@@ -13,9 +13,12 @@ window.onload=function () {
             codeErr:false,
             userId:null,
             code:"",
+            token:null,
         },
         methods: {
             sendSms:async function () {
+                console.log(this.token);
+                return;
 
                 var _this=this;
                 if(!_this.userId) {
@@ -79,10 +82,16 @@ window.onload=function () {
                 input.focus()
             }
 
-            var socket = io('');
+          /*  var socket = io('');
             socket.on('connect', function () {
                 console.log("socket connected")
-            })
+            })*/
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj', {action: 'enter'})
+                    .then(function (token) {
+                        _this.token=token;
+                    });
+            });
             document.getElementById("app").style.opacity=1;
         }
 
