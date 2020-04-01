@@ -18,23 +18,27 @@ router.post('/sendSms', async (req, res, next)=> {
     method: 'post'
   })
       .then(response => response.json())
-      .then(google_response => res.json({ google_response }))
+      .then(async google_response => {
+        if(!google_response.success)
+          return res.sendStatus(404);
+        var code=(parseInt(Math.random()*10000)+parseInt(10000));
+        var users=await req.knex.select("*").from("t_users").where({tel:req.body.tel, isDeleted:false});
+        if(users.length==0)
+        {
+          users=await req.knex("t_users").insert({tel:req.body.tel, smsCode:code},"*")
+        }
+        else
+        {
+          await req.knex("t_users").update({smsCode:code}).where({id:users[0].id})
+        }
+        console.log(req.body.tel)
+        sendCodeToSms(req.body.tel,code)
+        res.json({code:' ', id:users[0].id});
+      })
       .catch(error => res.json({ error }));
-  return;
 
-  var code=(parseInt(Math.random()*10000)+parseInt(10000));
-  var users=await req.knex.select("*").from("t_users").where({tel:req.body.tel, isDeleted:false});
-  if(users.length==0)
-  {
-    users=await req.knex("t_users").insert({tel:req.body.tel, smsCode:code},"*")
-  }
-  else
-  {
-    await req.knex("t_users").update({smsCode:code}).where({id:users[0].id})
-  }
-  console.log(req.body.tel)
-  sendCodeToSms(req.body.tel,code)
-  res.json({code:' ', id:users[0].id});
+
+
 
 });
 router.post('/checkCode',async (req, res, next)=> {
