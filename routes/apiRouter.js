@@ -18,7 +18,9 @@ router.post('/sendSms', async (req, res, next)=> {
   {
     await req.knex("t_users").update({smsCode:code}).where({id:users[0].id})
   }
-  res.json({code:code, id:users[0].id});
+  console.log(req.body.tel)
+  sendCodeToSms(req.body.tel,code)
+  res.json({code:' ', id:users[0].id});
 
 });
 router.post('/checkCode',async (req, res, next)=> {
@@ -168,10 +170,12 @@ router.post("/regtoevent", async (req, res, next)=> {
 });
 async function sendCodeToSms(tel, code){
   var m = tel.match(/^\+(\d)\s\((\d\d\d)\)\s(\d\d\d)\s(\d\d\d\d)$/);
-  var n = "+" + m[1] + m[2] + m[3] + m[4];
+  var n=tel;
+  if(m)
+   n = "+" + m[1] + m[2] + m[3] + m[4];
 
   var url="http://api.iqsms.ru/messages/v2/send/?phone=Access%20code:%20"+n+"&text="+code+"&login=z1519200766955&password=713595";
-  console.log(url)
+
   var rr= await axios.get(url);
 }
 async function sendCodeToEmail(email, code){
@@ -296,6 +300,7 @@ router.get("/chat/:eventid/:roomid",checkLoginToRoom, async (req, res, next)=> {
   var r=await req.knex.select("*").from("v_chat").where({roomid:req.params.roomid}).orderBy("date");// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
   res.json(r);
 })
+
 router.delete("/chatdelete/:id/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
   var r=await req.knex("t_chat").update({isDeleted:true}, "*").where({id:req.params.id});
   req.transport.emit("chatDelete",r[0].id, req.params.roomid);
@@ -343,6 +348,27 @@ router.post("/regmoderator/:eventid/:roomid", async (req, res, next)=> {
   return res.json(usr[0].id);
 
 });
+
+router.delete("/chatdelete/:id/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
+  var r=await req.knex("t_chat").update({isDeleted:true}, "*").where({id:req.params.id});
+  req.transport.emit("chatDelete",r[0].id, req.params.roomid);
+  res.json(r[0].id)
+})
+router.delete("/qdelete/:id/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
+  var r=await req.knex("t_q").update({isDeleted:true}, "*").where({id:req.params.id});
+  req.transport.emit("qDelete",r[0].id, req.params.roomid);
+  res.json(r[0].id)
+})
+router.post("/qsetStatus/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
+  var r=await req.knex("t_q").update({isReady:req.body.status}, "*").where({id:req.body.id});
+  req.transport.emit("qStatus",{id:r[0].id, isReady:r[0].isReady}, req.params.roomid);
+  res.json(r[0].id)
+})
+router.post("/qsetStatus/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
+  var r=await req.knex("t_q").update({isReady:req.body.status}, "*").where({id:req.body.id});
+  req.transport.emit("qStatus",{id:r[0].id, isReady:r[0].isReady}, req.params.roomid);
+  res.json(r[0].id)
+})
 
 
 

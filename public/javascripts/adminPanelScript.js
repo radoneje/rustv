@@ -22,7 +22,7 @@ window.onload=function () {
                 if(dt.data)
                 this.events.push(dt.data);
                 else
-                    alert("оплата")
+                    alert("Ваш тарифный план не позволяет активировать эту функцию. Пожалуйста, свяжитесь с отделом продаж info@rustv.ru")
             },
             changeEventCase:function (item, regCase) {
                 item.regCase=regCase;
@@ -33,10 +33,13 @@ window.onload=function () {
             },
             addRoom:async function(item){
                 var dt=await axios.post("/rest/api/room", item);
-                if(dt.data)
+                if(dt.data) {
+                    if(!item.rooms)
+                        item.rooms=[];
                     item.rooms.push(dt.data);
+                }
                 else
-                    alert("оплата")
+                    alert("Ваш тарифный план не позволяет активировать эту функцию. Пожалуйста, свяжитесь с отделом продаж info@rustv.ru")
             },
             changeRoomDate:function (item, e) {
                 var _this=this;
@@ -67,7 +70,12 @@ window.onload=function () {
                 });
             },
             changeRoomSect:async function(sect) {
-                this.editRoom[sect]=! this.editRoom[sect];
+
+
+                if(sect=='isQpreMod' || sect=='isPres' || sect=='isFile' || sect=='isRecord'  )
+                    return alert("Ваш тарифный план не позволяет активировать эту функцию. Пожалуйста, свяжитесь с отделом продаж info@rustv.ru");
+                    this.editRoom[sect]=! this.editRoom[sect];
+                //
                 await this.changeRoom();
             },
             changeRoom:async function(){
@@ -105,6 +113,7 @@ window.onload=function () {
         mounted:async function () {
             var dt=await axios.get("/rest/api/events");
             this.events=dt.data;
+            document.getElementById("app").style.opacity=1;
         }
     });
 }

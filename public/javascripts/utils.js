@@ -213,6 +213,7 @@ function connect(_this, roomid){
     })
 }
 function chattextChange(_this, e) {
+
     if(e.keyCode==13 && _this.chatText.length>0){
         chattextSend(_this)
     }

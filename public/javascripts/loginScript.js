@@ -116,6 +116,7 @@ window.onload=function () {
                 telElem.addEventListener("focus", mask, false);
                 telElem.addEventListener("blur", mask, false);
             }
+            document.getElementById("app").style.opacity=1;
         }
     })
 }

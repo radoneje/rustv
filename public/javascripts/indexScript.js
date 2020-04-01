@@ -83,6 +83,7 @@ window.onload=function () {
             socket.on('connect', function () {
                 console.log("socket connected")
             })
+            document.getElementById("app").style.opacity=1;
         }
 
     })

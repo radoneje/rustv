@@ -93,6 +93,7 @@ window.onload=function () {
                         .then(function (r) {
                             _this.chat=r.data;
                         })
+                    document.getElementById("app").style.opacity=1;
 
                 })
         }
