@@ -19,8 +19,10 @@ window.onload=function () {
         methods:{
             addEvent:async function () {
                 var dt=await axios.post("/rest/api/events");
-                if(dt.data)
-                this.events.push(dt.data);
+                if(dt.data) {
+                    dt.data.rooms = [];
+                    this.events.push(dt.data);
+                }
                 else
                     alert("Ваш тарифный план не позволяет активировать эту функцию. Пожалуйста, свяжитесь с отделом продаж info@rustv.ru")
             },
@@ -34,8 +36,6 @@ window.onload=function () {
             addRoom:async function(item){
                 var dt=await axios.post("/rest/api/room", item);
                 if(dt.data) {
-                    if(!item.rooms)
-                        item.rooms=[];
                     item.rooms.push(dt.data);
                 }
                 else
