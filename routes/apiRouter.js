@@ -97,9 +97,10 @@ router.put("/events", async (req, res, next)=> {
 router.post("/room", async (req, res, next)=> {
   if(!req.session["admin"])
     return res.send(404);
-  var r=await req.knex.select("*").from("t_events").where({id:req.body.id,adminId:req.session["admin"].id, isDeleted:false})
+  var r=await req.knex.select("*").from("t_events").where({id:req.body.id,adminId:req.session["admin"].id, eventid:req.body.id, isDeleted:false})
   if(r.length>=req.session["admin"].countOfRooms)
     return res.json(null)
+
   var count=await req.knex.select("*").from ("t_rooms").where({isDeleted:false,eventid:req.body.id })
   if(count.length>=req.session["admin"].countOfEvents)
     return res.json(null)
