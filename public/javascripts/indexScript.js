@@ -105,6 +105,9 @@ window.onload=function () {
 
     })
 }
+function onSubmit(token) {
+    console.log('success!', token);
+}
 
 function setCursorPosition(pos, elem) {
     elem.focus();
