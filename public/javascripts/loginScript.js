@@ -15,10 +15,12 @@ window.onload=function () {
             codeErr:false,
             code:"",
             userId:null,
+            token:null,
         },
         methods:{
             enter:async function () {
-
+                console.log(this.token);
+                return;
                 var _this = this;
                 var emailElem=document.getElementById("emailInpit")
                 var telElem=document.getElementById("telInpit")
@@ -109,6 +111,7 @@ window.onload=function () {
 
         },
         mounted:function () {
+            var _this=this;
             document.getElementById("iInpit").focus()
             var telElem=document.getElementById("telInpit")
             if(telElem) {
@@ -117,6 +120,12 @@ window.onload=function () {
                 telElem.addEventListener("blur", mask, false);
             }
             document.getElementById("app").style.opacity=1;
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj', {action: 'enter'})
+                    .then(function (token) {
+                        _this.token=token;
+                    });
+            });
         }
     })
 }
