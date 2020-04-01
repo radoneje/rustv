@@ -86,13 +86,15 @@ window.onload=function () {
             socket.on('connect', function () {
                 console.log("socket connected")
             })*/
-            grecaptcha.ready(function () {
-                grecaptcha.execute('6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj', {action: 'enter'})
-                    .then(function (token) {
-                        console.log("get token", token)
-                        _this.token=token;
-                    });
-            });
+            grecaptcha.execute();
+            /*grecaptcha.ready(function () {
+              grecaptcha.execute('6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj', {action: 'enter'})
+                   .then(function (token) {
+                       console.log("get token", token)
+                       _this.token=token;
+                   });
+
+            });*/
             document.getElementById("app").style.opacity=1;
         }
 
