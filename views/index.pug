@@ -23,7 +23,7 @@ block content
 
         div.llInputBox
           div#sendSmsPlaceHolder
-          div.llSubmit(v-on:click="sendSms()")
+          div.llSubmit(v-on:click="sendSms()" v-if=token)
             span(v-if="!isLoading") Зарегистрироваться или войти
             span(v-else)
               include ./elements/whiteDotLoader

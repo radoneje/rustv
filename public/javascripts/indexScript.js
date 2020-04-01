@@ -64,6 +64,9 @@ window.onload=function () {
                     document.location.href="/adminpanel";
                 }
 
+            },
+            noRobot:function (token) {
+                this.token=token;
             }
         },
         mounted: function () {
@@ -89,7 +92,7 @@ window.onload=function () {
            // grecaptcha.execute();
             grecaptcha.render('sendSmsPlaceHolder', {
                 'sitekey' : '6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj',
-                'callback' : onSubmit
+                'callback' : _this.noRobot
             });
 
             /*grecaptcha.ready(function () {
