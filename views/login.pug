@@ -3,7 +3,9 @@ block head
 
   script.
     var evntId=#{event.id}
-
+    var onSubmit = function (token) {
+      console.log('success!', token);
+    };
   script(src="/javascripts/loginScript.js")
 
 block content
