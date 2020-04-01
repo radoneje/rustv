@@ -1,0 +1,12 @@
+{
+  "serverName": "https://webinar.sberbank-school.ru",
+  "localServerName": "http://localhost",
+  "port": 8080,
+  "pgConnection":  {
+      "host" : "127.0.0.1",
+      "user" : "postgres",
+      "password" : "gbplf13",
+      "database" : "rustv"
+      },
+  "sha256Secret": "dfczgegrby"
+}

@@ -1,0 +1,60 @@
+div.topUserBox#topUserBox(v-bind:style="{opacity:isLoaded?1:0}" v-on:click.stop.prevent="console.log(1)")
+    div.topUserBoxWr
+        div.topUserBoxIcon(v-on:click="isDialogShow=true")
+            <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+            <desc>Created with Sketch.</desc>
+            <defs></defs>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop-HD" transform="translate(-965.000000, -331.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="Group" transform="translate(961.000000, 327.000000)">
+            <g id="mdi-account">
+            <g id="Icon">
+            <path d="M12,4 C14.209139,4 16,5.790861 16,8 C16,10.209139 14.209139,12 12,12 C9.790861,12 8,10.209139 8,8 C8,5.790861 9.790861,4 12,4 Z M12,14 C16.42,14 20,15.79 20,18 L20,20 L4,20 L4,18 C4,15.79 7.58,14 12,14 Z" id="Icon-Shape"></path>
+            <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="24" height="24"></rect>
+            </g>
+            </g>
+            </g>
+            </g>
+            </g>
+            </svg>
+        div.topUserBoxDlg(v-bind:style="{display:isDialogShow?'block':'none'}" )
+            div.topUserBoxDlgCloseBtn(v-on:click="isDialogShow=false")
+                <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                <desc>Created with Sketch.</desc>
+                <defs></defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Desktop-HD" transform="translate(-1179.000000, -365.000000)" fill="#888888" fill-rule="nonzero">
+                <g id="Group" transform="translate(961.000000, 327.000000)">
+                <g id="jam-close-rectangle" transform="translate(216.000000, 36.000000)">
+                <g id="Icon">
+                <path d="M6,2 L18,2 C20.209139,2 22,3.790861 22,6 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 Z M6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,6 C20,4.8954305 19.1045695,4 18,4 L6,4 Z M13.414,12 L16.243,14.828 C16.6337415,15.2187415 16.6337415,15.8522585 16.243,16.243 C15.8522585,16.6337415 15.2187415,16.6337415 14.828,16.243 L12,13.414 L9.172,16.243 C8.9192346,16.4957654 8.55082099,16.5944815 8.20553703,16.501963 C7.86025306,16.4094444 7.59055559,16.1397469 7.49803703,15.794463 C7.40551847,15.449179 7.5042346,15.0807654 7.757,14.828 L10.586,12 L7.757,9.172 C7.5042346,8.9192346 7.40551847,8.55082099 7.49803703,8.20553703 C7.59055559,7.86025306 7.86025306,7.59055559 8.20553703,7.49803703 C8.55082099,7.40551847 8.9192346,7.5042346 9.172,7.757 L12,10.586 L14.828,7.757 C15.2187415,7.36625854 15.8522585,7.36625854 16.243,7.757 C16.6337415,8.14774146 16.6337415,8.78125854 16.243,9.172 L13.414,12 Z" id="Icon-Shape"></path>
+                <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="24" height="24"></rect>
+                </g>
+                </g>
+                </g>
+                </g>
+                </g>
+                </svg>
+            div.topUserBoxDlgItem Ваши персональные данные:
+            div.topUserBoxDlgItem
+                input(type="text" placeholder="Фамилия" v-model='usr.f' maxlength='254' v-on:change="saveFio()")
+            div.topUserBoxDlgItem
+                input(type="text" placeholder="Имя" v-model='usr.i' maxlength='254' v-on:change="saveFio()")
+            div.topUserBoxDlgItem
+                input(type="text" placeholder="Телефон"  readonly v-model='usr.tel')
+            div.topUserBoxDlgItem
+                div.topUserBoxDlgItemLabel Максимальное количество событий:
+                div.topUserBoxDlgItemInputGroup
+                    input(type="text" placeholder=""  readonly v-model='usr.countOfEvents')
+                    div.topUserBoxDlgItemBtn Увеличить
+            div.topUserBoxDlgItem
+                div.topUserBoxDlgItemLabel Максимальное количество комнат:
+                div.topUserBoxDlgItemInputGroup
+                    input(type="text" placeholder=""  readonly v-model='usr.countOfRooms')
+                    div.topUserBoxDlgItemBtn Увеличить
+
+
+
+script(src="/javascripts/topUserBox.js")

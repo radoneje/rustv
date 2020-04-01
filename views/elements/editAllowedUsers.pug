@@ -1,0 +1,34 @@
+div.editRoomBox(v-if="allowUsers" v-on:click="allowUsers=null")
+    div.editRoom(v-on:click.stop.prevent=";;")
+        div.flexBox
+            div.half
+                div.regGroupTitle Пользователи, которым разрешен доступ:
+                div.telBox
+                    div.telItem(v-for="item in allowUsers.users" style="margin-top: 5px;") {{item.tel}}
+                        span &nbsp;&nbsp;
+                        span(style="cursor:pointer" v-on:click="deleteAlowedTel(allowUsers.id,item.id)")
+                            <svg width="10px" height="12px" viewBox="0 0 10 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                            <desc>Created with Sketch.</desc>
+                            <defs></defs>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Tablet" transform="translate(-305.000000, -685.000000)" fill="#000000" fill-rule="nonzero">
+                            <g id="Group-2" transform="translate(86.000000, 683.000000)">
+                            <g id="ic-baseline-delete-forever" transform="translate(216.000000, 0.000000)">
+                            <g id="Icon">
+                            <path d="M4,12.6666667 C4,13.4 4.6,14 5.33333333,14 L10.6666667,14 C11.4,14 12,13.4 12,12.6666667 L12,4.66666667 L4,4.66666667 L4,12.6666667 Z M5.64,7.92 L6.58,6.98 L8,8.39333333 L9.41333333,6.98 L10.3533333,7.92 L8.94,9.33333333 L10.3533333,10.7466667 L9.41333333,11.6866667 L8,10.2733333 L6.58666667,11.6866667 L5.64666667,10.7466667 L7.06,9.33333333 L5.64,7.92 Z M10.3333333,2.66666667 L9.66666667,2 L6.33333333,2 L5.66666667,2.66666667 L3.33333333,2.66666667 L3.33333333,4 L12.6666667,4 L12.6666667,2.66666667 L10.3333333,2.66666667 Z" id="Icon-Shape"></path>
+                            <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="16" height="16"></rect>
+                            </g>
+                            </g>
+                            </g>
+                            </g>
+                            </g>
+                            </svg>
+
+
+            div.half
+                div.regGroupTitle Введите телефоны пользователей в формате +7xxxxxxxxxx через пробел:
+                    textarea.telInput(v-on:change=";;" v-model="telInput")
+                div.regGroupTitle(style="cursor: pointer;color:#3D89E0" v-on:click="addAllowedTels(allowUsers)") Добавить
+
+

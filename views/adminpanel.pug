@@ -1,0 +1,164 @@
+extends layout
+block head
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    script(src="/javascripts/flatpickr.js")
+    script(src="/javascripts/adminPanelScript.js")
+
+block content
+    include ./elements/topUserBox
+    div.aBox#app
+        div.top
+
+            div.title
+                span Ваши события ({{events.length}})
+                span.iconPost(v-on:click="addEvent()")
+                    <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                    <desc>Created with Sketch.</desc>
+                    <defs></defs>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Desktop-HD" transform="translate(-705.000000, -641.000000)" fill="#000000" fill-rule="nonzero">
+                    <g id="Group" transform="translate(627.000000, 639.000000)">
+                    <g id="ant-design:plus-square-outlined" transform="translate(76.000000, 0.000000)">
+                    <g id="Icon">
+                    <path d="M6.2755102,10.6111111 L9.18367347,10.6111111 L9.18367347,13.5138889 C9.18367347,13.5979167 9.25255102,13.6666667 9.33673469,13.6666667 L10.255102,13.6666667 C10.3392857,13.6666667 10.4081633,13.5979167 10.4081633,13.5138889 L10.4081633,10.6111111 L13.3163265,10.6111111 C13.4005102,10.6111111 13.4693878,10.5423611 13.4693878,10.4583333 L13.4693878,9.54166667 C13.4693878,9.45763889 13.4005102,9.38888889 13.3163265,9.38888889 L10.4081633,9.38888889 L10.4081633,6.48611111 C10.4081633,6.40208333 10.3392857,6.33333333 10.255102,6.33333333 L9.33673469,6.33333333 C9.25255102,6.33333333 9.18367347,6.40208333 9.18367347,6.48611111 L9.18367347,9.38888889 L6.2755102,9.38888889 C6.19132653,9.38888889 6.12244898,9.45763889 6.12244898,9.54166667 L6.12244898,10.4583333 C6.12244898,10.5423611 6.19132653,10.6111111 6.2755102,10.6111111 Z" id="Icon-Shape"></path>
+                    <path d="M16.9306122,2.33333333 L2.66122449,2.33333333 C2.31806122,2.33333333 2.04081633,2.60741667 2.04081633,2.94666667 L2.04081633,17.0533333 C2.04081633,17.3925833 2.31806122,17.6666667 2.66122449,17.6666667 L16.9306122,17.6666667 C17.2737755,17.6666667 17.5510204,17.3925833 17.5510204,17.0533333 L17.5510204,2.94666667 C17.5510204,2.60741667 17.2737755,2.33333333 16.9306122,2.33333333 Z M16.155102,16.2866667 L3.43673469,16.2866667 L3.43673469,3.71333333 L16.155102,3.71333333 L16.155102,16.2866667 Z" id="Icon-Shape"></path>
+                    <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="20" height="20"></rect>
+                    </g>
+                    </g>
+                    </g>
+                    </g>
+                    </g>
+                    </svg>
+            div.eventBox
+                div.eventItem(v-for="item in events")
+                    div.half
+                        input.eventItemInput.eventTitle(v-model="item.title" placeholder='Напишите название события' v-on:change="changeEvent(item)")
+                        div.regGroup
+                            div.regGroupTitle Способ регистрации пользователей:
+                            div.regGroupItems
+                                div.regGroupItem(v-bind:class="{active:item.regCase==0}" v-on:click="changeEventCase(item, 0)")
+                                    span Открытая ссылка
+                                    span.iconPost(v-if="item.regCase==0")
+                                        div.linkLabel https://rustv.ru/event/{{item.id}}
+                                div.regGroupItem(v-bind:class="{active:item.regCase==1}" v-on:click="changeEventCase(item, 1)") Подтверждение через e-mail
+                                div.regGroupItem(v-bind:class="{active:item.regCase==2}" v-on:click="changeEventCase(item, 2)") Подтверждение через SMS
+                                div.regGroupItem(v-bind:class="{active:item.regCase==3}" v-on:click="changeEventCase(item, 3)")
+                                 span Список пользователей
+                                 span.iconPost(v-on:click="showAllowedUsers(item)")
+                                     <svg width="14px" height="8px" viewBox="0 0 14 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                     <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                                     <desc>Created with Sketch.</desc>
+                                     <defs></defs>
+                                     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                     <g id="Tablet" transform="translate(-177.000000, -456.000000)">
+                                     <g id="Group" transform="translate(43.000000, 412.000000)">
+                                     <g id="openmoji-hamburger-menu" transform="translate(131.000000, 38.000000)">
+                                     <g id="Icon">
+                                     <g id="Icon-Group" stroke-linecap="round" stroke-linejoin="round" transform="translate(4.444444, 7.222222)" stroke="#000000" stroke-width="2">
+                                     <path d="M0,0 L11.1111111,0" id="Icon-Shape"></path>
+                                     <path d="M0,2.77777778 L11.1111111,2.77777778" id="Icon-Shape"></path>
+                                     <path d="M0,5.55555556 L11.1111111,5.55555556" id="Icon-Shape"></path>
+                                     </g>
+                                     <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" fill-rule="nonzero" x="0" y="0" width="20" height="20"></rect>
+                                     </g>
+                                     </g>
+                                     </g>
+                                     </g>
+                                     </g>
+                                     </svg>
+                        div.regGroup
+                            div.regGroupTitle Вставьте это на ваш сайт для показа баннера регистрации:
+                                textarea(readonly).
+                                    <iframe src="https://rustv.ru/regtoevent/{{item.id}}" width="150px" height="60px"></iframe>
+                    div.half
+                        div.title
+                            span Сессии ({{item.rooms.length}})
+                            span.iconPost(v-on:click="addRoom(item)")
+                                <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                                <desc>Created with Sketch.</desc>
+                                <defs></defs>
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Desktop-HD" transform="translate(-705.000000, -641.000000)" fill="#000000" fill-rule="nonzero">
+                                <g id="Group" transform="translate(627.000000, 639.000000)">
+                                <g id="ant-design:plus-square-outlined" transform="translate(76.000000, 0.000000)">
+                                <g id="Icon">
+                                <path d="M6.2755102,10.6111111 L9.18367347,10.6111111 L9.18367347,13.5138889 C9.18367347,13.5979167 9.25255102,13.6666667 9.33673469,13.6666667 L10.255102,13.6666667 C10.3392857,13.6666667 10.4081633,13.5979167 10.4081633,13.5138889 L10.4081633,10.6111111 L13.3163265,10.6111111 C13.4005102,10.6111111 13.4693878,10.5423611 13.4693878,10.4583333 L13.4693878,9.54166667 C13.4693878,9.45763889 13.4005102,9.38888889 13.3163265,9.38888889 L10.4081633,9.38888889 L10.4081633,6.48611111 C10.4081633,6.40208333 10.3392857,6.33333333 10.255102,6.33333333 L9.33673469,6.33333333 C9.25255102,6.33333333 9.18367347,6.40208333 9.18367347,6.48611111 L9.18367347,9.38888889 L6.2755102,9.38888889 C6.19132653,9.38888889 6.12244898,9.45763889 6.12244898,9.54166667 L6.12244898,10.4583333 C6.12244898,10.5423611 6.19132653,10.6111111 6.2755102,10.6111111 Z" id="Icon-Shape"></path>
+                                <path d="M16.9306122,2.33333333 L2.66122449,2.33333333 C2.31806122,2.33333333 2.04081633,2.60741667 2.04081633,2.94666667 L2.04081633,17.0533333 C2.04081633,17.3925833 2.31806122,17.6666667 2.66122449,17.6666667 L16.9306122,17.6666667 C17.2737755,17.6666667 17.5510204,17.3925833 17.5510204,17.0533333 L17.5510204,2.94666667 C17.5510204,2.60741667 17.2737755,2.33333333 16.9306122,2.33333333 Z M16.155102,16.2866667 L3.43673469,16.2866667 L3.43673469,3.71333333 L16.155102,3.71333333 L16.155102,16.2866667 Z" id="Icon-Shape"></path>
+                                <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="20" height="20"></rect>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </svg>
+                        div.regGroupItems
+                            div.regGroupItem(v-for="room in item.rooms" v-on:click="editRoom=room")
+                                div
+                                    span.iconPre(v-if="room.price>0")
+                                        <svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                                        <desc>Created with Sketch.</desc>
+                                        <defs></defs>
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="Tablet" transform="translate(-85.000000, -382.000000)" fill="#000000" fill-rule="nonzero">
+                                        <g id="Group" transform="translate(43.000000, 381.000000)">
+                                        <g id="ant-design:dollar-outlined" transform="translate(41.000000, 0.000000)">
+                                        <g id="Icon">
+                                        <path d="M8,1 C4.134375,1 1,4.134375 1,8 C1,11.865625 4.134375,15 8,15 C11.865625,15 15,11.865625 15,8 C15,4.134375 11.865625,1 8,1 Z M8,13.8125 C4.790625,13.8125 2.1875,11.209375 2.1875,8 C2.1875,4.790625 4.790625,2.1875 8,2.1875 C11.209375,2.1875 13.8125,4.790625 13.8125,8 C13.8125,11.209375 11.209375,13.8125 8,13.8125 Z M8.7453125,7.6375 L8.3484375,7.5453125 L8.3484375,5.446875 C8.9421875,5.528125 9.309375,5.9 9.371875,6.35625 C9.3796875,6.41875 9.4328125,6.4640625 9.4953125,6.4640625 L10.196875,6.4640625 C10.2703125,6.4640625 10.328125,6.4 10.321875,6.3265625 C10.2265625,5.353125 9.425,4.728125 8.3546875,4.6203125 L8.3546875,4.109375 C8.3546875,4.040625 8.2984375,3.984375 8.2296875,3.984375 L7.790625,3.984375 C7.721875,3.984375 7.665625,4.040625 7.665625,4.109375 L7.665625,4.625 C6.559375,4.7328125 5.69375,5.34375 5.69375,6.484375 C5.69375,7.540625 6.471875,8.05 7.2890625,8.2453125 L7.675,8.34375 L7.675,10.5734375 C6.984375,10.48125 6.596875,10.1125 6.5171875,9.615625 C6.5078125,9.55625 6.4546875,9.5125 6.39375,9.5125 L5.671875,9.5125 C5.5984375,9.5125 5.540625,9.575 5.546875,9.6484375 C5.6171875,10.5078125 6.26875,11.2984375 7.659375,11.4 L7.659375,11.890625 C7.659375,11.959375 7.715625,12.015625 7.784375,12.015625 L8.228125,12.015625 C8.296875,12.015625 8.353125,11.959375 8.353125,11.8890625 L8.35,11.39375 C9.5734375,11.2859375 10.4484375,10.63125 10.4484375,9.45625 C10.446875,8.371875 9.7578125,7.8875 8.7453125,7.6375 Z M7.6734375,7.384375 C7.5859375,7.359375 7.5125,7.3359375 7.4390625,7.30625 C6.9109375,7.115625 6.665625,6.8078125 6.665625,6.4109375 C6.665625,5.84375 7.0953125,5.5203125 7.6734375,5.446875 L7.6734375,7.384375 Z M8.3484375,10.578125 L8.3484375,8.4890625 C8.396875,8.503125 8.440625,8.5140625 8.4859375,8.5234375 C9.225,8.7484375 9.4734375,9.0609375 9.4734375,9.540625 C9.4734375,10.1515625 9.0140625,10.51875 8.3484375,10.578125 Z" id="Icon-Shape"></path>
+                                        <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="16" height="16"></rect>
+                                        </g>
+                                        </g>
+                                        </g>
+                                        </g>
+                                        </g>
+                                        </svg>
+                                    span.iconPre(v-else)
+                                        <svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                                        <desc>Created with Sketch.</desc>
+                                        <defs></defs>
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="Tablet" transform="translate(-130.000000, -496.000000)" fill="#3D89E0" fill-rule="nonzero">
+                                        <g id="Group" transform="translate(15.000000, 381.000000)">
+                                        <g id="emojione-monotone:free-button" transform="translate(115.000000, 115.000000)">
+                                        <g id="Icon">
+                                        <path d="M11.375,0.4375 L2.625,0.4375 C1.41684375,0.4375 0.4375,1.41684375 0.4375,2.625 L0.4375,11.375 C0.4375,12.5831562 1.41684375,13.5625 2.625,13.5625 L11.375,13.5625 C12.5831562,13.5625 13.5625,12.5831562 13.5625,11.375 L13.5625,2.625 C13.5625,1.41684375 12.5831562,0.4375 11.375,0.4375 Z M3.9375,5.6875 L2.8240625,5.6875 L2.8240625,6.671875 L3.9375,6.671875 L3.9375,7.328125 L2.8240625,7.328125 L2.8240625,8.96875 L2.1875,8.96875 L2.1875,5.03125 L3.9375,5.03125 L3.9375,5.6875 Z M6.66640625,8.96875 L6.0055625,8.96875 L5.46503125,7.328125 L5.2189375,7.328125 L5.2189375,8.96875 L4.59375,8.96875 L4.59375,5.03125 L5.6875,5.03125 C6.2908125,5.03125 6.78125,5.54640625 6.78125,6.1796875 C6.78125,6.66028125 6.49840625,7.0730625 6.09853125,7.24390625 L6.66640625,8.96875 Z M9.1875,5.6875 L8.0740625,5.6875 L8.0740625,6.671875 L9.1875,6.671875 L9.1875,7.328125 L8.0740625,7.328125 L8.0740625,8.3125 L9.1875,8.3125 L9.1875,8.96875 L7.4375,8.96875 L7.4375,5.03125 L9.1875,5.03125 L9.1875,5.6875 Z M11.8125,5.6875 L10.6990625,5.6875 L10.6990625,6.671875 L11.8125,6.671875 L11.8125,7.328125 L10.6990625,7.328125 L10.6990625,8.3125 L11.8125,8.3125 L11.8125,8.96875 L10.0625,8.96875 L10.0625,5.03125 L11.8125,5.03125 L11.8125,5.6875 Z" id="Icon-Shape"></path>
+                                        <path d="M5.6875,5.6875 L5.21871875,5.6875 L5.21871875,6.671875 L5.6875,6.671875 C5.9460625,6.671875 6.15628125,6.4509375 6.15628125,6.1796875 C6.15628125,5.9084375 5.9460625,5.6875 5.6875,5.6875 Z" id="Icon-Shape"></path>
+                                        <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="14" height="14"></rect>
+                                        </g>
+                                        </g>
+                                        </g>
+                                        </g>
+                                        </g>
+                                        </svg>
+                                    span.roomTitle {{room.title}}
+                                    span &nbsp;&nbsp;&nbsp;&nbsp;
+                                    span.iconPre
+                                        <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                                        <desc>Created with Sketch.</desc>
+                                        <defs></defs>
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="Tablet" transform="translate(-234.000000, -517.000000)" fill="#000000" fill-rule="nonzero">
+                                        <g id="Group" transform="translate(43.000000, 411.000000)">
+                                        <g id="bx-bx-calendar" transform="translate(190.000000, 105.000000)">
+                                        <g id="Icon">
+                                        <path d="M3.5,5.5 L4.5,5.5 L4.5,6.5 L3.5,6.5 L3.5,5.5 Z M3.5,7.5 L4.5,7.5 L4.5,8.5 L3.5,8.5 L3.5,7.5 Z M5.5,5.5 L6.5,5.5 L6.5,6.5 L5.5,6.5 L5.5,5.5 Z M5.5,7.5 L6.5,7.5 L6.5,8.5 L5.5,8.5 L5.5,7.5 Z M7.5,5.5 L8.5,5.5 L8.5,6.5 L7.5,6.5 L7.5,5.5 Z M7.5,7.5 L8.5,7.5 L8.5,8.5 L7.5,8.5 L7.5,7.5 Z" id="Icon-Shape"></path>
+                                        <path d="M2.5,11 L9.5,11 C10.0515,11 10.5,10.5515 10.5,10 L10.5,3 C10.5,2.4485 10.0515,2 9.5,2 L8.5,2 L8.5,1 L7.5,1 L7.5,2 L4.5,2 L4.5,1 L3.5,1 L3.5,2 L2.5,2 C1.9485,2 1.5,2.4485 1.5,3 L1.5,10 C1.5,10.5515 1.9485,11 2.5,11 Z M9.5,4 L9.5005,10 L2.5,10 L2.5,4 L9.5,4 Z" id="Icon-Shape"></path>
+                                        <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="12" height="12"></rect>
+                                        </g>
+                                        </g>
+                                        </g>
+                                        </g>
+                                        </g>
+                                        </svg>
+                                    span {{moment(room.date).format('HH:mm dddd, DD MMMM YYYY г. ')}}
+
+
+                                //div.itemPost
+                                    div.half.linkLabel https://rustv.ru/room/{{room.id}}
+                                    div.half.linkLabel &lt;iframe src='https://rustv.ru/room/{{room.id}}' allowfullscreen width="150px" height="60px" &gt;&lt;/iframe&gt;
+        include elements/editRoom
+        include elements/editAllowedUsers

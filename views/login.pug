@@ -1,0 +1,80 @@
+extends layout
+block head
+  script.
+    var evntId=#{event.id}
+  script(src="/javascripts/loginScript.js")
+
+block content
+  div.aBox#app
+    div.top
+    div.lBsubRTitle #{event.title}
+    div.lBottom
+      div.lTopL
+        div.lBsubRTitleText Пожалуйста, зарегистрируйтесь.
+        div.lBsubRTitleMust   Все поля обязательны для заполнения.
+        div.flex
+          div.half
+            div.llInputBox(v-bind:class="{warning:(iErr &&  i.length<2)}")
+              div.llInputBoxLabel
+                input#iInpit(placeholder='Имя' v-model="i" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+              div.llInputBoxWarning Поле должно быть заполнено
+            div.llInputBox(v-bind:class="{warning:(fErr &&  f.length<2)}")
+              div.llInputBoxLabel
+                input#fInpit(placeholder='Фамилия' v-model="f" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+              div.llInputBoxWarning Поле должно быть заполнено
+          div.half
+            if (event.regCase==1)
+              div.llInputBox(v-bind:class="{warning:(emailErr)}")
+                div.llInputBoxLabel
+                  input#emailInpit(placeholder='Ваш e-mail' autocomplete="off" v-model="email"  v-on:keydown="if($event.keyCode==13) enter()")
+                div.llInputBoxWarning Телефон указан неверно
+            if (event.regCase == 2 || event.regCase == 3 )
+              div.llInputBox(v-bind:class="{warning:(telErr )}")
+                div.llInputBoxLabel
+                  input#telInpit(placeholder='Ваш Телефон' autocomplete="off" v-model="tel"  v-on:keydown="if($event.keyCode==13) enter()")
+                div.llInputBoxWarning Телефон указан неверно
+
+
+        div.flex(style="margin-top:0")
+            div.half
+              div.llInputBox
+                div.llSubmit(v-on:click="enter()")
+                  div(v-if="!loader") Войти
+                  div(v-if="loader")
+                    include ./elements/whiteDotLoader
+
+    div.editRoomBox(v-if="showCode")
+      div.codeRoom(v-on:click.stop.prevent=";;")
+        div(style="text-align: center;")
+          <svg width="50px" height="50px" viewBox="0 0 40 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+          <desc>Created with Sketch.</desc>
+          <defs></defs>
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="Tablet" transform="translate(-139.000000, -788.000000)" fill="#3D89E0" fill-rule="nonzero">
+          <g id="Group-2" transform="translate(139.000000, 786.000000)">
+          <g id="fa-regular:comment-dots">
+          <g id="Icon">
+          <path d="M11.3060429,16.2183236 C9.92592593,16.2183236 8.81091618,17.3333333 8.81091618,18.7134503 C8.81091618,20.0935673 9.92592593,21.208577 11.3060429,21.208577 C12.6861598,21.208577 13.8011696,20.0935673 13.8011696,18.7134503 C13.8011696,17.3333333 12.6861598,16.2183236 11.3060429,16.2183236 Z M20.0389864,16.2183236 C18.6588694,16.2183236 17.5438596,17.3333333 17.5438596,18.7134503 C17.5438596,20.0935673 18.6588694,21.208577 20.0389864,21.208577 C21.4191033,21.208577 22.5341131,20.0935673 22.5341131,18.7134503 C22.5341131,17.3333333 21.4191033,16.2183236 20.0389864,16.2183236 Z M28.7719298,16.2183236 C27.3918129,16.2183236 26.2768031,17.3333333 26.2768031,18.7134503 C26.2768031,20.0935673 27.3918129,21.208577 28.7719298,21.208577 C30.1520468,21.208577 31.2670565,20.0935673 31.2670565,18.7134503 C31.2670565,17.3333333 30.1520468,16.2183236 28.7719298,16.2183236 Z M20.0389864,2.49512671 C9.01364522,2.49512671 0.0779727096,9.75438596 0.0779727096,18.7134503 C0.0779727096,22.4249513 1.62962963,25.8245614 4.20272904,28.5614035 C3.04093567,31.6335283 0.623781676,34.2378168 0.584795322,34.2690058 C0.0701754386,34.8148148 -0.0701754386,35.6101365 0.226120858,36.2962963 C0.522417154,36.9824561 1.20077973,37.4269006 1.94931774,37.4269006 C6.74463938,37.4269006 10.5263158,35.4230019 12.7953216,33.8167641 C15.0487329,34.5263158 17.4814815,34.9317739 20.0389864,34.9317739 C31.0643275,34.9317739 40,27.6725146 40,18.7134503 C40,9.75438596 31.0643275,2.49512671 20.0389864,2.49512671 Z M20.0389864,31.1890838 C17.957115,31.1890838 15.8986355,30.8693957 13.9259259,30.245614 L12.1559454,29.6842105 L10.6354776,30.7602339 C9.52046784,31.5477583 7.99220273,32.4288499 6.15204678,33.0214425 C6.72124756,32.0779727 7.2748538,31.0175439 7.7037037,29.8869396 L8.53021442,27.6959064 L6.92397661,25.9961014 C5.51267057,24.4912281 3.82066277,22.0038986 3.82066277,18.7134503 C3.82066277,11.8362573 11.0955166,6.23781676 20.0389864,6.23781676 C28.9824561,6.23781676 36.2573099,11.8362573 36.2573099,18.7134503 C36.2573099,25.5906433 28.9824561,31.1890838 20.0389864,31.1890838 Z" id="Icon-Shape"></path>
+          <rect id="Icon-Rectangle-path" fill-opacity="0" x="0.0779727096" y="0" width="39.9220273" height="39.9220273"></rect>
+          </g>
+          </g>
+          </g>
+          </g>
+          </g>
+          </svg>
+        div.smsHeader(style="text-align:center") Введите код, полученный по E-mail или SMS
+        div.llInputBox(v-bind:class="{warning:(codeErr && !checkCode(code))}"  v-on:keydown="if($event.keyCode==13) sendCode()")
+          div.llInputBoxLabel
+          input.code#code( type="text"  autocomplete="off" maxlength="25" v-model="code" )
+          div.llInputBoxWarning Код указан неверно или у Вас нет доступа
+        div.llInputBox
+          div.llSubmit(v-on:click="sendCode()")
+            div(v-if="!loader") Проверить код
+            div(v-if="loader")
+              include ./elements/whiteDotLoader
+        div.smsReturn(v-on:click="closeCodeWindow()") Вернуться к вводу
+
+
+
+

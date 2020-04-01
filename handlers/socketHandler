@@ -1,0 +1,27 @@
+
+
+
+const io= require('socket.io')
+class socket{
+    constructor(server, knex){
+        this.clients=require('./clientsHandler')
+        //this.emit=this.clients.sendToRoomUsers;
+        this.io=require('socket.io')(server);
+        this.io.binaryType = 'arraybuffer';
+        var  _this=this;
+        this.io.on('connection', async (socket)=> {
+            var id=null;
+            socket.on("hello",async ( data)=>{
+                var users=await knex.select("*").from("t_eventusers").where({id:data.id})
+                id=_this.clients.add({id:id,socket:socket, user:users[0], roomid:data.roomid, isActive:true, isAdmin:false })
+            })
+            socket.on("disconnect",(msg,  data)=>{
+                console.log("disconnect",id);
+                if(id)
+                    _this.clients.disActive(id);
+            });
+
+        });
+    }
+}
+module.exports = socket;
