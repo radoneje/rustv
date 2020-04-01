@@ -102,8 +102,8 @@ router.post("/room", async (req, res, next)=> {
     return res.json(null)
 
   var count=await req.knex.select("*").from ("t_rooms").where({isDeleted:false,eventid:req.body.id })
- // if(count.length>=req.session["admin"].countOfEvents)
- //   return res.json(null)
+  if(count.length>=req.session["admin"].countOfEvents)
+    return res.json(null)
   var r=await req.knex("t_rooms").insert({eventid:req.body.id, title:'Сессия '+parseInt(parseInt(count.length)+1)}, "*");
 
   return res.json(r[0])
