@@ -86,7 +86,7 @@ window.onload=function () {
             socket.on('connect', function () {
                 console.log("socket connected")
             })*/
-            grecaptcha.execute();
+           // grecaptcha.execute();
             grecaptcha.render('sendSms', {
                 'sitekey' : '6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj',
                 'callback' : onSubmit
