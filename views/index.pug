@@ -22,7 +22,8 @@ block content
             //div(class="g-recaptcha" data-sitekey="6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj" data-callback="onSubmit" data-size="invisible")
 
         div.llInputBox
-          div.llSubmit#sendSms(v-on:click="sendSms()")
+          div#sendSmsPlaceHolder
+          div.llSubmit(v-on:click="sendSms()")
             span(v-if="!isLoading") Зарегистрироваться или войти
             span(v-else)
               include ./elements/whiteDotLoader

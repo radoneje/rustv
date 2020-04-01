@@ -87,7 +87,7 @@ window.onload=function () {
                 console.log("socket connected")
             })*/
            // grecaptcha.execute();
-            grecaptcha.render('sendSms', {
+            grecaptcha.render('sendSmsPlaceHolder', {
                 'sitekey' : '6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj',
                 'callback' : onSubmit
             });
