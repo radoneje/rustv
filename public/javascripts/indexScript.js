@@ -17,9 +17,6 @@ window.onload=function () {
         },
         methods: {
             sendSms:async function () {
-                console.log(this.token);
-                return;
-
                 var _this=this;
                 if(!_this.userId) {
                     var tel = this.tel.replace(/\s/g, "");
@@ -31,7 +28,7 @@ window.onload=function () {
                     }
                     this.isLoading = true;
                     localStorage.setItem("loginTel", this.tel);
-                    var dt = await axios.post('/rest/api/sendSms', {tel: tel});
+                    var dt = await axios.post('/rest/api/sendSms', {tel: tel, token:this.token});
                     this.showSmsCode = dt.data.code;
                     this.userId = dt.data.id;
                     setTimeout(function () {

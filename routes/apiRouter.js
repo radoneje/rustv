@@ -2,12 +2,26 @@ var express = require('express');
 var router = express.Router();
 var axios= require('axios')
 var nodemailer = require('nodemailer');
+require('dotenv').config();
+const fetch = require('isomorphic-fetch');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Сервис организации конференций' });
 });
 router.post('/sendSms', async (req, res, next)=> {
+
+  const secret_key = '6LfC5uUUAAAAAFl49ps6HQys6fTmDxLTefNME3BW';
+  const token = req.body.token;
+  const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
+  fetch(url, {
+    method: 'post'
+  })
+      .then(response => response.json())
+      .then(google_response => res.json({ google_response }))
+      .catch(error => res.json({ error }));
+  return;
+
   var code=(parseInt(Math.random()*10000)+parseInt(10000));
   var users=await req.knex.select("*").from("t_users").where({tel:req.body.tel, isDeleted:false});
   if(users.length==0)
