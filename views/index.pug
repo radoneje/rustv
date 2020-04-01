@@ -19,10 +19,10 @@ block content
             input(v-bind:placeholder="'код из  СМС '+showSmsCode" v-model="code" id="smsCode")
           div.llInputBoxWarning Поле должно быть заполнено
         div.llInputBox
-            div(class="g-recaptcha" data-sitekey="6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj" data-callback="onSubmit" data-size="invisible")
+            //div(class="g-recaptcha" data-sitekey="6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj" data-callback="onSubmit" data-size="invisible")
 
         div.llInputBox
-          div.llSubmit(v-on:click="sendSms()")
+          div.llSubmit#sendSms(v-on:click="sendSms()")
             span(v-if="!isLoading") Зарегистрироваться или войти
             span(v-else)
               include ./elements/whiteDotLoader

@@ -87,6 +87,11 @@ window.onload=function () {
                 console.log("socket connected")
             })*/
             grecaptcha.execute();
+            grecaptcha.render('sendSms', {
+                'sitekey' : '6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj',
+                'callback' : onSubmit
+            });
+
             /*grecaptcha.ready(function () {
               grecaptcha.execute('6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj', {action: 'enter'})
                    .then(function (token) {
