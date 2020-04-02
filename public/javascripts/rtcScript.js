@@ -115,6 +115,7 @@ async function createReceiver(data, video, socket, clbk){
     RTConn.oniceconnectionstatechange = (event) => {
         if(RTConn.iceConnectionState=="disconnected")
         { console.log("disconnected")
+
             videoReceivers=videoReceivers.filter(s=>{
                 if(s.guid==data.guid)
                 {
