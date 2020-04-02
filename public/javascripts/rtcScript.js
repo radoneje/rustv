@@ -121,7 +121,9 @@ async function createReceiver(data, video, socket, clbk){
                 {
                     s.RTConn.close()
                     s.RTConn=null;
-                    s.video.parentNode.parentNode.removeChild(s.video.parentNode)
+                    var elem=document.getElementById(s.guid);
+
+                    elem.parentNode.removeChild(elem)
                     return false;
                 }
                 return true
