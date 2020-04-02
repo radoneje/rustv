@@ -28,10 +28,13 @@ async function getStream(_this){
      /*   var dt=await axios.get('/rest/api/guid');
         var videoSender={guid:dt.data, myVideo:video,myStream:stream}
         videoSenders.push(videoSender);*/
-       _this.socket.emit("selfVideoStarted",true);
+        repeatSelfVideo();
+       function repeatSelfVideo() {
+           _this.socket.emit("selfVideoStarted",true);
+           setTimeout(repeatSelfVideo, 5000);
+       }
     })
     _this.webCamStream=stream;
-
 
 }
 function createVideoContaiter(id, caption) {
