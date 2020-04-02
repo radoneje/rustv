@@ -10,12 +10,13 @@ class Clients{
         var _this=this;
         data.id=uuidv4();
         data.isActive=true;
+        data.user.isActive=true;
         data.date=new Date();
         data.isVideo=false;
         this.count++;
         this.clients.push(data);
         this.emit=this.sendToRoomUsers
-        setTimeout(()=>{_this.sendToRoomUsers("userConnnect", data.user,data.roomid)}, 1000);
+        setTimeout(()=>{_this.sendToRoomUsers("userConnnect",  data.user,data.roomid)}, 1000);
         return data.id;
     }
     disActive(id){
