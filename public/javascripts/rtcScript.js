@@ -68,7 +68,7 @@ async function modGetStream(_this, clbk) {
             }
         }
         _this.selfVideoStream = await navigator.mediaDevices.getUserMedia(constraints);
-        var video = createVideoContaiter('selfVideo', _this.user.i || '' + " " + _this.user.f);
+         video = createVideoContaiter('selfVideo', _this.user.i || '' + " " + _this.user.f);
         video.srcObject = _this.selfVideoStream ;
         video.muted = true;
         video.addEventListener("play", () => {
@@ -76,16 +76,9 @@ async function modGetStream(_this, clbk) {
         })
     }
     else
-    {
-      /*  var elem=document.querySelector('#videoWr_'+item.id +' video');
-        elem.parentNode.removeChild(elem);
-        _this.selfVideoStream .getTracks().forEach(function(track) {
-            track.stop();
-        });
-        _this.selfVideoStream=null;
-        video.parentNode.removeChild(video);*/
+        clbk(video, _this.selfVideoStream);
 
-    }
+
     return  video;
 }
 async function createSender(video, stream, clbk){
@@ -114,8 +107,7 @@ async function createReceiver(data, video, socket, clbk){
     }
     RTConn.oniceconnectionstatechange = (event) => {
         if(RTConn.iceConnectionState=="disconnected")
-        { console.log("disconnected")
-
+        {
             videoReceivers=videoReceivers.filter(s=>{
                 if(s.guid==data.guid)
                 {
@@ -128,7 +120,6 @@ async function createReceiver(data, video, socket, clbk){
                 }
                 return true
             })
-
         }
     }
     RTConn.ontrack=(event)=>{
@@ -151,7 +142,6 @@ async function  addSenderEvents(socket,videoSender, data, clbk){
         socket.emit("videoLink",{type:"icecandidate", to:data.from, candidate:event.candidate , guid:data.guid})
     }
     RTConn.oniceconnectionstatechange = (event) => {
-        console.log("disconnected")
         if(RTConn.iceConnectionState=="disconnected")
         {
             videoSenders=videoSenders.filter(s=>{
@@ -159,13 +149,10 @@ async function  addSenderEvents(socket,videoSender, data, clbk){
                 {
                     s.RTConn.close()
                     s.RTConn=null;
-                    //s.video.parentNode.removeChild(s.video)
                     return false;
                 }
                 return true
             })
-
-
         }
     }
     var descr=await RTConn.createOffer({offerToReceiveAudio: 1, offerToReceiveVideo: 1})
