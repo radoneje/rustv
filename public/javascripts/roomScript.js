@@ -115,7 +115,16 @@ window.onload=function () {
                     })
 
 
-            }
+            },
+            onReceiverReady:function (data) {
+                var _this=this;
+                var videoSender=videoSenders.filter(s=>{return s.guid==data.guid})[0];
+
+                addSenderEvents(_this.socket,videoSender, data, function () {
+                    console.log("invite Send")
+                })
+
+            },
 
 
         },
