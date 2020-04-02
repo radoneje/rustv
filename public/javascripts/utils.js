@@ -12,7 +12,7 @@ if (!myHostname) {
     myHostname = "localhost";
 }
 log("Hostname: " + myHostname);
-function connect(_this, roomid){
+function connect(_this, roomid, clbk){
     var serverUrl;
     var scheme = "http";
     if (document.location.protocol === "https:") {
@@ -24,6 +24,8 @@ function connect(_this, roomid){
     socket.on('connect', function() {
         log("connection.onopen")
         socket.emit("hello",{id:_this.user.id, roomid:roomid});
+        if(clbk)
+            clbk(socket)
         sendToServer=function (data, type) {
             socket.emit(type||"roomVideoMessage", data);
         }
@@ -56,11 +58,40 @@ function connect(_this, roomid){
             _this.users.forEach(function (user) {
                 if(user.id==userid) {
                     user.isActive = false;
-                    user.jpg = null;
+                    user.isVideo=false;
                     console.log("disconnect")
                 }
             })
         });
+
+        socket.on("selfVideoStarted", function(data){
+            console.log("selfVideoStarted receive")
+            _this.users.filter(function (u) {
+                 if(u.id==data.id) {
+                     u.isVideo = true;
+                     u.socketid=data.socketid
+                     console.log(u.socketid);
+                 }
+            })
+
+        });
+        socket.on("senderReady", function(data){
+            console.log("senderReady receive")
+            if(_this.onSenderReady)
+                _this.onSenderReady(data)
+        });
+        socket.on("receiverReady", function(data){
+            console.log("receiverReady receive")
+            if(_this.onReceiverReady)
+                _this.onReceiverReady(data)
+        });
+        socket.on("videoLink", function(data){
+            console.log("videoLink receive", data.type)
+            if(_this.onVideoLink)
+                _this.onVideoLink(data)
+        });
+
+
         socket.on("newUser", function(data){
             if(_this.users.filter(function (u) {
                 return u.id==data.id

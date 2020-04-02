@@ -11,6 +11,7 @@ class Clients{
         data.id=uuidv4();
         data.isActive=true;
         data.date=new Date();
+        data.isVideo=false;
         this.count++;
         this.clients.push(data);
         this.emit=this.sendToRoomUsers
@@ -22,11 +23,19 @@ class Clients{
         this.clients.forEach(c=>{
             if(c.id==id) {
                 c.isActive = false;
+                c.isVideo=false;
                 _this.sendToRoomUsers("userDisconnnect", c.user.id,c.roomid)
             }
         })
-
-
+    }
+    startVideo(id, socketid) {
+        var _this = this;
+        this.clients.forEach(c => {
+            if (c.id == id) {
+                c.isVideo = true;
+                _this.sendToRoomAdmins("selfVideoStarted", {id:c.user.id, socketid:socketid}, c.roomid)
+            }
+        })
     }
     sendToRoomUsers(msg, data, roomid){
         this.clients.forEach(c=>{
@@ -34,6 +43,19 @@ class Clients{
                 c.socket.emit(msg, data);
         });
     }
+    sendToRoomAdmins(msg, data, roomid){
+        this.clients.forEach(c=>{
+            if(c.isActive && c.roomid==roomid && c.isAdmin )
+                c.socket.emit(msg, data);
+        });
+    }
+    fwd(msg, data){
+        this.clients.forEach(c=>{
+            if(c.isActive && c.socket.id==data.to )
+                c.socket.emit(msg, data);
+        });
+    }
+
 
 
 }

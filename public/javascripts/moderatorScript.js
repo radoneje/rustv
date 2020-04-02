@@ -11,6 +11,8 @@ window.onload=function () {
             qText:"",
             chatText:"",
             user:null,
+            selfVideoStream:null,
+            socket,
         },
         methods:{
             qtextChange:function (e) {
@@ -80,13 +82,63 @@ window.onload=function () {
 
                     })
             },
+
+            startVideoChat:async function(item){
+                var _this=this;
+
+                if (typeof (createVideoContaiter) == 'undefined') {
+                    var s = document.createElement('script');
+                    s.src = "/javascripts/rtcScript.js";
+                    s.type = "text/javascript";
+                    s.async = false;
+                    s.onload = function () {
+                        modGetStream(_this,function(video, stream){ _this.onMyVideoStarted(video, stream,item)});
+                    }// <-- this is important
+                    document.getElementsByTagName('head')[0].appendChild(s);
+                } else
+                    modGetStream(_this, function(video, stream){ _this.onMyVideoStarted(video, stream,item)});
+
+
+
+            },
+            onMyVideoStarted: function (video, stream, item) {
+                var _this=this;
+                createSender(video, stream, function (videoSender) {
+                    videoSenders.push(videoSender)
+                    _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, to:item.socketid})
+
+                   // addSenderEvents(_this.socket,item.socketid, videoSender);
+                });
+                /*var remoteVideo=document.createElement("video")
+                remoteVideo.controls=true;
+                remoteVideo.width="240"
+                remoteVideo.autoplay=true;
+                document.getElementById('videoWr_'+item.id).appendChild(remoteVideo);*/
+
+            },
+            onReceiverReady:function (data) {
+                var _this=this;
+                var videoSender=videoSenders.filter(s=>{return s.guid==data.guid})[0];
+
+                addSenderEvents(_this.socket,videoSender, data, function () {
+                    console.log("invite Send")
+                })
+
+            },
+            onVideoLink:function (data) {
+
+                onVideoLink(this, data)
+
+            }
         },
         mounted:async function () {
             var _this=this;
             axios.get('/rest/api/info/'+eventid+"/"+roomid)
                 .then(function (dt) {
                     _this.user=dt.data;
-                    connect(_this,roomid);
+                    connect(_this,roomid, function (socket) {
+                        _this.socket=socket;
+                    });
                     axios.get("/rest/api/users/"+eventid+"/"+roomid)
                         .then(function (r) {
                             _this.users=r.data;

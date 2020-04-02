@@ -11,41 +11,6 @@ block content
     div.adminContainer(id="app" style="height: 100vh;")
         div.aModBox(style="height: 100vh;")
             div.aModSect
-                div.aModSectTitle ЧАТ ({{chat.length}})
-                div.aSectBody(id="chatBox")
-                    div.qItem(v-for="item in chat")
-                        div.qItemSmi  {{item.smi}}
-                        div.qItemName {{item.i}}&nbsp;{{item.f}}
-                        div.qItemText {{item.text}}
-                        div.qItemDate
-                            span.link.red(v-on:click="deleteChat(item)") Удалить
-                            span &nbsp;&nbsp;
-                            span {{moment(item.date).format("HH:MM")}}
-                div.rFooter
-                    div.askWr
-                        <svg v-on:click="chatAddSmile()" style="cursor:pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 22C18.299 22 23 17.299 23 11.5C23 5.70101 18.299 1 12.5 1C6.70101 1 2 5.70101 2 11.5C2 17.299 6.70101 22 12.5 22Z" stroke="#9A9A9A"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 11C10.3284 11 11 10.1046 11 9C11 7.89543 10.3284 7 9.5 7C8.67157 7 8 7.89543 8 9C8 10.1046 8.67157 11 9.5 11Z" fill="#9A9A9A"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 11C16.3284 11 17 10.1046 17 9C17 7.89543 16.3284 7 15.5 7C14.6716 7 14 7.89543 14 9C14 10.1046 14.6716 11 15.5 11Z" fill="#9A9A9A"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.37027 13.5247C6.27006 13.3332 6.41166 13.116 6.62779 13.116H18.5288C18.7536 13.116 18.8943 13.3497 18.7776 13.5418C18.0473 14.7436 15.7228 18.0745 12.3926 18.0745C9.0464 18.0745 6.99138 14.7116 6.37027 13.5247Z" stroke="#9A9A9A"/>
-                        </svg>
-                        input.ask(placeholder="Напишите Ваше сообщение" id="chatText" v-model="chatText" v-on:keydown="chattextChange($event)")
-                        <svg v-on:click="chattextSend()" class="svgSendBtn" v-on:click="chattextSend()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
-                        <desc>Created with Sketch.</desc>
-                        <defs></defs>
-                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="Desktop-HD" transform="translate(-712.000000, -505.000000)" fill-rule="nonzero">
-                        <g id="ic-baseline-call-made" transform="translate(708.000000, 500.000000)">
-                        <g id="Icon">
-                        <polygon id="Icon-Shape" fill="#9A9A9A" points="9 5 9 7 15.59 7 4 18.59 5.41 20 17 8.41 17 15 19 15 19 5"></polygon>
-                        <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
-                        </g>
-                        </g>
-                        </g>
-                        </g>
-                        </svg>
-            div.aModSect
                 div.aModSectTitle Вопросы ({{q.length}})
                 div.aSectBody(id="qBox")
                     div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}")
@@ -85,27 +50,63 @@ block content
                         </g>
                         </svg>
             div.aModSect
+                div.aModSectTitle ЧАТ ({{chat.length}})
+                div.aSectBody(id="chatBox")
+                    div.qItem(v-for="item in chat")
+                        div.qItemSmi  {{item.smi}}
+                        div.qItemName {{item.i}}&nbsp;{{item.f}}
+                        div.qItemText {{item.text}}
+                        div.qItemDate
+                            span.link.red(v-on:click="deleteChat(item)") Удалить
+                            span &nbsp;&nbsp;
+                            span {{moment(item.date).format("HH:MM")}}
+                div.rFooter
+                    div.askWr
+                        <svg v-on:click="chatAddSmile()" style="cursor:pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 22C18.299 22 23 17.299 23 11.5C23 5.70101 18.299 1 12.5 1C6.70101 1 2 5.70101 2 11.5C2 17.299 6.70101 22 12.5 22Z" stroke="#9A9A9A"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 11C10.3284 11 11 10.1046 11 9C11 7.89543 10.3284 7 9.5 7C8.67157 7 8 7.89543 8 9C8 10.1046 8.67157 11 9.5 11Z" fill="#9A9A9A"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 11C16.3284 11 17 10.1046 17 9C17 7.89543 16.3284 7 15.5 7C14.6716 7 14 7.89543 14 9C14 10.1046 14.6716 11 15.5 11Z" fill="#9A9A9A"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.37027 13.5247C6.27006 13.3332 6.41166 13.116 6.62779 13.116H18.5288C18.7536 13.116 18.8943 13.3497 18.7776 13.5418C18.0473 14.7436 15.7228 18.0745 12.3926 18.0745C9.0464 18.0745 6.99138 14.7116 6.37027 13.5247Z" stroke="#9A9A9A"/>
+                        </svg>
+                        input.ask(placeholder="Напишите Ваше сообщение" id="chatText" v-model="chatText" v-on:keydown="chattextChange($event)")
+                        <svg v-on:click="chattextSend()" class="svgSendBtn" v-on:click="chattextSend()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                        <desc>Created with Sketch.</desc>
+                        <defs></defs>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Desktop-HD" transform="translate(-712.000000, -505.000000)" fill-rule="nonzero">
+                        <g id="ic-baseline-call-made" transform="translate(708.000000, 500.000000)">
+                        <g id="Icon">
+                        <polygon id="Icon-Shape" fill="#9A9A9A" points="9 5 9 7 15.59 7 4 18.59 5.41 20 17 8.41 17 15 19 15 19 5"></polygon>
+                        <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                        </g>
+                        </g>
+                        </g>
+                        </g>
+                        </svg>
+
+            div.aModSect
                 div.aModSectTitle Пользователи ({{users.length}})
 
                 div.aSectBody.aSectUser
                     div.qItem.userItem(v-for="item in users" v-bind:key="item.id" v-bind:class="{active:(item.isActive), handup:item.handup}")
                         div.qItemSmi  {{item.title}}
                         div.qItemName {{item.i}}&nbsp;{{item.f}}
-                        div.userItemAvatar(v-if="!item.jpg")
+                        div.userItemAvatar(v-if="!item.isVideo")
                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.9993 2.66663C8.77135 2.66663 2.66602 8.77196 2.66602 16C2.66602 23.228 8.77135 29.3333 15.9993 29.3333C23.2274 29.3333 29.3327 23.228 29.3327 16C29.3327 8.77196 23.2274 2.66663 15.9993 2.66663ZM15.9993 9.33329C18.302 9.33329 19.9993 11.0293 19.9993 13.3333C19.9993 15.6373 18.302 17.3333 15.9993 17.3333C13.698 17.3333 11.9993 15.6373 11.9993 13.3333C11.9993 11.0293 13.698 9.33329 15.9993 9.33329ZM9.19135 22.3626C10.3873 20.6026 12.382 19.4293 14.666 19.4293H17.3327C19.618 19.4293 21.6114 20.6026 22.8074 22.3626C21.1034 24.1866 18.686 25.3333 15.9993 25.3333C13.3127 25.3333 10.8953 24.1866 9.19135 22.3626Z" fill="#9A9A9A"/>
                             </svg>
-                        div.userItemAvatar(v-if="item.jpg" style="cursor:pointer" v-on:click="showHideJpg(item)")
-                            <svg width="26px" height="18px" viewBox="0 0 26 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        div.userItemAvatar(v-else style="cursor:pointer" v-on:click="startVideoChat(item)")
+                            <svg width="32px" height="32px" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
                             <desc>Created with Sketch.</desc>
                             <defs></defs>
                             <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g id="Desktop-HD" transform="translate(-567.000000, -31.000000)" fill="#000000" fill-rule="nonzero">
-                            <g id="ic-baseline-videocam" transform="translate(563.000000, 23.000000)">
+                            <g id="Desktop" transform="translate(-502.000000, -506.000000)" fill="#000000" fill-rule="nonzero">
+                            <g id="bx-bx-video" transform="translate(500.000000, 500.000000)">
                             <g id="Icon">
-                            <path fill="#000000" d="M24.0833333,14.875 L24.0833333,9.91666667 C24.0833333,9.1375 23.4458333,8.5 22.6666667,8.5 L5.66666667,8.5 C4.8875,8.5 4.25,9.1375 4.25,9.91666667 L4.25,24.0833333 C4.25,24.8625 4.8875,25.5 5.66666667,25.5 L22.6666667,25.5 C23.4458333,25.5 24.0833333,24.8625 24.0833333,24.0833333 L24.0833333,19.125 L29.75,24.7916667 L29.75,9.20833333 L24.0833333,14.875 Z" id="Icon-Shape"></path>
-                            <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="34" height="34"></rect>
+                            <path d="M24,9.33333333 C24,7.86266667 22.804,6.66666667 21.3333333,6.66666667 L5.33333333,6.66666667 C3.86266667,6.66666667 2.66666667,7.86266667 2.66666667,9.33333333 L2.66666667,22.6666667 C2.66666667,24.1373333 3.86266667,25.3333333 5.33333333,25.3333333 L21.3333333,25.3333333 C22.804,25.3333333 24,24.1373333 24,22.6666667 L24,18.2226667 L29.3333333,22.6666667 L29.3333333,9.33333333 L24,13.7773333 L24,9.33333333 Z M21.336,22.6666667 L5.33333333,22.6666667 L5.33333333,9.33333333 L21.3333333,9.33333333 L21.3346667,15.9986667 L21.3333333,16 L21.3346667,16.0013333 L21.336,22.6666667 Z" id="Icon-Shape"></path>
+                            <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="32" height="32"></rect>
                             </g>
                             </g>
                             </g>
@@ -127,11 +128,8 @@ block content
                             </g>
                             </g>
                             </svg>
-                        div.userJpgWr(:id="'jpgWr_'+item.id" v-if="item.jpg" style="display:none")
-                            img.userJpg(:id="'jpg_'+item.id")
-                            div.userJpgControls
-                                div.greenBtn(v-on:click="startShow(item, $event)" )
-                                    span Начать показ
+                        div.userVideoWr(:id="'videoWr_'+item.id" )
+        div#videoWr
 
 
 

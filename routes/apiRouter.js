@@ -4,6 +4,7 @@ var axios= require('axios')
 var nodemailer = require('nodemailer');
 require('dotenv').config();
 const fetch = require('isomorphic-fetch');
+const { v4: uuidv4 } = require('uuid');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -19,8 +20,8 @@ router.post('/sendSms', async (req, res, next)=> {
   })
       .then(response => response.json())
       .then(async google_response => {
-        if(!google_response.success)
-          return res.sendStatus(404);
+        //if(!google_response.success)
+        //  return res.sendStatus(404);
         var code=(parseInt(Math.random()*10000)+parseInt(10000));
         var users=await req.knex.select("*").from("t_users").where({tel:req.body.tel, isDeleted:false});
         if(users.length==0)
@@ -33,7 +34,7 @@ router.post('/sendSms', async (req, res, next)=> {
         }
         console.log(req.body.tel)
         sendCodeToSms(req.body.tel,code)
-        res.json({code:' ', id:users[0].id});
+        res.json({code:code, id:users[0].id});
       })
       .catch(error => res.json({ error }));
 
@@ -291,7 +292,7 @@ router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next)=>
   var ret=[];
   req.transport.clients.forEach(c=>{
     if(c.roomid==req.params.roomid && c.isActive)
-      ret.push({id:c.user.id, i:c.user.i, f:c.user.f, isActive:c.isActive });
+      ret.push({id:c.user.id, i:c.user.i, f:c.user.f, isActive:c.isActive, isVideo:c.isVideo });
   })
   res.json(ret);
 });
@@ -388,6 +389,11 @@ router.post("/qsetStatus/:eventid/:roomid",checkLoginToRoom,async (req, res, nex
   req.transport.emit("qStatus",{id:r[0].id, isReady:r[0].isReady}, req.params.roomid);
   res.json(r[0].id)
 })
+router.get("/guid",async (req, res, next)=> {
+  res.json(uuidv4());
+});
+
+
 
 
 
