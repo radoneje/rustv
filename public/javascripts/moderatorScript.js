@@ -130,18 +130,21 @@ window.onload=function () {
                 console.log("createReceiver", data, socket);
                 var video=createVideoContaiter(data.guid, (data.user.i||"") +" "+ data.user.f)
                 createReceiver(data, video, _this.socket, function (ret) {
+                     ret.pairGUID=data.recguid
                     videoReceivers.push(ret)
                     _this.socket.emit("receiverReady",{user:_this.user, guid:data.guid, to:data.from})
                 })
-                console.log('#'+data.guid+" img")
+
 
                 var videoBox=document.getElementById(data.guid)
                 var videoCap=videoBox.querySelector(".videoCap")
                 videoCap.innerHTML = "<img src='/images/close.svg'/>" + videoCap.innerHTML;
                 {
                     videoCap.querySelector("img").addEventListener("click", ()=>{
-                        stopReceiveVideo(data.guid);
-                        _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.guid, to:data.from})
+                        console.log("stopReceiveVideo")
+                        stopReceiveVideo(data.recguid);
+                        stopSendVideo(data.recguid);
+                        _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.recguid, to:data.from})
                     })
                 }
 

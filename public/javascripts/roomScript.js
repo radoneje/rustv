@@ -110,7 +110,7 @@ window.onload=function () {
                         createSender(video, _this.webCamStream, function (videoSender) {
                             console.log("11111", videoSender)
                             videoSenders.push(videoSender)
-                            _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, to:data.from})
+                            _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, recguid:data.guid, to:data.from})
                         });
             },
             onReceiverReady:function (data) {
