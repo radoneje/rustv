@@ -109,6 +109,7 @@ window.onload=function () {
                         var video=document.getElementById('selfVideo');
                         console.log("receiverPlaying", video, _this.webCamStream )
                         createSender(video, _this.webCamStream, function (videoSender) {
+                            console.log("11111", videoSender)
                             videoSenders.push(videoSender)
                             _this.socket.emit("senderReady",{user:_this.user, guid:ret.data, to:data.from})
                         });
@@ -119,7 +120,7 @@ window.onload=function () {
             onReceiverReady:function (data) {
                 var _this=this;
                 var videoSender=videoSenders.filter(s=>{return s.guid==data.guid})[0];
-
+                console.log("22222", videoSender, videoSenders)
                 addSenderEvents(_this.socket,videoSender, data, function () {
                     console.log("invite Send")
                 })
