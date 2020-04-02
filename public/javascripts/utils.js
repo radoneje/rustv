@@ -105,8 +105,6 @@ function connect(_this, roomid, clbk){
         });
 
 
-
-
         socket.on("newUser", function(data){
             if(_this.users.filter(function (u) {
                 return u.id==data.id
