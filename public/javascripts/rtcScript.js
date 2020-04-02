@@ -117,7 +117,7 @@ async function createReceiver(data, video, socket, clbk){
         }
     }
     video.addEventListener("play", ()=>{
-        _this.socket.emit("receiverPlaying",{user:_this.user, guid:data.guid, to:data.from})
+        socket.emit("receiverPlaying",{ guid:data.guid, to:data.from})
     })
     clbk(ret);
 }
