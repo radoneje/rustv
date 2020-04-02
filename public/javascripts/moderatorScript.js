@@ -103,6 +103,8 @@ window.onload=function () {
                 } else {
                     videoReceivers.forEach(function (r) {
                         stopReceiveVideo(r.guid);
+                        stopSendVideo(data.recguid);
+                        _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.recguid, to:data.from})
                     });
                     modGetStream(_this, function (video, stream) {
                         _this.onMyVideoStarted(video, stream, item)
