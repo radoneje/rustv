@@ -78,6 +78,7 @@ function connect(_this, roomid, clbk){
                  }
                  return u;
             })
+            _this.users=_this.users.filter(f=>{return true})
 
         });
         socket.on("senderReady", function(data){
