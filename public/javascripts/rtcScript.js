@@ -48,13 +48,37 @@ function createVideoContaiter(id, caption) {
     videoBox.id = id;
     var videoCap = document.createElement("div");
     videoCap.classList.add("videoCap")
-    videoCap.innerText=caption;// + "<img src='/images/close.svg'/>";
-    videoCap.innerHTML ="<img src='/images/close.svg'/>"+ videoCap.innerHTML;
+
+        videoCap.innerText = caption;// + "<img src='/images/close.svg'/>";
+    if(id!="selfVideo") {
+        videoCap.innerHTML = "<img src='/images/close.svg'/>" + videoCap.innerHTML;
+    }
    // console.log(videoCap.innerHtml)
     videoBox.appendChild(video);
     videoBox.appendChild(videoCap);
     document.getElementById("videoWr").appendChild(videoBox);
+    if(id!="selfVideo") {
+        videoCap.addEventListener("click", ()=>{
+            stopVideo(id);
+        })
+    }
+
     return     video
+}
+function  stopVideo(id){
+    videoReceivers=videoReceivers.filter(s=>{
+        if(s.guid==id)
+        {
+            s.RTConn.close()
+            s.RTConn=null;
+            var elem=document.getElementById(s.guid);
+
+            elem.parentNode.removeChild(elem)
+            return false;
+        }
+        return true
+    })
+
 }
 async function modGetStream(_this, clbk) {
 
@@ -112,18 +136,7 @@ async function createReceiver(data, video, socket, clbk){
     RTConn.oniceconnectionstatechange = (event) => {
         if(RTConn.iceConnectionState=="disconnected")
         {
-            videoReceivers=videoReceivers.filter(s=>{
-                if(s.guid==data.guid)
-                {
-                    s.RTConn.close()
-                    s.RTConn=null;
-                    var elem=document.getElementById(s.guid);
-
-                    elem.parentNode.removeChild(elem)
-                    return false;
-                }
-                return true
-            })
+            stopVideo(data.guid);
         }
     }
     RTConn.ontrack=(event)=>{
