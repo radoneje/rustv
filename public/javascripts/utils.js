@@ -100,8 +100,8 @@ function connect(_this, roomid, clbk){
         });
         socket.on("stopSendVideo", function(data){
             console.log("stopSendVideo")
-            if(stopSendVideo)
-                stopSendVideo(data.guid)
+            if(stopReceiveVideo)
+                stopReceiveVideo(data.guid)
         });
 
 
