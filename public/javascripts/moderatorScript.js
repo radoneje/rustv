@@ -87,6 +87,8 @@ window.onload=function () {
                 var _this=this;
 
                 var avatar=document.getElementById('videoAvatar'+item.id);
+                if(avatar.classList.contains("clicked"))
+                    return ;
                 avatar.classList.add("clicked")
                 setTimeout(function () {
                     avatar.classList.remove("clicked")
