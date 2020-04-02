@@ -157,11 +157,12 @@ async function  addSenderEvents(socket,videoSender, data, clbk){
                 {
                     s.RTConn.close()
                     s.RTConn=null;
-                    s.video.parentNode.removeChild(s.video)
+                    //s.video.parentNode.removeChild(s.video)
                     return false;
                 }
                 return true
             })
+
 
         }
     }
