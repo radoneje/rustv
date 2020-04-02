@@ -90,7 +90,7 @@ window.onload=function () {
                 avatar.classList.add("clicked")
                 setTimeout(function () {
                     avatar.classList.remove("clicked")
-                }, 2000)
+                }, 500)
                 if (typeof (createVideoContaiter) == 'undefined') {
                     var s = document.createElement('script');
                     s.src = "/javascripts/rtcScript.js";
