@@ -113,7 +113,20 @@ async function createReceiver(data, video, socket, clbk){
         socket.emit("videoLink",{type:"icecandidate", to:data.from, candidate:event.candidate , guid:data.guid})
     }
     RTConn.oniceconnectionstatechange = (event) => {
-        console.log("oniceconnectionstatechange", event, RTConn.iceConnectionState)
+        if(RTConn.iceConnectionState=="disconnected")
+        {
+            videoReceivers=videoReceivers.filter(s=>{
+                if(s.guid==data.guid)
+                {
+                    s.RTConn.close()
+                    s.RTConn=null;
+                    s.video.parentNode.removeChild(s.video)
+                    return false;
+                }
+                return true
+            })
+
+        }
     }
     RTConn.ontrack=(event)=>{
         console.log("receiver have a track")
@@ -135,8 +148,20 @@ async function  addSenderEvents(socket,videoSender, data, clbk){
         socket.emit("videoLink",{type:"icecandidate", to:data.from, candidate:event.candidate , guid:data.guid})
     }
     RTConn.oniceconnectionstatechange = (event) => {
-        console.log("oniceconnectionstatechange", event, RTConn.iceConnectionState)
+        if(RTConn.iceConnectionState=="disconnected")
+        {
+            videoSenders=videoSenders.filter(s=>{
+                if(s.guid==videoSender.guid)
+                {
+                    s.RTConn.close()
+                    s.RTConn=null;
+                    s.video.parentNode.removeChild(s.video)
+                    return false;
+                }
+                return true
+            })
 
+        }
     }
     var descr=await RTConn.createOffer({offerToReceiveAudio: 1, offerToReceiveVideo: 1})
     await RTConn.setLocalDescription(descr);
