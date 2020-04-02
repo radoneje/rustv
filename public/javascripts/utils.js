@@ -48,11 +48,16 @@ function connect(_this, roomid, clbk){
 
         })
 
-        socket.on("userConnnect", function(userid){
+        socket.on("userConnnect", function(user){
+            var find=false
             _this.users.forEach(function (user) {
-                if(user.id==userid)
-                    user.isActive=true;
+                if(user.id==user.id) {
+                    user.isActive = true;
+                    find=truel
+                }
             })
+            if(!find)
+                _this.users.push(user)
         });
         socket.on("userDisconnnect", function(userid){
             _this.users.forEach(function (user) {
