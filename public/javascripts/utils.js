@@ -72,6 +72,7 @@ function connect(_this, roomid, clbk){
                     user.isVideo=false;
                     console.log("disconnect")
                 }
+
             })*/
         });
 
