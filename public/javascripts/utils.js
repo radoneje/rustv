@@ -65,13 +65,14 @@ function connect(_this, roomid, clbk){
             }
         });
         socket.on("userDisconnnect", function(userid){
-            _this.users.forEach(function (user) {
+            _this.users=_this.users.filter(u=>{return u.id!=userid})
+            /*_this.users.forEach(function (user) {
                 if(user.id==userid) {
                     user.isActive = false;
                     user.isVideo=false;
                     console.log("disconnect")
                 }
-            })
+            })*/
         });
 
         socket.on("selfVideoStarted", function(data){
