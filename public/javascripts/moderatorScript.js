@@ -86,9 +86,11 @@ window.onload=function () {
             startVideoChat:async function(item){
                 var _this=this;
 
-                videoReceivers.forEach(function (r) {
-                    stopReceiveVideo(r.guid);
-                });
+                if(videoReceivers) {
+                    videoReceivers.forEach(function (r) {
+                        stopReceiveVideo(r.guid);
+                    });
+                }
                 if (typeof (createVideoContaiter) == 'undefined') {
                     var s = document.createElement('script');
                     s.src = "/javascripts/rtcScript.js";
