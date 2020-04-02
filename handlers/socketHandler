@@ -17,6 +17,7 @@ class socket{
                 var users=await knex.select("*").from("t_eventusers").where({id:data.id})
                 var client={socket:socket, user:users[0], roomid:data.roomid, isActive:true, isAdmin:(users[0].email=='moderator@rustv.ru'&& users[0].smsCode==999999)}
                 id=_this.clients.add(client)
+                console.log(client);
                 client.id=id;
             })
             socket.on("disconnect",(msg,  data)=>{
