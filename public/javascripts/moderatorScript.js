@@ -86,6 +86,9 @@ window.onload=function () {
             startVideoChat:async function(item){
                 var _this=this;
 
+                videoReceivers.forEach(function (r) {
+                    stopReceiveVideo(r.guid);
+                });
                 if (typeof (createVideoContaiter) == 'undefined') {
                     var s = document.createElement('script');
                     s.src = "/javascripts/rtcScript.js";
@@ -131,6 +134,7 @@ window.onload=function () {
                 var video=createVideoContaiter(data.guid, (data.user.i||"") +" "+ data.user.f)
                 createReceiver(data, video, _this.socket, function (ret) {
                      ret.pairGUID=data.recguid
+                     ret.user=data.user;
                     videoReceivers.push(ret)
                     _this.socket.emit("receiverReady",{user:_this.user, guid:data.guid, to:data.from})
                 })
