@@ -102,9 +102,9 @@ window.onload=function () {
                     document.getElementsByTagName('head')[0].appendChild(s);
                 } else {
                     videoReceivers.forEach(function (r) {
-                        console.log(r);
+                        console.log(item);
                         stopReceiveVideo(r.guid);
-                        stopSendVideo(r.recguid);
+                        stopSendVideo(r.pairGUID);
                         _this.socket.emit("stopSendVideo",{user:_this.user, guid:r.recguid, to:item.socketid})
                     });
                     modGetStream(_this, function (video, stream) {
