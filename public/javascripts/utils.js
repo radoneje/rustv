@@ -99,9 +99,9 @@ function connect(_this, roomid, clbk){
                 _this.receiverPlaying(data)
         });
         socket.on("stopSendVideo", function(data){
-            console.log("stopSendVideo", data.guid)
-            if(stopReceiveVideo)
-                stopReceiveVideo(data.guid)
+
+            if(stopSendVideo)
+                stopSendVideo(data.guid)
         });
 
 

@@ -78,7 +78,9 @@ function stopSendVideo(id){
         {
             s.RTConn.close()
             s.RTConn=null;
+            console.log("videoSender stopped")
             return false;
+
         }
         return true
     })
