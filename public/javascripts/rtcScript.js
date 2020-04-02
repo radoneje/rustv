@@ -77,7 +77,6 @@ function  stopReceiveVideo(id){
         }
         return true
     })
-
 }
 function stopSendVideo(id){
     videoSenders=videoSenders.filter(s=>{
