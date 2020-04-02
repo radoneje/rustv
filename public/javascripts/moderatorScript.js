@@ -133,6 +133,16 @@ window.onload=function () {
                     videoReceivers.push(ret)
                     _this.socket.emit("receiverReady",{user:_this.user, guid:data.guid, to:data.from})
                 })
+
+                var videoCap=document.querySelector('#'+data.guid+" img")
+                videoCap.innerHTML = "<img src='/images/close.svg'/>" + videoCap.innerHTML;
+                {
+                    videoCap.addEventListener("click", ()=>{
+                        stopReceiveVideo(id);
+                        _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.guid, to:data.from})
+                    })
+                }
+
             },
             onVideoLink:function (data) {
 

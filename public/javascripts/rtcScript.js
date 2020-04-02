@@ -50,18 +50,12 @@ function createVideoContaiter(id, caption) {
     videoCap.classList.add("videoCap")
 
         videoCap.innerText = caption;// + "<img src='/images/close.svg'/>";
-    if(id!="selfVideo") {
-        videoCap.innerHTML = "<img src='/images/close.svg'/>" + videoCap.innerHTML;
-    }
+
    // console.log(videoCap.innerHtml)
     videoBox.appendChild(video);
     videoBox.appendChild(videoCap);
     document.getElementById("videoWr").appendChild(videoBox);
-    if(id!="selfVideo") {
-        videoCap.addEventListener("click", ()=>{
-            stopReceiveVideo(id);
-        })
-    }
+
 
     return     video
 }

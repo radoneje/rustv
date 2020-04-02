@@ -98,6 +98,12 @@ function connect(_this, roomid, clbk){
             if(_this.receiverPlaying)
                 _this.receiverPlaying(data)
         });
+        socket.on("stopSendVideo", function(data){
+            if(stopSendVideo)
+                stopSendVideo(data.guid)
+        });
+
+
 
 
         socket.on("newUser", function(data){

@@ -43,6 +43,13 @@ class socket{
                 if(id)
                     _this.clients.fwd("videoLink",  data)
             });
+            socket.on("stopSendVideo",(data)=>{
+                data.from=socket.id;
+                if(id)
+                    _this.clients.fwd("stopSendVideo",  data)
+            });
+
+
             socket.on("receiverPlaying",(data)=>{
                 /// reverce!!!
                 var to=data.to;
