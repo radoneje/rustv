@@ -133,7 +133,7 @@ window.onload=function () {
                     videoReceivers.push(ret)
                     _this.socket.emit("receiverReady",{user:_this.user, guid:data.guid, to:data.from})
                 })
-
+                console.log('#'+data.guid+" img")
                 var videoCap=document.querySelector('#'+data.guid+" img")
                 videoCap.innerHTML = "<img src='/images/close.svg'/>" + videoCap.innerHTML;
                 {
