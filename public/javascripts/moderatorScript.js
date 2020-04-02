@@ -86,7 +86,11 @@ window.onload=function () {
             startVideoChat:async function(item){
                 var _this=this;
 
-
+                var avatar=document.getElementById('videoAvatar'+item.id);
+                avatar.classList.add("clicked")
+                setTimeout(function () {
+                    avatar.classList.remove("clicked")
+                }, 2000)
                 if (typeof (createVideoContaiter) == 'undefined') {
                     var s = document.createElement('script');
                     s.src = "/javascripts/rtcScript.js";
