@@ -135,7 +135,7 @@ window.onload=function () {
                 })
                 console.log('#'+data.guid+" img")
 
-                var videoBox=document.querySelector('#'+data.guid)
+                var videoBox=document.getElementById(data.guid)
                 var videoCap=videoBox.querySelector(".videoCap")
                 videoCap.innerHTML = "<img src='/images/close.svg'/>" + videoCap.innerHTML;
                 {
