@@ -125,6 +125,15 @@ window.onload=function () {
                 })
 
             },
+            onSenderReady:function (data) {
+                var _this=this
+                console.log("createReceiver", data, socket);
+                var video=createVideoContaiter(data.guid, (data.user.i||"") +" "+ data.user.f)
+                createReceiver(data, video, _this.socket, function (ret) {
+                    videoReceivers.push(ret)
+                    _this.socket.emit("receiverReady",{user:_this.user, guid:data.guid, to:data.from})
+                })
+            },
             onVideoLink:function (data) {
 
                 onVideoLink(this, data)
