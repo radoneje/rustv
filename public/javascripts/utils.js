@@ -55,11 +55,9 @@ function connect(_this, roomid, clbk){
                 if(u.id==user.id) {
                     user.isActive = true;
                     find=true
-                    console.log("userConnnect set active", user)
                 }
             })
             if(!find) {
-                console.log("userConnnect push", user)
                 user.isActive = true;
                 _this.users.push(user)
             }
