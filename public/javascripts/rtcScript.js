@@ -59,26 +59,36 @@ function createVideoContaiter(id, caption) {
     document.getElementById("videoWr").appendChild(videoBox);
     if(id!="selfVideo") {
         videoCap.addEventListener("click", ()=>{
-            stopVideo(id);
+            stopReceiveVideo(id);
         })
     }
 
     return     video
 }
-function  stopVideo(id){
+function  stopReceiveVideo(id){
     videoReceivers=videoReceivers.filter(s=>{
         if(s.guid==id)
         {
             s.RTConn.close()
             s.RTConn=null;
             var elem=document.getElementById(s.guid);
-
             elem.parentNode.removeChild(elem)
             return false;
         }
         return true
     })
 
+}
+function stopSendVideo(id){
+    videoSenders=videoSenders.filter(s=>{
+        if(s.guid==id)
+        {
+            s.RTConn.close()
+            s.RTConn=null;
+            return false;
+        }
+        return true
+    })
 }
 async function modGetStream(_this, clbk) {
 
@@ -136,7 +146,7 @@ async function createReceiver(data, video, socket, clbk){
     RTConn.oniceconnectionstatechange = (event) => {
         if(RTConn.iceConnectionState=="disconnected")
         {
-            stopVideo(data.guid);
+            stopReceiveVideo(data.guid);
         }
     }
     RTConn.ontrack=(event)=>{
@@ -161,15 +171,8 @@ async function  addSenderEvents(socket,videoSender, data, clbk){
     RTConn.oniceconnectionstatechange = (event) => {
         if(RTConn.iceConnectionState=="disconnected")
         {
-            videoSenders=videoSenders.filter(s=>{
-                if(s.guid==videoSender.guid)
-                {
-                    s.RTConn.close()
-                    s.RTConn=null;
-                    return false;
-                }
-                return true
-            })
+            stopSendVideo(data.guid);
+
         }
     }
     var descr=await RTConn.createOffer({offerToReceiveAudio: 1, offerToReceiveVideo: 1})
