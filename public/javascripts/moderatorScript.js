@@ -102,6 +102,7 @@ window.onload=function () {
                     document.getElementsByTagName('head')[0].appendChild(s);
                 } else {
                     videoReceivers.forEach(function (r) {
+                        console.log(r);
                         stopReceiveVideo(r.guid);
                         stopSendVideo(r.recguid);
                         _this.socket.emit("stopSendVideo",{user:_this.user, guid:r.recguid, to:item.socketid})
