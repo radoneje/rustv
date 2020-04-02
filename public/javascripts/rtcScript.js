@@ -75,8 +75,10 @@ async function modGetStream(_this, clbk) {
             clbk(video, _this.selfVideoStream);
         })
     }
-    else
+    else {
+        console.log("else")
         clbk(video, _this.selfVideoStream);
+    }
 
 
     return  video;
