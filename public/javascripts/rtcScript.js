@@ -136,6 +136,7 @@ async function  addSenderEvents(socket,videoSender, data, clbk){
     }
     RTConn.oniceconnectionstatechange = (event) => {
         console.log("oniceconnectionstatechange", event, RTConn.iceConnectionState)
+
     }
     var descr=await RTConn.createOffer({offerToReceiveAudio: 1, offerToReceiveVideo: 1})
     await RTConn.setLocalDescription(descr);
