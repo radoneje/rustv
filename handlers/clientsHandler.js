@@ -16,7 +16,7 @@ class Clients{
         this.count++;
         this.clients.push(data);
         this.emit=this.sendToRoomUsers
-        setTimeout(()=>{_this.sendToRoomUsers("userConnnect",  data.user,data.roomid)}, 1000);
+        setTimeout(()=>{_this.sendToRoomUsers("userConnnect",  data.user,data.roomid)}, 0);
         return data.id;
     }
     disActive(id){
