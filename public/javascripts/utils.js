@@ -55,7 +55,7 @@ function connect(_this, roomid, clbk){
                 if(user.id==user.id) {
                     user.isActive = true;
                     find=true
-                    console.log("userConnnect set active")
+                    console.log("userConnnect set active", user)
                 }
             })
             if(!find) {
