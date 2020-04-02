@@ -15,7 +15,7 @@ class Clients{
         this.count++;
         this.clients.push(data);
         this.emit=this.sendToRoomUsers
-        _this.sendToRoomUsers("userConnnect", data.user,data.roomid)
+        //_this.sendToRoomUsers("userConnnect", data.user,data.roomid)
         return data.id;
     }
     disActive(id){
