@@ -104,18 +104,14 @@ window.onload=function () {
             receiverPlaying:function (data) {
 
                 var _this=this;
-                axios.get('/rest/api/guid')
-                    .then(function (ret) {
+
                         var video=document.getElementById('selfVideo');
                         console.log("receiverPlaying", video, _this.webCamStream )
                         createSender(video, _this.webCamStream, function (videoSender) {
                             console.log("11111", videoSender)
                             videoSenders.push(videoSender)
-                            _this.socket.emit("senderReady",{user:_this.user, guid:ret.data, to:data.from})
+                            _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, to:data.from})
                         });
-                    })
-
-
             },
             onReceiverReady:function (data) {
                 var _this=this;
