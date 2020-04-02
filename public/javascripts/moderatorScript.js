@@ -86,11 +86,7 @@ window.onload=function () {
             startVideoChat:async function(item){
                 var _this=this;
 
-                if(videoReceivers) {
-                    videoReceivers.forEach(function (r) {
-                        stopReceiveVideo(r.guid);
-                    });
-                }
+
                 if (typeof (createVideoContaiter) == 'undefined') {
                     var s = document.createElement('script');
                     s.src = "/javascripts/rtcScript.js";
@@ -100,8 +96,14 @@ window.onload=function () {
                         modGetStream(_this,function(video, stream){ _this.onMyVideoStarted(video, stream,item)});
                     }// <-- this is important
                     document.getElementsByTagName('head')[0].appendChild(s);
-                } else
-                    modGetStream(_this, function(video, stream){ _this.onMyVideoStarted(video, stream,item)});
+                } else {
+                    videoReceivers.forEach(function (r) {
+                        stopReceiveVideo(r.guid);
+                    });
+                    modGetStream(_this, function (video, stream) {
+                        _this.onMyVideoStarted(video, stream, item)
+                    });
+                }
 
 
 
