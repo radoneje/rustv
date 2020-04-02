@@ -134,10 +134,10 @@ window.onload=function () {
                     _this.socket.emit("receiverReady",{user:_this.user, guid:data.guid, to:data.from})
                 })
                 console.log('#'+data.guid+" img")
-                var videoCap=document.querySelector('#'+data.guid+" img")
+                var videoCap=document.querySelector('#'+data.guid+" .videoCap")
                 videoCap.innerHTML = "<img src='/images/close.svg'/>" + videoCap.innerHTML;
                 {
-                    videoCap.addEventListener("click", ()=>{
+                    videoCap.querySelector("img").addEventListener("click", ()=>{
                         stopReceiveVideo(id);
                         _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.guid, to:data.from})
                     })
