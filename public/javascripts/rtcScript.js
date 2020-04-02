@@ -131,17 +131,14 @@ async function  addSenderEvents(socket,videoSender, data, clbk){
         console.log("onicecandidate")
         socket.emit("videoLink",{type:"icecandidate", to:data.from, candidate:event.candidate , guid:data.guid})
     }
+    RTConn.onconnectionstatechange = (event) => {
+        console.log("onconnectionstatechange", event)
+    }
     var descr=await RTConn.createOffer({offerToReceiveAudio: 1, offerToReceiveVideo: 1})
     await RTConn.setLocalDescription(descr);
     socket.emit("videoLink",{type:"videoOffer", to:data.from, descr:descr , guid:data.guid})
 
-   /* RTConn.createOffer((desc)=>{
-        RTConn.setLocalDescription(desc, ()=>{console.log("set Descr OK")})
-       // console.log("emit videoOffer")
 
-        console.log("videoOffer send", data.desc)
-        clbk();
-    }, err=>{console.warn(err)}, {offerToReceiveAudio: 1, offerToReceiveVideo: 1});*/
 }
 async function  onVideoLink(_this, data) {
 
