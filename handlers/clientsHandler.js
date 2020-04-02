@@ -16,6 +16,7 @@ class Clients{
         this.count++;
         this.clients.push(data);
         this.emit=this.sendToRoomUsers
+        console.log("add", data.user);
         setTimeout(()=>{_this.sendToRoomUsers("userConnnect",  data.user,data.roomid)}, 1000);
         return data.id;
     }
