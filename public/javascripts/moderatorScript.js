@@ -130,6 +130,7 @@ window.onload=function () {
                 onVideoLink(this, data)
 
             }
+
         },
         mounted:async function () {
             var _this=this;

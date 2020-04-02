@@ -42,6 +42,14 @@ class socket{
                 if(id)
                     _this.clients.fwd("videoLink",  data)
             });
+            socket.on("receiverPlaying",(data)=>{
+                /// reverce!!!
+                var to=data.to;
+                data.from=to;
+                data.to=socket.id;
+                if(id)
+                    _this.clients.fwd("receiverPlaying",  data)
+            });
 
         });
     }

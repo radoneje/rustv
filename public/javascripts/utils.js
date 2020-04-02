@@ -90,6 +90,10 @@ function connect(_this, roomid, clbk){
             if(_this.onVideoLink)
                 _this.onVideoLink(data)
         });
+        socket.on("receiverPlaying", function(data){
+            if(_this.receiverPlaying)
+                _this.receiverPlaying(data)
+        });
 
 
         socket.on("newUser", function(data){

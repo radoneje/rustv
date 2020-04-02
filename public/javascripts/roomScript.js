@@ -100,7 +100,11 @@ window.onload=function () {
             onVideoLink:function (data) {
 
                 onVideoLink(this, data)
+            },
+            receiverPlaying:function (data) {
+                console.log("receiverPlaying", data)
             }
+
 
         },
         mounted:async function () {

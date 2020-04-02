@@ -70,12 +70,6 @@ async function modGetStream(_this, clbk) {
         video.muted = true;
         video.addEventListener("play", () => {
             clbk(video, _this.selfVideoStream);
-           /* var remoteVideo=document.createElement("video")
-            remoteVideo.controls=true;
-            remoteVideo.width="240"
-            remoteVideo.autoplay=true;
-            document.getElementById('videoWr_'+item.id).appendChild(remoteVideo)*/
-
         })
     }
     else
@@ -123,7 +117,7 @@ async function createReceiver(data, video, socket, clbk){
         }
     }
     video.addEventListener("play", ()=>{
-        console.log("video play!!!")
+        _this.socket.emit("receiverPlaying",{user:_this.user, guid:data.guid, to:data.from})
     })
     clbk(ret);
 }
