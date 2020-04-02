@@ -59,7 +59,7 @@ function connect(_this, roomid, clbk){
                 }
             })
             if(!find) {
-                console.log("userConnnect push")
+                console.log("userConnnect push", user)
                 _this.users.push(user)
             }
         });
