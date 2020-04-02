@@ -51,8 +51,8 @@ function connect(_this, roomid, clbk){
         socket.on("userConnnect", function(user){
             var find=false;
             console.log("userConnnect")
-            _this.users.forEach(function (user) {
-                if(user.id==user.id) {
+            _this.users.forEach(function (u) {
+                if(u.id==user.id) {
                     user.isActive = true;
                     find=true
                     console.log("userConnnect set active", user)
