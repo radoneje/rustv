@@ -41,7 +41,7 @@ window.onload=function () {
                     }// <-- this is important
                     document.getElementsByTagName('head')[0].appendChild(s);
                 } else
-                    getStream();
+                    getStream()(_this).then();
             },
             sectActive:function (item) {
                 var _this=this;
@@ -103,6 +103,19 @@ window.onload=function () {
             },
             receiverPlaying:function (data) {
                 console.log("receiverPlaying", data)
+
+                var _this=this;
+                axios.get('/rest/api/guid')
+                    .then(function (ret) {
+                        var video=document.getElementById('selfVideo');
+                        console.log("receiverPlaying", video, video.srcObject )
+                        /*createSender(video, stream, function (videoSender) {
+                            videoSenders.push(videoSender)
+                            _this.socket.emit("senderReady",{user:_this.user, guid:ret.data, to:data.from})
+                        });*/
+                    })
+
+
             }
 
 
