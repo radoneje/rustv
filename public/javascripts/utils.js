@@ -53,7 +53,7 @@ function connect(_this, roomid, clbk){
             _this.users.forEach(function (user) {
                 if(user.id==user.id) {
                     user.isActive = true;
-                    find=truel
+                    find=true
                 }
             })
             if(!find)
