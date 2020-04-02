@@ -48,8 +48,8 @@ function createVideoContaiter(id, caption) {
     videoBox.id = id;
     var videoCap = document.createElement("div");
     videoCap.classList.add("videoCap")
-    videoCap.innerText=caption + "<img src='/images/close.svg'/>";
-  //  videoCap.innerHtml ="<b> src='/images/close.svg'</b>"+ videoCap.innerHtml;
+    videoCap.innerText=caption;// + "<img src='/images/close.svg'/>";
+    videoCap.innerHTML ="<img src='/images/close.svg'/>"+ videoCap.innerHTML;
    // console.log(videoCap.innerHtml)
     videoBox.appendChild(video);
     videoBox.appendChild(videoCap);
