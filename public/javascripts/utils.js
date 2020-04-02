@@ -60,6 +60,7 @@ function connect(_this, roomid, clbk){
             })
             if(!find) {
                 console.log("userConnnect push", user)
+                user.isActive = true;
                 _this.users.push(user)
             }
         });
