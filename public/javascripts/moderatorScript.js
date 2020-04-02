@@ -138,7 +138,7 @@ window.onload=function () {
                 videoCap.innerHTML = "<img src='/images/close.svg'/>" + videoCap.innerHTML;
                 {
                     videoCap.querySelector("img").addEventListener("click", ()=>{
-                        stopReceiveVideo(id);
+                        stopReceiveVideo(data.guid);
                         _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.guid, to:data.from})
                     })
                 }
