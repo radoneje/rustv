@@ -69,13 +69,12 @@ function connect(_this, roomid, clbk){
         });
 
         socket.on("selfVideoStarted", function(data){
-            console.log("selfVideoStarted receive")
-            _this.users.filter(function (u) {
+            _this.users.forEach(function (u) {
                  if(u.id==data.id) {
                      u.isVideo = true;
                      u.socketid=data.socketid
-                     console.log(u.socketid);
                  }
+                 return u;
             })
 
         });
