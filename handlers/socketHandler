@@ -62,7 +62,6 @@ class socket{
                     _this.clients.fwd("stopSendVideo",  data)
             });
           socket.on("SPKstatus",(dt)=>{
-
                 if(id) {
                     _this.clients.sendToRoomAdmins("SPKstatus", dt, roomid)
                 }
@@ -72,9 +71,12 @@ class socket{
                     _this.clients.sendToRoomSpeakers("setSpkStatus",  dt, roomid)
             });
             socket.on("setSpkAlert",(dt)=>{
-
                 if(id)
                     _this.clients.sendToRoomSpeakers("setSpkAlert",  dt, roomid)
+            });
+            socket.on("spkStartVks",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomSpeakers("spkStartVks",  dt, roomid)
             });
 
 

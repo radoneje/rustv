@@ -13,6 +13,8 @@ window.onload=function () {
             user:null,
             handUp:false,
             socket:null,
+            hand:false,
+            handTimer:null,
         },
         methods:{
             isWebRtc:function(){
@@ -94,6 +96,10 @@ window.onload=function () {
                 var video=createVideoContaiter(data.guid, (data.user.i||"") +" "+ data.user.f)
                 createReceiver(data, video, _this.socket, function (ret) {
                     videoReceivers.push(ret)
+                    //console.log("data from spk", data.isSpk)
+                    if(data.isSpk)
+                        document.getElementById("videoWr").classList.add('fromSpk')
+
                     _this.socket.emit("receiverReady",{user:_this.user, guid:data.guid, to:data.from})
                 })
             },
@@ -104,6 +110,7 @@ window.onload=function () {
                 var _this=this;
                         var video=document.getElementById('selfVideo');
                         createSender(video, _this.webCamStream, function (videoSender) {
+
                             videoSenders.push(videoSender)
                             _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, recguid:data.guid, to:data.from})
                         });
@@ -115,7 +122,21 @@ window.onload=function () {
                 })
 
             },
+            OnhandUp:function () {
+                var _this=this;
+                clearTimeout(_this.handTimer);
+                _this.hand=!_this.hand;
+                if(_this.hand)
+                    _this.handTimer=setTimeout(function () {
+                        _this.hand=false;
+                        axios.post('/rest/api/hand/'+eventid+"/"+roomid, {val:_this.hand, id:_this.user.id}).then()
+                    },10*60*1000)
+                axios.post('/rest/api/hand/'+eventid+"/"+roomid, {val:_this.hand, id:_this.user.id}).then()
 
+            }
+
+        },
+        watch:{
 
         },
         mounted:async function () {

@@ -82,7 +82,6 @@ function connect(_this, roomid, clbk){
                  return u;
             })
             _this.users=_this.users.filter(f=>{return true})
-
         });
         socket.on("senderReady", function(data){
             console.log("senderReady receive")
@@ -103,8 +102,12 @@ function connect(_this, roomid, clbk){
             if(_this.receiverPlaying)
                 _this.receiverPlaying(data)
         });
-        socket.on("stopSendVideo", function(data){
+        socket.on("handUp", function(data){
+            if(_this.onHandUp)
+                _this.onHandUp(data)
+        });
 
+        socket.on("stopSendVideo", function(data){
             if(stopReceiveVideo)
                 stopReceiveVideo(data.guid)
         });
@@ -119,10 +122,13 @@ function connect(_this, roomid, clbk){
                 _this.setSpkStatus(data)
         });
         socket.on("setSpkAlert", function(data){
-            console.log("setSpkAlert")
             if(_this.setSpkAlert)
                 _this.setSpkAlert(data)
         });
+    socket.on("spkStartVks", function(data){
+        if(_this.spkStartVks)
+            _this.spkStartVks(data)
+    });
 
 
 

@@ -302,7 +302,7 @@ router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next)=>
   var ret=[];
   req.transport.clients.forEach(c=>{
     if(c.roomid==req.params.roomid && c.isActive)
-      ret.push({id:c.user.id, i:c.user.i, f:c.user.f, isActive:c.isActive?true:false, isVideo:c.isVideo });
+      ret.push({id:c.user.id, i:c.user.i, f:c.user.f, isActive:c.isActive?true:false, isVideo:c.isVideo,handUp:c.handUp?true:false });
   })
   res.json(ret);
 });
@@ -434,6 +434,27 @@ router.post("/qsetStatus/:eventid/:roomid",checkLoginToRoom,async (req, res, nex
   req.transport.emit("qStatus",{id:r[0].id, isReady:r[0].isReady}, req.params.roomid);
   res.json(r[0].id)
 })
+router.post("/hand/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
+  var r=await req.knex("t_eventusers").update({handup:req.body.val}, "*").where({id:req.body.id});
+
+  req.transport.clients.forEach(c=>{
+    if(c.user.id==r[0].id && c.isActive)
+      c.handUp=r[0].handup;
+  })
+  req.transport.emit("handUp",{id:r[0].id, hand:r[0].handup}, req.params.roomid);
+  if(r[0].handup)
+    setTimeout(async ()=>{
+      await req.knex("t_eventusers").update({handup:false}, "*").where({id:req.body.id});
+      req.transport.clients.forEach(c=>{
+        if(c.user.id==r[0].id && c.isActive)
+          c.handUp=false;
+      })
+      req.transport.emit("handUp",{id:r[0].id, hand:false}, req.params.roomid);
+    },10*60*1000)
+  res.json(r[0].id)
+})
+
+
 router.get("/guid",async (req, res, next)=> {
   res.json(uuidv4());
 });

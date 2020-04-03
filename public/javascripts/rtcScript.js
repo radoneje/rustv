@@ -73,6 +73,9 @@ function  stopReceiveVideo(id){
     })
     if(videoReceivers.length==0)
         mainVideoMute(false)
+    var elem=document.getElementById("videoWr")
+        if(elem)
+            elem.classList.remove('fromSpk')
 }
 function stopSendVideo(id){
     videoSenders=videoSenders.filter(s=>{

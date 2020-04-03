@@ -1,9 +1,11 @@
 const { v4: uuidv4 } = require('uuid');
+var axios= require('axios')
 
 class Clients{
 
     constructor() {
         this.clients=[];
+        this.collectTh(this)
     }
     add(data){
         var _this=this;
@@ -64,6 +66,20 @@ class Clients{
             if(c.isActive && c.socket.id==data.to )
                 c.socket.emit(msg, data);
         });
+    }
+     collectTh(_this){
+         _this.clients.forEach(async c=> {
+            if(!c.isVideo)
+                c.Th=null
+            else if(c.isActive){
+                await _this.getUserTh(c);
+            }
+        })
+         setTimeout(()=>{_this.collectTh(_this)}, 2*1000)
+    }
+    async getUserTh(c){
+        var dt=await axios.get('/rest/api/test')
+        console.log("get th", c.id)
     }
 
 

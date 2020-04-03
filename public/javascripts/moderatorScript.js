@@ -18,6 +18,15 @@ window.onload=function () {
             SPKalertText:""
         },
         methods:{
+            onHandUp:function(data){
+
+                this.users.forEach(u=>{
+                    if(u.id==data.id) {
+
+                        u.handUp = data.hand
+                    }
+                })
+            },
             sendSpkAleret:function(data){
                 this.SPKalert=!this.SPKalert;
                 this.socket.emit("setSpkAlert",{SPKalert:this.SPKalert, SPKalertText:this.SPKalertText});
@@ -171,13 +180,21 @@ window.onload=function () {
 
                 var videoBox=document.getElementById(data.guid)
                 var videoCap=videoBox.querySelector(".videoCap")
-                videoCap.innerHTML = "<img src='/images/close.svg'/>" + videoCap.innerHTML;
+                videoCap.innerHTML ='<div class="videoCatHer">' +videoCap.innerText +"</div><div class='videotoSpkWr'><span class='videotoSpk'>на экран</span>"+"<img src='/images/close.svg'/></div>";
                 {
                     videoCap.querySelector("img").addEventListener("click", ()=>{
                         console.log("stopReceiveVideo", data.guid, data.recguid )
                         stopReceiveVideo(data.guid);
                         stopSendVideo(data.recguid);
                         _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.recguid, to:data.from})
+                    })
+
+                    videoCap.querySelector(".videotoSpk").addEventListener("click", ()=>{
+                        stopReceiveVideo(data.guid);
+                        stopSendVideo(data.recguid);
+                        console.log(data);
+                        _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.recguid, to:data.from})
+                        _this.socket.emit("spkStartVks",{user:data.user})
                     })
                 }
 
