@@ -1,0 +1,36 @@
+extends layout
+block head
+  script.
+    var roomid=#{room.id}
+    var eventid=#{room.eventid}
+  script(src="/javascripts/speakerLoginScript.js")
+
+block content
+  div.aBox#app
+    div.top
+    div.lBsubRTitle #{room.title}
+    div.lBottom
+      div.lTopL
+        div.flex
+          div.half
+            div.lBsubRTitleText Пожалуйста, введите пароль.
+          div.half
+            div.lBsubRTitleMust Вход спикера.
+        div.flex
+          div.half
+            div.llInputBox(v-bind:class="{warning:(passErr &&  pass.length<2)}" style="margin-bottom:0")
+              div.llInputBoxLabel
+                input#passInpit(placeholder='Пароль' v-model="pass" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+              div.llInputBoxWarning Поле должно быть заполнено
+          div.half
+              div.llInputBox
+                div.llSubmit(v-on:click="enter()")
+                  div(v-if="!loader") Войти
+                  div(v-if="loader")
+                    include ./elements/whiteDotLoader
+
+
+
+
+
+

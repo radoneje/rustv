@@ -12,7 +12,10 @@ if (!myHostname) {
     myHostname = "localhost";
 }
 log("Hostname: " + myHostname);
+
+
 function connect(_this, roomid, clbk){
+
     var serverUrl;
     var scheme = "http";
     if (document.location.protocol === "https:") {
@@ -22,6 +25,7 @@ function connect(_this, roomid, clbk){
     log('Connecting to server:' + serverUrl);
     socket = io(serverUrl);
     socket.on('connect', function() {
+
         log("connection.onopen")
         socket.emit("hello",{id:_this.user.id, roomid:roomid});
         if(clbk)
@@ -29,6 +33,7 @@ function connect(_this, roomid, clbk){
         sendToServer=function (data, type) {
             socket.emit(type||"roomVideoMessage", data);
         }
+    })
         socket.on("roomVideoMessage", function(data){
             switch(msg.type) {
                 case "video-answer":  // Invitation and offer to chat
@@ -103,6 +108,24 @@ function connect(_this, roomid, clbk){
             if(stopReceiveVideo)
                 stopReceiveVideo(data.guid)
         });
+
+        socket.on("SPKstatus", function(data){
+            if(_this.onSPKstatus)
+                _this.onSPKstatus(data)
+        });
+        socket.on("setSpkStatus", function(data){
+            console.log("setSpkStatus")
+            if(_this.setSpkStatus)
+                _this.setSpkStatus(data)
+        });
+        socket.on("setSpkAlert", function(data){
+            console.log("setSpkAlert")
+            if(_this.setSpkAlert)
+                _this.setSpkAlert(data)
+        });
+
+
+
 
 
         socket.on("newUser", function(data){
@@ -254,7 +277,7 @@ function connect(_this, roomid, clbk){
         });
 
 
-    })
+
 }
 function chattextChange(_this, e) {
 

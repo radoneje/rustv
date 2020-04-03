@@ -11,18 +11,31 @@ class socket{
         var  _this=this;
         this.io.on('connection', async (socket)=> {
             var id=null;
-
+            var roomid=null;
             socket.on("hello",async ( data)=>{
 
                 var users=await knex.select("*").from("t_eventusers").where({id:data.id})
-                var client={socket:socket, user:users[0], roomid:data.roomid, isActive:true, isAdmin:(users[0].email=='moderator@rustv.ru'&& users[0].smsCode==999999)}
+                if(users[0].email=='speaker@rustv.ru' && users[0].smsCode==999999 && _this.clients.SpkCount(data.roomid)>0 )
+                {
+                    socket.emit("SPKanotherConnectError",false);
+                    return;
+                }
+                roomid=data.roomid;
+                var client={
+                    socket:socket,
+                    user:users[0],
+                    roomid:data.roomid,
+                    isActive:true,
+                    isAdmin:(users[0].email=='moderator@rustv.ru' && users[0].smsCode==999999),
+                    isSpeaker:(users[0].email=='speaker@rustv.ru' && users[0].smsCode==999999)
+                }
                 id=_this.clients.add(client)
                 client.id=id;
             })
             socket.on("disconnect",(msg,  data)=>{
                 console.log("disconnect",id);
-                if(id)
-                    _this.clients.disActive(id);
+              //  if(id)
+                    _this.clients.disActive(socket.id);
             });
             socket.on("selfVideoStarted",(msg,  data)=>{
                 if(id)
@@ -48,6 +61,22 @@ class socket{
                 if(id)
                     _this.clients.fwd("stopSendVideo",  data)
             });
+          socket.on("SPKstatus",(dt)=>{
+
+                if(id) {
+                    _this.clients.sendToRoomAdmins("SPKstatus", dt, roomid)
+                }
+            });
+            socket.on("setSpkStatus",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomSpeakers("setSpkStatus",  dt, roomid)
+            });
+            socket.on("setSpkAlert",(dt)=>{
+
+                if(id)
+                    _this.clients.sendToRoomSpeakers("setSpkAlert",  dt, roomid)
+            });
+
 
 
             socket.on("receiverPlaying",(data)=>{

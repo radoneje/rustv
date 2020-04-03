@@ -9,7 +9,22 @@ block head
 
 block content
     div.adminContainer(id="app" style="height: 100vh;")
-        div.aModBox(style="height: 100vh;")
+        div.aMenu
+
+
+            div.greenBtn.clearBtn(v-on:click="sendSpkStatus(1)" style="display:inline-block" v-bind:class="{active:SPKstatus==1}")
+                span Вопросы на экран
+            div.greenBtn.clearBtn(v-on:click="sendSpkStatus(2)" style="display:inline-block" v-bind:class="{active:SPKstatus==2}")
+                span Чат на экран
+            div.greenBtn.clearBtn(v-on:click="sendSpkStatus(4)" style="display:inline-block" v-bind:class="{active:SPKstatus==4}")
+                span Мозаику на экран
+            div.greenBtn.clearBtn(v-on:click="sendSpkStatus(0)" style="display:inline-block")
+                span Очистить экран
+            div.aMenuInputGroup
+                label Этот текст будет показан на экране
+                input(type="text" placeholder="" v-model="SPKalertText" :readonly="SPKalert")
+                div.greenBtn(v-on:click="sendSpkAleret()" v-bind:class="{active:SPKalert}"  ) Вывести на экран
+        div.aModBox(style="")
             div.aModSect
                 div.aModSectTitle Вопросы ({{q.length}})
                 div.aSectBody(id="qBox")

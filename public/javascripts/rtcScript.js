@@ -71,6 +71,8 @@ function  stopReceiveVideo(id){
         }
         return true
     })
+    if(videoReceivers.length==0)
+        mainVideoMute(false)
 }
 function stopSendVideo(id){
     videoSenders=videoSenders.filter(s=>{
@@ -153,8 +155,16 @@ async function createReceiver(data, video, socket, clbk){
     }
     video.addEventListener("play", ()=>{
         socket.emit("receiverPlaying",{ guid:data.guid, to:data.from})
+        mainVideoMute(true)
     })
     clbk(ret);
+}
+function mainVideoMute(val){
+    var mainVideoElem=document.getElementById('video');
+    if(mainVideoElem)
+    {
+        mainVideoElem.muted=val?true:false;
+    }
 }
 async function  addSenderEvents(socket,videoSender, data, clbk){
     var RTConn=videoSender.RTConn;

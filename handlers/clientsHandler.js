@@ -4,7 +4,6 @@ class Clients{
 
     constructor() {
         this.clients=[];
-        this.count=0;
     }
     add(data){
         var _this=this;
@@ -13,7 +12,6 @@ class Clients{
         data.user.isActive=true;
         data.date=new Date();
         data.isVideo=false;
-        this.count++;
         this.clients.push(data);
         this.emit=this.sendToRoomUsers
         setTimeout(()=>{_this.sendToRoomUsers("userConnnect",  data.user,data.roomid)}, 0);
@@ -22,12 +20,15 @@ class Clients{
     disActive(id){
         var _this=this;
         this.clients.forEach(c=>{
-            if(c.id==id) {
+            if(c.socket.id==id) {
                 c.isActive = false;
                 c.isVideo=false;
                 _this.sendToRoomUsers("userDisconnnect", c.user.id,c.roomid)
             }
         })
+    }
+    SpkCount(roomid){
+        return this.clients.filter(c=>{return c.isSpeaker && c.isActive && c.roomid==roomid}).length;
     }
     startVideo(id, socketid) {
         var _this = this;
@@ -46,7 +47,15 @@ class Clients{
     }
     sendToRoomAdmins(msg, data, roomid){
         this.clients.forEach(c=>{
-            if(c.isActive && c.roomid==roomid && c.isAdmin )
+            if(c.isActive && c.roomid==roomid && ( c.isAdmin || c.isSpeaker) ) {
+                c.socket.emit(msg, data);
+
+            }
+        });
+    }
+    sendToRoomSpeakers(msg, data, roomid){
+        this.clients.forEach(c=>{
+            if(c.isActive && c.roomid==roomid &&  c.isSpeaker )
                 c.socket.emit(msg, data);
         });
     }

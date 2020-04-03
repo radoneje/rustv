@@ -17,6 +17,7 @@ window.onload=function () {
             }
         },
         methods:{
+
             addEvent:async function () {
                 var dt=await axios.post("/rest/api/events");
                 if(dt.data) {

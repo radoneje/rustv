@@ -1,0 +1,39 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/stylesheets/old.css')
+    script.
+        var roomid = #{room.id}
+        var eventid = #{room.eventid}
+    script(src="/javascripts/utils.js")
+    script(src="/javascripts/rtcScript.js")
+    script(src="/javascripts/speakerScript.js")
+
+block content
+    div.adminContainer.spkContaiter(id="app" style="height: 100vh;")
+        div.aMenu
+            div(v-if="SPKanotherConnectError")
+                div.greenBtn.clearBtn.error
+                    span() Открыт другой экран спикера. Для продолжения работы закройте его.
+            div.greenBtn.clearBtn(v-else v-on:click="showLocalVideo()" style="display:inline-block" v-bind:class="{error:!socketConnection}")
+                span(v-if="socketConnection") подключено
+                    span(v-if="selfVideoStream") , видео включено
+                span(v-else) ошибка сети
+            div.spkMenu
+                div.spkMenuItem(v-bind:class="{active:SPKstatus==1}" v-on:click="SPKstatus=1") Вопросы
+                div.spkMenuItem(v-bind:class="{active:SPKstatus==2}" v-on:click="SPKstatus=2") Чат
+                div.spkMenuItem(v-bind:class="{active:SPKstatus==3}" v-on:click="SPKstatus=3") Пользователи
+                div.spkMenuItem(v-bind:class="{active:SPKstatus==4}" v-on:click="SPKstatus=4") Мозаика
+                div.spkMenuItem(v-bind:class="{active:SPKstatus==5}" v-on:click="SPKstatus=5") Видео
+                div.spkMenuItem(v-bind:class="{active:SPKstatus==6}" v-on:click="SPKstatus=6") Конференция
+                div.spkMenuItem(v-bind:class="{active:SPKstatus==7}" v-on:click="SPKstatus=7") Презентация
+        div#videoWr
+
+
+
+
+
+
+
+
+
+

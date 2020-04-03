@@ -68,7 +68,7 @@ router.get('/room/:id',  async (req, res, next) =>{
 
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
-  res.render('room', { title: 'MAY24:ONevent::'+rooms.title, room:room });
+  res.render('room', { title: 'MAY24:ONevent::'+room.title, room:room });
 
 })
 
@@ -85,8 +85,25 @@ router.get('/moderator/:id',  async (req, res, next) =>{
   var room=rooms[0]
 
   if(!req.session["moderator"+room.id])
-    return res.render('moderatorLogin',{ title: 'MAY24:ONevent::'+rooms.title, room:room})
-  res.render('moderator', { title: 'MAY24:ONevent::'+rooms.title, room:room});
+    return res.render('moderatorLogin',{ title: 'MAY24:ONevent  '+rooms.title, room:room})
+  res.render('moderator', { title: 'MAY24:ONevent  '+room.title, room:room});
+
+})
+router.get('/speaker/:id',  async (req, res, next) =>{
+
+  req.params.id=parseInt(req.params.id)
+  if(!Number.isInteger(req.params.id))
+    return res.send(404);
+
+  var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.params.id})
+  if(rooms.length<1)
+    return res.send(404);
+
+  var room=rooms[0]
+
+  if(!req.session["speaker"+room.id])
+    return res.render('speakerLogin',{ title: 'MAY24:ONevent::'+rooms.title, room:room})
+  res.render('speaker', { title: 'MAY24:ONevent  '+room.title, room:room});
 
 })
 

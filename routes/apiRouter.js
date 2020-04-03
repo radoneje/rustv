@@ -231,6 +231,7 @@ router.post("/logincheckcode", async (req, res, next)=> {
   await req.knex("t_eventusers").update({isConfirm:true,confirmdate:(new Date())})
       .where({id:usr[0].id});
   req.session["user"+usr[0].eventid]=usr[0];
+  res.set('x-userid', usr[0].id);
   return res.json({status:1, showConfirm:false, user:{id:usr[0].id,f:usr[0].f, i:usr[0].i}})
 })
 
@@ -287,6 +288,15 @@ router.get("/info/:eventid/:roomid", checkLoginToRoom, async (req, res, next)=> 
   var usr=req.session["user"+req.params.eventid];
   res.json({id:usr.id, f:usr.f, i:usr.i});
 })
+router.get("/infospk/:eventid/:roomid", checkLoginToRoom, async (req, res, next)=> {
+  var usr=req.session["speaker"+req.params.roomid];
+  res.json({id:usr.id, f:usr.f, i:usr.i});
+})
+router.get("/infomod/:eventid/:roomid", checkLoginToRoom, async (req, res, next)=> {
+  var usr=req.session["moderator"+req.params.roomid];
+  res.json({id:usr.id, f:usr.f, i:usr.i});
+})
+
 router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next)=> {
 
   var ret=[];
@@ -298,7 +308,6 @@ router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next)=>
 });
 router.post("/quest/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
   var r=await req.knex("t_q").insert({text:req.body.text,roomid:req.params.roomid, userid:req.session["user"+req.params.eventid].id, date:(new Date())}, "*")
-  console.log("qAdd add", r[0])
 
   r=await req.knex.select("*").from("v_q").where({id:r[0].id});
 
@@ -334,7 +343,6 @@ router.delete("/qdelete/:id/:eventid/:roomid",checkLoginToRoom,async (req, res, 
 
 router.post("/regmoderator/:eventid/:roomid", async (req, res, next)=> {
 
-
   req.params.eventid=parseInt(req.params.eventid)
   if(!Number.isInteger(req.params.eventid))
     return res.send(404);
@@ -361,13 +369,50 @@ router.post("/regmoderator/:eventid/:roomid", async (req, res, next)=> {
         .insert({eventid:req.params.eventid, email:'moderator@rustv.ru', smsCode:999999,f:"Модератор", isConfirm:true, confirmdate:(new Date()) },"*")
 
   req.session["user"+usr[0].eventid]=usr[0];
-
   req.session["moderator"+req.params.roomid]=usr[0]
-
   console.log(req.session["moderator"+req.params.roomid])
+
+
   return res.json(usr[0].id);
 
 });
+
+router.post("/regspeaker/:eventid/:roomid", async (req, res, next)=> {
+
+
+  req.params.eventid=parseInt(req.params.eventid)
+  if(!Number.isInteger(req.params.eventid))
+    return res.send(404);
+
+  req.params.roomid=parseInt(req.params.roomid)
+  if(!Number.isInteger(req.params.roomid))
+    return res.send(404);
+
+
+  var rooms=await req.knex.select("*").from("t_rooms").where({id:req.params.roomid, isDeleted:false})
+  if(rooms.length<1)
+    return  res.send(404)
+  var room=rooms[0];
+
+  if(room.password!=req.body.pass || req.body.pass.length<3)
+    return res.json(false);
+
+  var usr=await req.knex.select("*")
+      .from("t_eventusers")
+      .where({eventid:req.params.eventid, email:'speaker@rustv.ru', smsCode:999999 });
+
+  if(usr.length==0)
+    usr=await req.knex("t_eventusers")
+        .insert({eventid:req.params.eventid, email:'speaker@rustv.ru', smsCode:999999,f:"Спикер", isConfirm:true, confirmdate:(new Date()) },"*")
+
+  req.session["user"+usr[0].eventid]=usr[0];
+
+  req.session["speaker"+req.params.roomid]=usr[0]
+
+  return res.json(usr[0].id);
+
+});
+
 
 router.delete("/chatdelete/:id/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
   var r=await req.knex("t_chat").update({isDeleted:true}, "*").where({id:req.params.id});
@@ -392,7 +437,19 @@ router.post("/qsetStatus/:eventid/:roomid",checkLoginToRoom,async (req, res, nex
 router.get("/guid",async (req, res, next)=> {
   res.json(uuidv4());
 });
+router.get("/test", (req, res, next)=>{
 
+
+    var ret=[];
+    req.transport.clients.forEach(c=>{
+
+        ret.push({iid:c.id, id:c.user.id, i:c.user.i, f:c.user.f, isActive:c.isActive?true:false, isAdmin:c.isAdmin, isSpeaker:c.isSpeaker, isVideo:c.isVideo });
+    })
+  var r="";
+      ret.forEach(c=>{r+=JSON.stringify( c)+"<br>"})
+    res.send(r);
+
+})
 
 
 

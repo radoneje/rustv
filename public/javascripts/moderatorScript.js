@@ -13,8 +13,23 @@ window.onload=function () {
             user:null,
             selfVideoStream:null,
             socket,
+            SPKstatus:1,
+            SPKalert:null,
+            SPKalertText:""
         },
         methods:{
+            sendSpkAleret:function(data){
+                this.SPKalert=!this.SPKalert;
+                this.socket.emit("setSpkAlert",{SPKalert:this.SPKalert, SPKalertText:this.SPKalertText});
+            },
+            sendSpkStatus:function(data){
+                this.socket.emit("setSpkStatus",data);
+            },
+            onSPKstatus:function(data){
+
+                this.SPKstatus=data.SPKstatus;
+                this.SPKalert=data.SPKalert;
+            },
             qtextChange:function (e) {
                 var _this=this;
                 if(this.qText.length>0)
@@ -176,7 +191,7 @@ window.onload=function () {
         },
         mounted:async function () {
             var _this=this;
-            axios.get('/rest/api/info/'+eventid+"/"+roomid)
+            axios.get('/rest/api/infomod/'+eventid+"/"+roomid)
                 .then(function (dt) {
                     _this.user=dt.data;
                     connect(_this,roomid, function (socket) {
