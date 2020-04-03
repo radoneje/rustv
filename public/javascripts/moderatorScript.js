@@ -15,7 +15,8 @@ window.onload=function () {
             socket,
             SPKstatus:1,
             SPKalert:null,
-            SPKalertText:""
+            SPKalertText:"",
+            isSpkScreen:false,
         },
         methods:{
             onHandUp:function(data){
@@ -213,7 +214,9 @@ window.onload=function () {
                     _this.user=dt.data;
                     connect(_this,roomid, function (socket) {
                         _this.socket=socket;
+                        checkSpeakerScreen(_this);
                     });
+
                     axios.get("/rest/api/users/"+eventid+"/"+roomid)
                         .then(function (r) {
                             _this.users=r.data;
@@ -232,4 +235,19 @@ window.onload=function () {
                 })
         }
     });
+}
+
+function checkSpeakerScreen(_this){
+     axios.get('/rest/api/isSpkScreen/'+eventid+"/"+roomid)
+         .then(function (r) {
+                 _this.isSpkScreen=r.data
+             setTimeout(function () {
+                 checkSpeakerScreen(_this);
+             },5*1000)
+         })
+         .catch(function () {
+             setTimeout(function () {
+                 checkSpeakerScreen(_this);
+             },5*1000)
+         })
 }

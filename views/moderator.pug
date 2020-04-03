@@ -9,9 +9,7 @@ block head
 
 block content
     div.adminContainer(id="app" style="height: 100vh;")
-        div.aMenu
-
-
+        div.aMenu(v-if="isSpkScreen")
             div.greenBtn.clearBtn(v-on:click="sendSpkStatus(1)" style="display:inline-block" v-bind:class="{active:SPKstatus==1}")
                 span Вопросы на экран
             div.greenBtn.clearBtn(v-on:click="sendSpkStatus(2)" style="display:inline-block" v-bind:class="{active:SPKstatus==2}")
@@ -24,6 +22,10 @@ block content
                 label Этот текст будет показан на экране
                 input(type="text" placeholder="" v-model="SPKalertText" :readonly="SPKalert")
                 div.greenBtn(v-on:click="sendSpkAleret()" v-bind:class="{active:SPKalert}"  ) Вывести на экран
+        div(v-else)
+            div.aMenu()
+                div.greenBtn.clearBtn.flex.error(v-on:click="window.open('/speaker/'+roomid)")
+                    div Экран спикера закрыт. Откройте по ссылке.
         div.aModBox(style="")
             div.aModSect
                 div.aModSectTitle Вопросы ({{q.length}})

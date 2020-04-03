@@ -306,6 +306,17 @@ router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next)=>
   })
   res.json(ret);
 });
+
+
+router.get("/isSpkScreen/:eventid/:roomid", checkLoginToRoom, async (req, res, next)=> {
+  var ret=false;
+  req.transport.clients.forEach(c=>{
+    if(c.roomid==req.params.roomid && c.isActive && c.isSpeaker)
+     ret=true;
+  })
+  res.json(ret);
+});
+
 router.post("/quest/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
   var r=await req.knex("t_q").insert({text:req.body.text,roomid:req.params.roomid, userid:req.session["user"+req.params.eventid].id, date:(new Date())}, "*")
 
