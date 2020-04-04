@@ -1,10 +1,25 @@
 extends layout
 block head
-  //script(src="/javascripts/indexScript.js")
+  script(src="/javascripts/test.js")
+  style.
+    #srcVideo{
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      z-index: -1;
+    }
 
 block content
-  body(style="background:black")
-    <iframe src="/regtoevent/5" width="150px" height="60px"></iframe>
+  body()
+    div#btn(style="margin:50px; padding:10px; cursor:pointer; background:yellow;display: inline-block;") кликни здесь
+    div
+      video#srcVideo(autoplay="true")
+    div
+      canvas#canvas
+    div
+      video#destVideo(autoplay="true" controls)
+
 
 
 
