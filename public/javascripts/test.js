@@ -32,7 +32,7 @@ window.onload=async function() {
     }
 
     var outStream = canvas.captureStream(30);
-    var inputStream= await navigator.mediaDevices.getUserMedia({audio:true, video:{width:320}});
+    var inputStream= await navigator.mediaDevices.getUserMedia({audio:true, video:true});
     inputVideo.srcObject=inputStream;
     const ac = new AudioContext();
     const osc = ac.createOscillator();
