@@ -80,7 +80,9 @@ var i=100;
 
         try {
         var testvideo=document.getElementById("testvideo")
-            testvideo.srcObject = await navigator.mediaDevices.getUserMedia({video: true});
+            var mediaDevices=navigator.mediaDevices;
+        log(mediaDevices)
+            testvideo.srcObject = await mediaDevices.getUserMedia({video: true});
         } catch(e) {
            log(e);
         }
