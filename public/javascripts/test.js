@@ -71,15 +71,21 @@ var i=100;
     })
 
 */
-    const console = { log: msg => div.innerHTML += msg + "<br>" };
-    console.log("TEST")
-    (async () => {
+
+
+
+    log("TEST")
+
+
 
         try {
-            video.srcObject = await navigator.mediaDevices.getUserMedia({video: true});
+        var testvideo=document.getElementById("testvideo")
+            testvideo.srcObject = await navigator.mediaDevices.getUserMedia({video: true});
         } catch(e) {
-            console.log(e);
+           log(e);
         }
-    })();
+
 
 }
+
+function log(msg){div.innerHTML += msg + "<br>"}
