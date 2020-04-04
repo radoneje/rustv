@@ -1,5 +1,7 @@
 window.onload=async function() {
-
+    var AudioContext = window.AudioContext // Default
+        || window.webkitAudioContext // Safari and old versions of Chrome
+        || false;
 
     var inputVideo=document.getElementById("srcVideo")
     inputVideo.muted="mute"
@@ -38,7 +40,7 @@ window.onload=async function() {
     osc.start();
 
     var gainNode = ac.createGain();
-    gainNode.gain.value = 0.9;
+    gainNode.gain.value = 0.0;
     osc.connect(gainNode);
 
     var inputAudioNode= ac.createMediaStreamSource(inputStream);
