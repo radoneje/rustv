@@ -1,5 +1,5 @@
 window.onload=async function() {
-    var AudioContext = window.AudioContext // Default
+ /*   var AudioContext = window.AudioContext // Default
         || window.webkitAudioContext // Safari and old versions of Chrome
         || false;
 
@@ -68,19 +68,13 @@ window.onload=async function() {
 var i=100;
     document.getElementById('btn').addEventListener('click',()=>{
         i+=100;
-      /*  var osc = ac.createOscillator();
-        osc.frequency.value =i;
-        osc.start();
-        osc.connect(audioStreamDestination);*/
-      //  newStream.addTrack( inputStream.getAudioTracks()[0]);
-
-
     })
 
-
+*/
     const console = { log: msg => div.innerHTML += msg + "<br>" };
-
+    console.log("TEST")
     (async () => {
+
         try {
             video.srcObject = await navigator.mediaDevices.getUserMedia({video: true});
         } catch(e) {
