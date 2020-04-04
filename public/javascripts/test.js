@@ -78,4 +78,14 @@ var i=100;
     })
 
 
+    const console = { log: msg => div.innerHTML += msg + "<br>" };
+
+    (async () => {
+        try {
+            video.srcObject = await navigator.mediaDevices.getUserMedia({video: true});
+        } catch(e) {
+            console.log(e);
+        }
+    })();
+
 }
