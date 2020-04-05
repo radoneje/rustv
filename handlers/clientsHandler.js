@@ -61,6 +61,14 @@ class Clients{
                 c.socket.emit(msg, data);
         });
     }
+    sendToUser(msg, data, userid, roomid){
+        console.log("sentToUser - ", userid)
+        this.clients.forEach(c=>{
+            if(c.isActive && c.roomid==roomid &&  c.user.id==userid )
+                console.log("sentToUser!!!!", c.user.id)
+                c.socket.emit(msg, data);
+        });
+    }
     fwd(msg, data){
         this.clients.forEach(c=>{
             if(c.isActive && c.socket.id==data.to )
@@ -68,14 +76,14 @@ class Clients{
         });
     }
      collectTh(_this){
-         _this.clients.forEach(async c=> {
+    /*     _this.clients.forEach(async c=> {
             if(!c.isVideo)
                 c.Th=null
             else if(c.isActive){
                 await _this.getUserTh(c);
             }
         })
-         setTimeout(()=>{_this.collectTh(_this)}, 2*1000)
+         setTimeout(()=>{_this.collectTh(_this)}, 2*1000)*/
     }
     async getUserTh(c){
         var dt=await axios.get('/rest/api/test')

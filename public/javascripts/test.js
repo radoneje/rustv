@@ -75,9 +75,6 @@ var i=100;
 
 
     log("TEST")
-
-
-
         try {
         var testvideo=document.getElementById("testvideo")
             var mediaDevices=navigator.mediaDevices;

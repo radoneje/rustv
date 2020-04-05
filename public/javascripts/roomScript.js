@@ -18,16 +18,18 @@ window.onload=function () {
         },
         methods:{
             isWebRtc:function(){
-                var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-                var ya =/YaBrowser/.test(navigator.userAgent) ;
+                var isChrome = /chrome/.test(navigator.userAgent.toLowerCase()) && /google inc/.test(navigator.vendor.toLowerCase());
+                var ya =/yabrowser/.test(navigator.userAgent.toLowerCase()) ;
+                var safari =/safari/.test(navigator.userAgent.toLowerCase()) ;
+
                 var isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
                 var isRTC=typeof(RTCPeerConnection)=="function"
-                return  ((isChrome || ya) && !isMobile && isRTC);
+                return  ((isChrome || ya || safari) && !isMobile && isRTC);
             },
             isEsc6:function () {
                 try { eval('"use strict";const s=()=>{;;}; s();'); return true}
                 catch (e)
-                { console.log(e);
+                { //console.log(e);
                     return false
                 }
             },
@@ -92,16 +94,20 @@ window.onload=function () {
             },
             onSenderReady:function (data) {
                 var _this=this
-                console.log("createReceiver", data, socket);
+              //  console.log("createReceiver", data, socket);
                 var video=createVideoContaiter(data.guid, (data.user.i||"") +" "+ data.user.f)
-                createReceiver(data, video, _this.socket, function (ret) {
-                    videoReceivers.push(ret)
-                    //console.log("data from spk", data.isSpk)
-                    if(data.isSpk)
-                        document.getElementById("videoWr").classList.add('fromSpk')
+                console.log("onSenderReady", data. parent)
+                if(videoReceivers.length<4)
+                    createReceiver(data, video, _this.socket, function (ret) {
+                        ret.parent=data.parent;
+                        videoReceivers.push(ret)
+                        //console.log("data from spk", data.isSpk)
+                        if(data.isSpk)
+                            document.getElementById("VKS").classList.add('fromSpk')
 
-                    _this.socket.emit("receiverReady",{user:_this.user, guid:data.guid, to:data.from})
-                })
+                        _this.socket.emit("receiverReady",{user:_this.user, guid:data.guid, parent:data.parent, to:data.from})
+                        setRoomReceiversHeight();
+                    })
             },
             onVideoLink:function (data) {
                 onVideoLink(this, data)
@@ -109,13 +115,16 @@ window.onload=function () {
             receiverPlaying:function (data) {
                 var _this=this;
                         var video=document.getElementById('selfVideo');
+                        if(!data.parent || videoSenders.filter(e=>{return e.parent==data.parent}).length==0)
                         createSender(video, _this.webCamStream, function (videoSender) {
-
+                            videoSender.parent=data.parent;
+                            videoSender.parentpairGUID=data.parentpairGUID;
                             videoSenders.push(videoSender)
-                            _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, recguid:data.guid, to:data.from})
+                            _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, parent:data.parent, recguid:data.guid, to:data.from})
                         });
             },
             onReceiverReady:function (data) {
+                console.log("onReceiverReady", data.parent)
                 var _this=this;
                 var videoSender=videoSenders.filter(s=>{return s.guid==data.guid})[0];
                 addSenderEvents(_this.socket,videoSender, data, function () {
@@ -133,6 +142,24 @@ window.onload=function () {
                     },10*60*1000)
                 axios.post('/rest/api/hand/'+eventid+"/"+roomid, {val:_this.hand, id:_this.user.id}).then()
 
+            },
+            onStartDirectConnect:function (data) {
+                if(this.user.id==data.to.id) {
+                    console.log("onStartDirectConnect", data);
+                    var parent=data.guid;
+                     var parentpairGUID= data.pairGUID
+                    //data.toSocketid = кому посылаем команду
+
+                    var _this=this;
+                    var video=document.getElementById('selfVideo');
+                    createSender(video, _this.webCamStream, function (videoSender) {
+                        videoSender.parent=parent;
+                        videoSender.parentpairGUID=parentpairGUID;
+                        videoSenders.push(videoSender)
+                        _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, parent:parent, parentpairGUID:parentpairGUID, to:data.toSocketid})
+                    });
+
+                }
             }
 
         },
@@ -150,7 +177,7 @@ window.onload=function () {
                     axios.get("/rest/api/users/"+eventid+"/"+roomid)
                         .then(function (r) {
                             _this.users=r.data;
-                            console.log(_this.users)
+                         //   console.log(_this.users)
                         })
                     axios.get("/rest/api/quest/"+eventid+"/"+roomid)
                         .then(function (r) {
@@ -189,11 +216,11 @@ function startVideo() {
                 switch(data.type) {
                     case Hls.ErrorTypes.NETWORK_ERROR:
                         // try to recover network error
-                        console.log("fatal network error encountered, try to recover");
+                        console.warn("fatal network error encountered, try to recover");
                         hls.startLoad();
                         break;
                     case Hls.ErrorTypes.MEDIA_ERROR:
-                        console.log("fatal media error encountered, try to recover");
+                        console.warn("fatal media error encountered, try to recover");
                         hls.recoverMediaError();
                         break;
                     default:

@@ -1,0 +1,20 @@
+
+<svg width="160px" height="90px" viewBox="0 0 160 90" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                <desc>Created with Sketch.</desc>
+                <defs></defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Mobile" transform="translate(-89.000000, -467.000000)">
+                        <rect id="Rectangle" fill="#3D89E0" x="89" y="467" width="160" height="90"></rect>
+                        <g id="ic-baseline-replay" transform="translate(132.000000, 475.000000)" fill-rule="nonzero">
+                            <g id="Icon">
+                                <g id="Icon-Group" transform="translate(36.666667, 34.083333) scale(-1, 1) translate(-36.666667, -34.083333) translate(11.666667, 3.083333)" fill="#FFFFFF">
+                                    <path d="M24.6666667,12.3333333 L24.6666667,0 L9.25,15.4166667 L24.6666667,30.8333333 L24.6666667,18.5 C34.8725,18.5 43.1666667,26.7941667 43.1666667,37 C43.1666667,47.2058333 34.8725,55.5 24.6666667,55.5 C14.4608333,55.5 6.16666667,47.2058333 6.16666667,37 L0,37 C0,50.6283333 11.0383333,61.6666667 24.6666667,61.6666667 C38.295,61.6666667 49.3333333,50.6283333 49.3333333,37 C49.3333333,23.3716667 38.295,12.3333333 24.6666667,12.3333333 Z" id="Icon-Shape"></path>
+                                    <animateTransform xlink:href="#Icon-Shape" attributeName="transform" type="rotate" begin="0s" dur="3s" values="360 30 35; 180 30 35;0  30 35" keyTimes="0; 0.5; 1" repeatCount="indefinite"></animateTransform>
+                                </g>
+                                <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="74" height="74"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>

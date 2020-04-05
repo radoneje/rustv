@@ -42,24 +42,29 @@ function createVideoContaiter(id, caption) {
 
     video.autoplay = true;
     video.width = 320;
-    video.style.width="180px"
     var videoBox = document.createElement("div");
     videoBox.classList.add("videoBox")
     videoBox.id = id;
+
+    var videoBoxWr = document.createElement("div");
+    videoBoxWr.classList.add("videoBoxWr")
+
     var videoCap = document.createElement("div");
     videoCap.classList.add("videoCap")
 
         videoCap.innerText = caption;// + "<img src='/images/close.svg'/>";
 
    // console.log(videoCap.innerHtml)
-    videoBox.appendChild(video);
-    videoBox.appendChild(videoCap);
+    videoBoxWr.appendChild(video);
+    videoBoxWr.appendChild(videoCap);
+    videoBox.appendChild(videoBoxWr);
     document.getElementById("videoWr").appendChild(videoBox);
 
 
     return     video
 }
 function  stopReceiveVideo(id){
+    console.log("stopReceiveVideo", id, videoReceivers)
     videoReceivers=videoReceivers.filter(s=>{
         if(s.guid==id)
         {
@@ -67,17 +72,24 @@ function  stopReceiveVideo(id){
             s.RTConn=null;
             var elem=document.getElementById(s.guid);
             elem.parentNode.removeChild(elem)
+            if(!s.parent){
+                videoSenders.forEach(send=>{
+                    stopSendVideo(send.guid);
+                })
+            }
             return false;
         }
-        return true
     })
     if(videoReceivers.length==0)
         mainVideoMute(false)
-    var elem=document.getElementById("videoWr")
-        if(elem)
+    var elem=document.getElementById("VKS")
+        if(elem && document.getElementsByClassName("roomScreen").length>0)
             elem.classList.remove('fromSpk')
+    if(elem && document.getElementsByClassName("spkContaiter").length>0)
+        document.getElementById("VKS").classList.add('hidden')
 }
 function stopSendVideo(id){
+    console.log("stopSendVideo", id, videoSenders)
     videoSenders=videoSenders.filter(s=>{
         if(s.guid==id)
         {
@@ -89,6 +101,7 @@ function stopSendVideo(id){
         }
         return true
     })
+
 }
 async function modGetStream(_this, clbk) {
 
@@ -147,17 +160,18 @@ async function createReceiver(data, video, socket, clbk){
         if(RTConn.iceConnectionState=="disconnected")
         {
             stopReceiveVideo(data.guid);
+            setReceiversHeight();
         }
     }
     RTConn.ontrack=(event)=>{
-        console.log("receiver have a track")
+        //console.log("receiver have a track")
         if (video.srcObject !== event.streams[0]) {
             video.srcObject = event.streams[0];
             video.play();
         }
     }
     video.addEventListener("play", ()=>{
-        socket.emit("receiverPlaying",{ guid:data.guid, to:data.from})
+        socket.emit("receiverPlaying",{ guid:data.guid, parent:data.parent, to:data.from})
         mainVideoMute(true)
     })
     clbk(ret);
@@ -173,7 +187,6 @@ async function  addSenderEvents(socket,videoSender, data, clbk){
     var RTConn=videoSender.RTConn;
     videoSender.stream.getTracks().forEach(track => RTConn.addTrack(track, videoSender.stream));
     RTConn.onicecandidate = (event) => {
-        console.log("onicecandidate")
         socket.emit("videoLink",{type:"icecandidate", to:data.from, candidate:event.candidate , guid:data.guid})
     }
     RTConn.oniceconnectionstatechange = (event) => {
@@ -196,16 +209,16 @@ async function  onVideoLink(_this, data) {
         if(s.length>0 && data.candidate)
             s[0].RTConn.addIceCandidate(data.candidate)
                 .then(function () {
-                    console.log("sender candidate set")
+
                 })
                 .catch(function (e) {
-                    console.log("sender candidate err", e)
+                    console.warn("sender candidate err", e)
                 })
         var r=videoReceivers.filter(s=>{return s.guid==data.guid});
         if(r.length>0)
             r[0].RTConn.addIceCandidate(data.candidate)
                 .then(function () {
-                    console.log("receiver candidate set")
+
                 })
                 .catch(function (e) {
                     console.warn("receiver candidate err", e, data.candidate)
@@ -220,7 +233,6 @@ async function  onVideoLink(_this, data) {
             var answ=await r[0].RTConn.createAnswer();
             await r[0].RTConn.setLocalDescription(answ);
            socket.emit("videoLink",{type:"videoAnswer", to:data.from, answ:answ , guid:data.guid})
-           console.log("videoOffer set, videoAnswer send");
 
         }
     }
@@ -231,7 +243,7 @@ async function  onVideoLink(_this, data) {
            // console.log("on videoAnswer is ", r, data);
             if(data.answ) {
                 await r[0].RTConn.setRemoteDescription(data.answ);
-                console.log("on videoAnswer is set", r, data);
+             //   console.log("on videoAnswer is set", r, data);
             }
           /*   await r[0].RTConn.setLocalDescription(answ);
 
@@ -239,5 +251,43 @@ async function  onVideoLink(_this, data) {
         }
     }
 
+}
+function setReceiversHeight(){
+    var count=1;
+    if(videoReceivers.length>3)
+        count+=1;
+    if(videoReceivers.length>6)
+        count+=1;
+    if(videoReceivers.length>9)
+        count+=1;
+    if(videoReceivers.length>12)
+        count+=1;
+
+    //console.log("count height", count, videoReceivers.length,document.querySelectorAll(".videoBox").length );
+    document.querySelectorAll(".videoBox").forEach(v=>{
+        if(v.id!='selfVideo'){
+            v.style.height="calc((100vh - 56px)/"+count+")"
+        }
+    })
+}
+function setRoomReceiversHeight()
+{
+    var count=1;
+    if(videoReceivers.length>2)
+        count+=1;
+    if(videoReceivers.length>5)
+        count+=1;
+    if(videoReceivers.length>8)
+        count+=1;
+    if(videoReceivers.length>11)
+        count+=1;
+
+    //console.log("count height", count, videoReceivers.length,document.querySelectorAll(".videoBox").length );
+    document.querySelectorAll(".videoBox").forEach(v=>{
+       // if(v.id!='selfVideo'){
+            v.style.height= 100/count +"%";// calc(100%  / "+count+")"
+            console.log("height", 100/count +"%", v.style.height)
+       // }
+    })
 }
 

@@ -55,10 +55,10 @@ function connect(_this, roomid, clbk){
 
         socket.on("userConnnect", function(user){
             var find=false;
-            console.log("userConnnect")
+           // receiverPlayingg("userConnnect")
             _this.users.forEach(function (u) {
                 if(u.id==user.id) {
-                    console.log("userConnnect", user.isActive)
+                  //  console.log("userConnnect", user.isActive)
                     user.isActive = true;
                     find=true
                 }
@@ -84,17 +84,17 @@ function connect(_this, roomid, clbk){
             _this.users=_this.users.filter(f=>{return true})
         });
         socket.on("senderReady", function(data){
-            console.log("senderReady receive")
+
             if(_this.onSenderReady)
                 _this.onSenderReady(data)
         });
         socket.on("receiverReady", function(data){
-            console.log("receiverReady receive")
+
             if(_this.onReceiverReady)
                 _this.onReceiverReady(data)
         });
         socket.on("videoLink", function(data){
-            console.log("videoLink receive", data.type)
+
             if(_this.onVideoLink)
                 _this.onVideoLink(data)
         });
@@ -117,7 +117,7 @@ function connect(_this, roomid, clbk){
                 _this.onSPKstatus(data)
         });
         socket.on("setSpkStatus", function(data){
-            console.log("setSpkStatus")
+
             if(_this.setSpkStatus)
                 _this.setSpkStatus(data)
         });
@@ -129,6 +129,17 @@ function connect(_this, roomid, clbk){
         if(_this.spkStartVks)
             _this.spkStartVks(data)
     });
+    socket.on("disconnectSPKvksUser", function(data){
+        console.log("utils disconnectSPKvksUser", data)
+        if(_this.disconnectSPKvksUser)
+            _this.disconnectSPKvksUser(data)
+    });
+    socket.on("startDirectConnect", function(data){
+        if(_this.onStartDirectConnect)
+            _this.onStartDirectConnect(data)
+    });
+
+
 
 
 
@@ -142,7 +153,7 @@ function connect(_this, roomid, clbk){
         });
 
         socket.on("chatAdd", function(data){
-            console.log("chatAdd", data);
+
 
             if(_this.chat.filter(function (u) {
                 return u.id==data.id
@@ -170,15 +181,15 @@ function connect(_this, roomid, clbk){
             _this.q.forEach(function (e) {
                 if(e.id==data.id) {
                     e.isReady = data.isReady;
-                    console.log("qStatus", e.id, data.isReady)
+
                 }
             })
-            console.log("qStatus", _this.q)
+
         });
         socket.on("videoSnapshot", function(data){
             _this.users.forEach(function (user) {
                 if(user.id==data.id) {
-                    console.log("videoSnapshot2")
+
                     user.jpg = data.jpg;
                     setTimeout(function () {
                         var elem = document.getElementById('jpg_' + data.id)
@@ -198,7 +209,7 @@ function connect(_this, roomid, clbk){
                 if(user.id==data.id)
                     user.jpg=null;
             })
-            console.log("stop Video on user");
+
           /*  _this.users=_this.users.filter(function () {
                 return true;
             })*/
@@ -216,9 +227,9 @@ function connect(_this, roomid, clbk){
 
         })
         socket.on("videoOffer", function(data) {
-            console.log("vf 1")
+
             if(typeof(_this.videoOffer)){
-                console.log("vf2")
+
                 _this.videoOffer(data)
             }
         })
@@ -240,7 +251,7 @@ function connect(_this, roomid, clbk){
             }
         })
         socket.on("icecandidate2", function(data) {
-                console.log("va2 111")
+
             if(typeof(videoIce)!='undefined'){
                 videoIce2(data)
             }
@@ -270,13 +281,13 @@ function connect(_this, roomid, clbk){
                 if(user.id==data.id)
                     user.handup=data.handup;
             })
-            console.log("user Handup");
+
           /*  _this.users=_this.users.filter(function () {
                 return true;
             })*/
         });
         socket.on("mayShowScreen", function(data) {
-            console.log("mayShowScreen",data)
+
             if(typeof(_this.mayShowScreen)!='undefined'){
                 _this.mayShowScreen(data)
             }

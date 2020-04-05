@@ -9,7 +9,7 @@ block head
     script(src="/javascripts/speakerScript.js")
 
 block content
-    div.adminContainer.spkContaiter(id="app" style="height: 100vh;")
+    div.adminContainer.spkContaiter.multiViewVideo(id="app" style="height: 100vh;")
         div.aMenu
             div(v-if="SPKanotherConnectError")
                 div.greenBtn.clearBtn.error
@@ -145,8 +145,8 @@ block content
                             </g>
                             </g>
                             </svg>
-
-        div#videoWr
+        div#VKS.fromSpk.hidden
+            div#videoWr
         div#spkAlert(v-if="SPKalert")  {{SPKalertText}}
 
 

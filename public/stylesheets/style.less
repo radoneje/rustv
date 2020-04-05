@@ -446,20 +446,15 @@ margin-right: 0;
   transition: opacity 1s ease;
  }
 #videoWr{
-  position: absolute;
-  right: 0;
-  top: 0;
+
 }
 .L{
   position: relative;
 }
-.videoBox{
-  position: relative;
-  background: url(/images/dots.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: gray;
-}
+
+
+
+
 .videoCap{
   color:white;
   position: absolute;
@@ -471,15 +466,7 @@ margin-right: 0;
   box-sizing: border-box;
 }
 
-.videoBox img{
-  margin-right: .5em;
-  cursor: pointer;
-  opacity: .5;
-  transition: opacity .3s ease;
-}
-.videoBox img:hover{
-  opacity: 1;
-}
+
 .userItemAvatar{
   transition: all .5s ease;
 }
@@ -542,6 +529,8 @@ background: #ecedec;;
   padding: 4px;
   cursor: pointer;
   background: white;
+  height: 180px;
+  width: 323px !important;
 }
 .spkContaiter #selfVideo video{
   width: 320px;
@@ -552,6 +541,7 @@ background: #ecedec;;
 }
 .spkContaiter .aMenu{
   position: relative;
+  z-index: 1;
 }
 .spkMenu{
   position: absolute;
@@ -642,89 +632,202 @@ background: #ecedec;;
 .spkLayer .userItemAvatar{
   top: 10px
 }
-.spkContaiter .videoBox:not(#selfVideo){
-  position: fixed;
-  top: 50px;
-  left: 0;
-  width: 100%;
-  z-index: 60;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.spkContaiter .videoBox:not(#selfVideo) video
-{
-  width: auto !important;
-  height: ~"calc(100vh - 50px)";
-  max-width: 80%;
-  border-radius: 10px;
-}
-.spkContaiter .videoBox:not(#selfVideo) .videoCap{
-  font-size: 36px;
-}
-.spkContaiter .videoBox:not(#selfVideo) .videoCap img {
-  margin-top: 5px;
-  width: 30px;
-}
+
+
+
 .videotoSpkWr{
-  display: flex;
+display: flex;
 }
 .videotoSpkWr img{
-  width: 22px;
-  margin-left: 10px;
+width: 22px;
+margin-left: 10px;
 }
 .videotoSpk{
-  background: #3c89e0;
-  padding: 4px 4px;
-  font-size: 16px;
-  border-radius: 2px;
-  margin: 0 .5em;
-  cursor: pointer;
+background: #3c89e0;
+padding: 4px 4px;
+font-size: 16px;
+border-radius: 2px;
+margin: 0 .5em;
+cursor: pointer;
 }
 .videoCatHer{
-  margin-bottom: 5px;
-  margin-left: 10px;
+margin-bottom: 5px;
+margin-left: 10px;
 }
 .adminContainer .videoCap{
-  opacity: .25;
+opacity: .25;
 }
 .adminContainer .videoCap:hover{
-  opacity: 1;
+opacity: 1;
 }
-#videoWr.fromSpk{
-  width: 100%;
-  height: 100%;
-  background: gray;
+
+.spkLayer .userHandUp{
+left: 3px;
+top: 3px;
 }
-#videoWr.fromSpk #selfVideo{
-  position: fixed;
-  top: 0;
-  left: ~"calc(50% - 90px)";
-  z-index: 100;
+
+.adminScreen .aModBox {
+
+width: ~"calc(100% -  270px)";
+
+}
+
+.adminScreen video{
+width: 100% !important;
+}
+@keyframes gradient {
+0% {
+background-position: 0% 50%;
+}
+50% {
+background-position: 100% 50%;
+}
+100% {
+background-position: 0% 50%;
+}
+}
+.VKSbox{
+
+}
+.VKSboxTitle{
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 40px;
+}
+.VKSboxItems{
+  margin-bottom: 40px;
+}
+.VKSboxItem{
+  margin-bottom: 20px;
+}
+.VKSboxItemBox{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.VKSboxItemTitle{
+
+}
+.VKSboxItemBtn{
+  cursor: pointer;
   padding: 4px;
-  background: white;
-  box-shadow: 0 0 10px 0 black;
+  margin-left: 10px;
+  border-radius: 2px;
+  background: gold;
 }
-#videoWr.fromSpk .videoBox:not(#selfVideo){
-  position: fixed;
-  top: 65px;
-  left: 0;
-  z-index: 90;
+.VKSboxItemBtn.removing{
+  color:white;
+  background: #3c89e0;
+}
+.multiViewVideo #VKS{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.multiViewVideo .videoBoxWr{
+  position: relative;
+  height: 101px;
+  background: #3c89df;
+}
+.multiViewVideo  .videoBoxWr video {
+  height: 100%;
+  max-width: 180px;
+}
+.multiViewVideo #VKS:not(.fromSpk) .videoBox{
+  height: inherit !important;
+
+}
+
+.multiViewVideo #VKS.fromSpk .videoBox{
+  flex: 1 0 32%;
+}
+
+.multiViewVideo #VKS.fromSpk{
   width: 100%;
-  height: ~"calc(100vh - 65px)";
+}
+.multiViewVideo #VKS.fromSpk #videoWr{
+  margin-top: 0px;
+  height: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  display: flex;
+ }
+
+.multiViewVideo #VKS.fromSpk .videoBoxWr{
+  height: 100%;
+  text-align: center;
 }
-#videoWr.fromSpk .videoBox:not(#selfVideo) video{
-  max-width: 90%;
-  width: 90% !important;
-  max-height: 100vh !important;
+.multiViewVideo #VKS.fromSpk video
+{
+  height: 100%;
+  max-width: 100%;
+  width: inherit;
 }
-.spkLayer .userHandUp{
-  left: 3px;
-  top: 3px;
+.multiViewVideo #VKS.fromSpk .videoCap{
+  bottom:inherit;
+  top: 0;
+  left: 50%;
 }
+
+.multiViewVideo #selfVideo{
+ /* position: fixed;
+  z-index: 100;
+  top: 63px;
+  height: 101px;
+  left: ~"calc(66% - 27px - 19px - 180px)";*/
+
+}
+.adminScreen #VKS{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 305px;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px 0 grey;
+  height: 100%;
+  overflow-y: scroll;
+}
+.adminScreen .videoBoxWr{
+  position: relative;
+  height: 161px;
+  margin-bottom: 2px;
+  background: #3c89df;
+}
+.adminScreen #translationVideoBox{
+  position: relative;
+}
+.spkContaiter  #VKS {
+  position: fixed;
+  background: white;
+}
+.spkContaiter  .videoBoxWr{
+  text-align: center;
+}
+.spkContaiter #VKS.hidden{
+  height: 0;
+}
+.closeIcon{
+  cursor: pointer;
+}
+#mirrorVideo{
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  width: 320px;
+  left: ~"calc(50% - 160px)";
+  border-radius: 2px;
+  box-shadow:0 0 10px 0 gray
+}
+
+
+
+
 
 
 

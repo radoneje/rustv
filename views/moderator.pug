@@ -6,9 +6,10 @@ block head
         var eventid = #{room.eventid}
     script(src="/javascripts/utils.js")
     script(src="/javascripts/moderatorScript.js")
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 block content
-    div.adminContainer(id="app" style="height: 100vh;")
+    div.adminScreen.adminContainer(id="app" style="height: 100vh;")
         div.aMenu(v-if="isSpkScreen")
             div.greenBtn.clearBtn(v-on:click="sendSpkStatus(1)" style="display:inline-block" v-bind:class="{active:SPKstatus==1}")
                 span Вопросы на экран
@@ -147,8 +148,19 @@ block content
 
                         div.userVideoWr(:id="'videoWr_'+item.id" )
 
+        div#VKS
+            div#videoWr
+                div.VKSbox(v-if="SPKvksUsers.length>0")
+                    div.VKSboxTitle Активные подключения ({{SPKvksUsers.length}})
+                    div.VKSboxItems
+                        div.VKSboxItem(v-for="item in SPKvksUsers" v-key="item.guid")
+                            div.VKSboxItemBox
+                                div.VKSboxItemTitle {{item.user.i||''}} {{item.user.f || ''}}
+                                div.VKSboxItemBtn(v-on:click="disconnectSPKvksUser(item)" :id="'VKSboxItemBtn'+item.guid") Отключить
 
-        div#videoWr
+                div.videoBox#translationVideoBox
+                    video#translationVideo( width="180"  controls playsinline muted autoplay poster="/images/bg_03.png" src="https://aurora-school.cdnvideo.ru/hls/100/index.m3u8" )
+                    div.videoCap Трансляция
 
 
 

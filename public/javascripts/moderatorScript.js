@@ -13,6 +13,7 @@ window.onload=function () {
             user:null,
             selfVideoStream:null,
             socket,
+            SPKvksUsers:[],
             SPKstatus:1,
             SPKalert:null,
             SPKalertText:"",
@@ -39,6 +40,13 @@ window.onload=function () {
 
                 this.SPKstatus=data.SPKstatus;
                 this.SPKalert=data.SPKalert;
+                this.SPKvksUsers=data.SPKvksUsers;
+                setTimeout(()=>{
+                    SPKvksUsers.forEach(u=>{
+                        document.getElementById('VKSboxItemBtn'+u.guid).classList.remove("removing")
+                    })
+                },0)
+
             },
             qtextChange:function (e) {
                 var _this=this;
@@ -129,12 +137,12 @@ window.onload=function () {
                     }// <-- this is important
                     document.getElementsByTagName('head')[0].appendChild(s);
                 } else {
-                    videoReceivers.forEach(function (r) {
+                   /* videoReceivers.forEach(function (r) {
                         console.log(item);
                         stopReceiveVideo(r.guid);
                         stopSendVideo(r.pairGUID);
                         _this.socket.emit("stopSendVideo",{user:_this.user, guid:r.recguid, to:item.socketid})
-                    });
+                    });*/
                     modGetStream(_this, function (video, stream) {
                         _this.onMyVideoStarted(video, stream, item)
                     });
@@ -181,16 +189,18 @@ window.onload=function () {
 
                 var videoBox=document.getElementById(data.guid)
                 var videoCap=videoBox.querySelector(".videoCap")
-                videoCap.innerHTML ='<div class="videoCatHer">' +videoCap.innerText +"</div><div class='videotoSpkWr'><span class='videotoSpk'>на экран</span>"+"<img src='/images/close.svg'/></div>";
+                videoCap.innerHTML ='<div class="videoCatHer">'
+                    +videoCap.innerText +
+                    "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+data.guid+"' >на экран</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+data.guid+"'/></div>";
                 {
-                    videoCap.querySelector("img").addEventListener("click", ()=>{
+                    document.getElementById("close"+data.guid).addEventListener("click", ()=>{
                         console.log("stopReceiveVideo", data.guid, data.recguid )
                         stopReceiveVideo(data.guid);
                         stopSendVideo(data.recguid);
                         _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.recguid, to:data.from})
                     })
 
-                    videoCap.querySelector(".videotoSpk").addEventListener("click", ()=>{
+                    document.getElementById("videotoSpk"+data.guid).addEventListener("click", ()=>{
                         stopReceiveVideo(data.guid);
                         stopSendVideo(data.recguid);
                         console.log(data);
@@ -203,6 +213,20 @@ window.onload=function () {
             onVideoLink:function (data) {
 
                 onVideoLink(this, data)
+
+            },
+            disconnectSPKvksUser:function(discinnecredUser){
+             /*   if(event.target.classList.contains('removing')) {
+                    return;
+                }
+              console.log(discinnecredUser)
+
+                 //alert("disconnectSPKvksUser", item.user.f + item.user.i)*/
+
+               // var ctrl=event.target
+                this.socket.emit("disconnectSPKvksUser", {item:discinnecredUser})
+                var ctrl=document.getElementById('VKSboxItemBtn'+discinnecredUser.guid)
+              //  ctrl.classList.add('removing')
 
             }
 
@@ -217,6 +241,7 @@ window.onload=function () {
                         checkSpeakerScreen(_this);
                     });
 
+                    startVideo(document.getElementById("translationVideo"))
                     axios.get("/rest/api/users/"+eventid+"/"+roomid)
                         .then(function (r) {
                             _this.users=r.data;
@@ -250,4 +275,45 @@ function checkSpeakerScreen(_this){
                  checkSpeakerScreen(_this);
              },5*1000)
          })
+}
+function startVideo(video) {
+    if (Hls.isSupported()) {
+
+        var hls = new Hls();
+        console.log("init HLS")
+        hls.loadSource(video.src);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            console.log("MANIFEST_PARSED")
+
+        });
+        hls.on(Hls.Events.ERROR, function (event, data) {
+            if (data.fatal) {
+                switch(data.type) {
+                    case Hls.ErrorTypes.NETWORK_ERROR:
+                        // try to recover network error
+                        console.log("fatal network error encountered, try to recover");
+                        hls.startLoad();
+                        break;
+                    case Hls.ErrorTypes.MEDIA_ERROR:
+                        console.log("fatal media error encountered, try to recover");
+                        hls.recoverMediaError();
+                        break;
+                    default:
+                        // cannot recover
+                        hls.destroy();
+                        break;
+                }
+            }
+        });
+    }
+    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        //video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
+        video.addEventListener('loadedmetadata', function() {
+
+            video.controls=true;
+            banner.style.display="none";
+            video.play();
+        });
+    }
 }

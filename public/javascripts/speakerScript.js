@@ -31,9 +31,18 @@ window.onload=function () {
             },
             showLocalVideo:function () {
                 if(this.socketConnection && this.selfVideoStream){
-                    var elem=document.getElementById("selfVideo")
+                   /* var elem=document.getElementById("selfVideo")
                     elem.style.zIndex="100";
-                    elem.style.opacity="1"
+                    elem.style.opacity="1"*/
+                    var video=document.createElement('video')
+                    video.muted=true;
+                    video.srcObject=this.selfVideoStream;
+                    video.id="mirrorVideo";
+                    video.autoplay=true
+                    document.body.appendChild(video)
+                    video.addEventListener('click',()=>{
+                        (video).parentNode.removeChild(video);
+                    })
                 }
             },
             setSpkStatus:function (data) {
@@ -119,7 +128,7 @@ window.onload=function () {
                var _this=this;
                var items=this.users.filter(u=>u.id==data.user.id)
                 if(items.length>0) {
-                    _this.stopVKS();
+                  //  _this.stopVKS();
                     setTimeout(()=>{
                         _this.startVideoChat(items[0]);
                     },500)
@@ -127,6 +136,7 @@ window.onload=function () {
                 }
             },
             startVideoChat:async function(item){
+                document.getElementById("VKS").classList.remove('hidden')
                 var _this=this;
 
                 var avatar=document.getElementById('videoAvatar'+item.id);
@@ -149,14 +159,17 @@ window.onload=function () {
                     }// <-- this is important
                     document.getElementsByTagName('head')[0].appendChild(s);
                 } else {
-                    videoReceivers.forEach(function (r) {
+                   /* videoReceivers.forEach(function (r) {
                         console.log(item);
                         stopReceiveVideo(r.guid);
                         stopSendVideo(r.pairGUID);
                         _this.socket.emit("stopSendVideo",{user:_this.user, guid:r.recguid, to:item.socketid})
-                    });
+                    });*/
+
+
                     modGetStream(_this, function (video, stream) {
                         _this.onMyVideoStarted(video, stream, item)
+
                     });
                 }
 
@@ -186,6 +199,8 @@ window.onload=function () {
                     console.log("invite Send")
                 })
 
+
+
             },
             onSenderReady:function (data) {
                 var _this=this
@@ -194,6 +209,15 @@ window.onload=function () {
                 createReceiver(data, video, _this.socket, function (ret) {
                     ret.pairGUID=data.recguid
                     ret.user=data.user;
+                    if(videoReceivers.length>0){
+                        var i=1;
+                        videoReceivers.forEach(r=>{
+                        setTimeout(()=>{
+                            _this.socket.emit("startDirectConnect",{user:r.user, guid:data.guid, pairGUID:ret.pairGUID, to:data.user})
+                        },1000*i)
+                            i++;
+                        })
+                    }
                     videoReceivers.push(ret)
                     _this.socket.emit("receiverReady",{user:_this.user, guid:data.guid, to:data.from})
                     _this.SPKstatus=6;
@@ -201,17 +225,21 @@ window.onload=function () {
 
 
                 var videoBox=document.getElementById(data.guid)
-                var videoCap=videoBox.querySelector(".videoCap")
-                videoCap.innerHTML = "<img src='/images/close.svg'/>" + videoCap.innerHTML;
+               var videoCap=videoBox.querySelector(".videoCap")
+                videoCap.innerHTML = "<img src='/images/close.svg' class='closeIcon' id='close"+data.guid+"'/>" + videoCap.innerHTML;
                 {
-                    videoCap.querySelector("img").addEventListener("click", ()=>{
+                    document.getElementById("close"+data.guid).addEventListener("click", ()=>{
                         console.log("stopReceiveVideo", data.guid, data.recguid )
                         stopReceiveVideo(data.guid);
                         stopSendVideo(data.recguid);
                         _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.recguid, to:data.from})
-                        _this.SPKstatus=1;
+                        setReceiversHeight();
+                        if(videoReceivers.length==0)
+                            _this.SPKstatus=1;
+
                     })
                 }
+                setReceiversHeight();
 
             },
             onVideoLink:function (data) {
@@ -223,6 +251,19 @@ window.onload=function () {
                 var elem=document.querySelector(".spkContaiter .videoBox:not(#selfVideo) .videoCap img")
                 if(elem)
                     elem.click();
+            },
+            disconnectSPKvksUser:function (data, event) {
+                console.log("disconnectSPKvksUser", data)
+                videoReceivers.forEach(r=>{
+                    if(r.guid==data.item.guid){
+                        var elem=document.getElementById(r.guid)
+                        if(elem) {
+                            var subElem = document.querySelector(".videoCap img")
+                            if (subElem)
+                                subElem.click();
+                        }
+                    }
+                })
             }
 
         },
@@ -242,6 +283,7 @@ window.onload=function () {
                     this.stopVKS();
                 }
             }
+
         },
         mounted:async function () {
             var _this=this;
@@ -295,7 +337,9 @@ window.onload=function () {
                                 _this.socketConnection = true;
 
                                 setInterval(() => {
-                                      _this.socket.emit("SPKstatus",{SPKstatus: _this.SPKstatus, SPKalert:_this.SPKalert})
+                                    var SPKvksUsers=[]
+                                    videoReceivers.forEach(r=>{SPKvksUsers.push({user:r.user, guid:r.guid})})
+                                      _this.socket.emit("SPKstatus",{SPKstatus: _this.SPKstatus, SPKalert:_this.SPKalert, SPKvksUsers:SPKvksUsers})
                                 }, 1000)
                             }
 

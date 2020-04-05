@@ -42,6 +42,7 @@ class socket{
                     _this.clients.startVideo(id, socket.id)
             });
             socket.on("senderReady",(data)=>{
+                console.log("senderReady", data.parent)
                 data.from=socket.id;
                 if(id)
                     _this.clients.fwd("senderReady",  data)
@@ -77,6 +78,22 @@ class socket{
             socket.on("spkStartVks",(dt)=>{
                 if(id)
                     _this.clients.sendToRoomSpeakers("spkStartVks",  dt, roomid)
+            });
+            socket.on("disconnectSPKvksUser",(dt)=>{
+                console.log("disconnectSPKvksUser", dt)
+                if(id)
+                    _this.clients.sendToRoomSpeakers("disconnectSPKvksUser",  dt, roomid)
+            });
+            socket.on("startDirectConnect",(dt)=>{
+                var touserid=dt.to.id;
+                var socketid=null
+                _this.clients.clients.forEach(c=>{
+                    if(c.user.id == dt.user.id && c.isActive==true && c.roomid==roomid)
+                        socketid=c.socket.id;
+                })
+                dt.toSocketid=socketid;
+                if(id && socketid)
+                    _this.clients.sendToUser("startDirectConnect",  dt, touserid, roomid)
             });
 
 
