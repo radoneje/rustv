@@ -1035,15 +1035,15 @@ color:#4a91e1
 .head.front{
   padding-left: 10px;
 }
-
+#video, #translationVideo{
+  -webkit-transform: inherit ;
+  transform:inherit !important;
+}
   video:not(#video), video:not(#translationVideo) {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
   }
-#video, #translationVideo{
-  -webkit-transform: inherit;
-  transform:inherit;
-}
+
 
 @media only screen and (max-width: 1024px){
   .L {
