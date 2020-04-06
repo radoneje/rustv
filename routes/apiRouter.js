@@ -12,6 +12,7 @@ const util = require('util');
 const readdir = util.promisify(fs.readdir);
 const stripHtml = require("string-strip-html");
 const moment=require('moment')
+const jo = require('jpeg-autorotate')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -342,11 +343,21 @@ router.post("/qfileUpload/:eventid/:roomid",checkLoginToRoom,async (req, res, ne
             var field=struct.type.indexOf('image/')==0?"photo":"video";
             var inserted={text:"",roomid:req.params.roomid, userid:req.session["user"+req.params.eventid].id, date:(new Date())}
             inserted[field]=name
-            var r=await req.knex("t_"+struct.to).insert(inserted, "*")
-            r=await req.knex.select("*").from("v_"+struct.to).where({id:r[0].id});
-
-          req.transport.emit(struct.to+"Add",r[0], req.params.roomid);
-          res.json(r[0]);
+          if(struct.type.indexOf('image/')==0){
+            try {
+              var dt=jo.rotate(filename, {quality: 85})
+              dt.buffer
+              fs.unlinkSync(filename)
+              fs.writeFile(filename,dt.buffer, ()=>{
+                denExit(inserted)
+              })
+            }
+            catch (e) {
+              denExit(inserted)
+            }
+          }
+          else
+            denExit(inserted)
         }
         else
         {
@@ -354,6 +365,13 @@ router.post("/qfileUpload/:eventid/:roomid",checkLoginToRoom,async (req, res, ne
           res.status(505);
         }
       });
+      async function  denExit(inserted) {
+        var r=await req.knex("t_"+struct.to).insert(inserted, "*")
+        r=await req.knex.select("*").from("v_"+struct.to).where({id:r[0].id});
+
+        req.transport.emit(struct.to+"Add",r[0], req.params.roomid);
+        res.json(r[0]);
+      }
 })
 router.post("/quest/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
   var text=urlify(stripHtml(req.body.text))
