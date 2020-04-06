@@ -202,7 +202,7 @@ block content
               div.rBody(id="qBox" )
                 div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==user.id)}" v-if="item.userid==user.id")
                   div.qItemSmi  {{item.smi}}
-                  div.qItemName {{item.i}}&nbsp;{{item.f}} {{item.photo}}
+                  div.qItemName {{item.i}}&nbsp;{{item.f}}
                   div.qItemText(v-html="item.text")
                   div(style="text-align:center")
                     video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
