@@ -236,7 +236,7 @@ window.onload=function () {
 
                     if (this.status == 200) {
                         setTimeout(function () {
-                            var objDiv = document.getElementById("qBox");
+                            var objDiv = document.getElementById(to+"Box");
                             objDiv.scrollTop = objDiv.scrollHeight;
                         }, 100)
                         setTimeout(()=>{
