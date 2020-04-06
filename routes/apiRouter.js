@@ -345,11 +345,17 @@ router.post("/qfileUpload/:eventid/:roomid",checkLoginToRoom,async (req, res, ne
             inserted[field]=name
           if(struct.type.indexOf('image/')==0){
             try {
-              var dt=jo.rotate(filename, {quality: 85})
-              dt.buffer
-              fs.unlinkSync(filename)
-              fs.writeFile(filename,dt.buffer, ()=>{
-                denExit(inserted)
+               jo.rotate(filename, {quality: 85})
+                   .then((dt)=>{
+                     dt.buffer
+                     fs.unlinkSync(filename)
+                     fs.writeFile(filename,dt.buffer, ()=>{
+                       denExit(inserted)
+                   }).catch(()=>{
+                       denExit(inserted)
+                     })
+
+
               })
             }
             catch (e) {
