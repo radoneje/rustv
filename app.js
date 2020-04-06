@@ -6,6 +6,7 @@ var lessMiddleware = require('less-middleware');
 var logger = require('morgan');
 var config = require('./config.json')
 var session = require('express-session');
+var  fileUpload=require('express-fileupload')
 
 var indexRouter = require('./routes/indexRouter');
 var apiRouter = require('./routes/apiRouter');
@@ -38,6 +39,12 @@ app.use(session({
   saveUninitialized: true,
   cookie: { maxAge: 1 * 24 * 60 * 60 * 1000 }, // 1 days
   store:new pgSession(pgStoreConfig),
+}));
+app.use(fileUpload({
+  limits: { fileSize: 100 * 1024 * 1024 },
+  useTempFiles : true,
+  tempFileDir : path.join(__dirname, 'public/files'),
+  safeFileNames: true
 }));
 
 

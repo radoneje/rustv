@@ -18,7 +18,11 @@ window.onload=function () {
             SPKstatus:1,
             SPKalert:false,
             SPKalertText:"",
-            SPKalertTimeout:null
+            SPKalertTimeout:null,
+            isPres:false,
+            files:[],
+            previewPres:[],
+            pres:null
         },
         methods:{
             onHandUp:function(data){
@@ -31,9 +35,15 @@ window.onload=function () {
             },
             showLocalVideo:function () {
                 if(this.socketConnection && this.selfVideoStream){
+                    elem=document.getElementById("selfVideo")
+                    elem.style.position="fixed";
+                    elem.style.top= 0;
+                    elem.style.opacity= 1;
+                    elem.style.zIndex=100;
+
                    /* var elem=document.getElementById("selfVideo")
                     elem.style.zIndex="100";
-                    elem.style.opacity="1"*/
+                    elem.style.opacity="1"
                     var video=document.createElement('video')
                     video.muted=true;
                     video.srcObject=this.selfVideoStream;
@@ -42,7 +52,7 @@ window.onload=function () {
                     document.body.appendChild(video)
                     video.addEventListener('click',()=>{
                         (video).parentNode.removeChild(video);
-                    })
+                    })*/
                 }
             },
             setSpkStatus:function (data) {
@@ -178,7 +188,7 @@ window.onload=function () {
             },
             onMyVideoStarted: function (video, stream, item) {
                 var _this=this;
-                createSender(video, stream, function (videoSender) {
+                createSender(video, stream, null, function (videoSender) {
                     videoSenders.push(videoSender)
                     _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, to:item.socketid, isSpk:true})
 
@@ -213,7 +223,7 @@ window.onload=function () {
                         var i=1;
                         videoReceivers.forEach(r=>{
                         setTimeout(()=>{
-                            _this.socket.emit("startDirectConnect",{user:r.user, guid:data.guid, pairGUID:ret.pairGUID, to:data.user})
+                            _this.socket.emit("startDirectConnect",{user:r.user, guid:data.recguid, pairGUID:ret.pairGUID, to:data.user})
                         },1000*i)
                             i++;
                         })
@@ -235,7 +245,12 @@ window.onload=function () {
                         _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.recguid, to:data.from})
                         setReceiversHeight();
                         if(videoReceivers.length==0)
-                            _this.SPKstatus=1;
+                        {
+                            if(_this.pres)
+                                _this.SPKstatus=7;
+                            else
+                                _this.SPKstatus=1;
+                        }
 
                     })
                 }
@@ -253,18 +268,68 @@ window.onload=function () {
                     elem.click();
             },
             disconnectSPKvksUser:function (data, event) {
-                console.log("disconnectSPKvksUser", data)
                 videoReceivers.forEach(r=>{
                     if(r.guid==data.item.guid){
-                        var elem=document.getElementById(r.guid)
-                        if(elem) {
-                            var subElem = document.querySelector(".videoCap img")
-                            if (subElem)
-                                subElem.click();
-                        }
+                        var elem=document.getElementById("close"+r.guid)
+                        if(elem)
+                            elem.click();
+                        socket.emit("disconnectDirectConnect", r.guid );
                     }
                 })
-            }
+            },
+            setPres:function (id) {
+                console.log("setPres", id)
+                this.pres=id;
+                if(this.pres) {
+                    this.isPres=true
+                    var elem = document.getElementById("pres" + id)
+                    if (elem)
+                        elem.scrollIntoView({inline: "center", behavior: "smooth"})
+                    this.SPKstatus=7;
+                }
+                else{
+                    this.isPres=false;
+                    if(videoReceivers.length==0)
+                        this.SPKstatus=1
+                    else
+                        this.SPKstatus=9
+                }
+            },
+            activatePres:async function (item) {
+                await axios.post("/rest/api/pres/" + eventid + "/" + roomid, {id:item.id})
+            },
+            OnNewFilePres:function (data) {
+                console.log("OnNewFilePres", this.files, data)
+                this.files.forEach(f=>{
+                    if(f.id==data.fileid)
+                        f.presfiles.push(f);
+                })
+            },
+            onPreviewFilePres:function (dt) {
+                console.log("onPreviewFilePres", dt)
+
+                    this.previewPres=dt;
+            },
+            newFile(data){
+                console.log("new file", data, this.files)
+                if(this.files.filter(f=>f.id==data.id).length==0)
+                    this.files.push(data)
+                else
+                    this.files.forEach(f=>{
+                        if(f.id==data.id)
+                            f=data;
+                    })
+
+            },
+            downloadFile:function(item){
+                downloadFile(item.id);
+            },
+            fileLink:function(item){
+                copyText("https://conf.rustv.ru/rest/api/file/"+item.id+"/" + eventid + "/" + roomid)
+            },
+            onDeleteFile:function (id) {
+                this.files=this.files.filter(r=>r.id!=id)
+            },
 
         },
         watch:{
@@ -279,10 +344,11 @@ window.onload=function () {
                     clearTimeout(_this.SPKalertTimeout);
             },
             SPKstatus:function () {
-                if(this.SPKstatus!=6 && videoReceivers.length>0 ){
+                if(this.SPKstatus<6 && videoReceivers.length>0 ){
                     this.stopVKS();
                 }
-            }
+            },
+
 
         },
         mounted:async function () {
@@ -318,13 +384,14 @@ window.onload=function () {
                                     elem.addEventListener("click", () => {
                                         elem.style.zIndex = "-1";
                                         elem.style.opacity = "0"
+                                        elem.style.top="90%"
                                     })
                                     /*_this.onMyVideoStarted(video, stream,item)*/
                                 });
 
                                 axios.get("/rest/api/users/" + eventid + "/" + roomid)
                                     .then(function (r) {
-                                         _this.users = r.data;
+                                        _this.users = r.data;
                                     })
                                 axios.get("/rest/api/quest/" + eventid + "/" + roomid)
                                     .then(function (r) {
@@ -334,6 +401,32 @@ window.onload=function () {
                                     .then(function (r) {
                                         _this.chat = r.data;
                                     })
+                                axios.get("/rest/api/files/"+eventid+"/"+roomid)
+                                    .then(function (r) {
+                                        console.log(r.data)
+                                        _this.files=r.data;
+                                    axios.get("/rest/api/activePres/" + eventid + "/" + roomid)
+                                        .then(function (ff) {
+                                            // console.log("activePres", ff)
+                                            if (ff.data.fileid) {
+                                                _this.previewPres = _this.files.filter(r => r.id == ff.data.fileid)[0].presfiles
+                                                //_this.pres = ff.data.fileid
+                                                _this.setPres(ff.data.item)
+                                                setTimeout(function () {
+                                                    var elem = document.getElementById("pres" + ff.data.fileid)
+                                                    if (elem)
+                                                        elem.scrollIntoView({inline: "center", behavior: "smooth"})
+                                                }, 200)
+
+                                              //  _this.pres = ff.data.item
+                                               // _this.isPres = ff.data.item ? true : false
+                                            } else
+                                                _this.previewPres = []
+
+
+                                    })
+                            })
+
                                 _this.socketConnection = true;
 
                                 setInterval(() => {
@@ -341,6 +434,21 @@ window.onload=function () {
                                     videoReceivers.forEach(r=>{SPKvksUsers.push({user:r.user, guid:r.guid})})
                                       _this.socket.emit("SPKstatus",{SPKstatus: _this.SPKstatus, SPKalert:_this.SPKalert, SPKvksUsers:SPKvksUsers})
                                 }, 1000)
+                                document.addEventListener("keydown",(e)=>{
+                                    if(e.code=="ArrowRight" || e.code=="ArrowLeft" && this.isPres)
+                                    {
+                                        var elems=document.querySelectorAll(".aModSectPresItem");
+                                        for(var i=0; i<elems.length; i++){
+                                            if(elems[i].classList.contains("active"))
+                                            {
+                                                if(e.code=="ArrowRight" && i<elems.length-1)
+                                                    elems[i+1].click();
+                                                if(e.code=="ArrowLeft" && i>0)
+                                                    elems[i-1].click();
+                                            }
+                                        }
+                                    }
+                                })
                             }
 
                         }, 1000);

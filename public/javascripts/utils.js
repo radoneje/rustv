@@ -130,7 +130,7 @@ function connect(_this, roomid, clbk){
             _this.spkStartVks(data)
     });
     socket.on("disconnectSPKvksUser", function(data){
-        console.log("utils disconnectSPKvksUser", data)
+
         if(_this.disconnectSPKvksUser)
             _this.disconnectSPKvksUser(data)
     });
@@ -138,6 +138,12 @@ function connect(_this, roomid, clbk){
         if(_this.onStartDirectConnect)
             _this.onStartDirectConnect(data)
     });
+    socket.on("disconnectDirectConnect", function(data){
+        console.log("utils disconnectDirectConnect", data)
+        if(_this.disconnectDirectConnect)
+            _this.disconnectDirectConnect(data)
+    });
+
 
 
 
@@ -275,6 +281,43 @@ function connect(_this, roomid, clbk){
                 _this.StartShowUploadedVideo(data)
             }
         });
+        socket.on("newFile", function(data) {
+            if(typeof(_this.newFile)!='undefined'){
+                _this.newFile(data)
+            }
+        });
+    socket.on("deleteFile", function(data) {
+        if(typeof(_this.onDeleteFile)!='undefined'){
+            _this.onDeleteFile(data)
+        }
+    });
+    socket.on("newFilePres", function(data) {
+        if(typeof(_this.OnNewFilePres)!='undefined'){
+            _this.OnNewFilePres(data)
+        }
+    });
+    socket.on("setPres", function(data) {
+        if(typeof(_this.setPres)!='undefined'){
+            _this.setPres(data)
+        }
+    });
+    socket.on("rr", function(data) {
+        console.log("utils rr", data)
+    });
+    socket.on("previewFilePres", function(data) {
+        console.log("utils previewFilePres", data)
+        if(typeof(_this.onPreviewFilePres)!='undefined'){
+            _this.onPreviewFilePres(data)
+        }
+    });
+
+
+
+
+
+
+
+
 
         socket.on("userHandup", function(data) {
             _this.users.forEach(function (user) {
@@ -328,4 +371,74 @@ function qtextSend(_this) {
                 objDiv.scrollTop = objDiv.scrollHeight;
             },100)
         })
+}
+ function  uploadFile(_this) {
+    var input= document.createElement("input")
+    input.type="file";
+    input.multiple=true;
+    input.style.display="none"
+    input.onchange=async function (e) {
+        var files=input.files
+        console.log(input.files);
+        for(var i=0; i<files.length; i++) {
+
+                var data = new FormData();
+                data.append('file', files[i]);
+                var dt = await axios.post('/rest/api/newFile/' + eventid + "/" + roomid,{name:files[i].name, size:files[i].size, type:files[i].type})
+                _this.files.push(dt.data);
+            setTimeout(function () {
+                    var objDiv = document.getElementById("fileBox");
+                    objDiv.scrollTop = objDiv.scrollHeight;
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.upload.onprogress = function(event) {
+                        console.log(parseFloat(event.loaded/event.total));
+                        document.getElementById("fileloader"+dt.data.id).style.width=parseFloat(event.loaded/event.total)*100+"%"
+                    }
+                    xhr.onload = xhr.onerror = function() {
+                        if (this.status == 200) {
+                            setTimeout(()=>{
+                                document.getElementById("fileloader"+dt.data.id).style.width=0;
+                            }, 4*1000)
+                        } else {
+                            document.getElementById("fileloader"+dt.data.id).style.width=100;
+                            document.getElementById("fileloader"+dt.data.id).classList.add('error')
+                            console.warn("error " + this.status);
+                        }
+                    };
+                 xhr.open("POST", "/rest/api/file/"+dt.data.id+"/" + eventid + "/" + roomid,true);
+                 xhr.send(data);
+            },100)
+
+        }
+        input.parentNode.removeChild(input);
+    }
+    document.body.appendChild(input)
+    input.click()
+
+}
+async function downloadFile(id) {
+
+    var iframe=document.createElement('iframe')
+    iframe.src="/rest/api/downloadFile/"+id+"/" + eventid + "/" + roomid;
+    console.log(iframe.src)
+   document.body.append(iframe);
+   setTimeout(()=>{
+       iframe.parentNode.removeChild(iframe);
+   },200)
+}
+ function copyText(txt) {
+
+    var textArea=document.createElement('textarea')
+     textArea.value = txt;
+     document.body.appendChild(textArea);
+     textArea.focus();
+     textArea.select();
+     var successful=document.execCommand('copy');
+     if(successful)
+         alert("Ссылка скопирована в буфер обмена.")
+     setTimeout(()=>{
+         textArea.parentNode.removeChild(textArea);
+     },200)
+
 }

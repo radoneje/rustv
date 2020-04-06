@@ -6,7 +6,7 @@ block head
   script(src="/javascripts/roomScript.js")
 
 block content
-  div.roomScreen.multiViewVideo(id="app")
+  div.roomScreen.multiViewVideo(id="app" v-bind:class="{roomInPres:pres}")
     div.head
       div.headBox
         //div.headLogo
@@ -162,7 +162,7 @@ block content
           //div(v-else)
             div.noRTCtext Для видеоподключения используйте браузер Chrome, Ya-Browser на компьютере с веб-камерой. Сейчас вы можете загрузить видеофайл в вопрос.
         div.Lbody
-          div.videoWrapper
+          div.videoWrapper(v-bind:style="{backgroundImage:pres?'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')':null}")
             //div(id="player")
 
             video(id="video" width="1280" height="720" controls playsinline poster="/images/bg_03.png" src="https://aurora-school.cdnvideo.ru/hls/100/index.m3u8" )
@@ -184,7 +184,7 @@ block content
               </g>
               </g>
               </svg>
-            div.banner-overlay
+            //div.banner-overlay
             //<iframe width="560" height="315" src="https://www.youtube.com/embed/QbhAaWgUvrw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             //video(id="myVideo" muted autoplay  v-if="webCamStream" )
             //video(id="remoteVideo"   v-if="webCamStream")
@@ -202,9 +202,11 @@ block content
               div.rBody(id="qBox" )
                 div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==user.id)}" v-if="item.userid==user.id")
                   div.qItemSmi  {{item.smi}}
-                  div.qItemName {{item.i}}&nbsp;{{item.f}}
-                  div.qItemText {{item.text}}
-                  video.qItemVideo(v-bind:src="'/uploads/'+item.video" v-if="item.video" controls)
+                  div.qItemName {{item.i}}&nbsp;{{item.f}} {{item.photo}}
+                  div.qItemText(v-html="item.text")
+                  div(style="text-align:center")
+                    video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
+                  div.qItemPhoto(v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
                   div.qItemDate
                     span.qItemReady(v-if="item.isReady")
                       span Ответ получен&nbsp;&nbsp;
@@ -215,6 +217,7 @@ block content
 
                     span {{moment(item.date).format("HH:MM")}}
               div.rFooter
+                div.fileLoadProgress
                 div.askWr
                   <svg v-on:click="qFileClick()" style="cursor:pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1.5 8C1.5 7.17157 2.17157 6.5 3 6.5H12C12.8284 6.5 13.5 7.17157 13.5 8V16C13.5 16.8284 12.8284 17.5 12 17.5H3C2.17157 17.5 1.5 16.8284 1.5 16V8Z" stroke="#9A9A9A"/>
@@ -237,12 +240,13 @@ block content
                   </g>
                   </svg>
 
+
             div.rContentWr(v-if="activeSection==2")
               div.rBody(id="chatBox" )
                 div.qItem(v-for="item in chat" v-bind:class="{my:(item.userid==user.id)}")
                   div.qItemSmi  {{item.smi}}
                   div.qItemName {{item.i}}&nbsp;{{item.f}}
-                  div.qItemText {{item.text}}
+                  div.qItemText(v-html="item.text")
                   div.qItemDate {{moment(item.date).format("HH:MM")}}
               div.rFooter
                 div.askWr
@@ -277,6 +281,14 @@ block content
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.9993 2.66663C8.77135 2.66663 2.66602 8.77196 2.66602 16C2.66602 23.228 8.77135 29.3333 15.9993 29.3333C23.2274 29.3333 29.3327 23.228 29.3327 16C29.3327 8.77196 23.2274 2.66663 15.9993 2.66663ZM15.9993 9.33329C18.302 9.33329 19.9993 11.0293 19.9993 13.3333C19.9993 15.6373 18.302 17.3333 15.9993 17.3333C13.698 17.3333 11.9993 15.6373 11.9993 13.3333C11.9993 11.0293 13.698 9.33329 15.9993 9.33329ZM9.19135 22.3626C10.3873 20.6026 12.382 19.4293 14.666 19.4293H17.3327C19.618 19.4293 21.6114 20.6026 22.8074 22.3626C21.1034 24.1866 18.686 25.3333 15.9993 25.3333C13.3127 25.3333 10.8953 24.1866 9.19135 22.3626Z" fill="#9A9A9A"/>
                     </svg>
+            div.rContentWr(v-if="activeSection==7")
+              div.rBody(id="fileBox" )
+                div.qItem(v-for="item in files" :id="'file'+item.id")
+                  div.qItemLoader(:id="'fileloader'+item.id")
+                  div.qItemName {{item.title}}
+                  div.qItemDate
+                    span.link.green(v-on:click="downloadFile(item)") &nbsp;&nbsp; Скачать
+                    span.link.green(v-on:click="fileLink(item)") &nbsp;&nbsp; Ссылка
 
 
       div(style="clear:both")

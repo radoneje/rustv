@@ -5,6 +5,13 @@ var nodemailer = require('nodemailer');
 require('dotenv').config();
 const fetch = require('isomorphic-fetch');
 const { v4: uuidv4 } = require('uuid');
+var path = require('path')
+var fs = require('fs')
+const PDF2Pic = require("pdf2pic");
+const util = require('util');
+const readdir = util.promisify(fs.readdir);
+const stripHtml = require("string-strip-html");
+const moment=require('moment')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -317,8 +324,40 @@ router.get("/isSpkScreen/:eventid/:roomid", checkLoginToRoom, async (req, res, n
   res.json(ret);
 });
 
+
+router.post("/qfileUpload/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
+
+  if(!req.headers['x-data'])
+    res.status(404);
+  console.log("qfileUpload", req.headers);
+  var struct=JSON.parse(decodeURI(req.headers['x-data']));
+  if(!(struct.type.indexOf('image/')==0 ||struct.type.indexOf('video/')==0 ))
+    return res.json(false);
+
+  var ext= path.extname(struct.name)
+  var name=moment().unix()+ext;
+  var filename=path.join(__dirname, '../public/files/'+name);
+  req.files.file.mv(filename, async (e)=> {
+        if (!e) {
+            var field=struct.type.indexOf('image/')==0?"photo":"video";
+            var inserted={text:"",roomid:req.params.roomid, userid:req.session["user"+req.params.eventid].id, date:(new Date())}
+            inserted[field]=name
+            var r=await req.knex("t_q").insert(inserted, "*")
+            r=await req.knex.select("*").from("v_q").where({id:r[0].id});
+
+          req.transport.emit("qAdd",r[0], req.params.roomid);
+          res.json(r[0]);
+        }
+        else
+        {
+          console.warn(e);
+          res.status(505);
+        }
+      });
+})
 router.post("/quest/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
-  var r=await req.knex("t_q").insert({text:req.body.text,roomid:req.params.roomid, userid:req.session["user"+req.params.eventid].id, date:(new Date())}, "*")
+  var text=urlify(stripHtml(req.body.text))
+  var r=await req.knex("t_q").insert({text:text,roomid:req.params.roomid, userid:req.session["user"+req.params.eventid].id, date:(new Date())}, "*")
 
   r=await req.knex.select("*").from("v_q").where({id:r[0].id});
 
@@ -326,11 +365,23 @@ router.post("/quest/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> 
   res.json(r[0]);
 })
 router.post("/chat/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
-  var r=await req.knex("t_chat").insert({text:req.body.text,roomid:req.params.roomid, userid:req.session["user"+req.params.eventid].id, date:(new Date())}, "*")
+  var text=urlify(stripHtml(req.body.text))
+
+  var r=await req.knex("t_chat").insert({text:text,roomid:req.params.roomid, userid:req.session["user"+req.params.eventid].id, date:(new Date())}, "*")
   r=await req.knex.select("*").from("v_chat").where({id:r[0].id});
   req.transport.emit("chatAdd",r[0], req.params.roomid);
   res.json(r[0]);
 })
+
+function urlify(text) {
+  var urlRegex = /(https?:\/\/[^\s]+)/g;
+  return text.replace(urlRegex, function(url) {
+    return '&nbsp;<a href="' + url + '" target="_blank">' + url + '</a>&nbsp;';
+  })
+  // or alternatively
+  // return text.replace(urlRegex, '<a href="$1">$1</a>')
+}
+
 router.get("/quest/:eventid/:roomid",checkLoginToRoom,async (req, res, next)=> {
   var r=await req.knex.select("*").from("v_q").where({roomid:req.params.roomid}).orderBy("date");// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
 
@@ -482,6 +533,150 @@ router.get("/test", (req, res, next)=>{
     res.send(r);
 
 })
+router.post("/newFile/:eventid/:roomid",checkLoginToRoom, async (req, res, next)=>{
+  var r=await req.knex("t_files").insert({roomid:req.params.roomid, userid:req.session["user"+req.params.eventid].id, title:req.body.name, mime:req.body.type, bytes:req.body.size}, "*");
+  r[0].presfiles=[];
+  return res.json(r[0]);
+
+})
+router.get("/files/:eventid/:roomid",checkLoginToRoom, async (req, res, next)=>{
+  var r=await req.knex.select("*").from("t_files").where({roomid:req.params.roomid, isDeleted:false}).orderBy("date");
+  for(d of r) {
+    d.presfiles = await req.knex.select("id").from("t_presfiles").where({isDeleted: false, fileid:d.id}).orderBy("id")
+  }
+  return res.json(r);
+
+})
+router.post("/file/:fileid/:eventid/:roomid",checkLoginToRoom, async (req, res, next)=>{
+ // var r=await req.knex("t_files").insert({roomid:req.params.roomid, title:req.body.name, mime:req.body.type, bytes:req.body.size}, "*");
+
+  var r=await req.knex.select("*").from("t_files").where({id:req.params.fileid})
+
+  var ext= path.extname(r[0].title)
+  var filename=path.join(__dirname, '../public/files/'+r[0].id+ext);
+  req.files.file.mv(filename, async (e)=>{
+    if(!e) {
+      console.log(filename, e)
+      var r=await req.knex("t_files").update({path:filename, isReady: true, ext: ext, date: (new Date())}, "*").where({id: req.params.fileid})
+
+      req.transport.emit("newFile",r[0], req.params.roomid);
+      console.log(r[0].mime, r[0].mime.indexOf('image/'))
+      if(r[0].mime.indexOf('image/')==0) {
+        var f = await req.knex("t_presfiles").insert({path: r[0].path, fileid:r[0].id}, "id")
+        r[0].presfiles=[];
+        r[0].presfiles.push(f[0])
+        req.transport.emit("newFilePres",{id:f[0], fileid:r[0].id}, req.params.roomid);
+      }
+      if(r[0].mime.indexOf('application/pdf')==0) {
+
+        var folder=path.join(__dirname, '../public/files/'+r[0].id)
+        if (!fs.existsSync(folder))
+           fs.mkdirSync(folder);
+        const pdf2pic = new PDF2Pic({
+            density: 300,           // output pixels per inch
+            savename: "p",   // output file name
+            savedir: folder,    // output file location
+            format: "png",          // output file format
+            size: "1024x720"         // output size in pixels
+          });
+
+        await pdf2pic.convertBulk(r[0].path,-1)
+        var pres=await readdir(folder);
+        for(pr of pres){
+          var m=pr.match(/p_(\d+)\.png/);
+          var f = await req.knex("t_presfiles").insert({path: path.join(folder, pr), fileid:r[0].id}, "id")
+          if(!r[0].presfiles)
+            r[0].presfiles=[];
+          r[0].presfiles.push(f[0])
+          req.transport.emit("newFilePres",{id:f[0], fileid:r[0].id}, req.params.roomid);
+        }
+      }
+
+      return res.json(res[0]);
+    }
+    else
+      console.warn("error file upload", e)
+  })
+
+
+
+})
+router.get("/files/:eventid/:roomid",checkLoginToRoom, async (req, res, next)=>{
+  var r=await req.knex.select("*").from("t_files").where({roomid:req.params.roomid, isDeleted:false}).orderBy("date");
+  return res.json(r);
+
+})
+
+router.get("/pres/:presid/:eventid/:roomid",checkLoginToRoom, async (req, res, next)=>{
+
+
+  var r=await req.knex.select("*").from("t_presfiles")
+      .where({id:req.params.presid, isDeleted:false});
+  if(r.length<1)
+    return res.sendStatus(404);
+
+  res.sendFile(r[0].path)
+
+})
+router.get("/activePres/:eventid/:roomid",checkLoginToRoom, async (req, res, next)=>{
+
+
+  var r=await req.knex.select("*").from("t_presfiles")
+      .where({isActive:true, isDeleted:false});
+  if(r.length<1)
+    return res.json({item:null,fileid:null})
+
+  res.json({item:r[0].id,fileid:r[0].fileid})
+
+
+})
+router.post("/pres/:eventid/:roomid",checkLoginToRoom, async (req, res, next)=>{
+
+  var p=await req.knex.select("*").from("t_presfiles").where({id:req.body.id});
+  var f=await req.knex.select("*").from("t_files").where({id:p[0].fileid});
+  for(ff of f){
+    var pp=await req.knex("t_presfiles").update({isActive:false}).where({fileid:ff.id})
+  }
+  await  req.knex("t_presfiles").update({isActive:true}).where({id:req.body.id})
+  req.transport.emit("setPres",req.body.id, req.params.roomid);
+  res.json(req.body.id)
+
+})
+router.post("/deActivatePres/:eventid/:roomid",checkLoginToRoom, async (req, res, next)=>{
+  var f=await req.knex.select("*").from("t_files").where({roomid:req.params.roomid});
+  for(ff of f){
+    var pp=await req.knex("t_presfiles").update({isActive:false}).where({fileid:ff.id})
+  }
+  req.transport.emit("setPres",null, req.params.roomid);
+  res.json(req.body.id)
+
+})
+router.post("/previewFilePres/:eventid/:roomid",checkLoginToRoom, async (req, res, next)=>{
+
+  req.transport.emit("previewFilePres",req.body.items, req.params.roomid);
+  res.json(req.body.id)
+
+})
+
+
+router.get("/downloadFile/:fileid/:eventid/:roomid", async (req, res, next)=>{
+  var r=await req.knex.select("*").from("t_files")
+      .where({id:req.params.fileid, isDeleted:false});
+  if(r.length<1)
+    return res.sendStatus(404);
+
+  res.setHeader("Content-disposition", "attachment; filename=\""+r[0].title.replace(/[^\x00-\x7F]/g, "")+"\"");
+  res.setHeader('Content-type', r[0].mime);
+
+  res.download(r[0].path)
+})
+router.delete("/file/:fileid/:eventid/:roomid",checkLoginToRoom, async (req, res, next)=>{
+  var r=await req.knex("t_files").update({isDeleted:true}, "*").where({id: req.params.fileid})
+  req.transport.emit("deleteFile",r[0].id, req.params.roomid);
+  res.json(r[0].id)
+})
+
+
 
 
 

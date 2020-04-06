@@ -72,20 +72,18 @@ function  stopReceiveVideo(id){
             s.RTConn=null;
             var elem=document.getElementById(s.guid);
             elem.parentNode.removeChild(elem)
-            if(!s.parent){
-                videoSenders.forEach(send=>{
-                    stopSendVideo(send.guid);
-                })
-            }
             return false;
         }
+        else
+            return true;
+
     })
     if(videoReceivers.length==0)
         mainVideoMute(false)
     var elem=document.getElementById("VKS")
-        if(elem && document.getElementsByClassName("roomScreen").length>0)
+        if(elem && document.getElementsByClassName("roomScreen").length>0 && videoReceivers.length==0)
             elem.classList.remove('fromSpk')
-    if(elem && document.getElementsByClassName("spkContaiter").length>0)
+    if(elem && document.getElementsByClassName("spkContaiter").length>0 && videoReceivers.length==0)
         document.getElementById("VKS").classList.add('hidden')
 }
 function stopSendVideo(id){
@@ -132,11 +130,16 @@ async function modGetStream(_this, clbk) {
 
     return  video;
 }
-async function createSender(video, stream, clbk){
+async function createSender(video, stream, guid, clbk,){
+    if(!guid)
+    {
+        var dt=await axios.get('/rest/api/guid');
+        guid=dt.data;
+    }
     var dt=await axios.get('/rest/api/guid');
     var RTConn= new RTCPeerConnection(RTPconfig);
     var ret={
-        guid:dt.data,
+        guid:guid,
         video:video,
         stream:stream,
         RTConn:RTConn
@@ -159,6 +162,7 @@ async function createReceiver(data, video, socket, clbk){
     RTConn.oniceconnectionstatechange = (event) => {
         if(RTConn.iceConnectionState=="disconnected")
         {
+            console.log("oniceconnectionstatechange", data.guid)
             stopReceiveVideo(data.guid);
             setReceiversHeight();
         }
@@ -181,6 +185,7 @@ function mainVideoMute(val){
     if(mainVideoElem)
     {
         mainVideoElem.muted=val?true:false;
+        mainVideoElem.style.opacity=val?0:1
     }
 }
 async function  addSenderEvents(socket,videoSender, data, clbk){

@@ -62,10 +62,11 @@
   //
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 40px;
   padding: 10px;
-  color: #262626;
+  padding-bottom: 5px;
+
   box-sizing: border-box;
 }
 span.link{
@@ -703,13 +704,7 @@ display: flex;
   padding-bottom: 56.25%; /* 16:9 */
   height: 0;
 }
-.videoWrapper iframe, .videoWrapper #video {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
- }
+
 #videoObj{
   width: 100%;
   height: 100%;
@@ -738,7 +733,7 @@ display: flex;
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
-  width: 33%;
+  width: 25%;
   box-sizing: border-box;
   padding: 15px 10px;
   display: inline-block;
@@ -791,6 +786,7 @@ display: flex;
   box-sizing: border-box;
   padding: 15px;
   margin-bottom: 15px;
+  position: relative;
 }
 .qItem.my .qItemName{
   color:#3D89E0;
@@ -1046,25 +1042,9 @@ position: absolute;
 
 
 }
-.videoPlayBannner{
 
-}
 
-.videoPlayBannner{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.videoPlayBannner svg{
-  width: 25%;
-  height: 25%;
-  cursor: pointer;
-}
+
 @media only screen and (max-width: 1024px) {
   .lTopTitle {
     font-size: 38px;

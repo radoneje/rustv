@@ -3,7 +3,12 @@ window.onload=function () {
         el: '#app',
         data: {
             webCamStream:null,
-            sect:[{title:"Вопросы", isActive:false, id:1}, {title:"Чат", isActive:true, id:2},{title:"Участники", isActive:false, id:3} ],
+            sect:[
+                {title:"Вопросы", isActive:false, id:1},
+                {title:"Чат", isActive:true, id:2},
+                {title:"Участники", isActive:false, id:3},
+                {title:"Файлы", isActive:false, id:7}
+                ],
             activeSection:2,
             chat:[],
             users:[],
@@ -15,6 +20,8 @@ window.onload=function () {
             socket:null,
             hand:false,
             handTimer:null,
+            pres:null,
+            files:[]
         },
         methods:{
             isWebRtc:function(){
@@ -116,7 +123,7 @@ window.onload=function () {
                 var _this=this;
                         var video=document.getElementById('selfVideo');
                         if(!data.parent || videoSenders.filter(e=>{return e.parent==data.parent}).length==0)
-                        createSender(video, _this.webCamStream, function (videoSender) {
+                        createSender(video, _this.webCamStream, data.guid, function (videoSender) {
                             videoSender.parent=data.parent;
                             videoSender.parentpairGUID=data.parentpairGUID;
                             videoSenders.push(videoSender)
@@ -152,7 +159,7 @@ window.onload=function () {
 
                     var _this=this;
                     var video=document.getElementById('selfVideo');
-                    createSender(video, _this.webCamStream, function (videoSender) {
+                    createSender(video, _this.webCamStream, null,function (videoSender) {
                         videoSender.parent=parent;
                         videoSender.parentpairGUID=parentpairGUID;
                         videoSenders.push(videoSender)
@@ -160,7 +167,91 @@ window.onload=function () {
                     });
 
                 }
-            }
+            },
+            disconnectDirectConnect:function(data){
+                console.log("disconnectDirectConnect", data)
+                videoReceivers.forEach(r=>{
+                    if(r.parent==data)
+                        stopReceiveVideo(r.guid);
+                })
+                videoSenders.forEach(r=>{
+                    if(r.parent==data)
+                        stopSendVideo(r.guid)
+                })
+            },
+            setPres:function (id) {
+                this.pres=id;
+            },
+            newFile(data){
+                console.log("new file", data, this.files)
+                if(this.files.filter(f=>f.id==data.id).length==0)
+                    this.files.push(data)
+                else
+                    this.files.forEach(f=>{
+                        if(f.id==data.id)
+                            f=data;
+                    })
+
+            },
+            downloadFile:function(item){
+                downloadFile(item.id);
+            },
+            fileLink:function(item){
+                copyText("https://conf.rustv.ru/rest/api/file/"+item.id+"/" + eventid + "/" + roomid)
+            },
+            onDeleteFile:function (id) {
+                this.files=this.files.filter(r=>r.id!=id)
+            },
+            qFileClick:function(){
+                var elem= document.createElement("input");
+                elem.type="file"
+                elem.style.display="none";
+                elem.accept="video/*;capture=camcorder";
+                elem.onchange=function(){
+                    if(!(elem.files[0].type.indexOf('image/')==0 ||elem.files[0].type.indexOf('video/')==0 ))
+                        return  alert("Можно загрузить только фото или видео")
+                    var fd = new FormData();
+                    fd.append('file', elem.files[0]);
+
+                    var xhr = new XMLHttpRequest();
+                    var progressElem=document.querySelector(".fileLoadProgress")
+                    xhr.upload.onprogress = function(event) {
+                        console.log(parseFloat(event.loaded/event.total));
+                        progressElem.style.width=parseFloat(event.loaded/event.total)*100+"%"
+                    }
+                    xhr.onload = xhr.onerror = function() {
+                        elem.parentNode.removeChild(elem)
+                        if (this.status == 200) {
+                            setTimeout(function () {
+                                var objDiv = document.getElementById("qBox");
+                                objDiv.scrollTop = objDiv.scrollHeight;
+                            }, 100)
+                            setTimeout(()=>{
+                                progressElem.style.width=0;
+                            }, 4*1000)
+                        } else {
+                            progressElem.style.width="100%";
+                            progressElem.classList.add('error')
+                            setTimeout(()=>{
+                                progressElem.style.width=0;
+                                progressElem.classList.remove('error')
+                            }, 4*1000)
+                            console.warn("error " + this.status);
+                        }
+                    };
+                    xhr.open("POST", '/rest/api/qfileUpload/'+eventid+"/"+roomid,true, );
+                    //xhr.setRequestHeader("Content-Type", "multipart/form-data")
+                    xhr.setRequestHeader("X-data", encodeURI( JSON.stringify({name:elem.files[0].name,type:elem.files[0].type})))
+
+                    xhr.send(fd);
+
+
+
+                }
+                document.body.appendChild(elem);
+
+                elem.click();
+            },
 
         },
         watch:{
@@ -187,6 +278,14 @@ window.onload=function () {
                         .then(function (r) {
                             _this.chat=r.data;
                         })
+                    axios.get("/rest/api/activePres/"+eventid+"/"+roomid)
+                        .then(function(ff){
+                                    _this.pres=ff.data.item
+                        })
+                    axios.get("/rest/api/files/"+eventid+"/"+roomid)
+                        .then(function (r) {
+                            _this.files = r.data;
+                        });
                     document.getElementById("app").style.opacity=1;
                     startVideo();
                     _this.startRTC();

@@ -9,7 +9,7 @@ block head
     script(src="/javascripts/speakerScript.js")
 
 block content
-    div.adminContainer.spkContaiter.multiViewVideo(id="app" style="height: 100vh;")
+    div.adminContainer.spkContaiter.multiViewVideo(id="app" style="height: 100vh;" v-bind:class="{roomInPres:pres}")
         div.aMenu
             div(v-if="SPKanotherConnectError")
                 div.greenBtn.clearBtn.error
@@ -33,8 +33,10 @@ block content
                     div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}" v-if="!item.isReady")
                         div.qItemSmi  {{item.smi}}
                         div.qItemName {{item.i}}&nbsp;{{item.f}}
-                        div.qItemText {{item.text}}
-                        video.qItemVideo(v-bind:src="'/uploads/'+item.video" v-if="item.video" controls)
+                        div.qItemText(v-html="item.text")
+                        div(style="text-align:center")
+                            video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
+                        div.qItemPhoto(v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
                         div.greenBtn(v-if="item.video" style="height: max-content;width: max-content;padding: 5px;" v-on:click="showUploadedVideo(item, $event)")
                             span Показать на экране
                         div.qItemDate
@@ -73,7 +75,7 @@ block content
                     div.qItem(v-for="item in chat")
                         div.qItemSmi  {{item.smi}}
                         div.qItemName {{item.i}}&nbsp;{{item.f}}
-                        div.qItemText {{item.text}}
+                        div.qItemText(v-html="item.text")
                         div.qItemDate
                             span.link.red(v-on:click="deleteChat(item)") Удалить
                             span &nbsp;&nbsp;
@@ -145,6 +147,16 @@ block content
                             </g>
                             </g>
                             </svg>
+        div.spkLayer(v-if="SPKstatus>5 " style="z-index:70")
+            div.aModSect
+                div.aModSectTitle Презентация {{pres}}
+                div.videoBox#admPresBox(v-if="pres")
+                    div#admPres(v-bind:style="{backgroundImage:'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')'}")
+                    div.aModSectPres
+                        div.aModSectPresSlider
+                            div.aModSectPresItem(v-for="item in previewPres" v-on:click="activatePres(item)" v-bind:class="{active:pres==item.id}" :id="'pres'+item.id")
+                                div.aModSectPresItemWr
+                                img.aModSectPresTh(:src="'/rest/api/pres/'+item.id+'/'+eventid+'/'+roomid")
         div#VKS.fromSpk.hidden
             div#videoWr
         div#spkAlert(v-if="SPKalert")  {{SPKalertText}}
