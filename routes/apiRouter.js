@@ -342,10 +342,10 @@ router.post("/qfileUpload/:eventid/:roomid",checkLoginToRoom,async (req, res, ne
             var field=struct.type.indexOf('image/')==0?"photo":"video";
             var inserted={text:"",roomid:req.params.roomid, userid:req.session["user"+req.params.eventid].id, date:(new Date())}
             inserted[field]=name
-            var r=await req.knex("t_q").insert(inserted, "*")
-            r=await req.knex.select("*").from("v_q").where({id:r[0].id});
+            var r=await req.knex("t_"+struct.to).insert(inserted, "*")
+            r=await req.knex.select("*").from("v_"+struct.to).where({id:r[0].id});
 
-          req.transport.emit("qAdd",r[0], req.params.roomid);
+          req.transport.emit(struct.to+"Add",r[0], req.params.roomid);
           res.json(r[0]);
         }
         else

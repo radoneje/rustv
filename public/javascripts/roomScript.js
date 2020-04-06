@@ -203,55 +203,98 @@ window.onload=function () {
                 this.files=this.files.filter(r=>r.id!=id)
             },
             qFileClick:function(){
+                var _this=this;
                 var elem= document.createElement("input");
                 elem.type="file"
                 elem.style.display="none";
                 elem.accept="video/*;capture=camcorder";
                 elem.onchange=function(){
-                    if(!(elem.files[0].type.indexOf('image/')==0 ||elem.files[0].type.indexOf('video/')==0 ))
-                        return  alert("Можно загрузить только фото или видео")
-                    var fd = new FormData();
-                    fd.append('file', elem.files[0]);
-
-                    var xhr = new XMLHttpRequest();
-                    var progressElem=document.querySelector(".fileLoadProgress")
-                    xhr.upload.onprogress = function(event) {
-                        console.log(parseFloat(event.loaded/event.total));
-                        progressElem.style.width=parseFloat(event.loaded/event.total)*100+"%"
-                    }
-                    xhr.onload = xhr.onerror = function() {
+                    _this.uploafFilesToQ(elem.files[0], "q", function () {
                         elem.parentNode.removeChild(elem)
-                        if (this.status == 200) {
-                            setTimeout(function () {
-                                var objDiv = document.getElementById("qBox");
-                                objDiv.scrollTop = objDiv.scrollHeight;
-                            }, 100)
-                            setTimeout(()=>{
-                                progressElem.style.width=0;
-                            }, 4*1000)
-                        } else {
-                            progressElem.style.width="100%";
-                            progressElem.classList.add('error')
-                            setTimeout(()=>{
-                                progressElem.style.width=0;
-                                progressElem.classList.remove('error')
-                            }, 4*1000)
-                            console.warn("error " + this.status);
-                        }
-                    };
-                    xhr.open("POST", '/rest/api/qfileUpload/'+eventid+"/"+roomid,true, );
-                    //xhr.setRequestHeader("Content-Type", "multipart/form-data")
-                    xhr.setRequestHeader("X-data", encodeURI( JSON.stringify({name:elem.files[0].name,type:elem.files[0].type})))
-
-                    xhr.send(fd);
-
-
+                    })
 
                 }
                 document.body.appendChild(elem);
-
                 elem.click();
+
             },
+            uploafFilesToQ:function(file, to, clbk){
+                var _this=this;
+                if(!(file.type.indexOf('image/')==0 ||file.type.indexOf('video/')==0 ))
+                    return  alert("Можно загрузить только фото или видео")
+                var fd = new FormData();
+                fd.append('file', file );
+
+                var xhr = new XMLHttpRequest();
+                var progressElem=document.querySelector(".fileLoadProgress")
+                xhr.upload.onprogress = function(event) {
+                    console.log(parseFloat(event.loaded/event.total));
+                    if(progressElem)
+                    progressElem.style.width=parseFloat(event.loaded/event.total)*100+"%"
+                }
+                xhr.onload = xhr.onerror = function() {
+
+                    if (this.status == 200) {
+                        setTimeout(function () {
+                            var objDiv = document.getElementById("qBox");
+                            objDiv.scrollTop = objDiv.scrollHeight;
+                        }, 100)
+                        setTimeout(()=>{
+                            var progressElem=document.querySelector(".fileLoadProgress")
+                            if(progressElem)
+                            progressElem.style.width=0;
+                        }, 4*1000)
+                    } else {
+                        if(progressElem) {
+                            progressElem.style.width = "100%";
+                            progressElem.classList.add('error')
+                        }
+                        setTimeout(()=>{
+                            var progressElem=document.querySelector(".fileLoadProgress")
+                            if(progressElem) {
+                                progressElem.style.width = 0;
+                                progressElem.classList.remove('error')
+                            }
+                        }, 4*1000)
+                        console.warn("error " + this.status);
+                    }
+                    if(clbk)
+                        clbk(this.status)
+                };
+                xhr.open("POST", '/rest/api/qfileUpload/'+eventid+"/"+roomid,true, );
+                //xhr.setRequestHeader("Content-Type", "multipart/form-data")
+                xhr.setRequestHeader("X-data", encodeURI( JSON.stringify({to:to,name:file.name||"",type:file.type})))
+
+                xhr.send(fd);
+
+
+            },
+            qTextOnPaste:function (event) {
+                var _this=this;
+                var items = event.clipboardData.items;
+                if(items == undefined)
+                    return;
+
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].type.indexOf("image") == -1) continue;
+                    if (items[i].kind === 'file') {
+                        _this.uploafFilesToQ(items[i].getAsFile(), "q")
+                    }
+                }
+            },
+            chatTextOnPaste:function (event) {
+                var _this=this;
+                var items = event.clipboardData.items;
+                if(items == undefined)
+                    return;
+
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].type.indexOf("image") == -1) continue;
+                    if (items[i].kind === 'file') {
+                        _this.uploafFilesToQ(items[i].getAsFile(), "chat")
+                    }
+                }
+            }
 
         },
         watch:{
