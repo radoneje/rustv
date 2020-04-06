@@ -32,7 +32,7 @@ router.get('/login/:id', async (req, res, next) =>{
   if(e.length<1)
     return res.send(404);
 
-  res.render('login', { title: 'MAY24:ONevent', event:e[0] });
+  res.render('login', { title: 'ON.event', event:e[0] });
 });
 
 router.get('/event/:id',  async (req, res, next) =>{
@@ -50,7 +50,7 @@ router.get('/event/:id',  async (req, res, next) =>{
 
   var event=evnts[0]
   var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, eventid:req.params.id}).orderBy("date","desc")
-  res.render('event', { title: 'MAY24:ONevent::'+event.title, event:event , rooms:rooms});
+  res.render('event', { title: 'ON.event', event:event , rooms:rooms});
 
 })
 
@@ -68,7 +68,7 @@ router.get('/room/:id',  async (req, res, next) =>{
 
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
-  res.render('room', { title: 'MAY24:ONevent::'+room.title, room:room });
+  res.render('room', { title: 'ON.event '+room.title, room:room });
 
 })
 
@@ -86,7 +86,7 @@ router.get('/moderator/:id',  async (req, res, next) =>{
 
   if(!req.session["moderator"+room.id])
     return res.render('moderatorLogin',{ title: 'MAY24:ONevent  '+rooms.title, room:room})
-  res.render('moderator', { title: 'MAY24:ONevent  '+room.title, room:room});
+  res.render('moderator', { title: 'ON.event  '+room.title, room:room});
 
 })
 router.get('/speaker/:id',  async (req, res, next) =>{
@@ -102,8 +102,8 @@ router.get('/speaker/:id',  async (req, res, next) =>{
   var room=rooms[0]
 
   if(!req.session["speaker"+room.id])
-    return res.render('speakerLogin',{ title: 'MAY24:ONevent::'+rooms.title, room:room})
-  res.render('speaker', { title: 'MAY24:ONevent  '+room.title, room:room});
+    return res.render('speakerLogin',{ title: 'ON.event::'+rooms.title, room:room})
+  res.render('speaker', { title: 'ON.event '+room.title, room:room});
 
 })
 
