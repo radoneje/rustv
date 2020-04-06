@@ -390,7 +390,7 @@ router.post("/qfileUpload/:eventid/:roomid", checkLoginToRoom, async (req, res, 
             inserted[field] = name
             if (struct.type.indexOf('image/jpeg') == 0) {
                 try {
-                    jo.rotate(filename, {quality: 85}, (error, buffer, orientation, dimensions, quality)=>{
+                   /* jo.rotate(filename, {quality: 85}, (error, buffer, orientation, dimensions, quality)=>{
                         if(!error) {
                             fs.unlinkSync(filename)
                             fs.writeFile(filename, buffer, () => {
@@ -401,7 +401,8 @@ router.post("/qfileUpload/:eventid/:roomid", checkLoginToRoom, async (req, res, 
                             denExit(inserted)
 
                     })
-
+*/
+                    denExit(inserted)
                 } catch (e) {
                     denExit(inserted)
                 }
