@@ -388,17 +388,36 @@ router.post("/qfileUpload/:eventid/:roomid", checkLoginToRoom, async (req, res, 
                 date: (new Date())
             }
             inserted[field] = name
-            var r = await req.knex("t_" + struct.to).insert(inserted, "*")
-            r = await req.knex.select("*").from("v_" + struct.to).where({id: r[0].id});
-
-            req.transport.emit(struct.to + "Add", r[0], req.params.roomid);
-            res.json(r[0]);
+            if (struct.type.indexOf('image/jpeg') == 0) {
+                try {
+                    jo.rotate(filename, {quality: 85}, (error, buffer, orientation, dimensions, quality)=>{
+                        if(!error) {
+                            fs.unlinkSync(filename)
+                            fs.writeFile(filename, buffer, () => {
+                                denExit(inserted)
+                            })
+                        }
+                        else
+                            denExit(inserted)
+                    })
+                    denExit(inserted)
+                } catch (e) {
+                    denExit(inserted)
+                }
+            } else
+                denExit(inserted)
         } else {
             console.warn(e);
             res.status(505);
         }
     });
+    async function denExit(inserted) {
+        var r = await req.knex("t_" + struct.to).insert(inserted, "*")
+        r = await req.knex.select("*").from("v_" + struct.to).where({id: r[0].id});
 
+        req.transport.emit(struct.to + "Add", r[0], req.params.roomid);
+        res.json(r[0]);
+    }
 
 })
 router.post("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
