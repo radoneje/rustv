@@ -22,7 +22,8 @@ window.onload=function () {
             isPres:false,
             files:[],
             previewPres:[],
-            pres:null
+            pres:null,
+            recorder:null,
         },
         methods:{
             onHandUp:function(data){
@@ -479,6 +480,8 @@ window.onload=function () {
                                         elem.style.opacity = "0"
                                         elem.style.top="90%"
                                     })
+                                    _this.recorder= new Recorder(_this);
+                                    _this.recorder.start(video);
                                     /*_this.onMyVideoStarted(video, stream,item)*/
                                 });
 
