@@ -13,6 +13,7 @@ const readdir = util.promisify(fs.readdir);
 const stripHtml = require("string-strip-html");
 const moment = require('moment')
 const jo = require('jpeg-autorotate')
+var im = require('imagemagick');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -394,16 +395,16 @@ router.post("/qfileUpload/:eventid/:roomid", checkLoginToRoom, async (req, res, 
                         if(!error) {
                             fs.unlinkSync(filename)
                             fs.writeFile(filename, buffer, () => {
-                                denExit(inserted)
+                              createTrump(filename, ()=>{denExit(inserted)})
                             })
                         }
                         else
-                            denExit(inserted)
+                            createTrump(filename, ()=>{denExit(inserted)})
                     })
-                    denExit(inserted)
                 } catch (e) {
-                    denExit(inserted)
+                    createTrump(filename, ()=>{denExit(inserted)})
                 }
+
             } else
                 denExit(inserted)
         } else {
@@ -411,10 +412,22 @@ router.post("/qfileUpload/:eventid/:roomid", checkLoginToRoom, async (req, res, 
             res.status(505);
         }
     });
+    function createTrump(filepath, clbk){
+        im.resize({
+            srcData: fs.readFileSync(filepath, 'binary'),
+            height:   200
+        }, function(err, stdout, stderr){
+            if (err)
+                return clbk();
+            fs.unlinkSync(filename)
+            fs.writeFileSync(filepath, stdout, 'binary');
+            clbk();
+        });
+
+    }
     async function denExit(inserted) {
         var r = await req.knex("t_" + struct.to).insert(inserted, "*")
         r = await req.knex.select("*").from("v_" + struct.to).where({id: r[0].id});
-
         req.transport.emit(struct.to + "Add", r[0], req.params.roomid);
         res.json(r[0]);
     }
