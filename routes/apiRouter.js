@@ -14,6 +14,7 @@ const stripHtml = require("string-strip-html");
 const moment = require('moment')
 const jo = require('jpeg-autorotate')
 var im = require('imagemagick');
+const { exec } = require('child_process');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -806,6 +807,48 @@ router.delete("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, re
     req.transport.emit("deleteFile", r[0].id, req.params.roomid);
     res.json(r[0].id)
 })
+router.get("/startRoomRecord/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    var r = await req.knex("t_roomrecords").insert({date: (new Date())}, "*").where({id: req.params.roomid})
+    res.json(r[0].id)
+})
+router.post("/record/:recId", async (req, res, next) => {
+    //var r = await req.knex("t_roomrecords").insert({date: (new Date())}, "*").where({id: req.params.roomid})
+    //res.json(r[0].id)
+    console.log( )
+
+    var name=req.params.recId+".webm";
+    if (!fs.existsSync(path.join(__dirname, '../public/records/'))){
+        fs.mkdirSync(path.join(__dirname, '../public/records/'));
+    }
+
+    var filename=path.join(__dirname, '../public/records/' + name);
+    if (!fs.existsSync(filename))
+    {
+        console.log(`create file`)
+        req.files.file.mv(filename, ()=>{
+            res.json(req.params.recId);
+        })
+    }
+    else{
+        console.log(req.files.file)
+      /*  exec(`cat ${req.files.file.tempFilePath} >> ${filename}`,(err)=>{
+
+            res.json({id:req.params.recId, err});
+        })*/
+        res.json({id:req.params.recId, err});
+      /*  fs.appendFile(filename, 'data to append', function (err) {
+            fs.readFile(filename,)
+
+            //cat file2 >> file1
+            fs.unlinkSync(req.files.file.tempFilePath)
+            res.json(req.params.recId);
+        });*/
+    }
+
+
+})
+
+
 
 
 module.exports = router;

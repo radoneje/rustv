@@ -423,6 +423,11 @@ window.onload=function () {
                         _this.uploafFilesToQ(items[i].getAsFile(), "chat")
                     }
                 }
+            },
+            onStartRecord:function () {
+                console.log("onStartRecord",this.recorder )
+                if(this.recorder)
+                    this.recorder.startRec(()=>{;;});
             }
 
         },
