@@ -14,6 +14,7 @@ async function getStream(_this){
     const constraints={
         audio: true,
         video: {
+           // width: { min: 1024, ideal: 1024, max: 1920 },
             width: { min: 320, ideal: 640, max: 1920 },
             //height:{min: 180, ideal:320 , max:720},
             facingMode: "user",
@@ -42,6 +43,7 @@ function createVideoContaiter(id, caption) {
 
     video.autoplay = true;
     video.width = 320;
+    //video.width = 1024;
     var videoBox = document.createElement("div");
     videoBox.classList.add("videoBox")
     videoBox.id = id;

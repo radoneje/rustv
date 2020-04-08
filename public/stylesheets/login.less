@@ -1,0 +1,141 @@
+
+
+body{
+  background-color: #1E2226;
+  font-family: Open Sans;
+  color: #EEEEEE;
+}
+input{
+  color: #EEEEEE;
+  box-sizing: border-box;
+}
+div{
+  box-sizing: border-box;
+}
+.pBox{
+  background: url(/images/loginbg.svg);
+  background-position: center;
+  background-size: cover;
+  padding: 50px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  transition: opacity 1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.pLoginHead{
+
+}
+.pLoginBox{
+  width: 448px;
+  margin-bottom: 100px;
+}
+.pLogoBox{
+  width: 100%;
+  text-align: center;
+}
+.pTitle{
+  margin-top:40px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+}
+.pLoginBody{
+  background: #282D33;
+  border-radius: 8px;
+  padding: 40px 30px;
+  margin-top:40px;
+  text-align: left;
+}
+.pBodyTitle{
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 25px;
+}
+.pBodySubTitle{
+  margin-top: 25px;
+  margin-bottom: 40px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+
+}
+.plInputBox {
+  position: relative;
+  margin-top: 25px;
+}
+.plInputBox input, .plInputBox div.sel {
+
+  background: #373D43;
+  border-radius: 4px;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  border: none;
+}
+.plSubmit {
+  cursor: pointer;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #39ACDE;
+  border-radius: 4px;
+  padding: 10px;
+}
+.plSubmit #whiteDotLoader{
+  height: 18px;
+}
+.plInputBoxWarning{
+  font-style: normal;
+  font-weight: 100;
+  font-size: 12px;
+  line-height: 16px;
+  /* identical to box height, or 133% */
+  color: #ec202e;
+  position: relative;
+  left: 0;
+  bottom: -4px;
+  display: none;
+}
+.plInputBox.warning .plInputBoxWarning{
+  display: block;
+}
+@media only screen and (max-width: 1024px){
+
+  .pTitle{
+    font-size: 18px;
+    line-height: 25px
+  }
+  .pBodyTitle{
+    font-size: 18px;
+    line-height: 25px
+  }
+  .pBodySubTitle{
+    font-size: 16px;
+    line-height: 22px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+  .plInputBox {
+    margin-top: 20px;
+  }
+  .pLoginBody{
+    background: transparent;
+    padding: 0;
+  }
+}

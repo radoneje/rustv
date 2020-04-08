@@ -1,5 +1,5 @@
 const recordConfig = {
-    size:{w:1920, h:1180},
+    size:{w:1280, h:720},
     bgImageUrl:'/images/bg_03.png'
 };
 
@@ -34,6 +34,7 @@ class Recorder{
         this.drawVideo(this);
     }
     drawVideo(_this){
+      //  console.log("dv")
         _this.ctx.beginPath();
         _this.ctx.rect(0, 0, _this.bgImage.width, _this.bgImage.height);
         _this.ctx.fillStyle = "#000000";
@@ -59,7 +60,6 @@ class Recorder{
             var j=recordConfig.size.w*.75;
             if(i>4)
                 j=recordConfig.size.w*.5;
-
             console.log(videoReceivers[i])
             _this.ctx.drawImage(videoReceivers[i].video, j, i*recordConfig.size.h*.25, recordConfig.size.w*.25, recordConfig.size.h*.25 );
         }
@@ -68,38 +68,41 @@ class Recorder{
             _this.ctx.drawImage(_this.mainVideo, 0, mainVideoSize.top, recordConfig.size.w*mainVideoSize.coof, recordConfig.size.h*mainVideoSize.coof );
         }
 
-
-        requestAnimationFrame(()=>{_this.drawVideo(_this)});
+       // if(document.visibilityState === 'visible')
+       //     requestAnimationFrame(()=>{_this.drawVideo(_this)});
+      //  else
+            setTimeout(()=>{_this.drawVideo(_this)}, 1000/30)
 
     }
     async startRec(clbk){
         var _this=this;
             var dt = await axios.get('/rest/api/startRoomRecord/' + eventid + "/" + roomid)
             var id = dt.data;
-            console.log("recordid", dt.data)
+            console.log("recordid", id)
 
             var mediaStream = _this.canvas.captureStream(30);
             _this.mediaRecorder = new MediaRecorder(mediaStream, {mimeType: 'video/webm; codecs=h264'});
             _this.mediaRecorder.ondataavailable = async function(e) {
-                //chunks.push(e.data);
-               // var blob=new Blob(e.data)
-               // var fd  = new FormData();
-               // fd.append('file', e.data);
-               // const res = await axios.post('/rest/api/record/'+id, fd, {headers:{'Content-Type': 'multipart/form-data; boundary=${data._boundary}'}});
 
-                var fileReader = new FileReader();
-                fileReader.onload=function(){
-                    var arrayBuffer = this.result;
-                    console.log(arrayBuffer);
+                var fd  = new FormData();
+                fd.append('file', e.data);
+
+                var xhr = new XMLHttpRequest();
+                xhr.onload   = xhr.onerror= function(e) {
+                    if(xhr.status!=200)
+                    {
+                        console.warn("xhr.onerror", )
+                        try{
+                            _this.mediaRecorder.stop();
+                        }catch (e) {
+                            
+                        }
+                    }
                 }
-                fileReader.readAsArrayBuffer(e.data);
-               // const res = await axios.post('/rest/api/record/'+id, fd, {headers:{'Content-Type': 'multipart/form-data; boundary=${data._boundary}'}});
-
-
-                //console.log(e.data);
-
+                xhr.open("POST", '/rest/api/record/'+id,true );
+                xhr.send(fd);
             }
-            _this.mediaRecorder.start(3000);
+            _this.mediaRecorder.start(1000);
 
         clbk(id);
     }

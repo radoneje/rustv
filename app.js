@@ -18,7 +18,7 @@ var knex = require('knex')({
   connection:config.pgConnection
 });
 
-
+var sockClients=[];
 var transport = []; // array of active clients
 
 var app = express();
@@ -55,6 +55,7 @@ app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use("/", (req,res, next)=>{req.sockClients=sockClients;next();});
 app.use("/", (req,res, next)=>{req.knex=knex;next();});
 app.use("/", (req,res, next)=>{req.transport=transport;next();});
 

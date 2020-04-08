@@ -7,6 +7,7 @@ const fetch = require('isomorphic-fetch');
 const {v4: uuidv4} = require('uuid');
 var path = require('path')
 var fs = require('fs')
+var net = require('net');
 const PDF2Pic = require("pdf2pic");
 const util = require('util');
 const readdir = util.promisify(fs.readdir);
@@ -14,6 +15,7 @@ const stripHtml = require("string-strip-html");
 const moment = require('moment')
 const jo = require('jpeg-autorotate')
 var im = require('imagemagick');
+var config = require('../config');
 const { exec } = require('child_process');
 
 /* GET home page. */
@@ -808,46 +810,76 @@ router.delete("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, re
     res.json(r[0].id)
 })
 router.get("/startRoomRecord/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
-    var r = await req.knex("t_roomrecords").insert({date: (new Date())}, "*").where({id: req.params.roomid})
-    res.json(r[0].id)
+    var r = await req.knex("t_roomrecords").insert({roomid:req.params.roomid,date: (new Date())}, "*")
+   //
+    console.log("get sock port", r[0].id)
+    var sockServ = net.createServer( function (socketClient) {
+        console.log("sock create")
+        var item={socket: socketClient, id:r[0].id}
+        req.sockClients.push(item);
+        setTimeout(()=>{
+            res.json(r[0].id);
+        },1000)
+    });
+    sockServ.listen(0,async (d)=>{
+        console.log("sock listen" );
+        var dt=await axios.get("http://"+config.encoderServer+":"+config.encoderPort+"/newvideo/"+r[0].id+"/"+sockServ.address().port);
+    })
 })
-router.post("/record/:recId", async (req, res, next) => {
-    //var r = await req.knex("t_roomrecords").insert({date: (new Date())}, "*").where({id: req.params.roomid})
-    //res.json(r[0].id)
-    console.log( )
-
-    var name=req.params.recId+".webm";
-    if (!fs.existsSync(path.join(__dirname, '../public/records/'))){
-        fs.mkdirSync(path.join(__dirname, '../public/records/'));
+router.post("/record/:recId/", async (req, res, next) => {
+    var r = req.read();
+    fs.readFile(req.files.file.tempFilePath, (err, data) => {
+        if (err) {
+            console.warn(err)
+            res.sendStatus(500)
+        }
+        else
+        {
+            req.sockClients.forEach(sockClient => {
+                if (sockClient.id == req.params.recId) {
+                    sockClient.socket.write(data);
+                    saveFile(()=>{res.json(200)})
+                }
+            });
+        }
+    });
+    function saveFile(clbk){
+        var name=req.params.recId+".webm";
+        if (!fs.existsSync(path.join(__dirname, '../public/records/'))){
+            fs.mkdirSync(path.join(__dirname, '../public/records/'));
+        }
+        var filename=path.join(__dirname, '../public/records/' + name);
+        if (!fs.existsSync(filename))
+        {
+            req.files.file.mv(filename, async ()=>{
+                clbk();
+            })
+        }
+        else{
+            exec(`cat ${req.files.file.tempFilePath} >> ${filename}`, ()=>{
+                fs.unlinkSync(req.files.file.tempFilePath)
+                clbk();
+            })
+        }
     }
+    return
+})
+router.post("/encodeTime", async (req, res, next) => {
 
-    var filename=path.join(__dirname, '../public/records/' + name);
-    if (!fs.existsSync(filename))
+    console.log("/encodeTime", req.body.time, parseInt(req.body.id))
+    var r = await req.knex.select("*").from("t_roomrecords").where({id:parseInt(req.body.id)})
+    if(r.length>0)
     {
-        console.log(`create file`)
-        req.files.file.mv(filename, ()=>{
-            res.json(req.params.recId);
-        })
+        console.log("/encodeTime ok")
+        req.transport.emit("updateRecordTime", {id:r[0].id, time:req.body.time}, r[0].roomid);
+        res.send(200);
     }
-    else{
-        console.log(req.files.file)
-      /*  exec(`cat ${req.files.file.tempFilePath} >> ${filename}`,(err)=>{
-
-            res.json({id:req.params.recId, err});
-        })*/
-        res.json({id:req.params.recId, err});
-      /*  fs.appendFile(filename, 'data to append', function (err) {
-            fs.readFile(filename,)
-
-            //cat file2 >> file1
-            fs.unlinkSync(req.files.file.tempFilePath)
-            res.json(req.params.recId);
-        });*/
+    else {
+        console.log("/encodeTime err",)
+        res.sendStatus(404);
     }
-
 
 })
-
 
 
 

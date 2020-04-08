@@ -111,7 +111,9 @@ window.onload=function () {
         },
         mounted:function () {
             var _this=this;
-            document.getElementById("iInpit").focus()
+          //  var iInpit=document.getElementById("iInpit");
+           // if(iInpit)
+            //    iInpit.focus()
             var telElem=document.getElementById("telInpit")
             if(telElem) {
                 telElem.addEventListener("input", mask, false);

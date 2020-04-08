@@ -1,0 +1,297 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g opacity="0.71">
+        <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="1920" height="1080">
+            <rect width="1920" height="1080" fill="#C4C4C4"/>
+        </mask>
+        <g mask="url(#mask0)">
+            <rect opacity="0.3" x="178.059" y="1079.03" width="1091.06" height="1091.06" transform="rotate(-45 178.059 1079.03)" stroke="#373D43" stroke-width="6"/>
+            <g opacity="0.3" filter="url(#filter0_d)">
+                <rect x="349.691" y="1090.39" width="848.33" height="848.33" transform="rotate(-45 349.691 1090.39)" fill="#373D43"/>
+            </g>
+            <g opacity="0.3" filter="url(#filter1_d)">
+                <rect x="525.57" y="1079.03" width="599.605" height="599.605" transform="rotate(-45 525.57 1079.03)" fill="#373D43"/>
+            </g>
+            <g opacity="0.3" filter="url(#filter2_d)">
+                <rect x="702.211" y="1079.03" width="349.797" height="349.797" transform="rotate(-45 702.211 1079.03)" fill="#373D43"/>
+            </g>
+            <path opacity="0.3" d="M3001.34 -260.466L1047.51 1693.36" stroke="#373D43" stroke-width="6"/>
+            <g opacity="0.3" filter="url(#filter3_d)">
+                <rect x="-722.579" y="-815.132" width="1845.85" height="1845.85" transform="rotate(45 -722.579 -815.132)" fill="#373D43"/>
+            </g>
+            <g opacity="0.3" filter="url(#filter4_d)">
+                <rect x="-721.832" y="-701.443" width="1685.07" height="1685.07" transform="rotate(45 -721.832 -701.443)" fill="#373D43"/>
+            </g>
+            <g opacity="0.3" filter="url(#filter5_d)">
+                <rect x="-722.579" y="-555.598" width="1478.81" height="1478.81" transform="rotate(45 -722.579 -555.598)" fill="#373D43"/>
+            </g>
+            <g opacity="0.44">
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1276.47 535.668)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1299.49 558.691)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1322.51 581.714)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1345.54 604.736)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1368.56 627.759)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1391.58 650.781)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1414.61 673.804)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1437.63 696.825)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1460.65 719.848)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1483.67 742.872)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1506.7 765.894)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 788.917)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 811.939)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.76 834.961)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1299.49 512.645)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1322.51 535.668)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1345.54 558.691)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1368.56 581.714)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1391.58 604.736)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1414.61 627.759)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1437.63 650.781)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1460.65 673.804)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1483.67 696.825)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1506.7 719.848)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 742.872)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 765.894)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.76 788.917)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 811.939)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1322.51 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1345.54 512.645)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1368.56 535.668)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1391.58 558.691)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1414.61 581.714)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1437.63 604.736)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1460.65 627.759)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1483.67 650.781)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1506.7 673.804)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 696.825)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 719.848)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.77 742.872)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 765.894)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 788.917)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1345.54 466.601)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1368.56 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1391.58 512.645)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1414.61 535.668)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1437.63 558.691)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1460.65 581.714)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1483.67 604.736)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1506.7 627.759)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 650.781)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 673.804)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.76 696.825)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 719.848)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 742.872)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1644.83 765.894)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1368.56 443.579)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1391.58 466.601)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1414.61 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1437.63 512.645)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1460.65 535.668)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1483.67 558.691)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1506.7 581.714)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 604.736)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 627.759)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.77 650.781)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 673.804)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 696.825)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1644.83 719.848)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1667.85 742.872)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1391.58 420.557)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1414.61 443.579)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1437.63 466.601)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1460.65 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1483.67 512.645)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1506.7 535.668)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 558.691)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 581.714)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.77 604.736)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 627.759)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 650.781)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1644.83 673.804)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1667.85 696.825)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1690.88 719.849)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1414.61 397.534)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1437.63 420.557)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1460.65 443.579)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1483.67 466.601)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1506.7 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 512.645)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 535.668)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.76 558.691)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 581.714)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 604.736)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1644.83 627.759)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1667.85 650.781)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1690.88 673.804)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1713.9 696.826)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1437.63 374.511)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1460.65 397.534)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1483.67 420.557)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1506.7 443.579)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 466.601)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.76 512.645)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 535.668)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 558.691)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1644.83 581.715)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1667.85 604.736)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1690.88 627.759)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1713.9 650.781)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1736.92 673.804)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1460.65 351.487)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1483.67 374.511)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1506.7 397.534)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 420.557)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 443.579)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.76 466.601)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 512.645)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1644.83 535.668)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1667.85 558.692)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1690.88 581.714)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1713.9 604.736)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1736.92 627.759)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1759.94 650.781)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1483.67 328.466)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1506.7 351.487)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 374.511)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 397.534)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.76 420.557)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 443.579)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 466.601)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1644.83 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1667.85 512.645)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1690.88 535.669)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1713.9 558.691)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1736.92 581.714)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1759.94 604.736)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1782.97 627.759)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1506.7 305.443)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1506.7 305.443)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 282.422)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 259.398)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.76 236.376)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 328.466)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1529.72 328.466)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 305.443)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.76 282.422)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 259.398)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 351.487)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1552.74 351.487)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.76 328.466)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 305.443)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 282.422)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.76 374.511)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1575.76 374.511)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 351.487)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 328.466)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1644.83 305.443)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 397.534)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1598.79 397.534)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 374.511)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1644.83 351.487)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1667.85 328.466)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 420.557)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1621.81 420.557)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1644.83 397.534)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1667.85 374.511)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1690.88 351.487)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1644.83 443.579)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1644.83 443.579)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1667.85 420.557)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1690.88 397.534)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1713.9 374.511)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1667.85 466.601)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1667.85 466.601)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1690.88 443.579)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1713.9 420.557)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1736.92 397.534)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1690.88 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1690.88 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1713.9 466.601)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1736.92 443.579)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1759.94 420.557)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1713.9 512.646)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1713.9 512.646)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1736.92 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1759.94 466.602)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1782.97 443.579)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1736.92 535.668)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1759.94 558.691)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1782.97 581.714)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1805.99 604.736)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1736.92 535.668)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1759.94 558.691)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1782.97 581.714)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1805.99 604.736)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1759.94 512.645)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1782.97 535.668)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1805.99 558.692)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1829.01 581.714)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1782.97 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1805.99 512.645)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1829.01 535.669)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1852.03 558.691)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1805.99 466.602)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1829.01 489.623)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1852.04 512.646)" fill="#373D43"/>
+                <circle r="8.13969" transform="matrix(-0.707107 0.707107 0.707107 0.707107 1875.06 535.668)" fill="#373D43"/>
+            </g>
+        </g>
+    </g>
+    <defs>
+        <filter id="filter0_d" x="325.691" y="470.532" width="1247.72" height="1247.72" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="12"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+        </filter>
+        <filter id="filter1_d" x="501.57" y="635.041" width="895.969" height="895.969" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="12"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+        </filter>
+        <filter id="filter2_d" x="678.211" y="811.682" width="542.688" height="542.688" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="12"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+        </filter>
+        <filter id="filter3_d" x="-2051.79" y="-835.132" width="2658.43" height="2658.43" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="12"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+        </filter>
+        <filter id="filter4_d" x="-1937.36" y="-721.443" width="2431.05" height="2431.05" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="12"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+        </filter>
+        <filter id="filter5_d" x="-1792.26" y="-575.598" width="2139.36" height="2139.36" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="12"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+        </filter>
+    </defs>
+</svg>

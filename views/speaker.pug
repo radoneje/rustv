@@ -19,7 +19,7 @@ block content
                 span(v-if="socketConnection") подключено
                     span(v-if="selfVideoStream") , видео включено
                 span(v-else) ошибка сети
-            div.greenBtn.clearBtn(v-if="socketConnection" v-on:click="onStartRecord()") Начать запись
+            div.greenBtn.clearBtn(v-if="socketConnection" v-on:click="onStartRecord()") Начать запись {{recordTime}}
             div.spkMenu
                 div.spkMenuItem(v-bind:class="{active:SPKstatus==1}" v-on:click="SPKstatus=1") Вопросы
                 div.spkMenuItem(v-bind:class="{active:SPKstatus==2}" v-on:click="SPKstatus=2") Чат

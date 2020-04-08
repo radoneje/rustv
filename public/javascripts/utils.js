@@ -310,6 +310,13 @@ function connect(_this, roomid, clbk){
             _this.onPreviewFilePres(data)
         }
     });
+    socket.on("updateRecordTime", function(data) {
+        if(typeof(_this.onUpdateRecordTime)!='undefined'){
+            _this.onUpdateRecordTime(data)
+        }
+    });
+
+
 
 
 

@@ -24,6 +24,7 @@ window.onload=function () {
             previewPres:[],
             pres:null,
             recorder:null,
+            recordTime:null,
         },
         methods:{
             onHandUp:function(data){
@@ -428,6 +429,9 @@ window.onload=function () {
                 console.log("onStartRecord",this.recorder )
                 if(this.recorder)
                     this.recorder.startRec(()=>{;;});
+            },
+            onUpdateRecordTime:function (data) {
+                this.recordTime=data.time;
             }
 
         },
