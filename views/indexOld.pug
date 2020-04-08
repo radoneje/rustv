@@ -1,0 +1,34 @@
+extends layout
+block head
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj"></script>
+  script(src="/javascripts/indexScript.js")
+
+block content
+  div.aBox#app
+    div.top
+    h1 Сервис организации конференций
+    div.lBottom
+      div.lTopL
+        div.lBsubRTitle Для входа администратора,<br>пожалуйста введите Ваш номер телефона
+        div.llInputBox(v-bind:class="{warning:(telErr &&  tel.length<12)}")
+          div.llInputBoxLabel
+            input(placeholder='+7 ххх ххх хх хх' v-model="tel" id="smsNo")
+          div.llInputBoxWarning Поле должно быть заполнено
+        div.llInputBox(v-bind:class="{warning:(codeErr &&  code.length<5)}" v-if="showSmsCode")
+          div.llInputBoxLabel
+            input(v-bind:placeholder="'код из  СМС '+showSmsCode" v-model="code" id="smsCode")
+          div.llInputBoxWarning Поле должно быть заполнено
+        div.llInputBox
+            //div(class="g-recaptcha" data-sitekey="6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj" data-callback="onSubmit" data-size="invisible")
+
+        div.llInputBox
+          div#sendSmsPlaceHolder
+          div.llSubmit(v-on:click="sendSms()" v-if="token" style="margin-top:20px")
+            span(v-if="!isLoading") Зарегистрироваться или войти
+            span(v-else)
+              include ./elements/whiteDotLoader
+
+
+
+
+

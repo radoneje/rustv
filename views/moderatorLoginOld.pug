@@ -1,9 +1,9 @@
 extends layout
 block head
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-  link(rel='stylesheet', href='/stylesheets/login.css')
-  <script src="https://www.google.com/recaptcha/api.js?render=6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj"></script>
-  script(src="/javascripts/indexScript.js")
+  script.
+    var roomid=#{room.id}
+    var eventid=#{room.eventid}
+  script(src="/javascripts/moderatorLoginScript.js")
 
 block content
   div.pBox#app
@@ -22,20 +22,21 @@ block content
             <path id="dot" d="M281.645 36.3347C286.465 36.3347 290.372 32.6031 290.372 28C290.372 23.3969 286.465 19.6653 281.645 19.6653C276.824 19.6653 272.917 23.3969 272.917 28C272.917 32.6031 276.824 36.3347 281.645 36.3347Z" fill="#ED212E">
             <animate id="animation1" attributeType="xml" attributeName="fill-opacity"  begin="0s" values="0.5;0.5;0.5;1;1" dur="2s" repeatCount="indefinite"  / >
             </path>
-          div.pTitle Сервис организации конференций
+          div.pTitle #{room.title}
         div.pLoginBody
-          div.pBodyTitle Вход администратора
-          div.plInputBox(v-bind:class="{warning:(telErr &&  tel.length<12)}")
+          div.pBodyTitle Регистрация спикера
+          div.plInputBox(v-bind:class="{warning:(passErr &&  pass.length<2)}" style="margin-bottom:0")
             div.plInputBoxLabel
-              input(placeholder='+7 ххх ххх хх хх' v-model="tel" id="smsNo")
-            div.plInputBoxWarning Поле должно быть заполнено
-          div.plInputBox(v-bind:class="{warning:(codeErr &&  code.length<5)}" v-if="showSmsCode")
-            div.plInputBoxLabel
-              input(v-bind:placeholder="'код из  СМС '+showSmsCode" v-model="code" id="smsCode")
+              input#passInpit(placeholder='Пароль' v-model="pass" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
             div.plInputBoxWarning Поле должно быть заполнено
           div.plInputBox
-            div#sendSmsPlaceHolder
-            div.plSubmit(v-on:click="sendSms()" v-if="token" style="margin-top:20px")
-              span(v-if="!isLoading") Зарегистрироваться или войти
-              span(v-else)
+            div.plSubmit(v-on:click="enter()")
+              div(v-if="!loader") Войти
+              div(v-if="loader")
                 include ./elements/whiteDotLoader
+
+
+
+
+
+

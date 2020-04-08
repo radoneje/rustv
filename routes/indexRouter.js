@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'MAY24:ONevent' });
+  res.render('index', { title: 'ON.event' });
 });
 router.get('/adminpanel', function(req, res, next) {
   if(!req.session["admin"])
@@ -85,7 +85,7 @@ router.get('/moderator/:id',  async (req, res, next) =>{
   var room=rooms[0]
 
   if(!req.session["moderator"+room.id])
-    return res.render('moderatorLogin',{ title: 'MAY24:ONevent  '+rooms.title, room:room})
+    return res.render('moderatorLogin',{ title: 'ON.event  '+rooms.title, room:room})
   res.render('moderator', { title: 'ON.event  '+room.title, room:room});
 
 })
@@ -102,7 +102,7 @@ router.get('/speaker/:id',  async (req, res, next) =>{
   var room=rooms[0]
 
   if(!req.session["speaker"+room.id])
-    return res.render('speakerLogin',{ title: 'ON.event::'+rooms.title, room:room})
+    return res.render('speakerLogin',{ title: 'ON.event '+room.title, room:room})
   res.render('speaker', { title: 'ON.event '+room.title, room:room});
 
 })
