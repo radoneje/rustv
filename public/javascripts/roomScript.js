@@ -1,13 +1,14 @@
+var app;
 window.onload=function () {
-    var app = new Vue({
+     app = new Vue({
         el: '#app',
         data: {
             webCamStream:null,
             sect:[
-                {title:"Вопросы", isActive:false, id:1},
-                {title:"Чат", isActive:true, id:2},
-                {title:"Участники", isActive:false, id:3},
-                {title:"Файлы", isActive:false, id:7}
+                {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoq.svg'},
+                {title:"Чат", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactive.svg'},
+                {title:"Участники", isActive:false, id:3, logo:'/images/logousers.svg', logoactive:'/images/logousersa.svg'},
+                {title:"Файлы", isActive:false, id:7, logo:'/images/logofiles.svg', logoactive:'/images/logofilesa.svg'}
                 ],
             activeSection:2,
             chat:[],
@@ -21,7 +22,8 @@ window.onload=function () {
             hand:false,
             handTimer:null,
             pres:null,
-            files:[]
+            files:[],
+            mainVideoMuted:false
         },
         methods:{
             isWebRtc:function(){
@@ -294,7 +296,14 @@ window.onload=function () {
                         _this.uploafFilesToQ(items[i].getAsFile(), "chat")
                     }
                 }
+            },
+            OnmainVideoMute:function (val) {
+
+                var mainVideoElem=document.getElementById('video');
+                mainVideoElem.muted=!val;
+                this.mainVideoMuted=!val;
             }
+
 
         },
         watch:{
@@ -375,8 +384,8 @@ function startVideo() {
     }
     else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         //video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
+        var banner=document.querySelector(".videoPlayBannner");
         video.addEventListener('loadedmetadata', function() {
-
             video.controls=true;
             banner.style.display="none";
             video.play();

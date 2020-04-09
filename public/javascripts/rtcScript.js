@@ -187,7 +187,9 @@ function mainVideoMute(val){
     if(mainVideoElem)
     {
         mainVideoElem.muted=val?true:false;
-        mainVideoElem.style.opacity=val?0:1
+      //  mainVideoElem.style.opacity=val?0:1
+
+        app.mainVideoMuted=mainVideoElem.muted;
     }
 }
 async function  addSenderEvents(socket,videoSender, data, clbk){

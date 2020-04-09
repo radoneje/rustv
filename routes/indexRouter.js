@@ -9,7 +9,7 @@ router.get('/adminpanel', function(req, res, next) {
   if(!req.session["admin"])
     return res.redirect("/");
 
-  res.render('adminpanel', { title: 'MAY24:ONevent' });
+  res.render('adminpanel', { title: 'ON.event' });
 });
 router.get('/test', function(req, res, next) {
   res.render('test', { title: 'Express' });
@@ -21,7 +21,7 @@ router.get('/regtoevent/:id', async (req, res, next) =>{
 
   var isRegistered=req.session["user"+req.params.id];
 
-  res.render('regtoevent', { title: 'MAY24:ONevent', event:e[0], isRegistered:isRegistered });
+  res.render('regtoevent', { title: 'ON.event', event:e[0], isRegistered:isRegistered });
 });
 router.get('/login/:id', async (req, res, next) =>{
   req.params.id=parseInt(req.params.id)
