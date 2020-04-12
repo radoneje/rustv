@@ -116,7 +116,7 @@ function publishMyVideo(msg,_this) {
                 console.log("Got publisher SDP!");
                 var dt = { "request": "configure", "audio": true, "video": true };
                 _this.handler.send({"message": dt, "jsep": jsep});
-                _this.handler.send({"message": { "request": "configure", "bitrate": 64000 }});
+                _this.handler.send({"message": { "request": "configure", "bitrate": 1024000 }});
 
             },
             error: (error) =>{console.warn("createOffer", error)}
