@@ -113,6 +113,13 @@ block content
                 div.rHeadItemLogo
                   img(v-bind:src="item.isActive?item.logoactive:item.logo")
                 div {{item.title}}
+            div.rContentWr(v-if="activeSection==0")
+              div.rBody(id="feedBox" )
+                div.qItem(v-for="item in eventRooms" :id="'eventRoom'+item.id")
+                  div.qItemName {{moment(item.date).format('HH:mm')}} {{item.title}}
+                  div.qItemDate
+                    span.link.green(v-on:click="document.location.href='/room/'+item.id" v-if="item.id!=roomid") &nbsp;&nbsp; Перейти
+
             div.rContentWr(v-if="activeSection==1")
               div.rBody(id="qBox" )
                 div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==user.id)}" v-if="item.userid==user.id")
@@ -208,6 +215,7 @@ block content
                   div.qItemDate
                     span.link.green(v-on:click="downloadFile(item)") &nbsp;&nbsp; Скачать
                     span.link.green(v-on:click="fileLink(item)") &nbsp;&nbsp; Ссылка
+
 
 
       div(style="clear:both")

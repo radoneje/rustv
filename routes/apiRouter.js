@@ -776,6 +776,15 @@ router.post("/pres/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
     res.json(req.body.id)
 
 })
+router.get("/eventRooms/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var p = await req.knex.select("*").from("t_rooms").where({eventid: req.params.eventid, isDeleted:false}).orderBy("date", "desc");
+    res.json(p)
+
+})
+
+
+
 router.post("/deActivatePres/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     var f = await req.knex.select("*").from("t_files").where({roomid: req.params.roomid});
     for (ff of f) {

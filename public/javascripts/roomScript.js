@@ -5,6 +5,7 @@ window.onload=function () {
         data: {
             webCamStream:null,
             sect:[
+                {title:"Лента", isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
                 {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoq.svg'},
                 {title:"Чат", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactive.svg'},
                 {title:"Участники", isActive:false, id:3, logo:'/images/logousers.svg', logoactive:'/images/logousersa.svg'},
@@ -23,7 +24,8 @@ window.onload=function () {
             handTimer:null,
             pres:null,
             files:[],
-            mainVideoMuted:false
+            mainVideoMuted:false,
+            eventRooms:[],
         },
         methods:{
             isWebRtc:function(){
@@ -338,6 +340,13 @@ window.onload=function () {
                         .then(function (r) {
                             _this.files = r.data;
                         });
+                    axios.get("/rest/api/eventRooms/"+eventid+"/"+roomid)
+
+                        .then(function (r) {
+                            console.log("eventRooms", r.data)
+                            _this.eventRooms = r.data;
+                        });
+
                     document.getElementById("app").style.opacity=1;
                     startVideo();
                     _this.startRTC();
