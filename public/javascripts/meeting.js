@@ -1,6 +1,6 @@
 window.onload= ()=> {
-    //var server = "http://rtcroom.may24.pro/rest/janus";
-    var server = "ws://rtcroom.may24.pro/janus";
+    var server = "http://rtcroom.may24.pro/rest/janus";
+    //var server = "ws://rtcroom.may24.pro/janus";
 
     var janus = null;
     var sfutest = null;
@@ -96,6 +96,8 @@ function createRoom(_this) {
         //"pin" : "<password required to join the room, optional>",
         "is_private" : false,
         //"allowed" : [ array of string tokens users can use to join this room, optional],
+        "fir_freq":5,
+        bitrate:1024000
     }
     _this.handler.send({"message": prm});
     console.log("room create");
@@ -114,7 +116,7 @@ function publishMyVideo(msg,_this) {
                 console.log("Got publisher SDP!");
                 var dt = { "request": "configure", "audio": true, "video": true };
                 _this.handler.send({"message": dt, "jsep": jsep});
-                _this.handler.send({"message": { "request": "configure", "bitrate": 1024000 }});
+                _this.handler.send({"message": { "request": "configure", "bitrate": 64000 }});
 
             },
             error: (error) =>{console.warn("createOffer", error)}
@@ -189,7 +191,9 @@ function addRemoteVideo(item, _this) {
                 document.getElementById('bitrate').innerHTML=remoteFeed.getBitrate();
             }, 500)
         },
-        oncleanup:()=>{console.warn("client oncleanup")}
+        oncleanup:()=>{console.warn("client oncleanup");
+            _this.videos=_this.videos.filter(r=>r.id!=item.id)
+        }
 
     });
 }
