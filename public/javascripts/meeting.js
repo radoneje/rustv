@@ -138,7 +138,7 @@ function addRemoteVideo(item, _this) {
         plugin: "janus.plugin.videoroom",
         opaqueId: _this.opaqueId,
         success:(pluginHandle)=>{
-            console.warn("client success", )
+            console.warn("!! client success !!! ", item )
             remoteFeed = pluginHandle;
             remoteFeed.simulcastStarted = false;
             var subscribe = { "request": "join", "room": meetRoomid, "ptype": "subscriber", "feed": item.id, "private_id": _this.janusPrivateId };
@@ -187,7 +187,7 @@ function addRemoteVideo(item, _this) {
         },
         onlocalstream:(stream)=>{console.log("client onremotestream")},
         onremotestream:(stream)=>{
-            console.log("REMOTE STRAEM", stream.getAudioTracks());
+
             Janus.attachMediaStream(document.getElementById(item.id), stream);
             setInterval(()=>{
                 document.getElementById('bitrate').innerHTML=remoteFeed.getBitrate();
