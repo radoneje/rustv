@@ -187,6 +187,7 @@ function addRemoteVideo(item, _this) {
         },
         onlocalstream:(stream)=>{console.log("client onremotestream")},
         onremotestream:(stream)=>{
+            console.log("REMOTE STRAEM", stream.getAudioTracks());
             Janus.attachMediaStream(document.getElementById(item.id), stream);
             setInterval(()=>{
                 document.getElementById('bitrate').innerHTML=remoteFeed.getBitrate();
