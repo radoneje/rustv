@@ -1,5 +1,5 @@
 window.onload= ()=> {
-    var server = "http://rtcroom.may24.pro/rest/janus";
+    var server = "https://rtcroom.may24.pro/rest/janus";
     //var server = "ws://rtcroom.may24.pro/janus";
 
     var janus = null;
