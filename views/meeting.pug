@@ -1,0 +1,48 @@
+extends layout
+block head
+    <script type="text/javascript" src="/lib/adapter.js" ></script>
+    <script type="text/javascript" src="/lib/janus.js" ></script>
+    <script type="text/javascript" src="/lib/vue.min.js" ></script>
+    <script type="text/javascript" src="/javascripts/meeting.js" ></script>
+    script.
+        var meetRoomid= #{meetRoomid};
+        var user= !{JSON.stringify(user)};
+    style.
+        .videoBox{margin:30px;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            overflow-x: scroll;
+            white-space: nowrap;
+            width: 100%;
+            box-sizing: content-box;
+        }
+
+        .videoItem {
+            width: max-content;
+            float: left;
+            position: relative;
+        }
+        .videoCap{
+            position: absolute;
+            top:0;
+            left: 0;
+            padding: 10px;
+            background: rgba(0,0,0,.5);
+            height: 40px;
+
+        }
+        video {
+           transform: inherit;
+        }
+
+
+block content
+    div#app
+        div(v-if="noWebrtc")
+            div Используйте  Chrome
+        div(v-else)
+            div.videoBox
+                div.videoItem(v-for="item in videos")
+                    video(:id="item.id", width="320" v-bind:muted="item.isMyVideo" autoplay controls playsinline)
+                    div.videoCap {{item.name}}
+            div#bitrate

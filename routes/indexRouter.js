@@ -106,6 +106,13 @@ router.get('/speaker/:id',  async (req, res, next) =>{
   res.render('speaker', { title: 'ON.event '+room.title, room:room});
 
 })
+router.get('/meeting/:eventid',  async (req, res, next) =>{
+  if(!req.session["user"+req.params.eventid])
+    res.sendStatus(404);
+  console.log(req.session["user"+req.params.eventid])
+  //{ title: 'Express' , meetRoomid:123, user:{f:"shevchenko", i:"denis", id:1}}
+  res.render('meeting', { title: 'ON.event meeting room', meetRoomid:123, user:{f:req.session["user"+req.params.eventid].f, i:req.session["user"+req.params.eventid].i, id:1}});
+})
 
 
 
