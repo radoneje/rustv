@@ -32,8 +32,8 @@ router.post('/sendSms', async (req, res, next) => {
     })
         .then(response => response.json())
         .then(async google_response => {
-            // if(!google_response.success)
-            // return res.sendStatus(404);
+             if(!google_response.success)
+             return res.sendStatus(404);
             var code = (parseInt(Math.random() * 10000) + parseInt(10000));
             var users = await req.knex.select("*").from("t_users").where({tel: req.body.tel, isDeleted: false});
             if (users.length == 0) {
@@ -43,7 +43,7 @@ router.post('/sendSms', async (req, res, next) => {
             }
             console.log(req.body.tel)
             sendCodeToSms(req.body.tel, code)
-            res.json({code: " " +code, id: users[0].id});
+            res.json({code: " " , id: users[0].id});
         })
         .catch(error => res.json({error}));
 
@@ -121,7 +121,7 @@ router.post("/events", async (req, res, next) => {
     if (!req.session["admin"])
         return res.send(404);
     var r = await req.knex.select("*").from("t_events").where({adminId: req.session["admin"].id, isDeleted: false})
-    if (r.length >= req.session["admin"].countOfEvents)
+    if (r.length >= 8/*req.session["admin"].countOfEvents*/)
         return res.json(null)
     var r = await req.knex("t_events").insert({adminId: req.session["admin"].id}, "*");
 
@@ -152,7 +152,7 @@ router.post("/room", async (req, res, next) => {
         return res.json(null)
 
     var count = await req.knex.select("*").from("t_rooms").where({isDeleted: false, eventid: req.body.id})
-    if (count.length >= req.session["admin"].countOfEvents)
+    if (count.length >=8/* req.session["admin"].countOfEvents*/)
         return res.json(null)
     var r = await req.knex("t_rooms").insert({
         eventid: req.body.id,
