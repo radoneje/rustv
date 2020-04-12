@@ -97,7 +97,7 @@ function createRoom(_this) {
         "is_private" : false,
         //"allowed" : [ array of string tokens users can use to join this room, optional],
         "fir_freq":5,
-        bitrate:1024000
+        bitrate:512000
     }
     _this.handler.send({"message": prm});
     console.log("room create");
@@ -116,7 +116,7 @@ function publishMyVideo(msg,_this) {
                 console.log("Got publisher SDP!");
                 var dt = { "request": "configure", "audio": true, "video": true };
                 _this.handler.send({"message": dt, "jsep": jsep});
-                _this.handler.send({"message": { "request": "configure", "bitrate": 1024000 }});
+                _this.handler.send({"message": { "request": "configure", "bitrate": 512000 }});
 
             },
             error: (error) =>{console.warn("createOffer", error)}
