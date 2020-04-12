@@ -97,6 +97,7 @@ function createRoom(_this) {
         "is_private" : false,
         //"allowed" : [ array of string tokens users can use to join this room, optional],
         "fir_freq":5,
+        publishers:12,
         videoorient_ext:true,
         bitrate:512000
     }
