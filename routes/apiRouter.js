@@ -346,7 +346,7 @@ router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
 
     var ret = [];
     req.transport.clients.forEach(c => {
-        if (c.roomid == req.params.roomid /*&& c.isActive*/)
+        if (c.roomid == req.params.roomid && c.isActive)
             ret.push({
                 id: c.user.id,
                 i: c.user.i,
