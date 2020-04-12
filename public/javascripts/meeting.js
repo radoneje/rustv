@@ -97,7 +97,7 @@ function createRoom(_this) {
         "is_private" : false,
         //"allowed" : [ array of string tokens users can use to join this room, optional],
         "fir_freq":5,
-        videoorient_ext:false,
+        videoorient_ext:true,
         bitrate:512000
     }
     _this.handler.send({"message": prm});
