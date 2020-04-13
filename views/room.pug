@@ -227,7 +227,7 @@ block content
                     </svg>
                   div.qItemDate
                     span.link.green(v-on:click="inviteToMeet(item)" v-if="userIsInvite(item)") &nbsp;&nbsp; Пригласить в мою переговорку
-                    span.link.green(v-on:click="userDenyInvite(item)" v-else ) &nbsp;&nbsp; Отозвать приглашение в переговорку
+                    span.link.green(v-on:click="userDenyInvite(item)" v-else ) &nbsp;&nbsp; Отозвать приглашение
             div.rContentWr(v-if="activeSection==7")
               div.rBody(id="fileBox" )
                 div.qItem(v-for="item in files" :id="'file'+item.id")
@@ -236,10 +236,17 @@ block content
                   div.qItemDate
                     span.link.green(v-on:click="downloadFile(item)") &nbsp;&nbsp; Скачать
                     span.link.green(v-on:click="fileLink(item)") &nbsp;&nbsp; Ссылка
+    div.inviteDialog(v-if="invites.length>0")
+        div.inviteDialogBox
+            div.inviteDialogBoxTitle Вас приглашают в переговорную
+                div.inviteDialogBoxItems(v-for="item in invites")
+                    div.inviteDialogBoxItem.qItem
+                        div.inviteDialogBoxItemTitle.qItemName Иванов Иван Иванович
+                        div.qItemDate
+                            span(style="font-size: 10px;").link.green.inviteDialogBoxItemLink Зайти &nbsp;&nbsp;&nbsp;
+                            span(style="font-size: 10px;" v-on:click="inviteDeny(item)").link.red.inviteDialogBoxItemLink Отказаться
 
 
-
-      div(style="clear:both")
     script.
       var eventid=!{room.eventid}
       var roomid=!{room.id}

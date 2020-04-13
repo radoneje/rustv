@@ -463,15 +463,60 @@ router.post("/qAnswer/:eventid/:roomid", checkLoginToRoom, async (req, res, next
     res.json(r[0]);
 })
 router.post("/inviteToMeet/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    var r = await req.knex("t_meetinginvetes").insert({
+        userid: req.session["user" + req.params.eventid].id,
+        invitedid:req.body.to.id
+    }, "*");
+    req.transport.emit("inviteToMeet", {from:req.session["user" + req.params.eventid], to:req.body.to.id}, req.params.roomid);
     // req.transport.emit("qAnswer", {id: r[0].id, answer:text}, req.params.roomid);
-    // res.json(0);
-    req.session["user"]
+    res.json(r[0]);
 })
 
 router.post("/inviteDenyToMeet/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
    // req.transport.emit("qAnswer", {id: r[0].id, answer:text}, req.params.roomid);
+
+   await req.knex("t_meetinginvetes").where({userid: req.session["user" + req.params.eventid].id,invitedid:req.body.to.id }).del();
+    req.transport.emit("inviteDenyToMeet", {from:req.session["user" + req.params.eventid], to:req.body.to.id}, req.params.roomid);
     res.json(0);
 })
+router.post("/inviteDeny/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    // req.transport.emit("qAnswer", {id: r[0].id, answer:text}, req.params.roomid);
+    await req.knex("t_meetinginvetes").where({invitedid: req.session["user" + req.params.eventid].id,userid:req.body.invtedUserid }).del();
+    req.transport.emit("inviteDeny", {to:req.session["user" + req.params.eventid], from:req.body.invtedUserid}, req.params.roomid);
+    res.json(0);
+})
+
+router.post("/inviteAllow/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    // req.transport.emit("qAnswer", {id: r[0].id, answer:text}, req.params.roomid);
+    await req.knex("t_meetinginvetes").where({invitedid: req.session["user" + req.params.eventid].id,userid:req.body.invtedUserid }).del();
+    req.transport.emit("inviteAllow", {to:req.session["user" + req.params.eventid], from:req.body.invtedUserid}, req.params.roomid);
+    res.json(0);
+})
+router.get("/invitedUsers/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    // req.transport.emit("qAnswer", {id: r[0].id, answer:text}, req.params.roomid);
+    var r=await req.knex.select("*").from("t_meetinginvetes").where({userid:req.session["user" + req.params.eventid].id })
+    var ret=[];
+    for(rr of r){
+        var  u=await req.knex.select("*").from("t_eventusers").where({id:rr.invitedid})
+        if(u.length>0)
+            ret.push(u[0])
+    }
+    res.json(ret);
+})
+router.get("/invites/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    // req.transport.emit("qAnswer", {id: r[0].id, answer:text}, req.params.roomid);
+    var r=await req.knex.select("*").from("t_meetinginvetes").where({invitedid:req.session["user" + req.params.eventid].id })
+    var ret=[];
+    for(rr of r){
+        var  u=await req.knex.select("*").from("t_eventusers").where({id:rr.userid})
+        if(u.length>0)
+            ret.push(u[0])
+    }
+    res.json(ret);
+})
+
+
+
 
 
 
@@ -767,7 +812,6 @@ router.get("/files/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
 })
 
 router.get("/pres/:presid/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
-
 
     var r = await req.knex.select("*").from("t_presfiles")
         .where({id: req.params.presid, isDeleted: false});

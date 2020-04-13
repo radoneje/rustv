@@ -282,6 +282,7 @@ window.onload=function () {
 
             },
             activatePres:async function (item) {
+                console.log("activatePres")
                 await axios.post("/rest/api/pres/" + eventid + "/" + roomid, {id:item.id})
             },
             setPres:function (id) {

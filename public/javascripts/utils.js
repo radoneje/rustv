@@ -327,6 +327,22 @@ function connect(_this, roomid, clbk){
             _this.onUpdateRecordTime(data)
         }
     });
+    socket.on("inviteDenyToMeet", function(data) {
+        if(typeof(_this.onInviteDenyToMeet)!='undefined'){
+            _this.onInviteDenyToMeet(data)
+        }
+    });
+    socket.on("inviteToMeet", function(data) {
+        if(typeof(_this.onInviteToMeet)!='undefined'){
+            _this.onInviteToMeet(data)
+        }
+    });
+    socket.on("inviteDeny", function(data) {
+        if(typeof(_this.onInviteDeny)!='undefined'){
+            _this.onInviteDeny(data)
+        }
+    });
+
 
 
 

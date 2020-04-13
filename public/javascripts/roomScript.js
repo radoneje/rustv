@@ -26,7 +26,8 @@ window.onload=function () {
             files:[],
             mainVideoMuted:false,
             eventRooms:[],
-            invitedUsers:[]
+            invitedUsers:[],
+            invites:[]
         },
         methods:{
             isWebRtc:function(){
@@ -307,17 +308,51 @@ window.onload=function () {
                 this.mainVideoMuted=!val;
             },
             inviteToMeet:function (item) {
-              this.invitedUsers.push(item);
+             // this.invitedUsers.push(item);
                 inviteToMeet(item)
 
             },
             userDenyInvite:function (item) {
-                this.invitedUsers=this.invitedUsers.filter(u=>u.id!=item.id)
+                //this.invitedUsers=this.invitedUsers.filter(u=>u.id!=item.id)
                 inviteDenyToMeet(item)
 
             },
             userIsInvite:function (item) {
               return  this.invitedUsers.filter(u=>u.id==item.id).length==0
+            },
+            onInviteToMeet:function (data) {
+                console.log("onInviteToMeet", data)
+                if(data.from.id==this.user.id){
+                    return this.invitedUsers.push({id:data.to});
+                }
+                if(data.to==this.user.id){
+
+                    this.invites.push(data.from);
+                }
+            },
+            onInviteDenyToMeet:function (data) {
+                console.log("onInviteDenyToMeet", data)
+                if(data.from.id==this.user.id){
+                    return this.invitedUsers=this.invitedUsers.filter(u=>u.id!=data.to)
+                }
+                if(data.to==this.user.id){
+                    this.invites=this.invites.filter(u=>u.id!=data.from.id);
+                }
+            },
+            inviteDeny:function (item) {
+                console.log("inviteDeny", item)
+                this.invites=this.invites.filter(u=>u.id!=item.id);
+                axios.post("/rest/api/inviteDeny/"+eventid+"/"+roomid,{invtedUserid:item.id})
+            },
+            inviteAllow:function (item) {
+                console.log("inviteAllow", data)
+                this.invites=this.invites.filter(u=>u.id!=u.id);
+                axios.post("/rest/api/inviteAllow/"+eventid+"/"+roomid,{invtedUserid:item.id})
+            },
+            onInviteDeny:function (data) {
+                console.log("onInviteDeny", data)
+                if(data.from==this.user.id)
+                    return   this.invitedUsers=this.invitedUsers.filter(u=>u.id!=data.to.id)
             }
 
 
@@ -338,6 +373,22 @@ window.onload=function () {
                         .then(function (r) {
                             _this.users=r.data;
                          //   console.log(_this.users)
+
+                            axios.get("/rest/api/invitedUsers/"+eventid+"/"+roomid)
+
+                                .then(function (r) {
+                                    console.log("invites",r.data )
+                                    _this.invitedUsers = r.data;
+                                });
+                            axios.get("/rest/api/invites/"+eventid+"/"+roomid)
+
+                                .then(function (r) {
+                                    console.log("invites",r.data )
+                                    _this.invites = r.data;
+                                });
+
+
+
                         })
                     axios.get("/rest/api/quest/"+eventid+"/"+roomid)
                         .then(function (r) {
@@ -361,6 +412,7 @@ window.onload=function () {
                             console.log("eventRooms", r.data)
                             _this.eventRooms = r.data;
                         });
+
 
                     document.getElementById("app").style.opacity=1;
                     var scrElem=rHead;
