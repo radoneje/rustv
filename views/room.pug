@@ -129,6 +129,9 @@ block content
                   div(style="text-align:center")
                     video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
                   div.qItemPhoto(v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
+                  div.qItemAnsvwer(v-if="item.answer!=null")
+                    div.qItemAnsvwerLabel Ответ:
+                    div.qItemAnsverText(v-html="item.answer")
                   div.qItemDate
                     span.qItemReady(v-if="item.isReady")
                       span Ответ получен&nbsp;&nbsp;
@@ -138,6 +141,7 @@ block content
                         </svg>
 
                     span {{moment(item.date).format("HH:MM")}}
+
               div.rFooter
                 div.fileLoadProgress
                 div.askWr

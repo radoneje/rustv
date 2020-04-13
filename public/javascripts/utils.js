@@ -180,6 +180,18 @@ function connect(_this, roomid, clbk){
                 _this.q.push(data);
 
         });
+    socket.on("qAnswer", function(data){
+        console.log("qAnswer")
+        _this.q.forEach(function (e) {
+            if(e.id==data.id) {
+                e.answer = data.answer;
+
+            }
+        })
+
+    });
+
+
         socket.on("qDelete", function(data){
             _this.q=_this.q.filter(function (e) {return e.id!=data;});
         });
@@ -351,6 +363,9 @@ function chattextChange(_this, e) {
     if(e.keyCode==13 && _this.chatText.length>0){
         chattextSend(_this)
     }
+}
+function qItemAnswerChange(item, _this){
+    axios.post("/rest/api/qAnswer/"+eventid+"/"+roomid,{answer:item.answer, id:item.id}).then(function () {;;})
 }
 function chattextSend(_this) {
     axios.post("/rest/api/chat/"+eventid+"/"+roomid,{text:_this.chatText})

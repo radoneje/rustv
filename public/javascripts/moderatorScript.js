@@ -73,6 +73,11 @@ window.onload=function () {
 
 
             },
+            qItemAnswerChange:function(item){
+                var _this=this;
+                if(item.answer.length>0)
+                    qItemAnswerChange(item,_this)
+            },
             chattextSend(_this){
                 if(this.chatText.length>0)
                     chattextSend(this) ;
@@ -401,6 +406,7 @@ window.onload=function () {
                         })
                     axios.get("/rest/api/quest/"+eventid+"/"+roomid)
                         .then(function (r) {
+                            console.log(r.data)
                             _this.q=r.data;
                         })
                     axios.get("/rest/api/chat/"+eventid+"/"+roomid)
@@ -409,7 +415,7 @@ window.onload=function () {
                         })
                     axios.get("/rest/api/files/"+eventid+"/"+roomid)
                         .then(function (r) {
-                            console.log(r.data)
+
                             _this.files=r.data;
 
                             axios.get("/rest/api/activePres/"+eventid+"/"+roomid)

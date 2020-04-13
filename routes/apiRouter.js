@@ -450,6 +450,19 @@ router.post("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) 
     req.transport.emit("qAdd", r[0], req.params.roomid);
     res.json(r[0]);
 })
+
+router.post("/qAnswer/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    var text = urlify(stripHtml(req.body.answer))
+    var r = await req.knex("t_q").update({
+        answer: text,
+    }, "*").where({id:req.body.id});
+
+    r = await req.knex.select("*").from("v_q").where({id: r[0].id});
+
+    req.transport.emit("qAnswer", {id: r[0].id, answer:text}, req.params.roomid);
+    res.json(r[0]);
+})
+
 router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     var text = urlify(stripHtml(req.body.text))
 

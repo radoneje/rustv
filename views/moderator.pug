@@ -42,14 +42,14 @@ block content
                         div(style="text-align:center")
                             video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
                         div.qItemPhoto(v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
-                        div.qItemAnsvwer
+                        div.qItemAnsvwer(v-if="item.answer!=null")
                             div.qItemAnsvwerLabel Ответ:
                             div.qItemAnsverText
-                                textarea(placeholder="Напишите здесь текст ответа")
+                                textarea(placeholder="Напишите здесь текст ответа" v-model="item.answer" v-on:change="qItemAnswerChange(item)")
                         div.greenBtn(v-if="item.video" style="height: max-content;width: max-content;padding: 5px;" v-on:click="showUploadedVideo(item, $event)")
                             span Показать на экране
                         div.qItemDate
-                            span.link.green() Ответить&nbsp;&nbsp;
+                            span.link.green(v-if="item.answer==null" v-on:click="item.answer=''") Ответить&nbsp;&nbsp;
                             span.link.green(v-if="item.isReady" v-on:click="QsetNew(item)") Пометить новым&nbsp;&nbsp;
                             span.link.green(v-else v-on:click="QsetOld(item)") Пометить отвеченным&nbsp;&nbsp;
                                 span
