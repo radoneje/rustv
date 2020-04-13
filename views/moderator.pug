@@ -7,6 +7,8 @@ block head
     script(src="/javascripts/utils.js")
     script(src="/javascripts/moderatorScript.js")
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    link(rel='stylesheet', href='/stylesheets/room.css')
 
 block content
     div.adminScreen.adminContainer(id="app" style="height: 100vh;" v-bind:class="{isPres:isPres}")
