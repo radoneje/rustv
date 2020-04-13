@@ -55,7 +55,6 @@ router.get('/event/:id',  async (req, res, next) =>{
 })
 
 router.get('/room/:id',  async (req, res, next) =>{
-
   req.params.id=parseInt(req.params.id)
   if(!Number.isInteger(req.params.id))
     return res.send(404);
@@ -69,6 +68,23 @@ router.get('/room/:id',  async (req, res, next) =>{
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
   res.render('room', { title: 'ON.event '+room.title, room:room });
+
+})
+router.get('/meeting/:eventid/:meetingId',  async (req, res, next) =>{
+    req.params.eventid=parseInt(req.params.eventid)
+    if(!Number.isInteger(req.params.eventid))
+        return res.send(404);
+
+
+    var users=await req.knex.select("*").from("t_eventusers").where({isDeleted:false, eventid:req.params.eventid})
+    if(users.length<1)
+        return res.send(404);
+
+        var user=users[0];
+
+    if(!req.session["user"+user.eventid])
+        return res.redirect("/login/"+req.params.eventid+"?redirect="+encodeURI('/meeting/'+req.params.eventid+"/"+req.params.meetingId))
+    res.render('meeting', { title: 'ON.event Переговорная комната',eventid:user.eventid, meetRoomid:req.params.meetingId, user: req.session["user"+user.eventid]});
 
 })
 
@@ -106,13 +122,14 @@ router.get('/speaker/:id',  async (req, res, next) =>{
   res.render('speaker', { title: 'ON.event '+room.title, room:room});
 
 })
+/*
 router.get('/meeting/:eventid',  async (req, res, next) =>{
   if(!req.session["user"+req.params.eventid])
     res.sendStatus(404);
   console.log(req.session["user"+req.params.eventid])
   //{ title: 'Express' , meetRoomid:123, user:{f:"shevchenko", i:"denis", id:1}}
   res.render('meeting', { title: 'ON.event meeting room', meetRoomid:123, user:{f:req.session["user"+req.params.eventid].f, i:req.session["user"+req.params.eventid].i, id:1}});
-})
+})*/
 
 
 

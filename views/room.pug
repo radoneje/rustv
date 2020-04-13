@@ -99,8 +99,6 @@ block content
                       </g>
                       </svg>
                     span.btnContentLbl &nbsp; &nbsp; Хочу спросить
-
-
         div#VKS
           span(style="position: absolute; top:40px; z-index: -1;") Из участников пока<br> никто не присоединился.
           div#videoWr
@@ -109,7 +107,7 @@ block content
         div.Rwr
           div.rContent
             div.rHead#rHead
-              div.rHeadItem(v-for="item in sect" v-bind:class="{active:item.isActive}" v-on:click="sectActive(item)")
+              div.rHeadItem(v-for="item in sect" v-bind:class="{active:item.isActive, alert:(invites.length>0  && item.id==3)}" v-on:click="sectActive(item)")
                 div.rHeadItemLogo
                   img(v-bind:src="item.isActive?item.logoactive:item.logo")
                 div {{item.title}}
@@ -123,8 +121,7 @@ block content
                         div.rItemSubTitle Пришлашено: {{invitedUsers.length}}
                         div.rItemSubTitle Зашло: 0
                       div.qItemDate
-                        span.link.green(v-on:click="") &nbsp;&nbsp; Зайти
-
+                        span.link.green(v-on:click="document.location.href='/meeting/'+eventid+'/'+user.id") &nbsp;&nbsp; Выйти в мою комнату
                   div.rFeedGroupBody
                 div.rFeedGroup
                   div.rFeedGroupTitle Расписание сессий
@@ -218,13 +215,13 @@ block content
                   </svg>
             div.rContentWr(v-if="activeSection==3")
               div.rBody(id="userBox" )
-                div.rInviteBox
+                div.rInviteBox(v-if="invites.length>0")
                     div.rInvitesTitle Приглашения ({{invites.length}})
                     div.inviteDialogBoxItems
                         div.inviteDialogBoxItem.qItem(v-for="item in invites")
                             div.inviteDialogBoxItemTitle.qItemName Иванов Иван Иванович
                             div.qItemDate
-                                span(style="font-size: 10px;").link.green.inviteDialogBoxItemLink Зайти &nbsp;&nbsp;&nbsp;
+                                span(style="font-size: 10px;" v-on:click="inviteAllow(item)").link.green.inviteDialogBoxItemLink Зайти &nbsp;&nbsp;&nbsp;
                                 span(style="font-size: 10px;" v-on:click="inviteDeny(item)").link.red.inviteDialogBoxItemLink Отказаться
                 div.rInviteBox
                   div.rInvitesTitle Люди ({{users.length}})

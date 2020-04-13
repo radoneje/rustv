@@ -9,6 +9,14 @@ window.onload= ()=> {
     var app=new Vue({
         el:"#app",
         data:{
+            sect:[
+                {title:"Лента", isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
+                {title:"Чат", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactive.svg'},
+                {title:"Люди", isActive:false, id:3, logo:'/images/logousers.svg', logoactive:'/images/logousersa.svg'},
+                {title:"Файлы", isActive:false, id:7, logo:'/images/logofiles.svg', logoactive:'/images/logofilesa.svg'}
+            ],
+            activeSection:2,
+            eventRooms:[],
             noWebrtc:false,
             janus:null,
             handler:null,
@@ -17,11 +25,26 @@ window.onload= ()=> {
             opaqueId:"videoroomtest-" + Janus.randomString(12),
             videos:[]
         },
-        methods:{},
+        methods:{
+            sectActive:function (item) {
+                var _this=this;
+                this.sect.forEach(function (e) {
+
+                    e.isActive=(item.id==e.id);
+                    if(e.isActive)
+                        _this.activeSection=e.id
+                    // return e;
+                })
+            },
+        },
 
         mounted:function () {
             var _this=this;
-            console.log("VUE IS WORK!")
+            axios.get("/rest/api/eventRooms/"+eventid+"/"+meetRoomid)
+                .then(function (r) {
+                    _this.eventRooms = r.data;
+                });
+            //////////////////////////
             Janus.init({debug: "all", callback: function() {
                     if(!Janus.isWebrtcSupported()) {
                         noWebrtc:true;

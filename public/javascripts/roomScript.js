@@ -345,15 +345,20 @@ window.onload=function () {
                 axios.post("/rest/api/inviteDeny/"+eventid+"/"+roomid,{invtedUserid:item.id})
             },
             inviteAllow:function (item) {
-                console.log("inviteAllow", data)
-                this.invites=this.invites.filter(u=>u.id!=u.id);
+
+
+                this.invites=this.invites.filter(u=>u.id!=item.id);
                 axios.post("/rest/api/inviteAllow/"+eventid+"/"+roomid,{invtedUserid:item.id})
+                if(confirm("Вы покидаете эту сессию, переходите в переговорную комнату?"))
+                    document.location.href="/meeting/"+eventid+"/"+item.id;
+
             },
             onInviteDeny:function (data) {
                 console.log("onInviteDeny", data)
                 if(data.from==this.user.id)
                     return   this.invitedUsers=this.invitedUsers.filter(u=>u.id!=data.to.id)
             }
+
 
 
 
