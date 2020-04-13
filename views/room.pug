@@ -108,7 +108,7 @@ block content
       div.R
         div.Rwr
           div.rContent
-            div.rHead
+            div.rHead#rHead
               div.rHeadItem(v-for="item in sect" v-bind:class="{active:item.isActive}" v-on:click="sectActive(item)")
                 div.rHeadItemLogo
                   img(v-bind:src="item.isActive?item.logoactive:item.logo")

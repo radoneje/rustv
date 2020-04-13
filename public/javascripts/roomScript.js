@@ -348,6 +348,9 @@ window.onload=function () {
                         });
 
                     document.getElementById("app").style.opacity=1;
+                    var scrElem=rHead;
+                    scrElem.scrollLeft = (scrElem.scrollWidth - scrElem.clientWidth) / 2
+
                     startVideo();
                     _this.startRTC();
                 })
