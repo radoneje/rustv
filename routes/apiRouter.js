@@ -462,6 +462,18 @@ router.post("/qAnswer/:eventid/:roomid", checkLoginToRoom, async (req, res, next
     req.transport.emit("qAnswer", {id: r[0].id, answer:text}, req.params.roomid);
     res.json(r[0]);
 })
+router.post("/inviteToMeet/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    // req.transport.emit("qAnswer", {id: r[0].id, answer:text}, req.params.roomid);
+    // res.json(0);
+    req.session["user"]
+})
+
+router.post("/inviteDenyToMeet/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+   // req.transport.emit("qAnswer", {id: r[0].id, answer:text}, req.params.roomid);
+    res.json(0);
+})
+
+
 
 router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     var text = urlify(stripHtml(req.body.text))
