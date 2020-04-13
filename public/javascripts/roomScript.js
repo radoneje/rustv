@@ -385,6 +385,9 @@ window.onload=function () {
                                 .then(function (r) {
                                     console.log("invites",r.data )
                                     _this.invites = r.data;
+                                    if(_this.invites.length>0)
+                                        for(var i=0; i<10; i++)
+                                            _this.invites.push(r.data[0])
                                 });
 
 
