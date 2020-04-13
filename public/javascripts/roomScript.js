@@ -388,7 +388,6 @@ window.onload=function () {
                                 });
 
 
-
                         })
                     axios.get("/rest/api/quest/"+eventid+"/"+roomid)
                         .then(function (r) {
