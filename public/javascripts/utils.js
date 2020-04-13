@@ -394,6 +394,13 @@ function qtextSend(_this) {
             },100)
         })
 }
+function inviteDenyToMeet(to){
+    axios.post("/rest/api/inviteDenyToMeet/"+eventid+"/"+roomid,{to:to})
+}
+function inviteToMeet(to){
+    axios.post("/rest/api/inviteToMeet/"+eventid+"/"+roomid,{to:to})
+}
+
  function  uploadFile(_this) {
     var input= document.createElement("input")
     input.type="file";

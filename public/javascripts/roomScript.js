@@ -8,7 +8,7 @@ window.onload=function () {
                 {title:"Лента", isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
                 {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoq.svg'},
                 {title:"Чат", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactive.svg'},
-                {title:"Участники", isActive:false, id:3, logo:'/images/logousers.svg', logoactive:'/images/logousersa.svg'},
+                {title:"Люди", isActive:false, id:3, logo:'/images/logousers.svg', logoactive:'/images/logousersa.svg'},
                 {title:"Файлы", isActive:false, id:7, logo:'/images/logofiles.svg', logoactive:'/images/logofilesa.svg'}
                 ],
             activeSection:2,
@@ -26,6 +26,7 @@ window.onload=function () {
             files:[],
             mainVideoMuted:false,
             eventRooms:[],
+            invitedUsers:[]
         },
         methods:{
             isWebRtc:function(){
@@ -304,7 +305,21 @@ window.onload=function () {
                 var mainVideoElem=document.getElementById('video');
                 mainVideoElem.muted=!val;
                 this.mainVideoMuted=!val;
+            },
+            inviteToMeet:function (item) {
+              this.invitedUsers.push(item);
+                inviteToMeet(item)
+
+            },
+            userDenyInvite:function (item) {
+                this.invitedUsers=this.invitedUsers.filter(u=>u.id!=item.id)
+                inviteDenyToMeet(item)
+
+            },
+            userIsInvite:function (item) {
+              return  this.invitedUsers.filter(u=>u.id==item.id).length==0
             }
+
 
 
         },
