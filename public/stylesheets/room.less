@@ -1,5 +1,8 @@
 .roomScreen {
 }
+html{
+  scroll-behavior: smooth;
+}
 
 @keyframes flick {
   0%{
@@ -115,10 +118,14 @@ width: 75%;
   width: 100%;
   min-height: 100px;
 }
+
 .multiViewVideo .videoBoxWr {
   position: relative;
   height: 101px;
   background: #272c31;
+}
+#videoWr::-webkit-scrollbar {
+  display: none;
 }
 #videoWr{
   display: flex;
@@ -166,9 +173,15 @@ width: 75%;
   fill:#eeeeee
 }
 .rBody{
-  height: ~"calc(100% - 83px)";
-
+  height: ~"calc(100% - 98px)";
+  scroll-behavior: smooth;
   overflow-x:hidden;
+  padding-top: 0;
+}
+
+  .rBody::-webkit-scrollbar {
+    display: none;
+
 }
 .rHead{
    overflow-x: auto;
@@ -178,7 +191,16 @@ width: 75%;
    white-space: nowrap;
   width: ~"calc(100% - 20px)";
   margin: 0 10px;
+  height: 99px;
+  background: #1e2226;
+
+    margin: 0 auto;
+    width: max-content;
  }
+.rHead::-webkit-scrollbar {
+  display: none;
+
+}
 .rHeadItem{
   font-size: 12px;
   width: 66px;
@@ -287,6 +309,10 @@ width: 75%;
   width: ~"calc(100% - 0px)";
   margin: 0 10px;
 }
+.inviteDialogBoxItems::-webkit-scrollbar {
+  display: none;
+
+}
 .inviteDialogBoxItem{
   width: 250px;
   width: 250px;
@@ -342,6 +368,7 @@ width: 75%;
     width: 100%;
     position: static;
   }
+
   .headBox{
     opacity: 1;
   }

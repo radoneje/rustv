@@ -46,6 +46,8 @@ block content
                             div.qItemAnsvwerLabel Ответ:
                             div.qItemAnsverText
                                 textarea(placeholder="Напишите здесь текст ответа" v-model="item.answer" v-on:change="qItemAnswerChange(item)")
+                        div.qItemDate
+                            include elements/likes
                         div.greenBtn(v-if="item.video" style="height: max-content;width: max-content;padding: 5px;" v-on:click="showUploadedVideo(item, $event)")
                             span Показать на экране
                         div.qItemDate
@@ -59,7 +61,7 @@ block content
                             span &nbsp;&nbsp;
                             span.link.red(v-on:click="deleteQ(item)") Удалить
                             span &nbsp;&nbsp;
-                            span {{moment(item.date).format("HH:MM")}}
+                            span {{moment(item.date).format("HH:mm")}}
                 div.rFooter
                     div.fileLoadProgress
                     div.askWr
@@ -96,7 +98,7 @@ block content
                         div.qItemDate
                             span.link.red(v-on:click="deleteChat(item)") Удалить
                             span &nbsp;&nbsp;
-                            span {{moment(item.date).format("HH:MM")}}
+                            span {{moment(item.date).format("HH:mm")}}
                 div.aSectBody(id="fileBox" v-if="centerSectActiveIndex==2")
                     div.qItem(v-for="item in files" :id="'file'+item.id")
                         div.qItemLoader(:id="'fileloader'+item.id")

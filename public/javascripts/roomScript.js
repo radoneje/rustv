@@ -67,12 +67,15 @@ window.onload=function () {
             sectActive:function (item) {
                 var _this=this;
                 this.sect.forEach(function (e) {
-
                     e.isActive=(item.id==e.id);
                     if(e.isActive)
                         _this.activeSection=e.id
                     // return e;
                 })
+                if(window.innerWidth<1024)
+                setTimeout(function () {
+                    window.scrollTo(0,document.body.scrollHeight);
+                },0)
             },
             qtextChange:function (e) {
                 var _this=this;
@@ -379,7 +382,10 @@ window.onload=function () {
 
         },
         watch:{
-
+          /*  activeSection:function () {
+                window.scrollTo(0,document.body.scrollHeight);
+            }*/
+            //
         },
         mounted:async function () {
             var _this=this;
