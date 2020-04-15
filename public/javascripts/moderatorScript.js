@@ -386,6 +386,17 @@ window.onload=function () {
                         _this.uploafFilesToQ(items[i].getAsFile(), "chat")
                     }
                 }
+            },
+            qLike:function (item) {
+                if(!localStorage.getItem("qLike"+item.id))
+                    axios.post("/rest/api/qLike/"+eventid+"/"+roomid,{id:item.id}).then();
+                localStorage.setItem("qLike"+item.id, true);
+            },
+            OnQLikes:function (data) {
+                this.q.forEach(q=>{
+                    if(q.id==data.id)
+                        q.likes=data.likes;
+                })
             }
 
         },

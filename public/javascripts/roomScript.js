@@ -27,7 +27,8 @@ window.onload=function () {
             mainVideoMuted:false,
             eventRooms:[],
             invitedUsers:[],
-            invites:[]
+            invites:[],
+            videoReceivers:[]
         },
         methods:{
             isWebRtc:function(){
@@ -54,7 +55,10 @@ window.onload=function () {
                     s.type = "text/javascript";
                     s.async = false;
                     s.onload = function () {
-                        getStream(_this).then();
+
+                        getStream(_this).then(function () {
+                                    _this.videoReceivers=videoReceivers;
+                        });
                     }// <-- this is important
                     document.getElementsByTagName('head')[0].appendChild(s);
                 } else
@@ -357,6 +361,17 @@ window.onload=function () {
                 console.log("onInviteDeny", data)
                 if(data.from==this.user.id)
                     return   this.invitedUsers=this.invitedUsers.filter(u=>u.id!=data.to.id)
+            },
+            qLike:function (item) {
+                if(!localStorage.getItem("qLike"+item.id))
+                    axios.post("/rest/api/qLike/"+eventid+"/"+roomid,{id:item.id}).then();
+                localStorage.setItem("qLike"+item.id, true);
+            },
+            OnQLikes:function (data) {
+                this.q.forEach(q=>{
+                    if(q.id==data.id)
+                        q.likes=data.likes;
+                })
             }
 
 
@@ -424,6 +439,7 @@ window.onload=function () {
                     document.getElementById("app").style.opacity=1;
                     var scrElem=rHead;
                     scrElem.scrollLeft = (scrElem.scrollWidth - scrElem.clientWidth) / 2
+
 
                     startVideo();
                     _this.startRTC();

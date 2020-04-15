@@ -8,6 +8,9 @@ block head
     script(src="/javascripts/rtcScript.js")
     script(src="/javascripts/recordScript.js")
     script(src="/javascripts/speakerScript.js")
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    link(rel='stylesheet', href='/stylesheets/login.css')
+    link(rel='stylesheet', href='/stylesheets/room.css')
 
 block content
     div.adminContainer.spkContaiter.multiViewVideo(id="app" style="height: 100vh;" v-bind:class="{roomInPres:pres}")
@@ -154,7 +157,7 @@ block content
                             </svg>
         div.spkLayer(v-if="SPKstatus>5 " style="z-index:70")
             div.aModSect
-                div.aModSectTitle Презентация {{pres}}
+                div.aModSectTitle
                 div.videoBox#admPresBox(v-if="pres")
                     div#admPres(v-bind:style="{backgroundImage:'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')'}")
                     div.aModSectPres

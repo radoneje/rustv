@@ -10,6 +10,7 @@ const RTPconfig = {
 
 var videoSenders=[]
 var videoReceivers=[]
+
 async function getStream(_this){
     const constraints={
         audio: true,

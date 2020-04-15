@@ -106,7 +106,7 @@ function JanusCreated(pluginHandle, _this) {
     joinRoom(_this)
 }
 function joinRoom(_this) {
-    var prm = { "request": "join", "room": meetRoomid, "ptype": "publisher", "display": user.i+" " +user.f };
+    var prm = { "request": "join", "room": meetRoomid, "ptype": "publisher", "display": (user.i || "")+" " +(user.f||"") };
     _this.handler.send({"message": prm});
 }
 function createRoom(_this) {
@@ -149,7 +149,7 @@ function publishMyVideo(msg,_this) {
 }
 function onLocalStream(stream, _this) {
     var id=Janus.randomString(12)
-    _this.videos.push({isMyVideo:true, id:id, name: user.i+" "+ user.f, handler:_this.handler})
+    _this.videos.push({isMyVideo:true, id:id, name: (user.i ||"")+" "+ (user.f ||""), handler:_this.handler})
     setTimeout(()=>{
         Janus.attachMediaStream( document.getElementById(id), stream);
     }, 0)
