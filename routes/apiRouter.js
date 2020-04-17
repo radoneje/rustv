@@ -329,8 +329,10 @@ function checkLoginToRoom(req, res, next) {
     next();
 }
 
-router.get("/info/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+router.get("/info/:eventid/:roomid", async (req, res, next) => {
     var usr = req.session["user" + req.params.eventid];
+    if(!usr)
+        res.json(false)
     res.json({id: usr.id, f: usr.f, i: usr.i});
 })
 router.get("/infospk/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
@@ -968,6 +970,20 @@ router.post("/encodeTime", async (req, res, next) => {
     }
 
 })
+router.get("/constraints", async (req, res, next) => {
+    res.json(config.constraints);
+})
+router.get("/meetWowza", async (req, res, next) => {
+    res.json(config.meetWowza[0]);
+})
+router.get("/meetBitrate", async (req, res, next) => {
+    res.json(config.meetBitrate);
+})
+
+
+
+
+
 
 
 

@@ -12,5 +12,26 @@
       "password" : "gbplf13",
       "database" : "rustv"
       },
-  "sha256Secret": "dfczgegrby"
+  "sha256Secret": "dfczgegrby",
+  "constraints":
+  {
+    "video":{
+      "aspectRatio": 1.777777778,
+      "frameRate": {"max": 30},
+      "width": {"min": 320, "ideal": 320, "max": 1920},
+      "height": {"min": 400, "ideal": 1080},
+      "facingMode":  "user"},
+    "audio": true
+  },
+  "meetWowza": [
+    {
+      "url": "wss://mi.may24.pro/webrtc-session.json",
+      "applicationName": "webrtc"
+    }
+
+  ],
+  "meetBitrate": {
+     "video":360,
+     "audio" :64
+  }
 }

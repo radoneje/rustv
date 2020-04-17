@@ -376,8 +376,89 @@ width: 75%;
   min-height: 100px;
   z-index: 10;
 }
+.meetingBtnBox{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 75%;
+  opacity: .5;
+  display: flex;
+  justify-content: center;
+  background: rgba(0,0,0,.25);
+}
+.meetingBtnBox:hover{
+  opacity: 1;
+}
+.meetVideoBox{
+  position: absolute;
+  top:60px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: ~"calc(100% - 100px)";
+  flex-wrap: wrap;
+
+
+}
+.meetVideoItem{
+  width:~"calc(33% - 20px)";
+  background: #272c31;
+  margin: 10px;
+  border-radius: 4px;
+ // position: relative;
+//  flex: 1 0 33%; /* explanation below */
+}
+.meetVideoWrapper{
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.meetVideoWrapperContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.meetVideo{
+  transform: inherit;
+  height: 100%;
+  max-height: 100%;
+  border-radius: 4px;
+  max-width: 100%;
+}
+
+.meetVideoCap{
+  position: absolute;
+  bottom:0;
+  left: 0;
+  padding: 5px;
+  box-sizing: border-box;
+  background: rgba(0,0,0,.25);
+  border-radius: 0 0 4px 0;
+  width: 100%;
+  text-align: center;
+}
+
 
 @media only screen and (max-width: 1024px){
+  .meetVideoBox{
+    position: inherit;
+    padding: 0;
+  }
+ .meetVideoItem{
+   width: ~"calc(50% - 10px)";
+   margin: 5px;
+ }
+ .meetingBtnBox{
+   display: none;
+ }
   .head{
     width: 100%;
     position: static;
