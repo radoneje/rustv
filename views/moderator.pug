@@ -4,6 +4,7 @@ block head
     script.
         var roomid = #{room.id}
         var eventid = #{room.eventid}
+        var room=!{JSON.stringify(room)}
     script(src="/javascripts/utils.js")
     script(src="/javascripts/moderatorScript.js")
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -209,7 +210,7 @@ block content
                     div#admPres(v-bind:style="{backgroundImage:'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')'}")
                     div.videoCap Трансляция
                 div.videoBox#translationVideoBox
-                    video#translationVideo( width="180"  controls playsinline muted autoplay poster="/images/bg_03.png" src="https://aurora-school.cdnvideo.ru/hls/100/index.m3u8" )
+                    video#translationVideo( width="180"  controls playsinline muted autoplay :src="'https://stream.sberbank-school.ru/hls/'+ room.streamname +'/index.m3u8'" :poster="'/images/'+room.poster" )
                     div.videoCap Трансляция
 
 

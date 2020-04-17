@@ -80,6 +80,8 @@ router.get('/meeting/:eventid/:meetingId',  async (req, res, next) =>{
     if(users.length<1)
         return res.send(404);
 
+    var curruser=await req.knex.select("*").from("t_eventusers").where({isDeleted:false, id:req.params.meetingId})
+  if(curruser.length<1)
         var user=users[0];
 
     if(!req.session["user"+user.eventid])

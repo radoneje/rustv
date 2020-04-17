@@ -22,7 +22,8 @@ window.onload=function () {
             isSpkScreen:false,
             centerSectActiveIndex:1,
             isPres:false,
-            previewPres:[]
+            previewPres:[],
+            room:room,
         },
         methods:{
             onHandUp:function(data){
