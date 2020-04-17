@@ -28,7 +28,8 @@ window.onload=function () {
             eventRooms:[],
             invitedUsers:[],
             invites:[],
-            videoReceivers:[]
+            videoReceivers:[],
+            room:room
         },
         methods:{
             isWebRtc:function(){
