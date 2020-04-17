@@ -34,7 +34,7 @@ block content
               div#videoWr
           div.Lbody
               div.videoWrapper(v-bind:style="{backgroundImage:pres?'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')':null}")
-                video(id="video" width="1280" height="720" controls playsinline loop  src="https://stream.sberbank-school.ru/hls/101/index.m3u8" :poster="'/images/'+room.poster" )
+                video(id="video" width="1280" height="720" controls playsinline loop  :src="'https://stream.sberbank-school.ru/hls/'+ room.streamname +'/index.m3u8'" :poster="'/images/'+room.poster" )
                 //:poster="'/images/'+room.poster" )//src="'https://aurora-school.cdnvideo.ru/hls/'+room.streamname+'/index.m3u8'" )
                 //https://stream.sberbank-school.ru/hls/100/index.m3u8
                 //video(id="video" width="1280" height="720" controls playsinline poster="/images/bg_03.png" src="https://stream.sberbank-school.ru/hls/100/index.m3u8" )
