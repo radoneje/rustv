@@ -20,8 +20,6 @@ async function getSpkConfig(){
 
 }
 
-
-
 async function publishVideoToWowza(id,stream,wssUrl,bitrate, clbk, err){
 
     var peerConnection=null;
