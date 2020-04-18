@@ -431,7 +431,6 @@ window.onload=function () {
                             }
                             wowzaRecievers.push(receiverItem)
                             mainVideoMute(true)
-
                         })
                     });
 
