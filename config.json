@@ -21,7 +21,10 @@
       "width": {"min": 320, "ideal": 320, "max": 1920},
       "height": {"min": 400, "ideal": 1080},
       "facingMode":  "user"},
-    "audio": true
+    "audio": {
+      "channelCount": 1,
+      "echoCancellation": true
+    }
   },
   "meetWowza": [
     {

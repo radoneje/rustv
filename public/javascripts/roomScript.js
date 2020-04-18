@@ -232,6 +232,7 @@ window.onload=function () {
                 elem.click();
 
             },
+
             uploafFilesToQ:function(file, to, clbk){
                 var _this=this;
                 if(!(file.type.indexOf('image/')==0 ||file.type.indexOf('video/')==0 ))
@@ -249,6 +250,7 @@ window.onload=function () {
                 xhr.onload = xhr.onerror = function() {
 
                     if (this.status == 200) {
+
                         setTimeout(function () {
                             var objDiv = document.getElementById(to+"Box");
                             objDiv.scrollTop = objDiv.scrollHeight;

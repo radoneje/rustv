@@ -371,7 +371,68 @@ router.get("/isSpkScreen/:eventid/:roomid", checkLoginToRoom, async (req, res, n
     res.json(ret);
 });
 
+router.post("/meetfileUpload/:eventid/:roomid/:userid", checkLoginToRoom, async (req, res, next) => {
+    if (!req.headers['x-data'])
+        res.status(404);
+    console.log("meetfileUpload", req.headers);
+    var struct = JSON.parse(decodeURI(req.headers['x-data']));
+    if (!(struct.type.indexOf('image/') == 0 || struct.type.indexOf('video/') == 0))
+        return res.json(false);
+    var ext = path.extname(struct.name)
+    var name = moment().unix() + ext;
+    var filename = path.join(__dirname, '../public/files/' + name);
+    req.files.file.mv(filename, async (e) => {
+        if (!e) {
+            var field = struct.type.indexOf('image/') == 0 ? "photo" : "video";
+            var inserted = {
+                text: "",
+                meetid: req.params.roomid,
+                userid: req.params.userid,
+                date: (new Date())
+            }
+            inserted[field] = name;
+            if (struct.type.indexOf('image/jpeg') == 0) {
+                try {
+                    jo.rotate(filename, {quality: 85}, (error, buffer, orientation, dimensions, quality)=>{
+                        if(!error) {
+                            fs.unlinkSync(filename)
+                            fs.writeFile(filename, buffer, () => {
+                                createTrump(filename, ()=>{denExit(inserted)})
+                            })
+                        }
+                        else
+                            createTrump(filename, ()=>{denExit(inserted)})
+                    })
+                } catch (e) {
+                    createTrump(filename, ()=>{denExit(inserted)})
+                }
 
+            } else
+                denExit(inserted)
+        } else {
+            console.warn(e);
+            res.status(505);
+        }
+    });
+    function createTrump(filepath, clbk){
+        im.resize({
+            srcData: fs.readFileSync(filepath, 'binary'),
+            height:   200
+        }, function(err, stdout, stderr){
+            if (err)
+                return clbk();
+            fs.unlinkSync(filename)
+            fs.writeFileSync(filepath, stdout, 'binary');
+            clbk();
+        });
+
+    }
+    async function denExit(inserted) {
+        var r = await req.knex("t_meetchat" ).insert(inserted, "*")
+        res.json(r[0]);
+    }
+
+});
 router.post("/qfileUpload/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
 
     if (!req.headers['x-data'])
