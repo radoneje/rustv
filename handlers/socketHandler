@@ -5,6 +5,7 @@ const io= require('socket.io')
 class socket{
     constructor(server, knex){
         this.clients=require('./clientsHandler')
+        this.spkRoom=[];
         //this.emit=this.clients.sendToRoomUsers;
         this.io=require('socket.io')(server);
         this.io.binaryType = 'arraybuffer';
@@ -20,6 +21,7 @@ class socket{
                     socket.emit("SPKanotherConnectError",false);
                     return;
                 }
+                var user=users[0];
                 roomid=data.roomid;
                 var client={
                     socket:socket,
@@ -31,12 +33,60 @@ class socket{
                 }
                 id=_this.clients.add(client)
                 client.id=id;
+                if(users[0].email=='speaker@rustv.ru' && users[0].smsCode==999999)
+                    _this.spkRoom.push({user:users[0],id:socket.id, socket:socket, isActive:true, roomid:data.roomid})
             })
             socket.on("disconnect",(msg,  data)=>{
                 console.log("disconnect",id);
               //  if(id)
                     _this.clients.disActive(socket.id);
+                _this.spkRoom.forEach(u=>{if(u.id==socket.id)u.isActive=false})
             });
+
+            socket.on("addUserToSpeakerRoom", async (data)=>{
+                console.log("addUserToSpeakerRoom", _this.spkRoom.length)
+                var fond=_this.clients.clients.filter(c=>{return  c.isActive && c.user.id==data.userid && c.roomid==data.roomid});
+                fond.forEach(f=>{
+                    _this.spkRoom.push(f);
+                    f.socket.emit("startSpeakerMeet")
+                    // послать в f новое видео спикера
+                    _this.spkRoom.forEach(a=>{
+                        if(a.isActive && a.roomid==data.roomid)
+                        {
+                       //     f.socket.emit("newSpkVideo",{streamid:a.socket.id, user:a.user});
+                        }
+                    })
+                    console.log("push", f.id)
+                })
+            });
+            socket.on("roomStopWowzaVideo", async (data)=>{
+
+                _this.spkRoom.forEach(u=>{
+                    if(u.streamid==data.streamid) {
+                      //  u.isActive = false;
+                        u.socket.emit("roomStopWowzaVideo");
+                    }
+                })
+                _this.spkRoom= _this.spkRoom.filter(r=>r.streamid!=data.streamid)
+            })
+
+            socket.on("SpkRoomVideoPublished", async (data)=>{
+                var item=this.clients.clients.filter(c=>c.socket.id==socket.id)
+                var user={};
+                if(item.length>0)
+                    user=item[0].user
+                setTimeout(()=>{
+                    _this.spkRoom.forEach(s=>{
+                        if(s.isActive && s.roomid==data.roomid ) {
+
+                            s.socket.emit("newSpkVideo",{streamid:data.id, user:user});
+                            if (s.socket.id == data.id)
+                                s.streamid = s.socket.id;
+                        }
+                    })
+                },500)
+            });
+
             socket.on("selfVideoStarted",(msg,  data)=>{
                 if(id)
                     _this.clients.startVideo(id, socket.id)

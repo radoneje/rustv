@@ -140,6 +140,22 @@ function connect(_this, roomid, clbk){
         if(_this.spkStartVks)
             _this.spkStartVks(data)
     });
+        socket.on("startSpeakerMeet", function(data){
+            if(_this.startSpeakerMeet)
+                _this.startSpeakerMeet(data)
+        });
+    socket.on("newSpkVideo", function(data){
+        if(_this.OnSpkVideo)
+            _this.OnSpkVideo(data)
+    });
+    socket.on("roomStopWowzaVideo", function(data){
+        if(_this.OnRoomStopWowzaVideo)
+            _this.OnRoomStopWowzaVideo(data)
+    });
+
+
+
+
     socket.on("disconnectSPKvksUser", function(data){
 
         if(_this.disconnectSPKvksUser)

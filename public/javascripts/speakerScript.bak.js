@@ -1,6 +1,4 @@
 window.onload=function () {
-    var wowzaRecievers=[];
-    var peerConnection=null;
     var app = new Vue({
         el: '#app',
         data: {
@@ -163,42 +161,6 @@ window.onload=function () {
                         avatar.classList.remove("clicked")
                     }, 500)
                 }
-                if(typeof (wowzaIsLoad)=="undefined" )
-                {
-                    var s = document.createElement('script');
-                    s.src = "/javascripts/wowza.js";
-                    s.type = "text/javascript";
-                    s.async = false;
-                    s.onload = async ()=> {
-                       await publishMyVideoToWowza()
-                    }// <-- this is important
-                    document.getElementsByTagName('head')[0].appendChild(s);
-                }
-                else
-                    await publishMyVideoToWowza()
-
-
-                async function publishMyVideoToWowza() {
-                    if(typeof (_this.WowzaCfg)=="undefined" || _this.WowzaCfg==null) {
-                        _this.WowzaCfg = await axios.get('/rest/api/spkWowza')
-                        _this.BitrateCfg = await axios.get('/rest/api/spkBitrate')
-                        await publishVideoToWowza(_this.socket.id, _this.selfVideoStream, _this.WowzaCfg.data, _this.BitrateCfg.data, (ret)=>{
-                            console.log("my Video Published", ret)
-                            peerConnection=ret.peerConnection
-                            _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid});
-                            addUserToSpeakerRoom();
-                        }, (err)=>{
-                            console.warn(err)
-                        })
-                    }
-                    else
-                        addUserToSpeakerRoom();
-                }
-                async function addUserToSpeakerRoom() {
-                    _this.socket.emit("addUserToSpeakerRoom",{userid:item.id,roomid:roomid });
-                }
-
-                /*
                 if (typeof (createVideoContaiter) == 'undefined') {
                     var s = document.createElement('script');
                     s.src = "/javascripts/rtcScript.js";
@@ -209,22 +171,31 @@ window.onload=function () {
                     }// <-- this is important
                     document.getElementsByTagName('head')[0].appendChild(s);
                 } else {
+                   /* videoReceivers.forEach(function (r) {
+                        console.log(item);
+                        stopReceiveVideo(r.guid);
+                        stopSendVideo(r.pairGUID);
+                        _this.socket.emit("stopSendVideo",{user:_this.user, guid:r.recguid, to:item.socketid})
+                    });*/
+
+
                     modGetStream(_this, function (video, stream) {
                         _this.onMyVideoStarted(video, stream, item)
+
                     });
                 }
-*/
+
+
 
             },
             onMyVideoStarted: function (video, stream, item) {
                 var _this=this;
-              /*  createSender(video, stream, null, function (videoSender) {
+                createSender(video, stream, null, function (videoSender) {
                     videoSenders.push(videoSender)
                     _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, to:item.socketid, isSpk:true})
 
                     // addSenderEvents(_this.socket,item.socketid, videoSender);
-                });*/
-
+                });
                 /*var remoteVideo=document.createElement("video")
                 remoteVideo.controls=true;
                 remoteVideo.width="240"
@@ -299,8 +270,6 @@ window.onload=function () {
                     elem.click();
             },
             disconnectSPKvksUser:function (data, event) {
-                this.removeWowzaVideo(data.item.guid)
-                /*
                 videoReceivers.forEach(r=>{
                     if(r.guid==data.item.guid){
                         var elem=document.getElementById("close"+r.guid)
@@ -308,7 +277,7 @@ window.onload=function () {
                             elem.click();
                         socket.emit("disconnectDirectConnect", r.guid );
                     }
-                })*/
+                })
             },
             setPres:function (id) {
                 console.log("setPres", id)
@@ -474,67 +443,7 @@ window.onload=function () {
                     if(q.id==data.id)
                         q.likes=data.likes;
                 })
-            },
-            OnSpkVideo:function (data) {
-                var _this=this;
-                console.log("OnSpkVideo", data)
-                if(data.streamid==_this.socket.id)
-                    return;// мое видео не показываем
-
-                var video=createVideoContaiter(data.streamid, (data.user.i||"") +" "+ data.user.f)
-                getSpkConfig()
-                    .then(function (wCfg) {
-                        var item={id:data.streamid, elem:video}
-                        getVideoFromWowza(item,  wCfg.WowzaCfg.data, wCfg.BitrateCfg.data, function (ret) {
-                            console.log("remote video play", ret)
-                            var receiverItem={id:data.streamid, isMyVideo:false, user:data.user, streamid:data.streamid}
-                            receiverItem.peerConnection=ret.peerConnection;
-                            receiverItem.peerConnection.onconnectionstatechange=(event)=> {
-                                var cs = receiverItem.peerConnection.connectionState
-                                console.log("cs", receiverItem.peerConnection.connectionState)
-                                if (cs == "disconnected" || cs == "failed" || cs == "closed") {
-
-                                    _this.removeWowzaVideo(receiverItem.streamid)
-                                    //arrVideo = arrVideo.filter(r => r.streamid != receiverItem.streamid);
-
-                                }
-                            }
-                            wowzaRecievers.push(receiverItem)
-                            _this.SPKstatus=6;
-                        })
-                    });
-
-            },
-             removeWowzaVideo:function(streamid) {
-                    var _this=this;
-                    console.log("removeWowzaVideo",(streamid))
-                    wowzaRecievers.forEach(r=>{
-                        if(r.streamid==streamid)
-                        {
-                            if (r.peerConnection) {
-                                r.peerConnection.close();
-                                r.peerConnection = null;
-                            }
-                            _this.socket.emit("roomStopWowzaVideo",{streamid:streamid});
-                            var elem=document.getElementById(streamid);
-                            if(elem)
-                                elem.parentNode.removeChild(elem);
-                        }
-                    })
-                    wowzaRecievers= wowzaRecievers.filter(r=>{
-                        return r.streamid!=streamid
-                    });
-                    if(wowzaRecievers.length==0)
-                    {
-                        _this.WowzaCfg=null;
-                        peerConnection.close();
-                        peerConnection = null;
-                        _this.SPKstatus=1;
-
-                    }
-
-
-    }
+            }
 
         },
         watch:{
@@ -577,28 +486,24 @@ window.onload=function () {
 
                             _this.SPKanotherConnectError = true;
                         })
-                            document.getElementById("app").style.opacity = 1;
-                        setTimeout(async () => {
+                        setTimeout(() => {
                             console.warn("continue")
-                            var dt= await axios.get('/rest/api/constraints');
-                            var constraints=dt.data;
-                            var video=SpkcreateVideoContaiter('selfVideo', _this.user.i ||''+" "+_this.user.f);
-                            video.width = 320;
-                            video.style.width = "320px"
-                            _this.selfVideoStream = await navigator.mediaDevices.getUserMedia(constraints);
-
-                            video.srcObject=_this.selfVideoStream;
-                            video.muted=true;
-
-                           /* video.addEventListener("click", () => {
-                                video.style.zIndex = "-1";
-                                video.style.opacity = "0"
-                                video.style.top="90%"
-                            })*/
-                            _this.recorder= new Recorder(_this);
-                            _this.recorder.start(video);
-
+                            document.getElementById("app").style.opacity = 1;
                             if (!_this.SPKanotherConnectError) {
+                                modGetStream(_this, function (video, stream) {
+                                    video.width = 320;
+                                    video.style.width = "320px"
+                                    var elem = document.getElementById("selfVideo")
+
+                                    elem.addEventListener("click", () => {
+                                        elem.style.zIndex = "-1";
+                                        elem.style.opacity = "0"
+                                        elem.style.top="90%"
+                                    })
+                                    _this.recorder= new Recorder(_this);
+                                    _this.recorder.start(video);
+                                    /*_this.onMyVideoStarted(video, stream,item)*/
+                                });
 
                                 axios.get("/rest/api/users/" + eventid + "/" + roomid)
                                     .then(function (r) {
@@ -642,8 +547,7 @@ window.onload=function () {
 
                                 setInterval(() => {
                                     var SPKvksUsers=[]
-                                   // videoReceivers.forEach(r=>{SPKvksUsers.push({user:r.user, guid:r.guid})})
-                                    wowzaRecievers.forEach(r=>{SPKvksUsers.push({user:r.user, guid:r.id})})
+                                    videoReceivers.forEach(r=>{SPKvksUsers.push({user:r.user, guid:r.guid})})
                                       _this.socket.emit("SPKstatus",{SPKstatus: _this.SPKstatus, SPKalert:_this.SPKalert, SPKvksUsers:SPKvksUsers})
                                 }, 1000)
                                 document.addEventListener("keydown",(e)=>{
@@ -671,29 +575,4 @@ window.onload=function () {
                 })
         }
     });
-}
-function SpkcreateVideoContaiter(id, caption) {
-    var video = document.createElement("video");
-
-    video.autoplay = true;
-    video.width = 320;
-    //video.width = 1024;
-    var videoBox = document.createElement("div");
-    videoBox.classList.add("videoBox")
-    videoBox.id = id;
-
-    var videoBoxWr = document.createElement("div");
-    videoBoxWr.classList.add("videoBoxWr")
-
-    var videoCap = document.createElement("div");
-    videoCap.classList.add("videoCap")
-
-    videoCap.innerText = caption;// + "<img src='/images/close.svg'/>";
-
-    // console.log(videoCap.innerHtml)
-    videoBoxWr.appendChild(video);
-    videoBoxWr.appendChild(videoCap);
-    videoBox.appendChild(videoBoxWr);
-    document.getElementById("videoWr").appendChild(videoBox);
-    return video;
 }

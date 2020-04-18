@@ -36,5 +36,16 @@
   "meetBitrate": {
      "video":360,
      "audio" :64
+  },
+  "spkWowza": [
+    {
+      "url": "wss://mi.may24.pro/webrtc-session.json",
+      "applicationName": "webrtc"
+    }
+
+  ],
+  "spkBitrate": {
+    "video":640,
+    "audio" :98
   }
 }

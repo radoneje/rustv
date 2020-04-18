@@ -1040,6 +1040,12 @@ router.get("/meetWowza", async (req, res, next) => {
 router.get("/meetBitrate", async (req, res, next) => {
     res.json(config.meetBitrate);
 })
+router.get("/spkWowza", async (req, res, next) => {
+    res.json(config.meetWowza[0]);
+})
+router.get("/spkBitrate", async (req, res, next) => {
+    res.json(config.meetBitrate);
+})
 
 
 

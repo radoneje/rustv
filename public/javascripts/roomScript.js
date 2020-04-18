@@ -1,5 +1,7 @@
 var app;
 window.onload=function () {
+    var wowzaRecievers=[];
+    peerConnection=null;
      app = new Vue({
         el: '#app',
         data: {
@@ -59,6 +61,12 @@ window.onload=function () {
 
                         getStream(_this).then(function () {
                                     _this.videoReceivers=videoReceivers;
+                            var ss = document.createElement('script');
+                            ss.src = "/javascripts/wowza.js";
+                            ss.type = "text/javascript";
+                            s.async = false;
+                            document.getElementsByTagName('head')[0].appendChild(ss);
+
                         });
                     }// <-- this is important
                     document.getElementsByTagName('head')[0].appendChild(s);
@@ -378,10 +386,87 @@ window.onload=function () {
                     if(q.id==data.id)
                         q.likes=data.likes;
                 })
+            },
+            startSpeakerMeet:function (data) {
+                var _this=this;
+                console.log("startSpeakerMeet", this.webCamStream)
+                getSpkConfig()
+                    .then(function (wCfg) {
+                        console.log("getSpkConfig", wCfg)
+                         publishVideoToWowza(_this.socket.id, _this.webCamStream, wCfg.WowzaCfg.data, wCfg.BitrateCfg.data, (ret)=>{
+                             peerConnection=ret.peerConnection;
+                             console.log("my Video Published", ret)
+                            _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid});
+                        }, (err)=>{
+                            consolw.warn(err)
+                        }).then()
+                    })
+            },
+            OnSpkVideo:function (data) {
+                var _this=this;
+                console.log("OnSpkVideo", data)
+                if(data.streamid==_this.socket.id)
+                    return;// мое видео не показываем
+                if(wowzaRecievers.filter(r=>r.id==data.streamid).length>0)
+                    return;
+                var video=createVideoContaiter(data.streamid, (data.user.i||"") +" "+ data.user.f)
+                getSpkConfig()
+                    .then(function (wCfg) {
+                        var item={id:data.streamid, elem:video}
+                        getVideoFromWowza(item,  wCfg.WowzaCfg.data, wCfg.BitrateCfg.data, function (ret) {
+                            console.log("remote video play", ret)
+                            document.getElementById("VKS").classList.add('fromSpk')
+
+                            var receiverItem={id:data.streamid, isMyVideo:false, user:data.user, streamid:data.streamid}
+                            receiverItem.peerConnection=ret.peerConnection;
+                            receiverItem.peerConnection.onconnectionstatechange=(event)=> {
+                                var cs = receiverItem.peerConnection.connectionState
+                                console.log("cs", receiverItem.peerConnection.connectionState)
+                                if (cs == "disconnected" || cs == "failed" || cs == "closed") {
+
+                                    _this.removeWowzaVideo(receiverItem.streamid)
+                                    //arrVideo = arrVideo.filter(r => r.streamid != receiverItem.streamid);
+
+                                }
+                            }
+                            wowzaRecievers.push(receiverItem)
+                            mainVideoMute(true)
+
+                        })
+                    });
+
+            },
+            OnRoomStopWowzaVideo:function (data) {
+                var _this=this;
+                console.log("OnRoomStopWowzaVideo",wowzaRecievers)
+                wowzaRecievers.forEach(r=>{
+                    _this.removeWowzaVideo(r.id);
+                })
+
+            },
+            removeWowzaVideo:function(streamid) {
+                var _this=this;
+                console.log("removeWowzaVideo",(streamid))
+                wowzaRecievers.forEach(r=>{
+                        if (r.peerConnection) {
+                            r.peerConnection.close();
+                            r.peerConnection = null;
+                        }
+                       var elem=document.getElementById(streamid);
+                        if(elem)
+                            elem.parentNode.removeChild(elem);
+
+                })
+
+                    _this.WowzaCfg=null;
+                    if(peerConnection) {
+                        peerConnection.close();
+                        peerConnection = null;
+                    }
+                    document.getElementById("VKS").classList.remove('fromSpk')
+                mainVideoMute(false)
+
             }
-
-
-
 
         },
         watch:{
@@ -503,3 +588,4 @@ function startVideo() {
         });
     }
 }
+
