@@ -417,7 +417,7 @@ router.post("/meetfileUpload/:eventid/:roomid/:userid", checkLoginToRoom, async 
     function createTrump(filepath, clbk){
         im.resize({
             srcData: fs.readFileSync(filepath, 'binary'),
-            height:   200
+            height:   600
         }, function(err, stdout, stderr){
             if (err)
                 return clbk();
@@ -481,7 +481,7 @@ router.post("/qfileUpload/:eventid/:roomid", checkLoginToRoom, async (req, res, 
     function createTrump(filepath, clbk){
         im.resize({
             srcData: fs.readFileSync(filepath, 'binary'),
-            height:   200
+            height:   600
         }, function(err, stdout, stderr){
             if (err)
                 return clbk();

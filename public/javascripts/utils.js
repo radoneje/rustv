@@ -7,20 +7,23 @@ function log_error(text) {
     var time = new Date();
     console.trace("[" + time.toLocaleTimeString() + "] " + text);
 }
+window.addEventListener( "pageshow", function ( event ) {
+    var historyTraversal = event.persisted ||
+        ( typeof window.performance != "undefined" &&
+            window.performance.navigation.type === 2 );
+    if ( historyTraversal ) {
+        // Handle page restore.
+        window.location.reload();
+    }
+});
+
 var myHostname = window.location.hostname;
 if (!myHostname) {
     myHostname = "localhost";
 }
 log("Hostname: " + myHostname);
 
-function urlify(text) {
-    var urlRegex = /(https?:\/\/[^\s]+)/g;
-    return text.replace(urlRegex, function (url) {
-        return '&nbsp;<a href="' + url + '" target="_blank">' + url + '</a>&nbsp;';
-    })
-    // or alternatively
-    // return text.replace(urlRegex, '<a href="$1">$1</a>')
-}
+
 
 function connect(_this, roomid, clbk){
 
