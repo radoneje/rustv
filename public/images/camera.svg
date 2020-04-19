@@ -1,0 +1,16 @@
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Mobile" transform="translate(0.000000, -604.000000)">
+            <rect id="Rectangle" fill="#282D33" x="0" y="604" width="320" height="179.753086"></rect>
+            <g id="ic-baseline-videocam" transform="translate(71.000000, 604.000000)" fill-rule="nonzero">
+                <g id="Icon">
+                    <path d="M126.791667,78.3125 L126.791667,52.2083333 C126.791667,48.10625 123.435417,44.75 119.333333,44.75 L29.8333333,44.75 C25.73125,44.75 22.375,48.10625 22.375,52.2083333 L22.375,126.791667 C22.375,130.89375 25.73125,134.25 29.8333333,134.25 L119.333333,134.25 C123.435417,134.25 126.791667,130.89375 126.791667,126.791667 L126.791667,100.6875 L156.625,130.520833 L156.625,48.4791667 L126.791667,78.3125 Z" id="Icon-Shape" fill="#BEBEBE"></path>
+                    <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="179" height="179"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
