@@ -55,7 +55,7 @@ async function publishVideoToWowza(id,stream,wssUrl,bitrate, clbk, err){
         var msgCommand = msgJSON['command'];
         if (msgStatus != 200) {
             $("#sdpDataTag").html(msgJSON['statusDescription']);
-            console.warn('err 0')
+            console.warn('err  ',msgJSON )
         }
         else {
             var sdpData = msgJSON['sdp'];
