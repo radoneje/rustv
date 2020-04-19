@@ -18,8 +18,8 @@
     "video":{
       "aspectRatio": 1.777777778,
       "frameRate": {"max": 30},
-      "width": {"min": 320, "ideal": 320, "max": 1920},
-      "height": {"min": 400, "ideal": 1080},
+      "width": {"min": 284, "ideal": 284, "max": 1920},
+      "height": {"min": 190},
       "facingMode":  "user"},
     "audio": {
       "channelCount": 1,
@@ -34,7 +34,7 @@
 
   ],
   "meetBitrate": {
-     "video":360,
+     "video":170,
      "audio" :64
   },
   "spkWowza": [

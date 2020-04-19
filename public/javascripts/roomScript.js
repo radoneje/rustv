@@ -433,7 +433,6 @@ window.onload=function () {
                             mainVideoMute(true)
                         })
                     });
-
             },
             OnRoomStopWowzaVideo:function (data) {
                 var _this=this;
