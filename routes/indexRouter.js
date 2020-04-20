@@ -67,7 +67,9 @@ router.get('/room/:id',  async (req, res, next) =>{
 
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
-  res.render('room', { title: 'ON.event '+room.title, room:room });
+  var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
+
+  res.render('room', { title: 'ON.event '+room.title, room:room , event:events[0]});
 
 })
 router.get('/meeting/:eventid/:meetingId',  async (req, res, next) =>{
