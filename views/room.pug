@@ -125,7 +125,7 @@ block content
                         div.rItemSubTitle Пришлашено: {{invitedUsers.length}}
                         div.rItemSubTitle Зашло: 0
                       div.qItemDate
-                        span.link.green(v-on:click="document.location.href='/meeting/'+eventid+'/'+user.id") &nbsp;&nbsp; Выйти в мою комнату
+                        span.link.green(v-on:click="document.location.href='/meeting/'+eventid+'/'+user.id") &nbsp;&nbsp; Зайти в мою комнату
                   div.rFeedGroupBody
                 div.rFeedGroup
                   div.rFeedGroupTitle Расписание сессий
@@ -237,7 +237,7 @@ block content
                         <path d="M15.9993 2.66663C8.77135 2.66663 2.66602 8.77196 2.66602 16C2.66602 23.228 8.77135 29.3333 15.9993 29.3333C23.2274 29.3333 29.3327 23.228 29.3327 16C29.3327 8.77196 23.2274 2.66663 15.9993 2.66663ZM15.9993 9.33329C18.302 9.33329 19.9993 11.0293 19.9993 13.3333C19.9993 15.6373 18.302 17.3333 15.9993 17.3333C13.698 17.3333 11.9993 15.6373 11.9993 13.3333C11.9993 11.0293 13.698 9.33329 15.9993 9.33329ZM9.19135 22.3626C10.3873 20.6026 12.382 19.4293 14.666 19.4293H17.3327C19.618 19.4293 21.6114 20.6026 22.8074 22.3626C21.1034 24.1866 18.686 25.3333 15.9993 25.3333C13.3127 25.3333 10.8953 24.1866 9.19135 22.3626Z" fill="#9A9A9A"/>
                         </svg>
                     div.qItemDate
-                        span.link.green(v-on:click="inviteToMeet(item)" v-if="userIsInvite(item)") &nbsp;&nbsp; Пригласить в мою переговорку
+                        span.link.green(v-on:click="inviteToMeet(item)" v-if="userIsInvite(item)") &nbsp;&nbsp; Пригласить в мою переговорную
                         span.link.green(v-on:click="userDenyInvite(item)" v-else ) &nbsp;&nbsp; Отозвать приглашение
             div.rContentWr(v-if="activeSection==7")
               div.rBody(id="fileBox" )
