@@ -32,6 +32,7 @@ window.onload=function () {
             invites:[],
             videoReceivers:[],
             room:room,
+            isHead:true,
             votes:[]
         },
         methods:{
@@ -61,6 +62,7 @@ window.onload=function () {
                     s.onload = function () {
 
                         getStream(_this).then(function () {
+                            _this.isHead=false;
                                     _this.videoReceivers=videoReceivers;
                             var ss = document.createElement('script');
                             ss.src = "/javascripts/wowza.js";
@@ -433,6 +435,7 @@ window.onload=function () {
                                 }
                             }
                             wowzaRecievers.push(receiverItem)
+                            _this.isHead=false;
                             mainVideoMute(true)
                         })
                     });
@@ -465,6 +468,7 @@ window.onload=function () {
                         peerConnection = null;
                     }
                 wowzaRecievers=[];
+
                     document.getElementById("VKS").classList.remove('fromSpk')
                 mainVideoMute(false)
 
