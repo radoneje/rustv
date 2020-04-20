@@ -198,39 +198,20 @@ window.onload=function () {
                 }
                 else
                     await publishMyVideoToWowza()
-
-
                 async function publishMyVideoToWowza() {
-                    var WowzaCfg=await axios.get('/rest/api/meetWowza')
-                    var BitrateCfg=await axios.get('/rest/api/meetBitrate')
-                    var stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true})
-                    setTimeout(async ()=>{
-                        await publishVideoToWowza(_this.socket.id, stream, WowzaCfg.data, BitrateCfg.data, (ret)=>{
-                            setTimeout(()=>{
-                                _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid});
-                                addUserToSpeakerRoom();
-                            }, 3000)
-                        })
-                    },1000)
-
-                    return ;
-
-
 
 
                     if(typeof (_this.WowzaCfg)=="undefined" || _this.WowzaCfg==null) {
-                        _this.WowzaCfg = await axios.get('/rest/api/meetWowza')
-                        _this.BitrateCfg = await axios.get('/rest/api/meetBitrate')
-
-                            var stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true})
-                        await publishVideoToWowza(_this.socket.id,stream/*_this.newStream _this.selfVideoStream*/, _this.WowzaCfg.data, _this.BitrateCfg.data, (ret)=>{
+                        _this.WowzaCfg = await axios.get('/rest/api/spkWowza')
+                        _this.BitrateCfg = await axios.get('/rest/api/spkBitrate')
+                        await publishVideoToWowza(_this.socket.id,_this.newStream /*_this.selfVideoStream*/, _this.WowzaCfg.data, _this.BitrateCfg.data, (ret)=>{
                             console.log("my Video Published", ret)
-                           // peerConnection=ret.peerConnection
-
+                            peerConnection=ret.peerConnection
                             setTimeout(async ()=>{
                               _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid});
-                            }, 100)
-                            addUserToSpeakerRoom();
+                                addUserToSpeakerRoom();
+                            }, 2000)
+
                         }, (err)=>{
                             console.warn(err)
                         })

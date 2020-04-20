@@ -395,9 +395,11 @@ window.onload=function () {
                     .then(function (wCfg) {
                         console.log("getSpkConfig", wCfg)
                          publishVideoToWowza(_this.socket.id, _this.webCamStream, wCfg.WowzaCfg.data, wCfg.BitrateCfg.data, (ret)=>{
-                             peerConnection=ret.peerConnection;
-                             console.log("my Video Published", ret)
-                            _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid});
+                             setTimeout(()=>{
+                                 peerConnection=ret.peerConnection;
+                                 console.log("my Video Published", ret)
+                                _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid});
+                             }, 2000)
                         }, (err)=>{
                             consolw.warn(err)
                         }).then()
@@ -405,7 +407,7 @@ window.onload=function () {
             },
             OnSpkVideo:function (data) {
                 var _this=this;
-                console.log("OnSpkVideo", data)
+                console.log("OnSpkVideo", data, _this.socket.id)
                 if(data.streamid==_this.socket.id)
                     return;// мое видео не показываем
                 if(wowzaRecievers.filter(r=>r.id==data.streamid).length>0)
@@ -462,6 +464,7 @@ window.onload=function () {
                         peerConnection.close();
                         peerConnection = null;
                     }
+                wowzaRecievers=[];
                     document.getElementById("VKS").classList.remove('fromSpk')
                 mainVideoMute(false)
 
