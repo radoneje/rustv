@@ -668,13 +668,14 @@ window.onload=function () {
 
 
 
-                    //startVideo();
+                    startVideo();
                     //_this.startRTC();
                 })
         }
     })
 }
 function startVideo() {
+
     if (Hls.isSupported()) {
 
         var hls = new Hls();
