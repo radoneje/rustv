@@ -31,7 +31,8 @@ window.onload=function () {
             invitedUsers:[],
             invites:[],
             videoReceivers:[],
-            room:room
+            room:room,
+            votes:[]
         },
         methods:{
             isWebRtc:function(){
@@ -464,6 +465,101 @@ window.onload=function () {
                     document.getElementById("VKS").classList.remove('fromSpk')
                 mainVideoMute(false)
 
+            },
+            OnVoteAdd:function(data){
+                var _this=this;
+
+                    data.forEach(d=>{
+                            _this.votes.push(d)
+                    })
+            },
+            OnVoteChange:function(data){
+                var _this=this;
+                _this.votes.forEach(d=>{
+                    if(d.id==data.id) {
+                        console.log("OnVoteChange", data)
+                        d.title=data.title;
+                        d.isactive=data.isactive;
+                        d.iscompl=data.iscompl;
+                        d.answers=data.answers;
+                        return d;
+                    }
+                })
+               // console.log("OnVoteChange 2",  _this.votes)
+               // _this.votes=_this.votes.filter(r=>{return true})
+            },
+            OnVoteAnswerChange:function(data){
+                var _this=this;
+                _this.votes.forEach(d=>{
+                    if(d.id==data.voteid)
+                        d.answers.forEach(a=>{
+                            if(a.id==data.id) {
+                                a.title = data.title;
+                                a.count = data.count;
+                            }
+                        })
+                    d.answers=d.answers;
+                })
+            },
+            vote:function (answ, voteItem) {
+                if(voteItem.iscompl)
+                    return;
+
+                var _this=this;
+                var isReady=localStorage.getItem("ansv_"+answ.id)
+                if(isReady){
+                    localStorage.removeItem("ansv_"+answ.id)
+                    unvote(answ.id)
+                }
+                else
+                {
+                    _this.votes.forEach(v=>{
+                        if(v.id==answ.voteid){
+                            v.answers.forEach(a=>{
+                                if(localStorage.getItem("ansv_"+a.id)) {
+                                    localStorage.removeItem("ansv_" + a.id)
+                                    unvote(a.id)
+                                }
+                            })
+                        }
+                    })
+                    localStorage.setItem("ansv_"+answ.id, true);
+                    vote(answ.id)
+                }
+                _this.votes=_this.votes.filter(v=>{return true})
+                function vote(id) {
+                    axios.post("/rest/api/vote/"+eventid+"/"+roomid,{id:id})
+                }
+                function unvote(id) {
+                    axios.post("/rest/api/unvote/"+eventid+"/"+roomid,{id:id})
+                }
+            },
+            answIsReady:function (answ) {
+                return localStorage.getItem("ansv_"+answ.id)? true: false
+            },
+            OnVote:function(data){
+                var _this=this;
+                _this.votes.forEach(d=>{
+                        d.answers.forEach(a=>{
+                            if(a.id==data.id) {
+                                a.count = data.count;
+                            }
+                        })
+                    d.answers=d.answers;
+                })
+                _this.votes=_this.votes.filter(v=>{return true})
+            },
+            CalcAnswPercent:function (answ, vote) {
+                var _this=this;
+                var count=vote.answers.length;
+                var total=0;
+                vote.answers.forEach(a=>total=total+a.count);
+
+                if(total==0)
+                    return 0;
+
+                ret=parseFloat(answ.count/total)*100;
+                return parseInt(ret);
             }
 
         },
@@ -526,6 +622,11 @@ window.onload=function () {
                             console.log("eventRooms", r.data)
                             _this.eventRooms = r.data;
                         });
+                    axios.get("/rest/api/votes/"+eventid+"/"+roomid)
+                        .then(function (r) {
+                            console.log("votes", r.data)
+                            _this.votes=r.data;
+                        })
 
 
                     document.getElementById("app").style.opacity=1;

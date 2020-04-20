@@ -115,6 +115,17 @@ block content
             div.rContentWr(v-if="activeSection==0")
               div.rBody(id="feedBox" )
                 div.rFeedGroup
+                  div.rFeedGroupTitle
+                    div.rFeedGroupBody
+                      div.qItem(v-for="item in votes" v-if="item.isactive" )
+                        div.qItemName {{item.title}}
+                          span.red(v-if="item.iscompl") &nbsp; Голосование окончено.
+                        div.vAnswBox
+                          div.vAnsw(v-for="answ in item.answers" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
+                            div.vAnswTitle
+                              span(v-if="item.iscompl") {{CalcAnswPercent(answ, item)}}%,&nbsp
+                              span {{answ.title}}
+
                   div.rFeedGroupTitle Переговорная комната
                   div.rFeedGroupBody
                     div.qItem()

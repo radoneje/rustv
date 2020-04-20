@@ -27,7 +27,7 @@ block content
                 div.spkMenuItem(v-bind:class="{active:SPKstatus==1}" v-on:click="SPKstatus=1") Вопросы
                 div.spkMenuItem(v-bind:class="{active:SPKstatus==2}" v-on:click="SPKstatus=2") Чат
                 div.spkMenuItem(v-bind:class="{active:SPKstatus==3}" v-on:click="SPKstatus=3") Пользователи
-                div.spkMenuItem(v-bind:class="{active:SPKstatus==4}" v-on:click="SPKstatus=4") Мозаика
+                div.spkMenuItem(v-bind:class="{active:SPKstatus==4}" v-on:click="SPKstatus=4") Голосование
                 div.spkMenuItem(v-bind:class="{active:SPKstatus==5}" style='cursor:inherit') Видео
                 div.spkMenuItem(v-bind:class="{active:SPKstatus==6}" style='cursor:inherit') Конференция
                 div.spkMenuItem(v-bind:class="{active:SPKstatus==7}" v-on:click="SPKstatus=7") Презентация
@@ -155,6 +155,18 @@ block content
                             </g>
                             </g>
                             </svg>
+        div.spkLayer(v-if="SPKstatus==4" style="z-index:40")
+            div.aModSect
+                div.aModSectTitle Голосования ({{votes.length}})
+                div.aSectBody(id="voteBox" )
+                    div.qItem(v-for="item in votes" v-bind:class="{ready:item.isReady}" v-if="item.isactive")
+                        div {{item.title}}
+                        div Ответы ({{caclAnswCount(item)}}):
+                            div(v-for="answ in item.answers")
+                                div.qAItem
+                                    span {{CalcAnswPercent(answ, item)}}% &nbsp;
+                                    span {{answ.title}}
+
         div.spkLayer(v-if="SPKstatus>5 " style="z-index:70")
             div.aModSect
                 div.aModSectTitle

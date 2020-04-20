@@ -1073,6 +1073,28 @@ color:#4a91e1
   width: 360px;
   display: none;
 }
+.vAnswTitle{
+  cursor: pointer;
+  margin: 10px;
+  width: ~"calc(100% - 20px)";
+}
+.vAnsw.ready{
+  cursor:inherit;
+  color:#39ACDE;
+  position: relative;
+}
+.vAnsw.ready:before{
+  width: 10px;
+  height: 5px;
+  position: absolute;
+  content: '';
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+  top: 2px;
+  left: -10px;
+  transform: rotate(-45deg);
+}
+
 @media only screen and (max-width: 1024px){
   .L {
     padding: 10px;

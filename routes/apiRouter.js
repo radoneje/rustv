@@ -596,6 +596,88 @@ router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
     req.transport.emit("chatAdd", r[0], req.params.roomid);
     res.json(r[0]);
 })
+router.post("/voteAdd/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var v = await req.knex("t_vote").insert({
+        roomid: req.params.roomid,
+        date: (new Date())
+    }, "*")
+    v[0].answers=[];
+    req.transport.emit("voteAdd", v, req.params.roomid);
+    res.json(v[0]);
+})
+router.get("/votes/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var v = await req.knex.select("*").from("t_vote")
+        .where({isDeleted:false, roomid:req.params.roomid})
+        .orderBy("date")
+    for(var vote of v){
+        var a =await req.knex.select("*").from("t_voteanswers").where({isDeleted:false, voteid:vote.id}).orderBy("id");
+        vote.answers=a;
+    }
+    res.json(v);
+})
+
+
+
+router.post("/voteChange/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var id=req.body.item.id;
+        delete req.body.item.id;
+        delete req.body.item.answers;
+
+    var v = await req.knex("t_vote")
+        .update(req.body.item, "*").where({id:id})
+
+    var vv=await req.knex.select("*").from("t_voteanswers").where({voteid:v[0].id}).orderBy("date")
+    v[0].answers=vv;
+
+    req.transport.emit("voteChange", v[0], req.params.roomid);
+    res.json(v);
+})
+router.post("/voteAddAnswer/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var v = await req.knex("t_voteanswers").insert({
+        voteid: req.body.id
+    }, "*")
+    v[0].answers=[];
+    req.transport.emit("voteAnswerAdd", v[0], req.params.roomid);
+    res.json(v[0]);
+})
+router.post("/voteAnswerChange/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var id=req.body.item.id;
+    delete req.body.item.id;
+    delete req.body.item.answers;
+
+    var v = await req.knex("t_voteanswers")
+        .update(req.body.item, "*").where({id:id})
+    req.transport.emit("voteAnswerChange", v[0], req.params.roomid);
+    res.json(v);
+})
+router.post("/unvote/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var id=req.body.id;
+
+    var v = await req.knex.select("*").from("t_voteanswers").where({id:id});
+    var vv=await req.knex("t_voteanswers").update({count:v[0].count-1},"*").where({id:id});
+    req.transport.emit("vote",{id:id, count:vv[0].count}, req.params.roomid);
+    res.json(true);
+})
+router.post("/vote/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var id=req.body.id;
+    var v = await req.knex.select("*").from("t_voteanswers").where({id:id});
+    var vv=await req.knex("t_voteanswers").update({count:v[0].count+1},"*").where({id:id});
+    req.transport.emit("vote",{id:id, count:vv[0].count}, req.params.roomid);
+    res.json(true);
+})
+
+
+
+
+
+
 
 function urlify(text) {
     var urlRegex = /(https?:\/\/[^\s]+)/g;
@@ -1034,6 +1116,11 @@ router.post("/encodeTime", async (req, res, next) => {
 router.get("/constraints", async (req, res, next) => {
     res.json(config.constraints);
 })
+router.get("/spkConstraints", async (req, res, next) => {
+    res.json(config.spkConstraints);
+})
+
+
 router.get("/meetWowza", async (req, res, next) => {
     res.json(config.meetWowza[0]);
 })

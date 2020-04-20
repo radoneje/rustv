@@ -31,7 +31,12 @@ async function publishVideoToWowza(id,stream,wssUrl,bitrate, clbk, err){
        // console.log("wsConnection.onopen");
         peerConnection = new RTCPeerConnection(peerConnectionConfig);
         peerConnection.onicecandidate = gotIceCandidate;
-        stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
+        for(const track of stream.getTracks())
+        {
+            peerConnection.addTrack(track, stream)
+            console.log("sender add track", track, stream)
+        }
+       // stream.getTracks().forEach(track =>{ peerConnection.addTrack(track, stream) ; console.log("sender add track", track)});
         var description=await peerConnection.createOffer();
         await gotDescription(description)
 
@@ -64,6 +69,7 @@ async function publishVideoToWowza(id,stream,wssUrl,bitrate, clbk, err){
                 var enhanceData = new Object();
                 enhanceData.audioBitrate = Number(bitrate.audio);
                 enhanceData.videoBitrate = Number(bitrate.video);
+                console.log("enhanceData",enhanceData)
                 sdpData.sdp = enhanceSDP(sdpData.sdp, enhanceData);
                 await peerConnection.setRemoteDescription(new RTCSessionDescription(sdpData))
                 if(clbk)
@@ -172,6 +178,7 @@ async function getVideoFromWowza(receiverItem, wssUrl, BitrateCfg, clbk) {
     function gotRemoteTrack(event) {
       //  console.log('receiver gotRemoteTrack: kind:' + event.track.kind + ' stream:' + event.streams[0]);
         try {
+            console.log("reseivet gotRemoteTrack", event)
             receiverItem.elem.srcObject = event.streams[0];
         } catch (error) {
             receiverItem.elem.src = window.URL.createObjectURL(event.streams[0]);

@@ -151,6 +151,32 @@ class socket{
                 if(id)
                     _this.clients.sendToRoomUsers("disconnectDirectConnect",  dt, roomid)
             })
+            socket.on("voteAdd",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomUsers("voteAdd",  dt, roomid)
+            })
+            socket.on("voteChange",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomUsers("voteChange",  dt, roomid)
+            })
+            socket.on("voteAnswerAdd",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomUsers("voteAnswerAdd",  dt, roomid)
+            })
+            socket.on("voteAnswerChange",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomUsers("voteAnswerChange",  dt, roomid)
+            })
+            socket.on("vote",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomUsers("vote",  dt, roomid)
+            })
+
+
+
+
+
+
 
 
 

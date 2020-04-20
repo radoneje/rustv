@@ -153,6 +153,33 @@ function connect(_this, roomid, clbk){
             _this.OnRoomStopWowzaVideo(data)
     });
 
+    socket.on("voteAdd", function(data){
+        if(_this.OnVoteAdd)
+            _this.OnVoteAdd(data)
+    });
+    socket.on("voteChange", function(data){
+        if(_this.OnVoteChange)
+            _this.OnVoteChange(data)
+    });
+    socket.on("voteAnswerAdd", function(data){
+        if(_this.OnVoteAnswerAdd)
+            _this.OnVoteAnswerAdd(data)
+    });
+    socket.on("voteAnswerChange", function(data){
+        if(_this.OnVoteAnswerChange)
+            _this.OnVoteAnswerChange(data)
+    });
+    socket.on("vote", function(data){
+        if(_this.OnVote)
+            _this.OnVote(data)
+    });
+
+
+
+
+
+
+
 
 
 

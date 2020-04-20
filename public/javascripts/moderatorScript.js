@@ -3,7 +3,7 @@ window.onload=function () {
         el: '#app',
         data: {
             webCamStream:null,
-            sect:[{title:"Вопросы", isActive:false, id:1}, {title:"Чат", isActive:true, id:2},{title:"Участники", isActive:false, id:3} ],
+            sect:[{title:"Вопросы", isActive:true, id:1}, {title:"Чат", isActive:true, id:2},{title:"Участники", isActive:false, id:3},,{title:"Голосования", isActive:false, id:4} ],
             activeSection:2,
             chat:[],
             users:[],
@@ -21,9 +21,11 @@ window.onload=function () {
             SPKalertText:"",
             isSpkScreen:false,
             centerSectActiveIndex:1,
+            lSectActiveIndex:2,
             isPres:false,
             previewPres:[],
             room:room,
+            votes:[]
         },
         methods:{
             onHandUp:function(data){
@@ -129,7 +131,59 @@ window.onload=function () {
 
                     })
             },
+            voteAdd:function(){
+                axios.post("/rest/api/voteAdd/"+eventid+"/"+roomid,{})
+            },
+            voteChange:function(item){
+                axios.post("/rest/api/voteChange/"+eventid+"/"+roomid,{item})
+            },
+            OnVoteAdd:function(data){
 
+                var _this=this;
+                data.forEach(d=>{
+                    _this.votes.push(d)
+                })
+            },
+            OnVoteChange:function(data){
+                var _this=this;
+                _this.votes.forEach(d=>{
+                    if(d.id==data.id)
+                        d=data;
+                })
+            },
+            voteAddAnswer:function(item){
+                axios.post("/rest/api/voteAddAnswer/"+eventid+"/"+roomid,{id:item.id})
+            },
+            OnVoteAnswerAdd:function(data){
+                var _this=this;
+                console.log("OnVoteAnswerAdd", data)
+                _this.votes.forEach(d=>{
+                    if(d.id==data.voteid)
+                        d.answers.push(data);
+                })
+                _this.votes=_this.votes.filter(r=>{return true})
+            },
+            voteAnswerChange:function(item){
+                axios.post("/rest/api/voteAnswerChange/"+eventid+"/"+roomid,{item})
+            },
+            OnVoteAnswerChange:function(data){
+                var _this=this;
+                _this.votes.forEach(d=>{
+                    if(d.id==data.voteid)
+                       d.answers.forEach(a=>{
+                           if(a.id==data.id)
+                               a=data;
+                       })
+                })
+            },
+            voteStart:function(item){
+                item.isactive=!item.isactive
+                axios.post("/rest/api/voteChange/"+eventid+"/"+roomid,{item})
+            },
+            voteShowResult:function(item){
+                item.iscompl=!item.iscompl
+                axios.post("/rest/api/voteChange/"+eventid+"/"+roomid,{item})
+            },
             startVideoChat:async function(item){
                 var _this=this;
 
@@ -165,6 +219,36 @@ window.onload=function () {
 
 
             },
+            OnVote:function(data){
+                var _this=this;
+                _this.votes.forEach(d=>{
+                    d.answers.forEach(a=>{
+                        if(a.id==data.id) {
+                            a.count = data.count;
+                        }
+                    })
+                    d.answers=d.answers;
+                })
+                _this.votes=_this.votes.filter(v=>{return true})
+            },
+            CalcAnswPercent:function (answ, vote) {
+                var _this=this;
+                var count=vote.answers.length;
+                var total=0;
+                vote.answers.forEach(a=>total=total+a.count);
+
+                if(total==0)
+                    return 0;
+
+                ret=parseFloat(answ.count/total)*100;
+                return parseInt(ret);
+            },
+            caclAnswCount:function(item){
+                var total=0;
+                item.answers.forEach(a=>total+=a.count);
+                return total;
+            },
+
             onMyVideoStarted: function (video, stream, item) {
                 var _this=this;
                 createSender(video, stream, null, function (videoSender) {
@@ -425,6 +509,11 @@ window.onload=function () {
                     axios.get("/rest/api/chat/"+eventid+"/"+roomid)
                         .then(function (r) {
                             _this.chat=r.data;
+                        })
+                    axios.get("/rest/api/votes/"+eventid+"/"+roomid)
+                        .then(function (r) {
+                            console.log("votes", r.data)
+                            _this.votes=r.data;
                         })
                     axios.get("/rest/api/files/"+eventid+"/"+roomid)
                         .then(function (r) {

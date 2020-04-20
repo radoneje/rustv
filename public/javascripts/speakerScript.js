@@ -5,7 +5,7 @@ window.onload=function () {
         el: '#app',
         data: {
             webCamStream:null,
-            sect:[{title:"Вопросы", isActive:false, id:1}, {title:"Чат", isActive:true, id:2},{title:"Участники", isActive:false, id:3} ],
+            sect:[{title:"Вопросы", isActive:false, id:1}, {title:"Чат", isActive:true, id:2},{title:"Участники", isActive:false, id:3}, {title:"Голосования", isActive:false, id:4} ],
             activeSection:2,
             chat:[],
             users:[],
@@ -27,6 +27,8 @@ window.onload=function () {
             pres:null,
             recorder:null,
             recordTime:null,
+            newStream:null,
+            votes:[],
         },
         methods:{
             onHandUp:function(data){
@@ -170,7 +172,27 @@ window.onload=function () {
                     s.type = "text/javascript";
                     s.async = false;
                     s.onload = async ()=> {
-                       await publishMyVideoToWowza()
+                        var canvas = document.createElement("canvas");
+                        canvas.width=16*40;
+                        canvas.height=9*40;
+                        var context = canvas.getContext('2d');
+                        var imgElem=document.createElement("img")
+                        imgElem.src="/images/camera.svg"
+
+                        var localTracks=_this.selfVideoStream.getTracks()
+                        var videoTrack=localTracks.filter(t=>t.kind=="video")[0]
+                        draw(document.getElementById('spkVideo'),context, videoTrack, imgElem )
+
+                        var canvasStream=await canvas.captureStream(30)
+                        var canvasTracks=canvasStream.getTracks()
+                        _this.newStream= new MediaStream();
+
+
+                        canvasTracks.forEach(t=>{if(t.kind=="video")_this.newStream.addTrack(t)})
+                        localTracks.forEach(t=>{if(t.kind=="audio")_this.newStream.addTrack(t)})
+                        console.log(_this.newStream.getTracks())
+                        await publishMyVideoToWowza()
+
                     }// <-- this is important
                     document.getElementsByTagName('head')[0].appendChild(s);
                 }
@@ -180,16 +202,21 @@ window.onload=function () {
 
                 async function publishMyVideoToWowza() {
                     if(typeof (_this.WowzaCfg)=="undefined" || _this.WowzaCfg==null) {
-                        _this.WowzaCfg = await axios.get('/rest/api/spkWowza')
-                        _this.BitrateCfg = await axios.get('/rest/api/spkBitrate')
-                        await publishVideoToWowza(_this.socket.id, _this.selfVideoStream, _this.WowzaCfg.data, _this.BitrateCfg.data, (ret)=>{
+                        _this.WowzaCfg = await axios.get('/rest/api/meetWowza')
+                        _this.BitrateCfg = await axios.get('/rest/api/meetBitrate')
+
+                            var stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true})
+                        await publishVideoToWowza(_this.socket.id,stream/*_this.newStream _this.selfVideoStream*/, _this.WowzaCfg.data, _this.BitrateCfg.data, (ret)=>{
                             console.log("my Video Published", ret)
                             peerConnection=ret.peerConnection
-                            _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid});
+                            setTimeout(async ()=>{
+                              _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid});
+                            }, 1000)
                             addUserToSpeakerRoom();
                         }, (err)=>{
                             console.warn(err)
                         })
+
                     }
                     else
                         addUserToSpeakerRoom();
@@ -534,7 +561,89 @@ window.onload=function () {
                     }
 
 
-    }
+    },
+            OnVote:function(data){
+                var _this=this;
+                _this.votes.forEach(d=>{
+                    d.answers.forEach(a=>{
+                        if(a.id==data.id) {
+                            a.count = data.count;
+                        }
+                    })
+                    d.answers=d.answers;
+                })
+                _this.votes=_this.votes.filter(v=>{return true})
+            },
+            CalcAnswPercent:function (answ, vote) {
+                var _this=this;
+                var count=vote.answers.length;
+                var total=0;
+                vote.answers.forEach(a=>total=total+a.count);
+
+                if(total==0)
+                    return 0;
+
+                ret=parseFloat(answ.count/total)*100;
+                return parseInt(ret);
+            },
+            caclAnswCount:function(item){
+                var total=0;
+                item.answers.forEach(a=>total+=a.count);
+                return total;
+            },
+            voteAdd:function(){
+                axios.post("/rest/api/voteAdd/"+eventid+"/"+roomid,{})
+            },
+            voteChange:function(item){
+                axios.post("/rest/api/voteChange/"+eventid+"/"+roomid,{item})
+            },
+            OnVoteAdd:function(data){
+
+                var _this=this;
+                data.forEach(d=>{
+                    _this.votes.push(d)
+                })
+            },
+            OnVoteChange:function(data){
+                var _this=this;
+                _this.votes.forEach(d=>{
+                    if(d.id==data.id)
+                        d=data;
+                })
+            },
+            voteAddAnswer:function(item){
+                axios.post("/rest/api/voteAddAnswer/"+eventid+"/"+roomid,{id:item.id})
+            },
+            OnVoteAnswerAdd:function(data){
+                var _this=this;
+                console.log("OnVoteAnswerAdd", data)
+                _this.votes.forEach(d=>{
+                    if(d.id==data.voteid)
+                        d.answers.push(data);
+                })
+                _this.votes=_this.votes.filter(r=>{return true})
+            },
+            voteAnswerChange:function(item){
+                axios.post("/rest/api/voteAnswerChange/"+eventid+"/"+roomid,{item})
+            },
+            OnVoteAnswerChange:function(data){
+                var _this=this;
+                _this.votes.forEach(d=>{
+                    if(d.id==data.voteid)
+                        d.answers.forEach(a=>{
+                            if(a.id==data.id)
+                                a=data;
+                        })
+                })
+            },
+            voteStart:function(item){
+                item.isactive=!item.isactive
+                axios.post("/rest/api/voteChange/"+eventid+"/"+roomid,{item})
+            },
+            voteShowResult:function(item){
+                item.iscompl=!item.iscompl
+                axios.post("/rest/api/voteChange/"+eventid+"/"+roomid,{item})
+            }
 
         },
         watch:{
@@ -586,7 +695,7 @@ window.onload=function () {
                             video.width = 320;
                             video.style.width = "320px"
                             _this.selfVideoStream = await navigator.mediaDevices.getUserMedia(constraints);
-
+                            video.id="spkVideo"
                             video.srcObject=_this.selfVideoStream;
                             video.muted=true;
 
@@ -611,6 +720,11 @@ window.onload=function () {
                                 axios.get("/rest/api/chat/" + eventid + "/" + roomid)
                                     .then(function (r) {
                                         _this.chat = r.data;
+                                    })
+                                axios.get("/rest/api/votes/"+eventid+"/"+roomid)
+                                    .then(function (r) {
+                                        console.log("votes", r.data)
+                                        _this.votes=r.data;
                                     })
                                 axios.get("/rest/api/files/"+eventid+"/"+roomid)
                                     .then(function (r) {
@@ -696,4 +810,34 @@ function SpkcreateVideoContaiter(id, caption) {
     videoBox.appendChild(videoBoxWr);
     document.getElementById("videoWr").appendChild(videoBox);
     return video;
+}
+function draw(v,c, videoTrack, img){
+
+
+
+    if((!v.paused || !v.ended ) && videoTrack.enabled)
+    {
+        c.fillStyle = "#282D33";
+        c.fillRect(0, 0, c.canvas.width, c.canvas.height);
+
+        if(v.videoWidth>v.videoHeight) {
+            var coof = c.canvas.width / v.videoWidth;
+            c.drawImage(v, 0, 0, v.videoWidth * coof, v.videoHeight * coof);
+        }
+        else
+        {
+            var coof = c.canvas.height / v.videoHeight;
+            c.drawImage(v, (c.canvas.width-(v.videoWidth * coof))/2, 0, v.videoWidth * coof, v.videoHeight * coof);
+        }
+
+        //videoWidth
+        // drawImageProp(c,v);
+    }
+    else
+    {
+        var coof = c.canvas.width / img.width;
+        c.drawImage(img, 0,0,img.width* coof,img.height* coof);
+    }
+
+    setTimeout(()=>{draw(v,c, videoTrack,img)},1000/30)
 }

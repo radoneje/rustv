@@ -19,7 +19,7 @@ block content
             div.greenBtn.clearBtn(v-on:click="sendSpkStatus(2)" style="display:inline-block" v-bind:class="{active:SPKstatus==2}")
                 span Чат на экран
             div.greenBtn.clearBtn(v-on:click="sendSpkStatus(4)" style="display:inline-block" v-bind:class="{active:SPKstatus==4}")
-                span Мозаику на экран
+                span Голосования
             div.greenBtn.clearBtn(v-on:click="sendSpkStatus(0)" style="display:inline-block")
                 span Очистить экран
             div.aMenuInputGroup
@@ -33,9 +33,11 @@ block content
         div.aModBox(style="")
             div.aModSect
                 div.aModSectMenu
-                    div.aModSectMenuItem.active
+                    div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==2}" v-on:click="lSectActiveIndex=2")
                         div.aModSectTitle Вопросы ({{q.length}})
-                div.aSectBody(id="qBox")
+                    div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==4}" v-on:click="lSectActiveIndex=4")
+                        div.aModSectTitle Голосования ({{votes.length}})
+                div.aSectBody(id="qBox" v-if="lSectActiveIndex==2")
                     div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}")
                         div.qItemSmi  {{item.smi}}
                         div.qItemName {{item.i}}&nbsp;{{item.f}}
@@ -63,9 +65,26 @@ block content
                             span.link.red(v-on:click="deleteQ(item)") Удалить
                             span &nbsp;&nbsp;
                             span {{moment(item.date).format("HH:mm")}}
+                div.aSectBody(id="voteBox" v-if="lSectActiveIndex==4")
+                    div.greenBtn.clearBtn(v-on:click="voteAdd()") Добавить голосование
+                    div.qItem(v-for="item in votes" v-bind:class="{ready:item.isReady}")
+                        input.ask(type='text' placeholder="введите текст вопроса" v-model="item.title" v-on:change="voteChange(item)")
+                        div Ответы ({{caclAnswCount(item)}}):
+                            div(v-for="answ in item.answers")
+                                div
+                                    span {{CalcAnswPercent(answ, item)}}% &nbsp;
+                                    input.ask(type='text' placeholder="введите текст ответа" v-on:change="voteAnswerChange(answ)" v-model="answ.title")
+                            div.qItemDate
+                                span.link.green(v-on:click="voteAddAnswer(item)") Добавить ответ
+                                span.link.green(v-if="!item.isactive" v-on:click="voteStart(item)") &nbsp;&nbsp; Запустить
+                                span.link.red(v-else v-on:click="voteStart(item)") &nbsp;&nbsp; Убрать
+                                span.link.green(v-if="!item.iscompl" v-on:click="voteShowResult(item)") &nbsp;&nbsp; Показать результаты
+                                span.link.red(v-else v-on:click="voteShowResult(item)") &nbsp;&nbsp; Убрать результаты
+
+
                 div.rFooter
                     div.fileLoadProgress
-                    div.askWr
+                    div.askWr(v-if="lSectActiveIndex==2")
                         input.ask#qText(v-on:paste="qTextOnPaste($event)" placeholder="Напишите Ваш вопрос" v-model="qText" v-on:keydown="qtextChange($event)")
                         <svg v-on:click="qtextSend()" class="svgSendBtn" v-on:click="chattextSend()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->

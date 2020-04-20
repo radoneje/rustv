@@ -26,6 +26,19 @@
       "echoCancellation": true
     }
   },
+  "spkConstraints":
+  {
+    "video":{
+      "aspectRatio": 1.777777778,
+      "frameRate": {"max": 30},
+      "width": {"min": 284, "ideal": 284, "max": 1920},
+      "height": {"min": 190},
+      "facingMode":  "user"},
+    "audio": {
+      "channelCount": 2,
+      "echoCancellation": true
+    }
+  },
   "meetWowza": [
     {
       "url": "wss://mi.may24.pro/webrtc-session.json",
@@ -35,7 +48,7 @@
   ],
   "meetBitrate": {
      "video":170,
-     "audio" :64
+     "audio" :98
   },
   "spkWowza": [
     {
@@ -45,7 +58,7 @@
 
   ],
   "spkBitrate": {
-    "video":640,
+    "video":170,
     "audio" :98
   }
 }
