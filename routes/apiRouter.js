@@ -500,8 +500,8 @@ router.post("/qfileUpload/:eventid/:roomid", checkLoginToRoom, async (req, res, 
 
 })
 router.post("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
-    if(text.length>2040)
-        text=text.substr(0, 2040);
+    if(req.body.text.length>2040)
+        req.body.text=req.body.text.substr(0, 2040);
     var text = urlify(stripHtml(req.body.text))
     var r = await req.knex("t_q").insert({
         text: text,
@@ -586,8 +586,8 @@ router.get("/invites/:eventid/:roomid", checkLoginToRoom, async (req, res, next)
 
 
 router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
-    if(text.length>2040)
-        text=text.substr(0, 2040);
+    if(req.body.text.length>2040)
+        req.body.text=req.body.text.substr(0, 2040);
     var text = urlify(stripHtml(req.body.text))
 
 
