@@ -634,8 +634,8 @@ window.onload=function () {
                     scrElem.scrollLeft = (scrElem.scrollWidth - scrElem.clientWidth) / 2
 
 
-                    startVideo();
-                    _this.startRTC();
+                    //startVideo();
+                    //_this.startRTC();
                 })
         }
     })
