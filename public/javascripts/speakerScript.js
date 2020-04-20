@@ -688,7 +688,7 @@ window.onload=function () {
                             document.getElementById("app").style.opacity = 1;
                         setTimeout(async () => {
                             console.warn("continue")
-                            var dt= await axios.get('/rest/api/constraints');
+                            var dt= await axios.get('/rest/api/spkConstraints');
                             var constraints=dt.data;
                             var video=SpkcreateVideoContaiter('selfVideo', _this.user.i ||''+" "+_this.user.f);
                             video.width = 320;
