@@ -31,11 +31,11 @@
     "video":{
       "aspectRatio": 1.777777778,
       "frameRate": {"max": 30},
-      "width": {"min": 284, "ideal": 284, "max": 1920},
+      "width": {"min": 284, "ideal": 640, "max": 1920},
       "height": {"min": 190},
       "facingMode":  "user"},
     "audio": {
-      "channelCount": 2,
+      "channelCount": 1,
       "echoCancellation": true
     }
   },
@@ -58,7 +58,7 @@
 
   ],
   "spkBitrate": {
-    "video":170,
+    "video":640,
     "audio" :98
   }
 }

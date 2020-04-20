@@ -635,6 +635,37 @@ window.onload=function () {
                     document.getElementById("app").style.opacity=1;
                     var scrElem=rHead;
                     scrElem.scrollLeft = (scrElem.scrollWidth - scrElem.clientWidth) / 2
+                        document.body.addEventListener('drop', function (event) {
+                            event.preventDefault();
+                            event.stopPropagation();
+
+                        }, false)
+
+                    window.addEventListener("dragover",function(e){
+                        e = e || event;
+                       // e.preventDefault();
+                       // console.log("dragover", e)
+                    },false);
+                    var el=document.getElementById("app")
+                    el.addEventListener('dragover', function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = 'copy';
+                    });
+                    el.addEventListener('drop', function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        console.log("drop")
+                        var files = e.dataTransfer.files; // Array of all files
+                        for (var i=0, file; file=files[i]; i++) {
+                            if (file.type.match(/image.*/)) {
+                                _this. activeSection=2,
+                                _this.uploafFilesToQ(file, "chat")
+                            }
+                        }
+                    });
+
+
 
 
                     //startVideo();
