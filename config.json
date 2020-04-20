@@ -55,7 +55,6 @@
       "url": "wss://mi.may24.pro/webrtc-session.json",
       "applicationName": "webrtc"
     }
-
   ],
   "spkBitrate": {
     "video":640,
