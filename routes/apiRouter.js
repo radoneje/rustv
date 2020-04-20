@@ -500,6 +500,8 @@ router.post("/qfileUpload/:eventid/:roomid", checkLoginToRoom, async (req, res, 
 
 })
 router.post("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    if(text.length>2040)
+        text=text.substr(0, 2040);
     var text = urlify(stripHtml(req.body.text))
     var r = await req.knex("t_q").insert({
         text: text,
@@ -584,7 +586,10 @@ router.get("/invites/:eventid/:roomid", checkLoginToRoom, async (req, res, next)
 
 
 router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    if(text.length>2040)
+        text=text.substr(0, 2040);
     var text = urlify(stripHtml(req.body.text))
+
 
     var r = await req.knex("t_chat").insert({
         text: text,
@@ -689,12 +694,21 @@ function urlify(text) {
 }
 
 router.get("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
-    var r = await req.knex.select("*").from("v_q").where({roomid: req.params.roomid}).orderBy("date");// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
+    var r = await req.knex.select("*")
+        .from("v_q")
+        .where({roomid: req.params.roomid})
+        .orderBy("date")
+        .limit(50)
+    ;// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
 
     res.json(r);
 })
 router.get("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
-    var r = await req.knex.select("*").from("v_chat").where({roomid: req.params.roomid}).orderBy("date");// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
+    var r = await req.knex.select("*")
+        .from("v_chat")
+        .where({roomid: req.params.roomid})
+        .orderBy("date")
+        .limit(50);// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
     res.json(r);
 })
 
