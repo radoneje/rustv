@@ -202,8 +202,8 @@ router.post("/regtoevent", async (req, res, next) => {
         tel: req.body.tel,
         email: req.body.email,
         smsCode: code,
-        companyid:req.body.company.id,
-        otraslid:req.body.otrasl.id
+        companyid:req.body.companyid,
+        otraslid:req.body.otraslid
     }, "*")
 
     if (evt.regCase == 0) {

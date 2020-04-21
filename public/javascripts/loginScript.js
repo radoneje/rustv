@@ -46,7 +46,7 @@ window.onload=function () {
                 });
 
             },
-            enter: function () {
+            enter: async function () {
 
                 var _this = this;
                 var emailElem=document.getElementById("emailInpit")
@@ -85,9 +85,9 @@ window.onload=function () {
                 localStorage.setItem("i", this.i);
                 localStorage.setItem("email", this.email);
                 this.loader=true;
-               axios.post('/rest/api/regtoevent/'
+               var dt= await axios.post('/rest/api/regtoevent/'
                     ,{evntId:evntId, f:this.f, i:this.i, tel:this.tel, email:this.email, company:this.company, otrasl:this.otrasl})
-                   .then(function (dt) {
+
                        if(!dt.data.showConfirm){
                            if(dt.data.user)
                                closeWnd();
@@ -105,7 +105,7 @@ window.onload=function () {
                                document.getElementById('code').focus();
                            },0)
                        }
-                   })
+
 
 
 
