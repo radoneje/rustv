@@ -295,7 +295,7 @@ router.get("/otrasl/:id", async (req, res, next) => {
     if(!Number.isInteger(parseInt(req.params.id)))
         res.sendStatus(404);
     var ret = await req.knex.select("*").from("t_otrasl")
-        .where({eventid: parseInt(req.params.id)}).orderBy("title")
+        .where({eventid: parseInt(req.params.id)}).orderBy("id")
     res.json(ret);
 });
 router.post("/otrasl/", async (req, res, next) => {
@@ -336,7 +336,7 @@ router.get("/company/:id", async (req, res, next) => {
     if(!Number.isInteger(parseInt(req.params.id)))
         res.sendStatus(404);
     var ret = await req.knex.select("*").from("t_company")
-        .where({eventid: parseInt(req.params.id)}).orderBy("title")
+        .where({eventid: parseInt(req.params.id)}).orderBy("id")
     res.json(ret);
 });
 router.post("/company/", async (req, res, next) => {
