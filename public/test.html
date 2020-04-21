@@ -1,0 +1,51 @@
+<html>
+<body>
+<script src="/lib/socket.io.js"></script>
+
+<div id="a">
+
+</div>
+<script>
+    var myHostname = window.location.hostname;
+    if (!myHostname)
+        myHostname = "localhost";
+        var serverUrl;
+        var scheme = "http";
+        if (document.location.protocol === "https:") {
+            scheme += "s";
+        }
+        serverUrl = document.location.protocol + "//" + myHostname;
+        console.log('Connecting to server:' + serverUrl);
+        for(var i=0; i<1000;i++) {
+            startSock(i ,0)
+        }
+        function startSock(i,j, socket) {
+            if(!socket) {
+                socket = io(serverUrl, {forceNew: true});
+                socket.on('connect', function () {
+                    console.log("connect " + i)
+                });
+                socket.on('po', function (dt) {
+                    console.log("po",dt)
+                    if(dt.j%100==0) {
+                        document.getElementById("a").innerHTML += "<div> pong " + dt.i + " is alive " + dt.j + " " + socket.id + "</div>"
+                    }
+
+                })
+
+            }
+            socket.emit("pp", {i,j});
+
+
+            j++;
+            setTimeout(()=>{startSock(i,j, socket)}, 100)
+            return;
+
+
+        }
+
+
+
+</script>
+</body>
+</html>

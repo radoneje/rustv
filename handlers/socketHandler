@@ -13,6 +13,9 @@ class socket{
         this.io.on('connection', async (socket)=> {
             var id=null;
             var roomid=null;
+            socket.on("pp",async ( data)=>{
+                socket.emit("po", data)
+            })
             socket.on("hello",async ( data)=>{
                 console.log("hello on room")
                 var users=await knex.select("*").from("t_eventusers").where({id:data.id})

@@ -25,11 +25,14 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
-/*var minify = require('express-minify');
+/*
+var minify = require('express-minify');
 var compression=require('compression')
 app.use(compression());
-app.use(minify({cache:__dirname + '/cache'}));*/
+app.use(minify({
+  jsMatch: /javascripts/,
+  cssMatch: /stylesheets/
+}));*/
 
 const pgSession = require('connect-pg-simple')(session);
 const pgStoreConfig = {conObject: config.pgConnection}
