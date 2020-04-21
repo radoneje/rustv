@@ -1,5 +1,12 @@
 var app;
 window.onload=function () {
+    try{
+        eval("()=>{;;}")
+    }
+    catch (e) {
+        document.location.href="/badbrowser"
+    }
+
     var wowzaRecievers=[];
     peerConnection=null;
      app = new Vue({

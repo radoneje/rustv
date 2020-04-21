@@ -1,0 +1,22 @@
+extends layout
+block head
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  link(rel='stylesheet', href='/stylesheets/login.css')
+  link(rel='stylesheet', href='/stylesheets/clientRoom.css')
+block content
+  div.pBox#app
+    div.pLoginBox
+        div.pLogoBox
+          div.pLoginHead
+          div.pLoginBody
+            div.pBodyTitle Пожалуйста, используйте любой современный браузер: <br><br>
+              div Chrome,
+              div Safari,
+              div Ya-Browser,
+              div Edge последний версий.
+  script.
+    document.getElementById("app").style.opacity = 1;
+
+
+
+

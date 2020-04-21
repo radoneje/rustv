@@ -5,6 +5,9 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'ON.event' });
 });
+router.get('/badbrowser', function(req, res, next) {
+  res.render('badbrowser', { title: 'ON.event' });
+});
 router.get('/userstat/:id', async function(req, res, next) {
   var e=await req.knex.select("*").from("t_events").where({isDeleted:false, id:req.params.id})
   if(e.length<1)
