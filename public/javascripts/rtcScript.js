@@ -14,13 +14,13 @@ var videoReceivers=[]
 async function getStream(_this){
     const constraints={
         audio: true,
-        video: /*{
+        video:true /*{
            // width: { min: 1024, ideal: 1024, max: 1920 },
             width: { min: 320, ideal: 640, max: 1920 },
             //height:{min: 180, ideal:320 , max:720},
             facingMode: "user",
             aspectRatio: 1.777777778
-        }
+        }*/
     }
     var stream=await navigator.mediaDevices.getUserMedia(constraints);
     var video = createVideoContaiter('selfVideo', _this.user.i ||''+" "+_this.user.f);
