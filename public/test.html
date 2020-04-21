@@ -19,6 +19,7 @@
         for(var i=0; i<2;i++) {
             startSock(i ,0)
         }
+
         function startSock(i,j, socket) {
             if(!socket) {
                 socket = io(serverUrl, {forceNew: true});
