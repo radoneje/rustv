@@ -244,6 +244,7 @@ async function sendCodeToSms(tel, code) {
     var url = "http://api.iqsms.ru/messages/v2/send/?phone=Access%20code:%20" + n + "&text=" + code + "&login=z1519200766955&password=713595";
 
     var rr = await axios.get(url);
+    console.log("ret", rr.data);
 }
 
 async function sendCodeToEmail(email, code) {

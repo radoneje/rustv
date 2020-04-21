@@ -122,7 +122,7 @@ block content
                   div.rFeedGroupBody
                     div.qItem()
                       div.qItemName
-                        div.rItemSubTitle Пришлашено: {{invitedUsers.length}}
+                        div.rItemSubTitle Приглашено: {{invitedUsers.length}}
                         div.rItemSubTitle Зашло: 0
                       div.qItemDate
                         span.link.green(v-on:click="document.location.href='/meeting/'+eventid+'/'+user.id") &nbsp;&nbsp; Зайти в мою комнату
@@ -223,7 +223,7 @@ block content
                     div.rInvitesTitle Приглашения ({{invites.length}})
                     div.inviteDialogBoxItems
                         div.inviteDialogBoxItem.qItem(v-for="item in invites")
-                            div.inviteDialogBoxItemTitle.qItemName Иванов Иван Иванович
+                            div.inviteDialogBoxItemTitle.qItemName {{item.i}} {{item.f}}
                             div.qItemDate
                                 span(style="font-size: 10px;" v-on:click="inviteAllow(item)").link.green.inviteDialogBoxItemLink Зайти &nbsp;&nbsp;&nbsp;
                                 span(style="font-size: 10px;" v-on:click="inviteDeny(item)").link.red.inviteDialogBoxItemLink Отказаться
