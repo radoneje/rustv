@@ -114,7 +114,7 @@ block content
                         div.qItemText(v-html="item.text")
                         div(style="text-align:center")
                             video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
-                        div.qItemPhoto(v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
+                        div.qItemPhoto(v-on:click="window.open('/files/'+item.photo)" v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
                         div.qItemDate
                             span.link.red(v-on:click="deleteChat(item)") Удалить
                             span &nbsp;&nbsp;
@@ -125,7 +125,7 @@ block content
                         div.qItemName {{item.title}}
                         div(style="text-align:center")
                             video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
-                        div.qItemPhoto(v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
+                        div.qItemPhoto(v-on:click="window.open('/files/'+item.photo)" v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
                         div.qItemDate
                             span.link.green(v-on:click="previewFilePres(item)" v-if="item.presfiles.length>0") &nbsp;&nbsp; Презентовать
                             span.link.green(v-on:click="downloadFile(item)") &nbsp;&nbsp; Скачать
