@@ -526,6 +526,27 @@ window.onload=function () {
                                 }
                             }
                             wowzaRecievers.push(receiverItem)
+                            if(wowzaRecievers.length==1){
+                                var elem=document.getElementById(wowzaRecievers[0].id)
+                                elem.style.position="fixed";
+                                elem.style.top= 0;
+                                elem.style.left= 0;
+                                elem.style.width= "100%";
+                                elem.style.zIndex= "1000";
+                                elem.style.height="100%";
+
+                            }
+                            else{
+                                wowzaRecievers.forEach(r=>{
+                                    var elem=document.getElementById(r.id)
+                                    elem.style.position=null
+                                    elem.style.top= null
+                                    elem.style.left= null
+                                    elem.style.width= null
+                                    elem.style.zIndex= null
+                                    elem.style.height=null;
+                                })
+                            }
                             _this.SPKstatus=6;
                         })
                     });
@@ -558,6 +579,28 @@ window.onload=function () {
                         _this.SPKstatus=1;
 
                     }
+                 if(wowzaRecievers.length==1){
+                     var elem=document.getElementById(wowzaRecievers[0].id)
+                     elem.style.position="fixed";
+                     elem.style.top= 0;
+                     elem.style.left= 0;
+                     elem.style.width= "100%";
+                     elem.style.zIndex= "1000";
+                     elem.style.height= "100%";
+
+                 }
+                 else{
+                     wowzaRecievers.forEach(r=>{
+                         var elem=document.getElementById(r.id)
+                         elem.style.position=null
+                         elem.style.top= null
+                         elem.style.left= null
+                         elem.style.width= null
+                         elem.style.zIndex= null
+                         elem.style.height=null;
+                     })
+                 }
+
 
 
     },
@@ -756,8 +799,13 @@ window.onload=function () {
                                 setInterval(() => {
                                     var SPKvksUsers=[]
                                    // videoReceivers.forEach(r=>{SPKvksUsers.push({user:r.user, guid:r.guid})})
-                                    wowzaRecievers.forEach(r=>{SPKvksUsers.push({user:r.user, guid:r.id})})
+                                    wowzaRecievers.forEach(r=>{
+                                        SPKvksUsers.push({user:r.user, guid:r.id})})
                                       _this.socket.emit("SPKstatus",{SPKstatus: _this.SPKstatus, SPKalert:_this.SPKalert, SPKvksUsers:SPKvksUsers})
+                                    if(SPKvksUsers.length==1)
+                                    {
+                                        var id=SPKvksUsers[0].guid;
+                                    }
                                 }, 1000)
                                 document.addEventListener("keydown",(e)=>{
                                     if(e.code=="ArrowRight" || e.code=="ArrowLeft" && this.isPres)
