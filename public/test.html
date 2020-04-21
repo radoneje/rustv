@@ -1,10 +1,13 @@
 <html>
 <body>
 <script src="/lib/socket.io.js"></script>
-
+<div id="b" onclick="wind()">
+    cccc
+</div>
 <div id="a">
 
 </div>
+
 <script>
     var myHostname = window.location.hostname;
     if (!myHostname)
@@ -28,7 +31,7 @@
                     console.log("connect " + i)
                 });
                 socket.on('po', function (dt) {
-                    console.log("po",dt)
+                   // console.log("po",dt)
                     if(dt.j%100==0) {
                         document.getElementById("a").innerHTML += "<div> pong " + dt.i + " is alive " + dt.j + " " + socket.id + "</div>"
                     }
@@ -47,7 +50,11 @@
 
         }
 
-
+function wind() {
+            alert(123)
+    for(var i=0; i<10; i++)
+        window.open('/test.html')
+}
 
 </script>
 </body>
