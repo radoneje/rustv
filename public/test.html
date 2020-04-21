@@ -16,7 +16,7 @@
         }
         serverUrl = document.location.protocol + "//" + myHostname;
         console.log('Connecting to server:' + serverUrl);
-        for(var i=0; i<1000;i++) {
+        for(var i=0; i<100;i++) {
             startSock(i ,0)
         }
         function startSock(i,j, socket) {
