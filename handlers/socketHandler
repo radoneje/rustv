@@ -42,8 +42,15 @@ class socket{
             socket.on("disconnect",(msg,  data)=>{
                 console.log("disconnect",id);
               //  if(id)
+                try {
                     _this.clients.disActive(socket.id);
-                _this.spkRoom.forEach(u=>{if(u.id==socket.id)u.isActive=false})
+                    _this.spkRoom.forEach(u => {
+                        if (u.id == socket.id) u.isActive = false
+                    })
+                }
+                catch (e) {
+                    
+                }
             });
 
             socket.on("addUserToSpeakerRoom", async (data)=>{

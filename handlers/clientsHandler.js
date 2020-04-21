@@ -21,13 +21,15 @@ class Clients{
     }
     disActive(id){
         var _this=this;
-        this.clients.forEach(c=>{
-            if(c.socket.id==id) {
-                c.isActive = false;
-                c.isVideo=false;
-                _this.sendToRoomUsers("userDisconnnect", c.user.id,c.roomid)
-            }
-        })
+        if(id) {
+            this.clients.forEach(c => {
+                if (c.socket.id == id) {
+                    c.isActive = false;
+                    c.isVideo = false;
+                    _this.sendToRoomUsers("userDisconnnect", c.user.id, c.roomid)
+                }
+            })
+        }
     }
     SpkCount(roomid){
         return this.clients.filter(c=>{return c.isSpeaker && c.isActive && c.roomid==roomid}).length;
