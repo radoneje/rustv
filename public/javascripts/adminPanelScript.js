@@ -6,7 +6,9 @@ window.onload=function () {
             events:[],
             editRoom:null,
             allowUsers:null,
-            telInput:""
+            telInput:"",
+            otrasl:null,
+            company:null,
         },
         watch:{
             editRoom:function (val) {
@@ -31,9 +33,20 @@ window.onload=function () {
                 item.regCase=regCase;
                 this.changeEvent(item);
             },
+            changeOtrasl:function (item, regCase) {
+                item.isOtrasl=!item.isOtrasl;
+                this.changeEvent(item);
+            },
+
+            changeCompany:function (item, regCase) {
+                item.isCompany=!item.isCompany;
+                this.changeEvent(item);
+            },
+
             changeEvent:async function(item){
                 await axios.put("/rest/api/events", item);
             },
+
             addRoom:async function(item){
                 var dt=await axios.post("/rest/api/room", item);
                 if(dt.data) {
@@ -83,12 +96,55 @@ window.onload=function () {
                 axios.put('/rest/api/room',this.editRoom);
             },
             showAllowedUsers:async function(event){
-
                 var dt=await axios.get('/rest/api/allowedUsers/'+event.id);
                 this.allowUsers={id:event.id, users:dt.data};
-
+            },
+            /////
+            showOtrasl:async function(event){
+                var dt=await axios.get('/rest/api/otrasl/'+event.id);
+                this.otrasl={items:dt.data, event:event};
+            },
+            saveOtrasl:async function()
+            {
+               // await axios.post("/rest/api/otrasl", this.otrasl);
+                this.otrasl=null
+            },
+            addOtrasl:async function(event){
+              var dr=  await axios.put("/rest/api/otrasl/"+event.id);
+                this.otrasl.items.push(dr.data)
+            },
+            saveOtraslItem:async function(item){
+                var dr=  await axios.post("/rest/api/otraslItem/",item);
 
             },
+            deleteOtraslItem:async function(item){
+                var dr=  await axios.delete("/rest/api/otraslItem/"+ item.id);
+                this.otrasl.items=this.otrasl.items.filter(r=>r.id!=item.id);
+            },
+            /////
+            showCompany:async function(event){
+                var dt=await axios.get('/rest/api/company/'+event.id);
+                console.log(dt.data)
+                this.company={items:dt.data, event:event};
+            },
+            saveCompany:async function()
+            {
+                // await axios.post("/rest/api/otrasl", this.otrasl);
+                this.company=null
+            },
+            addCompany:async function(event){
+                var dr=  await axios.put("/rest/api/company/"+event.id);
+                this.company.items.push(dr.data)
+            },
+            saveCompanyItem:async function(item){
+                var dr=  await axios.post("/rest/api/companyItem/",item);
+
+            },
+            deleteCompanyItem:async function(item){
+                var dr=  await axios.delete("/rest/api/companyItem/"+ item.id);
+                this.company.items=this.company.items.filter(r=>r.id!=item.id);
+            },
+            ///
             addAllowedTels:async function (item) {
                 var m = this.telInput.match(/(\+\d\d\d\d\d\d\d\d\d\d\d)/gm);
                 var arr=[]

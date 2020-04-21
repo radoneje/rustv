@@ -5,6 +5,13 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'ON.event' });
 });
+router.get('/userstat/:id', async function(req, res, next) {
+  var e=await req.knex.select("*").from("t_events").where({isDeleted:false, id:req.params.id})
+  if(e.length<1)
+    return res.send(404);
+
+  res.render('userstat', { title: 'ON.event', event:e[0] });
+});
 router.get('/adminpanel', function(req, res, next) {
   if(!req.session["admin"])
     return res.redirect("/");

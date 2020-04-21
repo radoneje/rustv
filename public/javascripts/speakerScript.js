@@ -600,9 +600,6 @@ window.onload=function () {
                          elem.style.height=null;
                      })
                  }
-
-
-
     },
             OnVote:function(data){
                 var _this=this;

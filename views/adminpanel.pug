@@ -67,10 +67,62 @@ block content
                                      </g>
                                      </g>
                                      </svg>
+                            div.regGroupItem(v-bind:class="{active:item.isCompany}" v-on:click="changeCompany(item)") Анкета компании
+                                span.iconPost(v-on:click.prevent.stop="showCompany(item)")
+                                    <svg width="14px" height="8px" viewBox="0 0 14 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                                    <desc>Created with Sketch.</desc>
+                                    <defs></defs>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Tablet" transform="translate(-177.000000, -456.000000)">
+                                    <g id="Group" transform="translate(43.000000, 412.000000)">
+                                    <g id="openmoji-hamburger-menu" transform="translate(131.000000, 38.000000)">
+                                    <g id="Icon">
+                                    <g id="Icon-Group" stroke-linecap="round" stroke-linejoin="round" transform="translate(4.444444, 7.222222)" stroke="#000000" stroke-width="2">
+                                    <path d="M0,0 L11.1111111,0" id="Icon-Shape"></path>
+                                    <path d="M0,2.77777778 L11.1111111,2.77777778" id="Icon-Shape"></path>
+                                    <path d="M0,5.55555556 L11.1111111,5.55555556" id="Icon-Shape"></path>
+                                    </g>
+                                    <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" fill-rule="nonzero" x="0" y="0" width="20" height="20"></rect>
+                                    </g>
+                                    </g>
+                                    </g>
+                                    </g>
+                                    </g>
+                                    </svg>
+                            div.regGroupItem(v-bind:class="{active:item.isOtrasl}" v-on:click="changeOtrasl(item)") Анкета отрасли
+                                span.iconPost(v-on:click.prevent.stop="showOtrasl(item)")
+                                    <svg width="14px" height="8px" viewBox="0 0 14 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                                    <desc>Created with Sketch.</desc>
+                                    <defs></defs>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Tablet" transform="translate(-177.000000, -456.000000)">
+                                    <g id="Group" transform="translate(43.000000, 412.000000)">
+                                    <g id="openmoji-hamburger-menu" transform="translate(131.000000, 38.000000)">
+                                    <g id="Icon">
+                                    <g id="Icon-Group" stroke-linecap="round" stroke-linejoin="round" transform="translate(4.444444, 7.222222)" stroke="#000000" stroke-width="2">
+                                    <path d="M0,0 L11.1111111,0" id="Icon-Shape"></path>
+                                    <path d="M0,2.77777778 L11.1111111,2.77777778" id="Icon-Shape"></path>
+                                    <path d="M0,5.55555556 L11.1111111,5.55555556" id="Icon-Shape"></path>
+                                    </g>
+                                    <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" fill-rule="nonzero" x="0" y="0" width="20" height="20"></rect>
+                                    </g>
+                                    </g>
+                                    </g>
+                                    </g>
+                                    </g>
+                                    </svg>
                         div.regGroup
                             div.regGroupTitle Вставьте это на ваш сайт для показа баннера регистрации:
                                 textarea(readonly).
                                     <iframe src="https://conf.rustv.ru/regtoevent/{{item.id}}" width="150px" height="60px"></iframe>
+                        div.regGroup
+                            div.regGroupTitle Статистика пользователей:
+                                textarea(readonly).
+                                    https://conf.rustv.ru/userstat/{{item.id}}"
+
+
                     div.half
                         div.title
                             span Сессии ({{item.rooms ? item.rooms.length : 0}})
@@ -162,3 +214,5 @@ block content
                                     div.half.linkLabel &lt;iframe src='https://conf.rustv.ru/room/{{room.id}}' allowfullscreen width="150px" height="60px" &gt;&lt;/iframe&gt;
         include elements/editRoom
         include elements/editAllowedUsers
+        include elements/editOtrasl
+        include elements/editCompany

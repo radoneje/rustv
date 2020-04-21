@@ -134,7 +134,9 @@ router.put("/events", async (req, res, next) => {
 
     var r = await req.knex("t_events").update({
         title: req.body.title,
-        regCase: req.body.regCase
+        regCase: req.body.regCase,
+        isCompany:req.body.isCompany,
+        isOtrasl:req.body.isOtrasl
     }, "*").where({id: req.body.id, adminId: req.session["admin"].id});
     r[0].rooms = [];
     return res.json(r[0])
@@ -199,7 +201,9 @@ router.post("/regtoevent", async (req, res, next) => {
         i: req.body.i,
         tel: req.body.tel,
         email: req.body.email,
-        smsCode: code
+        smsCode: code,
+        companyid:req.body.company.id,
+        otraslid:req.body.otrasl.id
     }, "*")
 
     if (evt.regCase == 0) {
@@ -286,6 +290,88 @@ router.get("/allowedUsers/:id", async (req, res, next) => {
         .where({eventid: req.params.id})
     res.json(ret)
 });
+/////
+router.get("/otrasl/:id", async (req, res, next) => {
+    if(!Number.isInteger(parseInt(req.params.id)))
+        res.sendStatus(404);
+    var ret = await req.knex.select("*").from("t_otrasl")
+        .where({eventid: parseInt(req.params.id)}).orderBy("title")
+    res.json(ret);
+});
+router.post("/otrasl/", async (req, res, next) => {
+    if (!req.session["admin"])
+        return res.send(404);
+    for(var item of req.body.items){
+        await req.knex("t_otrasl").update({title:item.title}).where({eventid:req.body.event.id})
+    }
+    res.json(true);
+});
+router.post("/otraslItem/", async (req, res, next) => {
+    if (!req.session["admin"])
+        return res.send(404);
+    if(!req.body.title)
+        req.body.title='';
+    if(req.body.id)
+        await req.knex("t_otrasl").update({title:req.body.title}).where({id:req.body.id})
+    res.json(true);
+})
+
+
+router.put("/otrasl/:id", async (req, res, next) => {
+    if (!req.session["admin"])
+        return res.send(404);
+
+    var dt=await req.knex("t_otrasl").insert({eventid:req.params.id, title:""},"*")
+    res.json(dt[0]);
+});
+router.delete("/otraslItem/:id", async (req, res, next) => {
+    if (!req.session["admin"])
+        return res.send(404);
+    var dt=await req.knex("t_otrasl").where({id:req.params.id}).del();
+    res.json(dt);
+});
+////////
+
+router.get("/company/:id", async (req, res, next) => {
+    if(!Number.isInteger(parseInt(req.params.id)))
+        res.sendStatus(404);
+    var ret = await req.knex.select("*").from("t_company")
+        .where({eventid: parseInt(req.params.id)}).orderBy("title")
+    res.json(ret);
+});
+router.post("/company/", async (req, res, next) => {
+    if (!req.session["admin"])
+        return res.send(404);
+    for(var item of req.body.items){
+        await req.knex("t_company").update({title:item.title}).where({eventid:req.body.event.id})
+    }
+    res.json(true);
+});
+router.post("/companyItem/", async (req, res, next) => {
+    if (!req.session["admin"])
+        return res.send(404);
+    if(!req.body.title)
+        req.body.title='';
+    if(req.body.id)
+        await req.knex("t_company").update({title:req.body.title}).where({id:req.body.id})
+    res.json(true);
+})
+
+
+router.put("/company/:id", async (req, res, next) => {
+    if (!req.session["admin"])
+        return res.send(404);
+
+    var dt=await req.knex("t_company").insert({eventid:req.params.id, title:""},"*")
+    res.json(dt[0]);
+});
+router.delete("/companyItem/:id", async (req, res, next) => {
+    if (!req.session["admin"])
+        return res.send(404);
+    var dt=await req.knex("t_company").where({id:req.params.id}).del();
+    res.json(dt);
+});
+/////////
 
 router.post("/addAllowedTels/", async (req, res, next) => {
     if (!req.session["admin"])
@@ -343,6 +429,12 @@ router.get("/infomod/:eventid/:roomid", checkLoginToRoom, async (req, res, next)
     var usr = req.session["moderator" + req.params.roomid];
     res.json({id: usr.id, f: usr.f, i: usr.i});
 })
+
+router.get("/usersstat/:eventid", async (req, res, next) => {
+
+    var dt=await req.knex.select(["id" ,"otraslid", "companyid"]).from("t_eventusers").where({eventid:req.params.eventid})
+    res.json(dt);
+});
 
 router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
 

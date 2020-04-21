@@ -29,6 +29,27 @@ block content
               div.plInputBoxLabel
                 input#fInpit(placeholder='Фамилия' v-model="f" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
               div.plInputBoxWarning Поле должно быть заполнено
+            if(event.isCompany)
+              div.plInputBox(v-on:click="showCompanies()")
+                div.plInputBoxLabel Размер Вашей компании
+                  div.sel(v-if="!company") Выберите размер компании
+                  div.sel(v-else) {{company.title}}
+                div.plInputBoxWarning Поле должно быть заполнено
+                div.plInputList(v-if="isShowCompany")
+                  div.plInputListItems
+                    div.plInputListItem(v-for="item in isShowCompany" v-on:click.stop.prevent="selectCompanies(item)")
+                      div.plInputListItemTitle {{item.title}}
+
+            if(event.isOtrasl)
+              div.plInputBox(v-on:click="showOtrasl()")
+                div.plInputBoxLabel Ваша отрасль
+                  div.sel(v-if="!otrasl") Выберите отрасль
+                  div.sel(v-else) {{otrasl.title}}
+                div.plInputBoxWarning Поле должно быть заполнено
+                div.plInputList(v-if="isShowOtrasl")
+                  div.plInputListItems
+                    div.plInputListItem(v-for="item in isShowOtrasl" v-on:click.stop.prevent="selectOtrasl(item)")
+                      div.plInputListItemTitle {{item.title}}
             if (event.regCase == 1)
               div.plInputBox(v-bind:class="{warning:(emailErr)}")
                 div.plInputBoxLabel

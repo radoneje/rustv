@@ -1,0 +1,9 @@
+div.editRoomBox(v-if="otrasl" v-on:click="saveOtrasl()")
+    div.editRoom(v-on:click.stop.prevent=";;")
+        div.regGroupTitle Отрасли:
+                    div.telItem(v-for="item in otrasl.items" style="margin-top: 5px;")
+                       input(v-model="item.title" placeholder="Введите название" v-on:change="saveOtraslItem(item)" style="width:300px")
+                       span(v-on:click="deleteOtraslItem(item)") &nbsp Удалить
+        div.regGroupTitle(style="cursor: pointer;color:#3D89E0" v-on:click="addOtrasl(otrasl.event)") Добавить 1
+
+

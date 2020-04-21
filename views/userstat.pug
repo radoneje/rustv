@@ -1,0 +1,23 @@
+extends layout
+block head
+
+  script.
+    var event=!{JSON.stringify(event)}
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  link(rel='stylesheet', href='/stylesheets/login.css')
+  script(src="/javascripts/usersStatScript.js")
+  if event.isClientCss
+    link(rel='stylesheet', href='/stylesheets/clientRoom.css')
+block content
+  div#app
+    div.pBlock
+      div.pOtrasles(v-for="item in companies")
+        div {{item.percent}}% {{item.title}}
+    div.pBlock
+      div.pOtrasles(v-for="item in otrasles")
+        div {{item.percent}}% {{item.title}}
+
+
+
+

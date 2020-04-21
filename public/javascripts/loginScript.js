@@ -15,10 +15,38 @@ window.onload=function () {
             codeErr:false,
             code:"",
             userId:null,
+            company:null,
+            otrasl:null,
+            isShowCompany:false,
+            isShowOtrasl:false,
 
         },
         methods:{
-            enter:async function () {
+            selectOtrasl:function(item){
+                this.otrasl=item;
+                this.isShowOtrasl=null;
+            },
+            showOtrasl:  function(){
+                var _this=this;
+                axios.get("/rest/api/otrasl/"+evntId).then(function (dt) {
+                    _this.isShowOtrasl=dt.data;
+
+                });
+
+            },
+            selectCompanies:function(item){
+                this.company=item;
+                this.isShowCompany=null;
+            },
+            showCompanies:  function(){
+                var _this=this;
+                axios.get("/rest/api/company/"+evntId).then(function (dt) {
+                    _this.isShowCompany=dt.data;
+
+                });
+
+            },
+            enter: function () {
 
                 var _this = this;
                 var emailElem=document.getElementById("emailInpit")
@@ -57,25 +85,28 @@ window.onload=function () {
                 localStorage.setItem("i", this.i);
                 localStorage.setItem("email", this.email);
                 this.loader=true;
-                var dt=await axios.post('/rest/api/regtoevent/'
-                    ,{evntId:evntId, f:this.f, i:this.i, tel:this.tel, email:this.email});
-                if(!dt.data.showConfirm){
-                    if(dt.data.user)
-                        closeWnd();
-                    else{
-                        this.loader = false;
-                        this.showCode=false;
-                        this.telErr=true;
-                    }
-                }
-                else {
-                    this.loader = false;
-                    this.showCode=true;
-                    this.userId=dt.data.user.id
-                    setTimeout(()=>{
-                        document.getElementById('code').focus();
-                    },0)
-                }
+               axios.post('/rest/api/regtoevent/'
+                    ,{evntId:evntId, f:this.f, i:this.i, tel:this.tel, email:this.email, company:this.company, otrasl:this.otrasl})
+                   .then(function (dt) {
+                       if(!dt.data.showConfirm){
+                           if(dt.data.user)
+                               closeWnd();
+                           else{
+                               this.loader = false;
+                               this.showCode=false;
+                               this.telErr=true;
+                           }
+                       }
+                       else {
+                           this.loader = false;
+                           this.showCode=true;
+                           this.userId=dt.data.user.id
+                           setTimeout(()=>{
+                               document.getElementById('code').focus();
+                           },0)
+                       }
+                   })
+
 
 
             },
