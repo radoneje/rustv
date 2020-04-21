@@ -26,10 +26,10 @@ block content
             </path>
           div.pTitle #{room.title}
         div.pLoginBody
-          div.pBodyTitle Регистрация модератора
+          div.pBodyTitle Регистрация спикера
           div.plInputBox(v-bind:class="{warning:(passErr &&  pass.length<2)}" style="margin-bottom:0")
             div.plInputBoxLabel
-              input#passInpit(placeholder='Пароль' v-model="pass" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+              input#passInpit(type="password" placeholder='Пароль' v-model="pass" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
             div.plInputBoxWarning Поле должно быть заполнено
           div.plInputBox
             div.plSubmit(v-on:click="enter()")
