@@ -585,7 +585,7 @@ window.onload=function () {
         },
         mounted:async function () {
             var _this=this;
-            if(room.id==52)
+            if(roomid==52)
                 sect=[
                     {title:"Лента", isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeedaCl.svg'},
                     {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoqCl.svg'},
