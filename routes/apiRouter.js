@@ -803,7 +803,7 @@ router.get("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =>
         .where({roomid: req.params.roomid})
         .orderBy("id","desc")
         .limit(50);// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
-    r=r.sort((a,b)=>a.id-b.id)
+    r=r.sort((a,b)=>b.id-a.id)
     res.json(r);
 })
 
