@@ -63,6 +63,9 @@ router.get('/event/:id',  async (req, res, next) =>{
   res.render('event', { title: 'ON.event', event:event , rooms:rooms});
 
 })
+router.get('/blank/',  async (req, res, next) =>{
+  res.send("");
+})
 
 router.get('/room/:id',  async (req, res, next) =>{
   req.params.id=parseInt(req.params.id)

@@ -196,10 +196,12 @@ function mainVideoMute(val){
 
     var ytPl=document.getElementById('YT');
     if(ytPl){
-        console.log("ytPl", ytPl)
-        console.log("ytPl", ytPl.contentWindow)
-        ytPl.contentWindow.postMessage(JSON.stringify(
-            { event: 'command', func: 'pauseVideo' }), 'https://www.youtube.com');
+        console.log("ytPl", ytPl.src)
+        if(ytPl.src.indexOf("/blank")<0)
+            ytPl.src='/blank'
+        else
+            ytPl.src='https://www.youtube.com/embed/BXF8E_UwEAA?enablejsapi=1'
+
     }
 }
 async function  addSenderEvents(socket,videoSender, data, clbk){
