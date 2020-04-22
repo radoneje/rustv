@@ -452,8 +452,33 @@ router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
                 handUp: c.handUp ? true : false
             });
     })
+    try{
+        for(srv of config.frontServers){
+            var usr=await axios.get(srv+"/rest/api/localUsers"+req.params.eventid+"/"+req.params.roomid);
+            usr.data.foeEach(d=>ret.push(d));
+        }
+    }
+    catch (e) {
+        console.warn("user error");
+    }
     res.json(ret);
 });
+router.get("/localUsers/:eventid/:roomid", async (req, res, next) => {
+    var ret = [];
+    req.transport.clients.forEach(c => {
+        if (c.roomid == req.params.roomid && c.isActive)
+            ret.push({
+                id: c.user.id,
+                i: c.user.i,
+                f: c.user.f,
+                isActive: c.isActive ? true : false,
+                isVideo: c.isVideo,
+                handUp: c.handUp ? true : false
+            });
+    })
+    return ret;
+})
+
 
 
 router.get("/isSpkScreen/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
