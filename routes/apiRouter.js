@@ -195,6 +195,7 @@ router.post("/regtoevent", async (req, res, next) => {
         return res.send(404)
     var code = (parseInt(Math.random() * 10000) + parseInt(10000));
 
+console.log("reg",req.body);
     var usr = await req.knex("t_eventusers").insert({
         eventid: evt.id,
         f: req.body.f,
@@ -202,8 +203,8 @@ router.post("/regtoevent", async (req, res, next) => {
         tel: req.body.tel,
         email: req.body.email,
         smsCode: code,
-        companyid:req.body.companyid,
-        otraslid:req.body.otraslid
+        companyid:req.body.company,
+        otraslid:req.body.otrasl
     }, "*")
 
     if (evt.regCase == 0) {
