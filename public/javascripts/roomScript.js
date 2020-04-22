@@ -585,6 +585,14 @@ window.onload=function () {
         },
         mounted:async function () {
             var _this=this;
+            if(room.id==52)
+                sect=[
+                    {title:"Лента", isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeedaCl.svg'},
+                    {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoqCl.svg'},
+                    {title:"Чат", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactiveCl.svg'},
+                    {title:"Люди", isActive:false, id:3, logo:'/images/logousers.svg', logoactive:'/images/logousersaCl.svg'},
+                    {title:"Файлы", isActive:false, id:7, logo:'/images/logofiles.svg', logoactive:'/images/logofilesaCl.svg'}
+                ]
             axios.get('/rest/api/info/'+eventid+"/"+roomid)
                 .then(function (dt) {
                     _this.user=dt.data;
