@@ -10,7 +10,7 @@ block head
   if event.isClientCss
     link(rel='stylesheet', href='/stylesheets/clientRoom.css')
 block content
-  div#app(style='display: flex;')
+  div#app(style='')
     div.pBlock
       div.pOtrasles(v-for="item in companies")
         div {{item.percent}}% {{item.title}}
