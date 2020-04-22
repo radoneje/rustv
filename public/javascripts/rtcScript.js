@@ -193,14 +193,13 @@ function mainVideoMute(val){
 
         app.mainVideoMuted=mainVideoElem.muted;
     }
-    if(typeof(player)!="undefined"){
-        console.log("mainVideoMute", player, player.isMuted())
-        if(player.isMuted())
-            player.unMute()
-        else
-            player.mute();
-         console.log("mainVideoMute", player, player.isMuted())
 
+    var ytPl=document.getElementById('YT');
+    if(ytPl){
+        console.log("ytPl", ytPl)
+        console.log("ytPl", ytPl.contentWindow)
+        ytPl.contentWindow.postMessage(JSON.stringify(
+            { event: 'command', func: 'pauseVideo' }), 'https://www.youtube.com');
     }
 }
 async function  addSenderEvents(socket,videoSender, data, clbk){
