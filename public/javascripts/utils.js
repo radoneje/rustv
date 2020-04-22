@@ -221,6 +221,7 @@ function connect(_this, roomid, clbk){
                 _this.chat.push(data);
             setTimeout(function () {
                 var objDiv = document.getElementById("chatBox");
+                if(objDiv)
                 objDiv.scrollTop = objDiv.scrollHeight;
             },0)
         });
