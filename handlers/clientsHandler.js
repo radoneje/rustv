@@ -54,7 +54,7 @@ class Clients{
         for( var srv of config.frontServers)
         {
             try {
-                console.log("OnSendToRoomUsers send " , msg, data, roomid)
+                console.log("send " , msg, data, roomid)
                 await axios.post(srv + '/rest/api/execCommand', {msg, data, roomid});
             }
             catch (e) {
@@ -66,7 +66,7 @@ class Clients{
         this.clients.forEach(c=>{
 
             if(c.isActive && c.roomid==roomid) {
-                console.log("OnSendToRoomUsers inside ")
+                console.log("receive inside ", msg)
                 c.socket.emit(msg, data);
             }
         });
