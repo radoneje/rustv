@@ -27,9 +27,40 @@ block content
           div.Lbody
               div.videoWrapper(v-bind:style="{backgroundImage:pres?'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')':null}")
                 if (room.id==52)
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/BXF8E_UwEAA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><iframe width="560" height="315" src="https://www.youtube.com/embed/BXF8E_UwEAA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  div#YT
+                  //<iframe id="YT" width="560" height="315" src="https://www.youtube.com/embed/BXF8E_UwEAA?enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  script.
+                    var tag = document.createElement('script');
+
+                    tag.src = "https://www.youtube.com/iframe_api";
+                    var firstScriptTag = document.getElementsByTagName('script')[0];
+                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                    var player;
+                    function onYouTubeIframeAPIReady() {
+                      player = new YT.Player('YT', {
+                        height: '1280',
+                        width: '720',
+                        videoId: 'BXF8E_UwEAA',
+                        events: {
+                          'onReady': onPlayerReady,
+                          'onStateChange': onPlayerStateChange
+                        }
+                      });
+                    }
+                    function onPlayerReady(event) {
+                      console.log("onPlayerReady")
+                      event.target.playVideo();
+                    }
+                    function onPlayerStateChange(event) {
+                      if (event.data == YT.PlayerState.PLAYING && !done) {
+                      //  setTimeout(stopVideo, 6000);
+                       // done = true;
+                      }
+                    }
+                  //<iframe width="560" height="315" src="https://www.youtube.com/embed/BXF8E_UwEAA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 else
                   video(id="video" width="1280" height="720" controls playsinline loop  :src="'https://stream.sberbank-school.ru/hls/'+ room.streamname +'/index.m3u8'" :poster="'/images/'+room.poster" )
+
                 //:poster="'/images/'+room.poster" )//src="'https://aurora-school.cdnvideo.ru/hls/'+room.streamname+'/index.m3u8'" )
                 //https://stream.sberbank-school.ru/hls/100/index.m3u8
                 //video(id="video" width="1280" height="720" controls playsinline poster="/images/bg_03.png" src="https://stream.sberbank-school.ru/hls/100/index.m3u8" )

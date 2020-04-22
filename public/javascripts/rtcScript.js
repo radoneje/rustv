@@ -184,6 +184,7 @@ async function createReceiver(data, video, socket, clbk){
     clbk(ret);
 }
 function mainVideoMute(val){
+
     var mainVideoElem=document.getElementById('video');
     if(mainVideoElem)
     {
@@ -191,6 +192,15 @@ function mainVideoMute(val){
       //  mainVideoElem.style.opacity=val?0:1
 
         app.mainVideoMuted=mainVideoElem.muted;
+    }
+    if(typeof(player)!="undefined"){
+        console.log("mainVideoMute", player, player.isMuted())
+        if(player.isMuted())
+            player.unMute()
+        else
+            player.mute();
+         console.log("mainVideoMute", player, player.isMuted())
+
     }
 }
 async function  addSenderEvents(socket,videoSender, data, clbk){

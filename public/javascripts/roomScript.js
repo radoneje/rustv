@@ -695,7 +695,9 @@ window.onload=function () {
 }
 function startVideo() {
 
-    if (Hls.isSupported()) {
+    if(typeof(video) =="undefined")
+        return;
+    if( Hls.isSupported()) {
 
         var hls = new Hls();
         console.log("init HLS")
