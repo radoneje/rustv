@@ -455,7 +455,7 @@ router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
     try{
         for(srv of config.frontServers){
             var usr=await axios.get(srv+"/rest/api/localUsers/"+req.params.eventid+"/"+req.params.roomid);
-            usr.data.foeEach(d=>ret.push(d));
+            usr.data.forEach(d=>ret.push(d));
         }
     }
     catch (e) {
