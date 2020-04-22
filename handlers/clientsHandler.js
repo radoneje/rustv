@@ -50,7 +50,7 @@ class Clients{
             if(c.isActive && c.roomid==roomid)
                 c.socket.emit(msg, data);
         });*/
-
+        console.log("OnSendToRoomUsers send " , msg, config.frontServers)
         for( var srv of config.frontServers)
         {
             try {
