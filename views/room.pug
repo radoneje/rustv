@@ -16,7 +16,7 @@ block content
         div.headLogo
           img(src=event.logo style="width:150px")
 
-        div.headTitle #{room.title}  #{room.id}
+        div.headTitle #{room.title}  !{JSON.stringify(room.id)}
 
     div.center
 
