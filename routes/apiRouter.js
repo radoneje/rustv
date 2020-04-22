@@ -791,7 +791,7 @@ router.get("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
     var r = await req.knex.select("*")
         .from("v_q")
         .where({roomid: req.params.roomid})
-        .orderBy("date")
+        .orderBy("id","desc")
         .limit(50)
     ;// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
 
@@ -801,8 +801,8 @@ router.get("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =>
     var r = await req.knex.select("*")
         .from("v_chat")
         .where({roomid: req.params.roomid})
-        .orderBy("date","desc")
-        //.limit(50);// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
+        .orderBy("id","desc")
+        .limit(50);// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
     res.json(r);
 })
 
