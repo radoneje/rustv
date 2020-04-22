@@ -11,6 +11,7 @@ class socket{
         this.io.binaryType = 'arraybuffer';
         var  _this=this;
         this.io.on('connection', async (socket)=> {
+            console.log("connect");
             var id=null;
             var roomid=null;
             socket.on("hello",async ( data)=>{
