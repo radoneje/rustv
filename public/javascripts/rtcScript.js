@@ -200,7 +200,7 @@ function mainVideoMute(val){
         if(ytPl.src.indexOf("/blank")<0)
             ytPl.src='/blank'
         else
-            ytPl.src='https://www.youtube.com/embed/BXF8E_UwEAA?enablejsapi=1'
+            ytPl.src='https://www.youtube.com/embed/f8SzXeXt9Qc?enablejsapi=1'
 
     }
 }

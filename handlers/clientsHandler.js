@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 var axios= require('axios')
+var config= require('../config')
 
 class Clients{
 
@@ -43,10 +44,32 @@ class Clients{
             }
         })
     }
-    sendToRoomUsers(msg, data, roomid){
-        this.clients.forEach(c=>{
+    async sendToRoomUsers(msg, data, roomid){
+
+      /*  this.clients.forEach(c=>{
             if(c.isActive && c.roomid==roomid)
                 c.socket.emit(msg, data);
+        });*/
+
+        for( var srv of config.frontServers)
+        {
+            try {
+
+                await axios.post(srv + '/rest/api/execCommand', {msg, data, roomid});
+            }
+            catch (e) {
+                    console.log(e)
+            }
+        }
+    }
+    OnSendToRoomUsers(msg, data, roomid){
+        console.log("OnSendToRoomUsers receive " , msg, data, roomid)
+        this.clients.forEach(c=>{
+
+            if(c.isActive && c.roomid==roomid) {
+                console.log("OnSendToRoomUsers inside ")
+                c.socket.emit(msg, data);
+            }
         });
     }
     sendToRoomAdmins(msg, data, roomid){

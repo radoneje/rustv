@@ -794,7 +794,7 @@ router.get("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
         .orderBy("id","desc")
         .limit(50)
     ;// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
-
+    r=r.sort((a,b)=>a.id-b.id)
     res.json(r);
 })
 router.get("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
@@ -1241,6 +1241,11 @@ router.get("/spkWowza", async (req, res, next) => {
 })
 router.get("/spkBitrate", async (req, res, next) => {
     res.json(config.meetBitrate);
+})
+router.post('/execCommand', async (req, res, next) => {
+    console.log("execCommand", )
+    req.transport.OnSendToRoomUsers(req.body.msg, req.body.data, req.body.roomid)
+    res.sendStatus(200);
 })
 
 

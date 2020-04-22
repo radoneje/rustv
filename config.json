@@ -59,5 +59,8 @@
   "spkBitrate": {
     "video":640,
     "audio" :98
-  }
+  },
+  "frontServers": [
+    "http://localhost"
+  ]
 }
