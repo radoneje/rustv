@@ -45,11 +45,6 @@ class Clients{
         })
     }
     async sendToRoomUsers(msg, data, roomid){
-
-      /*  this.clients.forEach(c=>{
-            if(c.isActive && c.roomid==roomid)
-                c.socket.emit(msg, data);
-        });*/
         this.OnSendToRoomUsers(msg, data, roomid);
         for( var srv of config.frontServers)
         {
@@ -64,14 +59,25 @@ class Clients{
     }
     OnSendToRoomUsers(msg, data, roomid){
         this.clients.forEach(c=>{
-
             if(c.isActive && c.roomid==roomid) {
-                console.log("receive inside ", msg)
                 c.socket.emit(msg, data);
             }
         });
     }
-    sendToRoomAdmins(msg, data, roomid){
+    async sendToRoomAdmins(msg, data, roomid){
+        this.OnSendToRoomAdmins(msg, data, roomid)
+        for( var srv of config.frontServers)
+        {
+            try {
+                console.log("send " , msg, data, roomid)
+                await axios.post(srv + '/rest/api/execCommandAdmins', {msg, data, roomid});
+            }
+            catch (e) {
+                console.log(e)
+            }
+        }
+    }
+    OnSendToRoomAdmins(msg, data, roomid){
         this.clients.forEach(c=>{
             if(c.isActive && c.roomid==roomid && ( c.isAdmin || c.isSpeaker) ) {
                 c.socket.emit(msg, data);
@@ -79,20 +85,48 @@ class Clients{
             }
         });
     }
-    sendToRoomSpeakers(msg, data, roomid){
+  async  sendToRoomSpeakers(msg, data, roomid){
+        this.OnSendToRoomSpeakers(msg, data, roomid)
+        for( var srv of config.frontServers)
+        {
+            try {
+                console.log("send " , msg, data, roomid)
+                await axios.post(srv + '/rest/api/execCommandSpeakers', {msg, data, roomid});
+            }
+            catch (e) {
+                console.log(e)
+            }
+        }
+    }
+    OnSendToRoomSpeakers(msg, data, roomid){
         this.clients.forEach(c=>{
             if(c.isActive && c.roomid==roomid &&  c.isSpeaker )
                 c.socket.emit(msg, data);
         });
     }
-    sendToUser(msg, data, userid, roomid){
-        console.log("sentToUser - ", userid)
+    async sendToUser(msg, data, userid, roomid){
+       this.OnSendToUser
+        for( var srv of config.frontServers)
+        {
+            try {
+                console.log("send " , msg, data, roomid)
+                await axios.post(srv + '/rest/api/execCommandUser', {msg, data, roomid});
+            }
+            catch (e) {
+                console.log(e)
+            }
+        }
+    }
+    OnSendToUser(msg, data, userid, roomid){
+
+
         this.clients.forEach(c=>{
             if(c.isActive && c.roomid==roomid &&  c.user.id==userid )
                 console.log("sentToUser!!!!", c.user.id)
-                c.socket.emit(msg, data);
+            c.socket.emit(msg, data);
         });
     }
+
     fwd(msg, data){
         this.clients.forEach(c=>{
             if(c.isActive && c.socket.id==data.to )

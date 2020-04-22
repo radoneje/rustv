@@ -1243,10 +1243,26 @@ router.get("/spkBitrate", async (req, res, next) => {
     res.json(config.meetBitrate);
 })
 router.post('/execCommand', async (req, res, next) => {
-    console.log("execCommand", )
+
     req.transport.OnSendToRoomUsers(req.body.msg, req.body.data, req.body.roomid)
     res.sendStatus(200);
 })
+router.post('/execCommandAdmins', async (req, res, next) => {
+
+    req.transport.OnSendToRoomAdmins(req.body.msg, req.body.data, req.body.roomid)
+    res.sendStatus(200);
+})
+router.post('/execCommandSpeakers', async (req, res, next) => {
+
+    req.transport.OnSendToRoomSpeakers(req.body.msg, req.body.data, req.body.roomid)
+    res.sendStatus(200);
+})
+router.post('/execCommandUser', async (req, res, next) => {
+
+    req.transport.OnSendToUser(req.body.msg, req.body.data, req.body.roomid)
+    res.sendStatus(200);
+})
+
 
 
 
