@@ -1287,6 +1287,16 @@ router.post('/execCommandUser', async (req, res, next) => {
     req.transport.OnSendToUser(req.body.msg, req.body.data, req.body.roomid)
     res.sendStatus(200);
 })
+router.post('/startVideoCommand', async (req, res, next) => {
+    req.transport.OnStartVideo(req.body.id, req.body.socketid)
+    res.sendStatus(200);
+})
+router.post('/execCommandFwd', async (req, res, next) => {
+    req.transport.Onfwd(req.body.msg, req.body.data)
+    res.sendStatus(200);
+})
+
+
 
 
 

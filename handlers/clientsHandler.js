@@ -35,12 +35,35 @@ class Clients{
     SpkCount(roomid){
         return this.clients.filter(c=>{return c.isSpeaker && c.isActive && c.roomid==roomid}).length;
     }
-    startVideo(id, socketid) {
+    async startVideo(id, socketid) {
         var _this = this;
+        var find=false;
         this.clients.forEach(c => {
             if (c.id == id) {
                 c.isVideo = true;
                 _this.sendToRoomAdmins("selfVideoStarted", {id:c.user.id, socketid:socketid}, c.roomid)
+                find=true;
+            }
+        })
+        if(!find)
+            for( var srv of config.frontServers)
+            {
+                try {
+                    console.log("send " , msg, data, roomid)
+                    await axios.post(srv + '/rest/api/startVideoCommand', {id, socketid});
+                }
+                catch (e) {
+                    console.log(e)
+                }
+            }
+
+    }
+    OnStartVideo(id, socketid){
+        this.clients.forEach(c => {
+            if (c.id == id) {
+                c.isVideo = true;
+                _this.sendToRoomAdmins("selfVideoStarted", {id:c.user.id, socketid:socketid}, c.roomid)
+
             }
         })
     }
@@ -127,7 +150,21 @@ class Clients{
         });
     }
 
-    fwd(msg, data){
+    async fwd(msg, data){
+
+        this.Onfwd(msg, data)
+        for( var srv of config.frontServers)
+        {
+            try {
+                console.log("send " , msg, data, roomid)
+                await axios.post(srv + '/rest/api/execCommandFwd', {msg, data});
+            }
+            catch (e) {
+                console.log(e)
+            }
+        }
+    }
+    Onfwd(msg, data){
         this.clients.forEach(c=>{
             if(c.isActive && c.socket.id==data.to )
                 c.socket.emit(msg, data);
