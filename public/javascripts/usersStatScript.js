@@ -24,6 +24,7 @@ window.onload=function () {
 
                 var dt=await axios.get("/rest/api/usersstat/"+event.id);
                 var users=dt.data;
+                users=users.filter(u=>{return u.otraslid != null})
                 console.log(users)
                 if(users.length!=0) {
                     _this.otrasles.forEach(o => {
