@@ -19,6 +19,8 @@ class socket{
             socket.on("hello",async ( data)=>{
                 console.log("hello on room")
                 var users=await knex.select("*").from("t_eventusers").where({id:data.id})
+                if(users.length==0)
+                    return
                 if(users[0].email=='speaker@rustv.ru' && users[0].smsCode==999999 && _this.clients.SpkCount(data.roomid)>0 )
                 {
                     socket.emit("SPKanotherConnectError",false);
