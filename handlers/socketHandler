@@ -11,7 +11,7 @@ class socket{
         this.io.binaryType = 'arraybuffer';
         var  _this=this;
         this.io.on('connection', async (socket)=> {
-            console.log("connect");
+
             var id=null;
             var roomid=null;
             socket.on("hello",async ( data)=>{
@@ -40,7 +40,6 @@ class socket{
                     _this.spkRoom.push({user:users[0],id:socket.id, socket:socket, isActive:true, roomid:data.roomid})
             })
             socket.on("disconnect",(msg,  data)=>{
-                console.log("disconnect");
               //  if(id)
                 try {
                     _this.clients.disActive(socket.id);
