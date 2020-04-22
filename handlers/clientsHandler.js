@@ -54,7 +54,7 @@ class Clients{
         for( var srv of config.frontServers)
         {
             try {
-
+                console.log("OnSendToRoomUsers send " , msg, data, roomid)
                 await axios.post(srv + '/rest/api/execCommand', {msg, data, roomid});
             }
             catch (e) {
