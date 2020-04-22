@@ -476,7 +476,7 @@ router.get("/localUsers/:eventid/:roomid", async (req, res, next) => {
                 handUp: c.handUp ? true : false
             });
     })
-    return ret;
+    res.json(ret);
 })
 
 
