@@ -61,6 +61,5 @@
     "audio" :98
   },
   "frontServers": [
-    "http://localhost"
   ]
 }

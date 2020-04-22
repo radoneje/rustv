@@ -50,7 +50,7 @@ class Clients{
             if(c.isActive && c.roomid==roomid)
                 c.socket.emit(msg, data);
         });*/
-        console.log("sendToRoomUsers send " , msg, data, config.frontServers)
+        OnSendToRoomUsers(msg, data, roomid);
         for( var srv of config.frontServers)
         {
             try {
@@ -63,7 +63,6 @@ class Clients{
         }
     }
     OnSendToRoomUsers(msg, data, roomid){
-        console.log("OnSendToRoomUsers receive " , msg, data, roomid)
         this.clients.forEach(c=>{
 
             if(c.isActive && c.roomid==roomid) {
