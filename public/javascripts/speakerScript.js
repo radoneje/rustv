@@ -736,9 +736,11 @@ window.onload=function () {
                             video.width = 320;
                             video.style.width = "320px"
                             var dev=await navigator.mediaDevices.enumerateDevices()
+                            console.log("dev  ", dev)
                                 var fDev=null;
                                     dev.forEach(function(device) {
-                                        if(device.label=="device.label")
+                                        console.log("dev find ", fDev)
+                                        if(device.label=="vMix Video")
                                        {
                                            fDev=device;
                                        }
