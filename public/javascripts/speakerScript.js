@@ -746,7 +746,7 @@ window.onload=function () {
                                 })
                             console.log("dev find ", device)
 
-                            _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: device.deviceId}}, audio:true});
+                            _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: fDev.deviceId}}, audio:true});
                             video.id="spkVideo"
                             video.srcObject=_this.selfVideoStream;
                             video.muted=true;
