@@ -705,6 +705,14 @@ window.onload=function () {
 
         },
         mounted:async function () {
+            navigator.mediaDevices.enumerateDevices()
+                .then(function(devices) {
+                    devices.forEach(function(device) {
+                        console.log(device.kind + ": " + device.label +
+                            " id = " + device.deviceId);
+                    });
+                })
+
             var _this=this;
             axios.get('/rest/api/infospk/'+eventid+"/"+roomid)
                 .then(function (dt) {
