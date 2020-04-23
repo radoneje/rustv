@@ -705,13 +705,7 @@ window.onload=function () {
 
         },
         mounted:async function () {
-            navigator.mediaDevices.enumerateDevices()
-                .then(function(devices) {
-                    devices.forEach(function(device) {
-                        console.log(device.kind + ": " + device.label +
-                            " id = " + device.deviceId);
-                    });
-                })
+
 
             var _this=this;
             axios.get('/rest/api/infospk/'+eventid+"/"+roomid)
@@ -736,12 +730,23 @@ window.onload=function () {
                             document.getElementById("app").style.opacity = 1;
                         setTimeout(async () => {
                             console.warn("continue")
-                            var dt= await axios.get('/rest/api/spkConstraints');
+                           // var dt= await axios.get('/rest/api/spkConstraints');
                             var constraints=dt.data;
                             var video=SpkcreateVideoContaiter('selfVideo', _this.user.i ||''+" "+_this.user.f);
                             video.width = 320;
                             video.style.width = "320px"
-                            _this.selfVideoStream = await navigator.mediaDevices.getUserMedia(constraints);
+                            var dev=await navigator.mediaDevices.enumerateDevices()
+                                var fDev=null;
+                                    dev.forEach(function(device) {
+                                        if(device.label=="device.label")
+                                       {
+                                           fDev=device;
+                                       }
+
+                                })
+                            console.log("dev find ", device)
+
+                            _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: device.deviceId}}, audio:true});
                             video.id="spkVideo"
                             video.srcObject=_this.selfVideoStream;
                             video.muted=true;
