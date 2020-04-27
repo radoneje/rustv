@@ -1074,6 +1074,20 @@ router.post("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, res,
 
                 await pdf2pic.convertBulk(r[0].path, -1)
                 var pres = await readdir(folder);
+                pres=pres.sort((a,b)=>{
+                    var ma = a.match(/p_(\d+)\.png/);
+                    var mb = b.match(/p_(\d+)\.png/);
+                    if(!ma )
+                        return 0
+                    if(!mb )
+                        return 0
+                    try{
+                        return parseInt(ma[0])-parseInt(mb[0]);
+                    }
+                    catch (e) {
+                        return 0
+                    }
+                })
                 for (pr of pres) {
                     var m = pr.match(/p_(\d+)\.png/);
                     var f = await req.knex("t_presfiles").insert({path: path.join(folder, pr), fileid: r[0].id}, "id")
