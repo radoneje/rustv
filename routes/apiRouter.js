@@ -1080,7 +1080,7 @@ router.post("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, res,
                     if (!r[0].presfiles)
                         r[0].presfiles = [];
                     r[0].presfiles.push(f[0])
-                    req.transport.emit("newFilePres", {id: f[0], fileid: r[0].id}, req.params.roomid);
+                    req.transport.emit("newFilePres", {id:  r[0].id, fileid:f[0]}, req.params.roomid);
                 }
             }
 
