@@ -631,7 +631,7 @@ window.onload=function () {
                         })
                     axios.get("/rest/api/activePres/"+eventid+"/"+roomid)
                         .then(function(ff){
-                                    _this.pres=ff.data.item
+                                  //  _this.pres=ff.data.item
                         })
                     axios.get("/rest/api/files/"+eventid+"/"+roomid)
                         .then(function (r) {
