@@ -1118,8 +1118,8 @@ router.get("/activePres/:eventid/:roomid", checkLoginToRoom, async (req, res, ne
     if (r.length < 1)
         return res.json({item: null, fileid: null})
 
-   // res.json({item: r[0].id, fileid: r[0].fileid})
-    res.json({});
+    res.json({item: r[0].id, fileid: r[0].fileid})
+   // res.json({});
 
 })
 router.post("/pres/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
