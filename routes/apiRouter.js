@@ -1082,7 +1082,7 @@ router.post("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, res,
                     if(!mb )
                         return 0
                     try{
-                        return parseInt(ma[0])-parseInt(mb[0]);
+                        return parseInt(ma[1])-parseInt(mb[1]);
                     }
                     catch (e) {
                         return 0
