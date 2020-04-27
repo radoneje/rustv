@@ -70,3 +70,12 @@ a=rtcp-fb:96 nack pli
 {
 "status":404
 }
+
+.n1BoxItem {
+    box-sizing: border-box;
+    width: 50%;
+    box-sizing: border-box;
+    flex: 1 0 50%;
+    padding-right: 20px;
+    padding-bottom: 21px;
+}

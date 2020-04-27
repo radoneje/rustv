@@ -1057,7 +1057,7 @@ router.post("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, res,
                 var f = await req.knex("t_presfiles").insert({path: r[0].path, fileid: r[0].id}, "id")
                 r[0].presfiles = [];
                 r[0].presfiles.push(f[0])
-                req.transport.emit("newFilePres", {id: r[0].id, fileid: f[0]}, req.params.roomid);
+                req.transport.emit("newFilePres", {id:  r[0].id, fileid:f[0]}, req.params.roomid);
             }
             if (r[0].mime.indexOf('application/pdf') == 0) {
 

@@ -353,7 +353,7 @@ window.onload=function () {
             OnNewFilePres:function (data) {
                console.log("OnNewFilePres", this.files, data)
                 this.files.forEach(f=>{
-                    if(f.id==data.fileid)
+                    if(f.id==data.id)
                         f.presfiles.push(f);
                 })
             },
