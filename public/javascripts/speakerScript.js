@@ -735,29 +735,30 @@ window.onload=function () {
                             var video=SpkcreateVideoContaiter('selfVideo', _this.user.i ||''+" "+_this.user.f);
                             video.width = 320;
                             video.style.width = "320px"
-                            var dev=await navigator.mediaDevices.enumerateDevices()
-                            console.log("dev  ", dev)
-                                var fDev=null;
-                                    dev.forEach(function(device) {
-                                        console.log("dev find ", fDev)
-                                        if(device.label=="vMix Video")
-                                       {
-                                           fDev=device;
-                                       }
+                            /*  var dev=await navigator.mediaDevices.enumerateDevices()
+                              console.log("dev  ", dev)
+                            /*    var fDev=null;
+                                      dev.forEach(function(device) {
+                                          console.log("dev find ", fDev)
+                                          if(device.label=="vMix Video")
+                                         {
+                                             fDev=device;
+                                         }
 
-                                })
-                            console.log("dev find ", fDev)
+                                  })
+                              console.log("dev find ", fDev)*/
 
-                            _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: fDev.deviceId}}, audio:true});
-                            video.id="spkVideo"
-                            video.srcObject=_this.selfVideoStream;
-                            video.muted=true;
+                             // _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: fDev.deviceId}}, audio:true});
+                            _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:true, audio:true});
+                              video.id="spkVideo"
+                              video.srcObject=_this.selfVideoStream;
+                              video.muted=true;
 
-                           /* video.addEventListener("click", () => {
-                                video.style.zIndex = "-1";
-                                video.style.opacity = "0"
-                                video.style.top="90%"
-                            })*/
+                             /* video.addEventListener("click", () => {
+                                  video.style.zIndex = "-1";
+                                  video.style.opacity = "0"
+                                  video.style.top="90%"
+                              })*/
                             _this.recorder= new Recorder(_this);
                             _this.recorder.start(video);
 
