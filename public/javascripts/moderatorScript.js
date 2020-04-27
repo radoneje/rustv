@@ -354,7 +354,8 @@ window.onload=function () {
                console.log("OnNewFilePres", this.files, data)
                 this.files.forEach(f=>{
                     if(f.id==data.id)
-                        f.presfiles.push({id:f.fileid, fileid:f.id});
+                        console.log("insert to pres", )
+                        f.presfiles.push({id:data.fileid, fileid:data.id});
                 })
             },
             previewFilePres:async function(item){
