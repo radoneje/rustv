@@ -1103,7 +1103,7 @@ router.get("/files/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
 router.get("/pres/:presid/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
 
     var r = await req.knex.select("*").from("t_presfiles")
-        .where({id: req.params.presid, isDeleted: false});
+        .where({id: req.params.presid, isDeleted: false}).orderBy("id");
     if (r.length < 1)
         return res.sendStatus(404);
 
