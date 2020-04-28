@@ -6,13 +6,18 @@ window.onload=function () {
             sect:[{title:"Вопросы", isActive:true, id:1}, {title:"Чат", isActive:true, id:2},{title:"Участники", isActive:false, id:3},,{title:"Голосования", isActive:false, id:4} ],
             activeSection:2,
             chat:[],
+            isChat:room.isChat,
             users:[],
             q:[],
             qText:"",
             chatText:"",
             files:[],
+            isFiles:room.isFiles,
             pres:null,
             user:null,
+            isUsers:room.isUsers,
+            isQ:room.isQ,
+            isLenta:room.isLenta,
             selfVideoStream:null,
             socket,
             SPKvksUsers:[],
@@ -25,7 +30,8 @@ window.onload=function () {
             isPres:false,
             previewPres:[],
             room:room,
-            votes:[]
+            votes:[],
+            userFindText:""
         },
         methods:{
             onHandUp:function(data){
@@ -482,9 +488,64 @@ window.onload=function () {
                 this.q.forEach(q=>{
                     if(q.id==data.id)
                         q.likes=data.likes;
-                })
-            }
 
+                })
+            },
+            chatOnOff:function () {
+
+                axios.post("/rest/api/isChat/"+eventid+"/"+roomid,{isChat:!this.isChat}).then();
+            },
+            OnIsChat:function (data) {
+                this.isChat=data.isChat;
+            },
+            filesOnOff:function () {
+
+                axios.post("/rest/api/isFiles/"+eventid+"/"+roomid,{isFiles:!this.isFiles}).then();
+            },
+            OnIsFiles:function (data) {
+                this.isFiles=data.isFiles;
+            },
+            usersOnOff:function () {
+
+                axios.post("/rest/api/isUsers/"+eventid+"/"+roomid,{isUsers:!this.isUsers}).then();
+            },
+            OnIsUsers:function (data) {
+                this.isUsers=data.isUsers;
+            },
+            //
+            qOnOff:function () {
+
+                axios.post("/rest/api/isQ/"+eventid+"/"+roomid,{isQ:!this.isQ}).then();
+            },
+            OnQOnOff:function (data) {
+                this.isQ=data.isQ;
+            },
+            lentaOnOff:function () {
+
+                axios.post("/rest/api/isLenta/"+eventid+"/"+roomid,{isLenta:!this.isLenta}).then();
+            },
+            OnIsLenta:function (data) {
+                this.isLenta=data.isLenta;
+            }
+        },
+        computed: {
+            sortedUsers:function () {
+                var sorted= this.users.sort((a,b)=>{
+                    if(a.handUp && b.handUp)
+                        return 0;
+                    if(a.handUp && !b.handUp)
+                        return -1;
+                    if(!a.handUp && b.handUp)
+                        return 1;
+                })
+                if(this.userFindText.length>0){
+                    sorted=sorted.filter(u=>{
+
+                        return (u.f && u.f.toLowerCase().indexOf(this.userFindText.toLowerCase())>=0) ||(u.i && u.i.toLowerCase().indexOf(this.userFindText.toLowerCase())>=0)
+                    })
+                }
+                return sorted;
+            }
         },
         mounted:async function () {
             var _this=this;

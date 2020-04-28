@@ -368,6 +368,7 @@ function connect(_this, roomid, clbk){
             _this.setPres(data)
         }
     });
+
     socket.on("rr", function(data) {
         console.log("utils rr", data)
     });
@@ -400,6 +401,32 @@ function connect(_this, roomid, clbk){
     socket.on("qLikes", function(data) {
         if(typeof(_this.OnQLikes)!='undefined'){
             _this.OnQLikes(data)
+        }
+    });
+    socket.on("isChat", function(data) {
+        if(typeof(_this.OnIsChat)!='undefined'){
+            _this.OnIsChat(data)
+        }
+    });
+
+    socket.on("isFiles", function(data) {
+        if(typeof(_this.OnIsFiles)!='undefined'){
+            _this.OnIsFiles(data)
+        }
+    });
+    socket.on("isUsers", function(data) {
+        if(typeof(_this.OnIsUsers)!='undefined'){
+            _this.OnIsUsers(data)
+        }
+    });
+    socket.on("isLenta", function(data) {
+        if(typeof(_this.OnIsLenta)!='undefined'){
+            _this.OnIsLenta(data)
+        }
+    });
+    socket.on("isQ", function(data) {
+        if(typeof(_this.OnQOnOff)!='undefined'){
+            _this.OnQOnOff(data)
         }
     });
 

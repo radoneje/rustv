@@ -328,6 +328,7 @@ width: 75%;
 .rInvitesTitle{
   font-size: 14px;
   line-height: 24px;
+  margin-bottom: 5px;
 }
 .inviteDialogBoxItems{
   margin: 10px auto;
@@ -507,6 +508,53 @@ width: 75%;
   -ms-overflow-style: none;
   display: none;
 }
+.aModSectTitle{
+  font-size: 12px;
+}
+.aModSectFind{
+  margin-left: 10px;
+  width: 100px;
+  border: 0;
+  border-radius: 2px;
+  background: #282d34;
+  padding: 4px;
+}
+.aModSectFind.active{
+  background: #dbdb01;
+  color: #282d34;
+}
+.aModSectFindClear{
+display: inline-block;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 5px;
+  position: relative;
+  height: 14px;
+
+ }
+.aModSectFindClear svg{
+  position: absolute;
+  top:0;
+  transform: rotate(45deg);
+}
+.aSectSwith{
+  margin: 10px 0;
+  cursor: pointer;
+}
+.aSectSwith div.warning{
+  color:red;
+}
+#UpBtn{
+  cursor: pointer;
+  position: fixed;
+  width: 40px;
+  bottom: 80px;
+  left:-1000px;
+}
+#UpBtn svg{
+  width: 100%;
+  height: 100%;
+}
 @media only screen and (max-width: 1024px){
   .meetVideoBox{
     position: inherit;
@@ -559,6 +607,12 @@ width: 75%;
    }
   .plInputListItems{
     max-height: 30vh;
+  }
+
+}
+@media only screen and (max-width: 767px) {
+  #UpBtn{
+    left: ~"calc(50% - 20px)";
   }
 
 }

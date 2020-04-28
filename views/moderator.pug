@@ -38,6 +38,9 @@ block content
                     div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==4}" v-on:click="lSectActiveIndex=4")
                         div.aModSectTitle Голосования ({{votes.length}})
                 div.aSectBody(id="qBox" v-if="lSectActiveIndex==2")
+                    div.aSectSwith(v-on:click="qOnOff()")
+                        div(v-if="isQ") Вопросы включены
+                        div.warning(v-else) Вопросы выключены
                     div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}")
                         div.qItemSmi  {{item.smi}}
                         div.qItemName {{item.i}}&nbsp;{{item.f}}
@@ -66,6 +69,9 @@ block content
                             span &nbsp;&nbsp;
                             span {{moment(item.date).format("HH:mm")}}
                 div.aSectBody(id="voteBox" v-if="lSectActiveIndex==4")
+                    div.aSectSwith(v-on:click="lentaOnOff()")
+                        div(v-if="isLenta") Лента включена
+                        div.warning(v-else) Лента выключена
                     div.greenBtn.clearBtn(v-on:click="voteAdd()") Добавить голосование
                     div.qItem(v-for="item in votes" v-bind:class="{ready:item.isReady}")
                         input.ask(type='text' placeholder="введите текст вопроса" v-model="item.title" v-on:change="voteChange(item)")
@@ -108,6 +114,9 @@ block content
                     div.aModSectMenuItem(v-bind:class="{active:centerSectActiveIndex==2}" v-on:click="centerSectActiveIndex=2")
                         div.aModSectTitle Файлы ({{files.length}})
                 div.aSectBody(id="chatBox" v-if="centerSectActiveIndex==1")
+                    div.aSectSwith(v-on:click="chatOnOff()")
+                        div(v-if="isChat") Чат включен
+                        div.warning(v-else) Чат выключен
                     div.qItem(v-for="item in chat")
                         div.qItemSmi  {{item.smi}}
                         div.qItemName {{item.i}}&nbsp;{{item.f}}
@@ -120,6 +129,9 @@ block content
                             span &nbsp;&nbsp;
                             span {{moment(item.date).format("HH:mm")}}
                 div.aSectBody(id="fileBox" v-if="centerSectActiveIndex==2")
+                    div.aSectSwith(v-on:click="filesOnOff()")
+                        div(v-if="isFiles") Файлы включены
+                        div.warning(v-else) Файлы выключены
                     div.qItem(v-for="item in files" :id="'file'+item.id")
                         div.qItemLoader(:id="'fileloader'+item.id")
                         div.qItemName {{item.title}}
@@ -133,6 +145,7 @@ block content
                             span.link.red(v-on:click="deleteFile(item)") &nbsp;&nbsp; Удалить
 
                 div.rFooter( v-if="centerSectActiveIndex==1")
+
                     div.fileLoadProgress
                     div.askWr
                         <svg v-on:click="chatAddSmile()" style="cursor:pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -162,9 +175,29 @@ block content
                         div.greenBtn.clearBtn(v-on:click="uploadFile()") Загрузить файл
             div.aModSect
                 div.aModSectTitle Пользователи ({{users.length}})
+                    input.aModSectFind(type="text" placeholder="Поиск" v-model='userFindText' v-bind:class="{active:userFindText.length>0}" )
+                    div.aModSectFindClear(v-on:click="userFindText=''" v-if="userFindText.length>0")
+                        <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                        <desc>Created with Sketch.</desc>
+                        <defs></defs>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Mobile" transform="translate(-149.000000, -501.000000)" fill="#eeeeee" fill-rule="nonzero">
+                        <g id="ic-baseline-add-circle-outline" transform="translate(148.000000, 500.000000)">
+                        <g id="Icon">
+                        <path d="M10.8333333,5.83333333 L9.16666667,5.83333333 L9.16666667,9.16666667 L5.83333333,9.16666667 L5.83333333,10.8333333 L9.16666667,10.8333333 L9.16666667,14.1666667 L10.8333333,14.1666667 L10.8333333,10.8333333 L14.1666667,10.8333333 L14.1666667,9.16666667 L10.8333333,9.16666667 L10.8333333,5.83333333 Z M10,1.66666667 C5.4,1.66666667 1.66666667,5.4 1.66666667,10 C1.66666667,14.6 5.4,18.3333333 10,18.3333333 C14.6,18.3333333 18.3333333,14.6 18.3333333,10 C18.3333333,5.4 14.6,1.66666667 10,1.66666667 Z M10,16.6666667 C6.325,16.6666667 3.33333333,13.675 3.33333333,10 C3.33333333,6.325 6.325,3.33333333 10,3.33333333 C13.675,3.33333333 16.6666667,6.325 16.6666667,10 C16.6666667,13.675 13.675,16.6666667 10,16.6666667 Z" id="Icon-Shape"></path>
+                        <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="20" height="20"></rect>
+                        </g>
+                        </g>
+                        </g>
+                        </g>
+                        </svg>
 
                 div.aSectBody.aSectUser
-                    div.qItem.userItem(v-for="item in users" v-bind:key="item.id" v-bind:class="{active:(item.isActive), handup:item.handup}" style="padding:5px;padding-left:50px")
+                    div.aSectSwith(v-on:click="usersOnOff()")
+                        div(v-if="isUsers") Пользователи включены
+                        div.warning(v-else) Пользователи выключены
+                    div.qItem.userItem(v-for="item in sortedUsers" v-bind:key="item.id" v-bind:class="{active:(item.isActive), handup:item.handup}" style="padding:5px;padding-left:50px")
                         div.qItemName(style='margin: 4px 0;') {{item.i}}&nbsp;{{item.f}}
                         div.userItemAvatar(v-if="!item.isVideo"  style="top:1px")
                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

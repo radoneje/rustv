@@ -22,17 +22,22 @@ window.onload=function () {
                 ],
             activeSection:2,
             chat:[],
+            isChat:room.isChat,
             users:[],
             q:[],
+            isQ:room.isQ,
+            isLenta:room.isLenta,
             qText:"",
             chatText:"",
             user:null,
+            isUsers:room.isUsers,
             handUp:false,
             socket:null,
             hand:false,
             handTimer:null,
             pres:null,
             files:[],
+            isFiles:room.isFiles,
             mainVideoMuted:false,
             eventRooms:[],
             invitedUsers:[],
@@ -40,7 +45,8 @@ window.onload=function () {
             videoReceivers:[],
             room:room,
             isHead:true,
-            votes:[]
+            votes:[],
+            userFindText:""
         },
         methods:{
             isWebRtc:function(){
@@ -574,7 +580,27 @@ window.onload=function () {
 
                 ret=parseFloat(answ.count/total)*100;
                 return parseInt(ret);
-            }
+            },
+            OnIsChat:function (data) {
+                this.isChat=data.isChat;
+            },
+            OnIsFiles:function (data) {
+                this.isFiles=data.isFiles;
+            },
+            usersOnOff:function () {
+
+                axios.post("/rest/api/isUsers/"+eventid+"/"+roomid,{isUsers:!this.isUsers}).then();
+            },
+            OnIsUsers:function (data) {
+                console.log("OnIsUsers", data)
+                this.isUsers=data.isUsers;
+            },
+            OnIsLenta:function (data) {
+                this.isLenta=data.isLenta;
+            },
+            OnQOnOff:function (data) {
+                this.isQ=data.isQ;
+            },
 
         },
         watch:{
@@ -583,6 +609,18 @@ window.onload=function () {
             }*/
             //
         },
+         computed: {
+             sortedUsers:function () {
+                 var sorted= this.users;
+                 if(this.userFindText.length>0){
+                     sorted=sorted.filter(u=>{
+
+                         return (u.f && u.f.toLowerCase().indexOf(this.userFindText.toLowerCase())>=0) ||(u.i && u.i.toLowerCase().indexOf(this.userFindText.toLowerCase())>=0)
+                     })
+                 }
+                 return sorted;
+             }
+         },
         mounted:async function () {
             var _this=this;
             if(roomid==52)
@@ -691,6 +729,25 @@ window.onload=function () {
                 })
         }
     })
+
+    let options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0
+    }
+    let callback = function(entries, observer){
+        if(entries.length>0)
+        {
+            document.getElementById("UpBtn").style.display=entries[0].isIntersecting?"none":"block"
+
+        }
+    }
+
+// наблюдатель
+    let observer = new IntersectionObserver(callback, options)
+    let target = document.querySelector('.L')
+    observer.observe(target)
+
 }
 function startVideo() {
 

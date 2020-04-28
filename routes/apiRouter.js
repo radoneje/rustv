@@ -1190,6 +1190,36 @@ router.delete("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, re
     req.transport.emit("deleteFile", r[0].id, req.params.roomid);
     res.json(r[0].id)
 })
+
+
+router.post("/isChat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    var r = await req.knex("t_rooms").update({isChat: req.body.isChat}, "*").where({id: req.params.roomid})
+    req.transport.emit("isChat", {isChat: req.body.isChat}, req.params.roomid);
+    res.json(r[0].id)
+})
+router.post("/isFiles/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    var r = await req.knex("t_rooms").update({isFiles: req.body.isFiles}, "*").where({id: req.params.roomid})
+    req.transport.emit("isFiles", {isFiles: req.body.isFiles}, req.params.roomid);
+    res.json(r[0].id)
+})
+router.post("/isUsers/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    var r = await req.knex("t_rooms").update({isUsers: req.body.isUsers}, "*").where({id: req.params.roomid})
+    req.transport.emit("isUsers", {isUsers: req.body.isUsers}, req.params.roomid);
+    res.json(r[0].id)
+})
+router.post("/isQ/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    var r = await req.knex("t_rooms").update({isQ: req.body.isQ}, "*").where({id: req.params.roomid})
+    req.transport.emit("isQ", {isQ: req.body.isQ}, req.params.roomid);
+    res.json(r[0].id)
+})
+router.post("/isLenta/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    var r = await req.knex("t_rooms").update({isLenta: req.body.isLenta}, "*").where({id: req.params.roomid})
+    req.transport.emit("isLenta", {isLenta: req.body.isLenta}, req.params.roomid);
+    res.json(r[0].id)
+})
+
+
+
 router.get("/startRoomRecord/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     var r = await req.knex("t_roomrecords").insert({roomid:req.params.roomid,date: (new Date())}, "*")
    //
@@ -1261,6 +1291,8 @@ router.post("/encodeTime", async (req, res, next) => {
     }
 
 })
+
+
 router.get("/constraints", async (req, res, next) => {
     res.json(config.constraints);
 })
