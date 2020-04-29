@@ -626,7 +626,7 @@ window.onload=function () {
             var _this=this;
             if(roomid==52)
                 _this.sect=[
-                    {title:"Программа", isActive:false, id:8, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
+                    {title:"Программа", isActive:false, id:8, logo:'/images/logofeed.svg', logoactive:'/images/logofeedaCl.svg'},
                     {title:"Лента", isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeedaCl.svg'},
                     {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoqCl.svg'},
                     {title:"Чат", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactiveCl.svg'},
