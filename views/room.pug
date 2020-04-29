@@ -28,7 +28,7 @@ block content
               div.videoWrapper(v-bind:style="{backgroundImage:pres?'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')':null}")
                 if (room.id==52)
                   //div#YT
-                  <iframe id="YT" width="560" height="315" src="https://www.youtube.com/embed/f8SzXeXt9Qc?enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  <iframe id="YT" width="560" height="315" src="https://www.youtube.com/embed/Wz9gYKwHWm4?enablejsapi=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
                   //<iframe width="560" height="315" src="https://www.youtube.com/embed/BXF8E_UwEAA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 else
@@ -103,14 +103,23 @@ block content
                         span.btnContentLbl &nbsp; &nbsp; Хочу спросить
 
 
+          div.rLfooter
+            include elements/footer
+            //div.lFooterHead.headTitle
+              div Программа.
+
+
       div.R
         div.Rwr
           div.rContent
             div.rHead#rHead
-              div.rHeadItem(v-for="item in sect" v-bind:class="{active:item.isActive, alert:(invites.length>0  && item.id==3)}" v-on:click="sectActive(item)" v-show="(item.id==0 && isLenta) || (item.id==1 && isQ) || (item.id==2 && isChat)   || (item.id==3 && isUsers) || item.id==4 || (item.id==7 && isFiles)")
+              div.rHeadItem(v-for="item in sect" v-bind:class="{active:item.isActive, alert:(invites.length>0  && item.id==3)}" v-on:click="sectActive(item)" :id="'sectMenu_'+item.id" v-show="item.id==-1 || (item.id==0 && isLenta) || (item.id==1 && isQ) || (item.id==2 && isChat)   || (item.id==3 && isUsers) || item.id==4 || (item.id==7 && isFiles)")
                 div.rHeadItemLogo
                   img(v-bind:src="item.isActive?item.logoactive:item.logo")
                 div {{item.title}}
+            div.rContentWr(v-if="activeSection==-1" )
+              div.rBody(id="progBox" )
+                include elements/footer
             div.rContentWr(v-if="activeSection==0" v-show="isLenta")
               div.rBody(id="feedBox" )
                 div.rFeedGroup
@@ -167,7 +176,7 @@ block content
               div.rFooter
                 div.fileLoadProgress
                 div.askWr
-                  <svg v-on:click="qFileClick()" style="cursor:pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg id='rQsend' v-on:click="qFileClick()" style="cursor:pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1.5 8C1.5 7.17157 2.17157 6.5 3 6.5H12C12.8284 6.5 13.5 7.17157 13.5 8V16C13.5 16.8284 12.8284 17.5 12 17.5H3C2.17157 17.5 1.5 16.8284 1.5 16V8Z" stroke="#9A9A9A"/>
                   <path d="M22.0992 5.00042C22.3496 5.16734 22.5 5.44833 22.5 5.74924V18.2508C22.5 18.5517 22.3496 18.8327 22.0992 18.9996C21.7655 19.222 21.3249 19.1968 21.0187 18.9378L16.0311 14.7175C15.6943 14.4325 15.5 14.0136 15.5 13.5724V10.4276C15.5 9.98637 15.6943 9.56752 16.0311 9.28252L21.0187 5.06222C21.3249 4.80315 21.7655 4.77795 22.0992 5.00042Z" stroke="#9A9A9A"/>
                   </svg>

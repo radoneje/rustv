@@ -3,6 +3,12 @@ body {
   color: #252321;
 }
 #app{
+  background: url(/images/clientBodyBg.png) !important;
+  background-size: 100%  !important;
+  background-position: 0  !important;
+  background-repeat: repeat  !important;
+}
+.roomScreen{
   background: url(/images/clientLoginBg.png);
   background-size: 100%;
   background-position: 0 120px;
@@ -67,6 +73,7 @@ input{
 }
 .rHeadItem{
   color: #4F4F4F;
+  width:85px
 }
 .rHeadItem.active{
   border-bottom: 2px solid #0F9B8C;
@@ -130,11 +137,29 @@ input{
 .aModSectFindClear svg g{
   fill:#282d34;
 }
+.lFooterAdgendaWr {
+  background: #DFDFDF;
+}
+.lFooterAdgendaWr .qItemName{
+  color: #0F9B8C;
+}
 
+.lFooterProg {
+  color: #4F4F4F;
+  background: #DFDFDF;
+  border-radius: 4px;
+}
+
+@media only screen and (max-width: 1024px) {
+  #sectMenu_-1 {
+    display: inline-block;
+  }
+}
 @media only screen and (max-width: 767px) {
   #app{
     background:#DFDFDF ;
   }
+
 
 }
 
