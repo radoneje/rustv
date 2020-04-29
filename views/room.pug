@@ -117,7 +117,7 @@ block content
                 div.rHeadItemLogo
                   img(v-bind:src="item.isActive?item.logoactive:item.logo")
                 div {{item.title}}
-            div.rContentWr(v-if="activeSection==8" )
+            div.rContentWr(v-if="activeSection==8" :id="'activeSection'+activeSection" )
               div.rBody(id="progBox" )
                 include elements/footer
             div.rContentWr(v-if="activeSection==0" v-show="isLenta")
