@@ -191,7 +191,7 @@ async function getVideoFromWowza(receiverItem, wssUrl, BitrateCfg, clbk) {
             console.warn("reciver  gotRemoteTrack err", event, receiverItem.elem)
                 // receiverItem.elem.src = window.URL.createObjectURL(event.streams[0]);
         }
-        receiverItem.elem.play();
+        //receiverItem.elem.play();
     }
     function gotIceCandidate() {
         
