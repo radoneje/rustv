@@ -93,6 +93,13 @@ async function publishVideoToWowza(id,stream,wssUrl,bitrate, clbk, err){
     }
 
 }
+function getVideoFromWowzaAync(id, elem, wssUrl, BitrateCfg){
+    return new Promise(async (res, rej)=> {
+        await getVideoFromWowza({id, elem}, wssUrl, BitrateCfg, (e)=>{
+            res(e);
+        })
+    })
+}
 async function getVideoFromWowza(receiverItem, wssUrl, BitrateCfg, clbk) {
     var peerConnection = null;
     var wsConnection = null;
@@ -119,7 +126,7 @@ async function getVideoFromWowza(receiverItem, wssUrl, BitrateCfg, clbk) {
 
     }
     wsConnection.onmessage = async (evt) => {
-     //   console.log("wsConnection.onmessage: " + evt.data);
+        console.log("wsConnection.onmessage: " + evt.data);
         var msgJSON = JSON.parse(evt.data);
 
         var msgStatus = Number(msgJSON['status']);
@@ -178,11 +185,13 @@ async function getVideoFromWowza(receiverItem, wssUrl, BitrateCfg, clbk) {
     function gotRemoteTrack(event) {
       //  console.log('receiver gotRemoteTrack: kind:' + event.track.kind + ' stream:' + event.streams[0]);
         try {
-            console.log("reseivet gotRemoteTrack", event)
+            console.log("reciver  gotRemoteTrack", event, receiverItem.elem)
             receiverItem.elem.srcObject = event.streams[0];
         } catch (error) {
+            console.log("reciver  gotRemoteTrack err", event, receiverItem.elem)
             receiverItem.elem.src = window.URL.createObjectURL(event.streams[0]);
         }
+        receiverItem.elem.play();
     }
     function gotIceCandidate() {
         

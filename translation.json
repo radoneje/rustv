@@ -1,0 +1,31 @@
+{
+  "original": {
+    "id": "ru",
+    "title": "original"
+  },
+  "languages": [
+    {
+      "id": "ru",
+      "title": "Russian",
+      "ch": 1
+    },
+    {
+      "id": "en",
+      "title": "English",
+      "ch": 2
+    },
+    {
+      "id": "cn",
+      "title": "Chinese",
+      "ch": 3
+    },
+    {
+      "id": "it",
+      "title": "Italiano",
+      "ch": 4
+    }
+  ]
+
+
+
+}

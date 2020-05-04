@@ -41,13 +41,13 @@
   },
   "meetWowza": [
     {
-      "url": "wss://mi.may24.pro/webrtc-session.json",
+      "url": "wss://wowza01.onevent.online/webrtc-session.json",
       "applicationName": "webrtc"
     }
 
   ],
   "meetBitrate": {
-     "video":170,
+     "video":750,
      "audio" :98
   },
   "spkWowza": [

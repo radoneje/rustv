@@ -1,3 +1,8 @@
+@dark:#252321;
+@dark2:#282d34;
+@color:#3c89df;
+@Superdark:#1E2226;
+@red:red;
 .roomScreen {
 }
 html{
@@ -20,7 +25,7 @@ html{
   100%{opacity: 1}
 }
 body{
-  background-color: #1E2226;
+  background-color: @Superdark;
   font-family: Open Sans;
   color: #EEEEEE;
 }
@@ -111,7 +116,7 @@ width: 75%;
   margin-left: 20px;
 }
 .fillOn #p2{
-  fill:red;
+  fill:@red;
 }
 .multiViewVideo #VKS {
   position: static;
@@ -148,7 +153,7 @@ width: 75%;
 .R{
   width: 25%;
   height: 100vh;
-  background: #1E2226;
+  background: @Superdark;
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.4);
   position: fixed;
   right: 0;
@@ -200,7 +205,7 @@ width: 75%;
   width: ~"calc(100% - 20px)";
   margin: 0 10px;
   height: 99px;
-  background: #1e2226;
+  background: @Superdark;
 
     margin: 0 auto;
     width: max-content;
@@ -474,7 +479,7 @@ width: 75%;
   right: 5px;
   width: 5px;
   height: 0;
-  background: #3c89df;
+  background: @color;
   opacity: .5;
   max-height: 100%;
 }
@@ -519,7 +524,7 @@ width: 75%;
   margin: 40px;
 }
 .videoPlayBannner svg path{
-  fill:#3c89df;
+  fill:@color;
 }
 .aSectBody::-webkit-scrollbar{
   -ms-overflow-style: none;
@@ -533,12 +538,12 @@ width: 75%;
   width: 100px;
   border: 0;
   border-radius: 2px;
-  background: #282d34;
+  background: @dark2;
   padding: 4px;
 }
 .aModSectFind.active{
   background: #dbdb01;
-  color: #282d34;
+  color: @dark2;
 }
 .aModSectFindClear{
 display: inline-block;
@@ -559,7 +564,7 @@ display: inline-block;
   cursor: pointer;
 }
 .aSectSwith div.warning{
-  color:red;
+  color:@red;
 }
 #UpBtn{
   cursor: pointer;
@@ -599,7 +604,7 @@ display: inline-block;
   height: 245px;
 }
 .lFooterAdgendaWr .qItemName{
-  color: #39ACDE;
+  color: @color;
   margin-left: 50px;
   font-size: 18px;
   line-height: 22px;
@@ -645,7 +650,7 @@ width: 100%;
 .lFooterProgItemTime{
   padding: 20px;
   width: 180px;
-  border-right: 1px solid #252321;
+  border-right: 1px solid @dark;
   position: relative;
 }
 .lFooterProgItemTime:after{
@@ -653,7 +658,7 @@ width: 100%;
   position: absolute;
   width: 10px;
   height: 10px;
-  border: 1px solid #252321;
+  border: 1px solid @dark;
   border-radius: 50%;
   right: -6px;
   top: 23px;
@@ -670,6 +675,67 @@ width: 100%;
 #sectMenu_8{
   display: none;
 }
+
+.chooseArrow{
+  border-bottom: 2px solid white;
+  border-right: 2px solid white;
+  width: 10px;
+  transform: rotate(45deg);
+  margin-left: 1em;
+  margin-bottom: .5em;
+
+  height: 10px;
+
+}
+.chooseLangBoxWr{
+  cursor: pointer;
+  position: relative;
+
+}
+.chooseLangBox{
+  position: absolute;
+  background: white;
+  border-radius: 4px;
+  bottom: 0;
+  z-index: 1;
+  right: 0;
+  color: black;
+  padding: 5px 0px;
+
+}
+.chooseLangItem{
+  padding: 3px 10px;
+  cursor: pointer;
+  padding-left: 20px;
+  position: relative;
+  cursor: pointer;
+}
+.chooseLangItem.active:before{
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  left: 8px;
+  border-bottom: 1px solid @dark;
+  border-right: 1px solid @dark;
+  transform: rotate(45deg);
+
+}
+.vCenterBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: inherit;
+}
+#analiserElem{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 10px;
+  z-index: 100;
+  background: @color;
+}
+
   @media only screen and (max-width: 1024px){
 
     #activeSection8{
@@ -782,6 +848,7 @@ width: 100%;
     }
 
 }
+
 @media only screen and (max-width: 767px) {
   #UpBtn{
     left: ~"calc(50% - 20px)";
