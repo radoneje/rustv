@@ -1,0 +1,20 @@
+<html>
+<body>
+    <div id="d">
+
+    </div>
+<script>
+    var elem=document.getElementById("d");
+    getDev();
+    async function getDev() {
+        var devices =await navigator.mediaDevices.enumerateDevices()
+        devices.forEach(d=>{
+            var item=document.createElement("div")
+            item.innerHTML=device.kind+" "+"device.label"+"device.deviceId"
+                elem.appendChild(item);
+        })
+    }
+
+</script>
+</body>
+</html>
