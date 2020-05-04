@@ -8,9 +8,9 @@
     getDev();
     async function getDev() {
         var devices =await navigator.mediaDevices.enumerateDevices()
-        devices.forEach(d=>{
+        devices.forEach(device=>{
             var item=document.createElement("div")
-            item.innerHTML=device.kind+" "+"device.label"+"device.deviceId"
+            item.innerHTML=device.kind+" "+device.label+" "+device.deviceId;
                 elem.appendChild(item);
         })
     }
