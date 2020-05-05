@@ -439,6 +439,11 @@ router.get("/usersstat/:eventid", async (req, res, next) => {
     res.json(dt);
 });
 
+router.get("/eventusers/:eventid",async (req, res, next)=>{
+    //public.v_eventuserswithcompany
+    var ret=await req.knex.select("*").from("v_eventuserswithcompany").where({eventid:req.params.eventid}).orderBy("f").orderBy("i")
+    res.json(ret);
+})
 router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
 
     var ret = [];
