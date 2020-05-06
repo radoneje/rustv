@@ -13,9 +13,20 @@ window.onload=function () {
             code:null
         },
         methods:{
-            cbLogin:function () {
-               this.codeError=true;
-                this.code="";
+            cbLogin:async function () {
+                try {
+                    var res = await axios.post("/rest/api/checkPersonalCode", {code});
+                    if(res.data.redirect)
+                        document.location.href=res.data.redirect
+                    else
+                        this.codeError=true;
+                    this.code="";
+                }
+                catch (e) {
+                    this.codeError=true;
+                    this.code="";
+                }
+
             }
         },
         mounted:function () {

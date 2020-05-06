@@ -50,6 +50,17 @@ router.post('/sendSms', async (req, res, next) => {
 
 
 });
+router.post('/checkPersonalCode', async (req, res, next) => {
+    var code=req.body.code;
+    if(code.length>10)
+        return res.sendStatus(500);
+    var users = await req.knex.select("*").from("t_users").where({personalcode:code}).orderBy("id","desc");
+    if(users.length==0)
+        return res.sendStatus(404);
+    req.session["user" + users[0].eventid]= users[0];
+    return res.json({redirect:'/room/'+users[0].defaultroom})
+    });
+
 router.post('/checkCode', async (req, res, next) => {
     var users = await req.knex.select("*").from("t_users").where({
         id: req.body.id,
