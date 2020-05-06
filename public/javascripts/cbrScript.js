@@ -15,7 +15,7 @@ window.onload=function () {
         methods:{
             cbLogin:async function () {
                 try {
-                    var res = await axios.post("/rest/api/checkPersonalCode", {code});
+                    var res = await axios.post("/rest/api/checkPersonalCode", {code:this.code});
                     if(res.data.redirect)
                         document.location.href=res.data.redirect
                     else
