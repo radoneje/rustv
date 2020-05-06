@@ -52,6 +52,8 @@ router.post('/sendSms', async (req, res, next) => {
 });
 router.post('/checkPersonalCode', async (req, res, next) => {
     var code=req.body.code;
+    if(!code)
+        return res.sendStatus(500);
     if(code.length>10)
         return res.sendStatus(500);
     var users = await req.knex.select("*").from("t_eventusers").where({personalcode:code}).orderBy("id","desc");
