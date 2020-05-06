@@ -168,11 +168,11 @@ window.onload=function () {
     })
 }
 function closeWnd(){
-    if(window.opener  && window.opener.registerSuccess)
+   /* if(window.opener  && window.opener.registerSuccess)
     {
         window.opener.registerSuccess(dt.data)
-    }
-    else
+    }*/
+  //  else
         var url = new URL(window.location.href);
         var redirect = url.searchParams.get("redirect");
          console.log(redirect);
