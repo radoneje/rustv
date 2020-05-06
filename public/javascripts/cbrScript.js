@@ -25,6 +25,7 @@ window.onload=function () {
                 catch (e) {
                     this.codeError=true;
                     this.code="";
+                    console.log(e)
                 }
 
             }
