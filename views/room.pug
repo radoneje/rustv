@@ -8,7 +8,7 @@ block head
   link(rel='stylesheet', href='/stylesheets/login.css')
   link(rel='stylesheet', href='/stylesheets/room.css')
   if event.isClientCss
-    link(rel='stylesheet', href='/stylesheets/clientRoom.css')
+    link(rel='stylesheet', href='/stylesheets/'+event.clientCss)
 block content
   div.roomScreen.multiViewVideo(id="app" v-bind:class="{roomInPres:pres}")
     div.head(v-show="videoReceivers.length<1 && isHead")
