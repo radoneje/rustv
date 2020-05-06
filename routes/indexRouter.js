@@ -3,6 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log(req.headers.host)
+     // if(req.headers.host.indexOf("localhost")>=0)
+    if(req.headers.host.indexOf("cbr-online.ru")>=0)
+    return res.render('cbr-online', { title: 'Пресс-конференция Банка России' });
   res.render('index', { title: 'ON.event' });
 });
 router.get('/badbrowser', function(req, res, next) {
