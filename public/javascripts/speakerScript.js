@@ -789,14 +789,19 @@ window.onload=function () {
                                         .then(function (ff) {
                                             // console.log("activePres", ff)
                                             if (ff.data.fileid) {
-                                                _this.previewPres = _this.files.filter(r => r.id == ff.data.fileid)[0].presfiles
-                                                //_this.pres = ff.data.fileid
-                                                _this.setPres(ff.data.item)
-                                                setTimeout(function () {
-                                                    var elem = document.getElementById("pres" + ff.data.fileid)
-                                                    if (elem)
-                                                        elem.scrollIntoView({inline: "center", behavior: "smooth"})
-                                                }, 200)
+                                                try {
+                                                    _this.previewPres = _this.files.filter(r => r.id == ff.data.fileid)[0].presfiles
+                                                    //_this.pres = ff.data.fileid
+                                                    _this.setPres(ff.data.item)
+                                                    setTimeout(function () {
+                                                        var elem = document.getElementById("pres" + ff.data.fileid)
+                                                        if (elem)
+                                                            elem.scrollIntoView({inline: "center", behavior: "smooth"})
+                                                    }, 200)
+                                                }
+                                                catch (e) {
+                                                    console.warn(e)
+                                                }
 
                                               //  _this.pres = ff.data.item
                                                // _this.isPres = ff.data.item ? true : false
