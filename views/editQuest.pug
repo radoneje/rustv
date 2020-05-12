@@ -1,0 +1,165 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/stylesheets/old.css')
+    script.
+        var roomid = #{room.id}
+        var eventid = #{room.eventid}
+        var room=!{JSON.stringify(room)}
+    script(src="/javascripts/utils.js")
+    script(src="/javascripts/moderatorScript.js")
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+    link(rel='stylesheet', href='/stylesheets/room.css')
+    if event.isClientCss
+        link(rel='stylesheet', href='/stylesheets/' + event.clientCss)
+
+block content
+    div.adminScreen.adminContainer(id="app" style="height: 100vh;" v-bind:class="{isPres:isPres}")
+
+        div.aModBox(style="height:100%")
+            div.aModSect(style="width:66%")
+                div.aModSectMenu
+                    div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==2}" v-on:click="lSectActiveIndex=2")
+                        div.aModSectTitle Вопросы ({{q.length}})
+                div.aSectBody(id="qBox" v-if="lSectActiveIndex==2")
+                    div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}")
+                        div.qItemSmi  {{item.smi}}
+                        div.qItemName {{item.i}}&nbsp;{{item.f}}
+                        long-text(v-bind:itemtext="item.text")
+                        div(style="text-align:center")
+                            video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
+                        div.qItemPhoto(v-on:click="window.open('/files/'+item.photo)" v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
+                        div.qItemAnsvwer(v-if="item.answer!=null")
+                            div.qItemAnsvwerLabel Ответ:
+                            div.qItemAnsverText
+                                //textarea( :id="'qAnswerText'+item.id" placeholder="Напишите здесь текст ответа" v-model="item.answer" v-on:change="qItemAnswerChange(item)")
+                                autosize-teztarea(v-bind:item="item" v-on:change="qItemAnswerChange(item)")
+
+                        div.qItemDate
+                            //include elements/likes
+                        div.greenBtn(v-if="item.video" style="height: max-content;width: max-content;padding: 5px;" v-on:click="showUploadedVideo(item, $event)")
+                            span Показать на экране
+                        div.qItemDate
+                            span.link.green(v-if="! item.isSpk" v-on:click="qToSpk(item)") Показать спикеру &nbsp;&nbsp;
+                            span.link.green.black(v-else v-on:click="qToSpk(item)") Убрать от спикера &nbsp;&nbsp;
+                            span.link.green(v-if="item.answer==null" v-on:click="item.answer=''") Ответить&nbsp;&nbsp;
+                            span.link.green.black(v-if="item.isReady" v-on:click="QsetNew(item)") Пометить новым&nbsp;&nbsp;
+                            span.link.green(v-else v-on:click="QsetOld(item)") Пометить отвеченным&nbsp;&nbsp;
+                                span
+                                    <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.7319 0.295798C13.639 0.20207 13.5284 0.127675 13.4065 0.0769067C13.2846 0.026138 13.1539 0 13.0219 0C12.8899 0 12.7592 0.026138 12.6373 0.0769067C12.5155 0.127675 12.4049 0.20207 12.3119 0.295798L4.86192 7.7558L1.73192 4.6158C1.6354 4.52256 1.52146 4.44925 1.3966 4.40004C1.27175 4.35084 1.13843 4.32671 1.00424 4.32903C0.870064 4.33135 0.737655 4.36008 0.614576 4.41357C0.491498 4.46706 0.380161 4.54428 0.286922 4.6408C0.193684 4.73732 0.12037 4.85126 0.0711659 4.97612C0.0219619 5.10097 -0.00216855 5.2343 0.000152918 5.36848C0.00247438 5.50266 0.0312022 5.63507 0.0846957 5.75814C0.138189 5.88122 0.215401 5.99256 0.311922 6.0858L4.15192 9.9258C4.24489 10.0195 4.35549 10.0939 4.47735 10.1447C4.59921 10.1955 4.72991 10.2216 4.86192 10.2216C4.99394 10.2216 5.12464 10.1955 5.2465 10.1447C5.36836 10.0939 5.47896 10.0195 5.57192 9.9258L13.7319 1.7658C13.8334 1.67216 13.9144 1.5585 13.9698 1.432C14.0253 1.30551 14.0539 1.1689 14.0539 1.0308C14.0539 0.892697 14.0253 0.756091 13.9698 0.629592C13.9144 0.503092 13.8334 0.389441 13.7319 0.295798Z" fill="#28BA54"/>
+                                    </svg>
+                            span &nbsp;&nbsp;
+                            span.link.red(v-on:click="deleteQ(item)") Удалить
+                            span &nbsp;&nbsp;
+                            span {{moment(item.date).format("HH:mm")}}
+
+
+                div.rFooter
+                    div.fileLoadProgress
+                    div.askWr(v-if="lSectActiveIndex==2")
+                        input.ask#qText(v-on:paste="qTextOnPaste($event)" placeholder="Напишите Ваш вопрос" v-model="qText" v-on:keydown="qtextChange($event)")
+                        <svg v-on:click="qtextSend()" class="svgSendBtn" v-on:click="chattextSend()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                        <desc>Created with Sketch.</desc>
+                        <defs></defs>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Desktop-HD" transform="translate(-712.000000, -505.000000)" fill-rule="nonzero">
+                        <g id="ic-baseline-call-made" transform="translate(708.000000, 500.000000)">
+                        <g id="Icon">
+                        <polygon id="Icon-Shape" fill="#9A9A9A" points="9 5 9 7 15.59 7 4 18.59 5.41 20 17 8.41 17 15 19 15 19 5"></polygon>
+                        <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                        </g>
+                        </g>
+                        </g>
+                        </g>
+                        </svg>
+
+            div.aModSect
+                div.aModSectTitle Пользователи ({{users.length}})
+                    input.aModSectFind(type="text" placeholder="Поиск" v-model='userFindText' v-bind:class="{active:userFindText.length>0}" )
+                    div.aModSectFindClear(v-on:click="userFindText=''" v-if="userFindText.length>0")
+                        <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                        <desc>Created with Sketch.</desc>
+                        <defs></defs>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Mobile" transform="translate(-149.000000, -501.000000)" fill="#eeeeee" fill-rule="nonzero">
+                        <g id="ic-baseline-add-circle-outline" transform="translate(148.000000, 500.000000)">
+                        <g id="Icon">
+                        <path d="M10.8333333,5.83333333 L9.16666667,5.83333333 L9.16666667,9.16666667 L5.83333333,9.16666667 L5.83333333,10.8333333 L9.16666667,10.8333333 L9.16666667,14.1666667 L10.8333333,14.1666667 L10.8333333,10.8333333 L14.1666667,10.8333333 L14.1666667,9.16666667 L10.8333333,9.16666667 L10.8333333,5.83333333 Z M10,1.66666667 C5.4,1.66666667 1.66666667,5.4 1.66666667,10 C1.66666667,14.6 5.4,18.3333333 10,18.3333333 C14.6,18.3333333 18.3333333,14.6 18.3333333,10 C18.3333333,5.4 14.6,1.66666667 10,1.66666667 Z M10,16.6666667 C6.325,16.6666667 3.33333333,13.675 3.33333333,10 C3.33333333,6.325 6.325,3.33333333 10,3.33333333 C13.675,3.33333333 16.6666667,6.325 16.6666667,10 C16.6666667,13.675 13.675,16.6666667 10,16.6666667 Z" id="Icon-Shape"></path>
+                        <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="20" height="20"></rect>
+                        </g>
+                        </g>
+                        </g>
+                        </g>
+                        </svg>
+
+                div.aSectBody.aSectUser
+                    div.qItem.userItem(v-for="item in sortedUsers" v-bind:key="item.id" v-bind:class="{active:(item.isActive), handup:item.handup}" style="padding:5px;padding-left:50px")
+                        div.qItemName(style='margin: 4px 0;') {{item.i}}&nbsp;{{item.f}}
+                        div.userItemAvatar(v-if="!item.isVideo"  style="top:1px")
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.9993 2.66663C8.77135 2.66663 2.66602 8.77196 2.66602 16C2.66602 23.228 8.77135 29.3333 15.9993 29.3333C23.2274 29.3333 29.3327 23.228 29.3327 16C29.3327 8.77196 23.2274 2.66663 15.9993 2.66663ZM15.9993 9.33329C18.302 9.33329 19.9993 11.0293 19.9993 13.3333C19.9993 15.6373 18.302 17.3333 15.9993 17.3333C13.698 17.3333 11.9993 15.6373 11.9993 13.3333C11.9993 11.0293 13.698 9.33329 15.9993 9.33329ZM9.19135 22.3626C10.3873 20.6026 12.382 19.4293 14.666 19.4293H17.3327C19.618 19.4293 21.6114 20.6026 22.8074 22.3626C21.1034 24.1866 18.686 25.3333 15.9993 25.3333C13.3127 25.3333 10.8953 24.1866 9.19135 22.3626Z" fill="#9A9A9A"/>
+                            </svg>
+                        div.userItemAvatar.video(v-else style="cursor:pointer; top:1px" v-on:click="startVideoChat(item)" :id="'videoAvatar'+item.id")
+                            <svg width="32px" height="32px" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                            <desc>Created with Sketch.</desc>
+                            <defs></defs>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Desktop" transform="translate(-502.000000, -506.000000)" fill="#000000" fill-rule="nonzero">
+                            <g id="bx-bx-video" transform="translate(500.000000, 500.000000)">
+                            <g id="Icon">
+                            <path d="M24,9.33333333 C24,7.86266667 22.804,6.66666667 21.3333333,6.66666667 L5.33333333,6.66666667 C3.86266667,6.66666667 2.66666667,7.86266667 2.66666667,9.33333333 L2.66666667,22.6666667 C2.66666667,24.1373333 3.86266667,25.3333333 5.33333333,25.3333333 L21.3333333,25.3333333 C22.804,25.3333333 24,24.1373333 24,22.6666667 L24,18.2226667 L29.3333333,22.6666667 L29.3333333,9.33333333 L24,13.7773333 L24,9.33333333 Z M21.336,22.6666667 L5.33333333,22.6666667 L5.33333333,9.33333333 L21.3333333,9.33333333 L21.3346667,15.9986667 L21.3333333,16 L21.3346667,16.0013333 L21.336,22.6666667 Z" id="Icon-Shape"></path>
+                            <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="32" height="32"></rect>
+                            </g>
+                            </g>
+                            </g>
+                            </g>
+                            </svg>
+                        div.userHandUp(v-if="item.handUp")
+                            <svg width="19px" height="20px" viewBox="0 0 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                            <desc>Created with Sketch.</desc>
+                            <defs></defs>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Desktop-HD" transform="translate(-461.000000, -30.000000)" fill="#c0c300" fill-rule="nonzero">
+                            <g id="mdi-hand-right" transform="translate(459.000000, 28.000000)">
+                            <g id="Icon">
+                            <path d="M21,6.58 L21,18.67 C21,20.5091082 19.5091082,22 17.67,22 L11.58,22 C10.68,22 9.83,21.64 9.21,21 L2.67,14.36 C2.67,14.36 3.72,13.33 3.75,13.32 C4.07119514,13.0340397 4.54077941,12.9895101 4.91,13.21 C4.94,13.22 8.5,15.26 8.5,15.26 L8.5,5.33 C8.5,4.63964406 9.05964406,4.08 9.75,4.08 C10.4403559,4.08 11,4.63964406 11,5.33 L11,11.17 L11.83,11.17 L11.83,3.25 C11.83,2.55964406 12.3896441,2 13.08,2 C13.78,2 14.33,2.56 14.33,3.25 L14.33,11.17 L15.17,11.17 L15.17,4.08 C15.17,3.39 15.72,2.83 16.42,2.83 C17.1103559,2.83 17.67,3.38964406 17.67,4.08 L17.67,11.17 L18.5,11.17 L18.5,6.58 C18.5,5.88964406 19.0596441,5.33 19.75,5.33 C20.4403559,5.33 21,5.88964406 21,6.58 Z" id="Icon-Shape"></path>
+                            <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="24" height="24"></rect>
+                            </g>
+                            </g>
+                            </g>
+                            </g>
+                            </svg>
+
+                        div.userVideoWr(:id="'videoWr_'+item.id" )
+
+        div#VKS
+            div#videoWr
+                div.VKSbox(v-if="SPKvksUsers.length>0")
+                    div.VKSboxTitle Активные подключения ({{SPKvksUsers.length}})
+                    div.VKSboxItems
+                        div.VKSboxItem(v-for="item in SPKvksUsers" v-key="item.guid")
+                            div.VKSboxItemBox
+                                div.VKSboxItemTitle {{item.user.i||''}} {{item.user.f || ''}}
+                                div.VKSboxItemBtn(v-on:click="disconnectSPKvksUser(item)" :id="'VKSboxItemBtn'+item.guid") Отключить
+
+                div.videoBox#admPresBox(v-if="pres")
+                    div#admPres(v-bind:style="{backgroundImage:'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')'}")
+                    div.videoCap Трансляция
+                div.videoBox#translationVideoBox
+                    video#translationVideo( width="180"  controls playsinline muted autoplay :src="'https://stream.sberbank-school.ru/hls/'+ room.streamname +'/index.m3u8'" :poster="'/images/'+room.poster" )
+                    div.videoCap Трансляция
+
+
+
+
+
+
+
+
+

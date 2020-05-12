@@ -1,4 +1,43 @@
-window.onload=function () {
+window.onload=async function () {
+    Vue.component('autosize-teztarea', {
+        props: ['item', "onChange" ,],
+        data: function () {
+
+        },
+        created: function () {
+            setTimeout(()=>{
+                console.log(document.getElementById("item.answer"+this.item.id))
+                autosize(document.getElementById("item.answer"+this.item.id));
+            }, 100)
+
+        },
+        template: '<textarea  :id="\'item.answer\'+item.id" v-model="item.answer" placeholder="Напишите здесь текст ответа" v-on:change="$emit(\'change\')" ></textarea>'
+        //textarea( :id="'qAnswerText'+item.id" placeholder="Напишите здесь текст ответа" v-model="item.answer" v-on:change="qItemAnswerChange(item)")
+    })
+    var lt=await axios.get("/longtext");
+    console.log(lt.data);
+    Vue.component('long-text', {
+        props: ['itemtext', "isOpen" ],
+        data: function () {
+
+        },
+        model: {
+            isOpen: false,
+            smallText: ''
+        },
+        created: function () {
+            if(this.itemtext.length>=100);
+            {
+                console.log(this)
+                this.isOpen=false;
+                this.smallText =this.itemtext.substr(0,100);
+            }
+        },
+        template: lt.data
+        //textarea( :id="'qAnswerText'+item.id" placeholder="Напишите здесь текст ответа" v-model="item.answer" v-on:change="qItemAnswerChange(item)")
+    })
+
+
     var app = new Vue({
         el: '#app',
         data: {
@@ -83,6 +122,7 @@ window.onload=function () {
 
             },
             qItemAnswerChange:function(item){
+                console.log("qItemAnswerChange")
                 var _this=this;
                 if(item.answer.length>0)
                     qItemAnswerChange(item,_this)
@@ -133,6 +173,13 @@ window.onload=function () {
             },
             QsetNew:function (item) {
                 axios.post("/rest/api/qsetStatus/"+eventid+"/"+roomid,{id:item.id, status:false})
+                    .then(function (r) {
+
+                    })
+            },
+            qToSpk:function (item) {
+                console.log(item.isSpk)
+                axios.post("/rest/api/qToSpk/"+eventid+"/"+roomid,{id:item.id, isSpk:!item.isSpk})
                     .then(function (r) {
 
                     })

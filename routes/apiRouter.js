@@ -978,6 +978,13 @@ router.post("/qsetStatus/:eventid/:roomid", checkLoginToRoom, async (req, res, n
     req.transport.emit("qStatus", {id: r[0].id, isReady: r[0].isReady}, req.params.roomid);
     res.json(r[0].id)
 })
+router.post("/qToSpk/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    var r = await req.knex("t_q").update({isSpk: req.body.isSpk}, "*").where({id: req.body.id});
+    req.transport.emit("qToSpk", {id: r[0].id, isSpk: r[0].isSpk}, req.params.roomid);
+    res.json(r[0].id)
+})
+
+
 router.post("/qsetStatus/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     var r = await req.knex("t_q").update({isReady: req.body.status}, "*").where({id: req.body.id});
     req.transport.emit("qStatus", {id: r[0].id, isReady: r[0].isReady}, req.params.roomid);

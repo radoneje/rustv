@@ -259,6 +259,16 @@ function connect(_this, roomid, clbk){
             })
 
         });
+    socket.on("qToSpk", function(data){
+        _this.q.forEach(function (e) {
+            if(e.id==data.id) {
+                e.isSpk = data.isSpk;
+
+            }
+        })
+
+    });
+
         socket.on("videoSnapshot", function(data){
             _this.users.forEach(function (user) {
                 if(user.id==data.id) {

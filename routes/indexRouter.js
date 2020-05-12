@@ -126,6 +126,30 @@ router.get('/moderator/:id',  async (req, res, next) =>{
   res.render('moderator', { title: 'ON.event  '+room.title, room:room});
 
 })
+router.get('/longtext/',  async (req, res, next) =>{
+  res.render("elements/longtext");
+});
+router.get('/editQuest/:id',  async (req, res, next) =>{
+
+  req.params.id=parseInt(req.params.id)
+  if(!Number.isInteger(req.params.id))
+    return res.send(404);
+
+  var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.params.id})
+  if(rooms.length<1)
+    return res.send(404);
+
+  if(rooms.length<1)
+    return res.send(404);
+  var room=rooms[0]
+  var events=await req.knex.select("*").from("t_events").where({ id:room.eventid})
+
+
+  if(!req.session["moderator"+room.id])
+    return res.render('editQuestLogin',{ title: 'ON.event  '+rooms.title, room:room})
+  res.render('editQuest', { title: 'ON.event  '+room.title, room:room, event:events[0]});
+
+})
 router.get('/speaker/:id',  async (req, res, next) =>{
 
   req.params.id=parseInt(req.params.id)

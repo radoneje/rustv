@@ -1,18 +1,58 @@
 <html>
 <body>
-    <div id="d">
+<select id="audioSource" class="form-control"></select>
 
-    </div>
+<select id="secondAudioSource" class="form-control"></select>
+<audio autoplay controls id="a1"></audio>
+<audio autoplay controls id="a2"></audio>
 <script>
-    var elem=document.getElementById("d");
+    let audioSelect = document.querySelector('select#audioSource');
+    let secondAudioSelect = document.querySelector('select#secondAudioSource');
     getDev();
     async function getDev() {
-        var devices =await navigator.mediaDevices.enumerateDevices()
-        devices.forEach(device=>{
-            var item=document.createElement("div")
-            item.innerHTML=device.kind+" "+device.label+" "+device.deviceId;
-                elem.appendChild(item);
-        })
+        var deviceInfos= await navigator.mediaDevices.enumerateDevices();
+        console.log("deviceInfos", deviceInfos)
+        let audioInputs = deviceInfos
+            .filter(device => device.kind === 'audioinput')
+            .map((device, indx) => ({
+                value: device.deviceId,
+                label: device.label || `microphone ${indx + 1}`
+            }));
+        audioInputs.forEach(device => {
+            let option = document.createElement('option');
+            option.text = device.label;
+            option.value = device.value;
+            secondAudioSelect.appendChild(option);
+            audioSelect.appendChild(option.cloneNode(true));
+            audioSelect.onchange = initStreams;
+        });
+
+        async function initStreams() {
+            let audioSource = audioSelect.value;
+            let audioSource2 = secondAudioSelect.value;
+            let constraints = {
+                audio: {
+                    deviceId: audioSource ? {
+                        exact: audioSource
+                    } : undefined
+                }
+            };
+            var stream=await navigator.mediaDevices.getUserMedia(constraints);
+            let constraints2 = {
+                audio: {
+                    deviceId: audioSource2 ? {
+                        exact: audioSource2
+                    } : undefined
+                }
+            };
+            document.getElementById("a1").srcObject=stream;
+            console.log("stream",audioSource, stream.getAudioTracks())
+            var stream2=await navigator.mediaDevices.getUserMedia(constraints2);
+
+            console.log("stream2",audioSource2,stream2.getAudioTracks());
+            document.getElementById("a2").srcObject=stream2;
+
+        }
     }
 
 </script>

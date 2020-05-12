@@ -1,0 +1,8 @@
+div.qItemText
+    div(v-if="itemtext.length<100" v-html="itemtext")
+    div(v-else)
+        div(v-if="!isOpen") {{smallText}}
+            span.showAll(v-on:click="isOpen=!isOpen") ... показать полностью
+        div(v-else )
+            div( v-html="itemtext")
+            span.showAll(v-on:click="isOpen=!isOpen") свернуть
