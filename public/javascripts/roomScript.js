@@ -624,24 +624,86 @@ window.onload=function () {
          },
         mounted:async function () {
             var _this=this;
-            if(roomid==52)
-                _this.sect=[
-                    {title:"Программа", isActive:false, id:8, logo:'/images/logofeed.svg', logoactive:'/images/logofeedaCl.svg'},
-                    {title:"Лента", isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeedaCl.svg'},
-                    {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoqCl.svg'},
-                    {title:"Чат", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactiveCl.svg'},
-                    {title:"Люди", isActive:false, id:3, logo:'/images/logousers.svg', logoactive:'/images/logousersaCl.svg'},
-                    {title:"Файлы", isActive:false, id:7, logo:'/images/logofiles.svg', logoactive:'/images/logofilesaCl.svg'}
+            if(roomid==52) {
+                _this.sect = [
+                    {
+                        title: "Программа",
+                        isActive: false,
+                        id: 8,
+                        logo: '/images/logofeed.svg',
+                        logoactive: '/images/logofeedaCl.svg'
+                    },
+                    {
+                        title: "Лента",
+                        isActive: false,
+                        id: 0,
+                        logo: '/images/logofeed.svg',
+                        logoactive: '/images/logofeedaCl.svg'
+                    },
+                    {
+                        title: "Вопросы",
+                        isActive: false,
+                        id: 1,
+                        logo: '/images/logoqactive.svg',
+                        logoactive: '/images/logoqCl.svg'
+                    },
+                    {
+                        title: "Чат",
+                        isActive: true,
+                        id: 2,
+                        logo: '/images/logochat.svg',
+                        logoactive: '/images/logochatactiveCl.svg'
+                    },
+                    {
+                        title: "Люди",
+                        isActive: false,
+                        id: 3,
+                        logo: '/images/logousers.svg',
+                        logoactive: '/images/logousersaCl.svg'
+                    },
+                    {
+                        title: "Файлы",
+                        isActive: false,
+                        id: 7,
+                        logo: '/images/logofiles.svg',
+                        logoactive: '/images/logofilesaCl.svg'
+                    }
                 ];
-            if(roomid==61)
-                _this.sect=[
-                // {title:"Программа", isActive:false, id:8, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
-                //{title:"Лента", isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
-                {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoq.svg'},
-                {title:"Чат", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactive.svg'},
-                {title:"Люди", isActive:false, id:3, logo:'/images/logousers.svg', logoactive:'/images/logousersa.svg'},
-                {title:"Файлы", isActive:false, id:7, logo:'/images/logofiles.svg', logoactive:'/images/logofilesa.svg'}
-            ],
+            }
+            if(roomid==61) {
+                _this.sect = [
+                    // {title:"Программа", isActive:false, id:8, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
+                    //{title:"Лента", isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
+                    {
+                        title: "Вопросы",
+                        isActive: false,
+                        id: 1,
+                        logo: '/images/logoqactive.svg',
+                        logoactive: '/images/logoq.svg'
+                    },
+                    {
+                        title: "Чат",
+                        isActive: true,
+                        id: 2,
+                        logo: '/images/logochat.svg',
+                        logoactive: '/images/logochatactive.svg'
+                    },
+                    {
+                        title: "Люди",
+                        isActive: false,
+                        id: 3,
+                        logo: '/images/logousers.svg',
+                        logoactive: '/images/logousersa.svg'
+                    },
+                    {
+                        title: "Файлы",
+                        isActive: false,
+                        id: 7,
+                        logo: '/images/logofiles.svg',
+                        logoactive: '/images/logofilesa.svg'
+                    }
+                ]
+            }
             axios.get('/rest/api/info/'+eventid+"/"+roomid)
                 .then(function (dt) {
                     _this.user=dt.data;
