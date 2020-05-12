@@ -13,6 +13,11 @@ window.onload=function () {
             code:null
         },
         methods:{
+            enterKeyDown:function(e){
+                if(e.keyCode==13){
+                    cbLogin();
+                }
+            },
             cbLogin:async function () {
                 try {
                     var res = await axios.post("/rest/api/checkPersonalCode", {code:this.code});

@@ -72,5 +72,5 @@ html
             div.cbLoginRightError
               span &nbsp;
               span(v-if="codeError") Введенный код неверен
-            input.cbLoginRightCode(placeholder="Введите код" v-model="code")
+            input.cbLoginRightCode(placeholder="Введите код" v-model="code" v-on:keypress="enterKeyDown($event)")
             div.cbLoginRightEnter(v-on:click="cbLogin()") Войти
