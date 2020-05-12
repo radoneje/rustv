@@ -127,7 +127,7 @@ router.get('/moderator/:id',  async (req, res, next) =>{
 
 })
 router.get('/longtext/',  async (req, res, next) =>{
-  res.render("elements/longtext");
+  res.render("elements/longText");
 });
 router.get('/editQuest/:id',  async (req, res, next) =>{
 
