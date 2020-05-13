@@ -47,18 +47,18 @@ window.onload=function () {
                     elem.style.opacity= 1;
                     elem.style.zIndex=100;
 
-                   /* var elem=document.getElementById("selfVideo")
-                    elem.style.zIndex="100";
-                    elem.style.opacity="1"
-                    var video=document.createElement('video')
-                    video.muted=true;
-                    video.srcObject=this.selfVideoStream;
-                    video.id="mirrorVideo";
-                    video.autoplay=true
-                    document.body.appendChild(video)
-                    video.addEventListener('click',()=>{
-                        (video).parentNode.removeChild(video);
-                    })*/
+                    /* var elem=document.getElementById("selfVideo")
+                     elem.style.zIndex="100";
+                     elem.style.opacity="1"
+                     var video=document.createElement('video')
+                     video.muted=true;
+                     video.srcObject=this.selfVideoStream;
+                     video.id="mirrorVideo";
+                     video.autoplay=true
+                     document.body.appendChild(video)
+                     video.addEventListener('click',()=>{
+                         (video).parentNode.removeChild(video);
+                     })*/
                 }
             },
             setSpkStatus:function (data) {
@@ -140,11 +140,11 @@ window.onload=function () {
             },
             spkStartVks:function(data){
                 console.log("spkStartVksspkStartVks")
-               var item=null;
-               var _this=this;
-               var items=this.users.filter(u=>u.id==data.user.id)
+                var item=null;
+                var _this=this;
+                var items=this.users.filter(u=>u.id==data.user.id)
                 if(items.length>0) {
-                  //  _this.stopVKS();
+                    //  _this.stopVKS();
                     setTimeout(()=>{
                         _this.startVideoChat(items[0]);
                     },500)
@@ -204,11 +204,11 @@ window.onload=function () {
                     if(typeof (_this.WowzaCfg)=="undefined" || _this.WowzaCfg==null) {
                         _this.WowzaCfg = await axios.get('/rest/api/spkWowza')
                         _this.BitrateCfg = await axios.get('/rest/api/spkBitrate')
-                        await publishVideoToWowza(_this.socket.id,_this.newStream /*_this.selfVideoStream*/, _this.WowzaCfg.data, _this.BitrateCfg.data, (ret)=>{
+                        await publishVideoToWowza(_this.socket.id,/*_this.newStream*/ _this.selfVideoStream, _this.WowzaCfg.data, _this.BitrateCfg.data, (ret)=>{
                             console.log("my Video Published", ret)
                             peerConnection=ret.peerConnection
                             setTimeout(async ()=>{
-                              _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid});
+                                _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid});
                                 addUserToSpeakerRoom();
                             }, 2000)
 
@@ -244,12 +244,12 @@ window.onload=function () {
             },
             onMyVideoStarted: function (video, stream, item) {
                 var _this=this;
-              /*  createSender(video, stream, null, function (videoSender) {
-                    videoSenders.push(videoSender)
-                    _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, to:item.socketid, isSpk:true})
+                /*  createSender(video, stream, null, function (videoSender) {
+                      videoSenders.push(videoSender)
+                      _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, to:item.socketid, isSpk:true})
 
-                    // addSenderEvents(_this.socket,item.socketid, videoSender);
-                });*/
+                      // addSenderEvents(_this.socket,item.socketid, videoSender);
+                  });*/
 
                 /*var remoteVideo=document.createElement("video")
                 remoteVideo.controls=true;
@@ -279,9 +279,9 @@ window.onload=function () {
                     if(videoReceivers.length>0){
                         var i=1;
                         videoReceivers.forEach(r=>{
-                        setTimeout(()=>{
-                            _this.socket.emit("startDirectConnect",{user:r.user, guid:data.recguid, pairGUID:ret.pairGUID, to:data.user})
-                        },1000*i)
+                            setTimeout(()=>{
+                                _this.socket.emit("startDirectConnect",{user:r.user, guid:data.recguid, pairGUID:ret.pairGUID, to:data.user})
+                            },1000*i)
                             i++;
                         })
                     }
@@ -292,7 +292,7 @@ window.onload=function () {
 
 
                 var videoBox=document.getElementById(data.guid)
-               var videoCap=videoBox.querySelector(".videoCap")
+                var videoCap=videoBox.querySelector(".videoCap")
                 videoCap.innerHTML = "<img src='/images/close.svg' class='closeIcon' id='close"+data.guid+"'/>" + videoCap.innerHTML;
                 {
                     document.getElementById("close"+data.guid).addEventListener("click", ()=>{
@@ -367,7 +367,7 @@ window.onload=function () {
             onPreviewFilePres:function (dt) {
                 console.log("onPreviewFilePres", dt)
 
-                    this.previewPres=dt;
+                this.previewPres=dt;
             },
             newFile(data){
                 console.log("new file", data, this.files)
@@ -552,55 +552,55 @@ window.onload=function () {
                     });
 
             },
-             removeWowzaVideo:function(streamid) {
-                    var _this=this;
-                    console.log("removeWowzaVideo",(streamid))
-                    wowzaRecievers.forEach(r=>{
-                        if(r.streamid==streamid)
-                        {
-                            if (r.peerConnection) {
-                                r.peerConnection.close();
-                                r.peerConnection = null;
-                            }
-                            _this.socket.emit("roomStopWowzaVideo",{streamid:streamid});
-                            var elem=document.getElementById(streamid);
-                            if(elem)
-                                elem.parentNode.removeChild(elem);
-                        }
-                    })
-                    wowzaRecievers= wowzaRecievers.filter(r=>{
-                        return r.streamid!=streamid
-                    });
-                    if(wowzaRecievers.length==0)
+            removeWowzaVideo:function(streamid) {
+                var _this=this;
+                console.log("removeWowzaVideo",(streamid))
+                wowzaRecievers.forEach(r=>{
+                    if(r.streamid==streamid)
                     {
-                        _this.WowzaCfg=null;
-                        peerConnection.close();
-                        peerConnection = null;
-                        _this.SPKstatus=1;
-
+                        if (r.peerConnection) {
+                            r.peerConnection.close();
+                            r.peerConnection = null;
+                        }
+                        _this.socket.emit("roomStopWowzaVideo",{streamid:streamid});
+                        var elem=document.getElementById(streamid);
+                        if(elem)
+                            elem.parentNode.removeChild(elem);
                     }
-                 if(wowzaRecievers.length==1){
-                     var elem=document.getElementById(wowzaRecievers[0].id)
-                     elem.style.position="fixed";
-                     elem.style.top= 0;
-                     elem.style.left= 0;
-                     elem.style.width= "100%";
-                     elem.style.zIndex= "1000";
-                     elem.style.height= "100%";
+                })
+                wowzaRecievers= wowzaRecievers.filter(r=>{
+                    return r.streamid!=streamid
+                });
+                if(wowzaRecievers.length==0)
+                {
+                    _this.WowzaCfg=null;
+                    peerConnection.close();
+                    peerConnection = null;
+                    _this.SPKstatus=1;
 
-                 }
-                 else{
-                     wowzaRecievers.forEach(r=>{
-                         var elem=document.getElementById(r.id)
-                         elem.style.position=null
-                         elem.style.top= null
-                         elem.style.left= null
-                         elem.style.width= null
-                         elem.style.zIndex= null
-                         elem.style.height=null;
-                     })
-                 }
-    },
+                }
+                if(wowzaRecievers.length==1){
+                    var elem=document.getElementById(wowzaRecievers[0].id)
+                    elem.style.position="fixed";
+                    elem.style.top= 0;
+                    elem.style.left= 0;
+                    elem.style.width= "100%";
+                    elem.style.zIndex= "1000";
+                    elem.style.height= "100%";
+
+                }
+                else{
+                    wowzaRecievers.forEach(r=>{
+                        var elem=document.getElementById(r.id)
+                        elem.style.position=null
+                        elem.style.top= null
+                        elem.style.left= null
+                        elem.style.width= null
+                        elem.style.zIndex= null
+                        elem.style.height=null;
+                    })
+                }
+            },
             OnVote:function(data){
                 var _this=this;
                 _this.votes.forEach(d=>{
@@ -687,7 +687,7 @@ window.onload=function () {
         },
         watch:{
             SPKalert:function () {
-               var _this=this;
+                var _this=this;
                 if(this.SPKalert) {
                     _this.SPKalertTimeout = setTimeout(() => {
                         _this.SPKalert = false
@@ -717,133 +717,133 @@ window.onload=function () {
                         if (!isSocketConnected)
                         {
                             isSocketConnected = true;
-                        _this.socket.on("disconnect", () => {
-                            _this.socketConnection = false;
-                        })
-                        _this.socket.on("connect", () => {
-                            _this.socketConnection = true;
-                        })
-                        _this.socket.on("SPKanotherConnectError", () => {
-
-                            _this.SPKanotherConnectError = true;
-                        })
-                            document.getElementById("app").style.opacity = 1;
-                        setTimeout(async () => {
-                            console.warn("continue")
-                           // var dt= await axios.get('/rest/api/spkConstraints');
-                            var constraints=dt.data;
-                            var video=SpkcreateVideoContaiter('selfVideo', _this.user.i ||''+" "+_this.user.f);
-                            video.width = 320;
-                            video.style.width = "320px"
-                            /*  var dev=await navigator.mediaDevices.enumerateDevices()
-                              console.log("dev  ", dev)
-                            /*    var fDev=null;
-                                      dev.forEach(function(device) {
-                                          console.log("dev find ", fDev)
-                                          if(device.label=="vMix Video")
-                                         {
-                                             fDev=device;
-                                         }
-
-                                  })
-                              console.log("dev find ", fDev)*/
-
-                             // _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: fDev.deviceId}}, audio:true});
-                            _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:true, audio:true});
-                              video.id="spkVideo"
-                              video.srcObject=_this.selfVideoStream;
-                              video.muted=true;
-
-                             /* video.addEventListener("click", () => {
-                                  video.style.zIndex = "-1";
-                                  video.style.opacity = "0"
-                                  video.style.top="90%"
-                              })*/
-                            _this.recorder= new Recorder(_this);
-                            _this.recorder.start(video);
-
-                            if (!_this.SPKanotherConnectError) {
-
-                                axios.get("/rest/api/users/" + eventid + "/" + roomid)
-                                    .then(function (r) {
-                                        _this.users = r.data;
-                                    })
-                                axios.get("/rest/api/quest/" + eventid + "/" + roomid)
-                                    .then(function (r) {
-                                        _this.q = r.data;
-                                    })
-                                axios.get("/rest/api/chat/" + eventid + "/" + roomid)
-                                    .then(function (r) {
-                                        _this.chat = r.data;
-                                    })
-                                axios.get("/rest/api/votes/"+eventid+"/"+roomid)
-                                    .then(function (r) {
-                                        console.log("votes", r.data)
-                                        _this.votes=r.data;
-                                    })
-                                axios.get("/rest/api/files/"+eventid+"/"+roomid)
-                                    .then(function (r) {
-                                        console.log(r.data)
-                                        _this.files=r.data;
-                                    axios.get("/rest/api/activePres/" + eventid + "/" + roomid)
-                                        .then(function (ff) {
-                                            // console.log("activePres", ff)
-                                            if (ff.data.fileid) {
-                                                try {
-                                                    _this.previewPres = _this.files.filter(r => r.id == ff.data.fileid)[0].presfiles
-                                                    //_this.pres = ff.data.fileid
-                                                    _this.setPres(ff.data.item)
-                                                    setTimeout(function () {
-                                                        var elem = document.getElementById("pres" + ff.data.fileid)
-                                                        if (elem)
-                                                            elem.scrollIntoView({inline: "center", behavior: "smooth"})
-                                                    }, 200)
-                                                }
-                                                catch (e) {
-                                                    console.warn(e)
-                                                }
-
-                                              //  _this.pres = ff.data.item
-                                               // _this.isPres = ff.data.item ? true : false
-                                            } else
-                                                _this.previewPres = []
-
-
-                                    })
+                            _this.socket.on("disconnect", () => {
+                                _this.socketConnection = false;
                             })
-
+                            _this.socket.on("connect", () => {
                                 _this.socketConnection = true;
+                            })
+                            _this.socket.on("SPKanotherConnectError", () => {
 
-                                setInterval(() => {
-                                    var SPKvksUsers=[]
-                                   // videoReceivers.forEach(r=>{SPKvksUsers.push({user:r.user, guid:r.guid})})
-                                    wowzaRecievers.forEach(r=>{
-                                        SPKvksUsers.push({user:r.user, guid:r.id})})
-                                      _this.socket.emit("SPKstatus",{SPKstatus: _this.SPKstatus, SPKalert:_this.SPKalert, SPKvksUsers:SPKvksUsers})
-                                    if(SPKvksUsers.length==1)
-                                    {
-                                        var id=SPKvksUsers[0].guid;
-                                    }
-                                }, 1000)
-                                document.addEventListener("keydown",(e)=>{
-                                    if(e.code=="ArrowRight" || e.code=="ArrowLeft" && this.isPres)
-                                    {
-                                        var elems=document.querySelectorAll(".aModSectPresItem");
-                                        for(var i=0; i<elems.length; i++){
-                                            if(elems[i].classList.contains("active"))
-                                            {
-                                                if(e.code=="ArrowRight" && i<elems.length-1)
-                                                    elems[i+1].click();
-                                                if(e.code=="ArrowLeft" && i>0)
-                                                    elems[i-1].click();
+                                _this.SPKanotherConnectError = true;
+                            })
+                            document.getElementById("app").style.opacity = 1;
+                            setTimeout(async () => {
+                                console.warn("continue")
+                                // var dt= await axios.get('/rest/api/spkConstraints');
+                                var constraints=dt.data;
+                                var video=SpkcreateVideoContaiter('selfVideo', _this.user.i ||''+" "+_this.user.f);
+                                video.width = 320;
+                                video.style.width = "320px"
+                                /*  var dev=await navigator.mediaDevices.enumerateDevices()
+                                  console.log("dev  ", dev)
+                                /*    var fDev=null;
+                                          dev.forEach(function(device) {
+                                              console.log("dev find ", fDev)
+                                              if(device.label=="vMix Video")
+                                             {
+                                                 fDev=device;
+                                             }
+
+                                      })
+                                  console.log("dev find ", fDev)*/
+
+                                // _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: fDev.deviceId}}, audio:true});
+                                _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:true, audio:true});
+                                video.id="spkVideo"
+                                video.srcObject=_this.selfVideoStream;
+                                video.muted=true;
+
+                                /* video.addEventListener("click", () => {
+                                     video.style.zIndex = "-1";
+                                     video.style.opacity = "0"
+                                     video.style.top="90%"
+                                 })*/
+                                _this.recorder= new Recorder(_this);
+                                _this.recorder.start(video);
+
+                                if (!_this.SPKanotherConnectError) {
+
+                                    axios.get("/rest/api/users/" + eventid + "/" + roomid)
+                                        .then(function (r) {
+                                            _this.users = r.data;
+                                        })
+                                    axios.get("/rest/api/quest/" + eventid + "/" + roomid)
+                                        .then(function (r) {
+                                            _this.q = r.data;
+                                        })
+                                    axios.get("/rest/api/chat/" + eventid + "/" + roomid)
+                                        .then(function (r) {
+                                            _this.chat = r.data;
+                                        })
+                                    axios.get("/rest/api/votes/"+eventid+"/"+roomid)
+                                        .then(function (r) {
+                                            console.log("votes", r.data)
+                                            _this.votes=r.data;
+                                        })
+                                    axios.get("/rest/api/files/"+eventid+"/"+roomid)
+                                        .then(function (r) {
+                                            console.log(r.data)
+                                            _this.files=r.data;
+                                            axios.get("/rest/api/activePres/" + eventid + "/" + roomid)
+                                                .then(function (ff) {
+                                                    // console.log("activePres", ff)
+                                                    if (ff.data.fileid) {
+                                                        try {
+                                                            _this.previewPres = _this.files.filter(r => r.id == ff.data.fileid)[0].presfiles
+                                                            //_this.pres = ff.data.fileid
+                                                            _this.setPres(ff.data.item)
+                                                            setTimeout(function () {
+                                                                var elem = document.getElementById("pres" + ff.data.fileid)
+                                                                if (elem)
+                                                                    elem.scrollIntoView({inline: "center", behavior: "smooth"})
+                                                            }, 200)
+                                                        }
+                                                        catch (e) {
+                                                            console.warn(e)
+                                                        }
+
+                                                        //  _this.pres = ff.data.item
+                                                        // _this.isPres = ff.data.item ? true : false
+                                                    } else
+                                                        _this.previewPres = []
+
+
+                                                })
+                                        })
+
+                                    _this.socketConnection = true;
+
+                                    setInterval(() => {
+                                        var SPKvksUsers=[]
+                                        // videoReceivers.forEach(r=>{SPKvksUsers.push({user:r.user, guid:r.guid})})
+                                        wowzaRecievers.forEach(r=>{
+                                            SPKvksUsers.push({user:r.user, guid:r.id})})
+                                        _this.socket.emit("SPKstatus",{SPKstatus: _this.SPKstatus, SPKalert:_this.SPKalert, SPKvksUsers:SPKvksUsers})
+                                        if(SPKvksUsers.length==1)
+                                        {
+                                            var id=SPKvksUsers[0].guid;
+                                        }
+                                    }, 1000)
+                                    document.addEventListener("keydown",(e)=>{
+                                        if(e.code=="ArrowRight" || e.code=="ArrowLeft" && this.isPres)
+                                        {
+                                            var elems=document.querySelectorAll(".aModSectPresItem");
+                                            for(var i=0; i<elems.length; i++){
+                                                if(elems[i].classList.contains("active"))
+                                                {
+                                                    if(e.code=="ArrowRight" && i<elems.length-1)
+                                                        elems[i+1].click();
+                                                    if(e.code=="ArrowLeft" && i>0)
+                                                        elems[i-1].click();
+                                                }
                                             }
                                         }
-                                    }
-                                })
-                            }
+                                    })
+                                }
 
-                        }, 1000);
-                    }
+                            }, 1000);
+                        }
                     })
 
 

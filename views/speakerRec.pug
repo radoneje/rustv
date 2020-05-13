@@ -1,0 +1,31 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/stylesheets/old.css')
+    script.
+        var roomid = #{room.id}
+        var eventid = #{room.eventid}
+    script(src="/javascripts/utils.js")
+    script(src="/javascripts/rtcScript.js")
+    script(src="/javascripts/wowza.js")
+    script(src="/javascripts/speakerRecScript.js")
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    link(rel='stylesheet', href='/stylesheets/login.css')
+    link(rel='stylesheet', href='/stylesheets/room.css')
+
+block content
+    div.adminContainer.spkContaiter.multiViewVideo(id="app" style="height: 100vh; opacity:1")
+        input(type="button")
+        div#meetVideoBox()
+
+
+
+
+
+
+
+
+
+
+
+
+

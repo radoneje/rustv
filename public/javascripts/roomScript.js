@@ -423,15 +423,20 @@ window.onload=function () {
             },
             OnSpkVideo:function (data) {
                 var _this=this;
+                console.log("before video from wowza aaa", video)
                 console.log("OnSpkVideo", data, _this.socket.id)
                 if(data.streamid==_this.socket.id)
                     return;// мое видео не показываем
+                console.log("before video from wowza bbb", video)
                 if(wowzaRecievers.filter(r=>r.id==data.streamid).length>0)
                     return;
+                console.log("before video from wowza ccc", video)
                 var video=createVideoContaiter(data.streamid, (data.user.i||"") +" "+ data.user.f)
+                console.log("before video from wowza 0", video)
                 getSpkConfig()
                     .then(function (wCfg) {
                         var item={id:data.streamid, elem:video}
+                        console.log("before video from wowza", video)
                         getVideoFromWowza(item,  wCfg.WowzaCfg.data, wCfg.BitrateCfg.data, function (ret) {
                             console.log("remote video play", ret)
                             document.getElementById("VKS").classList.add('fromSpk')

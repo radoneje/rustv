@@ -109,6 +109,9 @@ width: 75%;
 
   text-transform: uppercase;
 }
+.greenBtn.warning{
+  background: @red;
+}
 .clearBtn{
   margin-left: 10px;
 }
@@ -436,7 +439,7 @@ width: 75%;
 .meetVideoItem{
   width:~"calc(33% - 20px)";
   background: #272c31;
-  margin: 10px;
+  //margin: 10px;
   border-radius: 4px;
  // position: relative;
 //  flex: 1 0 33%; /* explanation below */
@@ -503,6 +506,9 @@ width: 75%;
     padding: 2px;
     border-radius: 4px 0 4px 0;
   opacity: .5;
+}
+.meetVideoBox.pgm .meetVideoMute, .meetVideoBox.pgm .meetVideoMute, .meetVideoBox.pgm .meetVideoLevel,  .meetVideoBox.pgm .meetVideoFullScreen{
+  display: none;
 }
 .meetVideoFullScreen:hover, .meetVideoMute:hover{
   opacity: 1;
@@ -759,6 +765,17 @@ width: 100%;
   padding: 0 4px;
   font-size: .8em;
   border-radius: 2px;
+}
+.meetVideoCap{
+  color:white;
+}
+.modContollers{
+  position: absolute;
+  bottom: 23px;
+}
+.stageModBtn{
+  display: inline-block;
+  padding-top: 5px;
 }
   @media only screen and (max-width: 1024px){
 

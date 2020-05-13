@@ -6,6 +6,7 @@ block head
         var eventid = #{room.eventid}
         var room=!{JSON.stringify(room)}
     script(src="/javascripts/utils.js")
+    <script src="/lib/autosize.min.js"></script>
     script(src="/javascripts/moderatorScript.js")
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -22,14 +23,20 @@ block content
                 span Голосования
             div.greenBtn.clearBtn(v-on:click="sendSpkStatus(0)" style="display:inline-block")
                 span Очистить экран
+
             div.aMenuInputGroup
                 label Этот текст будет показан на экране
                 input(type="text" placeholder="" v-model="SPKalertText" :readonly="SPKalert")
                 div.greenBtn(v-on:click="sendSpkAleret()" v-bind:class="{active:SPKalert}"  ) Вывести на экран
+            div.greenBtn.clearBtn( style="display:inline-block" v-on:click="window.open('/stage/'+roomid)")
+                span Перейти на сцену
         div(v-else)
             div.aMenu()
                 div.greenBtn.clearBtn.flex.error(v-on:click="window.open('/speaker/'+roomid)")
                     div Экран спикера закрыт. Откройте по ссылке.
+                div.greenBtn.clearBtn( style="display:inline-block" v-on:click="window.open('/stage/'+roomid)")
+                    span Перейти на сцену
+
         div.aModBox(style="")
             div.aModSect
                 div.aModSectMenu
@@ -51,7 +58,8 @@ block content
                         div.qItemAnsvwer(v-if="item.answer!=null")
                             div.qItemAnsvwerLabel Ответ:
                             div.qItemAnsverText
-                                textarea(placeholder="Напишите здесь текст ответа" v-model="item.answer" v-on:change="qItemAnswerChange(item)")
+                                //textarea(placeholder="Напишите здесь текст ответа" v-model="item.answer" v-on:change="qItemAnswerChange(item)")
+                                autosize-teztarea(v-bind:item="item" v-on:change="qItemAnswerChange(item)")
                         div.qItemDate
                             include elements/likes
                         div.greenBtn(v-if="item.video" style="height: max-content;width: max-content;padding: 5px;" v-on:click="showUploadedVideo(item, $event)")

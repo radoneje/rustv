@@ -28,7 +28,7 @@ async function publishVideoToWowza(id,stream,wssUrl,bitrate, clbk, err){
     wsConnection.binaryType = 'arraybuffer';
     var streamInfo = {applicationName:wssUrl.applicationName, streamName:id, sessionId:"123"};
     wsConnection.onopen = async () =>{
-       // console.log("wsConnection.onopen");
+        console.log("wsConnection.onopen");
         peerConnection = new RTCPeerConnection(peerConnectionConfig);
         peerConnection.onicecandidate = gotIceCandidate;
         for(const track of stream.getTracks())

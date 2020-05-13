@@ -49,6 +49,8 @@ class socket{
                             console.log(u.id);
                         }
                     })
+                    _this.clients.sendToRoomUsers("closeStageStream", socket.id, roomid)
+
                 }
                 catch (e) {
                     
@@ -81,7 +83,10 @@ class socket{
                 })
                 _this.spkRoom= _this.spkRoom.filter(r=>r.streamid!=data.streamid)
             })
+            socket.on("roomRecorder",async (data)=>{
+                _this.spkRoom.push({user:null,id:socket.id, socket:socket, isActive:true, roomid:data.roomid})
 
+            });
             socket.on("SpkRoomVideoPublished", async (data)=>{
                 var item=this.clients.clients.filter(c=>c.socket.id==socket.id)
                 var user={};
@@ -90,7 +95,6 @@ class socket{
                 setTimeout(()=>{
                     _this.spkRoom.forEach(s=>{
                         if(s.isActive && s.roomid==data.roomid ) {
-
                             s.socket.emit("newSpkVideo",{streamid:data.id, user:user});
                             if (s.socket.id == data.id)
                                 s.streamid = s.socket.id;
@@ -124,6 +128,13 @@ class socket{
                 if(id)
                     _this.clients.fwd("stopSendVideo",  data)
             });
+            socket.on("redirectToStage",(data)=>{
+                data.from=socket.id;
+                data.url="/stage/"+roomid;
+                if(id)
+                    _this.clients.fwd("redirectToStage",  data)
+            });
+
           socket.on("SPKstatus",(dt)=>{
                 if(id) {
                     _this.clients.sendToRoomAdmins("SPKstatus", dt, roomid)
@@ -183,15 +194,75 @@ class socket{
                 if(id)
                     _this.clients.sendToRoomUsers("vote",  dt, roomid)
             })
+            socket.on("newStageStream",(dt)=>{
+                if(id) {
+
+                    var cls=_this.clients.clients.filter(c=>c.socket.id==socket.id);
+                    if(cls.length>0){
+                        cls[0].stage=(dt);
+                        _this.clients.sendToRoomUsers("newStageStream", dt, roomid)
+                    }
+                }
+            })
+            socket.on("closeStageStream",(dt)=>{
+                if(id) {
+                    _this.clients.sendToRoomUsers("closeStageStream", dt, roomid)
+
+                }
+            })
+            socket.on("videoReload",(dt)=>{
+                if(id) {
+                    dt.streamid=dt.streamid.replace(/dt^/, "")
+                    _this.clients.sendToRoomUsers("reload", dt, roomid)
 
 
+                }
+            })
+            socket.on("videoRemove",(dt)=>{
+                if(id) {
+                    dt.streamid=dt.streamid.replace(/dt^/, "")
+                    _this.clients.sendToRoomUsers("redirect", {streamid:dt.streamid, url:"/room/"+roomid},roomid)
+                }
+            })
+            socket.on("videoMute",(dt)=>{
+                if(id) {
+                    var socketid=dt.streamid.replace(/dt^/, "")
+                    _this.clients.sendToRoomUsers("videoMute", {streamid:dt.streamid, val:dt.val},roomid)
+                }
+            })
+            socket.on("videoPgm",(dt)=>{
+                if(id) {
+                    var socketid=dt.streamid.replace(/dt^/, "")
+                    _this.clients.sendToRoomUsers("videoPgm", {streamid:dt.streamid, val:dt.val},roomid)
+                }
+            })
+            socket.on("videoPIP",(dt)=>{
+                if(id) {
+                    var socketid=dt.streamid.replace(/dt^/, "")
+                    _this.clients.sendToRoomUsers("videoPIP", {streamid:dt.streamid, val:dt.val},roomid)
+                }
+            })
 
 
+            socket.on("getStageVideos",(dt)=> {
+                if (id) {
+                    var arr=this.clients.clients.filter(c=>{
+                        return c.isActive && c.stage && c.roomid==roomid});
+                    var i=0;
+                    arr.forEach(c=>{
+                        i++;
+                        setTimeout(()=>{
+                            try {
+                                    socket.emit("newStageStream", c.stage)
 
+                            }catch (e) {
+                                console.warn("error send new stream")
+                            }
+                        },3000*i )
 
-
-
-
+                    })
+                }
+            });
 
             socket.on("receiverPlaying",(data)=>{
                 /// reverce!!!

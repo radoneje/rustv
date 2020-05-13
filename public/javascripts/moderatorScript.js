@@ -342,7 +342,7 @@ window.onload=async function () {
                 var videoCap=videoBox.querySelector(".videoCap")
                 videoCap.innerHTML ='<div class="videoCatHer">'
                     +videoCap.innerText +
-                    "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+data.guid+"' >на экран</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+data.guid+"'/></div>";
+                    "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+data.guid+"' >на экран</span><span class='videotoSpk' id='videotoStage"+data.guid+"' >на сцену</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+data.guid+"'/></div>";
                 {
                     document.getElementById("close"+data.guid).addEventListener("click", ()=>{
                         console.log("stopReceiveVideo", data.guid, data.recguid )
@@ -357,6 +357,11 @@ window.onload=async function () {
                         console.log(data);
                         _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.recguid, to:data.from})
                         _this.socket.emit("spkStartVks",{user:data.user})
+                    })
+                    document.getElementById("videotoStage"+data.guid).addEventListener("click", ()=>{
+                        stopReceiveVideo(data.guid);
+                        stopSendVideo(data.recguid);
+                        _this.socket.emit("redirectToStage",{user:_this.user, guid:data.recguid, to:data.from})
                     })
                 }
 

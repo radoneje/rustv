@@ -41,7 +41,7 @@
   },
   "meetWowza": [
     {
-      "url": "wss://wowza01.onevent.online/webrtc-session.json",
+      "url": "wss://mi.may24.pro/webrtc-session.json",
       "applicationName": "webrtc"
     }
 

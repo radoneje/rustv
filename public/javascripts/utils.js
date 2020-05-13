@@ -197,6 +197,45 @@ function connect(_this, roomid, clbk){
         if(_this.disconnectDirectConnect)
             _this.disconnectDirectConnect(data)
     });
+    socket.on("newStageStream", function(data){
+
+        if(_this.OnNewStageStream)
+            _this.OnNewStageStream(data)
+    });
+    socket.on("closeStageStream", function(data){
+
+        if(_this.onCloseStageStream)
+            _this.onCloseStageStream(data)
+    });
+    socket.on("reload", function(data){
+        if(_this.socket.id==data.streamid)
+            document.location.reload(true);
+    });
+    socket.on("redirect", function(data){
+        if(_this.socket.id==data.streamid) {
+            document.location.href = data.url;
+        }
+    });
+    socket.on("videoMute", function(data){
+        if(_this.OnVideoMute)
+            _this.OnVideoMute(data)
+    });
+    socket.on("videoPgm", function(data){
+
+        if(_this.OnVideoPgm)
+            _this.OnVideoPgm(data)
+    });
+    socket.on("videoPIP", function(data){
+        if(_this.OnVideoPIP)
+            _this.OnVideoPIP(data)
+    });
+    socket.on("redirectToStage", function(data){
+        document.location.href=data.url;
+    });
+
+
+
+
 
 
 
