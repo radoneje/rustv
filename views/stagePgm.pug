@@ -10,11 +10,12 @@ block head
   link(rel='stylesheet', href='/stylesheets/room.css')
   if event.isClientCss
     link(rel='stylesheet', href='/stylesheets/'+event.clientCss)
-  style.
-    body{
-      overflow: hidden !important;
-      }
+
 block content
+  style.
+        body {
+            overflow: hidden !important;
+        }
   div.roomScreen.multiViewVideo(id="app" )
 
     div.center
