@@ -6,7 +6,6 @@ window.onload=async function () {
         },
         created: function () {
             setTimeout(()=>{
-                console.log(document.getElementById("item.answer"+this.item.id))
                 autosize(document.getElementById("item.answer"+this.item.id));
             }, 100)
 
@@ -70,7 +69,9 @@ window.onload=async function () {
             previewPres:[],
             room:room,
             votes:[],
-            userFindText:""
+            userFindText:"",
+            messageFromMod:"",
+            messageToModText:""
         },
         methods:{
             onHandUp:function(data){
@@ -578,6 +579,42 @@ window.onload=async function () {
             },
             OnIsLenta:function (data) {
                 this.isLenta=data.isLenta;
+            },
+            messageToUser:function (item) {
+                item.messageToUser="";
+
+                this.socket.emit("messageToUser", {userid:item.id, text:item.messageToUserText})
+                item.messageToUserText=""
+            },
+            OnMessageToMod:function(data){
+              console.log("OnMessageToMod", data)
+              this.users.forEach(u=>{
+                  if(u.id==data.user.id) {
+                      u.messageToUser = data.text;
+                      var f=u.f;
+                      u.f="";
+                      setTimeout(()=>{u.f=f},0)
+                  }
+
+              })
+            },
+            messageToMod:function () {
+                this.socket.emit("messageToMod",  {text:this.messageToModText})
+                this.messageFromMod=''
+                this.messageToModText=''
+            },
+            setUserSteaker:function(item){
+                if(typeof (item.color)=="undefined")
+                    item.color = 1;
+                else
+                {
+                    item.color++;
+                    if(item.color>3)
+                        item.color=0;
+                }
+                var f=item.f;
+                item.f="";
+                setTimeout(()=>{item.f=f},0)
             }
         },
         computed: {

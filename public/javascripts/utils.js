@@ -232,6 +232,21 @@ function connect(_this, roomid, clbk){
     socket.on("redirectToStage", function(data){
         document.location.href=data.url;
     });
+    socket.on("messageToUser", function(data){
+        console.log("messageToUser",typeof (_this.messageFromMod)=="string" , data.userid==_this.user.id )
+        if(typeof (_this.messageFromMod)=="string" && data.userid==_this.user.id  ){
+            _this.messageFromMod=data.text;
+
+        }
+
+    });
+    socket.on("messageToMod", function(data){
+        if(_this.OnMessageToMod)
+            _this.OnMessageToMod(data)
+    });
+
+
+
 
 
 
@@ -264,6 +279,20 @@ function connect(_this, roomid, clbk){
                 objDiv.scrollTop = objDiv.scrollHeight;
             },0)
         });
+    socket.on("stageChatAdd", function(data){
+        if(_this.stageChat.filter(function (u) {
+            return u.id==data.id
+        }).length==0)
+            _this.stageChat.push(data);
+        setTimeout(function () {
+            var objDiv = document.getElementById("stageBox");
+            if(objDiv)
+                objDiv.scrollTop = objDiv.scrollHeight;
+        },0)
+    });
+
+
+
         socket.on("chatDelete", function(data){
             _this.chat=_this.chat.filter(function (e) {return e.id!=data;});
         });
@@ -517,6 +546,13 @@ function chattextChange(_this, e) {
         chattextSend(_this)
     }
 }
+
+function stageChattextChange(_this, e) {
+
+    if(e.keyCode==13 && _this.stageChatText.length>0){
+        stageChattextSend(_this)
+    }
+}
 function qItemAnswerChange(item, _this){
     axios.post("/rest/api/qAnswer/"+eventid+"/"+roomid,{answer:item.answer, id:item.id}).then(function () {;;})
 }
@@ -531,6 +567,18 @@ function chattextSend(_this) {
             },100)
         })
 }
+function stageChattextSend(_this) {
+    axios.post("/rest/api/stageChat/"+eventid+"/"+roomid,{text:_this.stageChatText})
+        .then(function (e) {
+            _this.stageChatText="";
+            // _this.q.push(e.data);
+            setTimeout(function () {
+                var objDiv = document.getElementById("stageBox");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            },100)
+        })
+}
+
 function qtextChange(_this,e) {
     if(e.keyCode==13 && _this.qText.length>0){
         qtextSend(_this)

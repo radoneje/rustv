@@ -722,11 +722,6 @@ router.get("/invites/:eventid/:roomid", checkLoginToRoom, async (req, res, next)
     res.json(ret);
 })
 
-
-
-
-
-
 router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     if(req.body.text.length>2040)
         req.body.text=req.body.text.substr(0, 2040);
@@ -743,6 +738,16 @@ router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
     req.transport.emit("chatAdd", r[0], req.params.roomid);
     res.json(r[0]);
 })
+router.post("/stageChat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    if(req.body.text.length>2040)
+        req.body.text=req.body.text.substr(0, 2040);
+    var text = urlify(stripHtml(req.body.text))
+    var user=req.session["user" + req.params.eventid]
+
+    req.transport.emit("stageChatAdd", {id:uuidv4(), text:text, i:user.i, f:user.f, userid:user.id}, req.params.roomid);
+    res.json(null);
+})
+
 router.post("/voteAdd/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
 
     var v = await req.knex("t_vote").insert({
@@ -764,8 +769,6 @@ router.get("/votes/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
     }
     res.json(v);
 })
-
-
 
 router.post("/voteChange/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
 

@@ -3,7 +3,11 @@ block head
   link(rel='stylesheet', href='/stylesheets/old.css')
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   script(src="/javascripts/utils.js")
-  script(src="/javascripts/wowza.js")
+  //script(src="/javascripts/wowza.js")
+
+  script(src="/lib/flashUtils.js")
+  script(src="/lib/flashphoner.js")
+  script(src="/javascripts/phoner.js")
   script(src="/javascripts/stageScript.js")
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   link(rel='stylesheet', href='/stylesheets/login.css')
@@ -12,10 +16,38 @@ block head
     link(rel='stylesheet', href='/stylesheets/'+event.clientCss)
 block content
   div.roomScreen.multiViewVideo(id="app" )
+    div.stageL
+      div.stageLTitle Служебный чат
+      div.rContentWr
+          div.rBody(id="stageBox" )
+            div.qItem(v-for="item in stageChat" v-bind:class="{my:(item.userid==user.id)}")
+              div.qItemSmi  {{item.smi}}
+              div.qItemName {{item.i}}&nbsp;{{item.f}}
+              div.qItemText(v-html="item.text")
+      div.rFooter
+        div.fileLoadProgress
+        div.askWr
+          input.ask( placeholder="Напишите Ваше сообщение" id="stageChatText" v-model="stageChatText" v-on:keypress="stageChatTextChange($event)")
+          <svg class="svgSendBtn" v-on:click="StagechattextSend()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+          <desc>Created with Sketch.</desc>
+          <defs></defs>
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="Desktop-HD" transform="translate(-712.000000, -505.000000)" fill-rule="nonzero">
+          <g id="ic-baseline-call-made" transform="translate(708.000000, 500.000000)">
+          <g id="Icon">
+          <polygon id="Icon-Shape" fill="#9A9A9A" points="9 5 9 7 15.59 7 4 18.59 5.41 20 17 8.41 17 15 19 15 19 5"></polygon>
+          <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+          </g>
+          </g>
+          </g>
+          </g>
+          </svg>
+
 
     div.center
 
-      div.L
+      div.L.stage
           div.Lbody
               div(v-if="!init" style="height: 100vh;display: flex;align-items: center;justify-content: center;margin: 10px;")
                 div.greenBtn.center( v-on:click="initStage()") Нажмите для начала
@@ -282,16 +314,19 @@ block content
                         </g>
                         </g>
                         </svg>
-                  div.qItem.userItem(v-for="item in sortedUsers" v-bind:key="item.id" v-bind:class="{active:(item.isActive)}")
-                    div.qItemSmi  {{item.title}}
-                    div.qItemName {{item.i}}&nbsp;{{item.f}}
-                    div.userItemAvatar
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.9993 2.66663C8.77135 2.66663 2.66602 8.77196 2.66602 16C2.66602 23.228 8.77135 29.3333 15.9993 29.3333C23.2274 29.3333 29.3327 23.228 29.3327 16C29.3327 8.77196 23.2274 2.66663 15.9993 2.66663ZM15.9993 9.33329C18.302 9.33329 19.9993 11.0293 19.9993 13.3333C19.9993 15.6373 18.302 17.3333 15.9993 17.3333C13.698 17.3333 11.9993 15.6373 11.9993 13.3333C11.9993 11.0293 13.698 9.33329 15.9993 9.33329ZM9.19135 22.3626C10.3873 20.6026 12.382 19.4293 14.666 19.4293H17.3327C19.618 19.4293 21.6114 20.6026 22.8074 22.3626C21.1034 24.1866 18.686 25.3333 15.9993 25.3333C13.3127 25.3333 10.8953 24.1866 9.19135 22.3626Z" fill="#9A9A9A"/>
-                        </svg>
-                    div.qItemDate(v-if="isLenta")
-                        span.link.green(v-on:click="inviteToMeet(item)" v-if="userIsInvite(item)") &nbsp;&nbsp; Пригласить в мою переговорную
-                        span.link.green(v-on:click="userDenyInvite(item)" v-else ) &nbsp;&nbsp; Отозвать приглашение
+                  if (!isMod)
+                    div.qItem.userItem(v-for="item in sortedUsers" v-bind:key="item.id" v-bind:class="{active:(item.isActive)}")
+                      div.qItemSmi  {{item.title}}
+                      div.qItemName {{item.i}}&nbsp;{{item.f}}
+                      div.userItemAvatar
+                          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M15.9993 2.66663C8.77135 2.66663 2.66602 8.77196 2.66602 16C2.66602 23.228 8.77135 29.3333 15.9993 29.3333C23.2274 29.3333 29.3327 23.228 29.3327 16C29.3327 8.77196 23.2274 2.66663 15.9993 2.66663ZM15.9993 9.33329C18.302 9.33329 19.9993 11.0293 19.9993 13.3333C19.9993 15.6373 18.302 17.3333 15.9993 17.3333C13.698 17.3333 11.9993 15.6373 11.9993 13.3333C11.9993 11.0293 13.698 9.33329 15.9993 9.33329ZM9.19135 22.3626C10.3873 20.6026 12.382 19.4293 14.666 19.4293H17.3327C19.618 19.4293 21.6114 20.6026 22.8074 22.3626C21.1034 24.1866 18.686 25.3333 15.9993 25.3333C13.3127 25.3333 10.8953 24.1866 9.19135 22.3626Z" fill="#9A9A9A"/>
+                          </svg>
+                      div.qItemDate(v-if="isLenta")
+                          span.link.green(v-on:click="inviteToMeet(item)" v-if="userIsInvite(item)") &nbsp;&nbsp; Пригласить в мою переговорную
+                          span.link.green(v-on:click="userDenyInvite(item)" v-else ) &nbsp;&nbsp; Отозвать приглашение
+                  else
+                    include elements/modUserItem
             div.rContentWr(v-if="activeSection==7" v-show="isFiles")
               div.rBody(id="fileBox" )
                 div.qItem(v-for="item in files" :id="'file'+item.id")
@@ -322,7 +357,7 @@ block content
       </g>
       </g>
       </svg>
-
+    include elements/messageFromMod
 
   script.
       var eventid=!{room.eventid}

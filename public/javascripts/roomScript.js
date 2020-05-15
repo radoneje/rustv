@@ -47,7 +47,9 @@ window.onload=function () {
             room:room,
             isHead:true,
             votes:[],
-            userFindText:""
+            userFindText:"",
+            messageFromMod:"",
+            messageToModText:""
         },
         methods:{
             isWebRtc:function(){
@@ -606,6 +608,11 @@ window.onload=function () {
             },
             OnQOnOff:function (data) {
                 this.isQ=data.isQ;
+            },
+            messageToMod:function () {
+                this.socket.emit("messageToMod",  {text:this.messageToModText})
+                this.messageFromMod=''
+                this.messageToModText=''
             },
 
         },

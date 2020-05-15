@@ -97,47 +97,7 @@ block content
                         </svg>
 
                 div.aSectBody.aSectUser
-                    div.qItem.userItem(v-for="item in sortedUsers" v-bind:key="item.id" v-bind:class="{active:(item.isActive), handup:item.handup}" style="padding:5px;padding-left:50px")
-                        div.qItemName(style='margin: 4px 0;') {{item.i}}&nbsp;{{item.f}}
-                        div.userItemAvatar(v-if="!item.isVideo"  style="top:1px")
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15.9993 2.66663C8.77135 2.66663 2.66602 8.77196 2.66602 16C2.66602 23.228 8.77135 29.3333 15.9993 29.3333C23.2274 29.3333 29.3327 23.228 29.3327 16C29.3327 8.77196 23.2274 2.66663 15.9993 2.66663ZM15.9993 9.33329C18.302 9.33329 19.9993 11.0293 19.9993 13.3333C19.9993 15.6373 18.302 17.3333 15.9993 17.3333C13.698 17.3333 11.9993 15.6373 11.9993 13.3333C11.9993 11.0293 13.698 9.33329 15.9993 9.33329ZM9.19135 22.3626C10.3873 20.6026 12.382 19.4293 14.666 19.4293H17.3327C19.618 19.4293 21.6114 20.6026 22.8074 22.3626C21.1034 24.1866 18.686 25.3333 15.9993 25.3333C13.3127 25.3333 10.8953 24.1866 9.19135 22.3626Z" fill="#9A9A9A"/>
-                            </svg>
-                        div.userItemAvatar.video(v-else style="cursor:pointer; top:1px" v-on:click="startVideoChat(item)" :id="'videoAvatar'+item.id")
-                            <svg width="32px" height="32px" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
-                            <desc>Created with Sketch.</desc>
-                            <defs></defs>
-                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g id="Desktop" transform="translate(-502.000000, -506.000000)" fill="#000000" fill-rule="nonzero">
-                            <g id="bx-bx-video" transform="translate(500.000000, 500.000000)">
-                            <g id="Icon">
-                            <path d="M24,9.33333333 C24,7.86266667 22.804,6.66666667 21.3333333,6.66666667 L5.33333333,6.66666667 C3.86266667,6.66666667 2.66666667,7.86266667 2.66666667,9.33333333 L2.66666667,22.6666667 C2.66666667,24.1373333 3.86266667,25.3333333 5.33333333,25.3333333 L21.3333333,25.3333333 C22.804,25.3333333 24,24.1373333 24,22.6666667 L24,18.2226667 L29.3333333,22.6666667 L29.3333333,9.33333333 L24,13.7773333 L24,9.33333333 Z M21.336,22.6666667 L5.33333333,22.6666667 L5.33333333,9.33333333 L21.3333333,9.33333333 L21.3346667,15.9986667 L21.3333333,16 L21.3346667,16.0013333 L21.336,22.6666667 Z" id="Icon-Shape"></path>
-                            <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="32" height="32"></rect>
-                            </g>
-                            </g>
-                            </g>
-                            </g>
-                            </svg>
-                        div.userHandUp(v-if="item.handUp")
-                            <svg width="19px" height="20px" viewBox="0 0 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
-                            <desc>Created with Sketch.</desc>
-                            <defs></defs>
-                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g id="Desktop-HD" transform="translate(-461.000000, -30.000000)" fill="#c0c300" fill-rule="nonzero">
-                            <g id="mdi-hand-right" transform="translate(459.000000, 28.000000)">
-                            <g id="Icon">
-                            <path d="M21,6.58 L21,18.67 C21,20.5091082 19.5091082,22 17.67,22 L11.58,22 C10.68,22 9.83,21.64 9.21,21 L2.67,14.36 C2.67,14.36 3.72,13.33 3.75,13.32 C4.07119514,13.0340397 4.54077941,12.9895101 4.91,13.21 C4.94,13.22 8.5,15.26 8.5,15.26 L8.5,5.33 C8.5,4.63964406 9.05964406,4.08 9.75,4.08 C10.4403559,4.08 11,4.63964406 11,5.33 L11,11.17 L11.83,11.17 L11.83,3.25 C11.83,2.55964406 12.3896441,2 13.08,2 C13.78,2 14.33,2.56 14.33,3.25 L14.33,11.17 L15.17,11.17 L15.17,4.08 C15.17,3.39 15.72,2.83 16.42,2.83 C17.1103559,2.83 17.67,3.38964406 17.67,4.08 L17.67,11.17 L18.5,11.17 L18.5,6.58 C18.5,5.88964406 19.0596441,5.33 19.75,5.33 C20.4403559,5.33 21,5.88964406 21,6.58 Z" id="Icon-Shape"></path>
-                            <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="24" height="24"></rect>
-                            </g>
-                            </g>
-                            </g>
-                            </g>
-                            </svg>
-
-                        div.userVideoWr(:id="'videoWr_'+item.id" )
-
+                    include elements/modUserItem
         div#VKS
             div#videoWr
                 div.VKSbox(v-if="SPKvksUsers.length>0")
@@ -154,7 +114,7 @@ block content
                 div.videoBox#translationVideoBox
                     video#translationVideo( width="180"  controls playsinline muted autoplay :src="'https://stream.sberbank-school.ru/hls/'+ room.streamname +'/index.m3u8'" :poster="'/images/'+room.poster" )
                     div.videoCap Трансляция
-
+        include elements/messageFromMod
 
 
 

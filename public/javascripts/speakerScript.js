@@ -204,7 +204,7 @@ window.onload=function () {
                     if(typeof (_this.WowzaCfg)=="undefined" || _this.WowzaCfg==null) {
                         _this.WowzaCfg = await axios.get('/rest/api/spkWowza')
                         _this.BitrateCfg = await axios.get('/rest/api/spkBitrate')
-                        await publishVideoToWowza(_this.socket.id,/*_this.newStream*/ _this.selfVideoStream, _this.WowzaCfg.data, _this.BitrateCfg.data, (ret)=>{
+                        await publishVideoToWowza(_this.socket.id,/*_this.newStream */_this.selfVideoStream, _this.WowzaCfg.data, _this.BitrateCfg.data, (ret)=>{
                             console.log("my Video Published", ret)
                             peerConnection=ret.peerConnection
                             setTimeout(async ()=>{

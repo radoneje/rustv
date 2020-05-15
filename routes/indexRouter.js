@@ -219,6 +219,12 @@ router.get('/speakerRec/:id',  async (req, res, next) =>{
   res.render('speakerRec', { title: 'ON.event '+room.title, room:room});
 
 })
+
+
+
+router.get('/phoneVideoElem/:videoid',  async (req, res, next) =>{
+  res.render("phoneVideoElem",{id:req.params.videoid})
+})
 /*
 router.get('/meeting/:eventid',  async (req, res, next) =>{
   if(!req.session["user"+req.params.eventid])

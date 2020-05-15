@@ -14,6 +14,7 @@ class socket{
 
             var id=null;
             var roomid=null;
+            var user=null;
             socket.on("hello",async ( data)=>{
                 console.log("hello on room")
                 var users=await knex.select("*").from("t_eventusers").where({id:data.id})
@@ -24,7 +25,7 @@ class socket{
                     socket.emit("SPKanotherConnectError",false);
                     return;
                 }
-                var user=users[0];
+                user=users[0];
                 roomid=data.roomid;
                 var client={
                     socket:socket,
@@ -199,15 +200,21 @@ class socket{
 
                     var cls=_this.clients.clients.filter(c=>c.socket.id==socket.id);
                     if(cls.length>0){
-                        cls[0].stage=(dt);
+                        if(!cls[0].stage)
+                            cls[0].stage=[];
+                        cls[0].stage.push(dt)
                         _this.clients.sendToRoomUsers("newStageStream", dt, roomid)
                     }
                 }
             })
             socket.on("closeStageStream",(dt)=>{
                 if(id) {
+                    console.log("dt");
+                    _this.clients.clients.forEach(c=>{
+                        if(c.stage)
+                            c.stage=c.stage.filter(f=>f.streamid!=dt);
+                    })
                     _this.clients.sendToRoomUsers("closeStageStream", dt, roomid)
-
                 }
             })
             socket.on("videoReload",(dt)=>{
@@ -242,6 +249,17 @@ class socket{
                     _this.clients.sendToRoomUsers("videoPIP", {streamid:dt.streamid, val:dt.val},roomid)
                 }
             })
+            socket.on("messageToUser",(dt)=>{
+                if(id) {
+                    _this.clients.sendToRoomUsers("messageToUser", dt,roomid)
+                }
+            })
+            socket.on("messageToMod",(dt)=>{
+                if(id) {
+                    dt.user=user;
+                    _this.clients.sendToRoomUsers("messageToMod", dt,roomid)
+                }
+            })
 
 
             socket.on("getStageVideos",(dt)=> {
@@ -253,12 +271,15 @@ class socket{
                         i++;
                         setTimeout(()=>{
                             try {
-                                    socket.emit("newStageStream", c.stage)
+                                c.stage.forEach(cc=>{
+                                    socket.emit("newStageStream", cc)
+                                })
+
 
                             }catch (e) {
                                 console.warn("error send new stream")
                             }
-                        },3000*i )
+                        },1000*i )
 
                     })
                 }

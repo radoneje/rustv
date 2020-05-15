@@ -1,0 +1,134 @@
+<html>
+<head>
+    <script src="/lib/flashUtils.js"></script>
+    <script src="https://wowza02.onevent.online:8444/client2/flashphoner.js"></script>
+    <style>
+        .videoBox{
+            width: 240px; height: 180px;
+            display:flex;
+            background: yellow;
+            align-items: center;justify-content: center;
+        }
+        .videoBox video{
+            max-width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <div class="videoBox" id="localVideo" style="width: 240px; height: 180px"></div>
+    <div class="videoBox" id="remoteVideo" style="width: 240px; height: 180px"></div>
+    <input  id="con" type="button" value="connect" onclick="connect()"/>
+    <input  id="start" type="button" value="start" style="display: none" onclick="start()"/>
+    <input  type="button" value="play"  onclick="play()"/>
+    <input  type="button" value="mute"  onclick="mute()"/>
+
+
+</div>
+<script>
+    const serverUrl="wss://wowza02.onevent.online:8443";
+    var SESSION_STATUS = Flashphoner.constants.SESSION_STATUS;
+    var STREAM_STATUS = Flashphoner.constants.STREAM_STATUS;
+    var STREAM_STATUS_INFO = Flashphoner.constants.STREAM_STATUS_INFO;
+    var session=null;
+    var localVideo=document.getElementById("localVideo");;
+    var remoteVideo= document.getElementById("remoteVideo");;
+
+
+    function initFlashServer(){
+        return new Promise((resolve,reject)=>{
+            if(Flashphoner.getSessions().length>0)
+                resolve(session);
+            Flashphoner.init({flashMediaProviderSwfLocation: '../../../../media-provider.swf'});
+            Flashphoner.createSession({urlServer: serverUrl}).on(SESSION_STATUS.ESTABLISHED, function (session) {
+                console.log("SESSION_STATUS.ESTABLISHED")
+                resolve(session);
+                // onConnected(session);
+            }).on(SESSION_STATUS.DISCONNECTED, function () {
+               // setStatus("#connectStatus", SESSION_STATUS.DISCONNECTED);
+                console.log("SESSION_STATUS.DISCONNECTED")
+                // onDisconnected();
+            }).on(SESSION_STATUS.FAILED, function () {
+              //  setStatus("#connectStatus", SESSION_STATUS.FAILED);
+                console.log("SESSION_STATUS.FAILED")
+                //  onDisconnected();
+            });
+
+        })
+    }
+
+    async function connect() {
+        try {
+
+            console.log("length", Flashphoner.getSessions().length)
+            if(Flashphoner.getSessions().length==0)
+                await initFlashServer();
+            console.log("initFlashServer done")
+            if (Browser.isSafariWebRTC()) {
+                console.log("safary")
+                await Flashphoner.playFirstVideo(localVideo, true, "https://wowza02.onevent.online:8444/client2/examples/demo/dependencies/media/preloader.mp4")
+                console.log("safary done")
+            }
+            await publishStream(1,localVideo);
+        } catch (e) {
+            return;
+        }
+    }
+    function publishStream(streamName, localVideo){
+        return new Promise((resolve, reject) => {
+            console.log("streamName", streamName)
+            var session = Flashphoner.getSessions()[0];
+            session.createStream({
+                name: streamName,
+                display: localVideo,
+                cacheLocalResources: true,
+                constraints:{audio:true, video:{quality:100}},
+                cvoExtension:true
+            }).on(STREAM_STATUS.PUBLISHING, function (stream) {
+                resolve();
+            }).on(STREAM_STATUS.UNPUBLISHED, function () {
+                console.log("STREAM_STATUS.UNPUBLISHED")
+                reject();
+            }).on(STREAM_STATUS.FAILED, function () {
+                console.log("STREAM_STATUS.FAILED")
+                reject();
+            }).publish();
+
+        })
+
+    }
+    async function start() {
+    }
+    async function play() {
+        var session=await initFlashServer();
+        var PlaySession = Flashphoner.getSessions()[0];
+        PlaySession.createStream({
+            name: 1,
+            display: remoteVideo
+        })
+        .on(STREAM_STATUS.PENDING, function (stream) {
+                var video = document.getElementById(stream.id());
+            }).on(STREAM_STATUS.PLAYING, function (stream) {
+
+        }).on(STREAM_STATUS.STOPPED, function () {
+
+          //  onStopped();
+        }).on(STREAM_STATUS.FAILED, function (stream) {
+
+           // onStopped();
+        }).play();
+    }
+    function mute() {
+        var video=document.getElementById("localVideo").querySelector('video')
+        var tracks=video.srcObject.getTracks();
+        tracks.forEach(track=>{
+            console.log(track)
+            track.enabled=!track.enabled
+        })
+    }
+
+</script>
+</body>
+</html>
