@@ -1438,7 +1438,7 @@ window.onload=function () {
 
             var trBox = document.getElementById("meetVideoBox");
             trBox.style.position = "relative";
-            var fullW = trBox.clientWidth - 20;
+            var fullW = trBox.clientWidth - 0;
             console.log("windoww",fullW)
             if( window.innerWidth<977)
             {
@@ -1448,7 +1448,6 @@ window.onload=function () {
                 fullW=window.innerWidth>window.screen.width?window.screen.width:window.innerWidth;
 
             }
-
             var pgm = arrVideo.filter(e => e.pgm == true)
             if (pgm.length > 0 && isPgm) {
                 var pip = arrVideo.filter(e => e.pip == true)
