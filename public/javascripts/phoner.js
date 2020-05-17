@@ -52,7 +52,8 @@ function publishStream(streamName, localVideo, stream,errHandeler) {
             display: localVideo,
             cacheLocalResources: true,
             constraints: constraints,
-            cvoExtension: true
+            cvoExtension: true,
+            stripCodecs: "h264,H264"
         }).on(STREAM_STATUS.PUBLISHING, function (stream) {
             resolve();
         }).on(STREAM_STATUS.UNPUBLISHED, function () {
@@ -84,7 +85,8 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
     var PlaySession = Flashphoner.getSessions()[0];
     PlaySession.createStream({
         name: id,
-        display: remoteVideo
+        display: remoteVideo,
+        stripCodecs: "h264,H264"
     })
     .on(STREAM_STATUS.PENDING, function (stream) {
           //  var video = document.getElementById(stream.id());
