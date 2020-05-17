@@ -1711,7 +1711,7 @@ window.onload=function () {
 
         elem.style.position = "absolute";
         elem.style.top = top + "px";
-        elem.style.left = (10+left) + "px";
+        elem.style.left = (left) + "px";
         elem.style.width = width+"px";
     }
 
