@@ -39,7 +39,7 @@ function publishStream(streamName, localVideo, stream,errHandeler) {
     if(stream) {
         var tracks=stream.getTracks();
         audio = tracks.filter(t => t.kind == "audio").length > 0 ? true : false;
-        video=tracks.filter(t => t.kind == "audio").length > 0 ? video : false;
+        video=tracks.filter(t => t.kind == "video").length > 0 ? video : false;
     }
 
     var constraints={
