@@ -1427,7 +1427,7 @@ window.onload=function () {
         }
 
     }*/
-    window.addEventListener("resize", videoLayout());
+    window.addEventListener("resize", videoLayout);
     function videoLayout() {
         try {
             var margin=5
