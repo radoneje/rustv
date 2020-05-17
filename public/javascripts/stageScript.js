@@ -1445,6 +1445,7 @@ window.onload=function () {
                 var top=5;
                 var beetwen=0;
                 fullW=window.innerWidth
+                console.log("windoww",fullW)
             }
 
             var pgm = arrVideo.filter(e => e.pgm == true)
