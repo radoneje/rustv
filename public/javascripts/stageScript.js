@@ -1233,7 +1233,7 @@ window.onload=function () {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .5 -margin)
                 setVideoLayout(arrVideo[1].id, 15, fullW * .5 +margin, fullW * .5 -margin)
                 setVideoLayout(arrVideo[2].id, 15 + (fullW * .5 + 10) / 1.777 +margin, fullW * .25 +margin, fullW * .5 -margin)
-                trBox.style.height = ((fullW * .5 +beetwen / 1.777) + beetwen*2) * 2 + "px"
+                trBox.style.height = (((fullW * .5 +beetwen) / 1.777) + beetwen*2) * 2 + "px"
             }
             if (arrVideo.length == 4) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .5 -margin)
