@@ -1482,7 +1482,7 @@ window.onload=function () {
                 elem.style.display = "block";
             })
             if (arrVideo.length == 1) {
-                setVideoLayout(arrVideo[0].id, 0, fullW * .05, fullW * .9)
+                setVideoLayout(arrVideo[0].id, 0, 0, fullW )
                 trBox.style.height = ((fullW / 1.777) + 20) + "px"
             }
             if (arrVideo.length == 2) {
