@@ -42,7 +42,7 @@ function publishStream(streamName, localVideo, stream,errHandeler) {
         //video=tracks.filter(t => t.kind == "audio").length > 0 ? video : false;
        // console.log("tracks",tracks )
        audio:false;
-       video:false;
+       video:true;
     }
 
     var constraints={
