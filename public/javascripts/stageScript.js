@@ -645,10 +645,10 @@ window.onload=function () {
                 if(!isMod &&  !isPgm)
                     setTimeout(() => {
                         _this.startMyVideo();
-                    }, 1000);
+                    }, 400);
                 setTimeout(() => {
                     socket.emit("getStageVideos");
-                }, 2000);
+                }, 0);
             },
             messageToUser:function (item) {
                 item.messageToUser="";
