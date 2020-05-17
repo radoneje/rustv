@@ -1439,13 +1439,14 @@ window.onload=function () {
             var trBox = document.getElementById("meetVideoBox");
             trBox.style.position = "relative";
             var fullW = trBox.clientWidth - 20;
+            console.log("windoww",fullW)
             if( window.innerWidth<977)
             {
                 var margin=0
                 var top=5;
                 var beetwen=0;
-                fullW=window.innerWidth
-                console.log("windoww",fullW)
+                fullW=window.innerWidth>window.screen.width?window.screen.width:window.innerWidth;
+
             }
 
             var pgm = arrVideo.filter(e => e.pgm == true)
