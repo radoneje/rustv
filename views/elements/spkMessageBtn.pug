@@ -1,0 +1,4 @@
+div.aMenuInputGroup
+    label Этот текст будет показан на экране
+    input(type="text" placeholder="" v-model="SPKalertText" :readonly="SPKalert" v-on:keypress="if($event.keyCode==13) sendSpkAleret() ")
+    div.greenBtn(v-on:click="sendSpkAleret()" v-bind:class="{active:SPKalert}"  ) Вывести

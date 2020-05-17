@@ -66,12 +66,11 @@ window.onload=function () {
                 this.SPKstatus=data;
             },
             setSpkAlert:function (data) {
-                console.warn("setSpkAlert",data )
-
                 this.SPKalert=data.SPKalert;
                 this.SPKalertText=data.SPKalertText;
             },
             qtextChange:function (e) {
+                console.log("qtextChange")
                 var _this=this;
                 if(this.qText.length>0)
                     qtextChange(_this,e)

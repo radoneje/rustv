@@ -24,10 +24,7 @@ block content
             div.greenBtn.clearBtn(v-on:click="sendSpkStatus(0)" style="display:inline-block")
                 span Очистить экран
 
-            div.aMenuInputGroup
-                label Этот текст будет показан на экране
-                input(type="text" placeholder="" v-model="SPKalertText" :readonly="SPKalert")
-                div.greenBtn(v-on:click="sendSpkAleret()" v-bind:class="{active:SPKalert}"  ) Вывести на экран
+            include elements/spkMessageBtn
             div.greenBtn.clearBtn( style="display:inline-block" v-on:click="window.open('/stage/'+roomid)")
                 span Перейти на сцену
         div(v-else)

@@ -328,10 +328,10 @@ function connect(_this, roomid, clbk){
 
         });
     socket.on("qToSpk", function(data){
+
         _this.q.forEach(function (e) {
             if(e.id==data.id) {
                 e.isSpk = data.isSpk;
-
             }
         })
 
