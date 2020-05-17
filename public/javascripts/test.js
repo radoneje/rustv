@@ -1,90 +1,275 @@
-window.onload=async function() {
- /*   var AudioContext = window.AudioContext // Default
-        || window.webkitAudioContext // Safari and old versions of Chrome
-        || false;
+function videoLayout() {
+    try {
+        var margin=5
+        var top=15;
+        var beetwen=10;
 
-    var inputVideo=document.getElementById("srcVideo")
-    inputVideo.muted="mute"
+        if( window.innerWidth<977)
+        {
+            var margin=0
+            var top=5;
+            var beetwen=0;
+        }
 
+        var trBox = document.getElementById("meetVideoBox");
+        trBox.style.position = "relative";
+        var fullW = trBox.clientWidth - 20;
 
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
-    ctx.font = "20px Georgia";
-    var vw;
-    var vh;
+        var pgm = arrVideo.filter(e => e.pgm == true)
+        if (pgm.length > 0 && isPgm) {
+            var pip = arrVideo.filter(e => e.pip == true)
+            arrVideo.forEach(a => {
+                var elem = document.getElementById("meetVideoItem_" + a.id);
+                elem.style.zIndex = 10;
+                elem.style.display = "none";
+            })
 
-    inputVideo.addEventListener('loadedmetadata', function() {
-        vw = this.videoWidth || this.width;   // these are on video element itself
-        vh = this.videoHeight || this.height;
-        canvas.width = vw
-        canvas.height = vh;
-    });
+            var elem = document.getElementById("meetVideoItem_" + pgm[0].id);
+            elem.style.position = "fixed";
+            elem.style.top = pip.length > 0 ? ("12.5vh") : ("0");
+            elem.style.left = 0;
+            elem.style.width = pip.length > 0 ? ("75%") : ("100%");
+            elem.style.zIndex = 100;
+            elem.style.display = "block";
 
-    inputVideo.addEventListener("play", draw, false);
-    function draw() {
-        if (inputVideo.paused || inputVideo.ended) {
+            if (pip.length > 0) {
+                var elem = document.getElementById("meetVideoItem_" + pip[0].id);
+                elem.style.position = "fixed";
+                elem.style.top = "50vh";
+                elem.style.left = "75%";
+                elem.style.width = ("25%");
+                elem.style.zIndex = 200;
+                elem.style.display = "block";
+            }
             return;
         }
-        ctx.drawImage(inputVideo, 0, 0, vw, vh);
 
-        ctx.fillText(new Date(), 10, 50);
-        requestAnimationFrame(draw);  // loop anim. using rAF
-    }
+        arrVideo.forEach(a => {
+            var elem = document.getElementById("meetVideoItem_" + a.id);
+            elem.style.zIndex = 10;
+            elem.style.display = "block";
+        })
+        if (arrVideo.length == 1) {
+            setVideoLayout(arrVideo[0].id, 0, fullW * .05, fullW * .9)
+            trBox.style.height = ((fullW / 1.777) + 20) + "px"
+        }
+        if (arrVideo.length == 2) {
+            setVideoLayout(arrVideo[0].id, 15, 0, fullW * .5 -margin)
+            setVideoLayout(arrVideo[1].id, 15, fullW * .5 +margin, fullW * .5 -margin)
+            trBox.style.height = ((fullW / 1.777) + 40) + "px"
+        }
+        if (arrVideo.length == 3) {
+            setVideoLayout(arrVideo[0].id, 15, 0, fullW * .5 -margin)
+            setVideoLayout(arrVideo[1].id, 15, fullW * .5 +margin, fullW * .5 -margin)
+            setVideoLayout(arrVideo[2].id, 15 + (fullW * .5 + 10) / 1.777 +margin, fullW * .25 +margin, fullW * .5 -margin)
+            trBox.style.height = ((fullW * .5 +margin / 1.777) + 20) * 2 + "px"
+        }
+        if (arrVideo.length == 4) {
+            setVideoLayout(arrVideo[0].id, 15, 0, fullW * .5 -margin)
+            setVideoLayout(arrVideo[1].id, 15, fullW * .5 +margin, fullW * .5 -margin)
+            setVideoLayout(arrVideo[2].id, 15 + (fullW * .5 +margin) / 1.777 +margin, 0, fullW * .5 -margin)
+            setVideoLayout(arrVideo[3].id, 15 + (fullW * .5 +margin) / 1.777 +margin, fullW * .5 +margin, fullW * .5 -margin)
+            trBox.style.height = (((fullW * .5 +margin) / 1.777) + 20) * 2 + "px"
+        }
+        if (arrVideo.length ==margin) {
+            setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
+            setVideoLayout(arrVideo[1].id, 15, fullW * .3 +margin, fullW * .3 -margin)
+            setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - 10)
+            setVideoLayout(arrVideo[3].id, 15 + (fullW * .3 + 10) / 1.777 +margin, 0, fullW * .3 -margin)
+            setVideoLayout(arrVideo[4].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
+            trBox.style.height = (((fullW * .3 + 10) / 1.777) + 20) * 3 + "px"
+        }
+        if (arrVideo.length == 6) {
+            setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
+            setVideoLayout(arrVideo[1].id, 15, fullW * .3 +margin, fullW * .3 -margin)
+            setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - 10)
+            setVideoLayout(arrVideo[3].id, 15 + (fullW * .3 + 10) / 1.777 +margin, 0, fullW * .3 -margin)
+            setVideoLayout(arrVideo[4].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 1, fullW * .3 -margin)
+            setVideoLayout(arrVideo[5].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
+            trBox.style.height = (((fullW * .3 + 10) / 1.777) + 20) * 3 + "px"
+        }
+        if (arrVideo.length == 7) {
+            setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
+            setVideoLayout(arrVideo[1].id, 15, fullW * .3 +margin, fullW * .3 -margin)
+            setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - 10)
+            setVideoLayout(arrVideo[3].id, 15 + (fullW * .3 + 10) / 1.777 +margin, 0, fullW * .3 -margin)
+            setVideoLayout(arrVideo[4].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 1, fullW * .3 -margin)
+            setVideoLayout(arrVideo[5].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
+            setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, 0, fullW * .3 -margin)
+            trBox.style.height = (((fullW * .3 + 10) / 1.777) + 20) * 3 + "px"
+        }
+        if (arrVideo.length == 8) {
+            setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
+            setVideoLayout(arrVideo[1].id, 15, fullW * .3 +margin, fullW * .3 -margin)
+            setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - 10)
+            setVideoLayout(arrVideo[3].id, 15 + (fullW * .3 + 10) / 1.777 +margin, 0, fullW * .3 -margin)
+            setVideoLayout(arrVideo[4].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 1, fullW * .3 -margin)
+            setVideoLayout(arrVideo[5].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
+            setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, 0, fullW * .3 -margin)
+            setVideoLayout(arrVideo[7].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .3 +margin) * 1, fullW * .3 -margin)
+            trBox.style.height = (((fullW * .3 + 10) / 1.777) + 20) * 3 + "px"
+        }
+        if (arrVideo.length == 9) {
+            setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
+            setVideoLayout(arrVideo[1].id, 15, fullW * .3 +margin, fullW * .3 -margin)
+            setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - 10)
+            setVideoLayout(arrVideo[3].id, 15 + (fullW * .3 + 10) / 1.777 +margin, 0, fullW * .3 -margin)
+            setVideoLayout(arrVideo[4].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 1, fullW * .3 -margin)
+            setVideoLayout(arrVideo[5].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
+            setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, 0, fullW * .3 -margin)
+            setVideoLayout(arrVideo[7].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .3 +margin) * 1, fullW * .3 -margin)
+            setVideoLayout(arrVideo[8].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .3 +margin) * 2, fullW * .3 -margin)
+            trBox.style.height = (((fullW * .3 + 10) / 1.777) + 20) * 3 + "px"
+        }
+        if (arrVideo.length == 10) {
 
-    var outStream = canvas.captureStream(30);
-    var inputStream= await navigator.mediaDevices.getUserMedia({audio:true, video:true});
-    inputVideo.srcObject=inputStream;
-    const ac = new AudioContext();
-    const osc = ac.createOscillator();
-    osc.frequency.value = 150;
-    osc.start();
+            setVideoLayout(arrVideo[0].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[1].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[2].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[3].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 3, fullW * .25 -margin)
 
-    var gainNode = ac.createGain();
-    gainNode.gain.value = 0.0;
-    osc.connect(gainNode);
+            setVideoLayout(arrVideo[4].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[5].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[7].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 3, fullW * .25 -margin)
 
-    var inputAudioNode= ac.createMediaStreamSource(inputStream);
+            setVideoLayout(arrVideo[8].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[9].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 1, fullW * .25 -margin)
 
-    var merger = ac.createChannelMerger(20);
+            trBox.style.height = (((fullW * .25 + 10) / 1.777) + 20) * 4 + "px"
+        }
+        if (arrVideo.length == 11) {
 
-    gainNode.connect(merger, 0, 1);
-    inputAudioNode.connect(merger, 0, 0);
+            setVideoLayout(arrVideo[0].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[1].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[2].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[3].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 3, fullW * .25 -margin)
 
+            setVideoLayout(arrVideo[4].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[5].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[7].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 3, fullW * .25 -margin)
 
-    const audioStreamDestination = ac.createMediaStreamDestination();
-    merger.connect(audioStreamDestination);
+            setVideoLayout(arrVideo[8].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[9].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[10].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 2, fullW * .25 -margin)
 
-    const newAudioTrack = audioStreamDestination.stream.getAudioTracks()[0];
+            trBox.style.height = (((fullW * .25 + 10) / 1.777) + 20) * 4 + "px"
+        }
+        if (arrVideo.length == 12) {
 
-    var middleVideoStream=canvas.captureStream(30)
-    const newStream = new window.MediaStream();
+            setVideoLayout(arrVideo[0].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[1].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[2].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[3].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 3, fullW * .25 -margin)
 
-    newStream.addTrack(newAudioTrack);
-    newStream.addTrack(middleVideoStream.getVideoTracks()[0]);
+            setVideoLayout(arrVideo[4].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[5].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[7].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 3, fullW * .25 -margin)
 
-    var outVideo=document.getElementById("destVideo")
-    outVideo.srcObject=newStream;
+            setVideoLayout(arrVideo[8].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[9].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[10].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[11].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 3, fullW * .25 -margin)
 
-var i=100;
-    document.getElementById('btn').addEventListener('click',()=>{
-        i+=100;
-    })
+            trBox.style.height = (((fullW * .25 + 10) / 1.777) + 20) * 4 + "px"
+        }
+        if (arrVideo.length == 13) {
 
-*/
+            setVideoLayout(arrVideo[0].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[1].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[2].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[3].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 3, fullW * .25 -margin)
 
+            setVideoLayout(arrVideo[4].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[5].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[7].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 3, fullW * .25 -margin)
 
+            setVideoLayout(arrVideo[8].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[9].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[10].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[11].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 3, fullW * .25 -margin)
 
-    log("TEST")
-        try {
-        var testvideo=document.getElementById("testvideo")
-            var mediaDevices=navigator.mediaDevices;
-        log(mediaDevices)
-            testvideo.srcObject = await mediaDevices.getUserMedia({video: true});
-        } catch(e) {
-           log(e);
+            setVideoLayout(arrVideo[12].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+
+            trBox.style.height = (((fullW * .25 + 10) / 1.777) + 20) * 4 + "px"
+        }
+        if (arrVideo.length == 14) {
+
+            setVideoLayout(arrVideo[0].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[1].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[2].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[3].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 3, fullW * .25 -margin)
+
+            setVideoLayout(arrVideo[4].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[5].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[7].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 3, fullW * .25 -margin)
+
+            setVideoLayout(arrVideo[8].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[9].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[10].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[11].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 3, fullW * .25 -margin)
+
+            setVideoLayout(arrVideo[12].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[13].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+
+            trBox.style.height = (((fullW * .25 + 10) / 1.777) + 20) * 4 + "px"
+        }
+        if (arrVideo.length == 15) {
+
+            setVideoLayout(arrVideo[0].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[1].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[2].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[3].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 3, fullW * .25 -margin)
+
+            setVideoLayout(arrVideo[4].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[5].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[7].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 3, fullW * .25 -margin)
+
+            setVideoLayout(arrVideo[8].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[9].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[10].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[11].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 3, fullW * .25 -margin)
+
+            setVideoLayout(arrVideo[12].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[13].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[14].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            trBox.style.height = (((fullW * .25 + 10) / 1.777) + 20) * 4 + "px"
+        }
+        if (arrVideo.length == 16) {
+
+            setVideoLayout(arrVideo[0].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[1].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[2].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[3].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 0, (fullW * .25 +margin) * 3, fullW * .25 -margin)
+
+            setVideoLayout(arrVideo[4].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[5].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[7].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 1, (fullW * .25 +margin) * 3, fullW * .25 -margin)
+
+            setVideoLayout(arrVideo[8].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[9].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[10].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[11].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 3, fullW * .25 -margin)
+
+            setVideoLayout(arrVideo[12].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 0, fullW * .25 -margin)
+            setVideoLayout(arrVideo[13].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 1, fullW * .25 -margin)
+            setVideoLayout(arrVideo[14].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 2, fullW * .25 -margin)
+            setVideoLayout(arrVideo[15].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 3, fullW * .25 -margin)
+            trBox.style.height = (((fullW * .25 + 10) / 1.777) + 20) * 4 + "px"
         }
 
+        arrVideo.forEach(e => {
+
+        })
+    }
+    catch (e) {
+        console.warn(e)
+    }
 
 }
-
-function log(msg){div.innerHTML += msg + "<br>"}
