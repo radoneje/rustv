@@ -1434,16 +1434,18 @@ window.onload=function () {
             var top=15;
             var beetwen=10;
 
+
+
+            var trBox = document.getElementById("meetVideoBox");
+            trBox.style.position = "relative";
+            var fullW = trBox.clientWidth - 20;
             if( window.innerWidth<977)
             {
                 var margin=0
                 var top=5;
                 var beetwen=0;
+                fullW=window.innerWidth
             }
-
-            var trBox = document.getElementById("meetVideoBox");
-            trBox.style.position = "relative";
-            var fullW = trBox.clientWidth - 20;
 
             var pgm = arrVideo.filter(e => e.pgm == true)
             if (pgm.length > 0 && isPgm) {
