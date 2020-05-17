@@ -1176,7 +1176,7 @@ window.onload=function () {
 
             var trBox = document.getElementById("meetVideoBox");
             trBox.style.position = "relative";
-            var fullW = trBox.innerWidth;// clientWidth - 0;
+            var fullW = trBox.offsetWidth;//clientWidth - 0;
             console.log("windoww",fullW)
             if( window.innerWidth<977)
             {
