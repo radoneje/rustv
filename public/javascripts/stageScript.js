@@ -1168,7 +1168,7 @@ window.onload=function () {
     window.addEventListener("resize",()=>{console.log("resize");videoLayout()});
     function videoLayout() {
         try {
-            var margin=0
+            var margin=5
             var top=15;
             var beetwen=10;
 
