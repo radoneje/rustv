@@ -1222,25 +1222,25 @@ window.onload=function () {
             })
             if (arrVideo.length == 1) {
                 setVideoLayout(arrVideo[0].id, 0, 0, fullW )
-                trBox.style.height = ((fullW / 1.777) + 20) + "px"
+                trBox.style.height = ((fullW / 1.777) + 20) + 10+ "px"
             }
             if (arrVideo.length == 2) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .5 -margin)
                 setVideoLayout(arrVideo[1].id, 15, fullW * .5 +margin, fullW * .5 -margin)
-                trBox.style.height = ((fullW / 1.777) + 40) + "px"
+                trBox.style.height = ((fullW / 1.777) + 40) + 10+ "px"
             }
             if (arrVideo.length == 3) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .5 -margin)
                 setVideoLayout(arrVideo[1].id, 15, fullW * .5 +margin, fullW * .5 -margin)
                 setVideoLayout(arrVideo[2].id, 15 + (fullW * .5 + 10) / 1.777 +margin, fullW * .25 +margin, fullW * .5 -margin)
-                trBox.style.height = (((fullW * .5 +beetwen) / 1.777) + beetwen*2) * 2 + "px"
+                trBox.style.height = (((fullW * .5 +beetwen) / 1.777) + beetwen*2) * 2 + 10+ "px"
             }
             if (arrVideo.length == 4) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .5 -margin)
                 setVideoLayout(arrVideo[1].id, 15, fullW * .5 +margin, fullW * .5 -margin)
                 setVideoLayout(arrVideo[2].id, 15 + (fullW * .5 +margin) / 1.777 +margin, 0, fullW * .5 -margin)
                 setVideoLayout(arrVideo[3].id, 15 + (fullW * .5 +margin) / 1.777 +margin, fullW * .5 +margin, fullW * .5 -margin)
-                trBox.style.height = (((fullW * .5 +beetwen) / 1.777) + beetwen*2) * 2 + "px"
+                trBox.style.height = (((fullW * .5 +beetwen) / 1.777) + beetwen*2) * 2 + 10+"px"
             }
             if (arrVideo.length ==5) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
@@ -1248,7 +1248,7 @@ window.onload=function () {
                 setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - margin)
                 setVideoLayout(arrVideo[3].id, 15 + (fullW * .3 + 10) / 1.777 +margin, 0, fullW * .3 -margin)
                 setVideoLayout(arrVideo[4].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
-                trBox.style.height = (((fullW * .3 + beetwen) / 1.777) + beetwen*2) * 3 + "px"
+                trBox.style.height = (((fullW * .3 + beetwen) / 1.777) + beetwen*2) * 3 + 10+ "px"
             }
             if (arrVideo.length == 6) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
@@ -1257,7 +1257,7 @@ window.onload=function () {
                 setVideoLayout(arrVideo[3].id, 15 + (fullW * .3 + 10) / 1.777 +margin, 0, fullW * .3 -margin)
                 setVideoLayout(arrVideo[4].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 1, fullW * .3 -margin)
                 setVideoLayout(arrVideo[5].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
-                trBox.style.height = (((fullW * .3 + beetwen) / 1.777) + beetwen*2) * 3 + "px"
+                trBox.style.height = (((fullW * .3 + beetwen) / 1.777) + beetwen*2) * 3+ 10 + "px"
             }
             if (arrVideo.length == 7) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
@@ -1267,7 +1267,7 @@ window.onload=function () {
                 setVideoLayout(arrVideo[4].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 1, fullW * .3 -margin)
                 setVideoLayout(arrVideo[5].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
                 setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, 0, fullW * .3 -margin)
-                trBox.style.height = (((fullW * .3 + beetwen) / 1.777) + beetwen*2) * 3 + "px"
+                trBox.style.height = (((fullW * .3 + beetwen) / 1.777) + beetwen*2) * 3 + 10+ "px"
             }
             if (arrVideo.length == 8) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
@@ -1278,7 +1278,7 @@ window.onload=function () {
                 setVideoLayout(arrVideo[5].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
                 setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, 0, fullW * .3 -margin)
                 setVideoLayout(arrVideo[7].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .3 +margin) * 1, fullW * .3 -margin)
-                trBox.style.height = (((fullW * .3 + beetwen) / 1.777) + beetwen*2) * 3 + "px"
+                trBox.style.height = (((fullW * .3 + beetwen) / 1.777) + beetwen*2) * 3 + 10+ "px"
             }
             if (arrVideo.length == 9) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
@@ -1290,7 +1290,7 @@ window.onload=function () {
                 setVideoLayout(arrVideo[6].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, 0, fullW * .3 -margin)
                 setVideoLayout(arrVideo[7].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .3 +margin) * 1, fullW * .3 -margin)
                 setVideoLayout(arrVideo[8].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .3 +margin) * 2, fullW * .3 -margin)
-                trBox.style.height = (((fullW * .3 + beetwen) / 1.777) + beetwen*2) * 3 + "px"
+                trBox.style.height = (((fullW * .3 + beetwen) / 1.777) + beetwen*2) * 3 + 10+ "px"
             }
             if (arrVideo.length == 10) {
 
@@ -1307,7 +1307,7 @@ window.onload=function () {
                 setVideoLayout(arrVideo[8].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 0, fullW * .25 -margin)
                 setVideoLayout(arrVideo[9].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 1, fullW * .25 -margin)
 
-                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + "px"
+                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + 10+ "px"
             }
             if (arrVideo.length == 11) {
 
@@ -1325,7 +1325,7 @@ window.onload=function () {
                 setVideoLayout(arrVideo[9].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 1, fullW * .25 -margin)
                 setVideoLayout(arrVideo[10].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 2, fullW * .25 -margin)
 
-                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + "px"
+                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + 10+ "px"
             }
             if (arrVideo.length == 12) {
 
@@ -1344,7 +1344,7 @@ window.onload=function () {
                 setVideoLayout(arrVideo[10].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 2, fullW * .25 -margin)
                 setVideoLayout(arrVideo[11].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 2, (fullW * .25 +margin) * 3, fullW * .25 -margin)
 
-                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + "px"
+                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + 10+ "px"
             }
             if (arrVideo.length == 13) {
 
@@ -1365,7 +1365,7 @@ window.onload=function () {
 
                 setVideoLayout(arrVideo[12].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 0, fullW * .25 -margin)
 
-                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + "px"
+                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4+ 10 + "px"
             }
             if (arrVideo.length == 14) {
 
@@ -1387,7 +1387,7 @@ window.onload=function () {
                 setVideoLayout(arrVideo[12].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 0, fullW * .25 -margin)
                 setVideoLayout(arrVideo[13].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 1, fullW * .25 -margin)
 
-                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + "px"
+                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + 10+ "px"
             }
             if (arrVideo.length == 15) {
 
@@ -1409,7 +1409,7 @@ window.onload=function () {
                 setVideoLayout(arrVideo[12].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 0, fullW * .25 -margin)
                 setVideoLayout(arrVideo[13].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 1, fullW * .25 -margin)
                 setVideoLayout(arrVideo[14].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 2, fullW * .25 -margin)
-                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + "px"
+                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + 10+ "px"
             }
             if (arrVideo.length == 16) {
 
@@ -1432,7 +1432,7 @@ window.onload=function () {
                 setVideoLayout(arrVideo[13].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 1, fullW * .25 -margin)
                 setVideoLayout(arrVideo[14].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 2, fullW * .25 -margin)
                 setVideoLayout(arrVideo[15].id, 15 + ((fullW * .3 + 10) / 1.777 +margin) * 3, (fullW * .25 +margin) * 3, fullW * .25 -margin)
-                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + "px"
+                trBox.style.height = (((fullW * .25 + beetwen) / 1.777) + beetwen*2) * 4 + 10+ "px"
             }
 
             arrVideo.forEach(e => {
