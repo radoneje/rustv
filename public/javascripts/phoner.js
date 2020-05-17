@@ -30,11 +30,11 @@ function initFlashServer(errHandeler){
 }
 function publishStream(streamName, localVideo, stream,errHandeler) {
     var audio=true;
-    var video = {quality: 100};
+    var video = true;// {quality: 100};
     if(stream) {
         var tracks=stream.getTracks();
         audio = tracks.filter(t => t.kind == "audio").length > 0 ? true : false;
-        video=tracks.filter(t => t.kind == "audio").length > 0 ? {quality: 100} : false;
+        video=tracks.filter(t => t.kind == "audio").length > 0 ? true/*{quality: 100}*/ : false;
     }
 
     var constraints={
