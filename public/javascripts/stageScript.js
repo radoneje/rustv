@@ -1245,7 +1245,7 @@ window.onload=function () {
             if (arrVideo.length ==5) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
                 setVideoLayout(arrVideo[1].id, 15, fullW * .3 +margin, fullW * .3 -margin)
-                setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - 10)
+                setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - margin)
                 setVideoLayout(arrVideo[3].id, 15 + (fullW * .3 + 10) / 1.777 +margin, 0, fullW * .3 -margin)
                 setVideoLayout(arrVideo[4].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
                 trBox.style.height = (((fullW * .3 + beetwen) / 1.777) + beetwen*2) * 3 + "px"
@@ -1253,7 +1253,7 @@ window.onload=function () {
             if (arrVideo.length == 6) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
                 setVideoLayout(arrVideo[1].id, 15, fullW * .3 +margin, fullW * .3 -margin)
-                setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - 10)
+                setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - margin)
                 setVideoLayout(arrVideo[3].id, 15 + (fullW * .3 + 10) / 1.777 +margin, 0, fullW * .3 -margin)
                 setVideoLayout(arrVideo[4].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 1, fullW * .3 -margin)
                 setVideoLayout(arrVideo[5].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
@@ -1262,7 +1262,7 @@ window.onload=function () {
             if (arrVideo.length == 7) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
                 setVideoLayout(arrVideo[1].id, 15, fullW * .3 +margin, fullW * .3 -margin)
-                setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - 10)
+                setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - margin)
                 setVideoLayout(arrVideo[3].id, 15 + (fullW * .3 + 10) / 1.777 +margin, 0, fullW * .3 -margin)
                 setVideoLayout(arrVideo[4].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 1, fullW * .3 -margin)
                 setVideoLayout(arrVideo[5].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
@@ -1283,7 +1283,7 @@ window.onload=function () {
             if (arrVideo.length == 9) {
                 setVideoLayout(arrVideo[0].id, 15, 0, fullW * .3 -margin)
                 setVideoLayout(arrVideo[1].id, 15, fullW * .3 +margin, fullW * .3 -margin)
-                setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - 10)
+                setVideoLayout(arrVideo[2].id, 15, (fullW * .3 +margin) * 2, fullW * .3 - margin)
                 setVideoLayout(arrVideo[3].id, 15 + (fullW * .3 + 10) / 1.777 +margin, 0, fullW * .3 -margin)
                 setVideoLayout(arrVideo[4].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 1, fullW * .3 -margin)
                 setVideoLayout(arrVideo[5].id, 15 + (fullW * .3 + 10) / 1.777 +margin, (fullW * .3 +margin) * 2, fullW * .3 -margin)
