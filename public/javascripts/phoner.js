@@ -37,7 +37,7 @@ function publishStream(streamName, localVideo, stream,errHandeler) {
         quality: 100
     }
     if(stream) {
-        //var tracks=stream.getTracks();
+        var tracks=stream.getTracks();
         audio = tracks.filter(t => t.kind == "audio").length > 0 ? true : false;
         video=tracks.filter(t => t.kind == "audio").length > 0 ? {width:640} : false;
        // console.log("tracks",tracks )
