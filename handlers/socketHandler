@@ -271,15 +271,19 @@ class socket{
                         i++;
                         setTimeout(()=>{
                             try {
+                                var j=0;
                                 c.stage.forEach(cc=>{
-                                    socket.emit("newStageStream", cc)
+                                    j++;
+                                    setTimeout(()=> {
+                                        socket.emit("newStageStream", cc)
+                                    },500*j);
                                 })
 
 
                             }catch (e) {
                                 console.warn("error send new stream")
                             }
-                        },1000*i )
+                        },0*i )
 
                     })
                 }
