@@ -33,7 +33,7 @@ function publishStream(streamName, localVideo, stream,errHandeler) {
     var video = {
         width: {ideal: 640},
         width: {ideal: 360},
-        aspectRatio: {ideal: 1.7777777778},
+        aspectRatio:  1.7777777778,
         quality: 100
     }
     if(stream) {
