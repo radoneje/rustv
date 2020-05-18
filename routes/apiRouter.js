@@ -478,6 +478,7 @@ router.post("/roomUsers/:roomid",async (req, res, next)=>{
         rooms.sendStatus(404);
     for(var user of req.body.items) {
         user.eventid=rooms[0].eventid;
+        user.defaultroom=req.params.roomid;
         await req.knex("t_eventusers").insert(user)
     }
     var users=   await req.knex.select("*").from("t_eventusers").where({eventid:rooms[0].eventid}).orderBy("f").orderBy("i")
