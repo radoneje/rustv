@@ -737,6 +737,8 @@ function checkSpeakerScreen(_this){
          })
 }
 function startVideo(video) {
+    if(!video)
+        return;
     if (Hls.isSupported()) {
 
         var hls = new Hls();
