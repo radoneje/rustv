@@ -15,7 +15,7 @@ window.onload=function () {
         methods:{
             enterKeyDown:function(e){
                 if(e.keyCode==13){
-                    cbLogin();
+                    this.cbLogin();
                 }
             },
             cbLogin:async function () {
