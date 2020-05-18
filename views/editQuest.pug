@@ -113,8 +113,7 @@ block content
                     div#admPres(v-bind:style="{backgroundImage:'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')'}")
                     div.videoCap Трансляция
                 div.videoBox#translationVideoBox
-                    video#translationVideo( width="180"  controls playsinline muted autoplay :src="'https://stream.sberbank-school.ru/hls/'+ room.streamname +'/index.m3u8'" :poster="'/images/'+room.poster" )
-                    div.videoCap Трансляция
+                    include elements/mainVideo
         div.eQMesToSpkBox
             include elements/spkMessageBtn
         include elements/messageFromMod
