@@ -23,10 +23,11 @@ block content
                     div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==2}" v-on:click="lSectActiveIndex=2")
                         div.aModSectTitle Вопросы ({{q.length}})
                 div.aSectBody(id="qBox" v-if="lSectActiveIndex==2")
-                    div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}")
-                        div.qItemSmi  {{item.smi}}
-                        div.qItemName {{item.i}}&nbsp;{{item.f}}
-                        long-text(v-bind:itemtext="item.text")
+                    div.qItem(v-for="item in q" v-key="item.id" v-bind:class="{ready:item.isReady}")
+
+                        div.qItemName {{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}
+                        //long-text(v-bind:itemtext="item.text")
+                        div.qItemText(v-html="item.text")
                         div(style="text-align:center")
                             video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
                         div.qItemPhoto(v-on:click="window.open('/files/'+item.photo)" v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)

@@ -461,6 +461,32 @@ router.get("/eventusers/:eventid",async (req, res, next)=>{
 
     res.json(ret);
 })
+router.get("/roomUsers/:roomid",async (req, res, next)=>{
+    //public.v_eventuserswithcompany
+    var rooms=await req.knex.select("*").from("t_rooms").where({id:req.params.roomid})
+    if(rooms.length==0)
+        rooms.sendStatus(404);
+    var users=   await req.knex.select("*").from("t_eventusers").where({eventid:rooms[0].eventid}).orderBy("f").orderBy("i")
+
+    res.json(users);
+})
+
+router.post("/roomUsers/:roomid",async (req, res, next)=>{
+    //public.v_eventuserswithcompany
+    var rooms=await req.knex.select("*").from("t_rooms").where({id:req.params.roomid})
+    if(rooms.length==0)
+        rooms.sendStatus(404);
+    for(var user of req.body.items) {
+        user.eventid=rooms[0].eventid;
+        await req.knex("t_eventusers").insert(user)
+    }
+    var users=   await req.knex.select("*").from("t_eventusers").where({eventid:rooms[0].eventid}).orderBy("f").orderBy("i")
+
+    res.json(users);
+})
+
+
+
 router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
 
     var ret = [];
@@ -470,6 +496,7 @@ router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
                 id: c.user.id,
                 i: c.user.i,
                 f: c.user.f,
+                smi:c.user.smi,
                 isActive: c.isActive ? true : false,
                 isVideo: c.isVideo,
                 handUp: c.handUp ? true : false
@@ -494,16 +521,34 @@ router.get("/localUsers/:eventid/:roomid", async (req, res, next) => {
                 id: c.user.id,
                 i: c.user.i,
                 f: c.user.f,
+                smi:c.user.smi,
                 isActive: c.isActive ? true : false,
                 isVideo: c.isVideo,
-                handUp: c.handUp ? true : false
+                handUp: c.handUp ? true : false,
+                th:null
             });
+    })
+    ret.forEach(r=>{
+        if(r.isActive && r.isVideo){
+            if (fs.existsSync(path.join(__dirname, '../public/th/'+req.params.roomid)+"/"+r.id+".jpg")) {
+               r.th=('/th/'+req.params.roomid)+"/"+r.id+".jpg"
+            }
+        }
+    });
+    res.json(ret);
+})
+router.get("/spkStatus/:roomid", async (req, res, next) => {
+    var arr=req.SPKstatus.filter(r=>r.roomid==req.params.roomid)
+    if(!arr || arr.length==0)
+        res.sendStatus(404)
+    var status=arr[0].status;
+    var ret=[]
+    status.SPKvksUsers.forEach(u=>{
+        var user=u.user;
+        ret.push({id:user.id,f:user.f,i:user.i,smi:user.smi});
     })
     res.json(ret);
 })
-
-
-
 router.get("/isSpkScreen/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     var ret = false;
     req.transport.clients.forEach(c => {
@@ -1376,6 +1421,21 @@ router.post('/startVideoCommand', async (req, res, next) => {
 router.post('/execCommandFwd', async (req, res, next) => {
     req.transport.Onfwd(req.body.msg, req.body.data)
     res.sendStatus(200);
+})
+
+router.post('/userTh/:roomid/:userid', async (req, res, next) => {
+   // console.log("userTh", req.files)
+    if (!fs.existsSync(path.join(__dirname, '../public/th/'))){
+        fs.mkdirSync(path.join(__dirname, '../public/th/'));
+    }
+    if (!fs.existsSync(path.join(__dirname, '../public/th/'+req.params.roomid))){
+        fs.mkdirSync(path.join(__dirname, '../public/th/'+req.params.roomid));
+    }
+    if(! req.files.file)
+        res.sendStatus(404)
+    req.files.file.mv(path.join(__dirname, '../public/th/'+req.params.roomid)+"/"+req.params.userid+".jpg", ()=>{
+        res.sendStatus(200);
+    });
 })
 
 

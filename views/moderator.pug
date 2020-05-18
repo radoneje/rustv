@@ -46,8 +46,7 @@ block content
                         div(v-if="isQ") Вопросы включены
                         div.warning(v-else) Вопросы выключены
                     div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}")
-                        div.qItemSmi  {{item.smi}}
-                        div.qItemName {{item.i}}&nbsp;{{item.f}}
+                        div.qItemName {{item.i}}&nbsp;{{item.f}},&nbsp; {{item.smi}}
                         div.qItemText(v-html="item.text")
                         div(style="text-align:center")
                             video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
@@ -62,6 +61,8 @@ block content
                         div.greenBtn(v-if="item.video" style="height: max-content;width: max-content;padding: 5px;" v-on:click="showUploadedVideo(item, $event)")
                             span Показать на экране
                         div.qItemDate
+                            span.link.green(v-if="! item.isSpk" v-on:click="qToSpk(item)") Показать спикеру &nbsp;&nbsp;
+                            span.link.green.red(v-else v-on:click="qToSpk(item)") Убрать от спикера &nbsp;&nbsp;
                             span.link.green(v-if="item.answer==null" v-on:click="item.answer=''") Ответить&nbsp;&nbsp;
                             span.link.green(v-if="item.isReady" v-on:click="QsetNew(item)") Пометить новым&nbsp;&nbsp;
                             span.link.green(v-else v-on:click="QsetOld(item)") Пометить отвеченным&nbsp;&nbsp;
@@ -123,8 +124,7 @@ block content
                         div(v-if="isChat") Чат включен
                         div.warning(v-else) Чат выключен
                     div.qItem(v-for="item in chat")
-                        div.qItemSmi  {{item.smi}}
-                        div.qItemName {{item.i}}&nbsp;{{item.f}}
+                        div.qItemName {{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}
                         div.qItemText(v-html="item.text")
                         div(style="text-align:center")
                             video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)

@@ -172,8 +172,6 @@ router.get('/editQuest/:id',  async (req, res, next) =>{
     return res.send(404);
 
   var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.params.id})
-  if(rooms.length<1)
-    return res.send(404);
 
   if(rooms.length<1)
     return res.send(404);
@@ -184,6 +182,26 @@ router.get('/editQuest/:id',  async (req, res, next) =>{
   if(!req.session["moderator"+room.id])
     return res.render('editQuestLogin',{ title: 'ON.event  '+rooms.title, room:room})
   res.render('editQuest', { title: 'ON.event  '+room.title, room:room, event:events[0]});
+
+})
+router.get('/editUsers/:id',  async (req, res, next) =>{
+
+  req.params.id=parseInt(req.params.id)
+  if(!Number.isInteger(req.params.id))
+    return res.send(404);
+
+  var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.params.id})
+
+  if(rooms.length<1)
+    return res.send(404);
+  var room=rooms[0]
+  var events=await req.knex.select("*").from("t_events").where({ id:room.eventid})
+
+
+  if(!req.session["moderator"+room.id])
+    return res.render('editQuestLogin',{ title: 'ON.event  '+rooms.title, room:room})
+
+  res.render('editUsers', { title: 'ON.event  '+room.title, room:room, event:events[0]});
 
 })
 router.get('/speaker/:id',  async (req, res, next) =>{
@@ -203,6 +221,37 @@ router.get('/speaker/:id',  async (req, res, next) =>{
   res.render('speaker', { title: 'ON.event '+room.title, room:room});
 
 })
+router.get('/tablet/:id',  async (req, res, next) =>{
+  req.params.id=parseInt(req.params.id)
+  if(!Number.isInteger(req.params.id))
+    return res.send(404);
+
+  var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.params.id})
+  if(rooms.length<1)
+    return res.send(404);
+  var room=rooms[0]
+  if(!req.session["speaker"+room.id])
+    return res.render('tabletLogin',{ title: 'ON.event '+room.title, room:room})
+  var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
+  res.render('tablet', { title: 'ON.event '+room.title, room:room, event:events[0]});
+
+})
+router.get('/mosaic/:id',  async (req, res, next) =>{
+  req.params.id=parseInt(req.params.id)
+  if(!Number.isInteger(req.params.id))
+    return res.send(404);
+
+  var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.params.id})
+  if(rooms.length<1)
+    return res.send(404);
+  var room=rooms[0]
+  if(!req.session["speaker"+room.id])
+    return res.render('tabletLogin',{ title: 'ON.event '+room.title, room:room})
+  var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
+  res.render('mosaic', { title: 'ON.event '+room.title, room:room, event:events[0]});
+
+})
+
 router.get('/speakerRec/:id',  async (req, res, next) =>{
 
   req.params.id=parseInt(req.params.id)

@@ -420,6 +420,18 @@ width: 75%;
   background: rgba(0,0,0,.25);
   z-index: 20;
 }
+.roomMeetVideoBox{
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: #262626;
+  background-size: 100%;
+  background-position: 0 120px;
+  background-repeat: no-repeat;
+}
 .meetingBtnBox:hover{
   opacity: 1;
 }
@@ -642,6 +654,7 @@ width: 100%;
   text-align: center;
   margin-top: 40px;
   font-size: 22px;
+  line-height: 32px;
 }
 .lFooterProg{
 
@@ -824,7 +837,7 @@ width: 100%;
 }
 .messageFromMod{
   position: fixed;
-  z-index: 100;
+  z-index: 10000;
   top: 0;
   background: white;
   color: black;
@@ -883,7 +896,40 @@ width: 100%;
   z-index: 10;
 }
 
+.mosaicItem{
+  width: 640px;
+  background: #262626;
+  border-radius: 4px;
+  box-sizing: border-box;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
 
+}
+.mosaicItemCap{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  background: rgba(0,0,0,.25);
+  z-index: 1;
+
+}
+.mosaicItemImage{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
   @media only screen and (max-width: 1024px){
 
     #activeSection8{

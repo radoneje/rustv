@@ -344,6 +344,10 @@ window.onload=async function () {
                 videoCap.innerHTML ='<div class="videoCatHer">'
                     +videoCap.innerText +
                     "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+data.guid+"' >на экран</span><span class='videotoSpk' id='videotoStage"+data.guid+"' >на сцену</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+data.guid+"'/></div>";
+               if(roomid==61)
+                   videoCap.innerHTML ='<div class="videoCatHer">'
+                       +videoCap.innerText +
+                       "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+data.guid+"' >на экран</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+data.guid+"'/></div>";
                 {
                     document.getElementById("close"+data.guid).addEventListener("click", ()=>{
                         console.log("stopReceiveVideo", data.guid, data.recguid )
@@ -359,11 +363,13 @@ window.onload=async function () {
                         _this.socket.emit("stopSendVideo",{user:_this.user, guid:data.recguid, to:data.from})
                         _this.socket.emit("spkStartVks",{user:data.user})
                     })
-                    document.getElementById("videotoStage"+data.guid).addEventListener("click", ()=>{
+                    var elem=document.getElementById("videotoStage"+data.guid)
+                    if(elem)
+                        elem.addEventListener("click", ()=>{
                         stopReceiveVideo(data.guid);
                         stopSendVideo(data.recguid);
                         _this.socket.emit("redirectToStage",{user:_this.user, guid:data.recguid, to:data.from})
-                    })
+                        })
                 }
 
             },
@@ -376,6 +382,7 @@ window.onload=async function () {
                 if(event.target.classList.contains('removing')) {
                     return;
                 }
+                console.log("discinnecredUser", discinnecredUser)
                 this.socket.emit("disconnectSPKvksUser", {item:discinnecredUser})
                 var ctrl=document.getElementById('VKSboxItemBtn'+discinnecredUser.guid)
                ctrl.classList.add('removing')

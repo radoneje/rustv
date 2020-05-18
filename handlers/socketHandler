@@ -3,7 +3,7 @@
 
 const io= require('socket.io')
 class socket{
-    constructor(server, knex){
+    constructor(server, knex, SPKstatus){
         this.clients=require('./clientsHandler')
         this.spkRoom=[];
         //this.emit=this.clients.sendToRoomUsers;
@@ -40,6 +40,15 @@ class socket{
                 if(users[0].email=='speaker@rustv.ru' && users[0].smsCode==999999)
                     _this.spkRoom.push({user:users[0],id:socket.id, socket:socket, isActive:true, roomid:data.roomid})
             })
+            socket.on("helloNobody",async ( data)=>{
+                var client={
+                    id:socket.id,
+                    socket:socket,
+                    roomid:data.roomid,
+                    isActive:true,
+                }
+                _this.clients.nobody.push(client);
+            })
             socket.on("disconnect",(msg,  data)=>{
               //  if(id)
                 try {
@@ -47,7 +56,6 @@ class socket{
                     _this.spkRoom.forEach(u => {
                         if (u.id == socket.id) {
                             u.isActive = false
-                            console.log(u.id);
                         }
                     })
                     _this.clients.sendToRoomUsers("closeStageStream", socket.id, roomid)
@@ -62,12 +70,15 @@ class socket{
                 console.log("addUserToSpeakerRoom", _this.spkRoom.length)
                 var fond=_this.clients.clients.filter(c=>{return  c.isActive && c.user.id==data.userid && c.roomid==data.roomid});
                 fond.forEach(f=>{
+                    f.streamid=socket.id;
                     _this.spkRoom.push(f);
-                    f.socket.emit("startSpeakerMeet")
+                    f.socket.emit("startSpeakerMeet",{streamid:socket.id});
+
                     // послать в f новое видео спикера
                     _this.spkRoom.forEach(a=>{
                         if(a.isActive && a.roomid==data.roomid)
                         {
+                         //   a.socket.emit("newSpkVideo",{streamid:a.socket.id, user:user});
                        //     f.socket.emit("newSpkVideo",{streamid:a.socket.id, user:a.user});
                         }
                     })
@@ -138,6 +149,13 @@ class socket{
 
           socket.on("SPKstatus",(dt)=>{
                 if(id) {
+                    if(SPKstatus.filter(s=>s.roomid==roomid)==0)
+                        SPKstatus.push({roomid:roomid, status:dt})
+                    else
+                        SPKstatus.forEach(s=>{
+                            if(s.roomid==roomid)
+                                s.status=dt;
+                        })
                     _this.clients.sendToRoomAdmins("SPKstatus", dt, roomid)
                 }
             });
@@ -154,9 +172,11 @@ class socket{
                     _this.clients.sendToRoomSpeakers("spkStartVks",  dt, roomid)
             });
             socket.on("disconnectSPKvksUser",(dt)=>{
+                if(id) {
+                    //_this.clients.sendToRoomSpeakers("disconnectSPKvksUser", dt, roomid)
+                    _this.clients.sendToRoomUsers("disconnectSPKvksUser", dt, roomid)
+                }
 
-                if(id)
-                    _this.clients.sendToRoomSpeakers("disconnectSPKvksUser",  dt, roomid)
             });
             socket.on("startDirectConnect",(dt)=>{
                 var touserid=dt.to.id;

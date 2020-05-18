@@ -14,7 +14,7 @@ var videoReceivers=[]
 async function getStream(_this){
     const constraints={
         audio: true,
-        video:true /*{
+        video:{width: {  ideal: 640, },aspectRatio: {ideal:1.777777778}} /*{
            // width: { min: 1024, ideal: 1024, max: 1920 },
             width: { min: 320, ideal: 640, max: 1920 },
             //height:{min: 180, ideal:320 , max:720},
@@ -35,7 +35,35 @@ async function getStream(_this){
            _this.socket.emit("selfVideoStarted",true);
            setTimeout(repeatSelfVideo, 5000);
        }
+
+
+
     })
+    var canvas=document.createElement('canvas')
+    canvas.width = video.width;
+    canvas.height = video.width/1.7777;
+    var ctx = canvas.getContext('2d');
+
+
+    drawVideo()
+     function drawVideo(){
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(async function(blob){
+            let data = new FormData();
+            data.append('file', blob);
+            try {
+                await axios.post("/rest/api/userTh/" + roomid + "/" + _this.user.id, data, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    }
+                })
+            }catch (e) {
+
+            }
+            setTimeout(drawVideo,5*1000)
+        }, 'image/jpeg', 0.6);
+
+    }
     _this.webCamStream=stream;
 
 }

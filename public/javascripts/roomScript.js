@@ -1,4 +1,7 @@
+
+
 var app;
+var arrVideo = [];
 window.onload=function () {
     try{
         eval("()=>{;;}")
@@ -6,8 +9,9 @@ window.onload=function () {
     catch (e) {
         document.location.href="/badbrowser"
     }
+    document.getElementById("app").style.opacity=1;
 
-    var wowzaRecievers=[];
+
     peerConnection=null;
      app = new Vue({
         el: '#app',
@@ -49,9 +53,13 @@ window.onload=function () {
             votes:[],
             userFindText:"",
             messageFromMod:"",
-            messageToModText:""
+            messageToModText:"",
+            arrVideo:  arrVideo,
         },
         methods:{
+            playing:function(){
+
+            },
             isWebRtc:function(){
                 var isChrome = /chrome/.test(navigator.userAgent.toLowerCase()) && /google inc/.test(navigator.vendor.toLowerCase());
                 var ya =/yabrowser/.test(navigator.userAgent.toLowerCase()) ;
@@ -187,7 +195,7 @@ window.onload=function () {
                     _this.handTimer=setTimeout(function () {
                         _this.hand=false;
                         axios.post('/rest/api/hand/'+eventid+"/"+roomid, {val:_this.hand, id:_this.user.id}).then()
-                    },10*60*1000)
+                    },100*10*60*1000)
                 axios.post('/rest/api/hand/'+eventid+"/"+roomid, {val:_this.hand, id:_this.user.id}).then()
 
             },
@@ -340,9 +348,23 @@ window.onload=function () {
             },
             OnmainVideoMute:function (val) {
 
+                console.log(this.$refs, this.mainVideoMuted)
                 var mainVideoElem=document.getElementById('video');
-                mainVideoElem.muted=!val;
+                if(mainVideoElem) {
+                    mainVideoElem.muted = !val;
+                }
+                else if(this.$refs.youtube)
+                {
+                    console.log()
+                    if(val)
+                        this.$refs.youtube.player.unMute()
+                    else
+                        this.$refs.youtube.player.mute()
+
+                }
                 this.mainVideoMuted=!val;
+
+
             },
             inviteToMeet:function (item) {
              // this.invitedUsers.push(item);
@@ -406,9 +428,20 @@ window.onload=function () {
                         q.likes=data.likes;
                 })
             },
-            startSpeakerMeet:function (data) {
+            startSpeakerMeet:async function (data) {
                 var _this=this;
-                console.log("startSpeakerMeet", this.webCamStream)
+                console.log("startSpeakerMeet", this.webCamStream, this.stramid);
+                var elem=document.createElement("div")
+                document.body.appendChild(elem);
+                elem.style.display="none";
+                await phonePublishLocalVideo(elem, _this.socket.id, null, ()=>{
+                    console.warn("local video failed")
+                });
+
+                _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid, streamid:_this.socket.id});
+                _this.hand=false;
+                await axios.post('/rest/api/hand/'+eventid+"/"+roomid, {val:_this.hand, id:_this.user.id})
+                /*
                 getSpkConfig()
                     .then(function (wCfg) {
                         console.log("getSpkConfig", wCfg)
@@ -421,45 +454,41 @@ window.onload=function () {
                         }, (err)=>{
                             consolw.warn(err)
                         }).then()
-                    })
+                    })*/
             },
-            OnSpkVideo:function (data) {
+            OnSpkVideo:async function (data) {
                 var _this=this;
-                console.log("before video from wowza aaa", video)
-                console.log("OnSpkVideo", data, _this.socket.id)
+
+
+                var ff = arrVideo.filter(v => {return v.streamid == data.streamid})
+                if (ff.length > 0)
+                    return;//убираем повтор моего видео
                 if(data.streamid==_this.socket.id)
-                    return;// мое видео не показываем
-                console.log("before video from wowza bbb", video)
-                if(wowzaRecievers.filter(r=>r.id==data.streamid).length>0)
                     return;
-                console.log("before video from wowza ccc", video)
-                var video=createVideoContaiter(data.streamid, (data.user.i||"") +" "+ data.user.f)
-                console.log("before video from wowza 0", video)
-                getSpkConfig()
-                    .then(function (wCfg) {
-                        var item={id:data.streamid, elem:video}
-                        console.log("before video from wowza", video)
-                        getVideoFromWowza(item,  wCfg.WowzaCfg.data, wCfg.BitrateCfg.data, function (ret) {
-                            console.log("remote video play", ret)
-                            document.getElementById("VKS").classList.add('fromSpk')
 
-                            var receiverItem={id:data.streamid, isMyVideo:false, user:data.user, streamid:data.streamid}
-                            receiverItem.peerConnection=ret.peerConnection;
-                            receiverItem.peerConnection.onconnectionstatechange=(event)=> {
-                                var cs = receiverItem.peerConnection.connectionState
-                                console.log("cs", receiverItem.peerConnection.connectionState)
-                                if (cs == "disconnected" || cs == "failed" || cs == "closed") {
+                var receiverItem = {
+                    id: data.streamid,
+                    isMyVideo: false,
+                    user: data.user,
+                    streamid: data.streamid
+                }
+                arrVideo.push(receiverItem);
+                this.arrVideo=arrVideo;
+                setTimeout(async ()=>{
+                    var video = await createVideo(data.streamid, false, data.user, ()=>{;;}, ()=>{;;}, ()=>{;;}, ()=>{/*videoRemove*/}, ()=>{;;});
+                    videoLayout();
+                    var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
+                    await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{
+                        console.warn("video Error")
+                    })
+                    receiverItem.elem=videoWrElem.querySelector('video')
+                    receiverItem.elem.style.transform="inherit"
+                    receiverItem.elem.setAttribute("allowfullscreen","allowfullscreen")
+                    receiverItem.elem.setAttribute("playsinline","playsinline")
 
-                                    _this.removeWowzaVideo(receiverItem.streamid)
-                                    //arrVideo = arrVideo.filter(r => r.streamid != receiverItem.streamid);
-
-                                }
-                            }
-                            wowzaRecievers.push(receiverItem)
-                            _this.isHead=false;
-                            mainVideoMute(true)
-                        })
-                    });
+                _this.OnmainVideoMute(false /* false - тихо*/)
+                },0)
+                return;
             },
             OnRoomStopWowzaVideo:function (data) {
                 var _this=this;
@@ -614,6 +643,19 @@ window.onload=function () {
                 this.messageFromMod=''
                 this.messageToModText=''
             },
+            disconnectSPKvksUser:function (dt) {
+
+                if(dt.item.user.id=this.user.id){
+                    arrVideo.forEach(v=>{
+                        removeVideo(v.streamid);
+                    })
+                    arrVideo=[];
+                    this.arrVideo=[];
+                    stopAllStreams();
+                    this.OnmainVideoMute(true /* false - тихо*/)
+                }
+                console.log("disconnectSPKvksUser", dt)
+            }
 
         },
         watch:{
@@ -809,9 +851,12 @@ window.onload=function () {
 
 
 
+
                     startVideo();
                     //_this.startRTC();
                 })
+
+
         }
     })
 
@@ -883,5 +928,36 @@ function startVideo() {
             video.play();
         });
     }
+
 }
+async function createVideo(id, muted, user, onPgm, onPip,onMute, onRemove, onReload) {
+    console.log("Create Video", id)
+    var meetVideoBox = document.getElementById("meetVideoBox");
+    var meetVideoItem = document.createElement("div");
+    meetVideoItem.classList.add("meetVideoItem");
+    meetVideoItem.id = 'meetVideoItem_' + id
+    var dt = await axios.get('/phoneVideoElem/' + id);
+    meetVideoItem.innerHTML = dt.data;
+    meetVideoBox.appendChild(meetVideoItem)
+
+
+    var cap = document.getElementById("meetVideoCap_" + id)
+    cap.innerText = (user.i || "") + " " + (user.f || "")
+
+    var mute = document.getElementById('meetVideoMute' + id)
+    var unmute = document.getElementById('meetVideoUnMute' + id)
+
+
+    unmute.parentNode.removeChild(unmute)
+    mute.parentNode.removeChild(mute)
+    var ff=document.getElementById('meetVideoFullScreen' + id);
+    ff.parentNode.removeChild(ff)
+
+}
+
+
+
+
+
+
 

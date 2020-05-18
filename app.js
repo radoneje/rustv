@@ -12,6 +12,7 @@ var indexRouter = require('./routes/indexRouter');
 var apiRouter = require('./routes/apiRouter');
 const socket=require("./handlers/socketHandler")
 
+var SPKstatus=[];
 var knex = require('knex')({
   client: 'pg',
   version: '7.2',
@@ -58,6 +59,8 @@ app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use("/", (req,res, next)=>{req.SPKstatus=SPKstatus;next();});
 app.use("/", (req,res, next)=>{req.sockClients=sockClients;next();});
 app.use("/", (req,res, next)=>{req.knex=knex;next();});
 app.use("/", (req,res, next)=>{req.transport=transport;next();});
@@ -83,7 +86,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 app.onListen=(server)=>{
-var sockServer= new socket(server, knex);
+var sockServer= new socket(server, knex, SPKstatus);
   transport=sockServer.clients;
 }
 

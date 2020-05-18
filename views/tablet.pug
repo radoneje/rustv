@@ -1,0 +1,37 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/stylesheets/old.css')
+    script.
+        var roomid = #{room.id}
+        var eventid = #{room.eventid}
+    script(src="/javascripts/utils.js")
+
+
+    script(src="/javascripts/tabletScript.js")
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    link(rel='stylesheet', href='/stylesheets/login.css')
+    link(rel='stylesheet', href='/stylesheets/room.css')
+    if event.isClientCss
+        link(rel='stylesheet', href='/stylesheets/' + event.clientCss)
+
+block content
+    div.adminContainer.spkContaiter.multiViewVideo(id="app" style="height: 100vh;")
+                div.aSectBody(id="qBox" style="height: 100%;")
+                    div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}" v-if="!item.isReady && item.isSpk")
+                        div.qItemSmi  {{item.smi}}
+                        div.qItemName {{item.i}}&nbsp;{{item.f}}
+                        div.qItemText(v-html="item.text")
+                        div.qItemDate
+
+                            span {{moment(item.date).format("HH:mm")}}
+                div#spkAlert(v-if="SPKalert")  {{SPKalertText}}
+
+
+
+
+
+
+
+
+
+

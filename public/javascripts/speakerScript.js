@@ -1,5 +1,6 @@
+arrVideo=[];
 window.onload=function () {
-    var wowzaRecievers=[];
+
     var peerConnection=null;
     var app = new Vue({
         el: '#app',
@@ -29,6 +30,8 @@ window.onload=function () {
             recordTime:null,
             newStream:null,
             votes:[],
+            isMyVideoPublish:false,
+            arrVideo:arrVideo,
         },
         methods:{
             onHandUp:function(data){
@@ -144,15 +147,35 @@ window.onload=function () {
                 var items=this.users.filter(u=>u.id==data.user.id)
                 if(items.length>0) {
                     //  _this.stopVKS();
-                    setTimeout(()=>{
+                    _this.startVideoChat(items[0]);
+                    /*setTimeout(()=>{
                         _this.startVideoChat(items[0]);
-                    },500)
+                    },500)*/
 
                 }
             },
             startVideoChat:async function(item){
-                document.getElementById("VKS").classList.remove('hidden')
                 var _this=this;
+                console.log(_this.localStreams)
+               // if(!_this.isMyVideoPublish)
+                {
+                    var elem=document.createElement("div")
+                    document.body.appendChild(elem);
+                    elem.style.display="none";
+                    await phonePublishLocalVideo(elem, _this.socket.id, null, ()=>{
+                        console.warn("local video failed")
+                    });
+                    _this.isMyVideoPublish=true;
+                   // _this.socket.emit("newSpeakerRoomVideo",{streamid:_this.socket.id});
+                    _this.socket.emit("addUserToSpeakerRoom",{userid:_this.user.id,roomid:roomid });
+                    setTimeout(async ()=>{
+                        _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid, streamid:_this.socket.id});
+                    }, 1000)
+                }
+                _this.socket.emit("addUserToSpeakerRoom",{userid:item.id,roomid:roomid });
+                return ;
+                document.getElementById("VKS").classList.remove('hidden')
+
 
                 var avatar=document.getElementById('videoAvatar'+item.id);
                 if(avatar) {
@@ -324,7 +347,15 @@ window.onload=function () {
                     elem.click();
             },
             disconnectSPKvksUser:function (data, event) {
-                this.removeWowzaVideo(data.item.guid)
+                //this.removeWowzaVideo(data.item.guid)
+
+                removeVideo(data.item.guid);
+                this.arrVideo=this.arrVideo.filter(r=>{return r.streamid!=data.item.guid})
+                arrVideo=this.arrVideo;
+                if(arrVideo.length>0)
+                    videoLayout();
+                else
+                    stopAllStreams();
                 /*
                 videoReceivers.forEach(r=>{
                     if(r.guid==data.item.guid){
@@ -502,9 +533,37 @@ window.onload=function () {
             },
             OnSpkVideo:function (data) {
                 var _this=this;
-                console.log("OnSpkVideo", data)
                 if(data.streamid==_this.socket.id)
                     return;// мое видео не показываем
+                var _this=this;
+                console.log("OnSpkVideo", data, _this.socket.id)
+
+                var ff = arrVideo.filter(v => v.streamid == data.streamid)
+                if (ff.length > 0)
+                    return;//убираем повтор моего видео
+                console.log("OnSpkVideo 2", data, _this.socket.id)
+                var receiverItem = {
+                    id: data.streamid,
+                    isMyVideo: false,
+                    user: data.user,
+                    streamid: data.streamid
+                }
+                arrVideo.push(receiverItem)
+                setTimeout(async ()=>{
+                    var video = await createVideo(data.streamid, false, data.user, ()=>{;;}, ()=>{;;}, ()=>{;;}, ()=>{/*videoRemove*/}, ()=>{;;});
+                    videoLayout();
+                    var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
+                    await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{
+                        console.warn("video Error")
+                    })
+                    receiverItem.elem=videoWrElem.querySelector('video')
+                    receiverItem.elem.style.transform="inherit"
+                    receiverItem.elem.setAttribute("allowfullscreen","allowfullscreen")
+                    receiverItem.elem.setAttribute("playsinline","playsinline")
+                    mainVideoMute(true)
+                },0)
+
+                return;
 
                 var video=createVideoContaiter(data.streamid, (data.user.i||"") +" "+ data.user.f)
                 getSpkConfig()
@@ -748,7 +807,12 @@ window.onload=function () {
                                   console.log("dev find ", fDev)*/
 
                                 // _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: fDev.deviceId}}, audio:true});
-                                _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:true, audio:true});
+                                _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({
+                                    video:{
+                                        width: {ideal: 640},
+                                        height: {ideal: parseInt(640/1.7777777778)}
+                                     },
+                                    audio:true});
                                 video.id="spkVideo"
                                 video.srcObject=_this.selfVideoStream;
                                 video.muted=true;
@@ -816,8 +880,11 @@ window.onload=function () {
                                     setInterval(() => {
                                         var SPKvksUsers=[]
                                         // videoReceivers.forEach(r=>{SPKvksUsers.push({user:r.user, guid:r.guid})})
-                                        wowzaRecievers.forEach(r=>{
-                                            SPKvksUsers.push({user:r.user, guid:r.id})})
+                                       // wowzaRecievers.forEach(r=>{
+                                       //     SPKvksUsers.push({user:r.user, guid:r.id})})
+                                        arrVideo.forEach(r=>{
+                                            SPKvksUsers.push({user:r.user, guid:r.streamid})})
+
                                         _this.socket.emit("SPKstatus",{SPKstatus: _this.SPKstatus, SPKalert:_this.SPKalert, SPKvksUsers:SPKvksUsers})
                                         if(SPKvksUsers.length==1)
                                         {
@@ -904,4 +971,28 @@ function draw(v,c, videoTrack, img){
     }
 
     setTimeout(()=>{draw(v,c, videoTrack,img)},1000/30)
+}
+async function createVideo(id, muted, user, onPgm, onPip,onMute, onRemove, onReload) {
+    console.log("Create Video", id)
+    var meetVideoBox = document.getElementById("meetVideoBox");
+    var meetVideoItem = document.createElement("div");
+    meetVideoItem.classList.add("meetVideoItem");
+    meetVideoItem.id = 'meetVideoItem_' + id
+    var dt = await axios.get('/phoneVideoElem/' + id);
+    meetVideoItem.innerHTML = dt.data;
+    meetVideoBox.appendChild(meetVideoItem)
+
+
+    var cap = document.getElementById("meetVideoCap_" + id)
+    cap.innerText = (user.i || "") + " " + (user.f || "")
+
+    var mute = document.getElementById('meetVideoMute' + id)
+    var unmute = document.getElementById('meetVideoUnMute' + id)
+
+
+    unmute.parentNode.removeChild(unmute)
+    mute.parentNode.removeChild(mute)
+    var ff=document.getElementById('meetVideoFullScreen' + id);
+    ff.parentNode.removeChild(ff)
+
 }

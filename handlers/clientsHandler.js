@@ -6,6 +6,7 @@ class Clients{
 
     constructor() {
         this.clients=[];
+        this.nobody=[];
         this.collectTh(this)
     }
     add(data){
@@ -28,6 +29,11 @@ class Clients{
                     c.isActive = false;
                     c.isVideo = false;
                     _this.sendToRoomUsers("userDisconnnect", c.user.id, c.roomid)
+                }
+            })
+            this.nobody.forEach(c => {
+                if (c.socket.id == id) {
+                    c.isActive = false;
                 }
             })
         }
@@ -86,6 +92,11 @@ class Clients{
                 c.socket.emit(msg, data);
             }
         });
+        this.nobody.forEach(c=>{
+            if(c.isActive && c.roomid==roomid) {
+                c.socket.emit(msg, data);
+            }
+        });
     }
     async sendToRoomAdmins(msg, data, roomid){
         this.OnSendToRoomAdmins(msg, data, roomid)
@@ -107,6 +118,11 @@ class Clients{
 
             }
         });
+        this.nobody.forEach(c=>{
+            if(c.isActive && c.roomid==roomid) {
+                c.socket.emit(msg, data);
+            }
+        });
     }
   async  sendToRoomSpeakers(msg, data, roomid){
         this.OnSendToRoomSpeakers(msg, data, roomid)
@@ -120,11 +136,17 @@ class Clients{
                 console.log(e)
             }
         }
+
     }
     OnSendToRoomSpeakers(msg, data, roomid){
         this.clients.forEach(c=>{
             if(c.isActive && c.roomid==roomid &&  c.isSpeaker )
                 c.socket.emit(msg, data);
+        });
+        this.nobody.forEach(c=>{
+            if(c.isActive && c.roomid==roomid) {
+                c.socket.emit(msg, data);
+            }
         });
     }
     async sendToUser(msg, data, userid, roomid){

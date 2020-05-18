@@ -184,7 +184,6 @@ function connect(_this, roomid, clbk){
 
 
     socket.on("disconnectSPKvksUser", function(data){
-
         if(_this.disconnectSPKvksUser)
             _this.disconnectSPKvksUser(data)
     });
@@ -297,9 +296,6 @@ function connect(_this, roomid, clbk){
             _this.chat=_this.chat.filter(function (e) {return e.id!=data;});
         });
         socket.on("qAdd", function(data){
-           /* if(_this.q.filter(function (u) {
-                return u.id==data.id
-            }).length==0)*/
                 _this.q.push(data);
 
         });
@@ -316,7 +312,7 @@ function connect(_this, roomid, clbk){
 
 
         socket.on("qDelete", function(data){
-           // _this.q=_this.q.filter(function (e) {return e.id!=data;});
+            _this.q=_this.q.filter(function (e) {return e.id!=data;});
         });
         socket.on("qStatus", function(data){
             _this.q.forEach(function (e) {

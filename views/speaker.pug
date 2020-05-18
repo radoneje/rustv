@@ -7,7 +7,11 @@ block head
     script(src="/javascripts/utils.js")
     script(src="/javascripts/rtcScript.js")
     script(src="/javascripts/recordScript.js")
-    script(src="/javascripts/wowza.js")
+    //script(src="/javascripts/wowza.js")
+    script(src="/lib/flashUtils.js")
+    script(src="/lib/flashphoner.js")
+    script(src="/javascripts/phoner.js")
+
     script(src="/javascripts/speakerScript.js")
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     link(rel='stylesheet', href='/stylesheets/login.css')
@@ -37,8 +41,7 @@ block content
                 div.aModSectTitle Вопросы ({{q.filter(q=>q.isReady==false).length}})
                 div.aSectBody(id="qBox")
                     div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}" v-if="!item.isReady && item.isSpk")
-                        div.qItemSmi  {{item.smi}}
-                        div.qItemName {{item.i}}&nbsp;{{item.f}}
+                        div.qItemName {{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}
                         div.qItemText(v-html="item.text")
                         div(style="text-align:center")
                             video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
@@ -79,8 +82,7 @@ block content
                 div.aModSectTitle ЧАТ ({{chat.length}})
                 div.aSectBody(id="chatBox")
                     div.qItem(v-for="item in chat")
-                        div.qItemSmi  {{item.smi}}
-                        div.qItemName {{item.i}}&nbsp;{{item.f}}
+                        div.qItemName {{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}
                         div.qItemText(v-html="item.text")
                         div(style="text-align:center")
                             video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
@@ -180,6 +182,8 @@ block content
                                 img.aModSectPresTh(:src="'/rest/api/pres/'+item.id+'/'+eventid+'/'+roomid")
         div#VKS.fromSpk.hidden
             div#videoWr
+        div.roomMeetVideoBox(v-if="arrVideo.length>0")
+            div#meetVideoBox
         div#spkAlert(v-if="SPKalert")  {{SPKalertText}}
 
 

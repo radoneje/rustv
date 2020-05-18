@@ -1,0 +1,38 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/stylesheets/old.css')
+    script.
+        var roomid = #{room.id}
+        var eventid = #{room.eventid}
+    script(src="/javascripts/utils.js")
+
+    script(src="/lib/flashUtils.js")
+    script(src="/lib/flashphoner.js")
+    script(src="/javascripts/phoner.js")
+    script(src="/javascripts/mosaicScript.js")
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    link(rel='stylesheet', href='/stylesheets/login.css')
+    link(rel='stylesheet', href='/stylesheets/room.css')
+    if event.isClientCss
+        link(rel='stylesheet', href='/stylesheets/' + event.clientCss)
+    script.
+        var roomid=!{room.id}
+        var eventid=!{event.id}
+block content
+    div.adminContainer.spkContaiter.multiViewVideo(id="app" style="height: 100vh;")
+        div#meetVideoBox
+            div.mosaicItem(:id="'meetVideoItem_'+item.id" v-for="item in arrVideo")
+                div.mosaicItemCap {{item.f}}&nbsp;{{item.i}}&nbsp;{{item.smi}}
+                div.mosaicItemImage(v-bind:style="{backgroundImage:'url('+item.th+')'}")
+
+
+
+
+
+
+
+
+
+
+
+

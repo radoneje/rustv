@@ -1,0 +1,38 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/stylesheets/old.css')
+    script.
+        var roomid = #{room.id}
+        var eventid = #{room.eventid}
+        var room=!{JSON.stringify(room)}
+    script(src="/javascripts/utils.js")
+    script(src="/javascripts/editUsersScript.js")
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="/lib/autosize.min.js"></script>
+    link(rel='stylesheet', href='/stylesheets/room.css')
+    if event.isClientCss
+        link(rel='stylesheet', href='/stylesheets/' + event.clientCss)
+
+block content
+    div.adminScreen.adminContainer(id="app" style="height: 100vh;" )
+
+        div.aModBox(style="height:100%;width: 100%;")
+            div.aModSect(style="width:66%")
+                div.aSectBody.aSectUser
+                    div.qItem.userItem(v-for="(item, i) in users" v-bind:key="item.id"  style="padding:5px;padding-left:50px")
+                        div.qItemName(style='margin: 4px 0;') {{i}}&nbsp;&nbsp;&nbsp;{{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}&nbsp;{{item.personalcode}}
+            div.aModSect(style="width:36%")
+                div.qItem.userItem
+                    div.qItemName формат- Имя;Фамилия;СМИ;Код - по дному в строчку
+                    div
+                        textarea(style="width: 100%;height: 300px;" id="addUserTextArea" v-model="addText")
+                    div
+                        div.greenBtn.clearBtn(v-on:click="usersAdd()") Добавить пользователей
+
+
+
+
+
+
+
