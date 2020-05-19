@@ -23,7 +23,7 @@
 <script>
     f();
     async function f() {
-       var stream=navigator.mediaDevices.getUserMedia({video:true,audio:true})
+       var stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true})
        document.getElementById('t').srcObject=stream;
     }
 
