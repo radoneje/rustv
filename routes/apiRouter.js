@@ -548,7 +548,25 @@ router.get("/spkStatus/:roomid", async (req, res, next) => {
         var user=u.user;
         ret.push({id:user.id,f:user.f,i:user.i,smi:user.smi});
     })
+    if(ret.length==0)
+        ret.push({id:'',f:'',i:'',smi:''});
     res.json(ret);
+
+})
+router.get("/spkToVmix/:roomid", async (req, res, next) => {
+    var arr=req.SPKstatus.filter(r=>r.roomid==req.params.roomid)
+    if(!arr || arr.length==0)
+        res.sendStatus(404)
+    var status=arr[0].status;
+    var ret=[]
+    status.SPKvksUsers.forEach(u=>{
+        var user=u.user;
+        ret.push({id:user.id,fi:(user.f||'')+' '+(user.i||''),smi:user.smi});
+    })
+    if(ret.length==0)
+        ret.push({id:'',fi:'',smi:''});
+    res.json(ret);
+
 })
 router.get("/isSpkScreen/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     var ret = false;
