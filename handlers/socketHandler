@@ -294,7 +294,7 @@ class socket{
                                 var j=0;
                                 c.stage.forEach(cc=>{
                                     j++;
-                                    console.log("newStageStream0",new Date(), j);
+                                    console.log("newStageStream0",new Date(), j, i);
                                     setTimeout(()=> {
                                         socket.emit("newStageStream", cc)
                                         console.log("newStageStream",new Date(), j);
