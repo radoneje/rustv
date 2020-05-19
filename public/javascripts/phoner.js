@@ -108,7 +108,7 @@ async function phonePublishLocalVideo(localVideo, id, stream, errHandeler){
         // await Flashphoner.playFirstVideo(localVideo, true, "https://wowza02.onevent.online:8444/client2/examples/demo/dependencies/media/preloader.mp4")
         alert(44)
     }
-    await publishStream(id,localVideo, stream,errHandeler);
+    await publishStream(id,localVideo, stream,()=>{alert(66);errHandeler()});
     alert(5)
 }
 async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
