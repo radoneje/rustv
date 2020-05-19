@@ -806,13 +806,13 @@ window.onload=function () {
                                       })
                                   console.log("dev find ", fDev)*/
 
-                                // _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: fDev.deviceId}}, audio:true});
-                                _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({
+                                 _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: fDev.deviceId}}, audio:true});
+                                /*_this.selfVideoStream = await navigator.mediaDevices.getUserMedia({
                                     video:{
-                                        width: {ideal: 640},
+                                      //  width: {ideal: 640},
                                         height: {ideal: parseInt(640/1.7777777778)}
                                      },
-                                    audio:true});
+                                    audio:true});*/
                                 video.id="spkVideo"
                                 video.srcObject=_this.selfVideoStream;
                                 video.muted=true;
