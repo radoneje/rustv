@@ -793,9 +793,9 @@ window.onload=function () {
                                 var video=SpkcreateVideoContaiter('selfVideo', _this.user.i ||''+" "+_this.user.f);
                                 video.width = 320;
                                 video.style.width = "320px"
-                                /*  var dev=await navigator.mediaDevices.enumerateDevices()
+                                  var dev=await navigator.mediaDevices.enumerateDevices()
                                   console.log("dev  ", dev)
-                                /*    var fDev=null;
+                                    var fDev=null;
                                           dev.forEach(function(device) {
                                               console.log("dev find ", fDev)
                                               if(device.label=="vMix Video")
@@ -804,7 +804,7 @@ window.onload=function () {
                                              }
 
                                       })
-                                  console.log("dev find ", fDev)*/
+                                  console.log("dev find ", fDev)
 
                                  _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: fDev.deviceId}}, audio:true});
                                 /*_this.selfVideoStream = await navigator.mediaDevices.getUserMedia({
