@@ -114,6 +114,7 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
     console.log("remotevideo"+id)
     if(Flashphoner.getSessions().length==0)
         await initFlashServer();
+    setTimeout(()=>{
     var PlaySession = Flashphoner.getSessions()[0];
     PlaySession.createStream({
         name: id,
@@ -132,6 +133,7 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
         if(errHandeler)
             errHandeler()
     }).play();
+    }, 1000)
 }
 function videoLayout() {
     try {
