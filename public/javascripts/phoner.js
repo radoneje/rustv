@@ -64,7 +64,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
     })
     console.log("dev find ", fDev)
     if(fDev)
-    video={ deviceId: {exact: fDev.deviceId}}
+    video={ deviceId:  fDev.deviceId}
 
     /*{
        // width: {ideal: 640},
@@ -85,6 +85,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
         audio: audio,
         video: video,
     }
+    console.log("constraints", constraints);
     if(stream)
         constraints.customStream=stream;
     console.log("constraints", constraints)
