@@ -298,7 +298,7 @@ class socket{
                                     setTimeout(()=> {
                                         socket.emit("newStageStream", cc)
                                         console.log("newStageStream",new Date(), j);
-                                    },1000*(j));
+                                    },1000*(Math.random()*2000));
                                 })
 
 
