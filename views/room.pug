@@ -17,6 +17,7 @@ block head
 
 block content
   div.roomScreen.multiViewVideo(id="app" v-bind:class="{roomInPres:pres}")
+    button(v-on:click="test()") ddddd
     div.head(v-show="videoReceivers.length<1 && isHead")
       div.headBox
         div.headLogo

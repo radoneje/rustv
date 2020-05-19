@@ -57,6 +57,11 @@ window.onload=function () {
             arrVideo:  arrVideo,
         },
         methods:{
+            test:function(){
+                var iframe=document.getElementById("profIframe");
+                var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+                console.log(iframeDocument)
+            },
             playing:function(){
 
             },
