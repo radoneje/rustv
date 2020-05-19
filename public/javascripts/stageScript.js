@@ -427,16 +427,16 @@ window.onload=function () {
                 this.isQ=data.isQ;
             },
             startMyVideo:async function () {
-                alert(1)
+
                 var _this=this;
                 _this.isMyVideo=true;
                 var videoItem = {id: _this.socket.id, isMyVideo: true, user: _this.user}
                 arrVideo.push(videoItem);
-                alert(2)
+
                 await createVideo(videoItem.id, videoItem.isMyVideo, _this.user, _this.videoPgm, _this.videoPIP, _this.videoMute, _this.videoRemove, _this.videoReload);
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
-                await phonePublishLocalVideo(videoWr, videoItem.id, null, ()=>{alert(4);removeVideo(videoItem.id)});
-                alert(3)
+                await phonePublishLocalVideo(videoWr, videoItem.id, null, ()=>{removeVideo(videoItem.id)});
+
                 videoLayout();
                 videoItem.streamid = _this.socket.id;
                 videoItem.elem = videoWr.querySelector('video');
