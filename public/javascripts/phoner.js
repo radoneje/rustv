@@ -48,7 +48,7 @@ function publishStream(streamName, localVideo, stream,errHandeler) {
     var isAndroid=navigator.userAgent.toLowerCase().indexOf("android") > -1;
    // if(isAndroid)
 
-        video=true;
+        video={width: {ideal: 640},quality: 100};
 
     /*{
        // width: {ideal: 640},
