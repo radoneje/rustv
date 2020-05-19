@@ -642,8 +642,8 @@ window.onload=function () {
                /* WowzaCfg = await axios.get('/rest/api/meetWowza')
                 BitrateCfg = await axios.get('/rest/api/meetBitrate')
                 var dt = await axios.get('/rest/api/constraints');
-                _this.constraints = dt.data;
-                _this.firstConnect = false;*/
+                _this.constraints = dt.data;*/
+                _this.firstConnect = false;
                 console.log("startMyVideo0", isMod ,  isPgm)
                 if(!isMod &&  !isPgm)
                     setTimeout(() => {
