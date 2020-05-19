@@ -296,7 +296,8 @@ class socket{
                                     j++;
                                     setTimeout(()=> {
                                         socket.emit("newStageStream", cc)
-                                    },1000*(j+i));
+                                        console.log("newStageStream",new Date());
+                                    },1000*(j));
                                 })
 
 
