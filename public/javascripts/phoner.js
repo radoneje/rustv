@@ -111,6 +111,7 @@ async function phonePublishLocalVideo(localVideo, id, stream, errHandeler){
 
 }
 async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
+    console.log("remotevideo"+id)
     if(Flashphoner.getSessions().length==0)
         await initFlashServer();
     var PlaySession = Flashphoner.getSessions()[0];
@@ -127,6 +128,7 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
         if(errHandeler)
             errHandeler()
     }).on(STREAM_STATUS.FAILED, function (stream) {
+        console.log("remotevideo ee2"+id)
         if(errHandeler)
             errHandeler()
     }).play();
