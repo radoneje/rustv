@@ -162,7 +162,7 @@ window.onload=function () {
                     var elem=document.createElement("div")
                     document.body.appendChild(elem);
                     elem.style.display="none";
-                    await phonePublishLocalVideo(elem, _this.socket.id, _this.selfVideoStream, ()=>{
+                    await phonePublishLocalVideo(elem, _this.socket.id, null, ()=>{
                         console.warn("local video failed")
                     });
                     _this.isMyVideoPublish=true;
