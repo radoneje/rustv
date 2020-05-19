@@ -240,7 +240,8 @@ window.onload=async function () {
             },
             startVideoChat:async function(item){
                 var _this=this;
-
+                if(videoSender.length>0)
+                    return;
                 var avatar=document.getElementById('videoAvatar'+item.id);
                 if(avatar.classList.contains("clicked"))
                     return ;
@@ -305,6 +306,8 @@ window.onload=async function () {
 
             onMyVideoStarted: function (video, stream, item) {
                 var _this=this;
+                if(videoSender.length>0)
+                    return;
                 createSender(video, stream, null, function (videoSender) {
                     videoSenders.push(videoSender)
                     _this.socket.emit("senderReady",{user:_this.user, guid:videoSender.guid, to:item.socketid})
