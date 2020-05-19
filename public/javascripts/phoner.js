@@ -98,15 +98,15 @@ function publishStream(streamName, localVideo, stream,errHandeler) {
 }
 async function phonePublishLocalVideo(localVideo, id, stream, errHandeler){
     console.log("localVideo", Flashphoner.getSessions().length, localVideo)
-    alert(1)
+    alert(11)
     if(Flashphoner.getSessions().length==0)
         await initFlashServer(errHandeler);
-    alert(2)
+    alert(22)
     if (Browser.isSafariWebRTC()) {
         console.log("safary")
-        alert(3)
+        alert(33)
         await Flashphoner.playFirstVideo(localVideo, true, "https://wowza02.onevent.online:8444/client2/examples/demo/dependencies/media/preloader.mp4")
-        alert(4)
+        alert(44)
     }
     await publishStream(id,localVideo, stream,errHandeler);
     alert(5)
