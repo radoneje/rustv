@@ -41,12 +41,13 @@ function stopAllStreams(){
 }
 function publishStream(streamName, localVideo, stream,errHandeler) {
     var audio=true;
-    var video = {width: {  ideal: 640, },aspectRatio: {ideal:1.777777778}}
-    var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-    if(iOS)
-        video=true;
+   // var video = {width: {  ideal: 640, },aspectRatio: {ideal:1.777777778}}
+   // var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+   // if(iOS)
+   //     video=true;
     var isAndroid=navigator.userAgent.toLowerCase().indexOf("android") > -1;
-    if(isAndroid)
+   // if(isAndroid)
+
         video=true;
 
     /*{
