@@ -366,9 +366,9 @@ window.onload=function () {
                 else if(document.getElementById('profIframe')){
                     var elem=document.getElementById('profIframe')
                     if(val)
-                        elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true"
+                        elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&autoplay=true&mute=false"
                     else
-                        elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&mute=true"
+                        elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&mute=true&autoplay=true"
                 }
                 this.mainVideoMuted=!val;
 

@@ -3,6 +3,6 @@ if (room.id==52)
     //<iframe id="YT" width="560" height="315" src="https://www.youtube.com/embed/w7LlUN393O4?enablejsapi=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 else if (room.id==61)
     //<youtube :video-id="'Ptg2_h6GXJI'" :player-vars="{playsinline:'1'}" ref="youtube" ></youtube>
-    <iframe id="profIframe" allowfullscreen src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true"></iframe>
+    <iframe id="profIframe" allowfullscreen src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&autoplay=false&mute=false"></iframe>
 else
     video(id="video" width="1280" height="720" controls playsinline loop  :src="'https://stream.sberbank-school.ru/hls/'+ room.streamname +'/index.m3u8'" :poster="'/images/'+room.poster" )
