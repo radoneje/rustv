@@ -39,7 +39,7 @@ function stopAllStreams(){
     })
 
 }
-function publishStream(streamName, localVideo, stream,errHandeler) {
+async function publishStream(streamName, localVideo, stream,errHandeler) {
     var audio=true;
    // var video = {width: {  ideal: 640, },aspectRatio: {ideal:1.777777778}}
    // var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
@@ -49,6 +49,22 @@ function publishStream(streamName, localVideo, stream,errHandeler) {
    // if(isAndroid)
 
         video={width: {ideal: 640},quality: 100};
+
+
+    var dev=await navigator.mediaDevices.enumerateDevices()
+    console.log("dev  ", dev)
+    var fDev=null;
+    dev.forEach(function(device) {
+        console.log("dev find ", fDev)
+        if(device.label=="vMix Video")
+        {
+            fDev=device;
+        }
+
+    })
+    console.log("dev find ", fDev)
+    if(fDev)
+    video={ deviceId: {exact: fDev.deviceId}}
 
     /*{
        // width: {ideal: 640},
@@ -111,7 +127,7 @@ async function phonePublishLocalVideo(localVideo, id, stream, errHandeler){
 
 }
 async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
-    console.log("remotevideo"+id)
+    //console.log("remotevideo"+id)
     if(Flashphoner.getSessions().length==0)
         await initFlashServer();
     setTimeout(()=>{
