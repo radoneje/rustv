@@ -18,6 +18,10 @@ block head
     script.
         var roomid=!{room.id}
         var eventid=!{event.id}
+    style.
+        body::-webkit-scrollbar {
+            display: none;
+        }
 block content
     div.adminContainer.spkContaiter.multiViewVideo(id="app" style="height: 100vh;")
         div#meetVideoBox
