@@ -365,7 +365,7 @@ window.onload=function () {
                 }
                 else if(document.getElementById('profIframe')){
                     var elem=document.getElementById('profIframe')
-                    if(!val)
+                    if(val)
                         elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&autoplay=true&mute=false"
                     else
                         elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&mute=true&autoplay=true"
@@ -491,9 +491,14 @@ window.onload=function () {
                         console.warn("video Error")
                     })
                     receiverItem.elem=videoWrElem.querySelector('video')
-                    receiverItem.elem.style.transform="inherit"
-                    receiverItem.elem.setAttribute("allowfullscreen","allowfullscreen")
-                    receiverItem.elem.setAttribute("playsinline","playsinline")
+                    if(!receiverItem.elem)
+                        receiverItem.elem=videoWrElem.querySelector('profIframe')
+                    if(receiverItem.elem) {
+
+                        receiverItem.elem.style.transform = "inherit"
+                        receiverItem.elem.setAttribute("allowfullscreen", "allowfullscreen")
+                        receiverItem.elem.setAttribute("playsinline", "playsinline")
+                    }
 
                 _this.OnmainVideoMute(false /* false - тихо*/)
                 },0)
