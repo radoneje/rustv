@@ -296,7 +296,7 @@ class socket{
                                     j++;
                                     setTimeout(()=> {
                                         socket.emit("newStageStream", cc)
-                                    },2000*j);
+                                    },1000*(j+i));
                                 })
 
 
