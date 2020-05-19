@@ -16,6 +16,10 @@ block head
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     link(rel='stylesheet', href='/stylesheets/login.css')
     link(rel='stylesheet', href='/stylesheets/room.css')
+    style.
+        body::-webkit-scrollbar {
+        display: none;
+        }
 
 block content
     div.adminContainer.spkContaiter.multiViewVideo(id="app" style="height: 100vh;" v-bind:class="{roomInPres:pres}")
