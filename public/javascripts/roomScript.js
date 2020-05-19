@@ -57,11 +57,7 @@ window.onload=function () {
             arrVideo:  arrVideo,
         },
         methods:{
-            test:function(){
-                var iframe=document.getElementById("profIframe");
-                var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-                console.log(iframeDocument)
-            },
+
             playing:function(){
 
             },
@@ -366,6 +362,13 @@ window.onload=function () {
                     else
                         this.$refs.youtube.player.mute()
 
+                }
+                else if(document.getElementById('profIframe')){
+                    var elem=document.getElementById('profIframe')
+                    if(val)
+                        elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true"
+                    else
+                        elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&mute=true"
                 }
                 this.mainVideoMuted=!val;
 
