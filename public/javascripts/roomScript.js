@@ -369,6 +369,7 @@ window.onload=function () {
                         elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&autoplay=true&mute=false"
                     else
                         elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&mute=true&autoplay=true"
+                    console.log("mute",val);
                 }
                 this.mainVideoMuted=!val;
 
