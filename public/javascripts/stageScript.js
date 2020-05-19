@@ -487,6 +487,7 @@ window.onload=function () {
                     receiverItem.elem.style.transform="inherit"
                     receiverItem.elem.setAttribute("allowfullscreen","allowfullscreen")
                     receiverItem.elem.setAttribute("playsinline","playsinline")
+
                 },500)
 
                 return ;
