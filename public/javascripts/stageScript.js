@@ -481,11 +481,13 @@ window.onload=function () {
                 videoLayout();
 
                 var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
-                await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{removeVideo(receiverItem.streamid)})
-                receiverItem.elem=videoWrElem.querySelector('video')
-                receiverItem.elem.style.transform="inherit"
-                receiverItem.elem.setAttribute("allowfullscreen","allowfullscreen")
-                receiverItem.elem.setAttribute("playsinline","playsinline")
+                setTimeout(async ()=>{
+                    await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{removeVideo(receiverItem.streamid)})
+                    receiverItem.elem=videoWrElem.querySelector('video')
+                    receiverItem.elem.style.transform="inherit"
+                    receiverItem.elem.setAttribute("allowfullscreen","allowfullscreen")
+                    receiverItem.elem.setAttribute("playsinline","playsinline")
+                },500)
 
                 return ;
 
