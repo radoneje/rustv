@@ -636,6 +636,7 @@ window.onload=function () {
                 videoLayout();
             },
             initStage:async function(){
+                console.log("init stage")
                 var _this=this;
                 _this.init=true;
                /* WowzaCfg = await axios.get('/rest/api/meetWowza')
@@ -645,6 +646,7 @@ window.onload=function () {
                 _this.firstConnect = false;*/
                 if(!isMod &&  !isPgm)
                     setTimeout(() => {
+                        console.log("startMyVideo")
                         _this.startMyVideo();
                     }, 400);
                 setTimeout(() => {
