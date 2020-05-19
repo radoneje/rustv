@@ -1,4 +1,5 @@
 var app;
+var arrVideo = [];
 window.onload=function () {
     try{
         eval("\"use strict\";const s=()=>{;;}; s();")
@@ -8,7 +9,7 @@ window.onload=function () {
     }
     var WowzaCfg = null;
     var BitrateCfg = null;
-    var arrVideo = [];
+
     var arrAudio = [];
 
     var wowzaRecievers=[];
