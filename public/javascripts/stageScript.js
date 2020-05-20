@@ -62,7 +62,8 @@ window.onload=function () {
             isMod:isMod,
             init:false,
             messageFromMod:"",
-            messageToModText:""
+            messageToModText:"",
+            errorMessage:"",
         },
         methods:{
 
@@ -435,28 +436,38 @@ window.onload=function () {
 
                 await createVideo(videoItem.id, videoItem.isMyVideo, _this.user, _this.videoPgm, _this.videoPIP, _this.videoMute, _this.videoRemove, _this.videoReload);
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
-                await phonePublishLocalVideo(videoWr, videoItem.id, null, ()=>{removeVideo(videoItem.id)});
+                try {
+                    await phonePublishLocalVideo(videoWr, videoItem.id, null, () => {
+                            removeVideo(videoItem.id)
+                        },
+                        () => {
+                                _this.errorMessage="Невозможно подключиться. Проверьте доступ к видекамере, разрешите использование видеокамеры в браузере и перезагрузите страницу."
+                        });
 
-                videoLayout();
-                videoItem.streamid = _this.socket.id;
-                videoItem.elem = videoWr.querySelector('video');
-                videoItem.elem.setAttribute("allowfullscreen","allowfullscreen")
-                videoItem.elem.setAttribute("playsinline","playsinline")
-                videoItem.stream = videoItem.elem.srcObject;
-                videoItem.audioElem = document.getElementById('meetVideoLevel' + videoItem.id)
-                videoItem.analiser = await createAudioAnaliser(videoItem.stream, (val) => {
-                    // console.log(val, parseFloat((val/100)*100));
-                    videoItem.audioElem.style.height = parseFloat((val / 100) * 100) + "%"
-                })
-                setTimeout(() => {
-                    socket.emit("newStageStream", {
-                        user: _this.user,
-                        isDesktop: false,
-                        roomid: room.id,
-                        streamid: videoItem.id
-                    });
+                    videoLayout();
+                    videoItem.streamid = _this.socket.id;
+                    videoItem.elem = videoWr.querySelector('video');
+                    videoItem.elem.setAttribute("allowfullscreen", "allowfullscreen")
+                    videoItem.elem.setAttribute("playsinline", "playsinline")
+                    videoItem.stream = videoItem.elem.srcObject;
+                    videoItem.audioElem = document.getElementById('meetVideoLevel' + videoItem.id)
+                    videoItem.analiser = await createAudioAnaliser(videoItem.stream, (val) => {
+                        // console.log(val, parseFloat((val/100)*100));
+                        videoItem.audioElem.style.height = parseFloat((val / 100) * 100) + "%"
+                    })
+                    setTimeout(() => {
+                        socket.emit("newStageStream", {
+                            user: _this.user,
+                            isDesktop: false,
+                            roomid: room.id,
+                            streamid: videoItem.id
+                        });
 
-                }, 0);
+                    }, 0);
+                }
+                catch (e) {
+                    console.log("publish video failed");
+                }
 
                 return ;
 

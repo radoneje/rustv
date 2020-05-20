@@ -39,7 +39,7 @@ function stopAllStreams(){
     })
 
 }
-async function publishStream(streamName, localVideo, stream,errHandeler) {
+async function publishStream(streamName, localVideo, stream,errHandeler, failedHandler) {
     var audio=true;
    // var video = {width: {  ideal: 640, },aspectRatio: {ideal:1.777777778}}
     var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
@@ -128,20 +128,22 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
 
             resolve();
         }).on(STREAM_STATUS.UNPUBLISHED, function () {
-            console.log("STREAM_STATUS.UNPUBLISHED")
 
             if(errHandeler)
                 errHandeler()
         }).on(STREAM_STATUS.FAILED, function () {
-            console.log("STREAM_STATUS.FAILED")
-            alert("STREAM_STATUS.FAILED")
+            //console.log("STREAM_STATUS.FAILED")
+            //alert("STREAM_STATUS.FAILED")
+            if(failedHandler)
+                failedHandler()
             if(errHandeler)
                 errHandeler()
+            reject();
         }).publish();
 
     })
 }
-async function phonePublishLocalVideo(localVideo, id, stream, errHandeler){
+async function phonePublishLocalVideo(localVideo, id, stream, errHandeler, failedHandler){
     console.log("localVideo", Flashphoner.getSessions().length, localVideo)
     if(Flashphoner.getSessions().length==0)
         await initFlashServer(errHandeler);
@@ -152,7 +154,7 @@ async function phonePublishLocalVideo(localVideo, id, stream, errHandeler){
         // await Flashphoner.playFirstVideo(localVideo, true, "https://wowza02.onevent.online:8444/client2/examples/demo/dependencies/media/preloader.mp4")
 
     }
-    await publishStream(id,localVideo, stream,()=>{if(errHandeler)errHandeler()});
+    await publishStream(id,localVideo, stream,()=>{if(errHandeler)errHandeler()},()=>{if(failedHandler)failedHandler()});
 
 }
 async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
