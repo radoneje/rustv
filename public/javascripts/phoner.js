@@ -42,7 +42,7 @@ function stopAllStreams(){
 async function publishStream(streamName, localVideo, stream,errHandeler) {
     var audio=true;
    // var video = {width: {  ideal: 640, },aspectRatio: {ideal:1.777777778}}
-   // var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+    var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
    // if(iOS)
    //     video=true;
     var isAndroid=navigator.userAgent.toLowerCase().indexOf("android") > -1;
@@ -110,6 +110,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
             cvoExtension: true,
             stripCodecs: "h264,H264"
         }).on(STREAM_STATUS.PUBLISHING, function (stream) {
+            alert(1)
             resolve();
         }).on(STREAM_STATUS.UNPUBLISHED, function () {
             console.log("STREAM_STATUS.UNPUBLISHED")
