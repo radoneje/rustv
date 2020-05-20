@@ -295,8 +295,8 @@ class socket{
                                 for(var cc in c.stage)
                                 {
                                     j++
-                                    await delay(1000*(i+j))
-                                    socket.emit("newStageStream", cc);
+                                    await delay(()=>{ socket.emit("newStageStream", cc);},1000*(i+j))
+
                                 }
                             }catch (e) {
                                 console.warn("error send new stream")
@@ -316,9 +316,9 @@ class socket{
         });
     }
 }
-function delay(time) {
+function delay(f,time) {
     return new Promise((res, rej)=>{
-        setTimeout(()=>{res()},time)
+        setTimeout(()=>{f(),res()},time)
     })
 }
 module.exports = socket;
