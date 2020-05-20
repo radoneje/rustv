@@ -358,7 +358,7 @@ block content
       </g>
       </svg>
     include elements/messageFromMod
-    div#errorMessage {{errorMessage}}
+    div#errorMessage(v-if="errorMessage.length>0") {{errorMessage}}
 
   script.
       var eventid=!{room.eventid}
