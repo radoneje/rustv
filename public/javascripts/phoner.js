@@ -186,7 +186,9 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
         name: id,
         display: remoteVideo,
      //   stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
-        stripCodecs: "h264,H264"
+        stripCodecs: "h264,H264",
+        playWidth:640,
+        playHeight:360
     })
     .on(STREAM_STATUS.PENDING, function (stream) {
           //  var video = document.getElementById(stream.id());
