@@ -250,18 +250,23 @@ function videoLayout() {
 
             var elem = document.getElementById("meetVideoItem_" + pgm[0].id);
             elem.style.position = "fixed";
+            //elem.style.top = pip.length > 0 ? ("12.5vh") : ("0");
             elem.style.top = pip.length > 0 ? ("12.5vh") : ("0");
             elem.style.left = 0;
-            elem.style.width = pip.length > 0 ? ("75%") : ("100%");
+            //elem.style.width = pip.length > 0 ? ("75%") : ("100%");
+            elem.style.width = pip.length > 0 ? ("50%") : ("100%");
             elem.style.zIndex = 100;
             elem.style.display = "block";
 
             if (pip.length > 0) {
                 var elem = document.getElementById("meetVideoItem_" + pip[0].id);
                 elem.style.position = "fixed";
-                elem.style.top = "50vh";
-                elem.style.left = "75%";
-                elem.style.width = ("25%");
+             //   elem.style.top = "50vh";
+             //   elem.style.left = "75%";
+             //   elem.style.width = ("25%");
+                   elem.style.top = "25vh";
+                   elem.style.left = "50%";
+                   elem.style.width = ("50%");
                 elem.style.zIndex = 200;
                 elem.style.display = "block";
             }
