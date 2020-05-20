@@ -58,8 +58,6 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
         facingMode: 'user',
             quality: 90
     }
-
-
            // {width: {ideal: 640},quality: 100};
 
 
