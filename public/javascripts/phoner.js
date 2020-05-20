@@ -264,7 +264,7 @@ function videoLayout() {
              //   elem.style.top = "50vh";
              //   elem.style.left = "75%";
              //   elem.style.width = ("25%");
-                   elem.style.top = "25vh";
+                   elem.style.top = "12.5vh";
                    elem.style.left = "50%";
                    elem.style.width = ("50%");
                 elem.style.zIndex = 200;
