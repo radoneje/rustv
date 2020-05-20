@@ -48,7 +48,16 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
     var isAndroid=navigator.userAgent.toLowerCase().indexOf("android") > -1;
    // if(isAndroid)
 
-        video={width: {ideal: 640},quality: 100};
+        video= {
+        width: {
+                ideal: 640
+        },
+        facingMode: 'user',
+            quality: 90
+    }
+
+
+           // {width: {ideal: 640},quality: 100};
 
 
     var dev=await navigator.mediaDevices.enumerateDevices()
@@ -65,6 +74,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
     console.log("dev find ", fDev)
     if(fDev)
     video={ deviceId:  fDev.deviceId}
+
 
     /*{
        // width: {ideal: 640},
