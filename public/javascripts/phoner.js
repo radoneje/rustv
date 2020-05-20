@@ -114,7 +114,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
             var video=localVideo.querySelector('video')
             if(video) {
                 try {
-                   // video.controls="controls"
+                    video.controls="controls"
                     setTimeout(()=>{video.play();},500)
 
                 }
