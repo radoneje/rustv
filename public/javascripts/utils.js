@@ -266,17 +266,20 @@ function connect(_this, roomid, clbk){
         });
 
         socket.on("chatAdd", function(data){
-
-
             if(_this.chat.filter(function (u) {
                 return u.id==data.id
             }).length==0)
-                _this.chat.push(data);
-            setTimeout(function () {
-                var objDiv = document.getElementById("chatBox");
-                if(objDiv)
-                objDiv.scrollTop = objDiv.scrollHeight;
-            },0)
+           var objDiv = document.getElementById("chatBox");
+            var needScrool=false;
+            if(objDiv && objDiv.scrollTop> objDiv.scrollHeight-230) {
+                needScrool=true;
+            }
+            _this.chat.push(data);
+            if(needScrool) {
+                    setTimeout(function () {
+                        objDiv.scrollTop = objDiv.scrollHeight;
+                    }, 0)
+            }
         });
     socket.on("stageChatAdd", function(data){
         if(_this.stageChat.filter(function (u) {
@@ -296,7 +299,19 @@ function connect(_this, roomid, clbk){
             _this.chat=_this.chat.filter(function (e) {return e.id!=data;});
         });
         socket.on("qAdd", function(data){
-                _this.q.push(data);
+
+            var objDiv = document.getElementById("qBox");
+            var needScrool=false;
+
+            if(objDiv && objDiv.scrollTop> objDiv.scrollHeight-230) {
+                needScrool=true;
+            }
+            _this.q.push(data);
+            if(needScrool) {
+                setTimeout(function () {
+                    objDiv.scrollTop = objDiv.scrollHeight;
+                }, 0)
+            }
 
         });
     socket.on("qAnswer", function(data){

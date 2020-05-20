@@ -57,7 +57,15 @@ window.onload=function () {
             arrVideo:  arrVideo,
         },
         methods:{
-
+            startVideoCall:async function(){
+                var _this = this;
+                var elem=document.getElementById('localVideo')
+                await phonePublishLocalVideo(elem, _this.socket.id, null, ()=>{
+                    console.warn("local video failed")
+                    _this.webCamStream=null;
+                });
+                _this.webCamStream=elem.querySelector('video').srcObject;
+            },
             playing:function(){
 
             },
@@ -803,10 +811,19 @@ window.onload=function () {
                     axios.get("/rest/api/quest/"+eventid+"/"+roomid)
                         .then(function (r) {
                             _this.q=r.data;
+                            var objDiv = document.getElementById("qBox");
+                            if(objDiv)
+                            setTimeout(function () {
+                                objDiv.scrollTop = objDiv.scrollHeight;
+                            }, 0)
                         })
                     axios.get("/rest/api/chat/"+eventid+"/"+roomid)
                         .then(function (r) {
                             _this.chat=r.data;
+                            var objDiv = document.getElementById("chatBox");
+                            setTimeout(function () {
+                                objDiv.scrollTop = objDiv.scrollHeight;
+                            }, 0)
                         })
                     axios.get("/rest/api/activePres/"+eventid+"/"+roomid)
                         .then(function(ff){

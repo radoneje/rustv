@@ -6,6 +6,18 @@
 <audio autoplay controls id="a1"></audio>
 <audio autoplay controls id="a2"></audio>
 <script>
+    window.addEventListener("message", function(event) {
+        if(event.data="mute")
+        {
+            /// код MUTE
+        }
+        if(event.data="unMute")
+        {
+            /// код UnMUTE
+        }
+
+    });
+
     let audioSelect = document.querySelector('select#audioSource');
     let secondAudioSelect = document.querySelector('select#secondAudioSource');
     getDev();
