@@ -282,31 +282,23 @@ class socket{
             })
 
 
-            socket.on("getStageVideos",(dt)=> {
+            socket.on("getStageVideos",async (dt)=> {
                 if (id) {
                     var arr=this.clients.clients.filter(c=>{
-                        return c.isActive && c.stage && c.roomid==roomid});
+                        return c.isActive && c.stage && c.roomid==roomid });
                     var i=0;
-                    arr.forEach(c=>{
-                        i++;
-                        setTimeout(()=>{
+
+                    arr.forEach(async c=>{
                             try {
                                 var j=0;
-                                c.stage.forEach(cc=>{
-                                    j++;
-                                    console.log("newStageStream0",new Date(), j, i);
-                                    setTimeout(()=> {
-                                        socket.emit("newStageStream", cc)
-                                        console.log("newStageStream",new Date(), j);
-                                    },3000*(Math.random()));
-                                })
-
-
+                                for(var cc in c.stage)
+                                {
+                                    await delay(1000)
+                                    socket.emit("newStageStream", cc);
+                                }
                             }catch (e) {
                                 console.warn("error send new stream")
                             }
-                        },0*i )
-
                     })
                 }
             });
@@ -322,5 +314,10 @@ class socket{
 
         });
     }
+}
+function delay(time) {
+    return new Promise((res, rej)=>{
+        setTimeout(()=>{res()},time)
+    })
 }
 module.exports = socket;

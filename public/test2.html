@@ -23,6 +23,21 @@
 <script>
     f();
     async function f() {
+
+        var a=[1,2,3,4,5,6,7,8,9]
+        var b=[1,2,3,4,5,6,7,8,9]
+        var i=0;
+        for(var aa of a){
+            i++
+            var j=0
+            for(var bb of b){
+                j++
+                await delay(1000)
+                console.log(i,j)
+            }
+        }
+
+        //onbeforeunload
         var supportedConstraints=navigator.mediaDevices.getSupportedConstraints()
         for (let constraint in supportedConstraints) {
             if (supportedConstraints.hasOwnProperty(constraint)) {
@@ -32,6 +47,11 @@
               //  constraintList.appendChild(elem);
                 document.getElementById('d').appendChild(elem)
             }
+        }
+        function delay(time) {
+            return new Promise((res, rej)=>{
+                setTimeout(()=>{res()},time)
+            })
         }
 
     }
