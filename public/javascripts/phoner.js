@@ -111,13 +111,26 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
             stripCodecs: "h264,H264"
         }).on(STREAM_STATUS.PUBLISHING, function (stream) {
             alert(1)
+            var video=localVideo.querySelector('video')
+            if(video) {
+                try {
+                    video.play();
+                }
+                catch (e) {
+                    alert("cant play video");
+                }
+            }
+                else alert('noVideo')
+
             resolve();
         }).on(STREAM_STATUS.UNPUBLISHED, function () {
             console.log("STREAM_STATUS.UNPUBLISHED")
+
             if(errHandeler)
                 errHandeler()
         }).on(STREAM_STATUS.FAILED, function () {
             console.log("STREAM_STATUS.FAILED")
+            alert("STREAM_STATUS.FAILED")
             if(errHandeler)
                 errHandeler()
         }).publish();
