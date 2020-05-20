@@ -66,6 +66,8 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
                     video.facingMode='user'
                 if(constraint=="quality")
                     video.quality=90;
+                if(constraint=="aspectRatio")
+                    video.aspectRatio= 1.7777777778
             }
         }
 
