@@ -53,7 +53,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
                 ideal: 640
         },
             height:{
-                ideal:480
+                ideal:360
             },
         facingMode: 'user',
             quality: 90
@@ -252,9 +252,9 @@ function videoLayout() {
             elem.style.position = "fixed";
             //elem.style.top = pip.length > 0 ? ("12.5vh") : ("0");
             elem.style.top = pip.length > 0 ? ("12.5vh") : ("0");
-            elem.style.left = 0;
+            elem.style.left =  '-5%';
             //elem.style.width = pip.length > 0 ? ("75%") : ("100%");
-            elem.style.width = pip.length > 0 ? ("50%") : ("100%");
+            elem.style.width = pip.length > 0 ? ("60%") : ("100%");
             elem.style.zIndex = 100;
             elem.style.display = "block";
 
@@ -265,8 +265,8 @@ function videoLayout() {
              //   elem.style.left = "75%";
              //   elem.style.width = ("25%");
                    elem.style.top = "12.5vh";
-                   elem.style.left = "50%";
-                   elem.style.width = ("50%");
+                   elem.style.left = "45%";
+                   elem.style.width = ("60%");
                 elem.style.zIndex = 200;
                 elem.style.display = "block";
             }
