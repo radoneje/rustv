@@ -16,15 +16,24 @@
     </style>
 </head>
 <body>
-
+<ul id="d"></ul>
 <div>
    <video id="t" controls autoplay playsinline></video>
 </div>
 <script>
     f();
     async function f() {
-       var stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true})
-       document.getElementById('t').srcObject=stream;
+        var supportedConstraints=navigator.mediaDevices.getSupportedConstraints()
+        for (let constraint in supportedConstraints) {
+            if (supportedConstraints.hasOwnProperty(constraint)) {
+                let elem = document.createElement("li");
+
+                elem.innerHTML = "<code>" + constraint + "</code>";
+              //  constraintList.appendChild(elem);
+                document.getElementById('d').appendChild(elem)
+            }
+        }
+
     }
 
 </script>
