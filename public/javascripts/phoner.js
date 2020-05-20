@@ -108,7 +108,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
             cacheLocalResources: true,
             constraints: constraints,
             cvoExtension: true,
-          //  stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
+            stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
           //  stripCodecs: "h264,H264"
         }).on(STREAM_STATUS.PUBLISHING, function (stream) {
            // alert(1)
@@ -163,7 +163,7 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
     PlaySession.createStream({
         name: id,
         display: remoteVideo,
-       // stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
+        stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
     //    stripCodecs: "h264,H264"
     })
     .on(STREAM_STATUS.PENDING, function (stream) {
@@ -176,7 +176,7 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
             try {
                 video.playsinline="playsinline";
                 video.setAttribute("playsinline", "playsinline");
-                //video.controls="controls"
+                video.controls="controls"
                 setTimeout(()=>{video.play();},500)
 
             }
