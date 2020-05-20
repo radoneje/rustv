@@ -132,6 +132,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
             if(video) {
                 try {
                     //video.controls="controls"
+                    video.style.transform="scaleX(-1);"
                     setTimeout(()=>{video.play();},500)
 
                 }
