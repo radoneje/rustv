@@ -168,7 +168,7 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
           //  var video = document.getElementById(stream.id());
 
     }).on(STREAM_STATUS.PLAYING, function (stream) {
-        var video=localVideo.querySelector('video')
+        var video=remoteVideo.querySelector('video')
         if(video) {
             try {
                 video.controls="controls"
