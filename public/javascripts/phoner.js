@@ -171,12 +171,14 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
         var video=remoteVideo.querySelector('video')
         if(video) {
             try {
+                video.playsinline="playsinline";
+                video.setAttribute("playsinline", "playsinline");
                 video.controls="controls"
                 setTimeout(()=>{video.play();},500)
 
             }
             catch (e) {
-                alert("cant play video");
+                alert("cant play video"+e);
             }
         }
         else alert('noVideo')
