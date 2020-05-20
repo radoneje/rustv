@@ -169,6 +169,7 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
 
     }).on(STREAM_STATUS.PLAYING, function (stream) {
         var video=remoteVideo.querySelector('video')
+        alert(video)
         if(video) {
             try {
                 video.playsinline="playsinline";
