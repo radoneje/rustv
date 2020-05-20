@@ -495,14 +495,12 @@ window.onload=function () {
                 videoLayout();
 
                 var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
-                setTimeout(async ()=>{
-                    await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{removeVideo(receiverItem.streamid)})
-                    receiverItem.elem=videoWrElem.querySelector('video')
+                    var playerid=await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{removeVideo(receiverItem.streamid)})
+                    receiverItem.elem=document.getElementById(playerid)
                     receiverItem.elem.style.transform="inherit"
                     receiverItem.elem.setAttribute("allowfullscreen","allowfullscreen")
                     receiverItem.elem.setAttribute("playsinline","playsinline")
 
-                },500)
 
                 return ;
 
@@ -613,7 +611,8 @@ window.onload=function () {
                     socket.emit("videoReload", data);
             },
             OnVideoMute:function (data) {
-               console.log("OnVideoMute", data)
+               console.log("OnVideoMute", data, arrVideo)
+
                 arrVideo.forEach(item=>{
                     if(item.streamid==data.streamid && !item.isMyVideo){
                         item.elem.muted=data.val;

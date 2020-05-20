@@ -178,48 +178,51 @@ async function phonePublishLocalVideo(localVideo, id, stream, errHandeler, faile
 }
 async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
     //console.log("remotevideo"+id)
-    if(Flashphoner.getSessions().length==0)
-        await initFlashServer();
-    setTimeout(()=>{
-    var PlaySession = Flashphoner.getSessions()[0];
-    PlaySession.createStream({
-        name: id,
-        display: remoteVideo,
-     //   stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
-        stripCodecs: "h264,H264"
-    })
-    .on(STREAM_STATUS.PENDING, function (stream) {
-          //  var video = document.getElementById(stream.id());
-     //   alert(11)
-    }).on(STREAM_STATUS.PLAYING, function (stream) {
-        var video=remoteVideo.querySelector('video')
-        console.log("stream.videoResolution();", stream.videoResolution())
-        //alert(video)
-     //   alert(22)
-        if(video) {
-            try {
-                video.playsinline="playsinline";
-                video.setAttribute("playsinline", "playsinline");
-              //  video.controls="controls"
-                setTimeout(()=>{video.play();},1000)
+    return new Promise(async (res, rej)=>{
+        if(Flashphoner.getSessions().length==0)
+            await initFlashServer();
+        setTimeout(()=>{
+        var PlaySession = Flashphoner.getSessions()[0];
+        PlaySession.createStream({
+            name: id,
+            display: remoteVideo,
+         //   stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
+            stripCodecs: "h264,H264"
+        })
+        .on(STREAM_STATUS.PENDING, function (stream) {
+              //  var video = document.getElementById(stream.id());
+            res(stream.id());
+         //   alert(11)
+        }).on(STREAM_STATUS.PLAYING, function (stream) {
+            var video=remoteVideo.querySelector('video')
+            console.log("stream.videoResolution();", stream.videoResolution())
+            //alert(video)
+         //   alert(22)
+            if(video) {
+                try {
+                    video.playsinline="playsinline";
+                    video.setAttribute("playsinline", "playsinline");
+                  //  video.controls="controls"
+                    setTimeout(()=>{video.play();},1000)
 
+                }
+                catch (e) {
+                   // alert("cant play video"+e);
+                    console.warn(e)
+                }
             }
-            catch (e) {
-               // alert("cant play video"+e);
-                console.warn(e)
-            }
-        }
-        else console.warn('noVideo')
-    }).on(STREAM_STATUS.STOPPED, function () {
-     //   alert(33)
-        if(errHandeler)
-            errHandeler()
-    }).on(STREAM_STATUS.FAILED, function (stream) {
-      //  alert("remotevideo ee2"+id)
-        if(errHandeler)
-            errHandeler()
-    }).play();
-    }, 1000)
+            else console.warn('noVideo')
+        }).on(STREAM_STATUS.STOPPED, function () {
+         //   alert(33)
+            if(errHandeler)
+                errHandeler()
+        }).on(STREAM_STATUS.FAILED, function (stream) {
+          //  alert("remotevideo ee2"+id)
+            if(errHandeler)
+                errHandeler()
+        }).play();
+        }, 1000)
+    })
 }
 function videoLayout() {
     try {
