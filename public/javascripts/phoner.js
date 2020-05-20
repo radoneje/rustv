@@ -108,7 +108,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
             cacheLocalResources: true,
             constraints: constraints,
             cvoExtension: true,
-           // stripCodecs: "h264,H264"
+            stripCodecs: "h264,H264"
         }).on(STREAM_STATUS.PUBLISHING, function (stream) {
            // alert(1)
             var video=localVideo.querySelector('video')
