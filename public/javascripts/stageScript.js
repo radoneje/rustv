@@ -1171,7 +1171,7 @@ window.onload=function () {
 
 
     window.addEventListener("resize",()=>{console.log("resize");videoLayout()});
-
+    window.addEventListener("orientationchange",()=>{console.log("orientationchange");videoLayout()});
 
 
 }
