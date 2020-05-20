@@ -289,11 +289,13 @@ class socket{
                     var i=0;
 
                     arr.forEach(async c=>{
+                        i++;
                             try {
                                 var j=0;
                                 for(var cc in c.stage)
                                 {
-                                    await delay(1000)
+                                    j++
+                                    await delay(500*(i+j))
                                     socket.emit("newStageStream", cc);
                                 }
                             }catch (e) {
