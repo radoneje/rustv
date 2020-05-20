@@ -172,6 +172,7 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
      //   alert(11)
     }).on(STREAM_STATUS.PLAYING, function (stream) {
         var video=remoteVideo.querySelector('video')
+        console.log("stream.videoResolution();", stream.videoResolution())
         //alert(video)
      //   alert(22)
         if(video) {
