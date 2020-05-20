@@ -292,7 +292,7 @@ class socket{
                         i++;
                             try {
                                 var j=0;
-                                for(var cc in c.stage)
+                                for(var cc of c.stage)
                                 {
                                     j++
                                     await delay(()=>{ socket.emit("newStageStream", cc);},1000*(i+j))
