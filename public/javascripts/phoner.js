@@ -114,6 +114,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
             var video=localVideo.querySelector('video')
             if(video) {
                 try {
+                    video.controls="controls"
                     video.play();
                 }
                 catch (e) {
