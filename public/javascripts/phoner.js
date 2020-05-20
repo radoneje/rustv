@@ -168,10 +168,11 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
     })
     .on(STREAM_STATUS.PENDING, function (stream) {
           //  var video = document.getElementById(stream.id());
-
+        alert(11)
     }).on(STREAM_STATUS.PLAYING, function (stream) {
         var video=remoteVideo.querySelector('video')
         //alert(video)
+        alert(22)
         if(video) {
             try {
                 video.playsinline="playsinline";
@@ -187,11 +188,11 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
         }
         else console.warn('noVideo')
     }).on(STREAM_STATUS.STOPPED, function () {
-
+        alert(33)
         if(errHandeler)
             errHandeler()
     }).on(STREAM_STATUS.FAILED, function (stream) {
-        console.log("remotevideo ee2"+id)
+        alert("remotevideo ee2"+id)
         if(errHandeler)
             errHandeler()
     }).play();
