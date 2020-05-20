@@ -166,9 +166,11 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
     })
     .on(STREAM_STATUS.PENDING, function (stream) {
           //  var video = document.getElementById(stream.id());
+        alert(111)
     }).on(STREAM_STATUS.PLAYING, function (stream) {
-
+        alert(222)
     }).on(STREAM_STATUS.STOPPED, function () {
+        alert(333)
         if(errHandeler)
             errHandeler()
     }).on(STREAM_STATUS.FAILED, function (stream) {
