@@ -288,20 +288,20 @@ class socket{
                         return c.isActive && c.stage && c.roomid==roomid });
                     var i=0;
 
-                    arr.forEach(async c=>{
+                    for(var c of arr){
                         i++;
-                            try {
-                                var j=0;
-                                for(var cc of c.stage)
-                                {
-                                    j++
-                                    await delay(()=>{ socket.emit("newStageStream", cc);},1000*(i+j))
-
-                                }
-                            }catch (e) {
-                                console.warn("error send new stream")
+                        try {
+                            var j=0;
+                            for(var cc of c.stage)
+                            {
+                                j++
+                                await delay(()=>{ socket.emit("newStageStream", cc);},1000*(i+j))
                             }
-                    })
+                        }catch (e) {
+                            console.warn("error send new stream")
+                        }
+                    }
+
                 }
             });
             socket.on("receiverPlaying",(data)=>{
