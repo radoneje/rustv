@@ -110,11 +110,11 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
             cvoExtension: true,
             stripCodecs: "h264,H264"
         }).on(STREAM_STATUS.PUBLISHING, function (stream) {
-            alert(1)
+           // alert(1)
             var video=localVideo.querySelector('video')
             if(video) {
                 try {
-                    video.controls="controls"
+                   // video.controls="controls"
                     setTimeout(()=>{video.play();},500)
 
                 }
