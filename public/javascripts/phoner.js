@@ -115,7 +115,8 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
             if(video) {
                 try {
                     video.controls="controls"
-                    video.play();
+                    setTimeout(()=>{video.play();},500)
+
                 }
                 catch (e) {
                     alert("cant play video");
