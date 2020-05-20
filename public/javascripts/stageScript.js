@@ -473,7 +473,7 @@ window.onload=function () {
 
             },
             OnNewStageStream:async function (data) {
-                console.log("OnNewStageStream", data.streamid)
+                console.log("OnNewStageStream", data)
                 var _this=this;
                 if (roomid != data.roomid)
                     return; //видео чужих комнат
