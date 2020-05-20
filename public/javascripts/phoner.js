@@ -129,11 +129,10 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
         }).on(STREAM_STATUS.PUBLISHING, function (stream) {
            // alert(1)
             var video=localVideo.querySelector('video')
-            console.log("video.style.transform0")
             if(video) {
                 try {
                     //video.controls="controls"
-                    video.style.transform="scaleX(2);"
+                    video.classList.add("mirrored")
                     console.log("video.style.transform")
                     setTimeout(()=>{video.play();},500)
 
