@@ -177,7 +177,7 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
             try {
                 video.playsinline="playsinline";
                 video.setAttribute("playsinline", "playsinline");
-                video.controls="controls"
+              //  video.controls="controls"
                 setTimeout(()=>{video.play();},1000)
 
             }
