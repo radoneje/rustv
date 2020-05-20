@@ -58,6 +58,21 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
         facingMode: 'user',
             quality: 90
     }
+    try{
+        var supportedConstraints=navigator.mediaDevices.getSupportedConstraints()
+        for (let constraint in supportedConstraints) {
+            if (supportedConstraints.hasOwnProperty(constraint)) {
+                if(constraint=="facingMode")
+                    video.facingMode='user'
+                if(constraint=="quality")
+                    video.quality=90;
+            }
+        }
+
+    }
+    catch (e) {
+
+    }
            // {width: {ideal: 640},quality: 100};
 
 
@@ -109,7 +124,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
             cacheLocalResources: true,
             constraints: constraints,
             cvoExtension: true,
-            stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
+           // stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
           //  stripCodecs: "h264,H264"
         }).on(STREAM_STATUS.PUBLISHING, function (stream) {
            // alert(1)
@@ -166,7 +181,7 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
     PlaySession.createStream({
         name: id,
         display: remoteVideo,
-        stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
+     //   stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
     //    stripCodecs: "h264,H264"
     })
     .on(STREAM_STATUS.PENDING, function (stream) {
