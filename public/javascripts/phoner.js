@@ -114,15 +114,15 @@ async function publishStream(streamName, localVideo, stream,errHandeler) {
             var video=localVideo.querySelector('video')
             if(video) {
                 try {
-                    video.controls="controls"
+                    //video.controls="controls"
                     setTimeout(()=>{video.play();},500)
 
                 }
                 catch (e) {
-                    alert("cant play video");
+                    console.warn("cant play video");
                 }
             }
-                else alert('noVideo')
+                else console.warn('noVideo')
 
             resolve();
         }).on(STREAM_STATUS.UNPUBLISHED, function () {
@@ -169,20 +169,21 @@ async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
 
     }).on(STREAM_STATUS.PLAYING, function (stream) {
         var video=remoteVideo.querySelector('video')
-        alert(video)
+        //alert(video)
         if(video) {
             try {
                 video.playsinline="playsinline";
                 video.setAttribute("playsinline", "playsinline");
-                video.controls="controls"
+                //video.controls="controls"
                 setTimeout(()=>{video.play();},500)
 
             }
             catch (e) {
-                alert("cant play video"+e);
+               // alert("cant play video"+e);
+                console.warn(e)
             }
         }
-        else alert('noVideo')
+        else console.warn('noVideo')
     }).on(STREAM_STATUS.STOPPED, function () {
 
         if(errHandeler)
