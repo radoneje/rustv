@@ -1024,7 +1024,9 @@ window.onload=function () {
                         else
                         {
                                 item.pgm=false;
-                                document.getElementById("pgmbtn"+item.id).classList.remove("active")
+                                var el= document.getElementById("pgmbtn"+item.id);
+                                if(el)
+                                el.classList.remove("active")
                         }
                     })
 
