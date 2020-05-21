@@ -700,7 +700,15 @@ window.onload=function () {
          },
         mounted:async function () {
             var _this=this;
-            if(roomid==62) {
+            if(roomid==62)
+                _this.sect.unshift({
+                    title: "Программа",
+                    isActive: false,
+                    id: 8,
+                    logo: '/images/logofeed.svg',
+                    logoactive: '/images/logofeeda.svg'
+                });
+            if(roomid==52) {
                 _this.sect = [
                     {
                         title: "Программа",
