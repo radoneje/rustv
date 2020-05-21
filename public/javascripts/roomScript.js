@@ -700,7 +700,7 @@ window.onload=function () {
          },
         mounted:async function () {
             var _this=this;
-            if(roomid==52) {
+            if(roomid==62) {
                 _this.sect = [
                     {
                         title: "Программа",
