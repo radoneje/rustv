@@ -257,7 +257,7 @@ function videoLayout() {
             elem.style.position = "fixed";
             //elem.style.top = pip.length > 0 ? ("12.5vh") : ("0");
             elem.style.top = pip.length > 0 ? ("12.5vh") : ("0");
-            elem.style.left =  '-5%';
+            elem.style.left =  pip.length > 0 ? ("-5%") : ("0");;//'-5%';
             //elem.style.width = pip.length > 0 ? ("75%") : ("100%");
             elem.style.width = pip.length > 0 ? ("60%") : ("100%");
             elem.style.zIndex = 100;
