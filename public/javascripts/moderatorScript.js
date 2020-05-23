@@ -262,7 +262,9 @@ window.onload=async function () {
                     if(video)
                         video.classList.add("mirrored");
                     console.log('local video is Published', _this.socket.id)
+                    _this.selfVideoStream=true;
                 }
+                console.log("")
                 if(_this.remoteVideoStream)
                 {
                     await stopPhone();
