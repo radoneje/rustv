@@ -16,20 +16,31 @@
     </style>
 </head>
 <body>
+
+<div id="btn">buttmn</div>
+
+<iframe id="if" width="100" height="100" src="test3.html"></iframe>
+
 <ul id="d"></ul>
 <div>
+
    <video id="t" controls autoplay playsinline></video>
 </div>
 <script>
 
+   document.getElementById('btn').addEventListener("click", ()=>{
+       alert(1)
+       var elem=document.getElementById('if')
+       elem.contentWindow.postMessage('unMute')
+   })
     window.addEventListener("message", function(event) {
         var elem=document.body.querySelector('video') // или getElementById(id)  если известен ID плейера
-        if(event.data="mute" && elem)
+        if(event.data=="mute" && elem)
         {
             /// код MUTE
             elem.muted=true
         }
-        if(event.data="unMute" && elem)
+        if(event.data=="unMute" && elem)
         {
             /// код UnMUTE
             elem.muted=false
