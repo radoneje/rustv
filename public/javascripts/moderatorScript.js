@@ -292,17 +292,19 @@ window.onload=async function () {
                 document.getElementById("close"+item.socketid).addEventListener("click", async ()=>{
                     console.log("stopReceiveVideo", item.socketid )
                     stopPhone();
-
+                    remoteWr.innerHTML="";
                 })
 
                 document.getElementById("videotoSpk"+item.socketid).addEventListener("click", async ()=>{
                     await stopPhone();
+                    remoteWr.innerHTML="";
                     _this.socket.emit("spkStartPhone",{socketid:item.socketid})
                 })
                 var elem=document.getElementById("videotoStage"+item.socketid)
                 if(elem)
                     elem.addEventListener("click", async()=>{
                         await stopPhone();
+                        remoteWr.innerHTML="";
                         _this.socket.emit("redirectToStage",{user:_this.user, guid:data.recguid, to:data.from})
                     })
 
