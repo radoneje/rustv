@@ -176,6 +176,17 @@ async function phonePublishLocalVideo(localVideo, id, stream, errHandeler, faile
     await publishStream(id,localVideo, stream,()=>{if(errHandeler)errHandeler()},()=>{if(failedHandler)failedHandler()});
 
 }
+async function   phoneStopRemoteVideo(id){
+    return new Promise(async (res, rej)=>{
+        if(Flashphoner.getSessions().length==0)
+            return res(false);
+        var PlaySession = Flashphoner.getSessions()[0];
+        var streams=PlaySession.getStreams;
+        console.log(streams)
+        return  res(streams);
+
+    });
+}
 async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
     //console.log("remotevideo"+id)
     return new Promise(async (res, rej)=>{

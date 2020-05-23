@@ -289,7 +289,28 @@ window.onload=async function () {
                         +videoCap.innerText +
                         "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+item.socketid+"' >на экран</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+item.socketid+"'/></div>";
 
+                document.getElementById("close"+item.socketid).addEventListener("click", async ()=>{
+                    console.log("stopReceiveVideo", item.socketid )
+                    stopPhone();
 
+                })
+
+                document.getElementById("videotoSpk"+data.guid).addEventListener("click", async ()=>{
+                    await stopPhone();
+                    _this.socket.emit("spkStartPhone",{socketid:item.socketid})
+                })
+                var elem=document.getElementById("videotoStage"+data.guid)
+                if(elem)
+                    elem.addEventListener("click", async()=>{
+                        await stopPhone();
+                        _this.socket.emit("redirectToStage",{user:_this.user, guid:data.recguid, to:data.from})
+                    })
+
+
+                async function stopPhone() {
+                   await phoneStopRemoteVideo();
+
+                }
 
 
 
