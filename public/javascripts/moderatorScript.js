@@ -252,19 +252,23 @@ window.onload=async function () {
                 }, 500)
 
                 if(!_this.selfVideoStream){
+                    var loader=document.getElementById("localVideoLoader");
+                    loader.classList.add("loader")
                     await  phonePublishLocalVideo(document.getElementById('localVideoWr'),_this.socket.id, null, () => {
                         var video=document.getElementById('localVideoWr').querySelector('video')
                         if(video)
                             video.parentNode.removeChild(video);
                         _this.selfVideoStream=null;
+                        loader.classList.remove("loader")
                     });
                     var video=document.getElementById('localVideoWr').querySelector('video')
-                    //if(video)
-                    //    video.classList.add("mirrored");
+                        if(video)
+                        video.classList.remove("mirrored");
                     console.log('local video is Published', _this.socket.id)
                     _this.selfVideoStream=true;
+                    loader.classList.remove("loader")
                 }
-                console.log("")
+
                 if(_this.remoteVideoStream)
                 {
                     await stopPhone();
@@ -272,6 +276,9 @@ window.onload=async function () {
                     //disconnect remote video stream
                 }
                 console.log('local video ready to connect', item)
+                var loader=document.getElementById("remoteVideoLoader");
+                loader.classList.add("loader")
+
                 var remoteWr=document.getElementById('remoteVideoWr')
                 await phoneGetRemoteVideo(remoteWr,item.socketid, ()=>{
                     console.log('remote video failed', _this.socket.id)
@@ -319,7 +326,7 @@ window.onload=async function () {
                 }
 
 
-
+                loader.classList.remove("loader")
                 return ;
                 if (typeof (createVideoContaiter) == 'undefined') {
                     var s = document.createElement('script');
