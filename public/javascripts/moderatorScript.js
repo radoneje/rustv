@@ -79,7 +79,7 @@ window.onload=async function () {
 
                 this.users.forEach(u=>{
                     if(u.id==data.id) {
-
+                        console.log("user handUp")
                         u.handUp = data.hand
                     }
                 })
