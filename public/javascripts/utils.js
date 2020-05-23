@@ -184,8 +184,8 @@ function connect(_this, roomid, clbk){
 
 
     socket.on("disconnectSPKvksUser", function(data){
-        if(_this.disconnectSPKvksUser)
-            _this.disconnectSPKvksUser(data)
+        if(_this.OndisconnectSPKvksUser)
+            _this.OndisconnectSPKvksUser(data)
     });
     socket.on("startDirectConnect", function(data){
         if(_this.onStartDirectConnect)
