@@ -392,6 +392,7 @@ window.onload=function () {
                 //this.removeWowzaVideo(data.item.guid)
                 phoneStopRemoteVideo(data.item.guid);
                 this.arrVideo=[];
+                arrVideo=this.arrVideo;
                 /*
                 removeVideo(data.item.guid);
                 this.arrVideo=this.arrVideo.filter(r=>{return r.streamid!=data.item.guid})
