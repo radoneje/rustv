@@ -668,13 +668,13 @@ window.onload=function () {
             OndisconnectSPKvksUser:function (dt) {
 
                 if(dt.item.user.id=this.user.id){
-                    arrVideo.forEach(v=>{
+                 /*   arrVideo.forEach(v=>{
                         phoneStopRemoteVideo(dt.item.guid);
                     })
                     arrVideo=[];
-                    this.arrVideo=[];
+                    this.arrVideo=[];*/
                    // stopAllStreams();
-                    this.OnmainVideoMute(true /* false - тихо*/)
+                   // this.OnmainVideoMute(true /* false - тихо*/)
                 }
                 console.log("disconnectSPKvksUser", dt)
             },
