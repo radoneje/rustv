@@ -466,7 +466,7 @@ window.onload=async function () {
             disconnectSPKvksUser:function(discinnecredUser){
 
                 console.log("disconnectSPKvksUser", discinnecredUser);
-                var ctrl=document.getElementById('VKSboxItemBtn'+discinnecredUser.item.guid)
+                var ctrl=document.getElementById('VKSboxItemBtn'+discinnecredUser.guid)
                 console.log("disconnectSPKvksUser2", ctrl);
                 if(ctrl.classList.contains('removing')) {
                     return;
