@@ -648,18 +648,30 @@ window.onload=function () {
             },
             OnStartModMeet:async function (data) {
                 console.log("OnStartModMeet", data);
+                var _this=this;
                 var remoteWr=document.getElementById('modVideo')
+
                 await phoneGetRemoteVideo(remoteWr,data.socketid, ()=>{
                     console.log('remote video failed', data.socketid)
                     var video=remoteWr.querySelector('video')
                     if(video)
                         video.parentNode.removeChild(video);
-                    _this.remoteVideoStream=null;
+                    _this.modVideo=null;
+                    document.getElementById('modVideo').innerHTML="";
+
                 })
+                _this.modVideo=data.socketid;
             }
             ,
             OnStopModMeet:function (data) {
-                console.log("OnStopModMeet", data);
+
+                var _this=this;
+                if(data.socketid==_this.socket.id && _this.modVideo){
+                    console.log("OnStopModMeet", data);
+                    phoneStopRemoteVideo(data.streamid)
+                    document.getElementById('modVideo').innerHTML="";
+                    _this.modVideo=null;
+                }
             }
 
 
