@@ -174,6 +174,10 @@ function connect(_this, roomid, clbk){
             _this.OnVote(data)
     });
 
+    socket.on("startPhoneToSpk", function(data){
+        if(_this.OnPhoneToSpk)
+            _this.OnPhoneToSpk(data)
+    });
 
 
 

@@ -143,6 +143,7 @@ window.onload=function () {
             spkStartPhone:async function(data){
                 var _this=this;
                 console.log("spkStartPhone",data)
+                _this.socket.emit("startPhoneToSpk", {socketid:data.socketid});
                 if(!_this.isMyVideoPublish)
                 {
                     var elem=document.createElement("div")

@@ -677,6 +677,10 @@ window.onload=function () {
                     this.OnmainVideoMute(true /* false - тихо*/)
                 }
                 console.log("disconnectSPKvksUser", dt)
+            },
+            OnPhoneToSpk:function (data) {
+                console.log("OnPhoneToSpk", data);
+
             }
 
         },

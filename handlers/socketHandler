@@ -312,6 +312,14 @@ class socket{
                 if(id)
                     _this.clients.fwd("receiverPlaying",  data)
             });
+            socket.on("startPhoneToSpk",(data)=> {
+
+                _this.clients.fwd("startPhoneToSpk",  {to:data.socketid,socketid:socket.id })
+
+            });
+
+
+
 
         });
     }
