@@ -197,7 +197,6 @@ window.onload=function () {
 
             },
             OnhandUp:function () {
-                console.log("OnhandUp rec",this.hand);
                 var _this=this;
                 clearTimeout(_this.handTimer);
                 _this.hand=!_this.hand;
@@ -638,8 +637,8 @@ window.onload=function () {
 
                     _this.OnmainVideoMute(false /* false - тихо*/)
                     console.log("OnhandUp", _this.hand)
-                    if(_this.hand);
-                    _this.OnhandUp()
+                    if(_this.hand)
+                        _this.OnhandUp()
                 },0)
 
 
