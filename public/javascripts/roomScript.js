@@ -373,13 +373,14 @@ window.onload=function () {
                 }
                 else if(document.getElementById('profIframe')){
 
-                    console.log("MUTE", window.frames.profIframe)
+
                     var elem=document.getElementById('profIframe')
+                    console.log("MUTE", elem.contentWindow)
                     if(val)
-                        elem.postMessage('unMute')
+                        elem.contentWindow.postMessage('unMute')
                         //elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&autoplay=false&mute=false"
                     else
-                        elem.postMessage('mute')
+                        elem.contentWindow.postMessage('mute')
                         //elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&mute=true&autoplay=true"
                     console.log("mute",val);
                 }
