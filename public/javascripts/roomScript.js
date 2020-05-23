@@ -645,7 +645,15 @@ window.onload=function () {
                 },0)
 
 
+            },
+            OnStartModMeet:function (data) {
+                console.log("OnStartModMeet", data);
             }
+            ,
+            OnStopModMeet:function (data) {
+                console.log("OnStopModMeet", data);
+            }
+
 
         },
         watch:{

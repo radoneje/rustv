@@ -144,6 +144,14 @@ function connect(_this, roomid, clbk){
             if(_this.startSpeakerMeet)
                 _this.startSpeakerMeet(data)
         });
+    socket.on("startModMeet", function(data){
+        if(_this.OnStartModMeet)
+            _this.OnStartModMeet(data)
+    });
+    socket.on("stopModMeet", function(data){
+        if(_this.OnStopModMeet)
+            _this.OnStopModMeet(data)
+    });
     socket.on("newSpkVideo", function(data){
         if(_this.OnSpkVideo)
             _this.OnSpkVideo(data)

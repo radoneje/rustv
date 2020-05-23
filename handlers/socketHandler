@@ -280,6 +280,19 @@ class socket{
                     _this.clients.sendToRoomUsers("messageToMod", dt,roomid)
                 }
             })
+            socket.on("startModMeet",(dt)=>{
+                if(id) {
+                    dt.user=user;
+                    _this.clients.sendToRoomUsers("messageToMod", dt,roomid)
+                }
+            })
+            socket.on("stopModMeet",(dt)=>{
+                if(id) {
+                    dt.user=user;
+                    _this.clients.sendToRoomUsers("stopModMeet", dt,roomid)
+                }
+            })
+
 
 
             socket.on("getStageVideos",async (dt)=> {

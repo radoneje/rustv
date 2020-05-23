@@ -292,9 +292,8 @@ window.onload=async function () {
                     if(video)
                         video.parentNode.removeChild(video);
                     _this.remoteVideoStream=null;
-
-
                 })
+                _this.socket.emit("startModMeet",{socketid:_this.socketid})
 
                 var videoCap=document.createElement('div');
                 videoCap.classList.add("videoCap")
@@ -330,6 +329,7 @@ window.onload=async function () {
 
                 _this.remoteVideoStream=item.socketid;
                 async function stopPhone() {
+                    _this.socket.emit("stopModMeet",{socketid:_this.socketid})
                     phoneStopRemoteVideo(item.socketid);
 
                 }
