@@ -326,7 +326,7 @@ window.onload=async function () {
                         _this.socket.emit("redirectToStage",{user:_this.user, guid:item.socketid, to:item.socketid})
                     })
 
-
+                _this.remoteVideoStream=item.socketid;
                 async function stopPhone() {
                     phoneStopRemoteVideo(item.socketid);
 
