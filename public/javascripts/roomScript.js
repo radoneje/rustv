@@ -510,7 +510,7 @@ window.onload=function () {
 
                 _this.OnmainVideoMute(false /* false - тихо*/)
                     if(_this.handUp);
-                    OnhandUp()
+                    _this.OnhandUp()
                 },0)
                 return;
             },
