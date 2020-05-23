@@ -67,7 +67,7 @@ class socket{
             });
 
             socket.on("addUserToSpeakerRoom", async (data)=>{
-                console.log("addUserToSpeakerRoom", _this.spkRoom.length)
+                //console.log("addUserToSpeakerRoom", _this.spkRoom.length)
                 var fond=_this.clients.clients.filter(c=>{return  c.isActive && c.user.id==data.userid && c.roomid==data.roomid});
                 fond.forEach(f=>{
                     f.streamid=socket.id;
@@ -229,7 +229,7 @@ class socket{
             })
             socket.on("closeStageStream",(dt)=>{
                 if(id) {
-                    console.log("dt");
+                   // console.log("dt");
                     _this.clients.clients.forEach(c=>{
                         if(c.stage)
                             c.stage=c.stage.filter(f=>f.streamid!=dt);
@@ -314,7 +314,7 @@ class socket{
             });
             socket.on("startPhoneToSpk",(data)=> {
 
-                _this.clients.fwd("startPhoneToSpk",  {to:data.socketid,socketid:socket.id }, roomid)
+                _this.clients.fwd("startPhoneToSpk",  {to:data.socketid,socketid:socket.id,user }, roomid)
 
             });
 
