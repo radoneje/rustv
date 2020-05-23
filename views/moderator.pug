@@ -221,6 +221,13 @@ block content
                         div.aModSectPresItemWr
                         img.aModSectPresTh(:src="'/rest/api/pres/'+item.id+'/'+eventid+'/'+roomid")
         div#VKS
+            div.VKSbox(v-if="SPKvksUsers.length>0")
+                div.VKSboxTitle Активные подключения ({{SPKvksUsers.length}})
+                div.VKSboxItems
+                    div.VKSboxItem(v-for="item in SPKvksUsers" v-key="item.guid")
+                        div.VKSboxItemBox
+                            div.VKSboxItemTitle {{item.user.i||''}} {{item.user.f || ''}}
+                            div.VKSboxItemBtn(v-on:click="disconnectSPKvksUser(item)" :id="'VKSboxItemBtn'+item.guid") Отключить
             div.videoBox#translationVideoBox
                 include elements/mainVideo
             div#localVideoLoader
@@ -230,13 +237,7 @@ block content
 
                 //div.videoCap Трансляция
             //div#videoWr
-                div.VKSbox(v-if="SPKvksUsers.length>0")
-                    div.VKSboxTitle Активные подключения ({{SPKvksUsers.length}})
-                    div.VKSboxItems
-                        div.VKSboxItem(v-for="item in SPKvksUsers" v-key="item.guid")
-                            div.VKSboxItemBox
-                                div.VKSboxItemTitle {{item.user.i||''}} {{item.user.f || ''}}
-                                div.VKSboxItemBtn(v-on:click="disconnectSPKvksUser(item)" :id="'VKSboxItemBtn'+item.guid") Отключить
+
 
                 div.videoBox#admPresBox(v-if="pres")
                     div#admPres(v-bind:style="{backgroundImage:'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')'}")
