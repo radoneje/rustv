@@ -267,7 +267,7 @@ window.onload=async function () {
                 {
                     //disconnect remote video stream
                 }
-                console.log('local video ready to connect', _this.socket.id)
+                console.log('local video ready to connect', item)
                 var remoteWr=document.getElementById('remoteVideoWr')
                 await phoneGetRemoteVideo(remoteWr,item.socketid, ()=>{
                     console.log('remote video failed', _this.socket.id)
@@ -295,7 +295,7 @@ window.onload=async function () {
 
                 })
 
-                document.getElementById("videotoSpk"+data.guid).addEventListener("click", async ()=>{
+                document.getElementById("videotoSpk"+item.socketid).addEventListener("click", async ()=>{
                     await stopPhone();
                     _this.socket.emit("spkStartPhone",{socketid:item.socketid})
                 })
