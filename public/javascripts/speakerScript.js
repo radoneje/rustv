@@ -177,6 +177,7 @@ window.onload=function () {
                     streamid: data.socketid
                 }
                 arrVideo.push(receiverItem)
+                _this.arrVideo=arrVideo;
                 setTimeout(async ()=>{
                     var video = await createVideo(data.socketid, false, data.user, ()=>{;;}, ()=>{;;}, ()=>{;;}, ()=>{/*videoRemove*/}, ()=>{;;});
                     videoLayout();
