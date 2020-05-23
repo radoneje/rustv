@@ -24,6 +24,13 @@ html{
   }
   100%{opacity: 1}
 }
+@keyframes loader {
+  0%{
+    width: 0%;
+  }
+
+  100%{width: 100%}
+}
 body{
   background-color: @Superdark;
   font-family: Open Sans;
@@ -956,6 +963,12 @@ width: 100%;
 }
 #remoteVideoWr{
   position: relative;
+}
+.loader{
+  height: 10px;
+  margin: 5px;
+  background: @color;
+  animation: loader 4s;
 }
   @media only screen and (max-width: 1024px){
 

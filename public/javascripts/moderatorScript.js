@@ -259,8 +259,8 @@ window.onload=async function () {
                         _this.selfVideoStream=null;
                     });
                     var video=document.getElementById('localVideoWr').querySelector('video')
-                    if(video)
-                        video.classList.add("mirrored");
+                    //if(video)
+                    //    video.classList.add("mirrored");
                     console.log('local video is Published', _this.socket.id)
                     _this.selfVideoStream=true;
                 }
