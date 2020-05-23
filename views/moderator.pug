@@ -222,8 +222,9 @@ block content
                         img.aModSectPresTh(:src="'/rest/api/pres/'+item.id+'/'+eventid+'/'+roomid")
         div#VKS
             div.videoBox#translationVideoBox
-            div#localVideoWr
                 include elements/mainVideo
+            div#localVideoWr
+
                 //div.videoCap Трансляция
             //div#videoWr
                 div.VKSbox(v-if="SPKvksUsers.length>0")
