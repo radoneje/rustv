@@ -48,33 +48,42 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
     var isAndroid=navigator.userAgent.toLowerCase().indexOf("android") > -1;
    // if(isAndroid)
 
-        video= {
-        width: {
-                ideal: 640
-        },
-            height:{
-                ideal:360
-            },
+
+    video= {
+        width:640,
+        height:360,//360,
         facingMode: 'user',
-            quality: 90
+        quality: 90
     }
     try{
-        var supportedConstraints=navigator.mediaDevices.getSupportedConstraints()
-        for (let constraint in supportedConstraints) {
-            if (supportedConstraints.hasOwnProperty(constraint)) {
-                if(constraint=="facingMode")
-                    video.facingMode='user'
-                if(constraint=="quality")
-                    video.quality=90;
-                if(constraint=="aspectRatio")
-                    video.aspectRatio= 1.7777777778
+        try{
+            var supportedConstraints=navigator.mediaDevices.getSupportedConstraints()
+            for (let constraint in supportedConstraints) {
+                if (supportedConstraints.hasOwnProperty(constraint)) {
+                    if(constraint=="facingMode")
+                        video.facingMode='user'
+                    if(constraint=="quality")
+                        video.quality=90;
+                    if(constraint=="aspectRatio")
+                        video.aspectRatio= 1.7777777778
+                }
             }
+            console.log(video)
+
+        }
+        catch (e) {
+
         }
 
+      await  navigator.mediaDevices.getUserMedia({audio:true, video})
     }
     catch (e) {
-
+        video= {
+            with:{ideal:360},
+            facingMode:'user'
+        };
     }
+
            // {width: {ideal: 640},quality: 100};
 
 
