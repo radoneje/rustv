@@ -509,6 +509,7 @@ window.onload=function () {
                     }
 
                 _this.OnmainVideoMute(false /* false - тихо*/)
+                    console.log("OnhandUp", _this.hand)
                     if(_this.hand);
                     _this.OnhandUp()
                 },0)
