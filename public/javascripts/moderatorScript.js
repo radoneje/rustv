@@ -273,6 +273,8 @@ window.onload=async function () {
                     loader.classList.remove("loader")
                 }
 
+                var remoteWr=document.getElementById('remoteVideoWr')
+
                 if(_this.remoteVideoStream)
                 {
                     await stopPhone();
@@ -283,7 +285,7 @@ window.onload=async function () {
                 var loader=document.getElementById("remoteVideoLoader");
                 loader.classList.add("loader")
 
-                var remoteWr=document.getElementById('remoteVideoWr')
+
                 await phoneGetRemoteVideo(remoteWr,item.socketid, ()=>{
                     console.log('remote video failed', _this.socket.id)
                     var video=remoteWr.querySelector('video')
