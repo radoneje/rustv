@@ -474,46 +474,7 @@ window.onload=function () {
                     })*/
             },
             OnSpkVideo:async function (data) {
-                var _this=this;
 
-
-                var ff = arrVideo.filter(v => {return v.streamid == data.streamid})
-                if (ff.length > 0)
-                    return;//убираем повтор моего видео
-                if(data.streamid==_this.socket.id)
-                    return;
-
-                var receiverItem = {
-                    id: data.streamid,
-                    isMyVideo: false,
-                    user: data.user,
-                    streamid: data.streamid
-                }
-                arrVideo.push(receiverItem);
-                this.arrVideo=arrVideo;
-                setTimeout(async ()=>{
-                    var video = await createVideo(data.streamid, false, data.user, ()=>{;;}, ()=>{;;}, ()=>{;;}, ()=>{/*videoRemove*/}, ()=>{;;});
-                    videoLayout();
-                    var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
-                    await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{
-                        console.warn("video Error")
-                    })
-                    receiverItem.elem=videoWrElem.querySelector('video')
-                    if(!receiverItem.elem)
-                        receiverItem.elem=videoWrElem.querySelector('profIframe')
-                    if(receiverItem.elem) {
-
-                        receiverItem.elem.style.transform = "inherit"
-                        receiverItem.elem.setAttribute("allowfullscreen", "allowfullscreen")
-                        receiverItem.elem.setAttribute("playsinline", "playsinline")
-                    }
-
-                _this.OnmainVideoMute(false /* false - тихо*/)
-                    console.log("OnhandUp", _this.hand)
-                    if(_this.hand);
-                    _this.OnhandUp()
-                },0)
-                return;
             },
             OnRoomStopWowzaVideo:function (data) {
                 var _this=this;
@@ -715,6 +676,9 @@ window.onload=function () {
                     }
 
                     _this.OnmainVideoMute(false /* false - тихо*/)
+                    console.log("OnhandUp", _this.hand)
+                    if(_this.hand);
+                    _this.OnhandUp()
                 },0)
 
 
