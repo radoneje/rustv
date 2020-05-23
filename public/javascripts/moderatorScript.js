@@ -464,10 +464,10 @@ window.onload=async function () {
 
             },
             disconnectSPKvksUser:function(discinnecredUser){
-                alert(1)
-                return;
+
                 console.log("disconnectSPKvksUser", discinnecredUser);
                 var ctrl=document.getElementById('VKSboxItemBtn'+discinnecredUser.item.guid)
+                console.log("disconnectSPKvksUser2", ctrl);
                 if(ctrl.classList.contains('removing')) {
                     return;
                 }
