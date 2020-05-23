@@ -154,13 +154,13 @@ window.onload=function () {
                     _this.isMyVideoPublish=true;
                     console.log("spk video published")
                 }
-                if(arrVideo.length>0) {
+                if(_this.arrVideo.length>0) {
                     arrVideo.forEach(a=>{
                         phoneStopRemoteVideo(data.streamid);
                     })
 
-                    this.arrVideo = [];
-                    arrVideo = this.arrVideo;
+                    _this.arrVideo = [];
+                    arrVideo = _this.arrVideo;
                 }
 
                 var receiverItem = {
