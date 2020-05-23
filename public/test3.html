@@ -1,0 +1,29 @@
+<html>
+<body>
+<div>
+    iframe
+</div>
+<div id="c">
+
+</div>
+<script>
+    window.addEventListener("message", function(event) {
+        console.log(event)
+        if(event.data=="mute")
+        {
+            /// код MUTE
+            var e=document.getElementById('c').innerHTML+="<div>Mute</div>"
+        }
+        if(event.data=="unMute")
+        {
+            /// код UnMUTE
+            var e=document.getElementById('c').innerHTML+="<div>un Mute</div>"
+        }
+
+    });
+
+
+
+</script>
+</body>
+</html>

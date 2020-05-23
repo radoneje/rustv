@@ -33,20 +33,8 @@
        var elem=document.getElementById('if')
        elem.contentWindow.postMessage('unMute')
    })
-    window.addEventListener("message", function(event) {
-        var elem=document.body.querySelector('video') // или getElementById(id)  если известен ID плейера
-        if(event.data=="mute" && elem)
-        {
-            /// код MUTE
-            elem.muted=true
-        }
-        if(event.data=="unMute" && elem)
-        {
-            /// код UnMUTE
-            elem.muted=false
-        }
 
-    });
+
 
     f();
     async function f() {
