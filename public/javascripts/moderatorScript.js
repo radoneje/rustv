@@ -57,6 +57,7 @@ window.onload=async function () {
             isQ:room.isQ,
             isLenta:room.isLenta,
             selfVideoStream:null,
+            remoteVideoStream:null,
             socket,
             SPKvksUsers:[],
             SPKstatus:1,
@@ -259,7 +260,16 @@ window.onload=async function () {
                     });
                     console.log('local video is Publisk', _this.socket.id)
                 }
+                if(_this.remoteVideoStream)
+                {
+                    //disconnect remote video stream
+                }
+//, item.socketid
                 console.log('local video ready to connect', _this.socket.id)
+                await phoneGetRemoteVideo(document.getElementById('remoteVideoWr'),item.socketid, ()=>{
+                    console.log('remote video filed', _this.socket.id)
+                })
+
 
 
 
