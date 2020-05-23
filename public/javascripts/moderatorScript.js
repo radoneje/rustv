@@ -329,7 +329,7 @@ window.onload=async function () {
 
                 _this.remoteVideoStream=item.socketid;
                 async function stopPhone() {
-                    _this.socket.emit("stopModMeet",{socketid:_this.socketid})
+                    _this.socket.emit("stopModMeet",{socketid:item.socketid, streamid:_this.socket.id})
                     phoneStopRemoteVideo(item.socketid);
 
                 }
