@@ -474,7 +474,6 @@ window.onload=async function () {
                 console.log("discinnecredUser", discinnecredUser)
                 this.socket.emit("disconnectSPKvksUser", {item:discinnecredUser})
                 ctrl.classList.add('removing')
-
             },
             uploadFile:function(){
                 uploadFile(this);
