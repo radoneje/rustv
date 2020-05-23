@@ -8,8 +8,10 @@ var config = require('./config.json')
 var session = require('express-session');
 var  fileUpload=require('express-fileupload')
 
+
 var indexRouter = require('./routes/indexRouter');
 var apiRouter = require('./routes/apiRouter');
+var phonerhooksRouter=require('./routes/phonerhooksRouter')
 const socket=require("./handlers/socketHandler")
 
 var SPKstatus=[];
@@ -69,6 +71,8 @@ app.use('/modules', express.static(__dirname + '/node_modules/'));
 
 app.use('/', indexRouter);
 app.use('/rest/api', apiRouter);
+app.use('/phonerhooks', phonerhooksRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
