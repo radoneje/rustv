@@ -669,19 +669,20 @@ window.onload=function () {
 
                 if(dt.item.user.id=this.user.id){
 
-                 /*   arrVideo.forEach(v=>{
-                        phoneStopRemoteVideo(dt.item.guid);
+                  //  console.log("OndisconnectSPKvksUser", dt, _this.socket.id);
+                    arrVideo.forEach(v=>{
+                        phoneStopRemoteVideo(v.streamid);
                     })
                     arrVideo=[];
-                    this.arrVideo=[];*/
+                    this.arrVideo=[];
                    // stopAllStreams();
-                   // this.OnmainVideoMute(true /* false - тихо*/)
+                    this.OnmainVideoMute(true /* false - тихо*/)
                 }
                 console.log("disconnectSPKvksUser", dt)
             },
             OnPhoneToSpk:function (data) {
                 var _this=this;
-                console.log("OnPhoneToSpk", data, _this.socket.id);
+
 
                 data.streamid=data.socketid;
                 var receiverItem = {
