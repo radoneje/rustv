@@ -117,7 +117,7 @@ class socket{
 
             socket.on("selfVideoStarted",(msg,  data)=>{
                 if(id)
-                    _this.clients.startVideo(id, socket.id)
+                    _this.clients.startVideo( socket.id)
             });
             socket.on("senderReady",(data)=>{
                 console.log("senderReady", data.parent)

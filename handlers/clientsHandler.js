@@ -41,11 +41,12 @@ class Clients{
     SpkCount(roomid){
         return this.clients.filter(c=>{return c.isSpeaker && c.isActive && c.roomid==roomid}).length;
     }
-    async startVideo(id, socketid) {
+    async startVideo(socketid) {
+        console.log("startVideo",socketid )
         var _this = this;
         var find=false;
         this.clients.forEach(c => {
-            if (c.id == id) {
+            if (c.socket.id == socketid) {
                 c.isVideo = true;
                 _this.sendToRoomAdmins("selfVideoStarted", {id:c.user.id, socketid:socketid}, c.roomid)
                 find=true;
@@ -56,7 +57,7 @@ class Clients{
             {
                 try {
                     console.log("send " , msg, data, roomid)
-                    await axios.post(srv + '/rest/api/startVideoCommand', {id, socketid});
+                    await axios.post(srv + '/rest/api/startVideoCommand', { socketid});
                 }
                 catch (e) {
                     console.log(e)
@@ -64,15 +65,49 @@ class Clients{
             }
 
     }
-    OnStartVideo(id, socketid){
+    OnStartVideo( socketid){
         this.clients.forEach(c => {
-            if (c.id == id) {
+            if (c.socket.id == socketid) {
                 c.isVideo = true;
                 _this.sendToRoomAdmins("selfVideoStarted", {id:c.user.id, socketid:socketid}, c.roomid)
-
             }
         })
     }
+
+    async stopVideo(socketid) {
+        console.log("stopVideo",socketid )
+        var _this = this;
+        var find=false;
+        this.clients.forEach(c => {
+            if (c.socket.id == socketid) {
+                c.isVideo = true;
+                _this.sendToRoomAdmins("selfVideoStopped", {id:c.user.id, socketid:socketid}, c.roomid)
+                find=true;
+            }
+        })
+        if(!find)
+            for( var srv of config.frontServers)
+            {
+                try {
+                    console.log("send " , msg, data, roomid)
+                    await axios.post(srv + '/rest/api/stopVideoCommand', { socketid});
+                }
+                catch (e) {
+                    console.log(e)
+                }
+            }
+
+    }
+    OnStopVideo( socketid){
+        this.clients.forEach(c => {
+            if (c.socket.id == socketid) {
+                c.isVideo = true;
+                _this.sendToRoomAdmins("selfVideoStopped", {id:c.user.id, socketid:socketid}, c.roomid)
+            }
+        })
+    }
+
+
     async sendToRoomUsers(msg, data, roomid){
         this.OnSendToRoomUsers(msg, data, roomid);
         for( var srv of config.frontServers)
