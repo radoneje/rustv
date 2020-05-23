@@ -16,6 +16,9 @@ router.get('/:method', async (req, res, next) => {
 });
 
 async function OnStreamStatusEvent(req, res){
-    console.log("phoder rest OnStreamStatusEvent", req.body)
+  //  console.log("phoder rest OnStreamStatusEvent", req.body)
+    var socketid=req.body.name;
+    var status=req.body.status=='PUBLISHING';
+    console.log("phoder rest OnStreamStatusEvent", socketid, status);
 }
 module.exports = router;
