@@ -26,7 +26,7 @@ async function OnStreamStatusEvent(req, res){
 
     console.log("phoder rest OnStreamStatusEvent", socketid, status);
 
-    res.json(req.body);
+   // res.json(req.body);
 
 
 }
