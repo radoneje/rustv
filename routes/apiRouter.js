@@ -500,7 +500,8 @@ router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
                 smi:c.user.smi,
                 isActive: c.isActive ? true : false,
                 isVideo: c.isVideo,
-                handUp: c.handUp ? true : false
+                handUp: c.handUp ? true : false,
+                socketid:c.socket.id
             });
     })
     try{
