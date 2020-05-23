@@ -669,7 +669,7 @@ window.onload=function () {
 
                 if(dt.item.user.id=this.user.id){
                     arrVideo.forEach(v=>{
-                        phoneStopRemoteVideo(data.item.guid);
+                        phoneStopRemoteVideo(dt.item.guid);
                     })
                     arrVideo=[];
                     this.arrVideo=[];
