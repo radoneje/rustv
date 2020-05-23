@@ -299,7 +299,7 @@ window.onload=async function () {
                     await stopPhone();
                     _this.socket.emit("spkStartPhone",{socketid:item.socketid})
                 })
-                var elem=document.getElementById("videotoStage"+data.guid)
+                var elem=document.getElementById("videotoStage"+item.socketid)
                 if(elem)
                     elem.addEventListener("click", async()=>{
                         await stopPhone();
