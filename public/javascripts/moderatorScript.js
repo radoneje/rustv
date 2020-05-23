@@ -283,11 +283,11 @@ window.onload=async function () {
 
                 videoCap.innerHTML ='<div class="videoCatHer">'
                     +videoCap.innerText +
-                    "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+data.guid+"' >на экран</span><span class='videotoSpk' id='videotoStage"+data.guid+"' >на сцену</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+data.guid+"'/></div>";
+                    "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+item.socketid+"' >на экран</span><span class='videotoSpk' id='videotoStage"+item.socketid+"' >на сцену</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+item.socketid+"'/></div>";
                 if(roomid==61)
                     videoCap.innerHTML ='<div class="videoCatHer">'
                         +videoCap.innerText +
-                        "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+data.guid+"' >на экран</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+data.guid+"'/></div>";
+                        "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+item.socketid+"' >на экран</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+item.socketid+"'/></div>";
 
 
 
