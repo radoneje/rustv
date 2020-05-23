@@ -197,6 +197,7 @@ window.onload=function () {
 
             },
             OnhandUp:function () {
+                console.log("OnhandUp rec",this.hand);
                 var _this=this;
                 clearTimeout(_this.handTimer);
                 _this.hand=!_this.hand;
@@ -458,55 +459,15 @@ window.onload=function () {
                 _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid, streamid:_this.socket.id});
                 _this.hand=false;
                 await axios.post('/rest/api/hand/'+eventid+"/"+roomid, {val:_this.hand, id:_this.user.id})
-                /*
-                getSpkConfig()
-                    .then(function (wCfg) {
-                        console.log("getSpkConfig", wCfg)
-                         publishVideoToWowza(_this.socket.id, _this.webCamStream, wCfg.WowzaCfg.data, wCfg.BitrateCfg.data, (ret)=>{
-                             setTimeout(()=>{
-                                 peerConnection=ret.peerConnection;
-                                 console.log("my Video Published", ret)
-                                _this.socket.emit("SpkRoomVideoPublished",{id:_this.socket.id, roomid:roomid});
-                             }, 2000)
-                        }, (err)=>{
-                            consolw.warn(err)
-                        }).then()
-                    })*/
             },
             OnSpkVideo:async function (data) {
 
             },
             OnRoomStopWowzaVideo:function (data) {
-                var _this=this;
-                console.log("OnRoomStopWowzaVideo",wowzaRecievers)
-                wowzaRecievers.forEach(r=>{
-                    _this.removeWowzaVideo(r.id);
-                })
 
             },
             removeWowzaVideo:function(streamid) {
-                var _this=this;
-                console.log("removeWowzaVideo",(streamid))
-                wowzaRecievers.forEach(r=>{
-                        if (r.peerConnection) {
-                            r.peerConnection.close();
-                            r.peerConnection = null;
-                        }
-                       var elem=document.getElementById(streamid);
-                        if(elem)
-                            elem.parentNode.removeChild(elem);
 
-                })
-
-                    _this.WowzaCfg=null;
-                    if(peerConnection) {
-                        peerConnection.close();
-                        peerConnection = null;
-                    }
-                wowzaRecievers=[];
-
-                    document.getElementById("VKS").classList.remove('fromSpk')
-                mainVideoMute(false)
 
             },
             OnVoteAdd:function(data){
