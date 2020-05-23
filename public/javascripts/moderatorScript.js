@@ -256,7 +256,7 @@ window.onload=async function () {
                         if(video)
                             video.parentNode.removeChild(video);
                         _this.selfVideoStream=null;
-                    }
+                    });
                     console.log('local video is Publisk', _this.socket.id)
                 }
                 console.log('local video ready to connect', _this.socket.id)
