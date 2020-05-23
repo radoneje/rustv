@@ -105,6 +105,7 @@ window.onload=async function () {
                 setTimeout(()=>{
                     _this.SPKvksUsers.forEach(u=>{
                         document.getElementById('VKSboxItemBtn'+u.guid).classList.remove("removing")
+                        document.getElementById('spkVideoLoader').classList.remove("loader")
                     })
                 },0)
 
