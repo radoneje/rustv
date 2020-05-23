@@ -186,6 +186,7 @@ async function   phoneStopRemoteVideo(id){
         streams.forEach(stream=> {
             if(stream.name()==id)
             {
+                console.log("find stream", id);
                 stream.stop();
                 res(streams);
                 find=true;
