@@ -136,9 +136,9 @@ function connect(_this, roomid, clbk){
             if(_this.setSpkAlert)
                 _this.setSpkAlert(data)
         });
-    socket.on("spkStartVks", function(data){
-        if(_this.spkStartVks)
-            _this.spkStartVks(data)
+    socket.on("spkStartPhone", function(data){
+        if(_this.spkStartPhone)
+            _this.spkStartPhone(data)
     });
         socket.on("startSpeakerMeet", function(data){
             if(_this.startSpeakerMeet)
