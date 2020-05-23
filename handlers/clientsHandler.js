@@ -56,7 +56,7 @@ class Clients{
             for( var srv of config.frontServers)
             {
                 try {
-                    console.log("send " , msg, data, roomid)
+                   // console.log("send " , msg, data, roomid)
                     await axios.post(srv + '/rest/api/startVideoCommand', { socketid});
                 }
                 catch (e) {
