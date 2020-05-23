@@ -249,6 +249,9 @@ window.onload=async function () {
                 setTimeout(function () {
                     avatar.classList.remove("clicked")
                 }, 500)
+
+
+                return ;
                 if (typeof (createVideoContaiter) == 'undefined') {
                     var s = document.createElement('script');
                     s.src = "/javascripts/rtcScript.js";
