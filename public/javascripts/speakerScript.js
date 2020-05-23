@@ -140,6 +140,24 @@ window.onload=function () {
 
                 }
             },
+            spkStartPhone:async function(data){
+                var _this=this;
+                console.log("spkStartPhone",data)
+                if(!_this.isMyVideoPublish)
+                {
+                    var elem=document.createElement("div")
+                    document.body.appendChild(elem);
+                    elem.style.display="none";
+                    await phonePublishLocalVideo(elem, _this.socket.id, null, ()=>{
+                        console.warn("local video failed")
+                    });
+                    _this.isMyVideoPublish=true;
+                    console.log("spk video published",_this.localStreams)
+                }
+                _this.socket.emit("addUserToSpeakerRoom",{userid:item.id,roomid:roomid });
+
+
+            },
             spkStartVks:function(data){
                 console.log("spkStartVksspkStartVks")
                 var item=null;

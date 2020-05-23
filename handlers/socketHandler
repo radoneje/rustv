@@ -167,9 +167,9 @@ class socket{
                 if(id)
                     _this.clients.sendToRoomSpeakers("setSpkAlert",  dt, roomid)
             });
-            socket.on("spkStartVks",(dt)=>{
+            socket.on("spkStartPhone",(dt)=>{
                 if(id)
-                    _this.clients.sendToRoomSpeakers("spkStartVks",  dt, roomid)
+                    _this.clients.sendToRoomSpeakers("spkStartPhone",  dt, roomid)
             });
             socket.on("disconnectSPKvksUser",(dt)=>{
                 if(id) {
