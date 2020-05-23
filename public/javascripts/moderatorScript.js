@@ -316,7 +316,7 @@ window.onload=async function () {
                     elem.addEventListener("click", async()=>{
                         await stopPhone();
                         remoteWr.innerHTML="";
-                        _this.socket.emit("redirectToStage",{user:_this.user, guid:data.recguid, to:data.from})
+                        _this.socket.emit("redirectToStage",{user:_this.user, guid:item.socketid, to:item.socketid})
                     })
 
 
