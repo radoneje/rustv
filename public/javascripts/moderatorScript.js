@@ -424,7 +424,7 @@ window.onload=async function () {
                 var videoBox=document.getElementById(data.guid)
                 var videoCap=videoBox.querySelector(".videoCap")
                 videoCap.innerHTML ='<div class="videoCatHer">'
-                    +videoCap.innerText +
+                    +item.user.i +
                     "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+data.guid+"' >на экран</span><span class='videotoSpk' id='videotoStage"+data.guid+"' >на сцену</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+data.guid+"'/></div>";
                if(roomid==61)
                    videoCap.innerHTML ='<div class="videoCatHer">'
