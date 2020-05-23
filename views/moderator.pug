@@ -8,6 +8,10 @@ block head
 
     <script src="/lib/vue-youtube.js"></script>
     script(src="/javascripts/utils.js")
+    script(src="/lib/flashUtils.js")
+    script(src="/lib/flashphoner.js")
+    script(src="/javascripts/phoner.js")
+
     <script src="/lib/autosize.min.js"></script>
     script(src="/javascripts/moderatorScript.js")
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -218,6 +222,7 @@ block content
                         img.aModSectPresTh(:src="'/rest/api/pres/'+item.id+'/'+eventid+'/'+roomid")
         div#VKS
             div.videoBox#translationVideoBox
+            div#localVideoWr
                 include elements/mainVideo
                 //div.videoCap Трансляция
             //div#videoWr

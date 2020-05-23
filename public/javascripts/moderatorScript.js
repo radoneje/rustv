@@ -250,6 +250,18 @@ window.onload=async function () {
                     avatar.classList.remove("clicked")
                 }, 500)
 
+                if(!_this.selfVideoStream){
+                    await  phonePublishLocalVideo(document.getElementById('localVideoWr'),_this.socket.id, null, () => {
+                        var video=document.getElementById('localVideoWr').querySelector('video')
+                        if(video)
+                            video.parentNode.removeChild(video);
+                        _this.selfVideoStream=null;
+                    }
+                    console.log('local video is Publisk', _this.socket.id)
+                }
+                console.log('local video ready to connect', _this.socket.id)
+
+
 
                 return ;
                 if (typeof (createVideoContaiter) == 'undefined') {
