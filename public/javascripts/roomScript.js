@@ -374,9 +374,11 @@ window.onload=function () {
                 else if(document.getElementById('profIframe')){
                     var elem=document.getElementById('profIframe')
                     if(val)
-                        elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&autoplay=false&mute=false"
+                        elem.postMessage('unMute')
+                        //elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&autoplay=false&mute=false"
                     else
-                        elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&mute=true&autoplay=true"
+                        elem.postMessage('mute')
+                        //elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&mute=true&autoplay=true"
                     console.log("mute",val);
                 }
                 this.mainVideoMuted=!val;
