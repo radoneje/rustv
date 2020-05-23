@@ -156,14 +156,14 @@ window.onload=function () {
                 }
 
                 var receiverItem = {
-                    id: data.streamid,
+                    id: data.socketid,
                     isMyVideo: false,
                     user: data.user,
-                    streamid: data.streamid
+                    streamid: data.socketid
                 }
                 arrVideo.push(receiverItem)
                 setTimeout(async ()=>{
-                    var video = await createVideo(data.streamid, false, data.user, ()=>{;;}, ()=>{;;}, ()=>{;;}, ()=>{/*videoRemove*/}, ()=>{;;});
+                    var video = await createVideo(data.socketid, false, data.user, ()=>{;;}, ()=>{;;}, ()=>{;;}, ()=>{/*videoRemove*/}, ()=>{;;});
                     videoLayout();
                     var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
                     await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{
