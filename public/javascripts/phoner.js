@@ -184,6 +184,7 @@ async function   phoneStopRemoteVideo(id){
         var streams=PlaySession.getStreams();
         var find=false;
         streams.forEach(stream=> {
+            console.log("searf stream", stream.name());
             if(stream.name()==id)
             {
                 console.log("find stream", id);
