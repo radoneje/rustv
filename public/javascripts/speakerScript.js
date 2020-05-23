@@ -152,9 +152,33 @@ window.onload=function () {
                         console.warn("local video failed")
                     });
                     _this.isMyVideoPublish=true;
-                    console.log("spk video published",_this.localStreams)
+                    console.log("spk video published")
                 }
-                _this.socket.emit("addUserToSpeakerRoom",{userid:item.id,roomid:roomid });
+
+                var receiverItem = {
+                    id: data.streamid,
+                    isMyVideo: false,
+                    user: data.user,
+                    streamid: data.streamid
+                }
+                arrVideo.push(receiverItem)
+                setTimeout(async ()=>{
+                    var video = await createVideo(data.streamid, false, data.user, ()=>{;;}, ()=>{;;}, ()=>{;;}, ()=>{/*videoRemove*/}, ()=>{;;});
+                    videoLayout();
+                    var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
+                    await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{
+                        console.warn("video Error")
+                        ///remove video;
+                    })
+                    receiverItem.elem=videoWrElem.querySelector('video')
+                    receiverItem.elem.style.transform="inherit"
+                    receiverItem.elem.setAttribute("allowfullscreen","allowfullscreen")
+                    receiverItem.elem.setAttribute("playsinline","playsinline")
+                    mainVideoMute(true)
+                },0)
+
+
+               // _this.socket.emit("addUserToSpeakerRoom",{userid:item.id,roomid:roomid });
 
 
             },
