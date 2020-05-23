@@ -646,8 +646,16 @@ window.onload=function () {
 
 
             },
-            OnStartModMeet:function (data) {
+            OnStartModMeet:async function (data) {
                 console.log("OnStartModMeet", data);
+                var remoteWr=document.getElementById('modVideo')
+                await phoneGetRemoteVideo(remoteWr,data.socketid, ()=>{
+                    console.log('remote video failed', data.socketid)
+                    var video=remoteWr.querySelector('video')
+                    if(video)
+                        video.parentNode.removeChild(video);
+                    _this.remoteVideoStream=null;
+                })
             }
             ,
             OnStopModMeet:function (data) {
