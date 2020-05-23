@@ -289,6 +289,8 @@ window.onload=async function () {
                     if(video)
                         video.parentNode.removeChild(video);
                     _this.remoteVideoStream=null;
+
+
                 })
 
                 var videoCap=document.createElement('div');
@@ -313,6 +315,7 @@ window.onload=async function () {
                     await stopPhone();
                     remoteWr.innerHTML="";
                     _this.socket.emit("spkStartPhone",{socketid:item.socketid, user:item})
+                    document.getElementById("spkVideoLoader").classList.add('loader');
                 })
                 var elem=document.getElementById("videotoStage"+item.socketid)
                 if(elem)

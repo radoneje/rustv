@@ -223,6 +223,7 @@ block content
         div#VKS
             div.VKSbox(v-if="SPKvksUsers.length>0")
                 div.VKSboxTitle Активные подключения ({{SPKvksUsers.length}})
+                div#spkVideoLoader
                 div.VKSboxItems
                     div.VKSboxItem(v-for="item in SPKvksUsers" v-key="item.guid")
                         div.VKSboxItemBox
