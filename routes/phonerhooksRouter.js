@@ -20,9 +20,9 @@ async function OnStreamStatusEvent(req, res){
     var socketid=req.body.name;
     var status=req.body.status=='PUBLISHING';
     if(status)
-        req.transport.startVideo( socket.id)
+        req.transport.startVideo( socketid)
     else
-        req.transport.stopVideo( socket.id)
+        req.transport.stopVideo( socketid)
 
     console.log("phoder rest OnStreamStatusEvent", socketid, status);
 
