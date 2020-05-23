@@ -80,7 +80,10 @@ window.onload=async function () {
                 this.users.forEach(u=>{
                     if(u.id==data.id) {
                         console.log("user handUp")
-                        u.handUp = data.hand
+                        u.handUp = data.hand;
+                        var i= u.i;
+                        u.i="";
+                        setTimeout(()=>{u.i=i},0)
                     }
                 })
             },
