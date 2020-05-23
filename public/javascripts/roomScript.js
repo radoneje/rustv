@@ -64,7 +64,7 @@ window.onload=function () {
                     console.warn("local video failed")
                     _this.webCamStream=null;
                 });
-                _this.webCamStream=elem.querySelector('video').srcObject;
+                _this.webCamStream=true;// elem.querySelector('video').srcObject;
             },
             playing:function(){
 
