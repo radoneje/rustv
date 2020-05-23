@@ -258,17 +258,37 @@ window.onload=async function () {
                             video.parentNode.removeChild(video);
                         _this.selfVideoStream=null;
                     });
-                    console.log('local video is Publisk', _this.socket.id)
+                    var video=document.getElementById('localVideoWr').querySelector('video')
+                    if(video)
+                        video.classList.add("mirrored");
+                    console.log('local video is Published', _this.socket.id)
                 }
                 if(_this.remoteVideoStream)
                 {
                     //disconnect remote video stream
                 }
-//, item.socketid
                 console.log('local video ready to connect', _this.socket.id)
-                await phoneGetRemoteVideo(document.getElementById('remoteVideoWr'),item.socketid, ()=>{
-                    console.log('remote video filed', _this.socket.id)
+                var remoteWr=document.getElementById('remoteVideoWr')
+                await phoneGetRemoteVideo(remoteWr,item.socketid, ()=>{
+                    console.log('remote video failed', _this.socket.id)
+                    var video=remoteWr.querySelector('video')
+                    if(video)
+                        video.parentNode.removeChild(video);
+                    _this.remoteVideoStream=null;
                 })
+
+                var videoCap=document.createElement('div');
+                videoCap.classList.add("videoCap")
+                remoteWr.appendChild(videoCap);
+
+                videoCap.innerHTML ='<div class="videoCatHer">'
+                    +videoCap.innerText +
+                    "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+data.guid+"' >на экран</span><span class='videotoSpk' id='videotoStage"+data.guid+"' >на сцену</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+data.guid+"'/></div>";
+                if(roomid==61)
+                    videoCap.innerHTML ='<div class="videoCatHer">'
+                        +videoCap.innerText +
+                        "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+data.guid+"' >на экран</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+data.guid+"'/></div>";
+
 
 
 
