@@ -328,7 +328,7 @@ window.onload=async function () {
 
 
                 async function stopPhone() {
-                   await phoneStopRemoteVideo(item.socketid);
+                    phoneStopRemoteVideo(item.socketid);
 
                 }
 

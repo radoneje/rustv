@@ -176,8 +176,8 @@ async function phonePublishLocalVideo(localVideo, id, stream, errHandeler, faile
     await publishStream(id,localVideo, stream,()=>{if(errHandeler)errHandeler()},()=>{if(failedHandler)failedHandler()});
 
 }
-async function   phoneStopRemoteVideo(id){
-    return new Promise(async (res, rej)=>{
+ function   phoneStopRemoteVideo(id){
+
         if(Flashphoner.getSessions().length==0)
             return res(false);
         var PlaySession = Flashphoner.getSessions()[0];
@@ -187,16 +187,11 @@ async function   phoneStopRemoteVideo(id){
             console.log("searf stream", stream.name(), id);
             if(stream.name()==id)
             {
-                console.log("find stream", id);
                 stream.stop();
-                res(streams);
-                find=true;
-
+               return;
             }
         })
-        if(!find)
-            return res(false);
-    });
+
 }
 async function  phoneGetRemoteVideo(remoteVideo,id, errHandeler) {
     console.log("remotevideo",id)
