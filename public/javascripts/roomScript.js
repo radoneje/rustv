@@ -665,20 +665,21 @@ window.onload=function () {
                 this.messageFromMod=''
                 this.messageToModText=''
             },
-            disconnectSPKvksUser:function (dt) {
+            OndisconnectSPKvksUser:function (dt) {
 
                 if(dt.item.user.id=this.user.id){
                     arrVideo.forEach(v=>{
-                        removeVideo(v.streamid);
+                        phoneStopRemoteVideo(data.item.guid);
                     })
                     arrVideo=[];
                     this.arrVideo=[];
-                    stopAllStreams();
+                   // stopAllStreams();
                     this.OnmainVideoMute(true /* false - тихо*/)
                 }
                 console.log("disconnectSPKvksUser", dt)
             },
             OnPhoneToSpk:function (data) {
+                var _this=this;
                 console.log("OnPhoneToSpk", data);
 
                 data.streamid=data.socketid;
