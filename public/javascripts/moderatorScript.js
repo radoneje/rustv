@@ -293,7 +293,7 @@ window.onload=async function () {
                 remoteWr.appendChild(videoCap);
 
                 videoCap.innerHTML ='<div class="videoCatHer">'
-                    +item.user.i +
+                    +item.i +' '+ item.f +' ' + item.smi+
                     "</div><div class='videotoSpkWr'><span class='videotoSpk' id='videotoSpk"+item.socketid+"' >на экран</span><span class='videotoSpk' id='videotoStage"+item.socketid+"' >на сцену</span>"+"<img src='/images/close.svg'  class='closeIcon'  id='close"+item.socketid+"'/></div>";
                 if(roomid==61)
                     videoCap.innerHTML ='<div class="videoCatHer">'
