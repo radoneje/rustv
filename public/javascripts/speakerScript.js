@@ -157,6 +157,13 @@ window.onload=function () {
                 if(_this.arrVideo.length>0) {
                     arrVideo.forEach(a=>{
                         phoneStopRemoteVideo(data.streamid);
+                        console.log("removeVideo on add new",data.streamid)
+                        var elem=
+                        document.getElementById('meetVideoItem_' + data.streamid)
+                        if(elem)
+                            elem.parentNode.removeChild(elem);
+
+
                     })
 
                     _this.arrVideo = [];
