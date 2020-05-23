@@ -312,7 +312,7 @@ window.onload=async function () {
                 document.getElementById("videotoSpk"+item.socketid).addEventListener("click", async ()=>{
                     await stopPhone();
                     remoteWr.innerHTML="";
-                    _this.socket.emit("spkStartPhone",{socketid:item.socketid})
+                    _this.socket.emit("spkStartPhone",{socketid:item.socketid, user:item})
                 })
                 var elem=document.getElementById("videotoStage"+item.socketid)
                 if(elem)
