@@ -265,6 +265,8 @@ window.onload=async function () {
                 }
                 if(_this.remoteVideoStream)
                 {
+                    await stopPhone();
+                    remoteWr.innerHTML="";
                     //disconnect remote video stream
                 }
                 console.log('local video ready to connect', item)
@@ -291,7 +293,7 @@ window.onload=async function () {
 
                 document.getElementById("close"+item.socketid).addEventListener("click", async ()=>{
                     console.log("stopReceiveVideo", item.socketid )
-                    stopPhone();
+                    await stopPhone();
                     remoteWr.innerHTML="";
                 })
 
