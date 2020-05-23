@@ -681,6 +681,36 @@ window.onload=function () {
             OnPhoneToSpk:function (data) {
                 console.log("OnPhoneToSpk", data);
 
+                data.streamid=data.socketid;
+                var receiverItem = {
+                    id: data.streamid,
+                    isMyVideo: false,
+                    user: data.user,
+                    streamid: data.streamid
+                }
+                arrVideo.push(receiverItem);
+                this.arrVideo=arrVideo;
+                setTimeout(async ()=>{
+                    var video = await createVideo(data.streamid, false, data.user, ()=>{;;}, ()=>{;;}, ()=>{;;}, ()=>{/*videoRemove*/}, ()=>{;;});
+                    videoLayout();
+                    var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
+                    await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{
+                        console.warn("video Error")
+                    })
+                    receiverItem.elem=videoWrElem.querySelector('video')
+                    if(!receiverItem.elem)
+                        receiverItem.elem=videoWrElem.querySelector('profIframe')
+                    if(receiverItem.elem) {
+
+                        receiverItem.elem.style.transform = "inherit"
+                        receiverItem.elem.setAttribute("allowfullscreen", "allowfullscreen")
+                        receiverItem.elem.setAttribute("playsinline", "playsinline")
+                    }
+
+                    _this.OnmainVideoMute(false /* false - тихо*/)
+                },0)
+
+
             }
 
         },
