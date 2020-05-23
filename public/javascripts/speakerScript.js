@@ -931,6 +931,7 @@ window.onload=function () {
                                         arrVideo.forEach(r=>{
                                             SPKvksUsers.push({user:r.user, guid:r.streamid})})
 
+                                        console.log(SPKstatus, {SPKstatus: _this.SPKstatus, SPKalert:_this.SPKalert, SPKvksUsers:SPKvksUsers})
                                         _this.socket.emit("SPKstatus",{SPKstatus: _this.SPKstatus, SPKalert:_this.SPKalert, SPKvksUsers:SPKvksUsers})
                                         if(SPKvksUsers.length==1)
                                         {
