@@ -464,15 +464,16 @@ window.onload=async function () {
 
             },
             disconnectSPKvksUser:function(discinnecredUser){
+                alert(1)
+                return;
                 console.log("disconnectSPKvksUser", discinnecredUser);
-                var ctrl=document.getElementById('VKSboxItemBtn'+discinnecredUser.guid)
+                var ctrl=document.getElementById('VKSboxItemBtn'+discinnecredUser.item.guid)
                 if(ctrl.classList.contains('removing')) {
                     return;
                 }
                 console.log("discinnecredUser", discinnecredUser)
                 this.socket.emit("disconnectSPKvksUser", {item:discinnecredUser})
-                var ctrl=document.getElementById('VKSboxItemBtn'+discinnecredUser.guid)
-               ctrl.classList.add('removing')
+                ctrl.classList.add('removing')
 
             },
             uploadFile:function(){
