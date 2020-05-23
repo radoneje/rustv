@@ -221,9 +221,10 @@ block content
                         div.aModSectPresItemWr
                         img.aModSectPresTh(:src="'/rest/api/pres/'+item.id+'/'+eventid+'/'+roomid")
         div#VKS
+            div#spkVideoLoader
             div.VKSbox(v-if="SPKvksUsers.length>0")
                 div.VKSboxTitle Активные подключения ({{SPKvksUsers.length}})
-                div#spkVideoLoader
+
                 div.VKSboxItems
                     div.VKSboxItem(v-for="item in SPKvksUsers" v-key="item.guid")
                         div.VKSboxItemBox
