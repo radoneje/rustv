@@ -668,6 +668,7 @@ window.onload=function () {
             OndisconnectSPKvksUser:function (dt) {
 
                 if(dt.item.user.id=this.user.id){
+
                  /*   arrVideo.forEach(v=>{
                         phoneStopRemoteVideo(dt.item.guid);
                     })
@@ -680,7 +681,7 @@ window.onload=function () {
             },
             OnPhoneToSpk:function (data) {
                 var _this=this;
-                console.log("OnPhoneToSpk", data);
+                console.log("OnPhoneToSpk", data, _this.socket.id);
 
                 data.streamid=data.socketid;
                 var receiverItem = {
@@ -690,6 +691,7 @@ window.onload=function () {
                     streamid: data.streamid
                 }
                 arrVideo.push(receiverItem);
+
                 this.arrVideo=arrVideo;
                 setTimeout(async ()=>{
                     var video = await createVideo(data.streamid, false, data.user, ()=>{;;}, ()=>{;;}, ()=>{;;}, ()=>{/*videoRemove*/}, ()=>{;;});
