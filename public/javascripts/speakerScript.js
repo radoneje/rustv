@@ -388,9 +388,11 @@ window.onload=function () {
                 if(elem)
                     elem.click();
             },
-            disconnectSPKvksUser:function (data, event) {
+            OndisconnectSPKvksUser:function (data, event) {
                 //this.removeWowzaVideo(data.item.guid)
-
+                phoneStopRemoteVideo(data.item.guid);
+                this.arrVideo=[];
+                /*
                 removeVideo(data.item.guid);
                 this.arrVideo=this.arrVideo.filter(r=>{return r.streamid!=data.item.guid})
                 arrVideo=this.arrVideo;
@@ -398,7 +400,7 @@ window.onload=function () {
                     videoLayout();
                 else
                     stopAllStreams();
-                /*
+
                 videoReceivers.forEach(r=>{
                     if(r.guid==data.item.guid){
                         var elem=document.getElementById("close"+r.guid)
