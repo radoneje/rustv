@@ -138,7 +138,7 @@ class Clients{
         for( var srv of config.frontServers)
         {
             try {
-                console.log("send " , msg, data, roomid)
+              //  console.log("send " , msg, data, roomid)
                 await axios.post(srv + '/rest/api/execCommandAdmins', {msg, data, roomid});
             }
             catch (e) {
@@ -164,7 +164,7 @@ class Clients{
         for( var srv of config.frontServers)
         {
             try {
-                console.log("send " , msg, data, roomid)
+              //  console.log("send " , msg, data, roomid)
                 await axios.post(srv + '/rest/api/execCommandSpeakers', {msg, data, roomid});
             }
             catch (e) {
@@ -189,7 +189,7 @@ class Clients{
         for( var srv of config.frontServers)
         {
             try {
-                console.log("send " , msg, data, roomid)
+              //  console.log("send " , msg, data, roomid)
                 await axios.post(srv + '/rest/api/execCommandUser', {msg, data, roomid});
             }
             catch (e) {
