@@ -797,7 +797,7 @@ window.onload=function () {
                                   console.log("dev  ", dev)
                                     var fDev=null;
                                           dev.forEach(function(device) {
-                                              console.log("dev find ", fDev)
+                                              //console.log("dev find ", fDev)
                                               if(device.label=="vMix Video")
                                              {
                                                  fDev=device;
@@ -806,7 +806,11 @@ window.onload=function () {
                                       })
                                   console.log("dev find ", fDev)
 
-                                 _this.selfVideoStream = await navigator.mediaDevices.getUserMedia({video:{ deviceId: {exact: fDev.deviceId}}, audio:true});
+                                var constraints={video:true, audio:true}
+                                if(fDev)
+                                    constraints=
+                                        {video:{ deviceId: {exact: fDev.deviceId}}, audio:true}
+                                 _this.selfVideoStream = await navigator.mediaDevices.getUserMedia(constraints);
                                 /*_this.selfVideoStream = await navigator.mediaDevices.getUserMedia({
                                     video:{
                                       //  width: {ideal: 640},
