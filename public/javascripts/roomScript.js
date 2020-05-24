@@ -648,8 +648,9 @@ window.onload=function () {
             },
             OnStartModMeet:async function (data) {
                 console.log("OnStartModMeet", data);
+                var _this = this;
                 if(data.to==_this.socket.id) {
-                    var _this = this;
+
                     var remoteWr = document.getElementById('modVideo')
 
                     await phoneGetRemoteVideo(remoteWr, data.socketid, () => {
