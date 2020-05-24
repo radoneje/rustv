@@ -70,6 +70,8 @@ block content
                         </g>
                         </svg>
                         span &nbsp;&nbsp;Хочу спросить
+                    div#meetVideoMessegeBox(v-if="arrVideo.length>0")
+                      div#meetVideoMessege Сейчас телемост. Вы можете быть в эфире.
 
                 include elements/mainVideo
 
@@ -294,8 +296,7 @@ block content
     include elements/messageFromMod
     div.roomMeetVideoBox(v-if="arrVideo.length>0" style="width: 75%;")
       div#meetVideoBox
-      div#meetVideoMessegeBox
-        div#meetVideoMessege Телемост со спикером. Ваше видео может быть в эфире.
+
 
 
   script.
