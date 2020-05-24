@@ -293,7 +293,7 @@ window.onload=async function () {
                         video.parentNode.removeChild(video);
                     _this.remoteVideoStream=null;
                 })
-                _this.socket.emit("startModMeet",{socketid:_this.socket.id})
+                _this.socket.emit("startModMeet",{socketid:_this.socket.id, to:item.socketid})
 
                 var videoCap=document.createElement('div');
                 videoCap.classList.add("videoCap")

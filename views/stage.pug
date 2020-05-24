@@ -8,6 +8,7 @@ block head
   script(src="/lib/flashUtils.js")
   script(src="/lib/flashphoner.js")
   script(src="/javascripts/phoner.js")
+  script(src="/lib/imask.js")
   script(src="/javascripts/stageScript.js")
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   link(rel='stylesheet', href='/stylesheets/login.css')
@@ -17,8 +18,16 @@ block head
 block content
   div.roomScreen.multiViewVideo(id="app" )
     div.stageL
+      div.stageLTitle
+        span 00:00:00
+        span(style='font-size: 12px;width: 76px;margin-left:10px;') лимит:
+          input#stageTimerLimit(style='font-size: 12px;width: 76px;margin-left:5px;' value="000000")
+      div(style="display:flex")
+        div.greenBtn(style='padding: 4px; margin-right:10px;margin-left:10px') Старт
+        div.greenBtn(style=' padding: 4px; margin-right:10px') Сбросить
+
       div.stageLTitle Служебный чат
-      div.rContentWr
+      div.rContentWr(style="height: calc(100% - 90px);")
           div.rBody(id="stageBox" )
             div.qItem(v-for="item in stageChat" v-bind:class="{my:(item.userid==user.id)}")
               div.qItemSmi  {{item.smi}}
