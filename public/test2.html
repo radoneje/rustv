@@ -20,7 +20,10 @@
 <div id="mute" style="cursor: pointer;padding: 4px; border:1px">mute</div>
 <div id="unMute" style="cursor: pointer;padding: 4px; border:1px">unMute</div>
 
+<div>profix</div>
 <iframe id="if" width="800" height="800" src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true"></iframe>
+<div>тест:</div>
+<iframe id="iftest" width="800" height="800" src="/test4.html"></iframe>
 
 <ul id="d"></ul>
 <div>
@@ -32,11 +35,13 @@
        console.log("mute")
        var elem=document.getElementById('if')
        elem.contentWindow.postMessage('mute')
+       document.getElementById('iftest').contentWindow.postMessage('mute')
    })
    document.getElementById('unMute').addEventListener("click", ()=>{
        console.log("unMute")
        var elem=document.getElementById('if')
        elem.contentWindow.postMessage('unMute')
+       document.getElementById('iftest').contentWindow.postMessage('unMute')
    })
 
 
