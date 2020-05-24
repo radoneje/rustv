@@ -58,7 +58,9 @@
 
 
     document.getElementById('mute').addEventListener("click", ()=>{
-       console.log("mute")
+       console.log("mute", flussonicPlayer)
+
+        console.log(flussonicPlayer.getAudioTracks());
        var elem=document.getElementById('if')
        elem.contentWindow.postMessage('mute')
        document.getElementById('iftest').contentWindow.postMessage('mute')
