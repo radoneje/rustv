@@ -53,6 +53,12 @@
         var config = {"streamName":"cbr_rus","hasPreview":false,"rtmpPort":1935,"rtmpsPort":null,"authTokenName":"token","thumbnails_enabled":false,"type":"live","dvr_info":null,"protocols":{"hds":true,"rtmp":true,"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}};
         var params = FlussonicPlayer.parseUrl("https://v4.proofix.ru/", options, {"streamName":"cbr_rus","hasPreview":false,"rtmpPort":1935,"rtmpsPort":null,"authTokenName":"token","thumbnails_enabled":false,"type":"live","dvr_info":null,"protocols":{"hds":true,"rtmp":true,"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}})
         window.flussonicPlayer = new FlussonicPlayer(params);
+        window.flussonicPlayer.onMediaInfo = (rawMetaData) => {
+            var videoTracks = window.player.getVideoTracks()
+            var audioTracks = window.player.getAudioTracks()
+            console.log("onMediaInfo", videoTracks,audioTracks );
+        }
+
         document.getElementsByTagName('title')[0].innerHTML = config.streamName;
     }
 
