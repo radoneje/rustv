@@ -662,12 +662,12 @@ window.onload=function () {
                         document.getElementById('modVideo').innerHTML = "";
 
                     })
-                    setTimeout(()=>{
+                  //  setTimeout(()=>{
                         var elem = document.createElement('div')
                         elem.classList.add("modVideoCap")
-                        elem.innerHTML="Разговор с модератором"
+                        elem.innerHTML+="Разговор с модератором"
                         remoteWr.appendChild(elem)
-                    },1000)
+                   // },1000)
 
                     _this.modVideo = data.socketid;
                 }
