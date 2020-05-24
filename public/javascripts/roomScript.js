@@ -652,8 +652,16 @@ window.onload=function () {
                 if(data.to==_this.socket.id) {
 
                     var remoteWr = document.getElementById('modVideo')
+                        var elem = document.createElement('div')
+                        elem.classList.add("modVideoCap")
+                        elem.innerHTML+="Разговор с модератором"
+                    remoteWr.appendChild(elem)
 
-                    await phoneGetRemoteVideo(remoteWr, data.socketid, () => {
+                    var videoElem = document.createElement('modVideoDiv')
+                    videoElem.classList.add("modVideoDiv")
+                    remoteWr.appendChild(videoElem)
+
+                    await phoneGetRemoteVideo(videoElem, data.socketid, () => {
                         console.log('remote video failed', data.socketid)
                         var video = remoteWr.querySelector('video')
                         if (video)
@@ -663,10 +671,7 @@ window.onload=function () {
 
                     })
                   //  setTimeout(()=>{
-                        var elem = document.createElement('div')
-                        elem.classList.add("modVideoCap")
-                        elem.innerHTML+="Разговор с модератором"
-                        remoteWr.appendChild(elem)
+
                    // },1000)
 
                     _this.modVideo = data.socketid;
