@@ -54,8 +54,8 @@
         var params = FlussonicPlayer.parseUrl("https://v4.proofix.ru/", options, {"streamName":"cbr_rus","hasPreview":false,"rtmpPort":1935,"rtmpsPort":null,"authTokenName":"token","thumbnails_enabled":false,"type":"live","dvr_info":null,"protocols":{"hds":true,"rtmp":true,"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}})
         window.flussonicPlayer = new FlussonicPlayer(params);
         window.flussonicPlayer.onMediaInfo = (rawMetaData) => {
-            var videoTracks = window.player.getVideoTracks()
-            var audioTracks = window.player.getAudioTracks()
+            var videoTracks = window.flussonicPlayer.getVideoTracks()
+            var audioTracks = window.flussonicPlayer.getAudioTracks()
             console.log("onMediaInfo", videoTracks,audioTracks );
         }
 
@@ -70,6 +70,8 @@
        var elem=document.getElementById('if')
        elem.contentWindow.postMessage('mute')
        document.getElementById('iftest').contentWindow.postMessage('mute')
+       var video =document.getElementById('flussonic-player').querySelector('video')
+        console.log('video', video)
    })
    document.getElementById('unMute').addEventListener("click", ()=>{
        console.log("unMute")
