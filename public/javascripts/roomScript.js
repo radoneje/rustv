@@ -662,6 +662,10 @@ window.onload=function () {
                         document.getElementById('modVideo').innerHTML = "";
 
                     })
+                    var elem = document.createElement('div')
+                    elem.classList.add("modVideoCap")
+                    elem.innerHTML="Разговор с модератором"
+                    remoteWr.appendChild(elem)
                     _this.modVideo = data.socketid;
                 }
             }
