@@ -13,7 +13,7 @@ window.onload=function () {
             UsersVideoStarted:async function (user) {
                 console.log('UsersVideoStarted', user);
                 setTimeout(async()=>{
-                    await phoneGetRemoteVideo(document.getElementById("meetVideoItem_"+user.socketid),user.socketid,()=>{
+                    await phoneGetRemoteVideo(document.getElementById("meetVideoItem_"+user.id),user.socketid,()=>{
                         console.log('error video');
                     })
                 },500)
