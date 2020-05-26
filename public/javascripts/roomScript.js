@@ -59,12 +59,13 @@ window.onload=function () {
         methods:{
             startVideoCall:async function(){
                 var _this = this;
+                _this.webCamStream=true;
                 var elem=document.getElementById('localVideo')
                 await phonePublishLocalVideo(elem, _this.socket.id, null, ()=>{
                     console.warn("local video failed")
                     _this.webCamStream=null;
                 });
-                _this.webCamStream=true;// elem.querySelector('video').srcObject;
+               // elem.querySelector('video').srcObject;
             },
             playing:function(){
 
