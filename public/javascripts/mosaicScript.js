@@ -16,7 +16,7 @@ window.onload=function () {
                     await phoneGetRemoteVideo(document.getElementById("meetVideoItem_"+user.id),user.socketid,()=>{
                         console.log('error video');
                     })
-                },500)
+                },2000)
 
             },
             showUsers:function () {
