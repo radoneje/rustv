@@ -42,6 +42,7 @@ window.onload=function () {
             document.getElementById("app").style.opacity = 1;
             axios.get("/rest/api/users/"+eventid+"/"+roomid)
                 .then(function (r) {
+                    console.log("users", r.data)
                     _this.users = r.data;
                 });
             var serverUrl;
