@@ -22,7 +22,7 @@ window.onload=function () {
         computed: {
             sortedUsers:function () {
                 var _this=this;
-                var users=_this.users.filter(u=>{u.isVideo;console.log(u) ;return true});
+                var users=_this.users.filter(u=>{console.log(u.u.isVideo) ;return u.isVideo});
                 if(users.length>16)
                     users=users.slice(0,15);
                 return users;
