@@ -74,10 +74,11 @@ window.onload=function () {
                 var isChrome = /chrome/.test(navigator.userAgent.toLowerCase()) && /google inc/.test(navigator.vendor.toLowerCase());
                 var ya =/yabrowser/.test(navigator.userAgent.toLowerCase()) ;
                 var safari =/safari/.test(navigator.userAgent.toLowerCase()) ;
+                var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
                 var isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
                 var isRTC=typeof(RTCPeerConnection)=="function"
-                return  ((isChrome || ya || safari) && !isMobile && isRTC);
+                return  ((isChrome || ya || safari || isFirefox) && !isMobile && isRTC);
             },
             isEsc6:function () {
                 try { eval('"use strict";const s=()=>{;;}; s();'); return true}
