@@ -10,9 +10,11 @@ window.onload=function () {
         },
         methods:{
 
-            UsersVideoStarted:function (user) {
+            UsersVideoStarted:async function (user) {
                 console.log('UsersVideoStarted', user);
-                    phoneGetRemoteVideo(document.getElementById("meetVideoItem_"+user.socketid))
+                    await phoneGetRemoteVideo(document.getElementById("meetVideoItem_"+user.socketid),user.socketid,()=>{
+                        console.log('error video');
+                    })
             },
             showUsers:function () {
                 console.log(this.users)
