@@ -84,6 +84,10 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
         };
     }
 
+    video= {
+        width:{ideal:360},
+        facingMode:'user'
+    };
            // {width: {ideal: 640},quality: 100};
 
 
@@ -101,7 +105,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
     console.log("dev find ", fDev)
     if(fDev)
     video={ deviceId:  fDev.deviceId}
-
+    video=true;
 
     /*{
        // width: {ideal: 640},
