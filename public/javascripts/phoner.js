@@ -105,7 +105,6 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
     console.log("dev find ", fDev)
     if(fDev)
     video={ deviceId:  fDev.deviceId}
-    video=true;
 
     /*{
        // width: {ideal: 640},
