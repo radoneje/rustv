@@ -79,7 +79,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
     }
     catch (e) {
         video= {
-            with:{ideal:360},
+            width:{ideal:360},
             facingMode:'user'
         };
     }
