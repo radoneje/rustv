@@ -91,7 +91,7 @@ function connect(_this, roomid, clbk){
                      u.isVideo = true;
                      u.socketid=data.socketid
                      if(_this.UsersVideoStarted)
-                         _this.UsersVideoStarted(data.socketid);
+                         _this.UsersVideoStarted(data);
                  }
                  return u;
             })
