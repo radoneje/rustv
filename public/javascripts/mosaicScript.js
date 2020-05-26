@@ -12,7 +12,7 @@ window.onload=function () {
 
             UsersVideoStarted:function (user) {
                 console.log('UsersVideoStarted', user);
-                phoneGetRemoteVideo(document.getElementById("userVideoItem"+u.socket))
+                //phoneGetRemoteVideo(document.getElementById("userVideoItem"+user.socket))
             },
             showUsers:function () {
                 console.log(this.users)
