@@ -24,10 +24,9 @@ block head
         }
 block content
     div.adminContainer.spkContaiter.multiViewVideo(id="app" style="height: 100vh;")
-        div#meetVideoBox
-            div.mosaicItem(:id="'meetVideoItem_'+item.id" v-for="item in arrVideo")
-                div.mosaicItemCap {{item.f}}&nbsp;{{item.i}}&nbsp;{{item.smi}}
-                div.mosaicItemImage(v-bind:style="{backgroundImage:'url('+item.th+')'}")
+        div#mosaicBox
+            div.mosaicItem(:id="'meetVideoItem_'+item.id" v-for="item in sortedUsers")
+        button(v-on:click="showUsers()" value="users")
 
 
 

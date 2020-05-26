@@ -59,25 +59,22 @@
             console.log("onMediaInfo", videoTracks,audioTracks );
         }
 
-        document.getElementsByTagName('title')[0].innerHTML = config.streamName;
+       // document.getElementsByTagName('title')[0].innerHTML = config.streamName;
     }
 
 
     document.getElementById('mute').addEventListener("click", ()=>{
-       console.log("mute", flussonicPlayer)
-
-        console.log(flussonicPlayer.getAudioTracks());
-       var elem=document.getElementById('if')
-       elem.contentWindow.postMessage('mute')
-       document.getElementById('iftest').contentWindow.postMessage('mute')
-       var video =document.getElementById('flussonic-player').querySelector('video')
-        console.log('video', video)
+        var videos =document.getElementById('flussonic-player').querySelectorAll('video')
+        videos.forEach(video=>{
+            video.muted=true;
+        })
    })
    document.getElementById('unMute').addEventListener("click", ()=>{
        console.log("unMute")
-       var elem=document.getElementById('if')
-       elem.contentWindow.postMessage('unMute')
-       document.getElementById('iftest').contentWindow.postMessage('unMute')
+       var videos =document.getElementById('flussonic-player').querySelectorAll('video')
+       videos.forEach(video=>{
+           video.muted=false;
+       })
    })
 
 

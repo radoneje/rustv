@@ -65,6 +65,7 @@ function connect(_this, roomid, clbk){
         })
 
         socket.on("userConnnect", function(user){
+            console.log("userConnnect")
             var find=false;
            // receiverPlayingg("userConnnect")
             _this.users.forEach(function (u) {
@@ -89,6 +90,8 @@ function connect(_this, roomid, clbk){
                  if(u.id==data.id) {
                      u.isVideo = true;
                      u.socketid=data.socketid
+                     if(_this.UsersVideoStarted)
+                         _this.UsersVideoStarted(u);
                  }
                  return u;
             })

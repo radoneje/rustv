@@ -153,7 +153,9 @@ class Clients{
 
             }
         });
+        console.log("OnSendToRoomAdmins", this.nobody)
         this.nobody.forEach(c=>{
+
             if(c.isActive && c.roomid==roomid) {
                 c.socket.emit(msg, data);
             }

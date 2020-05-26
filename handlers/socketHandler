@@ -116,6 +116,7 @@ class socket{
             });
 
             socket.on("selfVideoStarted",(msg,  data)=>{
+                console.log("selfVideoStarted")
                 if(id)
                     _this.clients.startVideo( socket.id)
             });

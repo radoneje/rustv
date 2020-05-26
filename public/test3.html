@@ -13,6 +13,7 @@
         {
             /// код MUTE
             var e=document.getElementById('c').innerHTML+="<div>Mute</div>"
+
         }
         if(event.data=="unMute")
         {
@@ -20,6 +21,14 @@
             var e=document.getElementById('c').innerHTML+="<div>un Mute</div>"
         }
 
+    });
+
+    window.addEventListener("message", function(event) {
+        var videos =document.getElementById('flussonic-player').querySelectorAll('video')
+        if(event.data=="mute")
+            videos.forEach(video=>{video.muted=false;})
+        if(event.data=="unMute")
+            videos.forEach(video=>{video.muted=true;})
     });
 
 
