@@ -15420,7 +15420,7 @@
                 }
             }
 
-            return {video:true, audio:true};//constraints;
+            return constraints;
         }
 
         var playFirstSound = function playFirstSound() {
