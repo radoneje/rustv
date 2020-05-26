@@ -51,7 +51,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
 
     video= {
         width:640,
-      //  height:360,//360,
+        height:360,//360,
         facingMode: 'user',
         quality: 90
     }
