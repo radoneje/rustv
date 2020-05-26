@@ -78,8 +78,8 @@ window.onload=function () {
 
                 var isOpera=navigator.userAgent.indexOf("Opera") > -1;;
 
-               // var isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
-                var isMobile = navigator.userAgent.match(/(iPhone)|(android)|(webOS)/i)
+                var isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
+               // var isMobile = navigator.userAgent.match(/(iPhone)|(android)|(webOS)/i)
                 var isRTC=typeof(RTCPeerConnection)=="function"
                 return  ((isChrome || ya || safari || isFirefox) && !isMobile && !isOpera && isRTC );
             },
