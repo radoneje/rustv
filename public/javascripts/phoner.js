@@ -86,10 +86,10 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
         };
     }
 
-    video= {
+   /* video= {
         width:{ideal:360},
         facingMode:'user'
-    };
+    };*/
            // {width: {ideal: 640},quality: 100};
 
 
