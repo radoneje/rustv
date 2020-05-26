@@ -55,6 +55,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
         facingMode: 'user',
         quality: 90
     }
+
     try{
         try{
             var supportedConstraints=navigator.mediaDevices.getSupportedConstraints()
@@ -78,6 +79,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
       await  navigator.mediaDevices.getUserMedia({audio:true, video})
     }
     catch (e) {
+        console.warn("errorin usermedia", video)
         video= {
             width:{ideal:360},
             facingMode:'user'
