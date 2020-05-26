@@ -1,0 +1,61 @@
+<html>
+<head>
+    <script src="/lib/flashUtils.js"></script>
+    <script src="https://wowza02.onevent.online:8444/client2/flashphoner.js"></script>
+    <style>
+        #flu{
+            width: 100%;
+        }
+        body{
+            margin: 0;
+        }
+    </style>
+    <link href="https://v4.proofix.ru/flu/player/0.47cd2b8b1d719dc762ce.css" rel="stylesheet">
+    <script type="text/javascript" src="https://v4.proofix.ru/flu/player/runtime.85ff25b349712e33777f.js"></script>
+    <script type="text/javascript" src="https://v4.proofix.ru/flu/player/vendors.184f9cd2e3f8cf6c2293.js"></script>
+    <script type="text/javascript" src="https://v4.proofix.ru/flu/player/main.1098242a1f66235163b7.js"></script>
+</head>
+<body>
+
+
+<div id="flu">
+</div>
+<script>
+
+    window.onload = function() {
+        var options = {
+            parentId: '#flu',
+            width: '100%',
+            height: '100%',
+            autoplay:false,
+            realtime:true
+        }
+        var config = {"streamName":"cbr_rus","hasPreview":false,"rtmpPort":1935,"rtmpsPort":null,"authTokenName":"token","thumbnails_enabled":false,"type":"live","dvr_info":null,"protocols":{"hds":true,"rtmp":true,"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}};
+        var params = FlussonicPlayer.parseUrl("https://v4.proofix.ru/", options, {"streamName":"cbr_rus","hasPreview":false,"rtmpPort":1935,"rtmpsPort":null,"authTokenName":"token","thumbnails_enabled":true,"type":"live","dvr_info":null,"protocols":{"hds":true,"rtmp":true,"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}})
+        window.flussonicPlayer = new FlussonicPlayer(params);
+        window.flussonicPlayer.onMediaInfo = (rawMetaData) => {
+            var videoTracks = window.flussonicPlayer.getVideoTracks()
+            var audioTracks = window.flussonicPlayer.getAudioTracks()
+            console.log("onMediaInfo", videoTracks,audioTracks );
+        }
+
+       // document.getElementsByTagName('title')[0].innerHTML = config.streamName;
+
+        window.addEventListener("message", function(event) {
+            var videos =document.getElementById('flu').querySelectorAll('video')
+            if(event.data=="mute")
+                videos.forEach(video=>{video.muted=true;})
+            if(event.data=="unMute")
+                videos.forEach(video=>{video.muted=false;})
+        });
+
+    }
+
+
+
+
+
+
+</script>
+</body>
+</html>

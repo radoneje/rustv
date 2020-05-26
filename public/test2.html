@@ -64,17 +64,27 @@
 
 
     document.getElementById('mute').addEventListener("click", ()=>{
+       console.log("mute", flussonicPlayer)
         var videos =document.getElementById('flussonic-player').querySelectorAll('video')
+        console.log('video', videos)
         videos.forEach(video=>{
             video.muted=true;
         })
+     /*   video.volume=0;
+       var elem=document.getElementById('if')
+       elem.contentWindow.postMessage('mute')
+       document.getElementById('iftest').contentWindow.postMessage('mute')*/
+
    })
    document.getElementById('unMute').addEventListener("click", ()=>{
        console.log("unMute")
-       var videos =document.getElementById('flussonic-player').querySelectorAll('video')
-       videos.forEach(video=>{
-           video.muted=false;
-       })
+       var video =document.getElementById('flussonic-player').querySelector('video')
+       console.log('video', video)
+       video.volume=1;
+
+       var elem=document.getElementById('if')
+       elem.contentWindow.postMessage('unMute')
+       document.getElementById('iftest').contentWindow.postMessage('unMute')
    })
 
 

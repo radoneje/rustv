@@ -3,35 +3,20 @@
 <div>
     iframe
 </div>
-<div id="c">
+<input type="button" value="mute" onclick="mute()">
+<input type="button" value="unmute" onclick="unmute()">
+<iframe style="width: 100%" id="profIframe" name="profIframe" allowfullscreen src="/flu.html?realtime=true&autoplay=true&mute=true"></iframe>
 
 </div>
+
 <script>
-    window.addEventListener("message", function(event) {
-        console.log(event)
-        if(event.data=="mute")
-        {
-            /// код MUTE
-            var e=document.getElementById('c').innerHTML+="<div>Mute</div>"
 
-        }
-        if(event.data=="unMute")
-        {
-            /// код UnMUTE
-            var e=document.getElementById('c').innerHTML+="<div>un Mute</div>"
-        }
-
-    });
-
-    window.addEventListener("message", function(event) {
-        var videos =document.getElementById('flussonic-player').querySelectorAll('video')
-        if(event.data=="mute")
-            videos.forEach(video=>{video.muted=false;})
-        if(event.data=="unMute")
-            videos.forEach(video=>{video.muted=true;})
-    });
-
-
+function mute() {
+    document.getElementById("profIframe").contentWindow.postMessage("mute")
+}
+function unmute() {
+    document.getElementById("profIframe").contentWindow.postMessage("unMute")
+}
 
 </script>
 </body>
