@@ -76,9 +76,11 @@ window.onload=function () {
                 var safari =/safari/.test(navigator.userAgent.toLowerCase()) ;
                 var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
+                var isOpera=navigator.userAgent.indexOf("Opera") > -1;;
+
                 var isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
                 var isRTC=typeof(RTCPeerConnection)=="function"
-                return  ((isChrome || ya || safari || isFirefox) && !isMobile && isRTC);
+                return  ((isChrome || ya || safari || isFirefox) && !isMobile && !isOpera && isRTC );
             },
             isEsc6:function () {
                 try { eval('"use strict";const s=()=>{;;}; s();'); return true}
