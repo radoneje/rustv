@@ -29,7 +29,16 @@
             width: '100%',
             height: '100%',
          //   autoplay:false,
-         //   realtime:true
+            realtime:true
+
+        }
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf('safari') != -1) {
+            if (ua.indexOf('chrome') > -1) {
+               // alert("1") // Chrome
+            } else {
+               delete options.realtime;
+            }
         }
         var config = {"streamName":"cbr_rus","hasPreview":false,"rtmpPort":1935,"rtmpsPort":null,"authTokenName":"token","thumbnails_enabled":false,"type":"live","dvr_info":null,"protocols":{"hds":true,"rtmp":true,"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}};
         var params = FlussonicPlayer.parseUrl("https://v4.proofix.ru/cbr_rus/embed.html?autoplay=false", options, {"streamName":"cbr_rus","hasPreview":false,"rtmpPort":1935,"rtmpsPort":null,"authTokenName":"token","thumbnails_enabled":false,"type":"live","dvr_info":null,"protocols":{"hds":true,"rtmp":true,"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}})
