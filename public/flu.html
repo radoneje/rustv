@@ -56,6 +56,7 @@
        // document.getElementsByTagName('title')[0].innerHTML = config.streamName;
 
         window.addEventListener("message", function(event) {
+            console.log("message", data);
             var videos =document.getElementById('flu').querySelectorAll('video')
             if(event.data=="mute")
                 videos.forEach(video=>{video.muted=true;})
