@@ -378,7 +378,7 @@ window.onload=function () {
                 }
                 else if(document.getElementById('profIframe')){
                     var elem=document.getElementById('profIframe')
-                  //  console.log("MUTE", elem.contentWindow)
+                    console.log("MUTE", elem.contentWindow)
                     if(val)
                         elem.contentWindow.postMessage('unMute')
                          //   elem.src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&autoplay=false&mute=false"
