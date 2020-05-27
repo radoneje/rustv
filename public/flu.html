@@ -14,6 +14,7 @@
     <script type="text/javascript" src="https://v4.proofix.ru/flu/player/runtime.85ff25b349712e33777f.js"></script>
     <script type="text/javascript" src="https://v4.proofix.ru/flu/player/vendors.184f9cd2e3f8cf6c2293.js"></script>
     <script type="text/javascript" src="https://v4.proofix.ru/flu/player/main.1098242a1f66235163b7.js"></script>
+
 </head>
 <body>
 
@@ -31,7 +32,11 @@
             realtime:true
         }
         var config = {"streamName":"cbr_rus","hasPreview":false,"rtmpPort":1935,"rtmpsPort":null,"authTokenName":"token","thumbnails_enabled":false,"type":"live","dvr_info":null,"protocols":{"hds":true,"rtmp":true,"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}};
-        var params = FlussonicPlayer.parseUrl("https://v4.proofix.ru/", options, {"streamName":"cbr_rus","hasPreview":false,"rtmpPort":1935,"rtmpsPort":null,"authTokenName":"token","thumbnails_enabled":true,"type":"live","dvr_info":null,"protocols":{"hds":true,"rtmp":true,"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}})
+        var params = FlussonicPlayer.parseUrl("https://v4.proofix.ru/cbr_rus/embed.html?autoplay=false", options, {"streamName":"cbr_rus","hasPreview":false,"rtmpPort":1935,"rtmpsPort":null,"authTokenName":"token","thumbnails_enabled":false,"type":"live","dvr_info":null,"protocols":{"hds":true,"rtmp":true,"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}})
+        window.flussonicPlayer = new FlussonicPlayer(params);
+        document.getElementsByTagName('title')[0].innerHTML = config.streamName;
+
+
         window.flussonicPlayer = new FlussonicPlayer(params);
         window.flussonicPlayer.onMediaInfo = (rawMetaData) => {
             var videoTracks = window.flussonicPlayer.getVideoTracks()
