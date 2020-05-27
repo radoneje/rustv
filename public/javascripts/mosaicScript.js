@@ -72,6 +72,13 @@ window.onload=function () {
                 if(!find) {
                     user.isActive = true;
                     _this.users.push(user)
+                    if(user.isVideo){
+                        setTimeout(async()=>{
+                            await phoneGetRemoteVideo(document.getElementById("meetVideoItem_"+user.id),user.socketid,()=>{
+                                console.log('error video');
+                            })
+                        },2000)
+                    }
                 }
             })
             socket.on("userDisconnnect", function(userid){
