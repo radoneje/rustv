@@ -64,9 +64,24 @@ window.onload=function () {
             messageFromMod:"",
             messageToModText:"",
             errorMessage:"",
+            stageTimer:0,
+            stageTimeout:null,
         },
         methods:{
-
+            StartTimer:function(){
+                var _this=this;
+                if(this.stageTimeout) {
+                    clearTimeout(this.stageTimeout)
+                    this.stageTimeout=null;
+                }
+                else {
+                    this.stageTimeout=setTimeout(updateStageTimer,1000);
+                }
+                function updateStageTimer() {
+                   _this.stageTimer++;
+                    _this.stageTimeout=setTimeout(updateStageTimer,1000);
+                }
+            },
             sectActive:function (item) {
                 var _this=this;
                 this.sect.forEach(function (e) {
@@ -725,7 +740,11 @@ window.onload=function () {
                      })
                  }
                  return sorted;
+             },
+             formatedTimeout:function () {
+                 return new Date(this.stageTimer * 1000).toISOString().substr(11, 8);
              }
+
          },
         mounted:async function () {
             var _this=this;
