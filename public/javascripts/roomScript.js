@@ -912,19 +912,17 @@ window.onload=function () {
                     //_this.startRTC();
                 })
             window.addEventListener('scroll', function() {
-                console.log("scroll",_this.$refs.youtube)
                 if(_this.$refs.youtube)
                 {
                     var el=document.querySelector('.videoWrapper')
                     if( ! checkVisible(el) && window.innerWidth>767) {
-                        console.log("_this.$refs.youtube", el.querySelector('iframe'))
                         el.querySelector('iframe').classList.add("videoInWindow")
                     }
                     else{
                         el.querySelector('iframe').classList.remove("videoInWindow")
                     }
                 }
-                    console.log("checkVisible",);
+
             });
 
         }
