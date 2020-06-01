@@ -278,6 +278,7 @@ function videoLayout() {
         var pgm = arrVideo.filter(e => e.pgm == true)
         if (pgm.length > 0 && isPgm) {
             var pip = arrVideo.filter(e => e.pip == true)
+            var p1 = arrVideo.filter(e => e.p1 == true)
             arrVideo.forEach(a => {
                 var elem = document.getElementById("meetVideoItem_" + a.id);
                 elem.style.zIndex = 10;
