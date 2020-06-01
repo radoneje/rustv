@@ -722,6 +722,9 @@ window.onload=function () {
                         item.pgm=data.val;
                         item.pip=false;
                         item.p1=false;
+                        var elem=document.getElementById('p1btn'+item.streamid)
+                        if(elem)
+                            elem.classList.remove("active")
                     }
                     else
                         item.pgm=false;
