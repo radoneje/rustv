@@ -721,6 +721,7 @@ window.onload=function () {
                     {
                         item.pgm=data.val;
                         item.pip=false;
+                        item.p1=false;
                     }
                     else
                         item.pgm=false;
