@@ -914,7 +914,7 @@ window.onload=function () {
             window.addEventListener('scroll', function() {
                 console.log("scroll",_this.$refs.youtube)
                 if(_this.$refs.youtube)
-                    console.log("checkVisible", checkVisible(_this.$refs.youtube));
+                    console.log("checkVisible", checkVisible(document.querySelector('.videoWrapper')));
             });
 
         }
