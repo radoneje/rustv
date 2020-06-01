@@ -916,7 +916,7 @@ window.onload=function () {
                 if(_this.$refs.youtube)
                 {
                     var el=document.querySelector('.videoWrapper')
-                    if( ! checkVisible(el)) {
+                    if( ! checkVisible(el) && window.innerWidth>767) {
                         console.log("_this.$refs.youtube", el.querySelector('iframe'))
                         el.querySelector('iframe').classList.add("videoInWindow")
                     }
