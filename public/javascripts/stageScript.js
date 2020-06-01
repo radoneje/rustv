@@ -714,9 +714,9 @@ window.onload=function () {
                             var elem=document.getElementById('p1btn'+item.streamid)
                             console.log("p1btn", elem)
                             if(elem && elem.classList.contains("active")) {
-                                item.p1=false
+                               // item.p1=false
                                 _this.videoP1(item)
-                                elem.classList.remove("active")
+                              //  elem.classList.remove("active")
                             }
                         }
                     })
