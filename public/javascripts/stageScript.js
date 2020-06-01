@@ -645,6 +645,15 @@ window.onload=function () {
                         item.pgm=false;
                         item.pip=false;
                         item.p1=false;
+                        var elem=document.getElementById("pgmbtn"+item.socketid)
+                        if(elem)
+                            elem.classList.remove("active")
+                    elem=document.getElementById("pipbtn"+item.socketid)
+                    if(elem)
+                        elem.classList.remove("active")
+                    elem=document.getElementById("p1btn"+item.socketid)
+                    if(elem)
+                        elem.classList.remove("active")
                 })
                 videoLayout();
             },
