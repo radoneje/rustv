@@ -645,14 +645,13 @@ window.onload=function () {
                         item.pgm=false;
                         item.pip=false;
                         item.p1=false;
-                        console.log("OnRelayoutVideo", item)
-                        var elem=document.getElementById("pgmbtn"+item.socketid)
+                        var elem=document.getElementById("pgmbtn"+item.streamid)
                         if(elem)
                             elem.classList.remove("active")
-                    elem=document.getElementById("pipbtn"+item.socketid)
+                    elem=document.getElementById("pipbtn"+item.streamid)
                     if(elem)
                         elem.classList.remove("active")
-                    elem=document.getElementById("p1btn"+item.socketid)
+                    elem=document.getElementById("p1btn"+item.streamid)
                     if(elem)
                         elem.classList.remove("active")
                 })
