@@ -640,20 +640,29 @@ window.onload=function () {
             OnVideoPIP:function (data) {
                 console.log('OnVideoPIP',data.val)
                 if(!isPgm)
-                    return;
-                var elems = document.querySelectorAll(".meetVideoItem");
-                elems.forEach(e=>{
-                    e.classList.remove("isPIP");
-                })
+                {
+                    var elems = document.querySelectorAll(".meetVideoItem");
+                    elems.forEach(e=>{
+                        e.classList.remove("isPIP");
+                    })
+                    arrVideo.forEach(item=>{
+                        if(item.streamid==data.streamid)
+                        {
+                            var elem = document.getElementById("meetVideoItem_" + data.streamid)
+                            if(elem)
+                                elem.classList.add("isPIP")
+                        }
+                    })
+                    return
+                }
+
                 arrVideo.forEach(item=>{
                     if(item.streamid==data.streamid)
                     {
                         item.pgm=false;
                         item.pip=data.val;
 
-                        var elem = document.getElementById("meetVideoItem_" + data.streamid)
-                        if(elem)
-                            elem.classList.add("isPIP")
+
 
                     }
                     else
