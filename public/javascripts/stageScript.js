@@ -662,8 +662,6 @@ window.onload=function () {
                         item.pgm=false;
                         item.pip=data.val;
 
-
-
                     }
                     else
                         item.pip=false;
@@ -689,7 +687,7 @@ window.onload=function () {
                        return
                    }
                 arrVideo.forEach(item=>{
-                    if(item.streamid==data.streamid)
+                    if(item.streamid==data.streamid && !item.pgm)
                     {
                         item.pgm=false;
                         item.p1=data.val;
@@ -708,7 +706,7 @@ window.onload=function () {
                         e.classList.remove("isPGM");
                     })
                     arrVideo.forEach(item=>{
-                        if(item.streamid==data.streamid)
+                        if(item.streamid==data.streamid && !item.p1 && !item.pip)
                         {
                             var elem = document.getElementById("meetVideoItem_" + data.streamid)
                             if(elem && data.val)
