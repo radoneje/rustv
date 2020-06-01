@@ -243,6 +243,10 @@ function connect(_this, roomid, clbk){
         if(_this.OnVideoPIP)
             _this.OnVideoPIP(data)
     });
+    socket.on("videoPIP", function(data){
+        if(_this.OnVideoP1)
+            _this.OnVideoP1(data)
+    });
     socket.on("redirectToStage", function(data){
         document.location.href=data.url;
     });

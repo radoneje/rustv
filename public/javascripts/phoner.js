@@ -288,21 +288,40 @@ function videoLayout() {
             elem.style.position = "fixed";
             //elem.style.top = pip.length > 0 ? ("12.5vh") : ("0");
             elem.style.top = pip.length > 0 ? ("12.5vh") : ("0");
-            elem.style.left =  pip.length > 0 ? ("-5%") : ("0");;//'-5%';
+            elem.style.left =  pip.length > 0 ? ("0%") : ("0");;//'-5%';
+            elem.style.width = pip.length > 0 ? ("50%") : ("100%");
+            if(p1.length > 0)
+            {
+                elem.style.top =  ("12.5vh");
+                elem.style.left = ("-5%");
+                elem.style.width = pip.length > 0 ? ("75%") : ("100%");
+            }
             //elem.style.width = pip.length > 0 ? ("75%") : ("100%");
-            elem.style.width = pip.length > 0 ? ("60%") : ("100%");
+
             elem.style.zIndex = 100;
             elem.style.display = "block";
 
-            if (pip.length > 0) {
+            if (p1.length > 0) {
+                var elem = document.getElementById("meetVideoItem_" + pip[0].id);
+                elem.style.position = "fixed";
+                   elem.style.top = "50vh";
+                   elem.style.left = "75%";
+                   elem.style.width = ("25%");
+                //elem.style.top = "12.5vh";
+                //elem.style.left = "45%";
+                //elem.style.width = ("60%");
+                elem.style.zIndex = 200;
+                elem.style.display = "block";
+            }
+            else if (pip.length > 0) {
                 var elem = document.getElementById("meetVideoItem_" + pip[0].id);
                 elem.style.position = "fixed";
              //   elem.style.top = "50vh";
              //   elem.style.left = "75%";
              //   elem.style.width = ("25%");
                    elem.style.top = "12.5vh";
-                   elem.style.left = "45%";
-                   elem.style.width = ("60%");
+                   elem.style.left = "50%";
+                   elem.style.width = ("50%");
                 elem.style.zIndex = 200;
                 elem.style.display = "block";
             }

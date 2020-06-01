@@ -449,7 +449,7 @@ window.onload=function () {
                 var videoItem = {id: _this.socket.id, isMyVideo: true, user: _this.user}
                 arrVideo.push(videoItem);
 
-                await createVideo(videoItem.id, videoItem.isMyVideo, _this.user, _this.videoPgm, _this.videoPIP, _this.videoMute, _this.videoRemove, _this.videoReload);
+                await createVideo(videoItem.id, videoItem.isMyVideo, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload);
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
                 try {
                     await phonePublishLocalVideo(videoWr, videoItem.id, null, () => {
@@ -506,7 +506,7 @@ window.onload=function () {
                 arrVideo.push(receiverItem)
 
 
-                var video = await createVideo(data.streamid, false, data.user, _this.videoPgm, _this.videoPIP, _this.videoMute, _this.videoRemove, _this.videoReload);
+                var video = await createVideo(data.streamid, false, data.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload);
                 videoLayout();
 
                 var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
@@ -567,7 +567,7 @@ window.onload=function () {
                 videoItem.stream = stream;
                 videoItem.streamid = socket.id + createUUID(4)+"Dt";
                 videoItem.id = videoItem.streamid ;
-                await createVideo(videoItem.id, true, _this.user, _this.videoPgm, _this.videoPIP, _this.videoMute, _this.videoRemove, _this.videoReload)
+                await createVideo(videoItem.id, true, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload)
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
                 await phonePublishLocalVideo(videoWr, videoItem.id, stream, ()=>{removeVideo(videoItem.id)});
                 videoLayout();
@@ -614,6 +614,9 @@ window.onload=function () {
             videoPIP:function (data) {
                 socket.emit("videoPIP", data);
             },
+            videoP1:function (data) {
+                socket.emit("videoP1", data);
+            },
             videoMute:function (data) {
                 socket.emit("videoMute", data);
             },
@@ -645,6 +648,20 @@ window.onload=function () {
                     }
                     else
                         item.pip=false;
+                })
+                videoLayout();
+            },
+            OnVideoP1:function (data) {
+                if(!isPgm)
+                    return;
+                arrVideo.forEach(item=>{
+                    if(item.streamid==data.streamid)
+                    {
+                        item.pgm=false;
+                        item.p1=data.val;
+                    }
+                    else
+                        item.p1=false;
                 })
                 videoLayout();
             },
@@ -953,7 +970,7 @@ window.onload=function () {
     if(target)
         observer.observe(target)
 
-    async function createVideo(id, muted, user, onPgm, onPip,onMute, onRemove, onReload) {
+    async function createVideo(id, muted, user, onPgm, onPip,onP1,onMute, onRemove, onReload) {
         console.log("Create Video", id)
         var meetVideoBox = document.getElementById("meetVideoBox");
         if(isPgm)
@@ -1081,6 +1098,37 @@ window.onload=function () {
 
 
                 })
+
+                var btnP1=document.createElement("div");
+                btnP1.classList.add("greenBtn")
+                btnP1.classList.add("clearBtn")
+                btnP1.classList.add("stageModBtn")
+                btnP1.id="pipbtn"+id;
+                btnP1.innerHTML="P1"
+                box.appendChild(btnP1);
+                btnP1.addEventListener("click",()=>{
+                    if(btn.classList.contains("active"))
+                    {
+                        btnP1.classList.remove("active")
+                        return;
+                    }
+                    if(btnP1.classList.contains("active"))
+                        btnP1.classList.remove("active")
+                    else
+                        btnP1.classList.add("active")
+                    if(onP1)
+                        onP1({streamid:id,val:btn2.classList.contains("active")})
+                    arrVideo.forEach(item=>{
+                        if(item.streamid==id){
+                            item.pgm=btn.classList.contains("active");
+                            item.pip=btnP1.classList.contains("active");
+                        }
+
+                    })
+
+
+                })
+
 
                 var btn3=document.createElement("div");
                 btn3.classList.add("greenBtn")
