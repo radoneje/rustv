@@ -711,6 +711,10 @@ window.onload=function () {
                             var elem = document.getElementById("meetVideoItem_" + data.streamid)
                             if(elem && data.val)
                                 elem.classList.add("isPGM")
+                            var elem=document.getElementById('p1btn'+item.streamid)
+                            console.log("p1btn", elem)
+                            if(elem)
+                                elem.classList.remove("active")
                         }
                     })
                     return
@@ -722,10 +726,7 @@ window.onload=function () {
                         item.pgm=data.val;
                         item.pip=false;
                         item.p1=false;
-                        var elem=document.getElementById('p1btn'+item.streamid)
-                        console.log("p1btn", elem)
-                        if(elem)
-                            elem.classList.remove("active")
+
                     }
                     else
                         item.pgm=false;
