@@ -912,7 +912,7 @@ window.onload=function () {
                     //_this.startRTC();
                 })
             window.addEventListener('scroll', function() {
-                console.log("scroll",this.$refs.youtube)
+                console.log("scroll",_this.$refs.youtube)
                 if(this.$refs.youtube)
                     checkVisible(document.getElementById())
             });
