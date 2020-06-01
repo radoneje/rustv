@@ -713,8 +713,11 @@ window.onload=function () {
                                 elem.classList.add("isPGM")
                             var elem=document.getElementById('p1btn'+item.streamid)
                             console.log("p1btn", elem)
-                            if(elem)
+                            if(elem && elem.classList.contains("active")) {
+                                item.p1=false
+                                _this.videoP1(item)
                                 elem.classList.remove("active")
+                            }
                         }
                     })
                     return
