@@ -706,7 +706,7 @@ window.onload=function () {
                         e.classList.remove("isPGM");
                     })
                     arrVideo.forEach(item=>{
-                        if(item.streamid==data.streamid && !item.p1 && !item.pip)
+                        if(item.streamid==data.streamid)
                         {
                             var elem = document.getElementById("meetVideoItem_" + data.streamid)
                             if(elem && data.val)
@@ -717,7 +717,7 @@ window.onload=function () {
                 }
 
                 arrVideo.forEach(item=>{
-                    if(item.streamid==data.streamid)
+                    if(item.streamid==data.streamid  && !item.p1 && !item.pip )
                     {
                         item.pgm=data.val;
                         item.pip=false;
