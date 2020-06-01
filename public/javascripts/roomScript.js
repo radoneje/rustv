@@ -915,10 +915,13 @@ window.onload=function () {
                 console.log("scroll",_this.$refs.youtube)
                 if(_this.$refs.youtube)
                 {
-                    if( checkVisible(document.querySelector('.videoWrapper')))
-                        _this.$refs.youtube.classList.add("videoInWindow")
+                    var el=document.querySelector('.videoWrapper')
+                    if( ! checkVisible(el)) {
+                        console.log("_this.$refs.youtube", el.querySelector('iframe'))
+                        el.querySelector('iframe').classList.add("videoInWindow")
+                    }
                     else{
-                        _this.$refs.youtube.classList.remove("videoInWindow")
+                        el.querySelector('iframe').classList.remove("videoInWindow")
                     }
                 }
                     console.log("checkVisible",);
