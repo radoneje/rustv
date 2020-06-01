@@ -1102,6 +1102,8 @@ window.onload=function () {
                         if(item.id==id){
                             item.pgm=btn.classList.contains("active");
                             item.pip=btn2.classList.contains("active");
+                            item.pip=btn2.classList.contains("active");
+                            item.p1=btnP1.classList.contains("active");
                         }
                         else
                         {
@@ -1149,7 +1151,7 @@ window.onload=function () {
                 btnP1.classList.add("greenBtn")
                 btnP1.classList.add("clearBtn")
                 btnP1.classList.add("stageModBtn")
-                btnP1.id="pipbtn"+id;
+                btnP1.id="p1btn"+id;
                 btnP1.innerHTML="P1"
                 box.appendChild(btnP1);
                 btnP1.addEventListener("click",()=>{
@@ -1167,7 +1169,8 @@ window.onload=function () {
                     arrVideo.forEach(item=>{
                         if(item.streamid==id){
                             item.pgm=btn.classList.contains("active");
-                            item.pip=btnP1.classList.contains("active");
+                            item.pip=btn2.classList.contains("active");
+                            item.p1=btnP1.classList.contains("active");
                         }
 
                     })
