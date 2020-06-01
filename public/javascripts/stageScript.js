@@ -716,7 +716,7 @@ window.onload=function () {
                             if(elem && elem.classList.contains("active")) {
                                 item.p1=false
                                 _this.videoP1(item)
-                              //  elem.classList.remove("active")
+                                elem.classList.remove("active")
                             }
                         }
                     })
