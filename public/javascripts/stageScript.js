@@ -718,7 +718,7 @@ window.onload=function () {
                 videoLayout();
             },
             OnVideoPgm:function (data) {
-
+                var  _this=this;
                 if(!isPgm)
                 {
                     var elems = document.querySelectorAll(".meetVideoItem");
