@@ -282,6 +282,13 @@ function videoLayout() {
 
             console.log("windoww",pip, p1);
 
+            arrVideo=arrVideo.filter(a=>{
+                var elem = document.getElementById("meetVideoItem_" + a.id);
+                if(!elem)
+                    return false;
+                else
+                    return true;
+            })
             arrVideo.forEach(a => {
                 var elem = document.getElementById("meetVideoItem_" + a.id);
                 elem.style.zIndex = 10;
