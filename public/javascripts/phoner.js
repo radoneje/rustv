@@ -307,7 +307,7 @@ function videoLayout() {
             elem.style.display = "block";
 
             if (p1.length > 0) {
-                var elem = document.getElementById("meetVideoItem_" + pip[0].id);
+                var elem = document.getElementById("meetVideoItem_" + p1[0].id);
                 elem.style.position = "fixed";
                    elem.style.top = "50vh";
                    elem.style.left = "75%";
