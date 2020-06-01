@@ -442,6 +442,9 @@ window.onload=function () {
             OnQOnOff:function (data) {
                 this.isQ=data.isQ;
             },
+            relayoutVideo:function () {
+                 socket.emit("relayoutVideo");
+             },
             startMyVideo:async function () {
 
                 var _this=this;
@@ -608,9 +611,6 @@ window.onload=function () {
 
 
             },
-             relayoutVideo:function () {
-                 socket.emit("relayoutVideo");
-             },
             videoPgm:function (data) {
                 socket.emit("videoPgm", data);
             },
