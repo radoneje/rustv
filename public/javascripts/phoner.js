@@ -298,8 +298,8 @@ function videoLayout() {
             if(p1.length > 0)
             {
                 elem.style.top =  ("12.5vh");
-                elem.style.left = ("-5%");
-                elem.style.width = pip.length > 0 ? ("75%") : ("100%");
+                elem.style.left = ("0");
+                elem.style.width = ("75%") ;
             }
             //elem.style.width = pip.length > 0 ? ("75%") : ("100%");
 
