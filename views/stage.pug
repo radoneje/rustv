@@ -30,7 +30,7 @@ block content
           div.greenBtn(style=' padding: 4px; margin-right:10px' v-on:click="stageTimer=0") Сбросить
 
       div.stageLTitle Служебный чат
-      div.rContentWr(style="height: calc(100% - 90px);")
+      div.rContentWr.stageLW(style="height: calc(100% - 90px);")
           div.rBody(id="stageBox" )
             div.qItem(v-for="item in stageChat" v-bind:class="{my:(item.userid==user.id)}")
               div.qItemSmi  {{item.smi}}
