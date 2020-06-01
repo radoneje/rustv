@@ -1119,7 +1119,7 @@ window.onload=function () {
                     else
                         btnP1.classList.add("active")
                     if(onP1)
-                        onP1({streamid:id,val:btn2.classList.contains("active")})
+                        onP1({streamid:id,val:btnP1.classList.contains("active")})
                     arrVideo.forEach(item=>{
                         if(item.streamid==id){
                             item.pgm=btn.classList.contains("active");
