@@ -913,7 +913,7 @@ window.onload=function () {
                 })
             window.addEventListener('scroll', function() {
                 console.log("scroll",_this.$refs.youtube)
-                if(this.$refs.youtube)
+                if(_this.$refs.youtube)
                     checkVisible(document.getElementById())
             });
 
