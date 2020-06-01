@@ -645,6 +645,7 @@ window.onload=function () {
                         item.pgm=false;
                         item.pip=false;
                         item.p1=false;
+                        console.log("OnRelayoutVideo", item)
                         var elem=document.getElementById("pgmbtn"+item.socketid)
                         if(elem)
                             elem.classList.remove("active")
