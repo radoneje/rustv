@@ -36,7 +36,7 @@ block content
               div.qItemSmi  {{item.smi}}
               div.qItemName {{item.i}}&nbsp;{{item.f}}
               div.qItemText(v-html="item.text")
-      div.rFooter
+      div.rFooter.stageLF
         div.fileLoadProgress
         div.askWr
           input.ask( placeholder="Напишите Ваше сообщение" id="stageChatText" v-model="stageChatText" v-on:keypress="stageChatTextChange($event)")
