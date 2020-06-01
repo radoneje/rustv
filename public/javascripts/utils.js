@@ -243,7 +243,7 @@ function connect(_this, roomid, clbk){
         if(_this.OnVideoPIP)
             _this.OnVideoPIP(data)
     });
-    socket.on("videoPIP", function(data){
+    socket.on("videoP1", function(data){
         if(_this.OnVideoP1)
             _this.OnVideoP1(data)
     });
