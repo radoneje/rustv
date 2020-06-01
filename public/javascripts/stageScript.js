@@ -638,7 +638,7 @@ window.onload=function () {
                 })
             },
             OnVideoPIP:function (data) {
-                console.log('OnVideoPIP')
+                console.log('OnVideoPIP',data.val)
                 if(!isPgm)
                     return;
                 arrVideo.forEach(item=>{
@@ -653,7 +653,7 @@ window.onload=function () {
                 videoLayout();
             },
             OnVideoP1:function (data) {
-                console.log('OnVideoP1')
+                console.log('OnVideoP1', data.val)
                 if(!isPgm)
                     return;
                 arrVideo.forEach(item=>{
