@@ -911,7 +911,11 @@ window.onload=function () {
                     startVideo();
                     //_this.startRTC();
                 })
-
+            window.addEventListener('scroll', function() {
+                console.log("scroll",this.$refs.youtube)
+                if(this.$refs.youtube)
+                    checkVisible(document.getElementById())
+            });
 
         }
     })
@@ -934,11 +938,7 @@ window.onload=function () {
     let target = document.querySelector('.L')
     observer.observe(target)
 
-    window.addEventListener('scroll', function() {
-        console.log("scroll",this.$refs.youtube)
-        if(this.$refs.youtube)
-            checkVisible(document.getElementById())
-    });
+
 
 
 
