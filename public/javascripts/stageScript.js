@@ -608,6 +608,9 @@ window.onload=function () {
 
 
             },
+             relayoutVideo:function () {
+                 socket.emit("relayoutVideo");
+             },
             videoPgm:function (data) {
                 socket.emit("videoPgm", data);
             },
@@ -623,9 +626,6 @@ window.onload=function () {
             videoRemove:function (data) {
                 if(confirm("Вывести пользователя?"))
                     socket.emit("videoRemove", data);
-            },
-            relayoutVideo:function (data) {
-                    socket.emit("relayoutVideo");
             },
             videoReload:function (data) {
                 if(confirm("Перезагрузить страницу у пользователя?"))
