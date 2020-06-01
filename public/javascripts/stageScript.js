@@ -649,7 +649,7 @@ window.onload=function () {
                         if(item.streamid==data.streamid)
                         {
                             var elem = document.getElementById("meetVideoItem_" + data.streamid)
-                            if(elem)
+                            if(elem && data.val)
                                 elem.classList.add("isPIP")
                         }
                     })
@@ -673,7 +673,21 @@ window.onload=function () {
             OnVideoP1:function (data) {
                 console.log('OnVideoP1', data.val)
                 if(!isPgm)
-                    return;
+                   {
+                       var elems = document.querySelectorAll(".meetVideoItem");
+                       elems.forEach(e=>{
+                           e.classList.remove("isP1");
+                       })
+                       arrVideo.forEach(item=>{
+                           if(item.streamid==data.streamid)
+                           {
+                               var elem = document.getElementById("meetVideoItem_" + data.streamid)
+                               if(elem && data.val)
+                                   elem.classList.add("isP1")
+                           }
+                       })
+                       return
+                   }
                 arrVideo.forEach(item=>{
                     if(item.streamid==data.streamid)
                     {
@@ -686,16 +700,29 @@ window.onload=function () {
                 videoLayout();
             },
             OnVideoPgm:function (data) {
-                console.log("PGM")
+
                 if(!isPgm)
-                    return;
-                console.log("PGM 1")
+                {
+                    var elems = document.querySelectorAll(".meetVideoItem");
+                    elems.forEach(e=>{
+                        e.classList.remove("isPGM");
+                    })
+                    arrVideo.forEach(item=>{
+                        if(item.streamid==data.streamid)
+                        {
+                            var elem = document.getElementById("meetVideoItem_" + data.streamid)
+                            if(elem && data.val)
+                                elem.classList.add("isPGM")
+                        }
+                    })
+                    return
+                }
+
                 arrVideo.forEach(item=>{
                     if(item.streamid==data.streamid)
                     {
                         item.pgm=data.val;
                         item.pip=false;
-                        console.log("PGM2")
                     }
                     else
                         item.pgm=false;
