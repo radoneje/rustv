@@ -1137,7 +1137,7 @@ window.onload=function () {
                 btn3.classList.add("clearBtn")
                 btn3.classList.add("stageModBtn")
                 btn3.id="mutebtn"+id;
-                btn3.innerHTML="MUTE to All"
+                btn3.innerHTML="MUTE"
                 box.appendChild(btn3);
                 btn3.addEventListener("click",()=>{
 
