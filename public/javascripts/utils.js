@@ -247,6 +247,11 @@ function connect(_this, roomid, clbk){
         if(_this.OnVideoP1)
             _this.OnVideoP1(data)
     });
+    socket.on("relayoutVideo", function(data){
+        if(_this.OnRelayoutVideo)
+            _this.OnRelayoutVideo(data)
+    });
+
     socket.on("redirectToStage", function(data){
         document.location.href=data.url;
     });

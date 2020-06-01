@@ -270,6 +270,12 @@ class socket{
                     _this.clients.sendToRoomUsers("videoPIP", {streamid:dt.streamid, val:dt.val},roomid)
                 }
             })
+            socket.on("relayoutVideo",(dt)=>{
+                if(id) {
+                    _this.clients.sendToRoomUsers("relayoutVideo", {},roomid)
+                }
+            })
+
             socket.on("videoP1",(dt)=>{
                 if(id) {
                     var socketid=dt.streamid.replace(/dt^/, "")

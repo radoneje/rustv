@@ -624,6 +624,9 @@ window.onload=function () {
                 if(confirm("Вывести пользователя?"))
                     socket.emit("videoRemove", data);
             },
+            relayoutVideo:function (data) {
+                    socket.emit("relayoutVideo");
+            },
             videoReload:function (data) {
                 if(confirm("Перезагрузить страницу у пользователя?"))
                     socket.emit("videoReload", data);
@@ -636,6 +639,14 @@ window.onload=function () {
                         item.elem.muted=data.val;
                     }
                 })
+            },
+            OnRelayoutVideo:function(){
+                arrVideo.forEach(item=>{
+                        item.pgm=false;
+                        item.pip=false;
+                        item.p1=false;
+                })
+                videoLayout();
             },
             OnVideoPIP:function (data) {
                 console.log('OnVideoPIP',data.val)
