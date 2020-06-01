@@ -277,8 +277,8 @@ function videoLayout() {
         }
         var pgm = arrVideo.filter(e => e.pgm == true)
         if (pgm.length > 0 && isPgm) {
-            var pip = arrVideo.filter(e => e.pip == true)
-            var p1 = arrVideo.filter(e => e.p1 == true)
+            var pip = arrVideo.filter(e => e.pip == true && !e.pgm)
+            var p1 = arrVideo.filter(e => e.p1 == true && !e.pgm)
 
             console.log("windoww",pip, p1);
 
