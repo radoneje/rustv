@@ -285,6 +285,7 @@ function videoLayout() {
             })
 
             var elem = document.getElementById("meetVideoItem_" + pgm[0].id);
+            elem.style.display = "block";
             elem.style.position = "fixed";
             //elem.style.top = pip.length > 0 ? ("12.5vh") : ("0");
             elem.style.top = pip.length > 0 ? ("12.5vh") : ("0");
