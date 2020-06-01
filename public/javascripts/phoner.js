@@ -266,7 +266,7 @@ function videoLayout() {
         var trBox = document.getElementById("meetVideoBox");
         trBox.style.position = "relative";
         var fullW = trBox.offsetWidth;//clientWidth - 0;
-        console.log("windoww",fullW)
+
         if( window.innerWidth<977)
         {
             var margin=0
@@ -279,6 +279,9 @@ function videoLayout() {
         if (pgm.length > 0 && isPgm) {
             var pip = arrVideo.filter(e => e.pip == true)
             var p1 = arrVideo.filter(e => e.p1 == true)
+
+            console.log("windoww",pip, p1);
+
             arrVideo.forEach(a => {
                 var elem = document.getElementById("meetVideoItem_" + a.id);
                 elem.style.zIndex = 10;
