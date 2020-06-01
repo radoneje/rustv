@@ -309,7 +309,7 @@ function videoLayout() {
             if (p1.length > 0) {
                 var elem = document.getElementById("meetVideoItem_" + p1[0].id);
                 elem.style.position = "fixed";
-                   elem.style.top = "57vh";
+                   elem.style.top = "62.5vh";
                    elem.style.left = "75%";
                    elem.style.width = ("25%");
                 //elem.style.top = "12.5vh";
