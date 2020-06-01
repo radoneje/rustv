@@ -687,7 +687,7 @@ window.onload=function () {
                        return
                    }
                 arrVideo.forEach(item=>{
-                    if(item.streamid==data.streamid && !item.pgm)
+                    if(item.streamid==data.streamid)
                     {
                         item.pgm=false;
                         item.p1=data.val;
@@ -717,7 +717,7 @@ window.onload=function () {
                 }
 
                 arrVideo.forEach(item=>{
-                    if(item.streamid==data.streamid  && !item.p1 && !item.pip )
+                    if(item.streamid==data.streamid)
                     {
                         item.pgm=data.val;
                         item.pip=false;
