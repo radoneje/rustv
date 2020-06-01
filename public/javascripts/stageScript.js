@@ -654,6 +654,13 @@ window.onload=function () {
                     elem=document.getElementById("p1btn"+item.streamid)
                     if(elem)
                         elem.classList.remove("active")
+
+                    var elems = document.querySelectorAll(".meetVideoItem");
+                    elems.forEach(e=>{
+                        e.classList.remove("isPIP");
+                        e.classList.remove("isP1");
+                        e.classList.remove("isPGM");
+                    })
                 })
                 videoLayout();
             },
