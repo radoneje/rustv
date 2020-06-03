@@ -84,7 +84,7 @@ window.onload=async function () {
                 console.log("sortedVoteAnsvers", arr)
                 var nArr=arr.slice(0)
 
-                return nArr.sort((a,b)=>{return a.id-b.id});
+                return nArr.sort((a,b)=>{return b.id-a.id});
             },
             onHandUp:function(data){
 
