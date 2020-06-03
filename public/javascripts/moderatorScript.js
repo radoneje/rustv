@@ -727,7 +727,20 @@ window.onload=async function () {
                 var f=item.f;
                 item.f="";
                 setTimeout(()=>{item.f=f},0)
+            },
+            downloadQ:function () {
+                //axios.get('/rest/api/downloadQ/'+eventid+"/"+roomid)
+               var iframe=document.createElement("iframe")
+
+                iframe.src='/rest/api/downloadQ/'+eventid+"/"+roomid;
+                document.body.appendChild(iframe)
+                setTimeout(()=>{
+                   iframe.parentNode.removeChild(iframe);
+                },1000)
             }
+        },
+        watch:{
+
         },
         computed: {
             sortedUsers:function () {

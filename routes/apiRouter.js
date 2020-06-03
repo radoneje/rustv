@@ -1482,6 +1482,113 @@ router.post('/userTh/:roomid/:userid', async (req, res, next) => {
 })
 
 
+router.get("/downloadQ/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+
+    var xl = require('excel4node');
+    var wb = new xl.Workbook();
+    var headStyle = wb.createStyle({
+        font: {
+            bold: true,
+            size: 12
+        },
+        alignment: {
+            horizontal: 'center',
+        },
+    });
+    var style = wb.createStyle({
+        font: {
+            size: 12
+        },
+        alignment: {
+            wrapText: true,
+            vertical: 'top',
+        },
+    });
+    var qColumns=["date", "text","answer", "likes","f", "i", "company","smi", "email"]
+    var qs=await req.knex.select(qColumns).from("v_q").where({roomid:req.params.roomid}).orderBy("id")
+    var ws = wb.addWorksheet('Вопросы',
+    );
+    for(var i=1; i<=qColumns.length;i++){
+        ws.cell(1, i).string(qColumns[i-1]).style(headStyle);
+        ws.column(i).setWidth(30);
+
+    }
+    var j=1;
+    qs.forEach(q=>{
+        j++;
+        for(var i=1; i<qColumns.length;i++){
+            var val=q[qColumns[i-1]]
+                if(val) {
+                    val=val.toString();
+                    if (typeof (val) === 'string')
+                        ws.cell(j, i).string(val).style(style);
+                    else
+                        console.log('not string', val)
+                }
+        }
+    })
+
+     qColumns=["date", "text","f", "i",  "email"]
+     qs=await req.knex.select(qColumns).from("v_chat").where({roomid:req.params.roomid}).orderBy("id")
+     ws = wb.addWorksheet('Чат',
+    );
+    for(var i=1; i<=qColumns.length;i++){
+        ws.cell(1, i).string(qColumns[i-1]).style(headStyle);
+        ws.column(i).setWidth(30);
+
+    }
+    var j=1;
+    qs.forEach(q=>{
+        j++;
+        for(var i=1; i<qColumns.length;i++){
+            var val=q[qColumns[i-1]]
+            if(val) {
+                val=val.toString();
+                if (typeof (val) === 'string')
+                    ws.cell(j, i).string(val).style(style);
+                else
+                    console.log('not string', val)
+            }
+        }
+    })
+
+    qColumns=["f", "i", "company", "otrasl", "email"]
+    qs=await req.knex.select(qColumns).from("v_eventuserswithcompany").where({eventid:req.params.eventid}).orderBy("id")
+    ws = wb.addWorksheet('Люди',
+    );
+    for(var i=1; i<=qColumns.length;i++){
+        ws.cell(1, i).string(qColumns[i-1]).style(headStyle);
+        ws.column(i).setWidth(30);
+    }
+    var j=1;
+    qs.forEach(q=>{
+        j++;
+        for(var i=1; i<qColumns.length;i++){
+            var val=q[qColumns[i-1]]
+            if(val) {
+                val=val.toString();
+                if (typeof (val) === 'string')
+                    ws.cell(j, i).string(val).style(style);
+                else
+                    console.log('not string', val)
+            }
+        }
+    })
+
+
+    if (!fs.existsSync(path.join(__dirname, '../public/th/'+req.params.roomid))){
+        fs.mkdirSync(path.join(__dirname, '../public/th/'+req.params.roomid));
+    }
+    var file=path.join(__dirname, '../public/th/'+req.params.roomid)+'/statistics_'+req.params.roomid+'.xlsx'
+    wb.write( file,()=>{
+        res.download(file);
+    });
+
+
+    //res.json(qs);
+})
+
 
 
 

@@ -49,9 +49,9 @@ block content
                         div.aModSectTitle Голосования ({{votes.length}})
                 div.aSectBody(id="qBox" v-if="lSectActiveIndex==2")
                     div.aSectSwith(v-on:click="qOnOff()")
-                        div(v-if="isQ") Вопросы включены
-                        div.warning(v-else) Вопросы выключены
-                        div(style="float:right") скачать
+                        div(v-if="isQ" style="float:left") Вопросы включены
+                        div.warning(v-else style="float:left") Вопросы выключены
+                        div(style="float:right" v-on:click.stop.prevent="downloadQ()") скачать
                         div(style="clear:both")
                     div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}")
                         div.qItemName {{item.i}}&nbsp;{{item.f}},&nbsp; {{item.smi}}

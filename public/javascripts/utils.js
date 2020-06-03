@@ -608,7 +608,8 @@ function stageChattextSend(_this) {
             _this.stageChatText="";
             // _this.q.push(e.data);
             setTimeout(function () {
-                var objDiv = document.getElementById("stageBox");
+                var objDiv = document.getElementById("stageLBox");
+                if(objDiv)
                 objDiv.scrollTop = objDiv.scrollHeight;
             },100)
         })
