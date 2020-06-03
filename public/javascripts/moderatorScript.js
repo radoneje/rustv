@@ -745,6 +745,11 @@ window.onload=async function () {
                         return (u.f && u.f.toLowerCase().indexOf(this.userFindText.toLowerCase())>=0) ||(u.i && u.i.toLowerCase().indexOf(this.userFindText.toLowerCase())>=0)
                     })
                 }
+                if(this.findVideo){
+                    sorted=sorted.filter(u=>{
+                        return u.isVideo
+                    })
+                }
                 return sorted;
             }
         },
