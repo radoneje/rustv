@@ -722,6 +722,24 @@ router.post("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) 
     req.transport.emit("qAdd", r[0], req.params.roomid);
     res.json(r[0]);
 })
+router.get("/ChatCopyToQ/:id/:eventid/:roomid",checkLoginToRoom, async (req, res, next) =>{
+    var rr=await req.knex.select("*").from("t_chat").where({id:req.params.id});
+    if(rr.length==0)
+        return res.sendStatus(404);
+
+    var r = await req.knex("t_q").insert({
+        text: rr[0].text,
+        roomid: req.params.roomid,
+        userid: rr[0].userid,
+        date: (new Date())
+    }, "*")
+
+    r = await req.knex.select("*").from("v_q").where({id: r[0].id});
+
+    req.transport.emit("qAdd", r[0], req.params.roomid);
+    res.json(r[0]);
+
+})
 
 router.post("/qAnswer/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     var text = urlify(stripHtml(req.body.answer))

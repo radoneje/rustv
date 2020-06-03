@@ -136,6 +136,7 @@ block content
                             video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
                         div.qItemPhoto(v-on:click="window.open('/files/'+item.photo)" v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
                         div.qItemDate
+                            span.link.green(v-on:click="ChatCopyToQ(item)") Копировать в вопросы
                             span.link.red(v-on:click="deleteChat(item)") Удалить
                             span &nbsp;&nbsp;
                             span {{moment(item.date).format("HH:mm")}}
