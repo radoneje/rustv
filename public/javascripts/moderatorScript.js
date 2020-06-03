@@ -82,7 +82,7 @@ window.onload=async function () {
         methods:{
             sortedVoteAnsvers:function(arr){
                 console.log("sortedVoteAnsvers", arr)
-                return arr;
+                return arr.sort((a,b)=>{return a.id-b.id});
             },
             onHandUp:function(data){
 
