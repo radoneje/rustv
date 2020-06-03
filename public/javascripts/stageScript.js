@@ -926,6 +926,21 @@ window.onload=function () {
                     }
                 ]
             }
+            setTimeout(()=>{
+                if(mainVideoElem) {
+                    mainVideoElem.muted = !val;
+                }
+                else
+                if(this.$refs.youtube)
+                {
+                        this.$refs.youtube.player.mute()
+                }
+                else if(document.getElementById('profIframe')){
+                    var elem=document.getElementById('profIframe')
+                        elem.contentWindow.postMessage('mute', '*')
+                }
+            },1000)
+
             axios.get('/rest/api/info/'+eventid+"/"+roomid)
                 .then(async (dt)=> {
                     _this.user=dt.data;
