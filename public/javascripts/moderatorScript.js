@@ -750,6 +750,21 @@ window.onload=async function () {
                         return u.isVideo
                     })
                 }
+                if(this.findGreen){
+                    sorted=sorted.filter(u=>{
+                        return u.color==1
+                    })
+                }
+                if(this.findYellow){
+                    sorted=sorted.filter(u=>{
+                        return u.color==2
+                    })
+                }
+                if(this.findRed){
+                    sorted=sorted.filter(u=>{
+                        return u.color==3
+                    })
+                }
                 return sorted;
             }
         },
