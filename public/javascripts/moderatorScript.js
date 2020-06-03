@@ -81,10 +81,8 @@ window.onload=async function () {
         },
         methods:{
             sortedVoteAnsvers:function(arr){
-                console.log("sortedVoteAnsvers", arr)
                 var nArr=arr.slice(0)
-
-                return nArr.sort((a,b)=>{return b.id-a.id});
+                return nArr.sort((a,b)=>{return a.id-b.id});
             },
             onHandUp:function(data){
 

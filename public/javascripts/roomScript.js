@@ -57,6 +57,10 @@ window.onload=function () {
             arrVideo:  arrVideo,
         },
         methods:{
+            sortedVoteAnsvers:function(arr){
+                var nArr=arr.slice(0)
+                return nArr.sort((a,b)=>{return a.id-b.id});
+            },
             startVideoCall:async function(){
                 var _this = this;
                 _this.webCamStream=true;
