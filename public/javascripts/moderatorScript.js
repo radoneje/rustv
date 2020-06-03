@@ -163,13 +163,10 @@ window.onload=async function () {
             },
             ChatCopyToQ:function (item) {
                 var _this=this;
-                if(confirm('Вы хотите удалть сообщение')){
-                    axios.delete("/rest/api/ChatCopyToQ/"+item.id+"/"+eventid+"/"+roomid)
+                    axios.get("/rest/api/ChatCopyToQ/"+item.id+"/"+eventid+"/"+roomid)
                         .then(function (r) {
 
                         })
-
-                }
             },
             deleteQ:function (item) {
                 var _this=this;
