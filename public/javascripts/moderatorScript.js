@@ -80,6 +80,10 @@ window.onload=async function () {
 
         },
         methods:{
+            sortedVoteAnsvers:function(arr){
+                console.log("sortedVoteAnsvers", arr)
+                return arr;
+            },
             onHandUp:function(data){
 
                 this.users.forEach(u=>{
