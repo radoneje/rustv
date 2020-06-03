@@ -114,7 +114,7 @@ block content
                             div.vAnswTitle
                               span(v-if="item.iscompl") {{CalcAnswPercent(answ, item)}}%,&nbsp
                               span {{answ.title}}
-                              div.vAnswPercent
+                              div.vAnswPercent(v-if="item.iscompl" v-bind:style="width:CalcAnswPercent(answ, item)+'%'")
 
                   div.rFeedGroupTitle Переговорная комната
                   div.rFeedGroupBody
