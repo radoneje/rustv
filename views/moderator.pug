@@ -90,7 +90,7 @@ block content
                     div.qItem(v-for="item in votes" v-bind:class="{ready:item.isReady}")
                         input.ask(type='text' placeholder="введите текст вопроса" v-model="item.title" v-on:change="voteChange(item)")
                         div Ответы ({{caclAnswCount(item)}}):
-                            div(v-for="answ in item.answers")
+                            div(v-for="answ in item.answers.sort((a,b)=>{return a.id-b.id})")
                                 div
                                     span {{CalcAnswPercent(answ, item)}}% &nbsp;
                                     input.ask(type='text' placeholder="введите текст ответа" v-on:change="voteAnswerChange(answ)" v-model="answ.title")
