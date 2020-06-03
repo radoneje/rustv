@@ -110,7 +110,7 @@ block content
                         div.qItemName {{item.title}}
                           span.red(v-if="item.iscompl") &nbsp; Голосование окончено.
                         div.vAnswBox
-                          div.vAnsw(v-for="answ in item.answers" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
+                          div.vAnsw(v-for="answ in sortedVoteAnsvers(item.answers)" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
                             div.vAnswTitle
                               span(v-if="item.iscompl") {{CalcAnswPercent(answ, item)}}%,&nbsp
                               span {{answ.title}}
