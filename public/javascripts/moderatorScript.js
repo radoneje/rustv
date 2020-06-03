@@ -72,7 +72,12 @@ window.onload=async function () {
             votes:[],
             userFindText:"",
             messageFromMod:"",
-            messageToModText:""
+            messageToModText:"",
+            findVideo:false,
+            findGreen:false,
+            findYellow:false,
+            findRed:false
+
         },
         methods:{
             onHandUp:function(data){

@@ -204,7 +204,7 @@ block content
                         </g>
                         </g>
                         </svg>
-                    div.aModSectFindVideo.aModSectFindItem
+                    div.aModSectFindVideo.aModSectFindItem(v-bind:class="{active:findVideo}" v-on:click="findVideo=!findVideo")
                         <svg width="16px" height="16px" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
                         <desc>Created with Sketch.</desc>
@@ -220,9 +220,9 @@ block content
                         </g>
                         </g>
                         </svg>
-                    div.aModSectFindColor.aModSectFindItem(style="background:green")
-                    div.aModSectFindColor.aModSectFindItem(style="background:yellow")
-                    div.aModSectFindColor.aModSectFindItem(style="background:red")
+                    div.aModSectFindColor.aModSectFindItem(style="background:green" v-bind:class="{active:findGreen}" v-on:click="findGreen=!findGreen")
+                    div.aModSectFindColor.aModSectFindItem(style="background:yellow" v-bind:class="{active:findYellow}" v-on:click="findYellow=!findYellow")
+                    div.aModSectFindColor.aModSectFindItem(style="background:red" v-bind:class="{active:findRed}" v-on:click="findRed=!findRed")
 
                 div.aSectBody.aSectUser
                     div.aSectSwith(v-on:click="usersOnOff()")
