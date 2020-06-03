@@ -95,11 +95,11 @@ block content
                                     span {{CalcAnswPercent(answ, item)}}% &nbsp;
                                     input.ask(type='text' placeholder="введите текст ответа" v-on:change="voteAnswerChange(answ)" v-model="answ.title")
                             div.qItemDate
-                                span.link.green(v-on:click="voteAddAnswer(item)") Добавить ответ
+                                span.link.green(v-on:click="voteAddAnswer(item)" v-if="!item.isactive") Добавить ответ
                                 span.link.green(v-if="!item.isactive" v-on:click="voteStart(item)") &nbsp;&nbsp; Запустить
                                 span.link.red(v-else v-on:click="voteStart(item)") &nbsp;&nbsp; Убрать
-                                span.link.green(v-if="!item.iscompl" v-on:click="voteShowResult(item)") &nbsp;&nbsp; Показать результаты
-                                span.link.red(v-else v-on:click="voteShowResult(item)") &nbsp;&nbsp; Убрать результаты
+                                span.link.green(v-if="!item.iscompl && item.isactive" v-on:click="voteShowResult(item)") &nbsp;&nbsp; Показать результаты
+                                span.link.red(v-if="item.iscompl && item.isactive" v-on:click="voteShowResult(item)") &nbsp;&nbsp; Убрать результаты
 
 
                 div.rFooter
