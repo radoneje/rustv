@@ -165,7 +165,7 @@ window.onload=async function () {
                 var _this=this;
                     axios.get("/rest/api/ChatCopyToQ/"+item.id+"/"+eventid+"/"+roomid)
                         .then(function (r) {
-
+                            alert("Сообщение скопировано")
                         })
             },
             deleteQ:function (item) {

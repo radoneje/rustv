@@ -67,8 +67,8 @@ block content
                         div.greenBtn(v-if="item.video" style="height: max-content;width: max-content;padding: 5px;" v-on:click="showUploadedVideo(item, $event)")
                             span Показать на экране
                         div.qItemDate
-                            span.link.green(v-if="! item.isSpk" v-on:click="qToSpk(item)") Показать спикеру &nbsp;&nbsp;
-                            span.link.green.red(v-else v-on:click="qToSpk(item)") Убрать от спикера &nbsp;&nbsp;
+                            span.link.green(v-if="! item.isSpk && !item.isReady" v-on:click="qToSpk(item)") Показать спикеру &nbsp;&nbsp;
+                            span.link.green.red(v-if="item.isSpk && !item.isReady" v-on:click="qToSpk(item)") Убрать от спикера &nbsp;&nbsp;
                             span.link.green(v-if="item.answer==null" v-on:click="item.answer=''") Ответить&nbsp;&nbsp;
                             span.link.green(v-if="item.isReady" v-on:click="QsetNew(item)") Отвеченный&nbsp;&nbsp;
                             span.link.green(v-else v-on:click="QsetOld(item)") Новый&nbsp;&nbsp;
@@ -199,6 +199,22 @@ block content
                         <g id="Icon">
                         <path d="M10.8333333,5.83333333 L9.16666667,5.83333333 L9.16666667,9.16666667 L5.83333333,9.16666667 L5.83333333,10.8333333 L9.16666667,10.8333333 L9.16666667,14.1666667 L10.8333333,14.1666667 L10.8333333,10.8333333 L14.1666667,10.8333333 L14.1666667,9.16666667 L10.8333333,9.16666667 L10.8333333,5.83333333 Z M10,1.66666667 C5.4,1.66666667 1.66666667,5.4 1.66666667,10 C1.66666667,14.6 5.4,18.3333333 10,18.3333333 C14.6,18.3333333 18.3333333,14.6 18.3333333,10 C18.3333333,5.4 14.6,1.66666667 10,1.66666667 Z M10,16.6666667 C6.325,16.6666667 3.33333333,13.675 3.33333333,10 C3.33333333,6.325 6.325,3.33333333 10,3.33333333 C13.675,3.33333333 16.6666667,6.325 16.6666667,10 C16.6666667,13.675 13.675,16.6666667 10,16.6666667 Z" id="Icon-Shape"></path>
                         <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="20" height="20"></rect>
+                        </g>
+                        </g>
+                        </g>
+                        </g>
+                        </svg>
+                    div.aModSectFindVideo
+                        <svg width="16px" height="16px" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                        <desc>Created with Sketch.</desc>
+                        <defs></defs>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Desktop" transform="translate(-502.000000, -506.000000)" fill="#000000" fill-rule="nonzero">
+                        <g id="bx-bx-video" transform="translate(500.000000, 500.000000)">
+                        <g id="Icon">
+                        <path d="M24,9.33333333 C24,7.86266667 22.804,6.66666667 21.3333333,6.66666667 L5.33333333,6.66666667 C3.86266667,6.66666667 2.66666667,7.86266667 2.66666667,9.33333333 L2.66666667,22.6666667 C2.66666667,24.1373333 3.86266667,25.3333333 5.33333333,25.3333333 L21.3333333,25.3333333 C22.804,25.3333333 24,24.1373333 24,22.6666667 L24,18.2226667 L29.3333333,22.6666667 L29.3333333,9.33333333 L24,13.7773333 L24,9.33333333 Z M21.336,22.6666667 L5.33333333,22.6666667 L5.33333333,9.33333333 L21.3333333,9.33333333 L21.3346667,15.9986667 L21.3333333,16 L21.3346667,16.0013333 L21.336,22.6666667 Z" id="Icon-Shape"></path>
+                        <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="32" height="32"></rect>
                         </g>
                         </g>
                         </g>
