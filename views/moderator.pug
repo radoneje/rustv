@@ -51,7 +51,8 @@ block content
                     div.aSectSwith(v-on:click="qOnOff()")
                         div(v-if="isQ") Вопросы включены
                         div.warning(v-else) Вопросы выключены
-                        div скачать
+                        div(style="float:right") скачать
+                        div(style="clear:both")
                     div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}")
                         div.qItemName {{item.i}}&nbsp;{{item.f}},&nbsp; {{item.smi}}
                         div.qItemText(v-html="item.text")
