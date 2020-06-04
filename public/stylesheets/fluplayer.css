@@ -1,0 +1,121 @@
+
+.player-poster[data-poster] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 998;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    background-size: contain;
+}
+
+.player-poster.clickable { cursor: pointer; }
+
+.player-poster:hover .play-wrapper { opacity: 1; }
+
+
+.player-poster .play-wrapper {
+    width: 100%;
+    height: 25%;
+    margin: 0 auto;
+    opacity: 0.75;
+    transition: opacity 0.1s ease;
+}
+.player-poster .play-wrapper svg {
+    height: 100%;
+}
+.player-poster .play-wrapper svg path { fill: #fff; }
+
+
+
+.video-poster-wrapper {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.video-poster-wrapper .play-wrapper-cont {
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.video-poster-wrapper .poster-video.poster-video-canvas {
+    left: -10000px;
+    top: -10000px;
+}
+
+.video-poster-wrapper .poster-video {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0;
+}
+
+.video-poster-wrapper .poster-video.visible {
+    opacity: 1;
+}
+
+.video-poster-wrapper .poster-hid {
+    display: none;
+}
+
+
+
+.player-poster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 998;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+
+.player-poster.clickable { cursor: pointer; }
+.player-poster:hover .play-wrapper { opacity: 1; }
+
+.player-poster .play-wrapper {
+    width: 100%;
+    height: 25%;
+    margin: 0 auto;
+    opacity: 0.75;
+    transition: opacity 0.1s ease;
+}
+.player-poster .play-wrapper svg {
+    height: 100%;
+}
+.player-poster .play-wrapper svg path { fill: #fff; }
+
+.player-logo {
+    position: absolute;
+    z-index: 1200;
+    width: 100%;
+    height: 100%;
+}
+
+.flussonic-logo {
+    position: absolute;
+}
