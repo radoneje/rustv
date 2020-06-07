@@ -1,10 +1,14 @@
 {
   "ru": {
     "registration":"Регистрация",
-    "allMust":"Все поля обязательны"
+    "allMust":"Все поля обязательны",
+    "name":"Имя",
+    "famName":"Фамилия"
   },
   "en": {
     "registration":"Registration",
-    "allMust":"All fields must be filled in"
+    "allMust":"All fields must be filled in",
+    "name":"You name",
+    "famName":"Last name"
   }
 }
