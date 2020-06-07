@@ -12,6 +12,7 @@ function videoLayout() {
         }
 
         var trBox = document.getElementById("meetVideoBox");
+
         trBox.style.position = "relative";
         var fullW = trBox.clientWidth - 20;
 
