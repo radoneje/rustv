@@ -2,13 +2,17 @@
   "ru": {
     "registration":"Регистрация",
     "allMust":"Все поля обязательны",
+    "thisMast": "Поле должно быть заполнено",
     "name":"Имя",
-    "famName":"Фамилия"
+    "famName":"Фамилия",
+    "logon":"Войти"
   },
   "en": {
     "registration":"Registration",
     "allMust":"All fields must be filled in",
+    "thisMast": "Field must be filled in",
     "name":"You name",
-    "famName":"Last name"
+    "famName":"Last name",
+    "logon":"Log On"
   }
 }
