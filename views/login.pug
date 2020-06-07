@@ -10,7 +10,7 @@ block head
   link(rel='stylesheet', href='/stylesheets/login.css')
   script(src="/javascripts/loginScript.js")
   if event.isClientCss
-    link(rel='stylesheet', href='/stylesheets/clientRoom.css')
+    link(rel='stylesheet', href='/stylesheets/'+event.clientCss)
 block content
   div.pBox#app
     div.pLoginBox
