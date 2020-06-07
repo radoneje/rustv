@@ -3,7 +3,7 @@
         div.rFeedGroupBody
             div.qItem(v-for="item in votes" v-if="item.isactive" )
                 div.qItemName {{item.title}}
-                    span.red(v-if="item.iscompl") &nbsp; Голосование окончено.
+                    span.red(v-if="item.iscompl") &nbsp; #{lang.pollClosed}.
                 div.vAnswBox
                     div.vAnsw(v-for="answ in sortedVoteAnsvers(item.answers)" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
                         div.vAnswTitle

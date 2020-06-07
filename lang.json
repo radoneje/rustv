@@ -5,7 +5,8 @@
     "thisMast": "Поле должно быть заполнено",
     "name":"Имя",
     "famName":"Фамилия",
-    "logon":"Войти"
+    "logon":"Войти",
+    "pollClosed":"Голосование окончено"
   },
   "en": {
     "registration":"Registration",
@@ -13,6 +14,7 @@
     "thisMast": "Field must be filled in",
     "name":"You name",
     "famName":"Last name",
-    "logon":"Log On"
+    "logon":"Log On",
+    "pollClosed":"The poll have just closed"
   }
 }
