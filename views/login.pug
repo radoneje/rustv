@@ -23,11 +23,11 @@ block content
             div.pBodySubTitle #{lang.allMust}
             div.plInputBox(v-bind:class="{warning:(iErr &&  i.length<2)}")
               div.plInputBoxLabel
-                input#iInpit(placeholder='#{name}' v-model="i" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+                input#iInpit(placeholder=lang.name v-model="i" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
               div.plInputBoxWarning Поле должно быть заполнено
             div.plInputBox(v-bind:class="{warning:(fErr &&  f.length<2)}")
               div.plInputBoxLabel
-                input#fInpit(placeholder='#{famName}' v-model="f" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+                input#fInpit(placeholder=lang.famName v-model="f" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
               div.plInputBoxWarning Поле должно быть заполнено
             if(event.isCompany)
 
