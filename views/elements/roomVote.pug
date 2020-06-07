@@ -2,7 +2,8 @@
     div.rFeedGroupTitle
         div.rFeedGroupBody
             div.qItem(v-for="item in votes" v-if="item.isactive" )
-                div.red(v-if="item.iscompl") &nbsp; #{lang.pollClosed}.
+                div(v-if="item.iscompl" style="margin-bottom:20px")
+                    span.red #{lang.pollClosed}.
                 div.qItemName {{item.title}}
 
                 div.vAnswBox
