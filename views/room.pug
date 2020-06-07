@@ -10,10 +10,13 @@ block head
 
   script(src="/javascripts/roomScript.js")
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  if room.id==65
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
   link(rel='stylesheet', href='/stylesheets/login.css')
   link(rel='stylesheet', href='/stylesheets/room.css')
   if event.isClientCss
     link(rel='stylesheet', href='/stylesheets/'+event.clientCss)
+
 
 block content
   div.roomScreen.multiViewVideo(id="app" v-bind:class="{roomInPres:pres}")
