@@ -1,4 +1,4 @@
-#roomVote.rFeedGroup
+#roomVote.rFeedGroup(v-if="votes && votes.length>0")
     div.rFeedGroupTitle
         div.rFeedGroupBody
             div.qItem(v-for="item in votes" v-if="item.isactive" )
