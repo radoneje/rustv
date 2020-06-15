@@ -17,7 +17,7 @@ window.onload= ()=> {
             activeSection:2,
             eventRooms:[],
             noWebrtc:false,
-            janus:null,
+            janus:nuldeviceIdl,
             handler:null,
             janusRoomId:null,
             janusPrivateId:null,
