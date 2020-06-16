@@ -927,7 +927,7 @@ window.onload=function () {
                 ]
             }
             setTimeout(()=>{
-                if(mainVideoElem) {
+                if(typeof (mainVideoElem)!="undefined") {
                     mainVideoElem.muted = !val;
                 }
                 else
