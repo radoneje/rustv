@@ -471,6 +471,15 @@ router.get("/roomUsers/:roomid",async (req, res, next)=>{
     res.json(users);
 })
 
+router.post("/roomUsersEdit/:roomid",async (req, res, next)=>{
+    //public.v_eventuserswithcompany
+    var rooms=await req.knex.select("*").from("t_rooms").where({id:req.params.roomid})
+    if(rooms.length==0)
+        rooms.sendStatus(404);
+    await req.knex("t_eventusers").update({f_eng:req.body.item.f_eng,i_eng:req.body.item.i_eng, smi_eng:req.body.item.smi_eng}).where({id:req.body.item.id})
+
+    res.json(100);
+})
 router.post("/roomUsers/:roomid",async (req, res, next)=>{
     //public.v_eventuserswithcompany
     var rooms=await req.knex.select("*").from("t_rooms").where({id:req.params.roomid})
@@ -562,7 +571,7 @@ router.get("/spkToVmix/:roomid", async (req, res, next) => {
     var ret=[]
     status.SPKvksUsers.forEach(u=>{
         var user=u.user;
-        ret.push({id:user.id,fi:(user.f||'')+' '+(user.i||''),smi:user.smi});
+        ret.push({id:user.id,fi:(user.f||'')+' '+(user.i||''),smi:user.smi, fi_eng:(user.f_eng||'')+' '+(user.i_eng||''),smi_eng:user.smi_eng });
     })
     if(ret.length==0)
         ret.push({id:'',fi:'',smi:''});

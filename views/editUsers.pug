@@ -21,7 +21,12 @@ block content
             div.aModSect(style="width:66%")
                 div.aSectBody.aSectUser
                     div.qItem.userItem(v-for="(item, i) in users" v-bind:key="item.id"  style="padding:5px;padding-left:50px")
-                        div.qItemName(style='margin: 4px 0;') {{i}}&nbsp;&nbsp;&nbsp;{{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}&nbsp;{{item.personalcode}}
+                        div(style="display:inline-block; width:50%")
+                            div.qItemName(style='margin: 4px 0;') {{i}}&nbsp;&nbsp;&nbsp;{{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}&nbsp;{{item.personalcode}}
+                        div(style="display:inline-block; width:50%")
+                            input(placeholder="surname" v-model="item.f_eng" style="width:calc(33% - 4px)" v-on:change="changeUserEng(item)")
+                            input(placeholder="name" v-model="item.i_eng" style="width:calc(33% - 4px)" v-on:change="changeUserEng(item)")
+                            input(placeholder="company" v-model="item.smi_eng" style="width:calc(33% - 4px)" v-on:change="changeUserEng(item)")
             div.aModSect(style="width:36%")
                 div.qItem.userItem
                     div.qItemName формат- Имя;Фамилия;СМИ;Код - по дному в строчку

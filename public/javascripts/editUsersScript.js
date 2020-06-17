@@ -22,9 +22,12 @@ window.onload=function () {
                         ret.push({f:col[0],i:col[1],smi:col[2]|| null, personalcode:col[3]||null})
                     }
                 })
-                var dt=await await axios.post("/rest/api/roomUsers/"+roomid, {items:ret} )
+                var dt=await  axios.post("/rest/api/roomUsers/"+roomid, {items:ret} )
                 this.users=dt.data;
                 this.addText="";
+            },
+            changeUserEng:async function (item) {
+                var dt=await  axios.post("/rest/api/roomUsersEdit/"+roomid, {item} )
             }
 
         },

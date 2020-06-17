@@ -180,7 +180,7 @@ async function phonePublishLocalVideo(localVideo, id, stream, errHandeler, faile
     console.log("localVideo", Flashphoner.getSessions().length, localVideo)
     if(Flashphoner.getSessions().length==0)
         await initFlashServer(errHandeler);
-
+    console.log("initFlashServer ok" )
     if (Browser.isSafariWebRTC()) {
         console.log("safary")
 
