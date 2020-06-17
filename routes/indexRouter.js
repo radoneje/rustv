@@ -82,8 +82,20 @@ router.get('/room/:id',  async (req, res, next) =>{
 
   var room=rooms[0]
 
-  if(!req.session["user"+room.eventid])
+  if(!req.session["user"+room.eventid] && room.id!=66)
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
+  if(room.id==66)
+  {
+    var usr = await req.knex("t_eventusers").insert({
+      eventid: room.eventid,
+      f: "user",
+      i: "",
+      tel: "",
+      email: "",
+      smsCode: "",
+    }, "*")
+    req.session["user"+room.eventid]=usr[0];
+  }
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
 res.header("X-Frame-Options","")
   res.render('room', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
