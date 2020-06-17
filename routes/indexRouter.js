@@ -82,9 +82,9 @@ router.get('/room/:id',  async (req, res, next) =>{
 
   var room=rooms[0]
 
-  if(!req.session["user"+room.eventid] && room.id!=66)
+  if(!req.session["user"+room.eventid] && room.id!=65)
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
-  if(room.id==66)
+  if(room.id==65)
   {
     var usr = await req.knex("t_eventusers").insert({
       eventid: room.eventid,
