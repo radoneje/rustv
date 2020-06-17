@@ -8,5 +8,7 @@ else if room.id==62
 
 else if room.id==61
     <iframe id="profIframe" name="profIframe" allowfullscreen src="/flu.html"></iframe>
+else if room.id==66
+    <youtube :video-id="'DegT1Urm0Eg'" :player-vars="{playsinline:'1'}" ref="youtube" ></youtube>
 else
     video(id="video" width="1280" height="720" controls playsinline loop  :src="'https://stream.sberbank-school.ru/hls/'+ room.streamname +'/index.m3u8'" :poster="'/images/'+room.poster" )
