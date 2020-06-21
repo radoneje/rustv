@@ -1136,12 +1136,12 @@ window.onload=function () {
                 recBtn.classList.add("stageModBtn")
                 recBox.appendChild(recBtn);
                 recBtn.addEventListener("click",()=> {
-                    if(recBtn.classList.contains("active"))
+                    if(recBtn.classList.contains("warning"))
                     {
                         //recBtn.classList.remove("active")
                          return;
                     }
-                    if(recBtn.classList.add("active"))
+                    if(recBtn.classList.add("warning"))
                     {
                         //recBtn.classList.remove("active")
                         return;
