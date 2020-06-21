@@ -89,6 +89,7 @@ router.get('/showrecords/:eventid/:roomid',  async (req, res, next) => {
       ret.push(rec)
     }
   }
+  console.log("exist", ret)
   res.render("stagerecords",{title:"records", records:ret, moment:moment});
 
 
