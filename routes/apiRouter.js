@@ -1358,6 +1358,11 @@ router.post("/isLenta/:eventid/:roomid", checkLoginToRoom, async (req, res, next
 })
 
 
+router.get("/getRecFileId/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    var r = await req.knex("t_stagerecords").insert({roomid:req.params.roomid, userid:req.session["user" + req.params.eventid].id,date: (new Date())}, "*");
+    res.json(r[0].id)
+
+})
 
 router.get("/startRoomRecord/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     var r = await req.knex("t_roomrecords").insert({roomid:req.params.roomid,date: (new Date())}, "*")

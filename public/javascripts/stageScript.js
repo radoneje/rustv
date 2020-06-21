@@ -838,7 +838,7 @@ window.onload=function () {
                     if(item.isMyVideo && !item.isDesktop)
                     {
                         console.log(item);
-
+                        var dt=axios.get("/rest/api/getRecFileId/"+eventid+"/"+roomid)
                         mediaRecorder= new MediaRecorder(item.elem.srcObject);
                         mediaRecorder.ondataavailable = function(e) {
                            // chunks.push(e.data);
