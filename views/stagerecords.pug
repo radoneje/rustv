@@ -14,6 +14,9 @@ block content
 
 
     div.center
+      each item in records
+        div #{item.date}
+          a(href='/records/stage_'+item.id+".webm")
 
 
 
