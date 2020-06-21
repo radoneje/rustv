@@ -835,7 +835,18 @@ window.onload=function () {
                 }
                 console.log("onStartStageRecord", id, _this.socket.id)
                 arrVideo.forEach(item=>{
-                    console.log(item);
+                    if(item.isMyVideo && !item.isDesktop)
+                    {
+                        console.log(item);
+
+                        mediaRecorder= MediaRecorder(item.elem.srcObject);
+                        mediaRecorder.ondataavailable = function(e) {
+                           // chunks.push(e.data);
+                            console.log("recordDataAvaible");
+                        }
+                        mediaRecorder.start(2000);
+                    }
+
                 })
             }
 
