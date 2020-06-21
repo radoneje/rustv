@@ -85,7 +85,6 @@ window.onload=function () {
                     this.stageTimeout=setTimeout(updateStageTimer,1000);
                 }
                 function updateStageTimer() {
-                    var _this=this;
                     _this.stageTimer--;
                     if(_this.stageTimer<=0)
                     {
