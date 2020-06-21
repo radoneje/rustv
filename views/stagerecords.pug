@@ -8,12 +8,7 @@ block head
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   link(rel='stylesheet', href='/stylesheets/login.css')
   link(rel='stylesheet', href='/stylesheets/room.css')
-  script.
-    function download(url) {
-      var iframe=document.createElement('iframe')
-      document.body.appendChild(iframe)
-      iframe.src=url;
-    }
+
 block content
   div.roomScreen.multiViewVideo(id="app" style="opacity:1" )
     div.center
@@ -24,6 +19,12 @@ block content
               video(src='/records/stage_'+item.id+".webm" width="180" controls)
             div.qItemText
               a(style="cursor:pointer" onclick="download('/records/stage_"+item.id+".webm')") download
+  script.
+    function download(url) {
+      var iframe = document.createElement('iframe')
+      document.body.appendChild(iframe)
+      iframe.src = url;
+    }
 
 
 
