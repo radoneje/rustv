@@ -82,12 +82,12 @@ block content
                             span.link.red(v-on:click="deleteQ(item)") Удалить
                             span &nbsp;&nbsp;
                             span {{moment(item.date).format("HH:mm")}}
-                div.aSectBody(id="voteBox" v-if="lSectActiveIndex==4")
+                //div.aSectBody(id="voteBox" v-if="lSectActiveIndex==4")
                     div.aSectSwith(v-on:click="lentaOnOff()")
                         div(v-if="isLenta") Лента включена
                         div.warning(v-else) Лента выключена
                     div.greenBtn.clearBtn(v-on:click="voteAdd()") Добавить голосование
-                    //div.qItem(v-for="item in votes" v-bind:class="{ready:item.isReady}")
+                    div.qItem(v-for="item in votes" v-bind:class="{ready:item.isReady}")
                         input.ask(type='text' placeholder="введите текст вопроса" v-model="item.title" v-on:change="voteChange(item)")
                         div Ответы ({{caclAnswCount(item)}}):
                             div(v-for="answ in sortedVoteAnsvers(item.answers)")
