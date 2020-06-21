@@ -844,6 +844,9 @@ window.onload=function () {
                            // chunks.push(e.data);
                             console.log("recordDataAvaible");
                         }
+                        mediaRecorder.onstop=function(e){
+                            mediaRecorder=null;
+                        }
                         mediaRecorder.start(2000);
                     }
 
