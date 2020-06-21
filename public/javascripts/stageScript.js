@@ -68,6 +68,9 @@ window.onload=function () {
             stageTimeout:null,
         },
         methods:{
+            showRecords:function(){
+                window.open('/showrecords/'+eventid+"/"+roomid);
+            },
             StartTimer:function(){
                 var _this=this;
                 _this.socket.emit("startTimer", {isOn:this.stageTimeout?true:false})
