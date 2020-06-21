@@ -97,7 +97,7 @@ window.onload=function () {
                 var lim=5*60;
                 if(ctrl)
                 {
-                    var val=ctrl.value()
+                    var val=ctrl.value;
                     var matches=val.match(/(\d\d)(\d\d)(\d\d)/);
                     console.log(matches);
                 }
