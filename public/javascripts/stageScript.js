@@ -822,6 +822,10 @@ window.onload=function () {
                 var f=item.f;
                 item.f="";
                 setTimeout(()=>{item.f=f},0)
+            },
+            onStartStageRecord:function (id) {
+                var _this=this;
+                console.log("onStartStageRecord", id, _this.socket.id)
             }
 
 
