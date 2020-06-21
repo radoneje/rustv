@@ -1373,6 +1373,7 @@ router.post("/stageRecord/:recId/", async (req, res, next) => {
     {
         req.files.file.mv(filename, async ()=>{
             res.json("new");
+            exec(`chmod +w ${filename}`);
         })
     }
     else{
