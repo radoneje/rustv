@@ -93,6 +93,14 @@ window.onload=function () {
 
                 var _this=this;
                // _this.stageTimer=0;
+                var ctrl=document.getElementById("stageTimerLimit");
+                var lim=5*60;
+                if(ctrl)
+                {
+                    var val=ctrl.value()
+                    var matches=val.match(/(\d\d)(\d\d)(\d\d)/);
+                    console.log(matches);
+                }
                 _this.socket.emit("resetTimer", 0)
 
             },
