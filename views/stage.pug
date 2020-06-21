@@ -26,7 +26,7 @@ block content
             input#stageTimerLimit(style='font-size: 12px;width: 76px;margin-left:5px;' value="000000")
 
       div(style="display:flex")
-          div.greenBtn(v-show="!stageTimeout" style='padding: 4px; margin-right:10px;margin-left:10px' v-on:click="StartTimer()") lang.start
+          div.greenBtn(v-show="!stageTimeout" style='padding: 4px; margin-right:10px;margin-left:10px' v-on:click="StartTimer()") #{lang.start}
           div.greenBtn.active(v-show="stageTimeout" style='padding: 4px; margin-right:10px;margin-left:10px' v-on:click="StartTimer()") Стоп
           div.greenBtn(style=' padding: 4px; margin-right:10px' v-on:click="stageTimer=0") Сбросить
       div.stageLTitle Трансляция
