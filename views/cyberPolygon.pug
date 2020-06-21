@@ -1,0 +1,31 @@
+extends layout
+block head
+
+  script.
+    var onSubmit = function (token) {
+      console.log('success!', token);
+    };
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  link(rel='stylesheet', href='/stylesheets/login.css')
+  link(rel='stylesheet', href='/stylesheets/cyberRoom.css')
+  script(src="/javascripts/cyberLoginScript.js")
+block content
+  div.pBox.ploginnScreen#app
+    div.pLoginBox
+        div.pLogoBox
+          div.pLoginHead(style="display: flex;justify-content: center;align-items: center;")
+            img(style="width:60px;display: block;" src="/images/cyber.svg")
+            div.pTitle(style="margin-top:0;margin-left:20px") Cyber Poligon
+          div.pLoginBody
+            div.pBodyTitle Please, type you personal code.
+            div.pBodySubTitle
+            div.plInputBox(v-bind:class="{warning:codeErr}")
+              div.plInputBoxLabel
+                input#codeInpit(placeholder="code" v-model="code" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+              div.plInputBoxWarning #{lang.thisMast}
+            div.plInputBox
+              div.plSubmit(v-on:click="enter()")
+                div(v-if="!loader") #{lang.logon}
+                div(v-if="loader")
+                  include ./elements/whiteDotLoader
+

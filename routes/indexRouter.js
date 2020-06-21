@@ -5,7 +5,10 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   console.log(req.headers.host)
      // if(req.headers.host.indexOf("localhost")>=0)
-    if(req.headers.host.indexOf("cbr-online.ru")>=0)
+  if(req.headers.host.indexOf("localhost")>=0)
+    return res.render('cyberPolygon', { title: 'Cyber Poligon', lang:(require("../lang.json"))["en"] });
+
+  if(req.headers.host.indexOf("cbr-online.ru")>=0)
     return res.render('cbr-online', { title: 'Пресс-конференция Банка России' });
   res.render('index', { title: 'ON.event' });
 });
