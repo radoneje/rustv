@@ -449,6 +449,10 @@ window.onload=function () {
                 console.log("startStageRecord video", id)
                 socket.emit("startStageRecord", id);
             },
+            stopVideoRecord:function (id) {
+                console.log("stopStageRecord video", id)
+                socket.emit("stopStageRecord", id);
+            },
             startMyVideo:async function () {
 
                 var _this=this;
@@ -456,7 +460,7 @@ window.onload=function () {
                 var videoItem = {id: _this.socket.id, isMyVideo: true, user: _this.user}
                 arrVideo.push(videoItem);
 
-                await createVideo(videoItem.id, videoItem.isMyVideo, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord);
+                await createVideo(videoItem.id, videoItem.isMyVideo, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord, _this.stopVideoRecord);
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
                 try {
                     await phonePublishLocalVideo(videoWr, videoItem.id, null, () => {
@@ -513,7 +517,7 @@ window.onload=function () {
                 arrVideo.push(receiverItem)
 
 
-                var video = await createVideo(data.streamid, false, data.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload,_this.videoRecord);
+                var video = await createVideo(data.streamid, false, data.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload,_this.videoRecord, _this.stopVideoRecord);
                 videoLayout();
 
                 var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
@@ -574,7 +578,7 @@ window.onload=function () {
                 videoItem.stream = stream;
                 videoItem.streamid = socket.id + createUUID(4)+"Dt";
                 videoItem.id = videoItem.streamid ;
-                await createVideo(videoItem.id, true, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord)
+                await createVideo(videoItem.id, true, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord,  _this.stopVideoRecord)
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
                 await phonePublishLocalVideo(videoWr, videoItem.id, stream, ()=>{removeVideo(videoItem.id)});
                 videoLayout();
@@ -832,6 +836,16 @@ window.onload=function () {
                     btn.classList.add("warning");
                 }
             },
+            onStopStageRecord:function(id){
+                var _this=this;
+                console.log("onStopStageRecord")
+                if(id!= _this.socket.id)
+                    return;
+                if(!mediaRecorder)
+                    return;
+                console.log("onStopStageRecord before stop")
+                mediaRecorder.stop();
+            },
             onStartStageRecord:function (id) {
                 var _this=this;
                 if(id!= _this.socket.id)
@@ -874,6 +888,7 @@ window.onload=function () {
                         }
                         mediaRecorder.onstop=function(e){
                             mediaRecorder=null;
+                            console.log("mediaRecorder onstop")
                             _this.socket.emit("stageRecordStopped", _this.socket.id);
                         }
                         mediaRecorder.start(2000);
@@ -1128,7 +1143,7 @@ window.onload=function () {
     if(target)
         observer.observe(target)
 
-    async function createVideo(id, muted, user, onPgm, onPip,onP1,onMute, onRemove, onReload, onStartRecord) {
+    async function createVideo(id, muted, user, onPgm, onPip,onP1,onMute, onRemove, onReload, onStartRecord, onStopRecord) {
         console.log("Create Video", id)
         var meetVideoBox = document.getElementById("meetVideoBox");
         if(isPgm)
@@ -1206,6 +1221,12 @@ window.onload=function () {
                     if(recBtn.classList.contains("warning"))
                     {
                         //recBtn.classList.remove("active")
+                        if(confirm("Остановить запись?"))
+                        {
+                            if(onStopRecord)
+                                onStopRecord(id);
+                        }
+
                         return;
                     }
                     recBtn.classList.add("active");

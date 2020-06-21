@@ -226,12 +226,19 @@ function connect(_this, roomid, clbk){
         if(_this.onStartStageRecord)
             _this.onStartStageRecord(data)
     });
+    socket.on("stopStageRecord", function(data){
+
+        if(_this.onStopStageRecord)
+            _this.onStopStageRecord(data)
+    });
+
+
+
     socket.on("stageRecordStarted", function(data){
 
         if(_this.OnStageRecordStarted)
             _this.OnStageRecordStarted(data)
     });
-
     socket.on("reload", function(data){
         if(_this.socket.id==data.streamid)
             document.location.reload(true);

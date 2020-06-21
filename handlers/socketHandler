@@ -252,6 +252,12 @@ class socket{
                     _this.clients.sendToRoomUsers("startStageRecord", dt, roomid)
                 }
             })
+            socket.on("stopStageRecord",(dt)=>{
+                if(id) {
+                    //  dt.streamid=dt.streamid.replace(/dt^/, "")
+                    _this.clients.sendToRoomUsers("stopStageRecord", dt, roomid)
+                }
+            })
             socket.on("stageRecordStarted",(dt)=>{
                 if(id) {
                     //  dt.streamid=dt.streamid.replace(/dt^/, "")
