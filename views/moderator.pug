@@ -82,7 +82,7 @@ block content
                             span.link.red(v-on:click="deleteQ(item)") Удалить
                             span &nbsp;&nbsp;
                             span {{moment(item.date).format("HH:mm")}}
-                div.aSectBody(id="voteBox" v-if="lSectActiveIndex==14")
+                div.aSectBody(id="voteBox" v-if="lSectActiveIndex==4")
                     div.aSectSwith(v-on:click="lentaOnOff()")
                         div(v-if="isLenta") Лента включена
                         div.warning(v-else) Лента выключена
