@@ -17,6 +17,7 @@ const jo = require('jpeg-autorotate')
 var im = require('imagemagick');
 var config = require('../config');
 const { exec } = require('child_process');
+const child_process = require('child_process');
 const translateLang=require('../translation')
 
 /* GET home page. */
@@ -1378,10 +1379,32 @@ router.post("/stageRecord/:recId/", async (req, res, next) => {
     }
     else{
         console.log(`cat ${req.files.file.tempFilePath} >> ${filename}`)
-        exec(`cat ${req.files.file.tempFilePath} >> ${filename}`, ()=>{
+
+        var workerProcess = child_process.exec(`cat ${req.files.file.tempFilePath} >> ${filename}`,function
+            (error, stdout, stderr) {
+
+            if (error) {
+                console.log(error.stack);
+                console.log('Error code: '+error.code);
+                console.log('Signal received: '+error.signal);
+            }
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + stderr);
             fs.unlinkSync(req.files.file.tempFilePath)
             res.json("append");
-        })
+        });
+
+        workerProcess.on('exit', function (code) {
+            console.log('Child process exited with exit code '+code);
+        });
+
+        /*
+       exec(`cat ${req.files.file.tempFilePath} >> ${filename}`, ()=>{
+            fs.unlinkSync(req.files.file.tempFilePath)
+            res.json("append");
+        })*/
+
+
     }
 })
 
