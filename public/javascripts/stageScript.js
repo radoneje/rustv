@@ -1125,6 +1125,17 @@ window.onload=function () {
 
 
             if(isMod){
+                var recBox=document.createElement("div");
+                recBox.classList.add("modRecordContollers")
+                meetVideoItem.appendChild(recBox)
+                var recBtn=document.createElement("div");
+                recBtn.classList.add("greenBtn")
+                recBtn.classList.add("clearBtn")
+                recBtn.id="recbtn"+id;
+                recBtn.innerHTML="REC";
+                recBtn.classList.add("stageModBtn")
+                recBox.appendChild(recBtn);
+
                 var box=document.createElement("div");
                 box.classList.add("modContollers")
 
