@@ -24,11 +24,11 @@ block content
         if (isMod)
           span(style='font-size: 12px;width: 76px;margin-left:10px;') лимит:
             input#stageTimerLimit(style='font-size: 12px;width: 76px;margin-left:5px;' value="000500")
-
-      div(style="display:flex")
-          div.greenBtn(v-show="!stageTimeout" style='padding: 4px; margin-right:10px;margin-left:10px' v-on:click="StartTimer()") #{lang.start}
-          div.greenBtn.active(v-show="stageTimeout" style='padding: 4px; margin-right:10px;margin-left:10px' v-on:click="StartTimer()") #{lang.stop}
-          div.greenBtn(style=' padding: 4px; margin-right:10px' v-on:click="ResetTimer()") #{lang.reset}
+      if (isMod)
+        div(style="display:flex")
+            div.greenBtn(v-show="!stageTimeout" style='padding: 4px; margin-right:10px;margin-left:10px' v-on:click="StartTimer()") #{lang.start}
+            div.greenBtn.active(v-show="stageTimeout" style='padding: 4px; margin-right:10px;margin-left:10px' v-on:click="StartTimer()") #{lang.stop}
+            div.greenBtn(style=' padding: 4px; margin-right:10px' v-on:click="ResetTimer()") #{lang.reset}
       div.stageTrPreview(style="width:100%")
           include elements/mainVideo
       div.stageLTitle #{lang.techChat}
