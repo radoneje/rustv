@@ -89,7 +89,7 @@ block content
                     div.greenBtn.clearBtn(v-on:click="voteAdd()") Добавить голосование
                     div.qItem(v-for="item in votes" v-bind:class="{ready:item.isReady}")
                         input.ask(type='text' placeholder="введите текст вопроса" v-model="item.title" v-on:change="voteChange(item)")
-                        div Ответы ({{caclAnswCount(item)}}):
+                        //div Ответы ({{caclAnswCount(item)}}):
                             div(v-for="answ in sortedVoteAnsvers(item.answers)")
                                 div
                                     span {{CalcAnswPercent(answ, item)}}% &nbsp;
