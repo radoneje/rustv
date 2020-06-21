@@ -839,6 +839,7 @@ window.onload=function () {
                     {
                         console.log(item);
                         var dt=axios.get("/rest/api/getRecFileId/"+eventid+"/"+roomid)
+                        console.log("stage record id=",dt.data)
                         mediaRecorder= new MediaRecorder(item.elem.srcObject);
                         mediaRecorder.ondataavailable = function(e) {
                            // chunks.push(e.data);
