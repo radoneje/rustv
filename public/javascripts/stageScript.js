@@ -932,7 +932,7 @@ window.onload=function () {
                         console.log("stage record id=",recId.data)
                         var stream =await navigator.mediaDevices.getUserMedia({video:{width:{ideal:1280}}, audio:true});
 
-                        mediaRecorder= new MediaRecorder(stream/*tem.elem.srcObject*/,{mimeType: 'video/webm; codecs=h264'});
+                        mediaRecorder= new MediaRecorder(/*stream*/ item.elem.srcObject,{mimeType: 'video/webm; codecs=h264'});
                         mediaRecorder.ondataavailable = function(e) {
                            // chunks.push(e.data);
                             var fd  = new FormData();
