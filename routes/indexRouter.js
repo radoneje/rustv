@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var moment=require('moment')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -75,7 +76,7 @@ router.get('/showrecords/:eventid/:roomid',  async (req, res, next) => {
     return res.redirect("/login/"+req.params.eventid+"?redirect="+encodeURI('/showrecords/'+req.params.eventid+"/"+req.params.roomid));
 
   var records=await req.knex.select("*").from("t_stagerecords").where({roomid:req.params.roomid}).orderBy("date");
-  res.render("stagerecords",{title:"records", records:records});
+  res.render("stagerecords",{title:"records", records:records, moment:moment});
 
 
 });
