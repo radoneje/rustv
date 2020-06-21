@@ -71,17 +71,7 @@ window.onload=function () {
             StartTimer:function(){
                 var _this=this;
                 _this.socket.emit("startTimer", {stageTimeout:this.stageTimeout?true:null})
-                if(this.stageTimeout) {
-                    clearTimeout(this.stageTimeout)
-                    this.stageTimeout=null;
-                }
-                else {
-                    this.stageTimeout=setTimeout(updateStageTimer,1000);
-                }
-                function updateStageTimer() {
-                   _this.stageTimer++;
-                    _this.stageTimeout=setTimeout(updateStageTimer,1000);
-                }
+
             },
             OnStartTimer:function(data){
                 var _this=this;
