@@ -80,6 +80,9 @@ window.onload=async function () {
 
         },
         methods:{
+            activeteLSect:function(i){
+                this.lSectActiveIndex=i;
+            },
             sortedVoteAnsvers:function(arr){
                 var nArr=arr.slice(0)
                 return nArr.sort((a,b)=>{return a.id-b.id});
