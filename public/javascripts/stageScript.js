@@ -85,7 +85,13 @@ window.onload=function () {
                     this.stageTimeout=setTimeout(updateStageTimer,1000);
                 }
                 function updateStageTimer() {
-                    _this.stageTimer++;
+                    _this.stageTimer--;
+                    if(_this.stageTimer<=0)
+                    {
+                        clearTimeout(this.stageTimeout)
+                        this.stageTimeout=null;
+                    }
+                    else
                     _this.stageTimeout=setTimeout(updateStageTimer,1000);
                 }
             },
