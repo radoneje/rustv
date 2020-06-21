@@ -98,7 +98,7 @@ window.onload=function () {
                 if(ctrl)
                 {
                     var val=ctrl.value;
-                    var matches=val.match(/(\d\d)(\d\d)(\d\d)/);
+                    var matches=val.match(/(\d\d):(\d\d):(\d\d)/);
                     console.log(matches, val);
                 }
                 _this.socket.emit("resetTimer", 0)
