@@ -65,7 +65,7 @@ window.onload=async function () {
             SPKalertText:"",
             isSpkScreen:false,
             centerSectActiveIndex:1,
-            lSectActiveIndex:2,
+            lSectActiveIndex:4,
             isPres:false,
             previewPres:[],
             room:room,
