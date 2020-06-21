@@ -41,7 +41,7 @@ block content
       div.rFooter.stageLF
         div.fileLoadProgress
         div.askWr
-          input.ask( placeholder="Напишите Ваше сообщение" id="stageChatText" v-model="stageChatText" v-on:keypress="stageChatTextChange($event)")
+          input.ask( placeholder=lang.youMessage  id="stageChatText" v-model="stageChatText" v-on:keypress="stageChatTextChange($event)")
           <svg class="svgSendBtn" v-on:click="StagechattextSend()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
           <desc>Created with Sketch.</desc>
@@ -64,7 +64,7 @@ block content
       div.L.stage
           div.Lbody
               div(v-if="!init" style="height: 100vh;display: flex;align-items: center;justify-content: center;margin: 10px;")
-                div.greenBtn.center( v-on:click="initStage()") Нажмите здесь, что бы войти.
+                div.greenBtn.center( v-on:click="initStage()") #{lang.clickHere}
               div.meetVideoBox#meetVideoBox(v-else)
 
       div.meetingBtnBox(v-if="!firstConnect")

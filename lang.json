@@ -10,7 +10,9 @@
     "start": "Старт",
     "stop": "Стоп",
     "reset": "Сбросить",
-    "techChat": "Служебный чат"
+    "techChat": "Служебный чат",
+    "youMessage": "Напишите Ваше сообщение",
+    "clickHere": "Нажмите здесь, что бы войти."
   },
   "en": {
     "registration":"Registration",
@@ -23,6 +25,8 @@
     "start": "Start",
     "stop": "Stop",
     "reset": "Reset",
-    "techChat": "Stages chat"
+    "techChat": "Stage chat",
+    "youMessage": "Write you message here",
+    "clickHere":"Click here to start"
   }
 }
