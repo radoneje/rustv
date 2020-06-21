@@ -82,6 +82,22 @@ window.onload=function () {
                     this.stageTimeout=null;
                 }
                 else {
+                    if(_this.stageTimer<=0)
+                    {
+                        var lim=5*60;
+                        var ctrl=document.getElementById("stageTimerLimit");
+                        if(ctrl)
+                        {
+                            var val=ctrl.value;
+                            var matches=val.match(/(\d\d):(\d\d):(\d\d)/);
+                            console.log(matches, val);
+                            if(matches.length==4)
+                            {
+                                lim=parseInt(matches[1]*60*60)+parseInt(matches[2]*60)+parseInt(matches[3]);
+                            }
+                        }
+                        _this.stageTimer=lim;
+                    }
                     this.stageTimeout=setTimeout(updateStageTimer,1000);
                 }
                 function updateStageTimer() {
@@ -90,6 +106,8 @@ window.onload=function () {
                     {
                         clearTimeout(_this.stageTimeout)
                         _this.stageTimeout=null;
+                        _this.stageTimer=0;
+
                     }
                     else
                     _this.stageTimeout=setTimeout(updateStageTimer,1000);
