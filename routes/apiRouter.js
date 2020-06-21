@@ -1378,7 +1378,7 @@ router.post("/stageRecord/:recId/", async (req, res, next) => {
     else{
         console.log(`cat ${req.files.file.tempFilePath} >> ${filename}`)
         exec(`cat ${req.files.file.tempFilePath} >> ${filename}`, ()=>{
-            //fs.unlinkSync(req.files.file.tempFilePath)
+            fs.unlinkSync(req.files.file.tempFilePath)
             res.json("append");
         })
     }
