@@ -706,6 +706,10 @@ window.onload=function () {
                 window.scrollTo(0,document.body.scrollHeight);
             }*/
             //
+            sect:function () {
+               // window.scrollTo(0,document.body.scrollHeight);
+                console.log("sect". _this.sect
+            }
         },
          computed: {
              sortedUsers:function () {
