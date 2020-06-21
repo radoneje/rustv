@@ -82,6 +82,9 @@ window.onload=function () {
                     _this.stageTimeout=setTimeout(updateStageTimer,1000);
                 }
             },
+            ResetTimer:function(){
+                _this.stageTimer=0;
+            },
             sectActive:function (item) {
                 var _this=this;
                 this.sect.forEach(function (e) {
