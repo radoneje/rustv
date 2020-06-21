@@ -823,6 +823,15 @@ window.onload=function () {
                 item.f="";
                 setTimeout(()=>{item.f=f},0)
             },
+            OnStageRecordStarted:function(id){
+                console.log("OnStageRecordStarted", id)
+                var btn=document.getElementById("recbtn"+id)
+                if(btn)
+                {
+                    btn.classList.remove("active");
+                    btn.classList.add("warning");
+                }
+            },
             onStartStageRecord:function (id) {
                 var _this=this;
                 if(id!= _this.socket.id)
