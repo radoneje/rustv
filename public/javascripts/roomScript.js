@@ -124,6 +124,18 @@ window.onload=function () {
                     e.isActive=(item.id==e.id);
                     if(e.isActive)
                         _this.activeSection=e.id
+                    {
+                        setTimeout(()=>{
+                            rBody
+                            var parentElem=document.querySelector(".rContentWr");
+                            if(parentElem){
+                                var elem=parentElem.querySelector(".rBody");
+                                if(elem)
+                                    elem.scrollTop = elem.scrollHeight;
+
+                            }
+                        },0)
+                    }
                     // return e;
                 })
                 if(window.innerWidth<1024)
@@ -706,10 +718,7 @@ window.onload=function () {
                 window.scrollTo(0,document.body.scrollHeight);
             }*/
             //
-            sect:function () {
-               // window.scrollTo(0,document.body.scrollHeight);
-                console.log("sect", this.sect)
-            }
+
         },
          computed: {
              sortedUsers:function () {
