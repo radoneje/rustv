@@ -84,6 +84,7 @@ router.get('/showrecords/:eventid/:roomid',  async (req, res, next) => {
   for(var rec of records){
     var name="stage_"+rec.id+".webm";
     var filename=path.join(__dirname, '../public/records/' + name);
+    console.log(filename)
     if (fs.existsSync(path)) {
       ret.push(rec)
     }
