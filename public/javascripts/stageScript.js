@@ -76,7 +76,7 @@ window.onload=function () {
             OnStartTimer:function(data){
                 var _this=this;
                // _this.stageTimeout=data.stageTimeout;
-                console.log("OnStartTimer", data)
+
                 if(data.isOn) {
                     clearTimeout(this.stageTimeout)
                     this.stageTimeout=null;
