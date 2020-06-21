@@ -840,13 +840,32 @@ window.onload=function () {
                         console.log(item);
                         var dt=await axios.get("/rest/api/getRecFileId/"+eventid+"/"+roomid)
                         console.log("stage record id=",dt.data)
-                        mediaRecorder= new MediaRecorder(item.elem.srcObject);
+                        mediaRecorder= new MediaRecorder(item.elem.srcObject,{mimeType: 'video/webm; codecs=h264'});
                         mediaRecorder.ondataavailable = function(e) {
                            // chunks.push(e.data);
-                            console.log("recordDataAvaible");
+                            var fd  = new FormData();
+                            fd.append('file', e.data);
+
+                            var xhr = new XMLHttpRequest();
+                            xhr.onload   = xhr.onerror= function(e) {
+                                _this.socket.emit("stageRecordStarted", _this.socket.id);
+                                if(xhr.status!=200)
+                                {
+                                    console.warn("xhr.onerror", )
+                                    try{
+                                        mediaRecorder.stop();
+                                    }catch (e) {
+
+                                    }
+                                }
+                            }
+                            xhr.open("POST", '/rest/api/stageRecord/'+id,true );
+                            xhr.send(fd);
+
                         }
                         mediaRecorder.onstop=function(e){
                             mediaRecorder=null;
+                            _this.socket.emit("stageRecordStopped", _this.socket.id);
                         }
                         mediaRecorder.start(2000);
                     }

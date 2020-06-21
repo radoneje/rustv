@@ -1363,6 +1363,26 @@ router.get("/getRecFileId/:eventid/:roomid", checkLoginToRoom, async (req, res, 
     res.json(r[0].id)
 
 })
+router.post("/stageRecord/:recId/", async (req, res, next) => {
+    var name="stage_"+req.params.recId+".webm";
+    if (!fs.existsSync(path.join(__dirname, '../public/records/'))){
+        fs.mkdirSync(path.join(__dirname, '../public/records/'));
+    }
+    var filename=path.join(__dirname, '../public/records/' + name);
+    if (!fs.existsSync(filename))
+    {
+        req.files.file.mv(filename, async ()=>{
+            res.json("new");
+        })
+    }
+    else{
+        exec(`cat ${req.files.file.tempFilePath} >> ${filename}`, ()=>{
+            fs.unlinkSync(req.files.file.tempFilePath)
+            res.json("append");
+        })
+    }
+})
+
 
 router.get("/startRoomRecord/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     var r = await req.knex("t_roomrecords").insert({roomid:req.params.roomid,date: (new Date())}, "*")
