@@ -70,13 +70,14 @@ window.onload=function () {
         methods:{
             StartTimer:function(){
                 var _this=this;
-                _this.socket.emit("startTimer", {stageTimeout:this.stageTimeout?true:null})
+                _this.socket.emit("startTimer", {isOn:this.stageTimeout?true:false})
 
             },
             OnStartTimer:function(data){
                 var _this=this;
-                _this.stageTimeout=data.stageTimeout;
-                if(this.stageTimeout) {
+               // _this.stageTimeout=data.stageTimeout;
+                console.log("OnStartTimer", data)
+                if(data.isOn) {
                     clearTimeout(this.stageTimeout)
                     this.stageTimeout=null;
                 }
