@@ -112,7 +112,6 @@ window.onload=function () {
                     }
                 }
                 _this.socket.emit("resetTimer", lim)
-
             },
             OnResetTimer:function(data){
                 var _this=this;
