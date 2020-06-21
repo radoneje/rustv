@@ -6,7 +6,7 @@ var fs = require('fs')
 
 /* GET home page. */
 router.get('/ping', function(req, res, next) {
-  res.send("pong "+ new Date());
+  res.send( req.transport.clients.filter(c=>c.isActive).length);
 });
 router.get('/', function(req, res, next) {
   console.log(req.headers.host)
