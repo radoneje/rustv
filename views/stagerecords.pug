@@ -16,7 +16,7 @@ block content
     div.center
       div
         each item in records
-          div.qItem   #{moment(item.date)}
+          div.qItem   #{moment(item.date).format('DD MMMM YYYY, hh:mm:ss')}
             div(style="margin:10px")
               video(src='/records/stage_'+item.id+".webm" width="180" controls)
             div.qItemText
