@@ -1135,6 +1135,19 @@ window.onload=function () {
                 recBtn.innerHTML="REC";
                 recBtn.classList.add("stageModBtn")
                 recBox.appendChild(recBtn);
+                recBtn.addEventListener("click",()=> {
+                    if(recBtn.classList.contains("active"))
+                    {
+                        //recBtn.classList.remove("active")
+                         return;
+                    }
+                    if(recBtn.classList.add("active"))
+                    {
+                        //recBtn.classList.remove("active")
+                        return;
+                    }
+                });
+
 
                 var box=document.createElement("div");
                 box.classList.add("modContollers")
