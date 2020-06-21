@@ -897,8 +897,11 @@ window.onload=function () {
                         }
                         mediaRecorder.onstop=function(e){
                             mediaRecorder=null;
-                            console.log("mediaRecorder onstop")
-                            _this.socket.emit("stageRecordStopped", _this.socket.id);
+                            setTimeout(()=>{
+                                console.log("mediaRecorder onstop")
+                                _this.socket.emit("stageRecordStopped", _this.socket.id);
+                            },2000);
+
                         }
                         mediaRecorder.start(2000);
                     }
