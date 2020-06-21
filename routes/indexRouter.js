@@ -70,6 +70,17 @@ router.get('/event/:id',  async (req, res, next) =>{
   res.render('event', { title: 'ON.event', event:event , rooms:rooms});
 
 })
+router.get('/showrecords/:eventid/:roomid',  async (req, res, next) => {
+  if(!req.session["admin"+req.params.eventid])
+    return res.redirect("/login/"+req.params.eventid+"?redirect="+encodeURI('/showrecords/'+req.params.eventid+"/"+req.params.roomid));
+
+  var records=await req.knex.select("*").from("t_stagerecords").where({roomid:eq.params.roomid}).orderBy("date");
+  res.render("stagerecords",{title:"records", records:records});
+
+
+
+});
+
 router.get('/blank/',  async (req, res, next) =>{
   res.send("");
 })
