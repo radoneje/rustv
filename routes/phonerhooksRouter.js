@@ -11,7 +11,7 @@ router.post('/:method', async (req, res, next) => {
     }
     try{
         if(req.headers.host.indexOf("rosatom")<0)
-            axios.post('https://rosatom.onevent.online/phonerhooks/StreamStatusEvent', req.body)
+            await axios.post('https://rosatom.onevent.online/phonerhooks/StreamStatusEvent', req.body)
     }
     catch (e) {
 
