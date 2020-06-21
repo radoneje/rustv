@@ -17,9 +17,9 @@ block content
       div
         each item in records
           div.qItem #{item.date}
-            div
-              video(src='/records/stage_'+item.id+".webm" width="180")
-            div
+            div(style="margin:10px")
+              video(src='/records/stage_'+item.id+".webm" width="180" controls)
+            div.qItemText
               a(href='/records/stage_'+item.id+".webm") download
 
 
