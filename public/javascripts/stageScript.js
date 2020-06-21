@@ -100,8 +100,12 @@ window.onload=function () {
                     var val=ctrl.value;
                     var matches=val.match(/(\d\d):(\d\d):(\d\d)/);
                     console.log(matches, val);
+                    if(matches.length==4)
+                    {
+                        lim=matches[1]*60*60+matches[2]*60+matches[3]*60;
+                    }
                 }
-                _this.socket.emit("resetTimer", 0)
+                _this.socket.emit("resetTimer", lim)
 
             },
             OnResetTimer:function(data){
