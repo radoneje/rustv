@@ -16,10 +16,11 @@ block content
         each item in records
           div.qItem   #{moment(item.date).format('DD MMMM YYYY, hh:mm:ss')}
             div(style="margin:10px")
+              div(id=item.id onclick="this.innerHTML='dd'") показать видео
               video(src='/records/stage_'+item.id+".webm" width="180" controls)
             div.qItemText
               a(href="/records/stage_"+item.id+".webm"  download) download
-              a(style="cursor:pointer" onclick="var iframe = document.createElement('iframe');document.body.appendChild(iframe);iframe.src='/records/stage_"+item.id+".webm'") download
+
 
 
 
