@@ -1380,7 +1380,7 @@ router.post("/stageRecord/:recId/", async (req, res, next) => {
     else{
         console.log(`cat ${req.files.file.tempFilePath} >> ${filename}`)
 
-        var workerProcess = child_process.exec(`cat ${req.files.file.tempFilePath} >> ${filename}`,function
+        var workerProcess = child_process.exec(`/bin/cat ${req.files.file.tempFilePath} >> ${filename}`,function
             (error, stdout, stderr) {
 
             if (error) {
