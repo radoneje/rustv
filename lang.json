@@ -7,7 +7,10 @@
     "famName":"Фамилия",
     "logon":"Войти",
     "pollClosed":"Голосование окончено",
-    "start": "Старт"
+    "start": "Старт",
+    "stop": "Стоп",
+    "reset": "Сбросить",
+    "techChat": "Служебный чат"
   },
   "en": {
     "registration":"Registration",
@@ -17,6 +20,9 @@
     "famName":"Last name",
     "logon":"Log On",
     "pollClosed":"The poll have just closed",
-    "start": "Start"
+    "start": "Start",
+    "stop": "Stop",
+    "reset": "Reset",
+    "techChat": "Stages chat"
   }
 }
