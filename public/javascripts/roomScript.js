@@ -708,7 +708,7 @@ window.onload=function () {
             //
             sect:function () {
                // window.scrollTo(0,document.body.scrollHeight);
-                console.log("sect". _this.sect
+                console.log("sect", this.sect)
             }
         },
          computed: {
