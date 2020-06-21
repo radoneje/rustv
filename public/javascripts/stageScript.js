@@ -64,7 +64,7 @@ window.onload=function () {
             messageFromMod:"",
             messageToModText:"",
             errorMessage:"",
-            stageTimer:0,
+            stageTimer:5*60,
             stageTimeout:null,
         },
         methods:{
