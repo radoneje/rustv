@@ -83,6 +83,7 @@ window.onload=function () {
                 }
             },
             ResetTimer:function(){
+                var _this=this;
                 _this.stageTimer=0;
             },
             sectActive:function (item) {
