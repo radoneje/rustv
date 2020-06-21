@@ -834,11 +834,11 @@ window.onload=function () {
                     return;
                 }
                 console.log("onStartStageRecord", id, _this.socket.id)
-                arrVideo.forEach(item=>{
+                arrVideo.forEach(async item=>{
                     if(item.isMyVideo && !item.isDesktop)
                     {
                         console.log(item);
-                        var dt=axios.get("/rest/api/getRecFileId/"+eventid+"/"+roomid)
+                        var dt=await axios.get("/rest/api/getRecFileId/"+eventid+"/"+roomid)
                         console.log("stage record id=",dt.data)
                         mediaRecorder= new MediaRecorder(item.elem.srcObject);
                         mediaRecorder.ondataavailable = function(e) {
