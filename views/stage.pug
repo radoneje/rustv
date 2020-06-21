@@ -27,12 +27,11 @@ block content
 
       div(style="display:flex")
           div.greenBtn(v-show="!stageTimeout" style='padding: 4px; margin-right:10px;margin-left:10px' v-on:click="StartTimer()") #{lang.start}
-          div.greenBtn.active(v-show="stageTimeout" style='padding: 4px; margin-right:10px;margin-left:10px' v-on:click="StartTimer()") Стоп
-          div.greenBtn(style=' padding: 4px; margin-right:10px' v-on:click="stageTimer=0") Сбросить
-      div.stageLTitle Трансляция
+          div.greenBtn.active(v-show="stageTimeout" style='padding: 4px; margin-right:10px;margin-left:10px' v-on:click="StartTimer()") #{lang.stop}
+          div.greenBtn(style=' padding: 4px; margin-right:10px' v-on:click="stageTimer=0") #{lang.reset}
       div.stageTrPreview(style="width:100%")
           include elements/mainVideo
-      div.stageLTitle Служебный чат
+      div.stageLTitle #{lang.techChat}
       div.rContentWr.stageLW(style="height: calc(100% - 107px);")
           div.rBody(id="stageLBox" )
             div.qItem(v-for="item in stageChat" v-bind:class="{my:(item.userid==user.id)}")
