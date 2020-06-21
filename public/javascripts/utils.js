@@ -244,6 +244,16 @@ function connect(_this, roomid, clbk){
         if(_this.onStageRecordStopped)
             _this.onStageRecordStopped(data)
     });
+    socket.on("resetTimer", function(data){
+
+        if(_this.OnResetTimer)
+            _this.OnResetTimer(data)
+    });
+    socket.on("startTimer", function(data){
+
+        if(_this.OnStartTimer)
+            _this.OnStartTimer(data)
+    });
 
 
     socket.on("reload", function(data){

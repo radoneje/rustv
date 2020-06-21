@@ -246,6 +246,19 @@ class socket{
 
                 }
             })
+
+            socket.on("startTimer",(dt)=>{
+                if(id) {
+                    //  dt.streamid=dt.streamid.replace(/dt^/, "")
+                    _this.clients.sendToRoomUsers("startTimer", dt, roomid)
+                }
+            })
+            socket.on("resetTimer",(dt)=>{
+                if(id) {
+                    //  dt.streamid=dt.streamid.replace(/dt^/, "")
+                    _this.clients.sendToRoomUsers("resetTimer", dt, roomid)
+                }
+            })
             socket.on("startStageRecord",(dt)=>{
                 if(id) {
                   //  dt.streamid=dt.streamid.replace(/dt^/, "")

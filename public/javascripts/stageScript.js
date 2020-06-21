@@ -70,6 +70,7 @@ window.onload=function () {
         methods:{
             StartTimer:function(){
                 var _this=this;
+                _this.socket.emit("startTimer", {stageTimeout:this.stageTimeout?true:null})
                 if(this.stageTimeout) {
                     clearTimeout(this.stageTimeout)
                     this.stageTimeout=null;
@@ -82,9 +83,32 @@ window.onload=function () {
                     _this.stageTimeout=setTimeout(updateStageTimer,1000);
                 }
             },
-            ResetTimer:function(){
+            OnStartTimer:function(data){
                 var _this=this;
-                _this.stageTimer=0;
+                _this.stageTimeout=data.stageTimeout;
+                if(this.stageTimeout) {
+                    clearTimeout(this.stageTimeout)
+                    this.stageTimeout=null;
+                }
+                else {
+                    this.stageTimeout=setTimeout(updateStageTimer,1000);
+                }
+                function updateStageTimer() {
+                    _this.stageTimer++;
+                    _this.stageTimeout=setTimeout(updateStageTimer,1000);
+                }
+            },
+            ResetTimer:function(){
+
+                var _this=this;
+               // _this.stageTimer=0;
+                _this.socket.emit("resetTimer", 0)
+
+            },
+            OnResetTimer:function(data){
+                var _this=this;
+                 _this.stageTimer=data;
+
             },
             sectActive:function (item) {
                 var _this=this;
