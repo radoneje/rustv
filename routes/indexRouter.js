@@ -5,6 +5,9 @@ var path = require('path')
 var fs = require('fs')
 
 /* GET home page. */
+router.get('/ping', function(req, res, next) {
+  res.send("pong "+ new Date());
+});
 router.get('/', function(req, res, next) {
   console.log(req.headers.host)
      // if(req.headers.host.indexOf("localhost")>=0)
