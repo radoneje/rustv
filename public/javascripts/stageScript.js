@@ -836,6 +836,15 @@ window.onload=function () {
                     btn.classList.add("warning");
                 }
             },
+            onStageRecordStopped:function(id){
+                console.log("onStageRecordStopped", id)
+                var btn=document.getElementById("recbtn"+id)
+                if(btn)
+                {
+                    btn.classList.remove("active");
+                    btn.classList.remove("warning");
+                }
+            },
             onStopStageRecord:function(id){
                 var _this=this;
                 console.log("onStopStageRecord")
