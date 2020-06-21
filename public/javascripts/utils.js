@@ -228,7 +228,7 @@ function connect(_this, roomid, clbk){
     });
     socket.on("stageRecordStarted", function(data){
 
-        if(_this.onStartStageRecord)
+        if(_this.OnStageRecordStarted)
             _this.OnStageRecordStarted(data)
     });
 
