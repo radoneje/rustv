@@ -126,7 +126,6 @@ window.onload=function () {
                         _this.activeSection=e.id
                     {
                         setTimeout(()=>{
-                            rBody
                             var parentElem=document.querySelector(".rContentWr");
                             if(parentElem){
                                 var elem=parentElem.querySelector(".rBody");
