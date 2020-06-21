@@ -447,7 +447,7 @@ window.onload=function () {
              },
             videoRecord:function (id) {
                 console.log("startStageRecord video", id)
-                socket.emit("startStageRecord");
+                socket.emit("startStageRecord", id);
             },
             startMyVideo:async function () {
 
