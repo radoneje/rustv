@@ -9,7 +9,7 @@ window.onload=function () {
     }
     var WowzaCfg = null;
     var BitrateCfg = null;
-
+    var mediaRecorder=null;
     var arrAudio = [];
 
     var wowzaRecievers=[];
@@ -825,7 +825,18 @@ window.onload=function () {
             },
             onStartStageRecord:function (id) {
                 var _this=this;
+                if(id!= _this.socket.id)
+                    return;
+
+                if(mediaRecorder)
+                {
+                    console.log("record in process")
+                    return;
+                }
                 console.log("onStartStageRecord", id, _this.socket.id)
+                arrVideo.forEach(item=>{
+                    console.log(item);
+                })
             }
 
 
