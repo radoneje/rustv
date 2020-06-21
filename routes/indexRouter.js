@@ -115,11 +115,13 @@ router.get('/stage/:id',  async (req, res, next) =>{
 
   var room=rooms[0]
 
+
+
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stage/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
   res.header("X-Frame-Options","")
-  res.render('stage', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false});
+  res.render('stage', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false, lang:(require("../lang.json"))[events[0].lang||"ru"]});
 
 })
 router.get('/stagePgm/:id',  async (req, res, next) =>{

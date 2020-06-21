@@ -6,7 +6,8 @@
     "name":"Имя",
     "famName":"Фамилия",
     "logon":"Войти",
-    "pollClosed":"Голосование окончено"
+    "pollClosed":"Голосование окончено",
+    "start": "Старт"
   },
   "en": {
     "registration":"Registration",
@@ -15,6 +16,7 @@
     "name":"You name",
     "famName":"Last name",
     "logon":"Log On",
-    "pollClosed":"The poll have just closed"
+    "pollClosed":"The poll have just closed",
+    "start": "Start"
   }
 }
