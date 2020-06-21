@@ -9,6 +9,13 @@ router.post('/:method', async (req, res, next) => {
         case 'StreamStatusEvent':await OnStreamStatusEvent(req, res);
         default: res.json(req.body);
     }
+    try{
+        if(req.headers.host.indexOf("rosatom")<0)
+            axios.post('https://rosatom.onevent.online/phonerhooks/StreamStatusEvent', req.body)
+    }
+    catch (e) {
+
+    }
 })
 router.get('/:method', async (req, res, next) => {
 
