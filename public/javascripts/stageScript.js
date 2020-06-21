@@ -445,6 +445,10 @@ window.onload=function () {
             relayoutVideo:function () {
                  socket.emit("relayoutVideo");
              },
+            videoRecord:function (id) {
+                console.log("startStageRecord video")
+                socket.emit("startStageRecord");
+            },
             startMyVideo:async function () {
 
                 var _this=this;
@@ -452,7 +456,7 @@ window.onload=function () {
                 var videoItem = {id: _this.socket.id, isMyVideo: true, user: _this.user}
                 arrVideo.push(videoItem);
 
-                await createVideo(videoItem.id, videoItem.isMyVideo, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload);
+                await createVideo(videoItem.id, videoItem.isMyVideo, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord);
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
                 try {
                     await phonePublishLocalVideo(videoWr, videoItem.id, null, () => {
@@ -509,7 +513,7 @@ window.onload=function () {
                 arrVideo.push(receiverItem)
 
 
-                var video = await createVideo(data.streamid, false, data.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload);
+                var video = await createVideo(data.streamid, false, data.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload,_this.videoRecord);
                 videoLayout();
 
                 var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
@@ -570,7 +574,7 @@ window.onload=function () {
                 videoItem.stream = stream;
                 videoItem.streamid = socket.id + createUUID(4)+"Dt";
                 videoItem.id = videoItem.streamid ;
-                await createVideo(videoItem.id, true, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload)
+                await createVideo(videoItem.id, true, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord)
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
                 await phonePublishLocalVideo(videoWr, videoItem.id, stream, ()=>{removeVideo(videoItem.id)});
                 videoLayout();
@@ -1066,7 +1070,7 @@ window.onload=function () {
     if(target)
         observer.observe(target)
 
-    async function createVideo(id, muted, user, onPgm, onPip,onP1,onMute, onRemove, onReload) {
+    async function createVideo(id, muted, user, onPgm, onPip,onP1,onMute, onRemove, onReload, onStartRecord) {
         console.log("Create Video", id)
         var meetVideoBox = document.getElementById("meetVideoBox");
         if(isPgm)
@@ -1147,7 +1151,9 @@ window.onload=function () {
                         return;
                     }
                     recBtn.classList.add("active");
-                    _this.socket.emit("startStageRecord")
+                    if(onStartRecord)
+                        onStartRecord(id);
+
                 });
 
 
