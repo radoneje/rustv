@@ -1388,14 +1388,14 @@ router.post("/stageRecord/:recId/", async (req, res, next) => {
                 console.log('Error code: '+error.code);
                 console.log('Signal received: '+error.signal);
             }
-            console.log('stdout: ' + stdout);
-            console.log('stderr: ' + stderr);
+            //console.log('stdout: ' + stdout);
+           // console.log('stderr: ' + stderr);
             fs.unlinkSync(req.files.file.tempFilePath)
             res.json("append");
         });
 
         workerProcess.on('exit', function (code) {
-            console.log('Child process exited with exit code '+code);
+            //console.log('Child process exited with exit code '+code);
         });
 
         /*
