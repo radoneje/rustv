@@ -838,7 +838,7 @@ window.onload=function () {
                     if(item.isMyVideo && !item.isDesktop)
                     {
                         console.log(item);
-                        var dt=await axios.get("/rest/api/getRecFileId/"+eventid+"/"+roomid)
+                        var recId=await axios.get("/rest/api/getRecFileId/"+eventid+"/"+roomid)
                         console.log("stage record id=",dt.data)
                         mediaRecorder= new MediaRecorder(item.elem.srcObject,{mimeType: 'video/webm; codecs=h264'});
                         mediaRecorder.ondataavailable = function(e) {
@@ -859,7 +859,7 @@ window.onload=function () {
                                     }
                                 }
                             }
-                            xhr.open("POST", '/rest/api/stageRecord/'+id,true );
+                            xhr.open("POST", '/rest/api/stageRecord/'+recId.data,true );
                             xhr.send(fd);
 
                         }
