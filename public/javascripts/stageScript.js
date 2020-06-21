@@ -839,7 +839,7 @@ window.onload=function () {
                     {
                         console.log(item);
                         var recId=await axios.get("/rest/api/getRecFileId/"+eventid+"/"+roomid)
-                        console.log("stage record id=",dt.data)
+                        console.log("stage record id=",recId.data)
                         mediaRecorder= new MediaRecorder(item.elem.srcObject,{mimeType: 'video/webm; codecs=h264'});
                         mediaRecorder.ondataavailable = function(e) {
                            // chunks.push(e.data);
