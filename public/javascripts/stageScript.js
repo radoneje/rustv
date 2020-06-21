@@ -116,6 +116,7 @@ window.onload=function () {
             },
             OnResetTimer:function(data){
                 var _this=this;
+                console.log("OnResetTimer", data)
                  _this.stageTimer=data;
 
             },
