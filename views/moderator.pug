@@ -45,7 +45,7 @@ block content
                 div.aModSectMenu
                     div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==2}" v-on:click="lSectActiveIndex=2")
                         div.aModSectTitle Вопросы ({{q.length}})
-                    div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==4}" v-on:click="lSectActiveIndex=4")
+                    div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==4}" v-on:click="")
                         div.aModSectTitle Голосования ({{votes.length}})
                 div.aSectBody(id="qBox" v-if="lSectActiveIndex==2")
                     div.aSectSwith(v-on:click="qOnOff()")
@@ -82,6 +82,24 @@ block content
                             span.link.red(v-on:click="deleteQ(item)") Удалить
                             span &nbsp;&nbsp;
                             span {{moment(item.date).format("HH:mm")}}
+                div.aSectBody(id="voteBox" v-if="lSectActiveIndex==14")
+                    div.aSectSwith(v-on:click="lentaOnOff()")
+                        div(v-if="isLenta") Лента включена
+                        div.warning(v-else) Лента выключена
+                    div.greenBtn.clearBtn(v-on:click="voteAdd()") Добавить голосование
+                    div.qItem(v-for="item in votes" v-bind:class="{ready:item.isReady}")
+                        input.ask(type='text' placeholder="введите текст вопроса" v-model="item.title" v-on:change="voteChange(item)")
+                        div Ответы ({{caclAnswCount(item)}}):
+                            div(v-for="answ in sortedVoteAnsvers(item.answers)")
+                                div
+                                    span {{CalcAnswPercent(answ, item)}}% &nbsp;
+                                    input.ask(type='text' placeholder="введите текст ответа" v-on:change="voteAnswerChange(answ)" v-model="answ.title")
+                            div.qItemDate
+                                span.link.green(v-on:click="voteAddAnswer(item)" v-if="!item.isactive") Добавить ответ
+                                span.link.green(v-if="!item.isactive" v-on:click="voteStart(item)") &nbsp;&nbsp; Запустить
+                                span.link.red(v-else v-on:click="voteStart(item)") &nbsp;&nbsp; Убрать
+                                span.link.green(v-if="!item.iscompl && item.isactive" v-on:click="voteShowResult(item)") &nbsp;&nbsp; Показать результаты
+                                span.link.red(v-if="item.iscompl && item.isactive" v-on:click="voteShowResult(item)") &nbsp;&nbsp; Убрать результаты
 
 
                 div.rFooter
