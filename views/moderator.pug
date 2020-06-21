@@ -43,9 +43,9 @@ block content
         div.aModBox(style="")
             div.aModSect
                 div.aModSectMenu
-                    div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==2}" v-on:click="lSectActiveIndex=2")
+                    div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==2}" v-on:click="activeteLSect(2)")
                         div.aModSectTitle Вопросы ({{q.length}})
-                    div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==4}" v-on:click="lSectActiveIndex=1")
+                    div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==4}" v-on:click="activeteLSect(4)")
                         div.aModSectTitle Голосования ({{votes.length}})
                 div.aSectBody(id="qBox" v-if="lSectActiveIndex==2")
                     div.aSectSwith(v-on:click="qOnOff()")
