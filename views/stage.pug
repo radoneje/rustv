@@ -23,7 +23,7 @@ block content
         span {{formatedTimeout}}
         if (isMod)
           span(style='font-size: 12px;width: 76px;margin-left:10px;') лимит:
-            input#stageTimerLimit(style='font-size: 12px;width: 76px;margin-left:5px;' value="000000")
+            input#stageTimerLimit(style='font-size: 12px;width: 76px;margin-left:5px;' value="000500")
 
       div(style="display:flex")
           div.greenBtn(v-show="!stageTimeout" style='padding: 4px; margin-right:10px;margin-left:10px' v-on:click="StartTimer()") #{lang.start}
