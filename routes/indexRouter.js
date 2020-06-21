@@ -71,7 +71,7 @@ router.get('/event/:id',  async (req, res, next) =>{
 
 })
 router.get('/showrecords/:eventid/:roomid',  async (req, res, next) => {
-  if(!req.session["admin"+req.params.eventid])
+  if(!req.session["moderator"+req.params.eventid])
     return res.redirect("/login/"+req.params.eventid+"?redirect="+encodeURI('/showrecords/'+req.params.eventid+"/"+req.params.roomid));
 
   var records=await req.knex.select("*").from("t_stagerecords").where({roomid:eq.params.roomid}).orderBy("date");
