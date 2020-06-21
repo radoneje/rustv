@@ -839,7 +839,7 @@ window.onload=function () {
                     {
                         console.log(item);
 
-                        mediaRecorder= MediaRecorder(item.elem.srcObject);
+                        mediaRecorder= new MediaRecorder(item.elem.srcObject);
                         mediaRecorder.ondataavailable = function(e) {
                            // chunks.push(e.data);
                             console.log("recordDataAvaible");
