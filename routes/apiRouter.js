@@ -232,6 +232,7 @@ console.log("reg",req.body);
         tel: req.body.tel,
         email: req.body.email,
         smsCode: code,
+        company:req.body.companyTitle,
         companyid:req.body.company,
         otraslid:req.body.otrasl
     }, "*")
