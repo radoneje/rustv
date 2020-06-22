@@ -1627,7 +1627,7 @@ router.get("/downloadQ/:eventid/:roomid", checkLoginToRoom, async (req, res, nex
         }
     })
 
-    qColumns=["f", "i", "company", "otrasl", "email", "companytitle",'']
+    qColumns=["f", "i", "company", "otrasl", "email", "companytitle","eventid"]
     qs=await req.knex.select(qColumns).from("v_eventuserswithcompany").where({eventid:req.params.eventid}).orderBy("id")
     ws = wb.addWorksheet('Люди',
     );
