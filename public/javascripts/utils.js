@@ -330,6 +330,8 @@ function connect(_this, roomid, clbk){
             }).length==0)
            var objDiv = document.getElementById("chatBox");
             var needScrool=false;
+            if(objDiv)
+            console.log("aaa",objDiv.scrollTop, objDiv.scrollHeight-130)
             if(objDiv && objDiv.scrollTop> objDiv.scrollHeight-130) {
                 needScrool=true;
             }
