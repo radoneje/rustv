@@ -122,9 +122,9 @@ window.onload=function () {
                 var _this=this;
                 this.sect.forEach(function (e) {
                     e.isActive=(item.id==e.id);
-                    if(e.isActive)
+                    if(e.isActive){
                         _this.activeSection=e.id
-                    {
+
                         setTimeout(()=>{
                             var parentElem=document.querySelector(".rContentWr");
                             if(parentElem){
