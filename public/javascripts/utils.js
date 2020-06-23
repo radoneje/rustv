@@ -336,11 +336,11 @@ function connect(_this, roomid, clbk){
                 needScrool=true;
             }
             _this.chat.push(data);
-            if(needScrool || true) {
+            // if(needScrool || true) {
                     setTimeout(function () {
                         objDiv.scrollTop = objDiv.scrollHeight;
-                    }, 0)
-            }
+                    }, 100)
+           // }
         });
     socket.on("stageChatAdd", function(data){
         if(_this.stageChat.filter(function (u) {
