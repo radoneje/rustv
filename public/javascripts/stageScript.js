@@ -1076,12 +1076,13 @@ window.onload=function () {
                 ]
             }
             setTimeout(()=>{
-            /*    var hlsVideo=document.getElementById("video")
+                var hlsVideo=document.getElementById("video")
                 if(hlsVideo){
                     hlsVideo.muted=true;
-                //    initHLS(hlsVideo)
+
+                    initHLS(hlsVideo)
                 }
-                else*/
+                else
                 if(typeof (mainVideoElem)!="undefined") {
                     mainVideoElem.muted = !val;
                 }
