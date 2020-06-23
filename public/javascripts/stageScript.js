@@ -1081,6 +1081,8 @@ window.onload=function () {
                     hlsVideo.muted=true;
 
                     initHLS(hlsVideo)
+                    setTimeout(()=>{hlsVideo.play()},4000)
+
                 }
                 else
                 if(typeof (mainVideoElem)!="undefined") {
