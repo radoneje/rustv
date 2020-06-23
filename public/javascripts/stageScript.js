@@ -68,6 +68,7 @@ window.onload=function () {
             stageTimeout:null,
         },
         methods:{
+
             showRecords:function(){
                 window.open('/showrecords/'+eventid+"/"+roomid);
             },
@@ -384,7 +385,10 @@ window.onload=function () {
                         q.likes=data.likes;
                 })
             },
-
+            sortedVoteAnsvers:function(arr){
+                var nArr=arr.slice(0)
+                return nArr.sort((a,b)=>{return a.id-b.id});
+            },
             OnVoteAdd:function(data){
                 var _this=this;
 
