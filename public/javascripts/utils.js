@@ -752,6 +752,7 @@ function checkVisible(elm) {
     return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
 }
 function initHLS(video) {
+    return ;
     if( Hls.isSupported()) {
 
         var hls = new Hls();
