@@ -25,8 +25,8 @@ window.onload=function () {
             //chart.yScale().minimumGap(0).maximumGap(0);
             //chart.xScale().minimumGap(0).maximumGap(0);
 
-            chart.yScale().minimum(-50),maximum(50);
-            chart.xScale().minimum(-50),maximum(50);
+            chart.yScale().minimum(-50).maximum(50);
+            chart.xScale().minimum(-50).maximum(50);
 
 
             chart
