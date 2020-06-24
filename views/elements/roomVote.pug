@@ -21,7 +21,7 @@
             div.qItem(v-for="item in tags" v-bind:class="{ready:item.isReady}" v-if="item.isactive")
                 input.ask(type='text' placeholder="введите название облака" v-model="item.title" v-on:change="tagsChange(item)")
                 div(style="margin-bottom:10px" v-if="!item.iscompl")
-                    input.ask(type='text' placeholder="Напишите слова через запятую"  v-model="item.text" v-bind:readonly="item.done")
+                    input.ask.tInput(type='text' placeholder="Напишите слова через запятую"  v-model="item.text" v-bind:readonly="item.done")
                     div(style="margin-top:10px")
                         span.link.green( v-on:click="tagsDo(item)" v-if="!item.done") &nbsp;&nbsp; Проголосовать &nbsp;&nbsp;
                 div(style="margin:10px" v-if="item.iscompl")
