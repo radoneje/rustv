@@ -980,7 +980,7 @@ router.post("/tagsDo/:eventid/:roomid", checkLoginToRoom, async (req, res, next)
 
     var ret=[]
     words.forEach(w=>{
-        ret.push( w.replace(/^\s+|\s+$/g, ""));
+        ret.push( w.replace(/^\s+|\s+$/g, "").toUpperCase());
     })
     words=ret.filter(w=>{
         return w.length>0
