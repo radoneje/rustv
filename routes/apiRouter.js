@@ -866,6 +866,27 @@ router.post("/voteAdd/:eventid/:roomid", checkLoginToRoom, async (req, res, next
     req.transport.emit("voteAdd", v, req.params.roomid);
     res.json(v[0]);
 })
+router.post("/poleAdd/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var v = await req.knex("t_pole").insert({
+        roomid: req.params.roomid,
+        date: (new Date())
+    }, "*")
+    v[0].answers=[];
+    req.transport.emit("poleAdd", v, req.params.roomid);
+    res.json(v[0]);
+})
+router.post("/tagsAdd/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var v = await req.knex("t_tags").insert({
+        roomid: req.params.roomid,
+        date: (new Date())
+    }, "*")
+    v[0].answers=[];
+    req.transport.emit("tagsAdd", v, req.params.roomid);
+    res.json(v[0]);
+})
+
 router.get("/votes/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
 
     var v = await req.knex.select("*").from("t_vote")
@@ -875,6 +896,29 @@ router.get("/votes/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
         var a =await req.knex.select("*").from("t_voteanswers").where({isDeleted:false, voteid:vote.id}).orderBy("id");
         vote.answers=a;
     }
+    res.json(v);
+})
+router.get("/pole/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var v = await req.knex.select("*").from("t_pole")
+        .where({isDeleted:false, roomid:req.params.roomid})
+        .orderBy("date")
+
+    res.json(v);
+})
+
+router.get("/tags/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var v = await req.knex.select("*").from("t_tags")
+        .where({isDeleted:false, roomid:req.params.roomid})
+        .orderBy("date")
+   // var vv =await req.knex.select('val', req.knex.raw('count(*)')).from('t_tagsanswers').where({tagsid:v[0].id}).groupBy('val').havingRaw("val IS NOT null");
+   // v[0].answers=vv;
+
+  //  for(var tags of v){
+      //  var a =await req.knex.select("*").from("t_poleanswers").where({isDeleted:false, voteid:vote.id}).orderBy("id");
+      //  pole.answers=a;
+   // }
     res.json(v);
 })
 
@@ -893,8 +937,73 @@ router.post("/voteChange/:eventid/:roomid", checkLoginToRoom, async (req, res, n
     req.transport.emit("voteChange", v[0], req.params.roomid);
     res.json(v);
 })
-router.post("/voteAddAnswer/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+router.post("/poleChange/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
 
+    var id=req.body.item.id;
+    delete req.body.item.id;
+    delete req.body.item.answers;
+    delete req.body.item.x;
+    delete req.body.item.y;
+    delete req.body.item.done;
+
+    var v = await req.knex("t_pole")
+        .update(req.body.item, "*").where({id:id})
+
+   // var vv=await req.knex.select("*").from("t_poleanswers").where({poleid:v[0].id}).orderBy("date")
+  //  v[0].answers=vv;
+
+    req.transport.emit("poleChange", v[0], req.params.roomid);
+    res.json(v);
+})
+router.post("/tagsChange/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var id=req.body.item.id;
+    delete req.body.item.id;
+    delete req.body.item.answers;
+    delete req.body.item.text;
+    delete req.body.item.done;
+
+    var v = await req.knex("t_tags")
+        .update(req.body.item, "*").where({id:id})
+
+   // var vv=await req.knex.select('val', req.knex.raw('count(*)')).from('t_tagsanswers').where({tagsid:v[0].id}).groupBy('val').havingRaw("val IS NOT null");
+   // v[0].answers=vv;
+
+    req.transport.emit("tagsChange", v[0], req.params.roomid);
+    res.json(v);
+})
+router.post("/tagsDo/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var tagsid=req.body.item.id;
+
+    var words=req.body.item.text.split(',');
+
+    var ret=[]
+    words.forEach(w=>{
+        ret.push( w.replace(/^\s+|\s+$/g, ""));
+    })
+    words=ret.filter(w=>{
+        return w.length>0
+    })
+
+    for(var w of words){
+        var v = await req.knex("t_tagsanswers")
+            .insert({val:w, tagsid:tagsid}, "*")
+    }
+    res.json(words.length);
+
+})
+router.post("/poleDo/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+
+    var poleid=req.body.item.id;
+        var v = await req.knex("t_poleanswers")
+            .insert({x:req.body.item.x,y:req.body.item.y, poleid:poleid}, "*")
+    res.json(v.length);
+
+})
+
+
+router.post("/voteAddAnswer/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     var v = await req.knex("t_voteanswers").insert({
         voteid: req.body.id
     }, "*")
@@ -902,6 +1011,7 @@ router.post("/voteAddAnswer/:eventid/:roomid", checkLoginToRoom, async (req, res
     req.transport.emit("voteAnswerAdd", v[0], req.params.roomid);
     res.json(v[0]);
 })
+
 router.post("/voteAnswerChange/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
 
     var id=req.body.item.id;

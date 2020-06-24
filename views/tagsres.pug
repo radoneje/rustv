@@ -1,0 +1,28 @@
+extends layout
+block head
+  link(rel='stylesheet', href='/stylesheets/old.css')
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  script(src="/javascripts/utils.js")
+
+  <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-tag-cloud.min.js"></script>
+  script(src="/javascripts/tagresScript.js")
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  link(rel='stylesheet', href='/stylesheets/login.css')
+  link(rel='stylesheet', href='/stylesheets/room.css')
+  if event.isClientCss
+    link(rel='stylesheet', href='/stylesheets/'+event.clientCss)
+
+block content
+  div.tagRes(id="app" )
+      #container(style="width: 100%;height: 100vh;")
+  script.
+      var tag=!{JSON.stringify(tag)}
+      var event = !{JSON.stringify(event)}
+      var  arr=!{arr};
+
+
+
+
+
+

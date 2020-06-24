@@ -200,9 +200,33 @@ class socket{
                 if(id)
                     _this.clients.sendToRoomUsers("voteAdd",  dt, roomid)
             })
+            socket.on("tagsAdd",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomUsers("tagsAdd",  dt, roomid)
+            })
+            socket.on("poleAdd",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomUsers("poleAdd",  dt, roomid)
+            })
             socket.on("voteChange",(dt)=>{
                 if(id)
                     _this.clients.sendToRoomUsers("voteChange",  dt, roomid)
+            })
+            socket.on("poleChange",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomUsers("poleChange",  dt, roomid)
+            })
+            socket.on("tagsChange",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomUsers("tagsChange",  dt, roomid)
+            })
+            socket.on("presFow",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomUsers("presFow",  dt, roomid)
+            })
+            socket.on("presRew",(dt)=>{
+                if(id)
+                    _this.clients.sendToRoomUsers("presRew",  dt, roomid)
             })
             socket.on("voteAnswerAdd",(dt)=>{
                 if(id)

@@ -319,6 +319,38 @@ router.get('/speakerRec/:id',  async (req, res, next) =>{
 router.get('/phoneVideoElem/:videoid',  async (req, res, next) =>{
   res.render("phoneVideoElem",{id:req.params.videoid})
 })
+router.get('/tagsres/:id',  async (req, res, next) =>{
+  var vv=await req.knex.select('val', req.knex.raw('count(*)')).from('t_tagsanswers').where({tagsid:req.params.id}).groupBy('val').havingRaw("val IS NOT null");
+  var tag=await req.knex.select('id','title', 'roomid').from('t_tags').where({id:req.params.id})
+  if(tag.length==0)
+    return res.sendStatus(404);
+console.log("tags", tag)
+  var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:tag[0].roomid})
+  if(rooms.length<1)
+    return res.sendStatus(404);
+  var room=rooms[0]
+  var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
+
+
+  res.render("tagsres",{title:"results", arr:JSON.stringify(vv), tag:tag[0], event:events[0]})
+})
+router.get('/poleres/:id',  async (req, res, next) =>{
+  var vv=await req.knex.select("x", "y").from('t_poleanswers').where({poleid:req.params.id});
+  var pole=await req.knex.select('id','title', 'roomid').from('t_pole').where({id:req.params.id})
+  if(pole.length==0)
+    return res.sendStatus(404);
+
+  var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:pole[0].roomid})
+  if(rooms.length<1)
+    return res.sendStatus(404);
+  var room=rooms[0]
+  var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
+
+
+  res.render("poleres",{title:"results", arr:JSON.stringify(vv), pole:pole[0], event:events[0]})
+})
+
+
 /*
 router.get('/meeting/:eventid',  async (req, res, next) =>{
   if(!req.session["user"+req.params.eventid])

@@ -55,8 +55,126 @@ window.onload=function () {
             messageFromMod:"",
             messageToModText:"",
             arrVideo:  arrVideo,
+            tags:[],
+            pole:[]
         },
         methods:{
+
+            poleClick:function(item,event){
+                if(item.done)
+                    return;
+                var box=document.getElementById("pole"+item.id);
+                var x=parseInt((event.offsetX/box.offsetWidth)*100)
+                var y=parseInt((event.offsetY/box.offsetHeight)*100)
+                var elem=box.querySelector(".poleDot");
+                if(!elem){
+                    elem=document.createElement("div");
+                    elem.classList.add("poleDot")
+                    box.appendChild(elem);
+                }
+                elem.style.left=x+"%";
+                elem.style.top=y+"%";
+
+            },
+            poleDo:function(item){
+                var box=document.getElementById("pole"+item.id);
+                var elem=box.querySelector(".poleDot");
+                if(!elem)
+                    return;
+                item.x=elem.style.left.replace("%","")
+                item.y=elem.style.top.replace("%","")
+
+                var tmp=item.title || "";
+                item.done=true
+                item.title='';
+                setTimeout(function () {
+                    item.title=tmp+"";
+                },0)
+                axios.post("/rest/api/poleDo/"+eventid+"/"+roomid,{item})
+                    .then(function () {
+                        elem.style.background="green"
+
+                    })
+            },
+            tagsDo:function(item){
+                var text=item.text;
+                if(!text || text.length==0)
+                    return;
+                var tmp=item.title || "";
+                item.done=true
+                item.title='';
+                setTimeout(function () {
+                    item.title=tmp+"";
+                },0)
+                axios.post("/rest/api/tagsDo/"+eventid+"/"+roomid,{item})
+                    .then(function () {
+
+
+                    })
+            },
+            tagsResShow:function(item){
+                window.open('/tagsres/'+item.id)
+            },
+            poleResShow:function(item){
+                window.open('/poleres/'+item.id)
+            },
+            OnPoleAdd:function(data){
+                var _this=this;
+                var tmp=[];
+                this.pole.forEach(d=>{
+                    if(d.id==data.id)
+                        d=data;
+                    tmp.push(d)
+
+                })
+                data.forEach(d=>{
+                    tmp.push(d)
+                })
+                this.pole=tmp;
+            },
+            OnPoleChange:function(data){
+
+                var _this=this;
+                var tmp=[];
+                this.pole.forEach(d=>{
+                    if(d.id==data.id)
+                        d=data;
+                    tmp.push(d)
+
+                })
+
+                this.pole=tmp;// _this.tags.filter(()=>{return true})
+                console.log("OnPoleChange")
+            },
+
+            OnTagsAdd:function(data){
+                var _this=this;
+                var tmp=[];
+                this.tags.forEach(d=>{
+                    if(d.id==data.id)
+                        d=data;
+                    tmp.push(d)
+
+                })
+                data.forEach(d=>{
+                    tmp.push(d)
+                })
+                this.tags=tmp;
+            },
+            OnTagsChange:function(data){
+
+                var _this=this;
+                var tmp=[];
+                this.tags.forEach(d=>{
+                    if(d.id==data.id)
+                        d=data;
+                    tmp.push(d)
+
+                })
+
+                this.tags=tmp;// _this.tags.filter(()=>{return true})
+                console.log("OnTagsChange")
+            },
             sortedVoteAnsvers:function(arr){
                 var nArr=arr.slice(0)
                 return nArr.sort((a,b)=>{return a.id-b.id});
@@ -884,6 +1002,16 @@ window.onload=function () {
                         .then(function (r) {
                             console.log("votes", r.data)
                             _this.votes=r.data;
+                        })
+                    axios.get("/rest/api/tags/"+eventid+"/"+roomid)
+                        .then(function (r) {
+                            console.log("tags", r.data)
+                            _this.tags=r.data;
+                        })
+                    axios.get("/rest/api/pole/"+eventid+"/"+roomid)
+                        .then(function (r) {
+                            console.log("tags", r.data)
+                            _this.pole=r.data;
                         })
 
 

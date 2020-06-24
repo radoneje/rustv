@@ -76,10 +76,48 @@ window.onload=async function () {
             findVideo:false,
             findGreen:false,
             findYellow:false,
-            findRed:false
+            findRed:false,
+            pole:[],
+            tags:[]
 
         },
         methods:{
+            poleClick:function(item,event){
+                if(item.done)
+                    return;
+                var box=document.getElementById("pole"+item.id);
+                var x=parseInt((event.offsetX/box.offsetWidth)*100)
+                var y=parseInt((event.offsetY/box.offsetHeight)*100)
+                var elem=box.querySelector(".poleDot");
+                if(!elem){
+                    elem=document.createElement("div");
+                    elem.classList.add("poleDot")
+                    box.appendChild(elem);
+                }
+                elem.style.left=x+"%";
+                elem.style.top=y+"%";
+
+            },
+            poleDo:function(item){
+                var box=document.getElementById("pole"+item.id);
+                var elem=box.querySelector(".poleDot");
+                if(!elem)
+                    return;
+                item.x=elem.style.left.replace("%","")
+                item.y=elem.style.top.replace("%","")
+
+                var tmp=item.title || "";
+                item.done=true
+                item.title='';
+                setTimeout(function () {
+                    item.title=tmp+"";
+                },0)
+                axios.post("/rest/api/poleDo/"+eventid+"/"+roomid,{item})
+                    .then(function () {
+                    elem.style.background="green"
+
+                    })
+            },
             activeteLSect:function(i){
                 this.lSectActiveIndex=i;
             },
@@ -209,11 +247,23 @@ window.onload=async function () {
 
                     })
             },
+            poleAdd:function(){
+                axios.post("/rest/api/poleAdd/"+eventid+"/"+roomid,{})
+            },
+            tagsAdd:function(){
+                axios.post("/rest/api/tagsAdd/"+eventid+"/"+roomid,{})
+            },
             voteAdd:function(){
                 axios.post("/rest/api/voteAdd/"+eventid+"/"+roomid,{})
             },
             voteChange:function(item){
                 axios.post("/rest/api/voteChange/"+eventid+"/"+roomid,{item})
+            },
+            tagsChange:function(item){
+                axios.post("/rest/api/tagsChange/"+eventid+"/"+roomid,{item})
+            },
+            poleChange:function(item){
+                axios.post("/rest/api/poleChange/"+eventid+"/"+roomid,{item})
             },
             OnVoteAdd:function(data){
 
@@ -222,9 +272,37 @@ window.onload=async function () {
                     _this.votes.push(d)
                 })
             },
+            OnTagsAdd:function(data){
+
+                var _this=this;
+                data.forEach(d=>{
+                    _this.tags.push(d)
+                })
+            },
+            OnPoleAdd:function(data){
+
+                var _this=this;
+                data.forEach(d=>{
+                    _this.pole.push(d)
+                })
+            },
             OnVoteChange:function(data){
                 var _this=this;
                 _this.votes.forEach(d=>{
+                    if(d.id==data.id)
+                        d=data;
+                })
+            },
+            OnPoleChange:function(data){
+                var _this=this;
+                _this.pole.forEach(d=>{
+                    if(d.id==data.id)
+                        d=data;
+                })
+            },
+            OnTagsChange:function(data){
+                var _this=this;
+                _this.tags.forEach(d=>{
                     if(d.id==data.id)
                         d=data;
                 })
@@ -258,9 +336,48 @@ window.onload=async function () {
                 item.isactive=!item.isactive
                 axios.post("/rest/api/voteChange/"+eventid+"/"+roomid,{item})
             },
+            tagsStart:function(item){
+                item.isactive=!item.isactive
+                axios.post("/rest/api/tagsChange/"+eventid+"/"+roomid,{item})
+            },
+            poleStart:function(item){
+                item.isactive=!item.isactive
+                axios.post("/rest/api/poleChange/"+eventid+"/"+roomid,{item})
+            },
+
             voteShowResult:function(item){
                 item.iscompl=!item.iscompl
                 axios.post("/rest/api/voteChange/"+eventid+"/"+roomid,{item})
+            },
+            tagsShowResult:function(item){
+                item.iscompl=!item.iscompl
+                axios.post("/rest/api/tagsChange/"+eventid+"/"+roomid,{item})
+            },
+            poleShowResult:function(item){
+                item.iscompl=!item.iscompl
+                axios.post("/rest/api/poleChange/"+eventid+"/"+roomid,{item})
+            },
+            tagsDo:function(item){
+                var text=item.text;
+                if(!text || text.length==0)
+                    return;
+                var tmp=item.title || "";
+                item.done=true
+                item.title='';
+                setTimeout(function () {
+                    item.title=tmp+"";
+                },0)
+                axios.post("/rest/api/tagsDo/"+eventid+"/"+roomid,{item})
+                    .then(function () {
+
+
+                    })
+            },
+            tagsResShow:function(item){
+                window.open('/tagsres/'+item.id)
+            },
+            poleResShow:function(item){
+                window.open('/poleres/'+item.id)
             },
             startVideoChat:async function(item){
                 var _this=this;
@@ -818,6 +935,17 @@ window.onload=async function () {
                             console.log("votes", r.data)
                             _this.votes=r.data;
                         })
+                    axios.get("/rest/api/pole/"+eventid+"/"+roomid)
+                        .then(function (r) {
+                            console.log("pole", r.data)
+                            _this.pole=r.data;
+                        })
+                    axios.get("/rest/api/tags/"+eventid+"/"+roomid)
+                        .then(function (r) {
+                            console.log("tags", r.data)
+                            _this.tags=r.data;
+                        })
+
                     axios.get("/rest/api/files/"+eventid+"/"+roomid)
                         .then(function (r) {
 

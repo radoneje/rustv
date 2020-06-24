@@ -168,6 +168,15 @@ function connect(_this, roomid, clbk){
         if(_this.OnVoteAdd)
             _this.OnVoteAdd(data)
     });
+    socket.on("poleAdd", function(data){
+        if(_this.OnPoleAdd)
+            _this.OnPoleAdd(data)
+    });
+    socket.on("tagsAdd", function(data){
+        if(_this.OnTagsAdd)
+            _this.OnTagsAdd(data)
+    });
+
     socket.on("voteChange", function(data){
         if(_this.OnVoteChange)
             _this.OnVoteChange(data)
@@ -175,6 +184,22 @@ function connect(_this, roomid, clbk){
     socket.on("voteAnswerAdd", function(data){
         if(_this.OnVoteAnswerAdd)
             _this.OnVoteAnswerAdd(data)
+    });
+    socket.on("poleChange", function(data){
+        if(_this.OnPoleChange)
+            _this.OnPoleChange(data)
+    });
+    socket.on("presRew", function(data){
+        if(_this.OnPresRew)
+            _this.OnPresRew(data)
+    });
+    socket.on("presFow", function(data){
+        if(_this.OnPresFow)
+            _this.OnPresFow(data)
+    });
+    socket.on("tagsChange", function(data){
+        if(_this.OnTagsChange)
+            _this.OnTagsChange(data)
     });
     socket.on("voteAnswerChange", function(data){
         if(_this.OnVoteAnswerChange)

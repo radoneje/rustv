@@ -44,9 +44,52 @@ block content
             div.aModSect
                 div.aModSectMenu
                     div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==2}" v-on:click="activeteLSect(2)")
-                        div.aModSectTitle Вопросы ({{q.length}})
+                        div.aModSectTitle Вопр ({{q.length}})
                     div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==4}" v-on:click="activeteLSect(4)")
-                        div.aModSectTitle Голосования ({{votes.length}})
+                        div.aModSectTitle Голос ({{votes.length}})
+                    div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==8}" v-on:click="activeteLSect(8)")
+                        div.aModSectTitle Поле ({{pole.length}})
+                    div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==9}" v-on:click="activeteLSect(9)")
+                        div.aModSectTitle Теги ({{tags.length}})
+                div.aSectBody(id="poleBox" v-if="lSectActiveIndex==8")
+                    div.greenBtn.clearBtn(v-on:click="poleAdd()") Добавить поле
+                    div.qItem(v-for="item in pole" v-bind:class="{ready:item.isReady}")
+                        input.ask(type='text' placeholder="введите название поля" v-model="item.title" v-on:change="poleChange(item)")
+                        div(style="margin: 10px 0" v-if="!item.iscompl")
+                            div(style="width:100%;position: relative;height: 0;padding-bottom: 100%;")
+                                div(style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;")
+                                    div(:id="'pole'+item.id" v-on:click="poleClick(item, $event)" style="width: 100%;height: 100%;background:white;position: relative;")
+                                        div(style="width: 1px;height: 100%;background:black;position: absolute;top:0; left:50%")
+                                        div(style="width: 100%;height: 1px;background:black;position: absolute;top:50%; left:0")
+                                        input.ask(type='text' placeholder="введите текст здесь" v-model="item.top" v-on:change="poleChange(item)" style="background:black;width: 50%;position: absolute;top:0%; left:25%;text-align:center")
+                                        input.ask(type='text' placeholder="введите текст здесь" v-model="item.bottom" v-on:change="poleChange(item)" style="background:black;width: 50%;position: absolute;bottom:0%; left:25%;text-align:center")
+                                        input.ask(type='text' placeholder="введите текст здесь" v-model="item.l" v-on:change="poleChange(item)" style="background:black;width: 40%;position: absolute;bottom:50%; left:0%;text-align:left")
+                                        input.ask(type='text' placeholder="введите текст здесь" v-model="item.r" v-on:change="poleChange(item)" style="background:black;width: 40%;position: absolute;bottom:50%; right:0%;text-align:right")
+                            div(style="margin-top:10px")
+                                span.link.green( v-on:click="poleDo(item)" v-if="!item.done") &nbsp;&nbsp; Проголосовать &nbsp;&nbsp;
+                        div(style="margin:10px" v-if="item.iscompl")
+                            span.link.green( v-on:click="tagsResShow(item)") Посмотреть результаты
+                        div.qItemDate
+                            span.link.green(v-if="!item.isactive" v-on:click="poleStart(item)") &nbsp;&nbsp; Запустить
+                            span.link.red(v-else v-on:click="poleStart(item)") &nbsp;&nbsp; Убрать
+                            span.link.green(v-if="!item.iscompl && item.isactive" v-on:click="poleShowResult(item)") &nbsp;&nbsp; Показать результаты
+                            span.link.red(v-if="item.iscompl && item.isactive" v-on:click="poleShowResult(item)") &nbsp;&nbsp; Убрать результаты
+                div.aSectBody(id="tagBox" v-if="lSectActiveIndex==9")
+                    div.greenBtn.clearBtn(v-on:click="tagsAdd()") Добавить обл. тегов
+
+                    div.qItem(v-for="item in tags" v-bind:class="{ready:item.isReady}")
+                        input.ask(type='text' placeholder="введите название облака" v-model="item.title" v-on:change="tagsChange(item)")
+                        div(style="margin-bottom:10px" v-if="!item.iscompl")
+                            input.ask(type='text' placeholder="Напишите здесь Ваши вариаты ответа через запятую"  v-model="item.text" v-bind:readonly="item.done")
+                            div(style="margin-top:10px")
+                                span.link.green( v-on:click="tagsDo(item)" v-if="!item.done") &nbsp;&nbsp; Проголосовать &nbsp;&nbsp;
+                        div(style="margin:10px" v-if="item.iscompl")
+                            span.link.green( v-on:click="tagsResShow(item)") Посмотреть результаты
+                        div.qItemDate
+                            span.link.green(v-if="!item.isactive" v-on:click="tagsStart(item)") &nbsp;&nbsp; Запустить
+                            span.link.red(v-else v-on:click="tagsStart(item)") &nbsp;&nbsp; Убрать
+                            span.link.green(v-if="!item.iscompl && item.isactive" v-on:click="tagsShowResult(item)") &nbsp;&nbsp; Показать результаты
+                            span.link.red(v-if="item.iscompl && item.isactive" v-on:click="tagsShowResult(item)") &nbsp;&nbsp; Убрать результаты
                 div.aSectBody(id="qBox" v-if="lSectActiveIndex==2")
                     div.aSectSwith(v-on:click="qOnOff()")
                         div(v-if="isQ" style="float:left") Вопросы включены

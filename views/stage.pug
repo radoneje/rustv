@@ -33,7 +33,7 @@ block content
       div.stageTrPreview(style="width:100%")
           include elements/mainVideo
       div.stageLTitle #{lang.techChat}
-      div.rContentWr.stageLW(style="height: calc(100% - 107px);")
+      div.rContentWr.stageLW(style="height: calc(100% - 155px);")
           div.rBody(id="stageLBox" )
             div.qItem(v-for="item in stageChat" v-bind:class="{my:(item.userid==user.id)}")
               div.qItemSmi  {{item.smi}}
@@ -63,7 +63,14 @@ block content
     div.center
 
       div.L.stage
-          div.Lbody
+          div.Lbody(style="position:relative")
+              div(v-if="init" style='z-index:100;position:absolute; width:100%')
+                div(style="display:flex;justify-content: center;width:100%")
+                  #presRew.greenBtn.clearBtn.vCenterBtn(v-on:click="presRew()")
+                    span << REWIND
+                  #presFow.greenBtn.clearBtn.vCenterBtn(v-on:click="presFow()")
+                    span FORWARD >>
+
               div(v-if="!init" style="height: 100vh;display: flex;align-items: center;justify-content: center;margin: 10px;")
                 div.greenBtn.center( v-on:click="initStage()") #{lang.clickHere}
               div.meetVideoBox#meetVideoBox(v-else)
