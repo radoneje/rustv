@@ -1,4 +1,4 @@
-#roomVote.rFeedGroup(v-if="votes.filter(r=>{return r.isactive}).length>0 || tags.filter(r=>{return r.isactive}).length>0")
+#roomVote.rFeedGroup(v-if="votes.filter(r=>{return r.isactive}).length>0 || tags.filter(r=>{return r.isactive}).length>0 || pole.filter(r=>{return r.isactive}).length>0")
     div.rFeedGroupTitle
         div.rFeedGroupBody
             div.qItem(v-for="item in pole" v-bind:class="{ready:item.isReady}" v-if="item.isactive")
