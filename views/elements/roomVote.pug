@@ -2,7 +2,7 @@
     div.rFeedGroupTitle
         div.rFeedGroupBody
             div.qItem(v-for="item in pole" v-bind:class="{ready:item.isReady}" v-if="item.isactive")
-                input.ask(type='text' placeholder="введите название облака" v-model="item.title" v-on:change="tagsChange(item)")
+                div.ask.poleTitle( ) {{item.title}}
                 div(style="margin-bottom:10px" v-if="!item.iscompl")
                     div(style="width:100%;position: relative;height: 0;padding-bottom: 100%;")
                         div(style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;")
@@ -19,7 +19,7 @@
                     span.link.green( v-on:click="poleResShow(item)") Посмотреть результаты
 
             div.qItem(v-for="item in tags" v-bind:class="{ready:item.isReady}" v-if="item.isactive")
-                input.ask(type='text' placeholder="введите название облака" v-model="item.title" v-on:change="tagsChange(item)")
+                div.ask.poleTitle( ) {{item.title}}
                 div(style="margin-bottom:10px" v-if="!item.iscompl")
                     input.ask.tInput(type='text' placeholder="Напишите слова через запятую"  v-model="item.text" v-bind:readonly="item.done")
                     div(style="margin-top:10px")
