@@ -22,8 +22,13 @@ window.onload=function () {
 
             var chart = anychart.scatter();
             chart.title(tag.title);
-            chart.yScale().minimumGap(0).maximumGap(0);
-            chart.xScale().minimumGap(0).maximumGap(0);
+            //chart.yScale().minimumGap(0).maximumGap(0);
+            //chart.xScale().minimumGap(0).maximumGap(0);
+
+            chart.yScale().minimum(-50),maximum(50);
+            chart.xScale().minimum(-50),maximum(50);
+
+
             chart
                 .marker(data)
                 .size(20)
