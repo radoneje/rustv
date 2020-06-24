@@ -827,3 +827,33 @@ function initHLS(video) {
         });
     }
 }
+function tagsResShow(item){
+    resWindowOpen('/tagsres/'+item.id)
+}
+function poleResShow(item){
+    resWindowOpen('/poleres/'+item.id)
+}
+function resWindowOpen(url) {
+    console.log("resWindowOpen", url)
+    var container=document.createElement("div");
+    container.classList.add("resWr")
+    var containerInside=document.createElement("div");
+    containerInside.classList.add("resInside")
+    var iframe=document.createElement("iframe");
+    iframe.classList.add("resIframe");
+    iframe.border=0;
+    iframe.src=url;
+
+    var clickDiv=document.createElement("div");
+    clickDiv.classList.add("resClick")
+    containerInside.appendChild(iframe)
+    containerInside.appendChild(clickDiv)
+    container.appendChild(containerInside)
+
+    document.body.appendChild(container)
+    container.addEventListener("click", function () {
+        container.parentNode.removeChild(container)
+    })
+
+}
+

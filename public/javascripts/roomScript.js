@@ -112,12 +112,14 @@ window.onload=function () {
 
                     })
             },
-            tagsResShow:function(item){
-                window.open('/tagsres/'+item.id)
-            },
-            poleResShow:function(item){
+            tagsResShow: function(item){tagsResShow(item)},
+            poleResShow:function(item){poleResShow(item)},
+            /*function(item){
                 window.open('/poleres/'+item.id)
-            },
+            },*/
+            /*function(item){
+               window.open('/tagsres/'+item.id)
+           },*/
             OnPoleAdd:function(data){
                 var _this=this;
                 var tmp=[];

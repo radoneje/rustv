@@ -157,12 +157,9 @@ window.onload=function () {
 
                     })
             },
-            tagsResShow:function(item){
-                window.open('/tagsres/'+item.id)
-            },
-            poleResShow:function(item){
-                window.open('/poleres/'+item.id)
-            },
+            tagsResShow: function(item){tagsResShow(item)},
+            poleResShow:function(item){poleResShow(item)},
+
             OnPoleAdd:function(data){
                 var _this=this;
                 var tmp=[];

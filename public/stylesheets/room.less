@@ -1151,8 +1151,54 @@ width: 100%;
 #presRew.active, #presFow.active{
   animation: flick 2s infinite;
 }
+.resWr{
+  background: rgba(0,0,0,.75);
+  box-sizing: border-box;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10001;
+}
+.resIframe{
+  width: 100%;
+  height: 100%;
+}
+.resInside {
+  width: 100%;
+height: 100%;
+position: relative;
+}
+.resClick{
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+.progRow{
+  display: flex;
+  width: 100%;
+  font-size: 22px;
+  line-height: 28px;
+  margin-bottom: 22px;
+}
+.progTime{
+  width: 190px;
+}
+.progText{
+  width: ~"calc(100% - 190px)";
+}
+.progHeader{
+  font-weight: bold;
+}
 
-  @media only screen and (max-width: 1024px){
+
+
+
+@media only screen and (max-width: 1024px){
 
     #activeSection8{
       display:block;
@@ -1160,6 +1206,22 @@ width: 100%;
     .rLfooter{
       display: none;
     }
+    #progBox .rLfooter{
+      display: block;
+    }
+    .progRow{
+      font-size: 16px;
+      line-height: 20px;
+    }
+    .progRow{
+      display: block;
+    }
+    .progTime{
+      margin-bottom: 10px;
+    }
+  .progText {
+    width: 100%;
+  }
   .meetVideoBox{
     position: inherit;
     padding: 0;

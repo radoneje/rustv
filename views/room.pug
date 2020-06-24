@@ -91,9 +91,12 @@ block content
           if(room.id == 62)
             div.rLfooter
               include elements/footerNF
+          if(room.id == 19)
+            div.rLfooter
+              include elements/footerRosatom
           if(room.id == 66)
             div.rLfooter
-              include elements/footerNF
+              include elements/footerRosatom
 
 
 
@@ -108,7 +111,18 @@ block content
                 div {{item.title}}
             div.rContentWr(v-if="activeSection==8" :id="'activeSection'+activeSection" )
               div.rBody(id="progBox" )
-                include elements/footer
+                if(room.id == 52)
+                  div.rLfooter()
+                    include elements/footer
+                if(room.id == 62)
+                  div.rLfooter
+                    include elements/footerNF
+                if(room.id == 19)
+                  div.rLfooter
+                    include elements/footerRosatom
+                if(room.id == 66)
+                  div.rLfooter
+                    include elements/footerRosatom
             div.rContentWr(v-if="activeSection==0" v-show="isLenta")
               div.rBody(id="feedBox" )
                 include elements/roomVote
