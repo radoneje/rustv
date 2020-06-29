@@ -94,9 +94,9 @@ block content
           if(room.id == 19)
             div.rLfooter
               include elements/footerRosatom
-          if(room.id == 66)
+          if(room.id == 67)
             div.rLfooter
-              include elements/footerRosatom
+              include elements/footerDesign
 
 
 
@@ -123,6 +123,9 @@ block content
                 if(room.id == 66)
                   div.rLfooter
                     include elements/footerRosatom
+                if(room.id == 67)
+                  div.rLfooter
+                    include elements/footerDesign
             div.rContentWr(v-if="activeSection==0" v-show="isLenta")
               div.rBody(id="feedBox" )
                 include elements/roomVote

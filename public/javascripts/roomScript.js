@@ -853,7 +853,7 @@ window.onload=function () {
          },
         mounted:async function () {
             var _this=this;
-            if(roomid==62)
+            if(roomid==62 )
                 _this.sect.unshift({
                     title: "Программа",
                     isActive: false,
