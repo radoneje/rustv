@@ -1951,6 +1951,13 @@ window.onload=function () {
             }
         });
 }
+function publishVideoToWowzaAsync(p1, p2, p3, p4) {
+    return new Promise((res, rej) => {
+        publishVideoToWowza(p1, p2, p3, p4, (ret => {
+            res(ret);
+        }))
+    })
+}
 
 
 
