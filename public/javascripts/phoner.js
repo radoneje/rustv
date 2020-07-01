@@ -128,8 +128,12 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
         video: video,
     }
     console.log("constraints", constraints);
-    if(stream)
-        constraints.customStream=stream;
+    if(stream) {
+        constraints.customStream = stream;
+
+        //if(stream.getTracks().filter(s=>s.kind=='video').length==0)
+         //   constraints.video=false;
+    }
     console.log("constraints", constraints)
 
     return new Promise((resolve, reject) => {
@@ -190,6 +194,7 @@ async function phonePublishLocalVideo(localVideo, id, stream, errHandeler, faile
     await publishStream(id,localVideo, stream,()=>{if(errHandeler)errHandeler()},()=>{if(failedHandler)failedHandler()});
 
 }
+
  function   phoneStopRemoteVideo(id){
 
         if(Flashphoner.getSessions().length==0)

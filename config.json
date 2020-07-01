@@ -41,7 +41,7 @@
   },
   "meetWowza": [
     {
-      "url": "wss://mi.may24.pro/webrtc-session.json",
+      "url": "wss://wowza01.onevent.online/webrtc-session.json",
       "applicationName": "webrtc"
     }
 
@@ -52,7 +52,7 @@
   },
   "spkWowza": [
     {
-      "url": "wss://mi.may24.pro/webrtc-session.json",
+      "url": "wss://wowza01.onevent.online/webrtc-session.json",
       "applicationName": "webrtc"
     }
   ],

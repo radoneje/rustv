@@ -633,6 +633,36 @@ function connect(_this, roomid, clbk){
                 _this.mayShowScreen(data)
             }
         });
+        socket.on('newLangCh', async (data) => {
+            console.log("newLangCh received", data)
+            if(_this.langCh) {
+                if (_this.langCh.length == 0) {
+                    _this.langCh.push({lang: {title: "original", id: 0}, isActive: true})
+                }
+                var find = _this.langCh.filter(f => f.lang.id == data.lang.id)
+                if (find.length == 0) {
+                    data.isActive = false;
+                    _this.langCh.push(data);
+
+                }
+            }
+            console.log("newLangCh received", data)
+        });
+    socket.on('langChClose', async (data) => {
+
+        if( _this.langCh) {
+            var items = _this.langCh.filter(l => l.id == data.id)
+            console.log('langChClose', items, data)
+            if (items.length == 0)
+                return;
+            if (items[0].isActive) {
+                _this.langCh[0].isActive = true;
+                _this.activateLangCh({lang: {id: 0}});
+            }
+            console.log("lang close");
+            _this.langCh = _this.langCh.filter(l => l.id != data.id);
+        }
+    });
 
 
 
@@ -856,4 +886,5 @@ function resWindowOpen(url) {
     })
 
 }
+
 

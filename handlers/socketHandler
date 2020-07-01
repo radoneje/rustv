@@ -2,6 +2,7 @@
 
 
 const io= require('socket.io')
+var langArr=[]
 class socket{
     constructor(server, knex, SPKstatus){
         this.clients=require('./clientsHandler')
@@ -59,6 +60,12 @@ class socket{
                         }
                     })
                     _this.clients.sendToRoomUsers("closeStageStream", socket.id, roomid)
+                    langArr.forEach(lang=>{
+                        if(lang.socketid==socket.id) {
+                            lang.isActive=false
+                            _this.clients.sendToRoomUsers("langChClose", lang, roomid)
+                        }
+                    })
 
                 }
                 catch (e) {
@@ -389,6 +396,22 @@ class socket{
                             console.warn("error send new stream")
                         }
                     }
+                    i=0;
+                    setTimeout(()=>{
+                        try {
+                            console.log("lang Arr",langArr )
+                            langArr.forEach(lang=>{
+                                if(lang.isActive) {
+                                    i++;
+                                    socket.emit("newLangCh", lang)
+                                    console.log("emit newLangCh")
+                                }
+                            })
+
+                        }catch (e) {
+                            console.warn("error send new stream")
+                        }
+                    },1000*i)
 
                 }
             });
@@ -404,6 +427,16 @@ class socket{
 
                 _this.clients.fwd("startPhoneToSpk",  {to:data.socketid,socketid:socket.id,user }, roomid)
 
+            });
+            socket.on("newLangCh",(data)=>{
+                var cls=_this.clients.clients.filter(c=>c.socket.id==socket.id);
+                if(cls.length>0) {
+                    data.isActive = true;
+                    data.socketid=socket.id;
+                    langArr.push(data)
+                    _this.clients.sendToRoomUsers("newLangCh", data, roomid)
+                    console.log("send to client newLangCh", data)
+                }
             });
 
 

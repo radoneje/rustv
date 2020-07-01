@@ -11,6 +11,9 @@ window.onload=function () {
     var BitrateCfg = null;
     var mediaRecorder=null;
     var arrAudio = [];
+    var audio = [];
+    var micStream = null;
+    var micTracks = [];
 
     var wowzaRecievers=[];
     peerConnection=null;
@@ -51,8 +54,6 @@ window.onload=function () {
             isHead:true,
             votes:[],
             userFindText:"",
-            langCh: [],
-            showLangCh: false,
             constraints:null,
             firstConnect: true,
             isMyVideo:false,
@@ -68,6 +69,14 @@ window.onload=function () {
             stageTimeout:null,
             tags:[],
             pole:[],
+            /////////
+            isStarted: false,
+            avaibleLangs: [],
+            lang: [{}, {}],
+            showLang: [false, false],
+            activeLang: 0,
+            langCh: [],
+            showLangCh: false,
         },
         methods:{
             changeActiveLang: function (item) {
@@ -97,14 +106,6 @@ window.onload=function () {
                     audio.autoplay = "autoplay";
                     //  audio.controls="controls";
                     document.body.appendChild(audio);
-                    if(!WowzaCfg)
-                    {
-                        WowzaCfg = await axios.get('/rest/api/meetWowza')
-                    }
-                    if(!BitrateCfg)
-                    {
-                        BitrateCfg = await axios.get('/rest/api/meetBitrate')
-                    }
                     var ret = await getVideoFromWowzaAync(item.id, audio, WowzaCfg.data, BitrateCfg.data);
                     var audioItem = {id: item.id, elem: audio, peerConnection: ret.peerConnection}
                     arrAudio.push(audioItem)
@@ -148,6 +149,99 @@ window.onload=function () {
                         });
                     }
                     arrAudio = arrAudio.filter(r => r.id != id);
+                }
+            },
+            changeActiveLang: function (item) {
+                this.langCh.forEach(f => {
+                    f.isActive = f.lang.id == item.lang.id;
+                });
+                this.activateLangCh(item);
+                this.showLangCh = false
+            },
+            startTranslate: async function () {
+                var _this = this;
+                if (this.isStarted) {
+                    audio.forEach(a => {
+                        socket.emit("langChClose", {id: a.id});
+                        if (a.peerConnection) {
+                            a.peerConnection.close();
+                            a.peerConnection = null;
+                        }
+                    })
+                    return this.isStarted = false;
+                }
+                if (!this.lang[0].id || !this.lang[1].id)
+                    return this.isStarted = false;
+                else {
+                    audio = [];
+                    var a = [0, 1]
+                    for (i of a) {
+                        console.log("AudioContext", i)
+                        var ac = new AudioContext();
+                        var source = ac.createMediaStreamSource(micStream);
+                        var gainNode = ac.createGain();
+
+                        var merger = ac.createChannelMerger(32);
+                        var dest = ac.createMediaStreamDestination();
+                        source.connect(gainNode);
+                        gainNode.connect(merger, 0, 0);
+                        merger.connect(dest);
+                        gainNode.gain.value = this.activeLang == i ? 1 : 0;
+                        var id = await axios.get("/rest/api/guid");
+                        var item = {
+                            id: id.data,
+                            ac,
+                            gainNode,
+                            merger,
+                            dest,
+                            stream: dest.stream,
+                            lang: this.lang[i],
+                            origs: []
+                        }
+
+                        audio.push(item)
+
+                        dest.stream.label = JSON.stringify(this.lang[i]);
+                        console.log("publishVideoToWowzaAsync",id.data, dest.stream.id )
+                        await publishVideoToWowzaAsync(id.data, dest.stream, WowzaCfg.data, BitrateCfg.data);
+
+                        console.log("audio published")
+                        this.isStarted = true;
+                        socket.emit("newLangCh", {lang: _this.lang[i], id: id.data});
+
+                    }
+                    arrVideo.forEach(receiverItem => {
+                        console.log("startTranslate", receiverItem)
+                        this.addOriginalToAudio(receiverItem.elem.srcObject, receiverItem.streamid)
+                    })
+
+
+                }
+            },
+            selectLang: function (g, item) {
+                this.lang[g] = item;
+                this.showLang = [false, false];
+            },
+            switchAudioChannels: function () {
+                if (audio.length == 0)
+                    return;
+                console.log("switchAudioChannels",this.activeLang );
+
+                for (i = 0; i <= 1; i++) {
+                    console.log("switch ch:"+i,this.activeLang, audio[i].gainNode.gain.value);
+                    audio[i].gainNode.gain.value = this.activeLang == i ? 1 : 0;
+                    audio[i].origs.forEach(o => {
+                        o.gainNode.gain.value = this.activeLang == i ? 0 : 1;
+                    })
+                }
+                console.log("switchAudioChannels", audio)
+            },
+            activateLang: function (i) {
+                if (this.isStarted) {
+                    this.activeLang = i;
+                    this.switchAudioChannels();
+                } else {
+                    this.showLang = [i == 0, i == 1]
                 }
             },
             presRew:function(){
@@ -766,38 +860,9 @@ window.onload=function () {
                     videoItem.elem.setAttribute("playsinline", "playsinline")
                     videoItem.stream = videoItem.elem.srcObject;
                     videoItem.audioElem = document.getElementById('meetVideoLevel' + videoItem.id)
-                    var silentTimer = null;
-                    var silent = false;
                     videoItem.analiser = await createAudioAnaliser(videoItem.stream, (val) => {
                         // console.log(val, parseFloat((val/100)*100));
-                        videoItem.audioElem.style.height = parseFloat((val / 100) * 100) + "%";
-                        if (val > 15) {
-                            if (!silent) {
-                                silent = true;
-                                arrAudio.forEach(a => {
-                                    a.elem.volume = .2;
-                                })
-                                    /*arrVideo.forEach(a => {
-                                    if(!a.isMyVideo)
-                                        a.elem.volume = .2;
-                                    console.log("arrvideo elem", a)
-                                })*/
-                                console.log("silent on")
-                            }
-                            if (silentTimer)
-                                clearTimeout(silentTimer);
-                            silentTimer = setTimeout(() => {
-                                arrAudio.forEach(a => {
-                                    a.elem.volume = 1;
-                                })
-                               /* arrVideo.forEach(a => {
-                                    a.elem.volume = .2;
-                                })*/
-                                console.log("silent off")
-                                silent = false;
-                            }, 1000)
-                        }
-
+                        videoItem.audioElem.style.height = parseFloat((val / 100) * 100) + "%"
                     })
                     setTimeout(() => {
                         socket.emit("newStageStream", {
@@ -864,16 +929,11 @@ window.onload=function () {
             },
             myVideoMute: function () {
                 var _this = this;
-                var els = arrVideo.filter(r => r.isMyVideo && !r.isDesktop)
-                if (els.length == 0)
-                    return;
-                var item = els[0];
                 _this.isMyMute = !_this.isMyMute;
-                item.stream.getTracks().forEach(tr => {
-                    if (tr.kind == "audio") {
-                        tr.enabled = !_this.isMyMute;
-                    }
+                micTracks.forEach(t => {
+                    t.enabled = !this.isMyMute;
                 })
+
             },
             myVideoBlack: function () {
                 var _this = this;
@@ -1100,11 +1160,27 @@ window.onload=function () {
                 _this.constraints = dt.data;*/
                 _this.firstConnect = false;
                 console.log("startMyVideo0", isMod ,  isPgm)
-                if(!isMod &&  !isPgm)
+                /*if(!isMod &&  !isPgm)
                     setTimeout(() => {
                         console.log("startMyVideo")
                         _this.startMyVideo();
-                    }, 400);
+                    }, 400);*/
+                var stream = await navigator.mediaDevices.getUserMedia({audio: true});
+
+                micTracks = stream.getAudioTracks();
+                micStream = new MediaStream();
+                micTracks.forEach(t => {
+                    micStream.addTrack(t);
+                })
+
+
+                //  document.getElementById("myAudio").srcObject = stream;
+                var analiserElem = document.getElementById("analiserElem")
+                await createAudioAnaliser(micStream, (val) => {
+                    // console.log(val, parseFloat((val/100)*100));
+                    analiserElem.style.height = parseFloat((val / 100) * 100) + "%"
+                })
+
                 setTimeout(() => {
                     socket.emit("getStageVideos");
                 }, 0);
@@ -1251,6 +1327,7 @@ window.onload=function () {
              formatedTimeout:function () {
                  return new Date(this.stageTimer * 1000).toISOString().substr(11, 8);
              },
+
              activeLangCh: function () {
                  var ret = this.langCh.filter(r => r.isActive == true);
                  if (ret.length > 0)
@@ -1258,7 +1335,6 @@ window.onload=function () {
                  else
                      return 0;
              }
-
          },
         mounted:async function () {
             var _this=this;
@@ -1373,8 +1449,13 @@ window.onload=function () {
                         _this.socket=socket;
                         document.getElementById("app").style.opacity=1;
                     });
-
+                    WowzaCfg = await axios.get('/rest/api/meetWowza')
+                    BitrateCfg = await axios.get('/rest/api/meetBitrate')
                     if(!isPgm) {
+                        var dt = await axios.get("/rest/api/translateLang");
+                        this.avaibleLangs = dt.data.languages;
+                        console.log(this.avaibleLangs);
+
                         axios.get("/rest/api/users/" + eventid + "/" + roomid)
                             .then(function (r) {
                                 _this.users = r.data;
