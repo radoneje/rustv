@@ -79,6 +79,19 @@ window.onload=function () {
             showLangCh: false,
         },
         methods:{
+            addOriginalToAudio: function (stream, id) {
+                if (audio.length == 0)
+                    return;
+                for (i = 0; i <= 1; i++) {
+                    var source = audio[i].ac.createMediaStreamSource(stream);
+                    var gainNode = audio[i].ac.createGain();
+                    source.connect(gainNode);
+                    gainNode.connect(audio[i].merger, 0, audio[i].origs.length);
+                    var item = {id, source, gainNode}
+                    audio[i].origs.push(item);
+                }
+                this.switchAudioChannels()
+            },
             changeActiveLang: function (item) {
                 this.langCh.forEach(f => {
                     f.isActive = f.lang.id == item.lang.id;
