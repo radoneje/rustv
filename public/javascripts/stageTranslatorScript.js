@@ -915,6 +915,9 @@ window.onload=function () {
 
                 var video = await createVideo(data.streamid, false, data.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload,_this.videoRecord, _this.stopVideoRecord);
                 videoLayout();
+                var videoElem=document.getElementById("meetVideoWrapperContent_" + data.streamid).querySelector('video')
+
+                _this.addOriginalToAudio(videoElem, receiverItem.streamid);
 
                 var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
                     var playerid=await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{removeVideo(receiverItem.streamid)})
