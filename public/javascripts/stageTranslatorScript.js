@@ -83,12 +83,17 @@ window.onload=function () {
                 if (audio.length == 0)
                     return;
                 for (i = 0; i <= 1; i++) {
-                    var source = audio[i].ac.createMediaStreamSource(stream);
-                    var gainNode = audio[i].ac.createGain();
-                    source.connect(gainNode);
-                    gainNode.connect(audio[i].merger, 0, audio[i].origs.length);
-                    var item = {id, source, gainNode}
-                    audio[i].origs.push(item);
+                    try {
+                        var source = audio[i].ac.createMediaStreamSource(stream);
+                        var gainNode = audio[i].ac.createGain();
+                        source.connect(gainNode);
+                        gainNode.connect(audio[i].merger, 0, audio[i].origs.length);
+                        var item = {id, source, gainNode}
+                        audio[i].origs.push(item);
+                    }
+                    catch(e){
+                        console.warn(e)
+                    }
                 }
                 this.switchAudioChannels()
             },
