@@ -153,7 +153,7 @@ class Clients{
 
             }
         });
-        console.log("OnSendToRoomAdmins", this.nobody)
+      //  console.log("OnSendToRoomAdmins", this.nobody)
         this.nobody.forEach(c=>{
 
             if(c.isActive && c.roomid==roomid) {
