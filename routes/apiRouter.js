@@ -523,7 +523,7 @@ router.get("/users/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
                 i: c.user.i,
                 f: c.user.f,
                 smi:c.user.smi,
-                isActive: c.isActive ? true : false,
+              //  isActive: c.isActive ? true : false,
                 isVideo: c.isVideo,
                 handUp: c.handUp ? true : false,
                 socketid:c.socket.id
