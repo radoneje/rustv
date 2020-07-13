@@ -113,7 +113,7 @@ router.get('/room/:id',  async (req, res, next) =>{
 
   var room=rooms[0]
 if(room.id==37)
-  return res.redirect("https://rosatom.onevent.online")
+  return res.redirect("https://rosatom.onevent.online/room/37")
   if(!req.session["user"+room.eventid] && room.id!=65)
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
   if(room.id==65)
