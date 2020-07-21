@@ -13,7 +13,7 @@ else if room.id==61
 else if room.id==66
     video(id="video" width="1280" height="720" controls playsinline loop  src="https://stream.sberbank-school.ru/lrv/181_/index.m3u8" poster="/images/clients/rosatom/otkr.jpg" )
 else if room.id==69
-    video(id="video" width="1280" height="720" controls playsinline loop  :src="'https://stream.sberbank-school.ru/hls/'+ room.streamname +'/index.m3u8'" :poster="'/images/clients/gpn/gpn-poster.png?rnd=1'" )
+    <youtube :video-id="'eNNq-1JnP9c'" :player-vars="{playsinline:'1'}" ref="youtube" ></youtube>
 else
     video(id="video" width="1280" height="720" controls playsinline loop  :src="'https://stream.sberbank-school.ru/hls/'+ room.streamname +'/index.m3u8'" :poster="'/images/'+room.poster" )
 
