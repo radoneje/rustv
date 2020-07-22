@@ -1,0 +1,7 @@
+String submitterInitials="";
+String FirstName=submitter.getFirstName();
+if(FirstName!=null)
+        submitterInitials=submitterInitials+FirstName.substring(0, 1);
+String LastName = submitter.getLastName();
+if(LastName!=null)
+        submitterInitials=submitterInitials+LastName.substring(0, 1);

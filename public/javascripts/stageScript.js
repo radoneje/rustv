@@ -1514,7 +1514,7 @@ window.onload=function () {
 
 
         var cap = document.getElementById("meetVideoCap_" + id)
-        cap.innerText = (user.i || "") + " " + (user.f || "")
+        cap.innerText = (user.i || "") + " " + (user.f || "")+ " " + (user.smi || "")
 
         var mute = document.getElementById('meetVideoMute' + id)
         var unmute = document.getElementById('meetVideoUnMute' + id)
