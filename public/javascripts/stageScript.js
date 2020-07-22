@@ -1476,6 +1476,13 @@ window.onload=function () {
                     //startVideo();
                     //_this.startRTC();
                 })
+
+            setTimeout(function () {
+                var elem=document.getElementById("sectMenu_1")
+                if(elem)
+                    elem.click();
+            },1000)
+
         }
     })
 
