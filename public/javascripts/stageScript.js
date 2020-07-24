@@ -1479,7 +1479,7 @@ window.onload=function () {
 
             setTimeout(function () {
                 var elem=document.getElementById("sectMenu_1")
-                if(elem)
+                if(elem && !document.getElementById("sectMenu_2"))
                     elem.click();
             },1000)
 
