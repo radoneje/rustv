@@ -588,6 +588,7 @@ router.get("/spkToVmix/:roomid", async (req, res, next) => {
     var ret=[]
     status.SPKvksUsers.forEach(u=>{
         var user=u.user;
+        console.log(user);
         ret.push({id:user.id,fi:(user.f||'')+' '+(user.i || ''),smi:user.smi, fi_eng:(user.f_eng  | '')+' '+(user.i_eng | ''),smi_eng:(user.smi_eng | '') });
     })
     if(ret.length==0)
