@@ -32,6 +32,22 @@ window.onload=function () {
             isShowOtrasl:false,
             companyTitle:null,
 
+            sect:[
+
+                {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoq.svg'},
+                {title:"Чат", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactive.svg'}
+            ],
+            activeSection:2,
+            chat:[],
+            isChat:true,
+            users:[],
+            q:[],
+            isQ:true,
+            isLenta:false,
+            qText:"",
+            chatText:"",
+
+
         },
         methods:{
             selectOtrasl:function(item){
