@@ -44,6 +44,7 @@ window.onload=function () {
             q:[],
             votes:[],
             tags:[],
+            pole:[],
             isQ:true,
             isLenta:false,
             qText:"",
