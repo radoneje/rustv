@@ -330,7 +330,24 @@ window.onload=function () {
                         _this.UpdateInteractive();
                         setTimeout(function(){
                             startVideo();
-                            window.scrollTo(0, 0)
+                            window.scrollTo(0, 0);
+                            let options = {
+                                root: null,
+                                rootMargin: '0px',
+                                threshold: 0
+                            }
+                            let callback = function(entries, observer){
+                                if(entries.length>0)
+                                {
+                                    document.getElementById("UpBtn").style.display=entries[0].isIntersecting?"none":"block"
+
+                                }
+                            }
+
+// наблюдатель
+                            let observer = new IntersectionObserver(callback, options)
+                            let target = document.querySelector('.L')
+                            observer.observe(target)
                             },0)
                     }
                     else{
