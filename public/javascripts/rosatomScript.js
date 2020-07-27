@@ -206,6 +206,30 @@ window.onload=function () {
                 function unvote(id) {
                     axios.post("/rest/api/unvote/"+eventid+"/"+roomid,{id:id})
                 }
+
+            },
+            tagsResShow: function(item){
+
+                var url='/tagsres/'+item.id
+                var container=document.createElement("div");
+                container.classList.add("resWr")
+                var containerInside=document.createElement("div");
+                containerInside.classList.add("resInside")
+                var iframe=document.createElement("iframe");
+                iframe.classList.add("resIframe");
+                iframe.border=0;
+                iframe.src=url;
+
+                var clickDiv=document.createElement("div");
+                clickDiv.classList.add("resClick")
+                containerInside.appendChild(iframe)
+                containerInside.appendChild(clickDiv)
+                container.appendChild(containerInside)
+
+                document.body.appendChild(container)
+                container.addEventListener("click", function () {
+                    container.parentNode.removeChild(container)
+                })
             },
             tagsDo:function(item){
                 var text=item.text;
