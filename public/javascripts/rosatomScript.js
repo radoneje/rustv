@@ -76,7 +76,7 @@ window.onload=function () {
 
             },
             qtextSend:function(){
-
+                var _this=this;
                 axios.post("/rest/api/quest/"+eventid+"/"+roomid,{text:_this.qText})
                     .then(function (e) {
                         _this.qText="";
