@@ -42,6 +42,7 @@ window.onload=function () {
             isChat:true,
             users:[],
             q:[],
+            votes:[],
             isQ:true,
             isLenta:false,
             qText:"",
