@@ -88,7 +88,19 @@ window.onload=function () {
                         },100)
                     })
             },
-            chattextSend:function(){},
+            chattextSend:function(){
+                var _this=this;
+                axios.post("/rest/api/chat/"+eventid+"/"+roomid,{text:_this.qText})
+                    .then(function (e) {
+                        _this.qText="";
+                        _this.chat.push(e.data);
+                        //console.log(e.data)
+                        setTimeout(function () {
+                            var objDiv = document.getElementById("chatBox");
+                            objDiv.scrollTop = objDiv.scrollHeight;
+                        },100)
+                    })
+            },
             sectActive:function (item) {
                 var _this=this;
                 this.sect.forEach(function (e) {
