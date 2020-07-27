@@ -9,6 +9,8 @@ window.onload=function () {
 
     var evntId=30;
     var roomId=66
+    var evntid=30;
+    var roomid=66
     var app = new Vue({
         el: '#app',
         data: {
@@ -73,7 +75,19 @@ window.onload=function () {
                     document.getElementById('chatText').focus()
 
             },
-            qtextSend:function(){},
+            qtextSend:function(){
+
+                axios.post("/rest/api/quest/"+eventid+"/"+roomid,{text:_this.qText})
+                    .then(function (e) {
+                        _this.qText="";
+                        // _this.q.push(e.data);
+                        console.log(e.data)
+                        setTimeout(function () {
+                            var objDiv = document.getElementById("qBox");
+                            objDiv.scrollTop = objDiv.scrollHeight;
+                        },100)
+                    })
+            },
             chattextSend:function(){},
             sectActive:function (item) {
                 var _this=this;
