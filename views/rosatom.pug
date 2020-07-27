@@ -24,4 +24,18 @@ block content
                 div.plInputBoxLabel
                     input#fInpit(placeholder=lang.famName v-model="f" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
                 div.plInputBoxWarning #{lang.thisMast}
+            div.plInputBox(v-on:click="showOtrasl()")
+                div.plInputBoxLabel Ваша компания
+                    div.sel(v-if="!otrasl") Выберите компанию
+                    div.sel(v-else) {{otrasl.title}}
+                div.plInputBoxWarning #{lang.thisMast}
+                div.plInputList(v-if="isShowOtrasl")
+                    div.plInputListItems
+                        div.plInputListItem(v-for="item in isShowOtrasl" v-on:click.stop.prevent="selectOtrasl(item)")
+                            div.plInputListItemTitle {{item.title}}
+            div.plInputBox
+                div.plSubmit(v-on:click="enter()")
+                    div(v-if="!loader") #{lang.logon}
+                    div(v-if="loader")
+                        include ./elements/whiteDotLoader
         div.aR
