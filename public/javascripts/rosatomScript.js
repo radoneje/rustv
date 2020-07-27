@@ -80,6 +80,15 @@ window.onload=function () {
                             }, 0)
                     }
                 })
+
+                r=await axios.get("/rest/api/votes/"+eventid+"/"+roomid)
+                _this.votes=r.data;
+
+                r=await axios.get("/rest/api/tags/"+eventid+"/"+roomid)
+                _this.tags=r.data;
+                r=await axios.get("/rest/api/pole/"+eventid+"/"+roomid)
+                _this.pole=r.data;
+
                 setTimeout(this.UpdateInteractive,5000);
 
             },
