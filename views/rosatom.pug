@@ -54,7 +54,7 @@ block content
                         include elements/roomVote
                         div.rContent
                             div.rHead#rHead
-                                div.rHeadItem(v-for="item in sect" v-bind:class="{active:item.isActive" v-on:click="sectActive(item)" :id="'sectMenu_'+item.id")
+                                div.rHeadItem(v-for="item in sect" v-bind:class="{active:item.isActive}" v-on:click="sectActive(item)" :id="'sectMenu_'+item.id")
                                     div.rHeadItemLogo
                                         img(v-bind:src="item.isActive?item.logoactive:item.logo")
                                     div {{item.title}}
