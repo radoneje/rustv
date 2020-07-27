@@ -9,7 +9,7 @@ window.onload=function () {
 
     var evntId=30;
     var roomId=66
-    var evntid=30;
+    var eventid=30;
     var roomid=66
     var app = new Vue({
         el: '#app',
