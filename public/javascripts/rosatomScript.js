@@ -76,7 +76,7 @@ window.onload=function () {
                                 objDiv.scrollTop = objDiv.scrollHeight;
                             }, 0)
                 })
-                setTimeout(UpdateInteractive,5000);
+                setTimeout(this.UpdateInteractive,5000);
 
             },
             qtextChange:function (e) {
