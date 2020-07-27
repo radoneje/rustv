@@ -15,12 +15,12 @@ block content
             div.aTime
                 div Начало регистрации
                 div 28 июля 2020г.
-        div.plInputBox(v-bind:class="{warning:(iErr &&  i.length<2)}")
-            div.plInputBoxLabel
-                input#iInpit(placeholder=lang.name v-model="i" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
-            div.plInputBoxWarning #{lang.thisMast}
-        div.plInputBox(v-bind:class="{warning:(fErr &&  f.length<2)}")
-            div.plInputBoxLabel
-                input#fInpit(placeholder=lang.famName v-model="f" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
-            div.plInputBoxWarning #{lang.thisMast}
+            div.plInputBox(v-bind:class="{warning:(iErr &&  i.length<2)}")
+                div.plInputBoxLabel
+                    input#iInpit(placeholder=lang.name v-model="i" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+                div.plInputBoxWarning #{lang.thisMast}
+            div.plInputBox(v-bind:class="{warning:(fErr &&  f.length<2)}")
+                div.plInputBoxLabel
+                    input#fInpit(placeholder=lang.famName v-model="f" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+                div.plInputBoxWarning #{lang.thisMast}
         div.aR
