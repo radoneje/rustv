@@ -92,7 +92,7 @@ window.onload=function () {
                 var _this=this;
                 axios.post("/rest/api/chat/"+eventid+"/"+roomid,{text:_this.qText})
                     .then(function (e) {
-                        _this.qText="";
+                        _this.chatText="";
                         _this.chat.push(e.data);
                         //console.log(e.data)
                         setTimeout(function () {
