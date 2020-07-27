@@ -207,6 +207,22 @@ window.onload=function () {
                     axios.post("/rest/api/unvote/"+eventid+"/"+roomid,{id:id})
                 }
             },
+            tagsDo:function(item){
+                var text=item.text;
+                if(!text || text.length==0)
+                    return;
+                var tmp=item.title || "";
+                item.done=true
+                item.title='';
+                setTimeout(function () {
+                    item.title=tmp+"";
+                },0)
+                axios.post("/rest/api/tagsDo/"+eventid+"/"+roomid,{item})
+                    .then(function () {
+
+
+                    })
+            },
             answIsReady:function (answ) {
                 return localStorage.getItem("ansv_"+answ.id)? true: false
             },
