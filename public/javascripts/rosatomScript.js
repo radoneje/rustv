@@ -68,7 +68,7 @@ window.onload=function () {
             chattextChange:function (e) {
                 var _this=this;
                 if(this.chatText.length>0)
-                    if(e.keyCode==13 && _this.qText.length>0){
+                    if(e.keyCode==13 && _this.chatText.length>0){
                         _this.chattextSend()
                     }
                 else
