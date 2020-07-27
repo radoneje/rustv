@@ -58,23 +58,26 @@ window.onload=function () {
             UpdateInteractive:async function(){
                 var r=await axios.get("/rest/api/quest/"+eventid+"/"+roomid)
                 r.data.forEach(item=>{
-                    if(this.q.filter(qt=>qt.id==item.id).length==0)
+                    if(this.q.filter(qt=>qt.id==item.id).length==0) {
                         this.q.push(item);
+                        console.log(this.q, item)
                         var objDiv = document.getElementById("qBox");
-                        if(objDiv)
+                        if (objDiv)
                             setTimeout(function () {
                                 objDiv.scrollTop = objDiv.scrollHeight;
                             }, 0)
+                    }
                 })
                var r= await  axios.get("/rest/api/chat/"+eventid+"/"+roomid)
                 r.data.forEach(item=>{
-                    if(this.chat.filter(qt=>qt.id==item.id).length==0)
+                    if(this.chat.filter(qt=>qt.id==item.id).length==0) {
                         this.chat.push(item);
                         var objDiv = document.getElementById("chatBox");
-                        if(objDiv)
+                        if (objDiv)
                             setTimeout(function () {
                                 objDiv.scrollTop = objDiv.scrollHeight;
                             }, 0)
+                    }
                 })
                 setTimeout(this.UpdateInteractive,5000);
 
