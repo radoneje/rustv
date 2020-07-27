@@ -73,15 +73,6 @@ window.onload=function () {
                     document.getElementById('chatText').focus()
 
             },
-            qtextSend:function (e) {
-                var _this=this;
-                if(this.qText.length>0)
-                    _this.OnqtextSend()
-                else
-                    document.getElementById('qText').focus()
-
-
-            },
             sectActive:function (item) {
                 var _this=this;
                 this.sect.forEach(function (e) {
