@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
   if(req.headers.host.indexOf("gpn.onevent.online")>=0)
     return res.render('gpn', { title: 'Пресс-завтрак "Газпром Нефти"' });
   if(req.headers.host.indexOf("roastom.onevent.online")>=0)
-    return res.render('rosatom', { title: 'Росатом' });
+    return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
 
 
   res.render('index', { title: 'ON.event' });

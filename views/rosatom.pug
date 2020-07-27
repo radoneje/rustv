@@ -7,7 +7,7 @@ block head
     script(src="/javascripts/rosatomScript.js")
 block content
     div#app
-        div.aHome
+        div.aHome(v-if="!user")
             div.aL
                 div.aLogo
                     img(src="/images/clients/rosatom/logo.svg")
@@ -41,3 +41,5 @@ block content
                         div(v-if="loader")
                             include ./elements/whiteDotLoader
             div.aR
+        div(v-else)
+            span player
