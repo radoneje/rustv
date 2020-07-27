@@ -7,6 +7,8 @@ window.onload=function () {
         document.location.href="/badbrowser"
     }
 
+    var evntId=30;
+    var roomId=66
     var app = new Vue({
         el: '#app',
         data: {
