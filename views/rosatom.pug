@@ -61,7 +61,7 @@ block content
 
                             div.rContentWr(v-if="activeSection==1" v-show="isQ")
                                 div.rBody(id="qBox" )
-                                    div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==user.id)}" v-if="item.userid==user.id ")
+                                    div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==user.id)}" )
                                         div.qItemName {{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}
                                         div.qItemText(v-html="item.text")
                                         div(style="text-align:center")
