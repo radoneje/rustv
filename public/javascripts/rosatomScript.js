@@ -328,7 +328,10 @@ window.onload=function () {
                     {
                         _this.user=dt.data.user;
                         _this.UpdateInteractive();
-                        setTimeout( startVideo,0)
+                        setTimeout(function(){
+                            startVideo();
+                            window.scrollTo(0, 0)
+                            },0)
                     }
                     else{
                         this.loader = false;
