@@ -53,6 +53,30 @@ window.onload=function () {
 
         },
         methods:{
+            sectActive:function (item) {
+                var _this=this;
+                this.sect.forEach(function (e) {
+                    e.isActive=(item.id==e.id);
+                    if(e.isActive){
+                        _this.activeSection=e.id
+
+                        setTimeout(()=>{
+                            var parentElem=document.querySelector(".rContentWr");
+                            if(parentElem){
+                                var elem=parentElem.querySelector(".rBody");
+                                if(elem)
+                                    elem.scrollTop = elem.scrollHeight;
+
+                            }
+                        },0)
+                    }
+                    // return e;
+                })
+                if(window.innerWidth<1024)
+                    setTimeout(function () {
+                        window.scrollTo(0,document.body.scrollHeight);
+                    },0)
+            },
             selectOtrasl:function(item){
                 this.otrasl=item;
                 this.isShowOtrasl=null;
