@@ -24,6 +24,7 @@ window.onload=function () {
             showCode:false,
             codeErr:false,
             code:"",
+            user:null,
             userId:null,
             company:null,
             otrasl:null,
@@ -104,7 +105,9 @@ window.onload=function () {
 
                 if(!dt.data.showConfirm){
                     if(dt.data.user)
-                        closeWnd();
+                    {
+                        _this.user=dt.data.user;
+                    }
                     else{
                         this.loader = false;
                         this.showCode=false;
