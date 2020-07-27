@@ -162,6 +162,18 @@ window.onload=function () {
                         window.scrollTo(0,document.body.scrollHeight);
                     },0)
             },
+            CalcAnswPercent:function (answ, vote) {
+                var _this=this;
+                var count=vote.answers.length;
+                var total=0;
+                vote.answers.forEach(a=>total=total+a.count);
+
+                if(total==0)
+                    return 0;
+
+                ret=parseFloat(answ.count/total)*100;
+                return parseInt(ret);
+            },
             answIsReady:function (answ) {
                 return localStorage.getItem("ansv_"+answ.id)? true: false
             },
