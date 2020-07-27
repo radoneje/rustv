@@ -43,6 +43,7 @@ window.onload=function () {
             users:[],
             q:[],
             votes:[],
+            tags:[],
             isQ:true,
             isLenta:false,
             qText:"",
