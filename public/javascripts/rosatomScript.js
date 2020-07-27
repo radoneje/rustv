@@ -162,6 +162,9 @@ window.onload=function () {
                         window.scrollTo(0,document.body.scrollHeight);
                     },0)
             },
+            answIsReady:function (answ) {
+                return localStorage.getItem("ansv_"+answ.id)? true: false
+            },
             sortedVoteAnsvers:function(arr){
                 var nArr=arr.slice(0)
                 return nArr.sort((a,b)=>{return a.id-b.id});
