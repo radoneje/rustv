@@ -56,11 +56,12 @@ window.onload=function () {
         },
         methods:{
             UpdateInteractive:async function(){
+                var _this=this;
                 var r=await axios.get("/rest/api/quest/"+eventid+"/"+roomid)
                 r.data.forEach(item=>{
                     if(this.q.filter(qt=>qt.id==item.id).length==0) {
-                        this.q.push(item);
-                        console.log(this.q, item)
+                        _this.q.push(item);
+                        console.log(_this.q)
                         var objDiv = document.getElementById("qBox");
                         if (objDiv)
                             setTimeout(function () {
