@@ -53,6 +53,35 @@ window.onload=function () {
 
         },
         methods:{
+            qtextChange:function (e) {
+                var _this=this;
+                if(this.qText.length>0)
+                    if(e.keyCode==13 && _this.qText.length>0){
+                        this.OnqtextSend()
+                    }
+                else
+                    document.getElementById('qText').focus()
+
+            },
+            chattextChange:function (e) {
+                var _this=this;
+                if(this.chatText.length>0)
+                    if(e.keyCode==13 && _this.qText.length>0){
+                        this.OnchattextSend()
+                    }
+                else
+                    document.getElementById('chatText').focus()
+
+            },
+            qtextSend:function (e) {
+                var _this=this;
+                if(this.qText.length>0)
+                    _this.OnqtextSend()
+                else
+                    document.getElementById('qText').focus()
+
+
+            },
             sectActive:function (item) {
                 var _this=this;
                 this.sect.forEach(function (e) {
