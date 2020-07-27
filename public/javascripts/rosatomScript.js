@@ -174,6 +174,39 @@ window.onload=function () {
                 ret=parseFloat(answ.count/total)*100;
                 return parseInt(ret);
             },
+            vote:function (answ, voteItem) {
+                if(voteItem.iscompl)
+                    return;
+
+                var _this=this;
+                var isReady=localStorage.getItem("ansv_"+answ.id)
+                if(isReady){
+                    localStorage.removeItem("ansv_"+answ.id)
+                    unvote(answ.id)
+                }
+                else
+                {
+                    _this.votes.forEach(v=>{
+                        if(v.id==answ.voteid){
+                            v.answers.forEach(a=>{
+                                if(localStorage.getItem("ansv_"+a.id)) {
+                                    localStorage.removeItem("ansv_" + a.id)
+                                    unvote(a.id)
+                                }
+                            })
+                        }
+                    })
+                    localStorage.setItem("ansv_"+answ.id, true);
+                    vote(answ.id)
+                }
+                _this.votes=_this.votes.filter(v=>{return true})
+                function vote(id) {
+                    axios.post("/rest/api/vote/"+eventid+"/"+roomid,{id:id})
+                }
+                function unvote(id) {
+                    axios.post("/rest/api/unvote/"+eventid+"/"+roomid,{id:id})
+                }
+            },
             answIsReady:function (answ) {
                 return localStorage.getItem("ansv_"+answ.id)? true: false
             },
