@@ -41,5 +41,7 @@ block content
                         div(v-if="loader")
                             include ./elements/whiteDotLoader
             div.aR
-        div(v-else)
-            span player
+        div.center(v-else)
+            div.L
+                div.videoWrapper
+                    video(id="video" width="1280" height="720" controls playsinline loop  src="https://stream.sberbank-school.ru/hls/152/index.m3u8" poster="/images/room.poster" )
