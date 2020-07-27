@@ -55,6 +55,30 @@ window.onload=function () {
 
         },
         methods:{
+            UpdateInteractive:async function(){
+                var r=await axios.get("/rest/api/quest/"+eventid+"/"+roomid)
+                r.data.forEach(item=>{
+                    if(this.q.filter(qt=>qt.id==item.id).length==0)
+                        this.q.push(item);
+                        var objDiv = document.getElementById("qBox");
+                        if(objDiv)
+                            setTimeout(function () {
+                                objDiv.scrollTop = objDiv.scrollHeight;
+                            }, 0)
+                })
+               var r= await  axios.get("/rest/api/chat/"+eventid+"/"+roomid)
+                r.data.forEach(item=>{
+                    if(this.chat.filter(qt=>qt.id==item.id).length==0)
+                        this.chat.push(item);
+                        var objDiv = document.getElementById("chatBox");
+                        if(objDiv)
+                            setTimeout(function () {
+                                objDiv.scrollTop = objDiv.scrollHeight;
+                            }, 0)
+                })
+                setTimeout(UpdateInteractive,5000);
+
+            },
             qtextChange:function (e) {
                 var _this=this;
                 if(this.qText.length>0)
@@ -198,6 +222,7 @@ window.onload=function () {
                     if(dt.data.user)
                     {
                         _this.user=dt.data.user;
+                        _this.UpdateInteractive();
                     }
                     else{
                         this.loader = false;
