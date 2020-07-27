@@ -90,7 +90,7 @@ window.onload=function () {
             },
             chattextSend:function(){
                 var _this=this;
-                axios.post("/rest/api/chat/"+eventid+"/"+roomid,{text:_this.qText})
+                axios.post("/rest/api/chat/"+eventid+"/"+roomid,{text:_this.chatText})
                     .then(function (e) {
                         _this.chatText="";
                         _this.chat.push(e.data);
