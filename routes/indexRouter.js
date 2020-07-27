@@ -17,7 +17,11 @@ router.get('/', function(req, res, next) {
   if(req.headers.host.indexOf("cbr-online.ru")>=0)
     return res.render('cbr-online', { title: 'Пресс-конференция Банка России' });
   if(req.headers.host.indexOf("gpn.onevent.online")>=0)
-        return res.render('gpn', { title: 'Пресс-завтрак "Газпром Нефти"' });
+    return res.render('gpn', { title: 'Пресс-завтрак "Газпром Нефти"' });
+  if(req.headers.host.indexOf("roastom.onevent.online")>=0)
+    return res.render('rosatom', { title: 'Росатом' });
+
+
   res.render('index', { title: 'ON.event' });
 });
 router.get('/badbrowser', function(req, res, next) {
