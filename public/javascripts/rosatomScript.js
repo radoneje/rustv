@@ -67,12 +67,14 @@ window.onload=function () {
                 var _this=this;
                 if(this.chatText.length>0)
                     if(e.keyCode==13 && _this.qText.length>0){
-                        this.chattextSend()
+                        _this.chattextSend()
                     }
                 else
                     document.getElementById('chatText').focus()
 
             },
+            qtextSend:function(){},
+            chattextSend:function(){},
             sectActive:function (item) {
                 var _this=this;
                 this.sect.forEach(function (e) {
