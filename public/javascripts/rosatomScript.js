@@ -328,6 +328,7 @@ window.onload=function () {
                     {
                         _this.user=dt.data.user;
                         _this.UpdateInteractive();
+                        setTimeout( startVideo,0)
                     }
                     else{
                         this.loader = false;
@@ -448,5 +449,56 @@ function checkCode(code) {
 //console.log("f check",Number.isInteger( parseInt(code)) )
     return Number.isInteger(parseInt(code));
 
+
+}
+function startVideo() {
+
+    if(typeof(video) =="undefined")
+        return;
+    if( Hls.isSupported()) {
+
+        var hls = new Hls();
+        console.log("init HLS")
+        hls.loadSource(video.src);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            console.log("MANIFEST_PARSED")
+            var banner=document.querySelector(".videoPlayBannner");
+            banner.style.display="flex";
+            banner.onclick=function () {
+                console.log("PLAY")
+                video.play();
+                banner.style.display="none";
+            }
+        });
+        hls.on(Hls.Events.ERROR, function (event, data) {
+            if (data.fatal) {
+                switch(data.type) {
+                    case Hls.ErrorTypes.NETWORK_ERROR:
+                        // try to recover network error
+                        console.warn("fatal network error encountered, try to recover");
+                        hls.startLoad();
+                        break;
+                    case Hls.ErrorTypes.MEDIA_ERROR:
+                        console.warn("fatal media error encountered, try to recover");
+                        hls.recoverMediaError();
+                        break;
+                    default:
+                        // cannot recover
+                        hls.destroy();
+                        break;
+                }
+            }
+        });
+    }
+    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        //video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
+        var banner=document.querySelector(".videoPlayBannner");
+        video.addEventListener('loadedmetadata', function() {
+            video.controls=true;
+            banner.style.display="none";
+            video.play();
+        });
+    }
 
 }
