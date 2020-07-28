@@ -107,7 +107,7 @@ window.onload=function () {
                         if(fin.length !=1)
                             res=true;
                         else
-                            res=fin[0].isactive==tag.isactive || fin[0].iscompl==tag.iscompl || fin[0].isDeleted==tag.isDeleted
+                            res=fin[0].isactive!=tag.isactive || fin[0].iscompl!=tag.iscompl || fin[0].isDeleted!=tag.isDeleted
 
                     })
                     if(res)
