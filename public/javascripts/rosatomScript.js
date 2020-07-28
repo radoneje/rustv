@@ -97,7 +97,21 @@ window.onload=function () {
 
 
                     r = await axios.get("/rest/api/tags/" + eventid + "/" + roomid)
-                    _this.tags = r.data.filter(d=>d.isactive==true);
+                    /*_this.tags = */var data= r.data.filter(d=>d.isactive==true);
+
+                    var res=false;
+
+                    res=res || _this.tags.length!=data.length;
+                    _this.tags.forEach(tag=>{
+                        var fin=data.filter(d=>d.id==tag.id)
+                        if(fin.length !=1)
+                            res=true;
+                        else
+                            res=fin[0].isactive==tag.isactive || fin[0].iscompl==tag.iscompl || fin[0].isDeleted==tag.isDeleted
+
+                    })
+                    if(res)
+                        _this.tags=data;
 
                     console.log(_this.tag, r.data)
 
