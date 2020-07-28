@@ -82,10 +82,11 @@ window.onload=function () {
                         }
 
                     })
-                    this.chat = this.chat.filter(item => {
+                    _this.chat = _this.chat.filter(item => {
                         var count = r.data.filter(d = d.id == item.id).length;
                         return count > 0;
                     })
+                    console.log(_this.chat,r.data )
 
                     r = await axios.get("/rest/api/votes/" + eventid + "/" + roomid)
                     _this.votes = r.data;
