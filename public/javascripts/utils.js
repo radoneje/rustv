@@ -391,10 +391,18 @@ function connect(_this, roomid, clbk){
             var objDiv = document.getElementById("qBox");
             var needScrool=false;
 
-            if(objDiv && objDiv.scrollTop> objDiv.scrollHeight-230) {
-                needScrool=true;
+
+
+
+            if(_this.q.filter(c=>c.id==data.id).length<1) {
+                _this.q.push(data);
+                // if(needScrool || true) {
+                if(objDiv && objDiv.scrollTop> objDiv.scrollHeight-230) {
+                    needScrool=true;
+                }
+                // }
             }
-            _this.q.push(data);
+
             if(needScrool) {
                 setTimeout(function () {
                     objDiv.scrollTop = objDiv.scrollHeight;
