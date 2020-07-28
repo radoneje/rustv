@@ -83,7 +83,7 @@ window.onload=function () {
 
                     })
                     _this.chat = _this.chat.filter(item => {
-                        var count = r.data.filter(d = d.id == item.id).length;
+                        var count = r.data.filter(d => d.id == item.id).length;
                         return count > 0;
                     })
                     console.log(_this.chat,r.data )
