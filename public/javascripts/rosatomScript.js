@@ -146,7 +146,7 @@ window.onload=function () {
             },
             qtextSend:function(){
                 var _this=this;
-                if(_this.qText.qText>0) {
+                if(_this.qText.length>0) {
                     var tmp= _this.qText;
                     _this.qText = "";
                     axios.post("/rest/api/quest/" + eventid + "/" + roomid, {text:tmp})
