@@ -70,6 +70,10 @@ window.onload=function () {
                                 }, 0)
                         }
                     })
+                    _this.q = _this.q.filter(item => {
+                        var count = r.data.filter(d => d.id == item.id).length;
+                        return count > 0;
+                    })
                     var r = await axios.get("/rest/api/chat/" + eventid + "/" + roomid)
                     r.data.forEach(item => {
                         if (this.chat.filter(qt => qt.id == item.id).length == 0) {
@@ -86,7 +90,7 @@ window.onload=function () {
                         var count = r.data.filter(d => d.id == item.id).length;
                         return count > 0;
                     })
-                    console.log(_this.chat,r.data )
+
 
                     r = await axios.get("/rest/api/votes/" + eventid + "/" + roomid)
                     _this.votes = r.data;
