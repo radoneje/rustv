@@ -79,6 +79,11 @@ window.onload=function () {
                                 objDiv.scrollTop = objDiv.scrollHeight;
                             }, 0)
                     }
+
+                })
+                this.chat=this.chat.filter(item=>{
+                    var count=r.data.filter(d=d.id==item.id).length;
+                    return count>0;
                 })
 
                 r=await axios.get("/rest/api/votes/"+eventid+"/"+roomid)
