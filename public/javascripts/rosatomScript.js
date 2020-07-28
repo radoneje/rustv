@@ -114,31 +114,36 @@ window.onload=function () {
             },
             qtextSend:function(){
                 var _this=this;
-                if(_this.chatText.qText>0)
-                axios.post("/rest/api/quest/"+eventid+"/"+roomid,{text:_this.qText})
-                    .then(function (e) {
-                        _this.qText="";
-                         _this.q.push(e.data);
-                        //console.log(e.data)
-                        setTimeout(function () {
-                            var objDiv = document.getElementById("qBox");
-                            objDiv.scrollTop = objDiv.scrollHeight;
-                        },100)
-                    })
+                if(_this.chatText.qText>0) {
+                    var tmp= _this.qText;
+                    _this.qText = "";
+                    axios.post("/rest/api/quest/" + eventid + "/" + roomid, {text:tmp})
+                        .then(function (e) {
+                            _this.q.push(e.data);
+                            //console.log(e.data)
+                            setTimeout(function () {
+                                var objDiv = document.getElementById("qBox");
+                                objDiv.scrollTop = objDiv.scrollHeight;
+                            }, 100)
+                        })
+                }
             },
             chattextSend:function(){
                 var _this=this;
-                if(_this.chatText.length>0)
-                axios.post("/rest/api/chat/"+eventid+"/"+roomid,{text:_this.chatText})
-                    .then(function (e) {
-                        _this.chatText="";
-                        _this.chat.push(e.data);
-                        //console.log(e.data)
-                        setTimeout(function () {
-                            var objDiv = document.getElementById("chatBox");
-                            objDiv.scrollTop = objDiv.scrollHeight;
-                        },100)
-                    })
+                if(_this.chatText.length>0) {
+                    var tmp=_this.chatText;
+                    _this.chatText = "";
+                    axios.post("/rest/api/chat/" + eventid + "/" + roomid, {text: tmp})
+                        .then(function (e) {
+
+                            _this.chat.push(e.data);
+                            //console.log(e.data)
+                            setTimeout(function () {
+                                var objDiv = document.getElementById("chatBox");
+                                objDiv.scrollTop = objDiv.scrollHeight;
+                            }, 100)
+                        })
+                }
             },
             sectActive:function (item) {
                 var _this=this;
