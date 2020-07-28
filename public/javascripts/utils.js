@@ -395,6 +395,7 @@ function connect(_this, roomid, clbk){
 
 
             if(_this.q.filter(c=>c.id==data.id).length<1) {
+                console.log(c.id,data.id)
                 _this.q.push(data);
                 // if(needScrool || true) {
                 if(objDiv && objDiv.scrollTop> objDiv.scrollHeight-230) {
