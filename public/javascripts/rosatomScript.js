@@ -97,7 +97,8 @@ window.onload=function () {
 
 
                     r = await axios.get("/rest/api/tags/" + eventid + "/" + roomid)
-                    _this.tags = r.data;
+                    _this.tags = r.data.filter(d=>d.isactive==true);
+
                     console.log(_this.tag, r.data)
 
                     r = await axios.get("/rest/api/pole/" + eventid + "/" + roomid)
