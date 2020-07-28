@@ -360,12 +360,14 @@ function connect(_this, roomid, clbk){
             if(objDiv && objDiv.scrollTop> objDiv.scrollHeight-130) {
                 needScrool=true;
             }
-            _this.chat.push(data);
-            // if(needScrool || true) {
-                    setTimeout(function () {
-                        objDiv.scrollTop = objDiv.scrollHeight;
-                    }, 100)
-           // }
+            if(_this.chat.filter(c=>c.id==data.id).length<1) {
+                _this.chat.push(data);
+                // if(needScrool || true) {
+                setTimeout(function () {
+                    objDiv.scrollTop = objDiv.scrollHeight;
+                }, 100)
+                // }
+            }
         });
     socket.on("stageChatAdd", function(data){
         if(_this.stageChat.filter(function (u) {
