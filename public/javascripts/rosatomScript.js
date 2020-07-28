@@ -113,7 +113,7 @@ window.onload=function () {
                     if(res)
                         _this.tags=data;
 
-                    console.log(_this.tag, r.data)
+
 
                     r = await axios.get("/rest/api/pole/" + eventid + "/" + roomid)
                     _this.pole = r.data;
@@ -146,7 +146,7 @@ window.onload=function () {
             },
             qtextSend:function(){
                 var _this=this;
-                if(_this.chatText.qText>0) {
+                if(_this.qText.qText>0) {
                     var tmp= _this.qText;
                     _this.qText = "";
                     axios.post("/rest/api/quest/" + eventid + "/" + roomid, {text:tmp})
