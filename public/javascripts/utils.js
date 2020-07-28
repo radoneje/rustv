@@ -387,7 +387,7 @@ function connect(_this, roomid, clbk){
             _this.chat=_this.chat.filter(function (e) {return e.id!=data;});
         });
         socket.on("qAdd", function(data){
-
+            console.log("qAdd")
             var objDiv = document.getElementById("qBox");
             var needScrool=false;
 
