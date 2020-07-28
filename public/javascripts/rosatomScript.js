@@ -62,7 +62,7 @@ window.onload=function () {
                     r.data.forEach(item => {
                         if (this.q.filter(qt => qt.id == item.id).length == 0) {
                             _this.q.push(item);
-                            console.log(_this.q)
+
                             var objDiv = document.getElementById("qBox");
                             if (objDiv)
                                 setTimeout(function () {
