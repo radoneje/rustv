@@ -114,6 +114,7 @@ window.onload=function () {
             },
             qtextSend:function(){
                 var _this=this;
+                if(_this.chatText.qText>0)
                 axios.post("/rest/api/quest/"+eventid+"/"+roomid,{text:_this.qText})
                     .then(function (e) {
                         _this.qText="";
@@ -127,6 +128,7 @@ window.onload=function () {
             },
             chattextSend:function(){
                 var _this=this;
+                if(_this.chatText.length>0)
                 axios.post("/rest/api/chat/"+eventid+"/"+roomid,{text:_this.chatText})
                     .then(function (e) {
                         _this.chatText="";
