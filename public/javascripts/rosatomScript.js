@@ -149,7 +149,7 @@ window.onload=function () {
                 if(_this.qText.length>0) {
                     var tmp= _this.qText;
                     _this.qText = "";
-                    axios.post("/rest/api/quest/" + eventid + "/" + roomid, {text:tmp})
+                    axios.post("/rest/api/quest2/" + eventid + "/" + roomid, {text:tmp, user:user})
                         .then(function (e) {
                             _this.q.push(e.data);
                             //console.log(e.data)
@@ -165,7 +165,7 @@ window.onload=function () {
                 if(_this.chatText.length>0) {
                     var tmp=_this.chatText;
                     _this.chatText = "";
-                    axios.post("/rest/api/chat/" + eventid + "/" + roomid, {text: tmp})
+                    axios.post("/rest/api/chat2/" + eventid + "/" + roomid, {text: tmp, user:user})
                         .then(function (e) {
 
                             _this.chat.push(e.data);
