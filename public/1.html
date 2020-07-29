@@ -1,0 +1,66 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+<div class="videoPlayBannner"></div>
+<video id="video" width="1280" height="720" controls autoplay playsinline loop  src="/live/1/playlist.m3u8" poster="/images/clients/rosatom/screen_main.png" >
+</video>
+<script>
+    var video=document.getElementById("video")
+    startVideo();
+
+    function startVideo() {
+
+        if(typeof(video) =="undefined")
+            return;
+        if( Hls.isSupported()) {
+
+            var hls = new Hls();
+            console.log("init HLS")
+            hls.loadSource(video.src);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                console.log("MANIFEST_PARSED")
+                var banner=document.querySelector(".videoPlayBannner");
+                banner.style.display="flex";
+                banner.onclick=function () {
+                    console.log("PLAY")
+                    video.play();
+                    banner.style.display="none";
+                }
+            });
+            hls.on(Hls.Events.ERROR, function (event, data) {
+                if (data.fatal) {
+                    switch(data.type) {
+                        case Hls.ErrorTypes.NETWORK_ERROR:
+                            // try to recover network error
+                            console.warn("fatal network error encountered, try to recover");
+                            hls.startLoad();
+                            break;
+                        case Hls.ErrorTypes.MEDIA_ERROR:
+                            console.warn("fatal media error encountered, try to recover");
+                            hls.recoverMediaError();
+                            break;
+                        default:
+                            // cannot recover
+                            hls.destroy();
+                            break;
+                    }
+                }
+            });
+        }
+        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            //video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
+            var banner=document.querySelector(".videoPlayBannner");
+            video.addEventListener('loadedmetadata', function() {
+                video.controls=true;
+                banner.style.display="none";
+                video.play();
+            });
+        }
+
+    }
+</script>
+</body>
+</html>
