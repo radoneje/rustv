@@ -848,6 +848,38 @@ router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
     req.transport.emit("chatAdd", r[0], req.params.roomid);
     res.json(r[0]);
 })
+router.post("/chat2/:eventid/:roomid", async (req, res, next) => {
+    if(req.body.text.length>2040)
+        req.body.text=req.body.text.substr(0, 2040);
+    var text = urlify(stripHtml(req.body.text))
+
+
+    var r = await req.knex("t_chat").insert({
+        text: text,
+        roomid: req.params.roomid,
+        userid: req.body.user.id,
+        date: (new Date())
+    }, "*")
+    r = await req.knex.select("*").from("v_chat").where({id: r[0].id});
+    req.transport.emit("chatAdd", r[0], req.params.roomid);
+    res.json(r[0]);
+})
+router.post("/quest2/:eventid/:roomid", async (req, res, next) => {
+    if(req.body.text.length>2040)
+        req.body.text=req.body.text.substr(0, 2040);
+    var text = urlify(stripHtml(req.body.text))
+    var r = await req.knex("t_q").insert({
+        text: text,
+        roomid: req.params.roomid,
+        userid: req.body.user.id,
+        date: (new Date())
+    }, "*")
+
+    r = await req.knex.select("*").from("v_q").where({id: r[0].id});
+
+    req.transport.emit("qAdd", r[0], req.params.roomid);
+    res.json(r[0]);
+})
 router.post("/stageChat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     if(req.body.text.length>2040)
         req.body.text=req.body.text.substr(0, 2040);

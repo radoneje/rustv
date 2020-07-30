@@ -138,6 +138,24 @@ res.header("X-Frame-Options","")
   res.render('room', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
 
 })
+router.get('/chatToscreen/:id',  async (req, res, next) =>{
+  req.params.id=parseInt(req.params.id)
+  if(!Number.isInteger(req.params.id))
+    return res.send(404);
+
+  var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.params.id})
+  if(rooms.length<1)
+    return res.send(404);
+
+  var room=rooms[0]
+
+
+  var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
+  res.header("X-Frame-Options","")
+  res.render('chatToscreen', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
+
+})
+
 router.get('/stage/:id',  async (req, res, next) =>{
   req.params.id=parseInt(req.params.id)
   if(!Number.isInteger(req.params.id))

@@ -6,7 +6,6 @@ block head
     link(rel='stylesheet', href='/stylesheets/room.css')
     link(rel='stylesheet', href='/stylesheets/rosatomRoom.css')
     link(rel='stylesheet', href='/stylesheets/rosatomLogin.css')
-    <script src="/lib/vue-youtube.js"></script>
     script(src="https://cdn.jsdelivr.net/npm/hls.js@latest")
     script(src="/javascripts/rosatomScript.js")
 block content
@@ -50,8 +49,7 @@ block content
             div.center
                 div.L
                     div.videoWrapper
-                        <youtube :video-id="'MgDTmn22esg'" :player-vars="{playsinline:'1'}" ref="youtube" ></youtube>
-                        //video(id="video" width="1280" height="720" controls autoplay playsinline loop  src="https://aurora-school.cdnvideo.ru/hls/183/video/playlist.m3u8" poster="/images/clients/rosatom/screen_main.png" )
+                        video(id="video" width="1280" height="720" controls autoplay playsinline loop  src="/live/1/playlist.m3u8" poster="/images/clients/rosatom/screen_main.png" )
                 div.R
                     div.Rwr
                         include elements/roomVote
