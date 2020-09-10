@@ -760,7 +760,21 @@
 </div>
 <script>
 
-    window.onload = function() {
+
+        window.onload = function() {
+            var options = {
+                parentId: '#flu',
+                width: '100%',
+                height: '100%',
+            }
+            var config = {"streamName":"cbr_rus","hasPreview":false,"rtmpPort":1935,"rtmpsPort":null,"authTokenName":"token","thumbnails_enabled":false,"type":"live","dvr_info":null,"protocols":{"hds":true,"rtmp":true,"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}};
+            var params = LivePlayer.parseUrl(window.location.href, options, {"streamName":"cbr_rus","hasPreview":false,"rtmpPort":1935,"rtmpsPort":null,"authTokenName":"token","thumbnails_enabled":false,"type":"live","dvr_info":null,"protocols":{"hds":true,"rtmp":true,"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}});
+            window.LivePlayer = new LivePlayer(params);
+            //document.getElementsByTagName('title')[0].innerHTML = config.streamName;
+
+
+
+        /*
         var options = {
             parentId: '#flu',
             width: '100%',
@@ -806,6 +820,8 @@
             if(event.data=="unMute")
                 videos.forEach(video=>{video.muted=false;})
         });
+
+         */
 
     }
 
