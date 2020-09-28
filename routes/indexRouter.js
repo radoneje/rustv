@@ -20,7 +20,10 @@ router.get('/', function(req, res, next) {
     return res.render('gpn', { title: 'Пресс-завтрак "Газпром Нефти"' });
   if(req.headers.host.indexOf("roastom.onevent.online")>=0)
     return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
-
+  if(req.headers.host.indexOf("roastom02.onevent.online")>=0)
+    return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
+  if(req.headers.host.indexOf("atomday.ru")>=0)
+    return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
 
   res.render('index', { title: 'ON.event' });
 });
