@@ -212,21 +212,27 @@ block content
                             div.vAnswTitle
                               span(v-if="item.iscompl") {{CalcAnswPercent(answ, item)}}%,&nbsp
                               span {{answ.title}}
-
-                  div.rFeedGroupTitle Переговорная комната
+                  if(room.id!=37)
+                    div.rFeedGroupTitle Переговорная комната
+                    div.rFeedGroupBody
+                      div.qItem()
+                        div.qItemName
+                          div.rItemSubTitle Приглашено: {{invitedUsers.length}}
+                          div.rItemSubTitle Зашло: 0
+                        div.qItemDate
+                          span.link.green(v-on:click="document.location.href='/meeting/'+eventid+'/'+user.id") &nbsp;&nbsp; Зайти в мою комнату
                   div.rFeedGroupBody
-                    div.qItem()
-                      div.qItemName
-                        div.rItemSubTitle Приглашено: {{invitedUsers.length}}
-                        div.rItemSubTitle Зашло: 0
-                      div.qItemDate
-                        span.link.green(v-on:click="document.location.href='/meeting/'+eventid+'/'+user.id") &nbsp;&nbsp; Зайти в мою комнату
-                  div.rFeedGroupBody
-                div.rFeedGroup
+                if(room.id!=37)
+                  div.rFeedGroup
+                    div.rFeedGroupTitle Расписание сессий
+                    div.rFeedGroupBody
+                      div.qItem(v-for="item in eventRooms" :id="'eventRoom'+item.id")
+                        div.qItemName {{moment(item.date).format('HH:mm')}} {{item.description}}
+                if(room.id==37)
                   div.rFeedGroupTitle Расписание сессий
-                  div.rFeedGroupBody
-                    div.qItem(v-for="item in eventRooms" :id="'eventRoom'+item.id")
-                      div.qItemName {{moment(item.date).format('HH:mm')}} {{item.description}}
+                    div.rFeedGroupBody
+                      div.qItem(v-for="item in [1,2,3,4]" :id="'eventRoom'+item.id")
+                        div.qItemName 12:00 Meроприятие {item}
 
                       div.qItemDate
                         span.link.green(v-on:click="document.location.href='/room/'+item.id" v-if="item.id!=roomid") &nbsp;&nbsp; Перейти
