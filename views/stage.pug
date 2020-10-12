@@ -231,8 +231,8 @@ block content
                 if(room.id==37)
                   div.rFeedGroupTitle Расписание сессий
                     div.rFeedGroupBody
-                      div.qItem(v-for="item in [1,2,3,4]" :id="'eventRoom'+item.id")
-                        div.qItemName 12:00 Meроприятие {item}
+                      div.qItem(v-for="item in [1,2,3,4]")
+                        div.qItemName 12:00 Meроприятие {{item}}
 
                       div.qItemDate
                         span.link.green(v-on:click="document.location.href='/room/'+item.id" v-if="item.id!=roomid") &nbsp;&nbsp; Перейти
