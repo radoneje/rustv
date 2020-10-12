@@ -230,6 +230,11 @@ block content
 
                       div.qItemDate
                         span.link.green(v-on:click="document.location.href='/room/'+item.id" v-if="item.id!=roomid") &nbsp;&nbsp; Перейти
+                div.rFeedGroup
+                  div.rFeedGroupTitle Расписание сессий
+                  div.rFeedGroupBody
+                    div.qItem(v-for="item in [1,2,3,4]")
+                      div.qItemName 12:00 Сессия {{item}}
             div.rContentWr(v-if="activeSection==1" v-show="isQ")
               div.rBody(id="qBox" )
                 div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==user.id)}" v-if="item.userid==user.id || true")
