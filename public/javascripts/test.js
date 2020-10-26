@@ -50,7 +50,7 @@ window.onload=function () {
                             _this.isSucсess = true;
                             console.log("_this.isSucсess", _this.isSucсess)
                         })
-                        .catch(function (err0r) {
+                        .catch(function (e) {
                             itemWebCam.status = 1;
                             itemWebCam.error = true;
                             itemWebCam.descr = e;
