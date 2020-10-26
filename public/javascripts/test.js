@@ -7,6 +7,7 @@ window.onload=function () {
             isStarted:false,
             results:[],
             isError:false,
+            isSucess:false,
             errorIsSended:false,
 
         },
@@ -45,6 +46,7 @@ window.onload=function () {
                 navigator.mediaDevices.getUserMedia({ video: true, audio:true })
                     .then(function (stream) {
                         itemWebCam.status=1;
+                        _this.isSucess=true;
                     })
                     .catch(function (err0r) {
                         itemWebCam.status=1;
