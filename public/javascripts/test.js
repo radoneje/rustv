@@ -6,7 +6,7 @@ window.onload=function () {
         data: {
             isStarted:false,
             results:[],
-            isError:true,
+            isError:false,
 
         },
         watch: {
