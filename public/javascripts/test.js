@@ -19,7 +19,7 @@ window.onload=function () {
             checkError:function () {
                 var _this=this;
                 try {
-                    eval("setTimeout(()=>{sssconsole.log('esc6')},0)");
+                    eval("setTimeout(()=>{console.log('esc6')},0)");
                     _this.results.push({title:"Browser Version", status:1,error:false, descr:""})
                 }
                 catch (e) {
