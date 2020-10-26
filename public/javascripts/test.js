@@ -7,6 +7,7 @@ window.onload=function () {
             isStarted:false,
             results:[],
             isError:false,
+            errorIsSended:false,
 
         },
         watch: {
@@ -19,7 +20,15 @@ window.onload=function () {
                 this.isStarted=true;
                 this.checkError();
             },
-
+            sendErrors:function(){
+                var _this=this;
+                _this.errorIsSended=true;
+                axios.post("/rest/api/speakersErrors/",{results:_this.results}).then(function () {
+                    console.log("error send")
+                }).catch(function (e) {
+                    console.warn("error send", e)
+                })
+            },
             checkError:function () {
                 var _this=this;
                 try {

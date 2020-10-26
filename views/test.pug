@@ -34,7 +34,10 @@ block content
                   span(v-if="!item.error") OK
                   span(v-if="item.error" style="color:red; font-weight:bold") FAILED
                 span(v-else) checking...
-        .btn.mt(v-if="isError") Report errors / Отправить ошибки организаторам
+        div(v-if="isError")
+          .btn.mt(v-if="!errorIsSended" v-on:click="sendErrors()") Report errors / Отправить ошибки организаторам
+          .mt(v-else) Report is send /  ошибки отправлены
+
 
 
 
