@@ -1708,7 +1708,15 @@ router.post('/userTh/:roomid/:userid', async (req, res, next) => {
     });
 })
 
-
+router.post('/speakersErrors', async (req, res, next) =>{
+    var data=req.body.results;
+    var ret=(new Date()).toISOString()+"\r\n"
+    data.forEach(d=>{
+        ret+="\r\n"+r.title+":   "+r.descr;
+    })
+    fs.appendFile('speakersError.txt', ret, function (err) {
+    });
+} );
 router.get("/downloadQ/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
 
 

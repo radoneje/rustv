@@ -37,23 +37,32 @@ window.onload=function () {
                     _this.results.push({title:"Browser Version", status:1,error:false, descr:""})
                 }
                 catch (e) {
-                    _this.results.push({title:"Browser Version", status:1,error:false, descr:""})
+                    _this.results.push({title:"Browser Version", status:1,error:false, descr:e})
                     _this.isError=true;
                     return false;
                 }
                 var itemWebCam={title:"Webcam and mic", status:0,error:false, descr:""}
                 _this.results.push(itemWebCam)
-                navigator.mediaDevices.getUserMedia({ video: true, audio:true })
-                    .then(function (stream) {
-                        itemWebCam.status=1;
-                        _this.isSucсess=true;
-                        console.log("_this.isSucсess", _this.isSucсess)
-                    })
-                    .catch(function (err0r) {
-                        itemWebCam.status=1;
-                        itemWebCam.error=true;
-                        _this.isError=true;
-                    });
+                try {
+                    navigator.mediaDevices.getUserMedia({video: true, audio: true})
+                        .then(function (stream) {
+                            itemWebCam.status = 1;
+                            _this.isSucсess = true;
+                            console.log("_this.isSucсess", _this.isSucсess)
+                        })
+                        .catch(function (err0r) {
+                            itemWebCam.status = 1;
+                            itemWebCam.error = true;
+                            itemWebCam.descr = e;
+                            _this.isError = true;
+                        });
+                }
+                catch (e) {
+                    itemWebCam.status = 1;
+                    itemWebCam.error = true;
+                    itemWebCam.descr = e;
+                    _this.isError = true;
+                }
             }
         },
         mounted: function () {
