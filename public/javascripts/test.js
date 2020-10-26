@@ -10,7 +10,7 @@ window.onload=function () {
         },
         watch: {
             isError:function (val) {
-                results.filter(r=>r.error).length>0
+                return results.filter(r=>r.error).length>0
             },
         },
         methods: {},
