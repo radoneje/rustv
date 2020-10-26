@@ -28,10 +28,8 @@ block content
         .btn.mt(v-if="!isStarted" v-on:click="isStarted=true")
           div Click here to start / Нажмите для начала теста
         .roga.mt(v-else)
-          .rogaRow
-              .rogaCell.succeess bla-bla
-          .rogaRow
-              .rogaCell.error do while
+          .rogaRow(v-for="item in results")
+              .rogaCell(v-bind:class="{succeess:!item.error,error:item.error}") {{item.title}}
         .btn.mt(v-if="isError") Report errors / Отправить ошибки организаторам
 
 
