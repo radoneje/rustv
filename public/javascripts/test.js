@@ -4,20 +4,10 @@ window.onload=function () {
 
         el: "#app",
         data: {
-            events: [],
-            editRoom: null,
-            allowUsers: null,
-            telInput: "",
-            otrasl: null,
-            company: null,
+
         },
         watch: {
-            editRoom: function (val) {
-                document.body.style.overflowY = val ? "hidden" : "auto";
-            },
-            allowUsers: function (val) {
-                document.body.style.overflowY = val ? "hidden" : "auto";
-            }
+
         },
         methods: {},
         mounted: function () {
