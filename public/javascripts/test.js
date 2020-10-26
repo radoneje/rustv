@@ -28,6 +28,7 @@ window.onload=function () {
                 }
                 catch (e) {
                     _this.results.push({title:"Browser Version", status:1,error:false, descr:""})
+                    _this.isError=true;
                     return false;
                 }
                 var itemWebCam={title:"Webcam and mic", status:0,error:false, descr:""}
@@ -39,6 +40,7 @@ window.onload=function () {
                     .catch(function (err0r) {
                         itemWebCam.status=1;
                         itemWebCam.error=true;
+                        _this.isError=true;
                     });
             }
         },
