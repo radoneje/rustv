@@ -14,11 +14,26 @@ window.onload=function () {
                 return results.filter(r=>r.error).length>0
             },*/
         },
-        methods: {},
+        methods: {
+
+            checkError:function () {
+                var _this=this;
+                try {
+                    exec("setTimeout(()=>{console.log('esc6')},0)");
+                    _this.results.push({title:"Browser Version", status:1,error:false, descr:""})
+                }
+                catch (e) {
+                    _this.results.push({title:"Browser Version", status:1,error:false, descr:""})
+                    return;
+                }
+            }
+        },
         mounted: function () {
             setTimeout(function () {
                 document.getElementById("app").style.opacity=1;
-            },0)
+            },0);
+            this.checkError();
+
 
         }
     })
