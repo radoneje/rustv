@@ -15,6 +15,10 @@ window.onload=function () {
             },*/
         },
         methods: {
+            start:function(){
+                isStarted=true;
+                this.checkError();
+            },
 
             checkError:function () {
                 var _this=this;
@@ -42,7 +46,7 @@ window.onload=function () {
             setTimeout(function () {
                 document.getElementById("app").style.opacity=1;
             },0);
-            this.checkError();
+
 
 
         }
