@@ -47,6 +47,7 @@ window.onload=function () {
                     .then(function (stream) {
                         itemWebCam.status=1;
                         _this.isSucсess=true;
+                        console.log("_this.isSucсess", _this.isSucсess)
                     })
                     .catch(function (err0r) {
                         itemWebCam.status=1;
