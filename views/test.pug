@@ -30,8 +30,10 @@ block content
         .roga.mt(v-else)
           .rogaRow(v-for="item in results")
               .rogaCell(v-bind:class="{succeess:!item.error,error:item.error}") {{item.title}}  -
-                span(v-if="!item.error") {{OK}}
-                span(v-if="item.error" style="color:red") {{FAILED}}
+                span(v-if="item.status==1")
+                  span(v-if="!item.error") {{OK}}
+                  span(v-if="item.error" style="color:red") {{FAILED}}
+                span(v-else) checking...
         .btn.mt(v-if="isError") Report errors / Отправить ошибки организаторам
 
 
