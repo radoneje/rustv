@@ -29,7 +29,9 @@ block content
           div Click here to start / Нажмите для начала теста
         .roga.mt(v-else)
           .rogaRow(v-for="item in results")
-              .rogaCell(v-bind:class="{succeess:!item.error,error:item.error}") {{item.title}}
+              .rogaCell(v-bind:class="{succeess:!item.error,error:item.error}") {{item.title}}  -
+                span(v-if="!item.error") {{OK}}
+                span(v-if="item.error" style="color:red") {{FAILED}}
         .btn.mt(v-if="isError") Report errors / Отправить ошибки организаторам
 
 
