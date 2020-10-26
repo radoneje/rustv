@@ -44,7 +44,7 @@ router.get('/adminpanel', function(req, res, next) {
   res.render('adminpanel', { title: 'ON.event' });
 });
 router.get('/test', function(req, res, next) {
-  res.render('test', { title: 'Express' });
+  res.render('test', { title: 'AIJ test page' });
 });
 router.get('/regtoevent/:id', async (req, res, next) =>{
   var e=await req.knex.select("*").from("t_events").where({isDeleted:false, id:req.params.id})
