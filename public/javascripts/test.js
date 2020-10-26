@@ -18,7 +18,14 @@ window.onload=function () {
 
             checkError:function () {
                 var _this=this;
-
+                try {
+                    eval("const func=()=>{;;}");
+                    _this.results.push({title:"Browser Version", status:1,error:false, descr:""})
+                }
+                catch (e) {
+                    _this.results.push({title:"Browser Version", status:1,error:false, descr:""})
+                    return false;
+                }
             }
         },
         mounted: function () {
@@ -32,13 +39,5 @@ window.onload=function () {
     })
 };
 function checkESC6() {
-    try {
-        eval("const func=()=>{;;}");
-        _this.results.push({title:"Browser Version", status:1,error:false, descr:""})
-        return
-    }
-    catch (e) {
-        _this.results.push({title:"Browser Version", status:1,error:false, descr:""})
-        return false;
-    }
+
 }
