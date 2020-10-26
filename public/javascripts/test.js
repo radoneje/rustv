@@ -5,13 +5,14 @@ window.onload=function () {
         el: "#app",
         data: {
             isStarted:false,
-            results:[]
+            results:[],
+            isError:true,
 
         },
         watch: {
-            isError:function (val) {
+          /*  isError:function (val) {
                 return results.filter(r=>r.error).length>0
-            },
+            },*/
         },
         methods: {},
         mounted: function () {
