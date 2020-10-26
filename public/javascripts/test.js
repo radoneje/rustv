@@ -15,7 +15,10 @@ window.onload=function () {
         },
         methods: {},
         mounted: function () {
-            document.getElementById("app").style.opacity=1;
+            setTimeout(function () {
+                document.getElementById("app").style.opacity=1;
+            },0)
+
         }
     })
 };
