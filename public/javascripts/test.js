@@ -4,10 +4,14 @@ window.onload=function () {
 
         el: "#app",
         data: {
+            isStarted:false,
+            results:[]
 
         },
         watch: {
-
+            isError:function (val) {
+                results.filter(r=>r.error).length>0
+            },
         },
         methods: {},
         mounted: function () {

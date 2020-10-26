@@ -25,14 +25,14 @@ block content
             .js-marquee  Automated Decision   Support & Scoring Natural Language Processing    Computer Vision     Automated Decision   Support & Scoring    Natural Language Processing     Computer Vision speech analytics
       .tBody#app
         .tTitle AIJ speakers test page
-        .btn.mt
+        .btn.mt(v-if="!isStarted")
           div Click here to start / Нажмите для начала теста
-        .roga.mt
+        .roga.mt(v-else)
           .rogaRow
               .rogaCell.succeess bla-bla
           .rogaRow
               .rogaCell.error do while
-        .btn.mt Report errors / Отправить ошибки организаторам
+        .btn.mt(v-if="isError") Report errors / Отправить ошибки организаторам
 
 
 
