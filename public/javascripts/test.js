@@ -16,7 +16,7 @@ window.onload=function () {
         },
         methods: {
             start:function(){
-                isStarted=true;
+                this.isStarted=true;
                 this.checkError();
             },
 
