@@ -299,3 +299,41 @@ body{
   padding-right: .5em;
   font-weight: bold;
 }
+.rogaVideoWr{
+  display: flex;
+}
+.videoBox{
+  margin:10px;
+  position: relative;
+  width: max-content;
+min-width: 320px;
+
+}
+.videoBox video{
+  width: 320px;
+}
+.videoCap{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: .2em;
+  box-sizing: border-box;
+}
+@media only screen and (max-width: 800px) {
+.rogaVideoWr{
+  display: block;
+}
+  .videoBox{
+    width: calc(100% - 20px);
+    min-width: calc(100% - 20px);
+  }
+  .videoBox video{
+    width: 100%;
+  }
+  .btn{
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+  }
+}

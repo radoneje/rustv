@@ -9,6 +9,7 @@ window.onload=function () {
             isError:false,
             isSucсess:false,
             errorIsSended:false,
+            isShowVideo:false,
 
         },
         watch: {
@@ -34,34 +35,19 @@ window.onload=function () {
                 var _this=this;
                 try {
                     eval("const func=()=>{;;}");
-                    _this.results.push({title:"Browser Version", status:1,error:false, descr:""})
+                    _this.results.push({title:"Browser Version", status:1,error:false, descr:""});
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = '/javascripts/test2.js';
+                    script.onload = function(){
+                        checkStep2(_this);
+                    };
+                    document.body.appendChild(script);
                 }
                 catch (e) {
                     _this.results.push({title:"Browser Version", status:1,error:false, descr:e})
                     _this.isError=true;
                     return false;
-                }
-                var itemWebCam={title:"Webcam and mic", status:0,error:false, descr:""}
-                _this.results.push(itemWebCam)
-                try {
-                    navigator.mediaDevices.getUserMedia({video: true, audio: true})
-                        .then(function (stream) {
-                            itemWebCam.status = 1;
-                            _this.isSucсess = true;
-                            console.log("_this.isSucсess", _this.isSucсess)
-                        })
-                        .catch(function (e) {
-                            itemWebCam.status = 1;
-                            itemWebCam.error = true;
-                            itemWebCam.descr = e;
-                            _this.isError = true;
-                        });
-                }
-                catch (e) {
-                    itemWebCam.status = 1;
-                    itemWebCam.error = true;
-                    itemWebCam.descr = e;
-                    _this.isError = true;
                 }
             }
         },

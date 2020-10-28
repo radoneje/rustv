@@ -28,6 +28,13 @@ block content
         .btn.mt(v-if="!isStarted" v-on:click="start()")
           div Click here to start / Нажмите для начала теста
         .roga.mt(v-else)
+          .rogaVideoWr(v-show="isShowVideo")
+            .videoBox
+              video#sourceVideo(width="320"  muted)
+              .videoCap You video from webcam
+            .videoBox
+              video#remoteVideo(width="320" controls muted)
+              .videoCap You video from remote server
           .rogaRow(v-for="item in results")
               .rogaCell(v-bind:class="{succeess:!item.error,error:item.error}") {{item.title}}  -&nbsp;
                 span(v-if="item.status==1")
