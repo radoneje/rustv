@@ -9,7 +9,7 @@ router.get('/ping', function(req, res, next) {
   res.json( req.transport.clients.filter(c=>c.isActive).length);
 });
 
-router.get('/A/:id', function(req, res, next) {
+router.get('/A/:id/:subid', function(req, res, next) {
   //res.json( req.transport.clients.filter(c=>c.isActive).length);
   res.render('test', { title: 'AIJ test page' });
 });
