@@ -8,6 +8,12 @@ var fs = require('fs')
 router.get('/ping', function(req, res, next) {
   res.json( req.transport.clients.filter(c=>c.isActive).length);
 });
+
+router.get('/A/:id', function(req, res, next) {
+  //res.json( req.transport.clients.filter(c=>c.isActive).length);
+  res.render('test', { title: 'AIJ test page' });
+});
+
 router.get('/', function(req, res, next) {
   console.log(req.headers.host)
      // if(req.headers.host.indexOf("localhost")>=0)
@@ -82,7 +88,7 @@ router.get('/event/:id',  async (req, res, next) =>{
 
   var event=evnts[0]
   var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, eventid:req.params.id}).orderBy("date","desc")
-  res.render('event', { title: 'ON.event', event:event , rooms:rooms});
+  res.render('event', { title: 'ON.event',user:req.session["user"+req.params.id], event:event , rooms:rooms});
 
 })
 router.get('/showrecords/:eventid/:roomid',  async (req, res, next) => {
