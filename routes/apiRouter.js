@@ -228,7 +228,7 @@ router.put("/events", async (req, res, next) => {
         isCompanyName:req.body.isCompanyName,
         isClientCss:req.body.isClientCss,
         clientCss:req.body.clientCss,
-    }, "*").where({id: req.body.id, adminId: req.session["admin"].id});
+    }, "*").where({id: req.body.id});
     r[0].rooms = [];
     return res.json(r[0])
 });
