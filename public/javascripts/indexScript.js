@@ -28,7 +28,7 @@ window.onload=function () {
                     }
                     this.isLoading = true;
                     localStorage.setItem("loginTel", this.tel);
-                    var dt = await axios.post('/rest/api/sendSms', {tel: tel, token:this.token});
+                    var dt = await axios.post('/rest/api/sendAdminSms', {tel: tel, token:this.token});
                     this.showSmsCode = dt.data.code;
                     this.userId = dt.data.id;
                     setTimeout(function () {
@@ -81,25 +81,13 @@ window.onload=function () {
                 }, false);
                 input.focus()
             }
-
-          /*  var socket = io('');
-            socket.on('connect', function () {
-                console.log("socket connected")
-            })*/
-           // grecaptcha.execute();
+            _this.noRobot(123);
+        /*
             grecaptcha.render('sendSmsPlaceHolder', {
                 'sitekey' : '6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj',
                 'callback' : _this.noRobot
             });
-
-            /*grecaptcha.ready(function () {
-              grecaptcha.execute('6LfC5uUUAAAAAPN7shWL_ri1HGB-StMKv_onH2Vj', {action: 'enter'})
-                   .then(function (token) {
-                       console.log("get token", token)
-                       _this.token=token;
-                   });
-
-            });*/
+*/
             document.getElementById("app").style.opacity=1;
         }
 

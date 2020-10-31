@@ -9,10 +9,28 @@ router.get('/ping', function(req, res, next) {
   res.json( req.transport.clients.filter(c=>c.isActive).length);
 });
 
-router.get('/A/:id/', function(req, res, next) {
+router.get('/a/:id/', async function(req, res, next) {
   //res.json( req.transport.clients.filter(c=>c.isActive).length);
-  res.render('test', { title: 'AIJ test page' });
+ // res.render('test', { title: 'AIJ test page' });
+  await redirect("a",req, res)
 });
+router.get('/b/:id/', async function(req, res, next) {
+  //res.json( req.transport.clients.filter(c=>c.isActive).length);
+  //res.render('test', { title: 'AIJ test page' });
+  await redirect("b",req, res)
+});
+async function redirect(f,req,res){
+
+  var key=f+req.params.id;
+  console.log(key)
+  var r= await req.knex.select("*").from("t_redirect").where({key})
+  if(r.length==0)
+    return res.sendStatus(404);
+  if(!r[0].value)
+    r[0].value="/"
+  res.redirect(r[0].value);
+
+}
 
 router.get('/', function(req, res, next) {
   console.log(req.headers.host)

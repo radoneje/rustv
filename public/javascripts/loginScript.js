@@ -18,7 +18,9 @@ window.onload=function () {
             fErr:false,
             iErr:false,
             email:localStorage.getItem("email") || "",
+            CompanyName:localStorage.getItem("CompanyName") || "",
             emailErr:false,
+            CompanyNameErr:false,
             showCode:false,
             codeErr:false,
             code:"",
@@ -26,9 +28,12 @@ window.onload=function () {
             company:null,
             otrasl:null,
             isShowCompany:false,
+            isEmail:false,
             isShowOtrasl:false,
             companyTitle:null,
-
+            event:evt,
+            selLang:'ru',
+            lang:{ru:{},en:""},
         },
         methods:{
             selectOtrasl:function(item){
@@ -60,6 +65,7 @@ window.onload=function () {
                 var _this = this;
                 var emailElem=document.getElementById("emailInpit")
                 var telElem=document.getElementById("telInpit")
+                var companyNameElem=document.getElementById("CompanyNameInpit");
                 if ( this.f.length < 2) {
                     this.fErr = true;
                 } else
@@ -80,6 +86,14 @@ window.onload=function () {
                     else
                         this.telErr=false
                 }
+                if(companyNameElem){
+                    if(this.CompanyName.length<2) {
+                        this.CompanyNameErr=true;
+                    }
+                    else
+                        this.CompanyNameErr=false;
+
+                }
 
                 if(this.iErr)
                     return document.getElementById("iInpit").focus();
@@ -89,16 +103,21 @@ window.onload=function () {
                     return document.getElementById("telInpit").focus();
                 if(this.emailErr)
                     return document.getElementById("emailInpit").focus();
+                if(this.CompanyNameErr)
+                    return document.getElementById("CompanyNameInpit").focus();
+
 
                 localStorage.setItem("f", this.f);
                 localStorage.setItem("i", this.i);
                 localStorage.setItem("email", this.email);
+                localStorage.setItem("CompanyName", this.CompanyName);
+
                 this.loader=true;
 
               //  console.log("d", this.company?this.company.id:null, this.otrasl?this.otrasl.id:null,this.company, this.otrasl)
 
                var dt= await axios.post('/rest/api/regtoevent/'
-                    ,{evntId:evntId, f:this.f, i:this.i, tel:this.tel, email:this.email, companyTitle:this.companyTitle, company:this.company?this.company.id:null, otrasl:this.otrasl?this.otrasl.id:null})
+                    ,{evntId:evntId, f:this.f, i:this.i, CompanyName:this.CompanyName, tel:this.tel, email:this.email, companyTitle:this.companyTitle, company:this.company?this.company.id:null, otrasl:this.otrasl?this.otrasl.id:null})
 
                        if(!dt.data.showConfirm){
                            if(dt.data.user)
@@ -117,8 +136,6 @@ window.onload=function () {
                                document.getElementById('code').focus();
                            },0)
                        }
-
-
 
 
             },
@@ -149,11 +166,19 @@ window.onload=function () {
                 this.loader=false;
                 this.showCode=false;
                 this.code="";
+            },
+            changeLang:function (selLang) {
+                localStorage.setItem("selLang", selLang)
+                this.selLang=selLang;
+                console.log(selLang, )
             }
 
         },
-        mounted:function () {
+        mounted:async function () {
             var _this=this;
+            var r= await axios.get("/rest/api/lang");
+            this.lang=r.data;
+            this.selLang=localStorage.getItem("selLang")||"en";
           //  var iInpit=document.getElementById("iInpit");
            // if(iInpit)
             //    iInpit.focus()

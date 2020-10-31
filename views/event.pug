@@ -1,14 +1,21 @@
 extends layout
 block head
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  link(rel='stylesheet', href='/stylesheets/old.css')
   link(rel='stylesheet', href='/stylesheets/login.css')
+  if event.isClientCss
+    link(rel='stylesheet', href='/stylesheets/' + event.clientCss)
+
   //link(rel='stylesheet', href='/stylesheets/old.css')
   script(src="/javascripts/eventScript.js")
-
+  script.
+    var usr=!{JSON.stringify(user)}
+    var evt=!{JSON.stringify(event)}
 block content
-  div.pBox(id="app" style="opacity:1")
-    div.pLoginBox
+  div.pBox(id="app" style="opacity:0" v-bind:style="{opacity:opacity}")
+    div.pEventBox
       div.pLogoBox
+
         div.pLoginHead
           svg( width="291" height="56" viewBox="0 0 291 56" fill="none" xmlns="http://www.w3.org/2000/svg")
             <path d="M102.949 13.5365H125.214V19.3137H109.401V25.302H123.317V31.0792H109.401V37.2779H125.425V43.055H102.949V13.5365Z" fill="white"/>
@@ -23,20 +30,67 @@ block content
             <animate id="animation1" attributeType="xml" attributeName="fill-opacity"  begin="0s" values="0.5;0.5;0.5;1;1" dur="2s" repeatCount="indefinite"  / >
             </path>
           div.pTitle
-        div.pLoginBody
-          div.pBodyTitle Выберите сессию:
-          each room in rooms
-            div.plInputBox(id='room_'+room.id style="cursor:pointer")
-              div.plInputBoxTitle #{room.title}
-              div.proomDate(id='roomdate_'+room.id)
-              div.proomDescr #{room.description}
-            script.
-              var roomid = !{room.id};
-              var date = new Date('!{room.date}')
-              document.getElementById('roomdate_' + roomid).innerHTML = (moment(date).format('HH:mm dddd, DD MMMM YYYY г. '))
-              document.getElementById('room_' + roomid).addEventListener("click", function () {
-                document.location.href = "/room/" + !{room.id};
-              })
+        div.pLoginBody.pMainMenu
+          .pMenuItem(v-bind:class="{active:activeSection==0}" v-on:click="activeSection=0") Расписание сессий
+          .pMenuItem(v-bind:class="{active:activeSection==1}" v-on:click="activeSection=1") Персональные данные
+        div(v-show="activeSection==0")
+          div.pLoginBody.pEventBody(:id="'room_'+room.id" v-for="room in rooms"  )
+            div.plInputBox
+              div.plInputBoxTitle.lh(style="cursor:pointer" v-on:click="document.location.href = '/room/'+room.id") {{room.title}}
+              div.proomDate.lh {{moment(room.date).format('HH:mm dddd, DD MMMM YYYY г. ')}}
+              div.proomDescr.lh {{room.description}}
+              div.proomLink(v-bind:class="{active:room.isSendSms}" v-on:click="changeSMS(room)") получать уведомления по SMS
+              div.proomLink(v-bind:class="{active:room.isSendEmail}" v-on:click="changeEmail(room)") получать уведомления по E-mail
+              div.proomLink.qItemDate( style="text-align: right;" v-on:click="document.location.href = '/room/'+room.id")
+                span.link.green Перейти к участию
+        div.pLoginBody.pEventBody( v-show="activeSection==1" )
+          div.pAvatarWr
+            div.pAvatar(v-bind:style="{backgroundImage:user.avatar?('url('+user.avatar+')'):'url(/images/avatar.svg)'}")
+            div.pAvatarLink(v-on:click="uploadImage()") изменить
+          div.pPersWr
+            div.pPersItem
+                div.plInputBox(v-bind:class="{warning:(iErr &&  user.i.length<2)}")
+                  div.plInputBoxLabel
+                    .plInputBoxLabelText Ваше имя
+                    input#iInpit( v-model="user.i" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+                  div.plInputBoxWarning Поле обязательно
+            div.pPersItem
+              div.plInputBox(v-bind:class="{warning:(fErr &&  user.f.length<2)}")
+                div.plInputBoxLabel
+                  .plInputBoxLabelText Фамилия
+                  input#fInpit( v-model="user.f" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+                div.plInputBoxWarning Поле обязательно
+            div.pPersItem
+              div.plInputBox(v-bind:class="{warning:(CompanyNameErr)}")
+                div.plInputBoxLabel
+                  .plInputBoxLabelText Компания
+                  input#CompanyNameInpit( v-model="user.CompanyName" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+                div.plInputBoxWarning Поле обязательно
+            div.pPersItem
+              div.plInputBox(v-bind:class="{warning:(emailErr &&  f.length<2)}")
+                div.plInputBoxLabel
+                  .plInputBoxLabelText E-mail
+                  input#emailInpit( v-model="user.email" autocomplete="off" readonly )
+                div.plInputBoxAlert Изменить невозможно
+            div.pPersItem
+              div.plInputBox
+                div.plInputBoxLabel
+                  .plInputBoxLabelText Телефон
+                  input#tellInpit( v-model="user.tel" autocomplete="off" readonly)
+                div.plInputBoxAlert Изменить невозможно
+            div.pPersItem
+              div.plInputBox
+                div.plSubmit(v-on:click="enter()")
+                  div(v-if="!loader") Сохранить изменения
+                  div(v-if="loader")
+                    include ./elements/whiteDotLoader
+
+
+
+
+
+
+
 
 
 

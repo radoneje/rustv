@@ -44,12 +44,15 @@ div{
   font-size: 20px;
   line-height: 27px;
 }
-.pLoginBody{
+.pLoginBody {
   background: #282D33;
   border-radius: 8px;
   padding: 40px 30px;
   margin-top:40px;
   text-align: left;
+}
+.pLoginBody .lh{
+  line-height: 30px;
 }
 .pBodyTitle{
   font-weight: bold;
@@ -69,6 +72,7 @@ div{
 .plInputBox {
   position: relative;
   margin-top: 25px;
+  margin-bottom: 50px;
 }
 .plInputBox div.sel{
   position: relative;
@@ -189,6 +193,82 @@ div{
   border: 4px solid #dedede;
   border-radius: 15px;
 }
+.proomLink{
+  cursor: pointer;
+  margin: .3em auto;
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: .5em;
+  font-size: 12px;
+}
+
+.proomLink.active:before {
+  position: absolute;
+  content: "";
+  width: 6px;
+  height: 8px;
+  left: 2px;
+  top: 0px;
+  transform: rotate(45deg);
+  border-bottom: 2px solid #39ACDE;
+  border-right: 2px solid #39ACDE;
+}
+.pMainMenu{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 30px;
+}
+.pEventBody{
+  padding: 10px 30px;
+}
+.pEventBox{
+  width: 100%;
+  max-width: 600px;
+
+  margin-bottom: 100px;
+}
+.pAvatarWr{
+  text-align: center;
+}
+.pAvatar{
+  margin:5px auto;
+  width: 100px;
+  height: 100px;
+  background-image: url("/images/avatar.svg");
+  background-image: url(/images/avatar.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+}
+.aLang.active{
+  color:#000000;
+  background: #3c89df;
+}
+.plInputBoxAlert{
+  text-align: right;
+  margin-top: 2px;
+}
+.pPersItem .plInputBox{
+  margin-bottom:0;
+}
+.pAvatarLink{
+  cursor: pointer;
+}
+.plInputBoxLabelText{
+  margin-bottom: .5em;
+  margin-left: 8px;
+}
+.pMenuItem{
+  padding: 10px;
+  border-bottom: 1px solid white;
+  cursor: pointer;
+}
+.pMenuItem.active{
+  border-bottom: 1px solid #39ACDE;
+  color:#39ACDE;
+}
 @media only screen and (max-width: 1024px){
 
   .plInputListItems{
@@ -215,6 +295,9 @@ div{
   .pLoginBody{
     background: transparent;
     //padding: 0;
+  }
+  .pEventBody{
+    background: transparent;
   }
   .pBox{
     padding: 10px;

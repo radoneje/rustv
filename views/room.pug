@@ -101,7 +101,9 @@ block content
       div.R
         div.Rwr
           include elements/roomVote
+
           div.rContent
+            include elements/personal
             div.rHead#rHead
               div.rHeadItem(v-for="item in sect" v-bind:class="{active:item.isActive, alert:(invites.length>0  && item.id==3)}" v-on:click="sectActive(item)" :id="'sectMenu_'+item.id" v-show="item.id==8 || (item.id==0 && isLenta) || (item.id==1 && isQ) || (item.id==2 && isChat)   || (item.id==3 && isUsers) || item.id==4 || (item.id==7 && isFiles)")
                 div.rHeadItemLogo

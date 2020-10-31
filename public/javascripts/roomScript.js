@@ -56,7 +56,9 @@ window.onload=function () {
             messageToModText:"",
             arrVideo:  arrVideo,
             tags:[],
-            pole:[]
+            pole:[],
+            selLang:'ru',
+            lang:{ru:{},en:""},
         },
         methods:{
 
@@ -828,7 +830,13 @@ window.onload=function () {
                     document.getElementById('modVideo').innerHTML="";
                     _this.modVideo=null;
                 }
+            },
+            changeLang:function (selLang) {
+                localStorage.setItem("selLang", selLang)
+                this.selLang=selLang;
+                console.log(selLang, )
             }
+
 
 
         },
@@ -853,6 +861,9 @@ window.onload=function () {
          },
         mounted:async function () {
             var _this=this;
+            var r= await axios.get("/rest/api/lang");
+            this.lang=r.data;
+            this.selLang=localStorage.getItem("selLang")||"en";
             if(roomid==62 )
                 _this.sect.unshift({
                     title: "Программа",

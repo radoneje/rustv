@@ -3,6 +3,7 @@ block head
 
   script.
     var evntId=#{event.id}
+    var evt=!{JSON.stringify(event)};
     var onSubmit = function (token) {
       console.log('success!', token);
     };
@@ -18,34 +19,53 @@ block content
           div.pLoginHead
             img(style="width:291px" src=event.loginlogo)
             div.pTitle !{event.title}
-          div.pLoginBody
-            div.pBodyTitle #{lang.registration}
-            div.pBodySubTitle #{lang.allMust}
+          div.pLoginBody(style="padding-top: 1px;")
+            div.pBodySubTitle(style="margin-top:0;display: flex;margin-bottom:0px")
+              .plInputBox(style="width:min-content;")
+                input.aLang( v-bind:class="{active:selLang=='en'}" v-on:click="changeLang('en')" type="button" value="ENG" style="padding: 10px;cursor:pointer;")
+              .plInputBox(style="width:min-content;")
+                input.aLang(v-bind:class="{active:selLang=='ru'}" v-on:click="changeLang('ru')" type="button" value="RUS" style="padding: 10px;cursor:pointer;margin-left:10px")
+            div.pBodyTitle {{lang[selLang].registration}}
+            div.pBodySubTitle {{lang[selLang].allMust}}
             div.plInputBox(v-bind:class="{warning:(iErr &&  i.length<2)}")
               div.plInputBoxLabel
-                input#iInpit(placeholder=lang.name v-model="i" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
-              div.plInputBoxWarning #{lang.thisMast}
+                input#iInpit(:placeholder="lang[selLang].name" v-model="i" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+              div.plInputBoxWarning {{lang[selLang].thisMast}}
             div.plInputBox(v-bind:class="{warning:(fErr &&  f.length<2)}")
               div.plInputBoxLabel
-                input#fInpit(placeholder=lang.famName v-model="f" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
-              div.plInputBoxWarning #{lang.thisMast}
+                input#fInpit(:placeholder="lang[selLang].famName" v-model="f" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
+              div.plInputBoxWarning {{lang[selLang].thisMast}}
+            if (event.isEmail)
+              div.plInputBox(v-bind:class="{warning:(emailErr)}")
+                div.plInputBoxLabel
+                  input#emailInpit(:placeholder="lang[selLang].Uemail" autocomplete="off" v-model="email"  v-on:keydown="if($event.keyCode==13) enter()")
+                div.plInputBoxWarning {{lang[selLang].thisMast}}
+            if (event.isCompanyName)
+              div.plInputBox(v-bind:class="{warning:(CompanyNameErr)}")
+                div.plInputBoxLabel
+                  input#CompanyNameInpit(:placeholder="lang[selLang].UCompany" autocomplete="off" v-model="CompanyName"  v-on:keydown="if($event.keyCode==13) enter()")
+                div.plInputBoxWarning {{lang[selLang].thisMast}}
+            if (event.regCase == 1)
+              div.plInputBox(v-bind:class="{warning:(emailErr)}")
+                div.plInputBoxLabel
+                  input#emailInpit(:placeholder="lang[selLang].Uemail" autocomplete="off" v-model="email"  v-on:keydown="if($event.keyCode==13) enter()")
+                div.plInputBoxWarning {{lang[selLang].thisMast}}
+            if (event.regCase == 2 || event.regCase == 3)
+              div.plInputBox(v-bind:class="{warning:(telErr )}")
+                div.plInputBoxLabel
+                  input#telInpit(:placeholder="lang[selLang].Uphone"   autocomplete="off" v-model="tel"  v-on:keydown="if($event.keyCode==13) enter()")
+                div.plInputBoxWarning {{lang[selLang].thisMast}}
             if(event.isCompany)
-
               div.plInputBox(v-on:click="showCompanies()")
-                div.plInputBoxLabel Размер Вашей компании
-                  div.sel(v-if="!company") Выберите размер компании
+                div.plInputBoxLabel Выберите Вашу компанию
+                  div.sel(v-if="!company") Выберите Вашу компанию
                   div.sel(v-else) {{company.title}}
-                div.plInputBoxWarning #{lang.thisMast}
+                div.plInputBoxWarning {{lang[selLang].thisMast}}
                 div.plInputList(v-if="isShowCompany")
                   div.plInputListItems
                     div.plInputListItem(v-for="item in isShowCompany" v-on:click.stop.prevent="selectCompanies(item)")
                       div.plInputListItemTitle {{item.title}}
-
             if(event.isOtrasl)
-              div.plInputBox(v-bind:class="{warning:(emailErr)}")
-                div.plInputBoxLabel
-                  input#emailInpit(placeholder='Ваш e-mail' autocomplete="off" v-model="email"  v-on:keydown="if($event.keyCode==13) enter()")
-                div.plInputBoxWarning E-mail указан неверно
               div.plInputBox(v-on:click="showOtrasl()")
                 div.plInputBoxLabel Ваша отрасль
                   div.sel(v-if="!otrasl") Выберите отрасль
@@ -55,19 +75,9 @@ block content
                   div.plInputListItems
                     div.plInputListItem(v-for="item in isShowOtrasl" v-on:click.stop.prevent="selectOtrasl(item)")
                       div.plInputListItemTitle {{item.title}}
-            if (event.regCase == 1)
-              div.plInputBox(v-bind:class="{warning:(emailErr)}")
-                div.plInputBoxLabel
-                  input#emailInpit(placeholder='Ваш e-mail' autocomplete="off" v-model="email"  v-on:keydown="if($event.keyCode==13) enter()")
-                div.plInputBoxWarning E-mail указан неверно
-            if (event.regCase == 2 || event.regCase == 3)
-              div.plInputBox(v-bind:class="{warning:(telErr )}")
-                div.plInputBoxLabel
-                  input#telInpit(placeholder='Ваш Телефон' autocomplete="off" v-model="tel"  v-on:keydown="if($event.keyCode==13) enter()")
-                div.plInputBoxWarning Телефон указан неверно
             div.plInputBox
               div.plSubmit(v-on:click="enter()")
-                div(v-if="!loader") #{lang.logon}
+                div(v-if="!loader") {{lang[selLang].logon}}
                 div(v-if="loader")
                   include ./elements/whiteDotLoader
     div.editRoomBox(v-if="showCode")
@@ -92,20 +102,20 @@ block content
             </svg>
 
           if (event.regCase == 1)
-            div.smsHeader(style="text-align:center") Введите код, полученный по  E-mail
+            div.smsHeader(style="text-align:center") {{lang[selLang].emailCode}}
           if (event.regCase == 2 || event.regCase == 3)
-            div.smsHeader(style="text-align:center") Введите код, полученный по SMS
+            div.smsHeader(style="text-align:center") {{lang[selLang].smsCode}}
           div.llInputBox(v-bind:class="{warning:(codeErr && !checkCode(code))}"  v-on:keydown="if($event.keyCode==13) sendCode()")
             div.plInputBoxLabel
             input.code#code( type="text"  autocomplete="off" maxlength="25" v-model="code" )
-            div.plInputBoxWarning Код указан неверно или у Вас нет доступа
+            div.plInputBoxWarning {{lang[selLang].wrongCode}}
           div.plInputBox
             div.plSubmit(v-on:click="sendCode()")
-              div(v-if="!loader") Проверить код
+              div(v-if="!loader") {{lang[selLang].checkCode}}
               div(v-if="loader")
                 include ./elements/whiteDotLoader
           div.llInputBox
-            div.pLreturn(v-on:click="showCode=false") Вернуться к вводу телефона
+            div.pLreturn(v-on:click="showCode=false") {{lang[selLang].returnToForm}}
 
 
 

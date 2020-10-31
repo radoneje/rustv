@@ -31,16 +31,41 @@ window.onload=function () {
             },
             changeEventCase:function (item, regCase) {
                 item.regCase=regCase;
+                if(item.regCase==1)
+                    item.isEmail=false;
                 this.changeEvent(item);
             },
             changeOtrasl:function (item, regCase) {
                 item.isOtrasl=!item.isOtrasl;
                 this.changeEvent(item);
             },
-
+            changeEmailText:function(item){
+                item.isEmail=!item.isEmail;
+                if(item.isEmail && item.regCase==1)
+                    item.regCase=2;
+                this.changeEvent(item);
+            },
             changeCompany:function (item, regCase) {
                 item.isCompany=!item.isCompany;
+                if(item.isCompany)
+                    item.isCompanyName=false;
                 this.changeEvent(item);
+            },
+            changeClientCss:function (item) {
+                item.isClientCss=!item.isClientCss;
+                if(!item.isClientCss)
+                    item.isClientCss=null;
+                this.changeEvent(item);
+            },
+            changeClientCssText:function (item) {
+                this.changeEvent(item);
+            },
+            changeCompanyName:function(item){
+                item.isCompanyName=!item.isCompanyName;
+                if(item.isCompanyName)
+                    item.isCompany=false;
+                this.changeEvent(item);
+
             },
 
             changeEvent:async function(item){
@@ -86,8 +111,8 @@ window.onload=function () {
             changeRoomSect:async function(sect) {
 
 
-                if(sect=='isQpreMod' || sect=='isPres' || sect=='isFile' || sect=='isRecord'  )
-                    return alert("Ваш тарифный план не позволяет активировать эту функцию. Пожалуйста, свяжитесь с отделом продаж info@rustv.ru");
+              //  if(sect=='isQpreMod' || sect=='isPres' || sect=='isFile' || sect=='isRecord'  )
+               //     return alert("Ваш тарифный план не позволяет активировать эту функцию. Пожалуйста, свяжитесь с отделом продаж info@rustv.ru");
                     this.editRoom[sect]=! this.editRoom[sect];
                 //
                 await this.changeRoom();

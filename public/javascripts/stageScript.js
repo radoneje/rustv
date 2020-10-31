@@ -18,14 +18,7 @@ window.onload=function () {
         el: '#app',
         data: {
             webCamStream:null,
-            sect:[
-                {title:"Программа", isActive:false, id:8, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
-                {title:"Лента", isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
-                {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoq.svg'},
-                {title:"Чат", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactive.svg'},
-                {title:"Люди", isActive:false, id:3, logo:'/images/logousers.svg', logoactive:'/images/logousersa.svg'},
-                {title:"Файлы", isActive:false, id:7, logo:'/images/logofiles.svg', logoactive:'/images/logofilesa.svg'}
-                ],
+            sect:[],
             activeSection:2,
             chat:[],
             isChat:room.isChat,
@@ -68,8 +61,13 @@ window.onload=function () {
             stageTimeout:null,
             tags:[],
             pole:[],
+            selLang:'ru',
+            lang:{ru:{},en:""},
         },
         methods:{
+            uploadFile:function(){
+                uploadFile(this);
+            },
             changeActiveLang: function (item) {
                 this.langCh.forEach(f => {
                     f.isActive = f.lang.id == item.lang.id;
@@ -1228,6 +1226,101 @@ window.onload=function () {
 
                 })
             }
+            ,
+            changeLang:function (selLang) {
+                localStorage.setItem("selLang", selLang)
+                this.selLang=selLang;
+                this.sect=[
+                    {title:this.lang[this.selLang].Programme, isActive:false, id:8, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
+                    {title:this.lang[this.selLang].Feed, isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
+                    {title:this.lang[this.selLang].Questions, isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoq.svg'},
+                    {title:this.lang[this.selLang].Chat, isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactive.svg'},
+                    {title:this.lang[this.selLang].Users, isActive:false, id:3, logo:'/images/logousers.svg', logoactive:'/images/logousersa.svg'},
+                    {title:this.lang[this.selLang].Files, isActive:false, id:7, logo:'/images/logofiles.svg', logoactive:'/images/logofilesa.svg'}
+                ];
+
+
+                if(roomid==52) {
+                    this.sect = [
+                        {
+                            title: "Программа",
+                            isActive: false,
+                            id: 8,
+                            logo: '/images/logofeed.svg',
+                            logoactive: '/images/logofeedaCl.svg'
+                        },
+                        {
+                            title: "Лента",
+                            isActive: false,
+                            id: 0,
+                            logo: '/images/logofeed.svg',
+                            logoactive: '/images/logofeedaCl.svg'
+                        },
+                        {
+                            title: "Вопросы",
+                            isActive: false,
+                            id: 1,
+                            logo: '/images/logoqactive.svg',
+                            logoactive: '/images/logoqCl.svg'
+                        },
+                        {
+                            title: "Чат",
+                            isActive: true,
+                            id: 2,
+                            logo: '/images/logochat.svg',
+                            logoactive: '/images/logochatactiveCl.svg'
+                        },
+                        {
+                            title: "Люди",
+                            isActive: false,
+                            id: 3,
+                            logo: '/images/logousers.svg',
+                            logoactive: '/images/logousersaCl.svg'
+                        },
+                        {
+                            title: "Файлы",
+                            isActive: false,
+                            id: 7,
+                            logo: '/images/logofiles.svg',
+                            logoactive: '/images/logofilesaCl.svg'
+                        }
+                    ];
+                }
+                if(roomid==61) {
+                    _this.sect = [
+                        // {title:"Программа", isActive:false, id:8, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
+                        //{title:"Лента", isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
+                        {
+                            title: "Вопросы",
+                            isActive: false,
+                            id: 1,
+                            logo: '/images/logoqactive.svg',
+                            logoactive: '/images/logoq.svg'
+                        },
+                        {
+                            title: "Чат",
+                            isActive: true,
+                            id: 2,
+                            logo: '/images/logochat.svg',
+                            logoactive: '/images/logochatactive.svg'
+                        },
+                        {
+                            title: "Люди",
+                            isActive: false,
+                            id: 3,
+                            logo: '/images/logousers.svg',
+                            logoactive: '/images/logousersa.svg'
+                        },
+                        {
+                            title: "Файлы",
+                            isActive: false,
+                            id: 7,
+                            logo: '/images/logofiles.svg',
+                            logoactive: '/images/logofilesa.svg'
+                        }
+                    ]
+                }
+            }
 
 
         },
@@ -1262,86 +1355,11 @@ window.onload=function () {
          },
         mounted:async function () {
             var _this=this;
-            if(roomid==52) {
-                _this.sect = [
-                    {
-                        title: "Программа",
-                        isActive: false,
-                        id: 8,
-                        logo: '/images/logofeed.svg',
-                        logoactive: '/images/logofeedaCl.svg'
-                    },
-                    {
-                        title: "Лента",
-                        isActive: false,
-                        id: 0,
-                        logo: '/images/logofeed.svg',
-                        logoactive: '/images/logofeedaCl.svg'
-                    },
-                    {
-                        title: "Вопросы",
-                        isActive: false,
-                        id: 1,
-                        logo: '/images/logoqactive.svg',
-                        logoactive: '/images/logoqCl.svg'
-                    },
-                    {
-                        title: "Чат",
-                        isActive: true,
-                        id: 2,
-                        logo: '/images/logochat.svg',
-                        logoactive: '/images/logochatactiveCl.svg'
-                    },
-                    {
-                        title: "Люди",
-                        isActive: false,
-                        id: 3,
-                        logo: '/images/logousers.svg',
-                        logoactive: '/images/logousersaCl.svg'
-                    },
-                    {
-                        title: "Файлы",
-                        isActive: false,
-                        id: 7,
-                        logo: '/images/logofiles.svg',
-                        logoactive: '/images/logofilesaCl.svg'
-                    }
-                ];
-            }
-            if(roomid==61) {
-                _this.sect = [
-                    // {title:"Программа", isActive:false, id:8, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
-                    //{title:"Лента", isActive:false, id:0, logo:'/images/logofeed.svg', logoactive:'/images/logofeeda.svg'},
-                    {
-                        title: "Вопросы",
-                        isActive: false,
-                        id: 1,
-                        logo: '/images/logoqactive.svg',
-                        logoactive: '/images/logoq.svg'
-                    },
-                    {
-                        title: "Чат",
-                        isActive: true,
-                        id: 2,
-                        logo: '/images/logochat.svg',
-                        logoactive: '/images/logochatactive.svg'
-                    },
-                    {
-                        title: "Люди",
-                        isActive: false,
-                        id: 3,
-                        logo: '/images/logousers.svg',
-                        logoactive: '/images/logousersa.svg'
-                    },
-                    {
-                        title: "Файлы",
-                        isActive: false,
-                        id: 7,
-                        logo: '/images/logofiles.svg',
-                        logoactive: '/images/logofilesa.svg'
-                    }
-                ]
-            }
+            var r= await axios.get("/rest/api/lang");
+            this.lang=r.data;
+            this.selLang=localStorage.getItem("selLang")||"en";
+            this.changeLang(this.selLang);
+
             setTimeout(()=>{
                 var hlsVideo=document.getElementById("video")
                 if(hlsVideo){
@@ -1435,8 +1453,8 @@ window.onload=function () {
                                 console.log("pole", r.data)
                                 _this.pole=r.data;
                             })
-                        var scrElem = rHead;
-                        scrElem.scrollLeft = (scrElem.scrollWidth - scrElem.clientWidth) / 2
+                      //  var scrElem = rHead;
+                      //  scrElem.scrollLeft = (scrElem.scrollWidth - scrElem.clientWidth) / 2
                         document.body.addEventListener('drop', function (event) {
                             event.preventDefault();
                             event.stopPropagation();

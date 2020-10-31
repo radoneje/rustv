@@ -77,6 +77,8 @@ window.onload=function () {
             activeLang: 0,
             langCh: [],
             showLangCh: false,
+            selLang:'ru',
+            lang:{ru:{},en:""},
         },
         methods:{
             addOriginalToAudio: function (stream, id) {

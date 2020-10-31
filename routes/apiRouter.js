@@ -29,13 +29,13 @@ router.post('/sendSms', async (req, res, next) => {
     const secret_key = '6LfC5uUUAAAAAFl49ps6HQys6fTmDxLTefNME3BW';
     const token = req.body.token;
     const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
-    fetch(url, {
-        method: 'post'
-    })
-        .then(response => response.json())
-        .then(async google_response => {
-             if(!google_response.success)
-             return res.sendStatus(404);
+//    fetch(url, {
+//        method: 'post'
+//    })
+//        .then(response => response.json())
+//        .then(async google_response => {
+ //            if(!google_response.success)
+ //            return res.sendStatus(404);
             var code = (parseInt(Math.random() * 10000) + parseInt(10000));
             var users = await req.knex.select("*").from("t_users").where({tel: req.body.tel, isDeleted: false});
             if (users.length == 0) {
@@ -46,11 +46,41 @@ router.post('/sendSms', async (req, res, next) => {
             console.log(req.body.tel)
             sendCodeToSms(req.body.tel, code)
             res.json({code: " "+code , id: users[0].id});
-        })
-        .catch(error => res.json({error}));
+//        })
+ //       .catch(error => res.json({error}));
 
 
 });
+
+
+router.post('/sendAdminSms', async (req, res, next) => {
+
+    const secret_key = '6LfC5uUUAAAAAFl49ps6HQys6fTmDxLTefNME3BW';
+    const token = req.body.token;
+    const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
+//    fetch(url, {
+//        method: 'post'
+//    })
+//        .then(response => response.json())
+//        .then(async google_response => {
+    //            if(!google_response.success)
+    //            return res.sendStatus(404);
+    var code = (parseInt(Math.random() * 10000) + parseInt(10000));
+    var users = await req.knex.select("*").from("t_users").where({tel: req.body.tel, isDeleted: false});
+    if (users.length == 0) {
+        return res.sendStatus(404);
+    } else {
+        await req.knex("t_users").update({smsCode: code}).where({id: users[0].id})
+    }
+    sendCodeToSms(req.body.tel, code)
+    res.json({code: " "+code , id: users[0].id});
+//        })
+    //       .catch(error => res.json({error}));
+
+
+});
+
+
 router.post('/checkPersonalCode', async (req, res, next) => {
     var code=req.body.code;
     if(!code)
@@ -108,6 +138,34 @@ router.get("/CurrUser", async (req, res, next) => {
 
 });
 
+router.get("/admins", async (req, res, next) => {
+    if (!req.session["admin"])
+        return res.send(404);
+
+    var users=await req.knex.select("*").from("t_users")
+    res.json(users);
+
+});
+router.post("/admins", async (req, res, next) => {
+    if (!req.session["admin"])
+        return res.send(404);
+
+    var id=req.body.id;
+    delete req.body.id;
+    var users=await req.knex("t_users").update(req.body,"*").where({id});
+    res.json(users);
+
+});
+router.post("/adminsAdd", async (req, res, next) => {
+    if (!req.session["admin"])
+        return res.send(404);
+
+    var users=await req.knex("t_users").insert({tel:req.body.tel}, "*");
+    res.json(users[0]);
+
+});
+
+
 router.post("/CurrUser", async (req, res, next) => {
     if (!req.session["user"])
         return res.send(404);
@@ -134,7 +192,7 @@ router.get("/events", async (req, res, next) => {
 
     var r = await req.knex.select("*")
         .from("t_events")
-        .where({adminId: req.session["admin"].id, isDeleted: false})
+        .where({/*adminId: req.session["admin"].id,*/ isDeleted: false})
         .orderBy("id", 'desc')
 
     for (const item of r) {
@@ -150,8 +208,8 @@ router.post("/events", async (req, res, next) => {
     if (!req.session["admin"])
         return res.send(404);
     var r = await req.knex.select("*").from("t_events").where({adminId: req.session["admin"].id, isDeleted: false})
-    if (r.length >= 8/*req.session["admin"].countOfEvents*/)
-        return res.json(null)
+   // if (r.length >= 8/*req.session["admin"].countOfEvents*/)
+    //    return res.json(null)
     var r = await req.knex("t_events").insert({adminId: req.session["admin"].id}, "*");
 
     return res.json(r[0])
@@ -165,7 +223,11 @@ router.put("/events", async (req, res, next) => {
         title: req.body.title,
         regCase: req.body.regCase,
         isCompany:req.body.isCompany,
-        isOtrasl:req.body.isOtrasl
+        isOtrasl:req.body.isOtrasl,
+        isEmail:req.body.isEmail,
+        isCompanyName:req.body.isCompanyName,
+        isClientCss:req.body.isClientCss,
+        clientCss:req.body.clientCss,
     }, "*").where({id: req.body.id, adminId: req.session["admin"].id});
     r[0].rooms = [];
     return res.json(r[0])
@@ -183,8 +245,8 @@ router.post("/room", async (req, res, next) => {
         return res.json(null)
 
     var count = await req.knex.select("*").from("t_rooms").where({isDeleted: false, eventid: req.body.id})
-    if (count.length >=8/* req.session["admin"].countOfEvents*/)
-        return res.json(null)
+   // if (count.length >=8/* req.session["admin"].countOfEvents*/)
+    //    return res.json(null)
     var r = await req.knex("t_rooms").insert({
         eventid: req.body.id,
         title: 'Сессия ' + parseInt(parseInt(count.length) + 1)
@@ -213,6 +275,12 @@ router.put("/room", async (req, res, next) => {
 
     return res.json(r[0])
 });
+router.put("/regtoevent", async (req, res, next) => {
+    var r=await req.knex("t_eventusers").update({avatar:req.body.avatar, f:req.body.f, i:req.body.i, CompanyName:req.body.CompanyName},"*")
+        .where({id:req.body.id})
+    req.session["user" + req.body.evntId]=r[0];
+    res.json(r);
+});
 router.post("/regtoevent", async (req, res, next) => {
     req.session["user" + req.body.evntId] = null;
     var events = await req.knex.select("*").from("t_events").where({id: req.body.evntId, isDeleted: false})
@@ -233,9 +301,15 @@ console.log("reg",req.body);
         email: req.body.email,
         smsCode: code,
         company:req.body.companyTitle,
+        CompanyName:req.body.CompanyName,
         companyid:req.body.company,
         otraslid:req.body.otrasl
     }, "*")
+
+    var rooms=await req.knex.select("*").from("t_rooms").where({eventid:evt.id});
+    for(room of rooms){
+        await req.knex("t_roomToeventUsers").insert({roomid:room.id,eventuserid:usr[0].id});
+    }
 
     if (evt.regCase == 0) {
         req.session["user" + req.body.evntId] = usr[0];
@@ -266,6 +340,20 @@ console.log("reg",req.body);
 
 });
 
+router.get("/eventusersrooms/:eventid/:userid", async (req, res, next) => {
+    var r=await req.knex.select("*")
+        .from("v_roomToeventUsers")
+        .where({eventid:req.params.eventid, eventUserId:req.params.userid})
+        .orderBy("date")
+    res.json(r)
+});
+router.post("/roomSendStatus", async (req, res, next) => {
+    var r=await req.knex("t_roomToeventUsers")
+        .update({isSendSms:req.body.isSendSms,isSendEmail:req.body.isSendEmail}, "*")
+        .where({roomid:req.body.roomid,eventuserid:req.body.userid})
+    res.json(r)
+});
+
 async function sendCodeToSms(tel, code) {
     var m = tel.match(/^\+(\d)\s\((\d\d\d)\)\s(\d\d\d)\s(\d\d\d\d)$/);
     var n = tel;
@@ -284,16 +372,16 @@ async function sendCodeToEmail(email, code) {
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: "d@rustv.ru", // generated ethereal user
+            user: "info@sber.link", // generated ethereal user
             pass: "Gbplfgbplf13" // generated ethereal password
         }
     });
 
     var mailOptions = {
-        from: 'noreply@rustv.ru',
+        from: 'info@sber.link',
         to: email,
-        subject: 'Login code to rustv.ru',
-        text: 'Код для входа на rustv.ru ' + code
+        subject: 'Login code ',
+        text: 'Login code / Код для входа: ' + code
     };
     await transporter.sendMail(mailOptions)
 }
@@ -676,6 +764,19 @@ router.post("/meetfileUpload/:eventid/:roomid/:userid", checkLoginToRoom, async 
     }
 
 });
+router.post("/avatarUpload",async (req, res, next) =>{
+    if (!req.headers['x-data'])
+        res.status(404);
+    var struct = JSON.parse(decodeURI(req.headers['x-data']));
+    if (!(struct.type.indexOf('image/') == 0 ))
+        return res.json(false);
+    var ext = path.extname(struct.name)
+    var name = moment().unix() + ext;
+    var filename = path.join(__dirname, '../public/files/' + name);
+    req.files.file.mv(filename, async (e) => {
+        res.json("/files/"+name);
+    });
+})
 router.post("/qfileUpload/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
 
     if (!req.headers['x-data'])
@@ -1646,6 +1747,9 @@ router.get("/translateLang", async (req, res, next) => {
     res.json(translateLang);
 })
 
+router.get("/lang", async (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../lang.json' ));
+})
 
 router.get("/meetWowza", async (req, res, next) => {
     res.json(config.meetWowza[0]);
@@ -1824,6 +1928,41 @@ router.get("/downloadQ/:eventid/:roomid", checkLoginToRoom, async (req, res, nex
     //res.json(qs);
 })
 
+router.get('/redirect', async (req, res, next) =>{
+    if (!req.session["admin"])
+        return res.send(404);
+    var r= await req.knex.select("*").from("t_redirect").orderBy("key");
+    if(r.length==0)
+    {
+        var f="a"
+        var e=[];
+        for(var i=1; i<=12; i++){
+            e.push(i)
+        }
+        for(var i of e)
+        {
+            var key=f+i;
+            await req.knex("t_redirect").insert({key});
+
+        }
+        f="b";
+        for(var i of e)
+        {
+            var key=f+i;
+            await req.knex("t_redirect").insert({key});
+
+        }
+        r= await req.knex.select("*").from("t_redirect").orderBy("key");
+    }
+    res.json(r);
+})
+router.post('/redirect', async (req, res, next) =>{
+    if (!req.session["admin"])
+        return res.send(404);
+    console.log(req.body)
+    var r= await req.knex("t_redirect").update({value:req.body.value},"*").where({key:req.body.key})
+    res.json(r);
+})
 
 
 

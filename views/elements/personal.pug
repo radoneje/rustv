@@ -1,0 +1,5 @@
+.rUser()
+    .rUserLang(v-bind:class="{active:selLang=='en'}" v-on:click="changeLang('en')") ENG
+    .rUserLang(v-bind:class="{active:selLang=='ru'}" v-on:click="changeLang('ru')") RUS
+    .rUserAvatar(v-on:click="document.location.href='/event/'+eventid" v-bind:style="{backgroundImage:user.avatar?('url('+user.avatar+')'):'url(/images/avatar.svg)'}")
+    .rUserName(v-on:click="document.location.href='/event/'+eventid") {{user.i}} {{user.f}}

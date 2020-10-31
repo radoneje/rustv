@@ -38,22 +38,18 @@ div.topUserBox#topUserBox(v-bind:style="{opacity:isLoaded?1:0}" v-on:click.stop.
                 </g>
                 </svg>
             div.topUserBoxDlgItem Ваши персональные данные:
-            div.topUserBoxDlgItem
-                input(type="text" placeholder="Фамилия" v-model='usr.f' maxlength='254' v-on:change="saveFio()")
-            div.topUserBoxDlgItem
-                input(type="text" placeholder="Имя" v-model='usr.i' maxlength='254' v-on:change="saveFio()")
-            div.topUserBoxDlgItem
-                input(type="text" placeholder="Телефон"  readonly v-model='usr.tel')
-            div.topUserBoxDlgItem
-                div.topUserBoxDlgItemLabel Максимальное количество событий:
-                div.topUserBoxDlgItemInputGroup
-                    input(type="text" placeholder=""  readonly v-model='usr.countOfEvents')
-                    div.topUserBoxDlgItemBtn Увеличить
-            div.topUserBoxDlgItem
-                div.topUserBoxDlgItemLabel Максимальное количество комнат:
-                div.topUserBoxDlgItemInputGroup
-                    input(type="text" placeholder=""  readonly v-model='usr.countOfRooms')
-                    div.topUserBoxDlgItemBtn Увеличить
+            div(style="max-height:calc( 90vh - 100px);overflow-y: auto;")
+                div(v-for="usr in users" style="margin-bottom:2em; border-bottom: 2px solid gray")
+                    div.topUserBoxDlgItem
+                        input(type="text" placeholder="Фамилия" v-model='usr.f' maxlength='254' v-on:change="saveUser(usr)")
+                    div.topUserBoxDlgItem
+                        input(type="text" placeholder="Имя" v-model='usr.i' maxlength='254' v-on:change="saveUser(usr)")
+                    div.topUserBoxDlgItem
+                        input(type="text" placeholder="Телефон"  readonly v-model='usr.tel')
+            .topUserBoxDlgItem
+                input(type="text" placeholder="Телефон нового админа"   v-model='tel')
+                div(v-on:click="addUser()" style="cursor:pointer; padding:2px; border:1px solid black; background:#eee; margin-top:4px" v-if="tel.length>6") Добавить Пользователя
+
 
 
 

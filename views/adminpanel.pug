@@ -6,6 +6,7 @@ block head
 
 block content
     include ./elements/topUserBox
+    include ./elements/topRedirect
     div.aBox#app
         div.top
 
@@ -43,6 +44,8 @@ block content
                                         div.linkLabel https://conf.rustv.ru/event/{{item.id}}
                                 div.regGroupItem(v-bind:class="{active:item.regCase==1}" v-on:click="changeEventCase(item, 1)") Подтверждение через e-mail
                                 div.regGroupItem(v-bind:class="{active:item.regCase==2}" v-on:click="changeEventCase(item, 2)") Подтверждение через SMS
+                                div.regGroupItem(v-bind:class="{active:item.isEmail}" v-on:click="changeEmailText(item)") Поле ввода e-mail
+                                div.regGroupItem(v-bind:class="{active:item.isCompanyName}" v-on:click="changeCompanyName(item)") Поле ввода компании
                                 div.regGroupItem(v-bind:class="{active:item.regCase==3}" v-on:click="changeEventCase(item, 3)")
                                  span Список пользователей
                                  span.iconPost(v-on:click="showAllowedUsers(item)")
@@ -113,6 +116,9 @@ block content
                                     </g>
                                     </g>
                                     </svg>
+                            div.regGroupItem(v-bind:class="{active:item.isClientCss}")
+                                span(v-on:click="changeClientCss(item)") Свой стиль
+                                input(v-on:change="changeClientCssText(item)" v-model="item.clientCss")
                         div.regGroup
                             div.regGroupTitle Вставьте это на ваш сайт для показа баннера регистрации:
                                 textarea(readonly).

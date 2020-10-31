@@ -12,7 +12,31 @@
     "reset": "Сбросить",
     "techChat": "Служебный чат",
     "youMessage": "Напишите Ваше сообщение",
-    "clickHere": "Нажмите здесь, что бы войти."
+    "clickHere": "Нажмите здесь, что бы войти.",
+    "Uemail": "Ваш e-mail",
+    "UCompany": "Ваша компания",
+    "Uphone": "Ваш Телефон",
+    "emailCode": "Введите код, полученный по  E-mail",
+    "smsCode": "Введите код, полученный по SMS",
+    "wrongCode": "Код указан неверно или у Вас нет доступа",
+    "checkCode": "Проверить код",
+    "returnToForm": "Вернуться к вводу ",
+    "Feed":"Лента",
+    "Questions": "Вопросы",
+    "Chat": "Чат",
+    "Users": "Люди",
+    "Files": "Файлы",
+    "Programme": "Программа",
+    "ClickHere": "Нажмите здесь что бы войти",
+    "speakersChat": " Служебный чат",
+    "Yourmessage":"Напишите, ваше сообщение",
+    "Yourquestion":"Напишите ваш вопрос",
+    "download": "Скачать",
+    "upload": "Загрузить",
+    "link": "Ссылка"
+
+
+
   },
   "en": {
     "registration":"Registration",
@@ -27,6 +51,27 @@
     "reset": "Reset",
     "techChat": "Backstage chat",
     "youMessage": "Write your message here",
-    "clickHere":"Click here to start"
+    "clickHere":"Click here to start",
+    "Uemail": "You e-mail",
+    "UCompany": "You company",
+    "Uphone": "You phone",
+    "emailCode": "Enter code from e-mail",
+    "smsCode": "Enter code from  SMS",
+    "wrongCode": "Wrong code",
+    "checkCode": "Check code",
+    "returnToForm": "Return to form",
+    "Feed":"Feed",
+    "Questions": "Questions",
+    "Chat": "Chat",
+    "Users": "Users",
+    "Files": "Files",
+    "Programme": "Programme",
+    "ClickHere": "Click here to start",
+    "speakersChat": "Speakers chat",
+    "Yourmessage":"Your message",
+    "Yourquestion":"Your question",
+    "download": "Download",
+    "upload": "Upload new file",
+    "link": "Link"
   }
 }
