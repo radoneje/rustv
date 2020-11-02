@@ -1981,7 +1981,7 @@ async function startKeing(meetVideoItem, id){
         quantBytes: 2
     })
     var ctx = canvas.getContext('2d');
-    cameraFrame = detectBody(objNet, ctx, meetVideoItem.querySelector('video'));
+    cameraFrame = detectBody(objNet, ctx, meetVideoItem);
 console.log("meetVideoItem", meetVideoItem)
 
 }
@@ -2001,7 +2001,7 @@ function detectBody(net, ctx, mainVideo){
                 drawBody(personSegmentation, ctx);
             }
         });
-    cameraFrame = requestAnimFrame(()=>{detectBody(net, ctx)});
+    cameraFrame = requestAnimFrame(()=>{detectBody(net, ctx, mainVideo)});
 }
 function drawBody(personSegmentation,ctx) {
     console.log("db");
