@@ -1949,9 +1949,28 @@ window.onload=function () {
             }
         });
 }
+window.requestAnimFrame = (function(){
+    return  window.requestAnimationFrame       ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame    ||
+        window.oRequestAnimationFrame      ||
+        window.msRequestAnimationFrame     ||
+        function( callback ){
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
+
+window.cancelAnimationFrame = (function(){
+    return  window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+})();
 
 function startKeing(meetVideoItem, id){
+    let canvas=document.createElement('canvas');
+    canvas.width=640;
+    canvas.height=360;
 
+    meetVideoItem.appendChild(canvas)
+    var ctx = document.getElementById('mainCanvas').getContext('2d');
 }
 
 function stopKeing(meetVideoItem, id){
