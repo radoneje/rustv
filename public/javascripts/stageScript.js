@@ -1570,7 +1570,7 @@ window.onload=function () {
                 if(elem.classList.contains("fullScreen"))
                     elem.classList.remove("fullScreen")
                 else {
-                    var elems = document.querySelectorAll(".fullScreen");
+                    var elems = document.querySelectorAll(".meetVideoItem.fullScreen");
                     elems.forEach(e => {
                         e.classList.remove("fullScreen")
                     })
