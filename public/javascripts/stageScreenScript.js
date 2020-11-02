@@ -262,7 +262,7 @@ window.onload=function () {
                     if(d.id==data.id)
                         d=data;
                     tmp.push(d)
-
+                    requestAnimFrame
                 })
 
                 this.pole=tmp;// _this.tags.filter(()=>{return true})
@@ -1990,7 +1990,6 @@ console.log("meetVideoItem", meetVideoItem)
 }
 
 function detectBody(net, ctx, mainVideo, canvas){
-    console.log("get body",mainVideo )
     let personSegmentation=  net.segmentPerson(mainVideo,  {
         flipHorizontal: false,
         internalResolution: 'medium',
@@ -2007,14 +2006,13 @@ function detectBody(net, ctx, mainVideo, canvas){
     cameraFrame = requestAnimFrame(()=>{detectBody(net, ctx, mainVideo, canvas)});
 }
 function drawBody(personSegmentation,ctx, mainVideo, canvas) {
-    console.log("db");
+    console.log("draq body")
     const maskBackground = true;
 // Convert the segmentation into a mask to darken the background.
     const foregroundColor = {r: 0, g: 0, b: 0, a: 0};
     const backgroundColor = {r: 0, g: 255, b: 0, a: 255};
     const backgroundDarkeningMask = bodyPix.toMask(
         personSegmentation, foregroundColor, backgroundColor);
-    console.log(backgroundDarkeningMask);
     const opacity = 1;//0.7;
     const maskBlurAmount = 10;
     const flipHorizontal = false;
@@ -2048,7 +2046,14 @@ function drawBody(personSegmentation,ctx, mainVideo, canvas) {
 }
 
 function stopKeing(meetVideoItem, id){
-
+    try {
+        cancelAnimationFrame();
+        var canvas = document.querySelector('canvas');
+        canvas.parentNode.removeChild('canvas')
+    }
+    catch (e) {
+        console.warn(e);
+    }
 }
 
 
