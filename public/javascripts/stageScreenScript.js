@@ -1791,6 +1791,15 @@ window.onload=function () {
 
             }
 
+        meetVideoBox.addEventListener("click", ()=>{
+            if(meetVideoBox.classList.contains("first")){
+                meetVideoBox.classList.remove("first")
+            }
+            else {
+                meetVideoBox.classList.add("first")
+            }
+        })
+
     }
     async function createAudioAnaliser(stream, clbk) {
         try {

@@ -16,11 +16,8 @@ block head
 
 block content
   <style>body{overflow:hidden;}</style>
-  div.roomScreen.multiViewVideo.pgmScreen(id="app" )
-
+  div.roomScreen.multiViewVideo(id="app" )
     div.center
-
-
       div(v-if="!init" style="height: 100vh;display: flex;align-items: center;justify-content: center;margin: 10px;width: calc(100% - 20px);")
           div.greenBtn.center( v-on:click="initStage()") Нажмите для начала
       div.screenVideoBox#meetVideoBox(v-else )
