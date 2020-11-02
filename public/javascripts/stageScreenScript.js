@@ -1542,6 +1542,10 @@ window.onload=function () {
                 meetVideoItem.classList.remove("first")
             }
             else {
+                var elems=document.querySelectorAll(".meetVideoItem");
+                elems.forEach(elem=>{
+                    elem.classList.remove("first")
+                })
                 meetVideoItem.classList.add("first")
             }
         })
