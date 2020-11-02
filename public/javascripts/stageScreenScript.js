@@ -1981,7 +1981,7 @@ async function startKeing(meetVideoItem, id){
         quantBytes: 2
     })
     var ctx = canvas.getContext('2d');
-    cameraFrame = detectBody(objNet, ctx, meetVideoItem);
+    cameraFrame = detectBody(objNet, ctx, meetVideoItem.querySelector('video'));
 console.log("meetVideoItem", meetVideoItem)
 
 }
