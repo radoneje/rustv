@@ -1549,6 +1549,19 @@ window.onload=function () {
                 meetVideoItem.classList.add("first")
             }
         })
+        meetVideoItem.addEventListener("contextmenu", ()=>{
+            if(meetVideoItem.classList.contains("second")){
+                meetVideoItem.classList.remove("second")
+            }
+            else {
+                var elems=document.querySelectorAll(".meetVideoItem");
+                elems.forEach(elem=>{
+                    elem.classList.remove("second")
+                })
+                meetVideoItem.classList.add("second")
+            }
+        })
+
 
 
         var cap = document.getElementById("meetVideoCap_" + id)
