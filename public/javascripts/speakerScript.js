@@ -828,11 +828,9 @@ window.onload=function () {
 
 
             var _this=this;
-            document.addEventListener("keydown",(e)=>{console.log("keydown1",e)});
-            document.body.addEventListener("keydown body ",(e)=>{console.log("keydown1",e)});
-            document.body.onkeydown = function(e){
-                console.log("keydown2",e)
-            };
+            //document.addEventListener("keydown",(e)=>{console.log("keydown1",e)});
+            //document.body.addEventListener("keydown body ",(e)=>{console.log("keydown1",e)});
+
             axios.get('/rest/api/infospk/'+eventid+"/"+roomid)
                 .then(function (dt) {
                     _this.user=dt.data;
@@ -964,7 +962,6 @@ window.onload=function () {
                                         }
                                     }, 1000)
                                     document.addEventListener("keydown",(e)=>{
-                                        console.log("keydown", e)
                                         if(e.code=="ArrowRight" || e.code=="ArrowLeft" && this.isPres)
                                         {
                                             var elems=document.querySelectorAll(".aModSectPresItem");
