@@ -2059,14 +2059,16 @@ function stopKeing(meetVideoItem, id){
         stopKeyCmd=true;
         setTimeout(()=>{
             stopKeyCmd=false
+                var video=meetVideoItem.querySelector('video');
                 video.width=null;
                 video.height=null;
+                var canvas = document.querySelector('canvas');
+                canvas.parentNode.removeChild(canvas)
+
             }
         , 200);
         cancelAnimationFrame(cameraFrame);
-        var canvas = document.querySelector('canvas');
-        canvas.parentNode.removeChild(canvas)
-        var video=meetVideoItem.querySelector('video');
+
 
 
     }
