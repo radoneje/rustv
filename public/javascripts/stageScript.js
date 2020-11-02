@@ -1566,7 +1566,7 @@ window.onload=function () {
         }
             document.getElementById('meetVideoFullScreen' + id).addEventListener("click", function () {
                 console.log("requestFullscreen0", id)
-                var elem=document.getElementById("meetVideoItem");
+                var elem=document.getElementById("meetVideoItem"+ id);
                 if(elem.classList.contains("fullScreen"))
                     elem.classList.remove("fullScreen")
                 else {
