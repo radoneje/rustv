@@ -830,6 +830,9 @@ window.onload=function () {
             var _this=this;
             document.addEventListener("keydown",(e)=>{console.log("keydown1",e)});
             document.body.addEventListener("keydown body ",(e)=>{console.log("keydown1",e)});
+            document.body.onkeydown = function(e){
+                console.log("keydown2",e)
+            };
             axios.get('/rest/api/infospk/'+eventid+"/"+roomid)
                 .then(function (dt) {
                     _this.user=dt.data;
