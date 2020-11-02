@@ -828,6 +828,7 @@ window.onload=function () {
 
 
             var _this=this;
+            document.addEventListener("keydown",(e)=>{console.log("keydown1",e)});
             axios.get('/rest/api/infospk/'+eventid+"/"+roomid)
                 .then(function (dt) {
                     _this.user=dt.data;
