@@ -1987,7 +1987,7 @@ console.log("meetVideoItem", meetVideoItem)
 }
 
 function detectBody(net, ctx, mainVideo){
-    console.log("det body",mainVideo )
+    console.log("get body",mainVideo )
     let personSegmentation=  net.segmentPerson(mainVideo,  {
         flipHorizontal: false,
         internalResolution: 'medium',
