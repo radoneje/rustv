@@ -959,6 +959,7 @@ window.onload=function () {
                                         }
                                     }, 1000)
                                     document.addEventListener("keydown",(e)=>{
+                                        console.log("keydown", e)
                                         if(e.code=="ArrowRight" || e.code=="ArrowLeft" && this.isPres)
                                         {
                                             var elems=document.querySelectorAll(".aModSectPresItem");
