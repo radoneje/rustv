@@ -106,7 +106,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
     })
     console.log("dev find ", fDev)
     if(fDev)
-    video={ deviceId:  fDev.deviceId}
+    video={ deviceId:  fDev.deviceId, width: 128, height: 720,  aspectRatio:  1.7777777778}
 
     /*{
        // width: {ideal: 640},
@@ -117,7 +117,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
     if(stream) {
         var tracks=stream.getTracks();
         audio = tracks.filter(t => t.kind == "audio").length > 0 ? true : false;
-        video=tracks.filter(t => t.kind == "audio").length > 0 ? {width:1280, height: 720} : false;
+        video=tracks.filter(t => t.kind == "audio").length > 0 ? {width: 720} : false;
        // console.log("tracks",tracks )
       // audio:false;
       // video:true;
