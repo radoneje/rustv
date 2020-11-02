@@ -1982,12 +1982,12 @@ async function startKeing(meetVideoItem, id){
     })
     var ctx = canvas.getContext('2d');
     cameraFrame = detectBody(objNet, ctx, meetVideoItem.querySelector('video'));
-
+console.log("meetVideoItem", meetVideoItem)
 
 }
 
 function detectBody(net, ctx, mainVideo){
-    console.log("det body")
+    console.log("det body",mainVideo )
     let personSegmentation=  net.segmentPerson(mainVideo,  {
         flipHorizontal: false,
         internalResolution: 'medium',
