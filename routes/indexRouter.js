@@ -254,7 +254,7 @@ router.get('/stageScreen/:id',  async (req, res, next) =>{
   var room=rooms[0]
 
   if(!req.session["user"+room.eventid])
-    return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stagePgm/'+req.params.id))
+    return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stageScreen/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
   res.header("X-Frame-Options","")
   res.render('stageScreen', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false});
