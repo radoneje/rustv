@@ -1537,7 +1537,7 @@ window.onload=function () {
         meetVideoItem.innerHTML = dt.data;
         meetVideoBox.appendChild(meetVideoItem)
 
-        meetVideoItem.addEventListener("click", ()=>{
+        meetVideoItem.addEventListener("click", async ()=>{
             if(meetVideoItem.classList.contains("first")){
                 meetVideoItem.classList.remove("first")
                 stopKeing(meetVideoItem, id);
@@ -1548,7 +1548,7 @@ window.onload=function () {
                     elem.classList.remove("first")
                 })
                 meetVideoItem.classList.add("first")
-                startKeing(meetVideoItem, id);
+                await startKeing(meetVideoItem, id);
             }
         })
         meetVideoItem.addEventListener("contextmenu", (e)=>{
@@ -1964,13 +1964,82 @@ window.cancelAnimationFrame = (function(){
     return  window.cancelAnimationFrame || window.mozCancelAnimationFrame;
 })();
 
-function startKeing(meetVideoItem, id){
+async function startKeing(meetVideoItem, id){
     let canvas=document.createElement('canvas');
     canvas.width=640;
     canvas.height=360;
 
     meetVideoItem.appendChild(canvas)
     var ctx = document.getElementById('mainCanvas').getContext('2d');
+
+    let objNet=await bodyPix.load({
+        architecture: 'MobileNetV1',//'ResNet50',//'MobileNetV1',
+        outputStride: 16,
+        // multiplier: 1,
+        quantBytes: 2
+    })
+    var ctx = canvas.getContext('2d');
+    cameraFrame = detectBody(objNet, ctx);
+
+
+}
+
+function detectBody(net, ctx){
+    console.log("det body")
+    let personSegmentation=  net.segmentPerson(mainVideo,  {
+        flipHorizontal: false,
+        internalResolution: 'medium',
+        segmentationThreshold: segmentationThreshold
+    })
+        .catch(error => {
+            console.log(error);
+        })
+        .then(personSegmentation => {
+            if(personSegmentation!=null){
+                drawBody(personSegmentation, ctx);
+            }
+        });
+    cameraFrame = requestAnimFrame(()=>{detectBody(net, ctx)});
+}
+function drawBody(personSegmentation,ctx) {
+    console.log("db");
+    const maskBackground = true;
+// Convert the segmentation into a mask to darken the background.
+    const foregroundColor = {r: 0, g: 0, b: 0, a: 0};
+    const backgroundColor = {r: 0, g: 255, b: 0, a: 255};
+    const backgroundDarkeningMask = bodyPix.toMask(
+        personSegmentation, foregroundColor, backgroundColor);
+    console.log(backgroundDarkeningMask);
+    const opacity = 1;//0.7;
+    const maskBlurAmount = 10;
+    const flipHorizontal = false;
+    const canvas = document.getElementById('mainCanvas');
+// Draw the mask onto the image on a canvas.  With opacity set to 0.7 and
+// maskBlurAmount set to 3, this will darken the background and blur the
+// darkened background's edge.
+    bodyPix.drawMask(
+        canvas, mainVideo, backgroundDarkeningMask, opacity, maskBlurAmount, flipHorizontal);
+
+    /*  ctx.drawImage(img, 0, 0, 640, 360);
+      var bgData =ctx.getImageData(0,0, 640, 360);
+      ctx.drawImage(mainVideo, 0, 0, 640, 360);
+      var imageData =ctx.getImageData(0,0, 640, 360);
+      var pixel = imageData.data;
+      var pxbg=bgData.data;
+      for (var p = 0; p<pixel.length; p+=4)
+      {
+          //console.log(personSegmentation.data[p/4]);
+          if (personSegmentation.data[p/4] == 0) {
+              //pixel[p+3] = 0;
+              pixel[p]=pxbg[p];
+              pixel[p+1]=pxbg[p+1];
+              pixel[p+2]=pxbg[p+2];
+              pixel[p+3]=pxbg[p+3];
+          }
+      }
+      ctx.imageSmoothingEnabled = true;
+      ctx.putImageData(imageData,0,0);*/
+
 }
 
 function stopKeing(meetVideoItem, id){
