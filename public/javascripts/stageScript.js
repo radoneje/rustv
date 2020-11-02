@@ -1566,7 +1566,18 @@ window.onload=function () {
         }
             document.getElementById('meetVideoFullScreen' + id).addEventListener("click", function () {
                 console.log("requestFullscreen0", id)
-                var video = document.getElementById("meetVideoWrapperContent_" + id).querySelector('video')
+                var elem=document.getElementById("meetVideoItem");
+                if(elem.classList.contains("fullScreen"))
+                    elem.classList.remove("fullScreen")
+                else {
+                    var elems = document.querySelectorAll("fullScreen");
+                    elems.forEach(e => {
+                        e.classList.remove("fullScreen")
+                    })
+                    elem.classList.add("fullScreen");
+                }
+
+               /* var video = document.getElementById("meetVideoWrapperContent_" + id).querySelector('video')
                 console.log("requestFullscreen", video)
                 if (video.requestFullscreen) {
                     video.requestFullscreen();
@@ -1578,7 +1589,7 @@ window.onload=function () {
                     video.msRequestFullscreen();
                 } else if (video.webkitEnterFullScreen) {
                     video.msRequestFullscreen();
-                }
+                }*/
 
             })
 
