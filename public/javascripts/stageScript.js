@@ -1577,6 +1577,7 @@ window.onload=function () {
                     elem.classList.add("fullScreen");
                 }
 
+
                /* var video = document.getElementById("meetVideoWrapperContent_" + id).querySelector('video')
                 console.log("requestFullscreen", video)
                 if (video.requestFullscreen) {
