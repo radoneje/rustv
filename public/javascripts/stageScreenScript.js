@@ -2047,7 +2047,7 @@ function drawBody(personSegmentation,ctx, mainVideo, canvas) {
 
 function stopKeing(meetVideoItem, id){
     try {
-        cancelAnimationFrame();
+        cancelAnimationFrame(cameraFrame);
         var canvas = document.querySelector('canvas');
         canvas.parentNode.removeChild('canvas')
     }
