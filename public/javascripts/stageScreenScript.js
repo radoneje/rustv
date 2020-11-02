@@ -757,7 +757,7 @@ window.onload=function () {
                                 _this.errorMessage="Невозможно подключиться. Проверьте доступ к видеокамере, разрешите использование видеокамеры в браузере и перезагрузите страницу."
                         });
 
-                    videoLayout();
+                   // videoLayout();
                     videoItem.streamid = _this.socket.id;
                     videoItem.elem = videoWr.querySelector('video');
                     videoItem.elem.setAttribute("allowfullscreen", "allowfullscreen")
@@ -834,7 +834,7 @@ window.onload=function () {
 
 
                 var video = await createVideo(data.streamid, false, data.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload,_this.videoRecord, _this.stopVideoRecord);
-                videoLayout();
+            //    videoLayout();
 
                 var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
                     var playerid=await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{removeVideo(receiverItem.streamid)})
@@ -858,7 +858,7 @@ window.onload=function () {
                     }
                 })
                 arrVideo=arrVideo.filter(r=>{return r.streamid!=streamid});
-                videoLayout();
+             //   videoLayout();
             },
             myVideoMute: function () {
                 var _this = this;
@@ -897,7 +897,7 @@ window.onload=function () {
                 await createVideo(videoItem.id, true, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord,  _this.stopVideoRecord)
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
                 await phonePublishLocalVideo(videoWr, videoItem.id, stream, ()=>{removeVideo(videoItem.id)});
-                videoLayout();
+              //  videoLayout();
                 videoItem.elem = videoWr.querySelector('video');
                 videoItem.elem.setAttribute("allowfullscreen","allowfullscreen")
                 videoItem.elem.setAttribute("playsinline","playsinline")
@@ -986,7 +986,7 @@ window.onload=function () {
                         e.classList.remove("isPGM");
                     })
                 })
-                videoLayout();
+              //  videoLayout();
             },
             OnVideoPIP:function (data) {
                 console.log('OnVideoPIP',data.val)
@@ -1017,7 +1017,7 @@ window.onload=function () {
                     else
                         item.pip=false;
                 })
-                videoLayout();
+               // videoLayout();
             },
             OnVideoP1:function (data) {
                 console.log('OnVideoP1', data.val)
@@ -1046,7 +1046,7 @@ window.onload=function () {
                     else
                         item.p1=false;
                 })
-                videoLayout();
+            //    videoLayout();
             },
             OnVideoPgm:function (data) {
                 var  _this=this;
@@ -1086,7 +1086,7 @@ window.onload=function () {
                         item.pgm=false;
                 })
                 console.log("arrVideo ", arrVideo)
-                videoLayout();
+             //   videoLayout();
             },
             initStage:async function(){
                 console.log("init stage")
@@ -1853,8 +1853,8 @@ window.onload=function () {
     }
 
 
-    window.addEventListener("resize",()=>{console.log("resize");videoLayout()});
-    window.addEventListener("orientationchange",()=>{console.log("orientationchange");videoLayout()});
+  //  window.addEventListener("resize",()=>{console.log("resize");videoLayout()});
+   // window.addEventListener("orientationchange",()=>{console.log("orientationchange");videoLayout()});
     document.addEventListener("keydown",(e)=> {
         document.body.onkeydown = function (e) {
             if(e.code=="Escape"){
