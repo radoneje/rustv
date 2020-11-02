@@ -1,5 +1,7 @@
 var app;
 var arrVideo = [];
+let cameraFrame;
+const segmentationThreshold = 0.5;
 window.onload=function () {
     try{
         eval("\"use strict\";const s=()=>{;;}; s();")
