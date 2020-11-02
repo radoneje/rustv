@@ -1537,6 +1537,15 @@ window.onload=function () {
         meetVideoItem.innerHTML = dt.data;
         meetVideoBox.appendChild(meetVideoItem)
 
+        meetVideoItem.addEventListener("click", ()=>{
+            if(meetVideoItem.classList.contains("first")){
+                meetVideoItem.classList.remove("first")
+            }
+            else {
+                meetVideoItem.classList.add("first")
+            }
+        })
+
 
         var cap = document.getElementById("meetVideoCap_" + id)
         cap.innerText = (user.i || "") + " " + (user.f || "")+ " " + (user.smi || "")
@@ -1791,14 +1800,7 @@ window.onload=function () {
 
             }
 
-        meetVideoBox.addEventListener("click", ()=>{
-            if(meetVideoBox.classList.contains("first")){
-                meetVideoBox.classList.remove("first")
-            }
-            else {
-                meetVideoBox.classList.add("first")
-            }
-        })
+
 
     }
     async function createAudioAnaliser(stream, clbk) {
