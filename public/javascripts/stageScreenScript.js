@@ -1970,7 +1970,7 @@ async function startKeing(meetVideoItem, id){
     canvas.height=360;
 
     meetVideoItem.appendChild(canvas)
-    var ctx = document.getElementById('mainCanvas').getContext('2d');
+    var ctx = canvas.getContext('2d');
 
     let objNet=await bodyPix.load({
         architecture: 'MobileNetV1',//'ResNet50',//'MobileNetV1',
