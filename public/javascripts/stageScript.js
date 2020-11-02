@@ -1857,7 +1857,13 @@ window.onload=function () {
     window.addEventListener("orientationchange",()=>{console.log("orientationchange");videoLayout()});
     document.addEventListener("keydown",(e)=> {
         document.body.onkeydown = function (e) {
-            console.log("keydown2", e)
+            if(e.code=="Escape"){
+                var elems=document.querySelectorAll(".fullScreen");
+                elems.forEach(elem=>{
+                    elem.classList.remove("fullScreen");
+                })
+            }
+            
         };
     })
     var momentFormat = 'HH:mm:ss';
