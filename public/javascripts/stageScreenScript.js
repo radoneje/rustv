@@ -2057,13 +2057,18 @@ function drawBody(personSegmentation,ctx, mainVideo, canvas) {
 function stopKeing(meetVideoItem, id){
     try {
         stopKeyCmd=true;
-        setTimeout(()=>{stopKeyCmd=false}, 200);
+        setTimeout(()=>{
+            stopKeyCmd=false
+                video.width=null;
+                video.height=null;
+            }
+        , 200);
         cancelAnimationFrame(cameraFrame);
         var canvas = document.querySelector('canvas');
         canvas.parentNode.removeChild(canvas)
         var video=meetVideoItem.querySelector('video');
-        video.width=null;
-        video.height=null;
+
+
     }
     catch (e) {
         console.warn(e);
