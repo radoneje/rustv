@@ -1855,7 +1855,11 @@ window.onload=function () {
 
     window.addEventListener("resize",()=>{console.log("resize");videoLayout()});
     window.addEventListener("orientationchange",()=>{console.log("orientationchange");videoLayout()});
-
+    document.addEventListener("keydown",(e)=> {
+        document.body.onkeydown = function (e) {
+            console.log("keydown2", e)
+        };
+    })
     var momentFormat = 'HH:mm:ss';
     if(!isPgm)
         var momentMask = IMask(document.getElementById('stageTimerLimit'), {
