@@ -1984,12 +1984,12 @@ async function startKeing(meetVideoItem, id){
     var mainVideo=meetVideoItem.querySelector('video')
     mainVideo.width=640;
     mainVideo.height=360;
-    cameraFrame = detectBody(objNet, ctx, mainVideo);
+    cameraFrame = detectBody(objNet, ctx, mainVideo, canvas);
 console.log("meetVideoItem", meetVideoItem)
 
 }
 
-function detectBody(net, ctx, mainVideo){
+function detectBody(net, ctx, mainVideo, canvas){
     console.log("get body",mainVideo )
     let personSegmentation=  net.segmentPerson(mainVideo,  {
         flipHorizontal: false,
@@ -2001,12 +2001,12 @@ function detectBody(net, ctx, mainVideo){
         })
         .then(personSegmentation => {
             if(personSegmentation!=null){
-                drawBody(personSegmentation, ctx, mainVideo);
+                drawBody(personSegmentation, ctx, mainVideo, canvas);
             }
         });
-    cameraFrame = requestAnimFrame(()=>{detectBody(net, ctx, mainVideo)});
+    cameraFrame = requestAnimFrame(()=>{detectBody(net, ctx, mainVideo, canvas)});
 }
-function drawBody(personSegmentation,ctx, mainVideo) {
+function drawBody(personSegmentation,ctx, mainVideo, canvas) {
     console.log("db");
     const maskBackground = true;
 // Convert the segmentation into a mask to darken the background.
@@ -2018,7 +2018,7 @@ function drawBody(personSegmentation,ctx, mainVideo) {
     const opacity = 1;//0.7;
     const maskBlurAmount = 10;
     const flipHorizontal = false;
-    const canvas = document.getElementById('mainCanvas');
+    //const canvas = document.getElementById('mainCanvas');
 // Draw the mask onto the image on a canvas.  With opacity set to 0.7 and
 // maskBlurAmount set to 3, this will darken the background and blur the
 // darkened background's edge.
