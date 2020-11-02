@@ -874,7 +874,7 @@ window.onload=function () {
                                 var constraints={video:true, audio:true}
                                 if(fDev)
                                     constraints=
-                                        {video:{ deviceId: {exact: fDev.deviceId}, width:1280, height:720}, audio:true}
+                                        {video:{ deviceId: {exact: fDev.deviceId}, width:1920, height:1080}, audio:true}
                                  _this.selfVideoStream = await navigator.mediaDevices.getUserMedia(constraints);
                                 /*_this.selfVideoStream = await navigator.mediaDevices.getUserMedia({
                                     video:{
