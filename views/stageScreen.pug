@@ -23,7 +23,7 @@ block content
 
       div(v-if="!init" style="height: 100vh;display: flex;align-items: center;justify-content: center;margin: 10px;width: calc(100% - 20px);")
           div.greenBtn.center( v-on:click="initStage()") Нажмите для начала
-      div.meetVideoBox#meetVideoBox(v-else style="top:0;padding:0;margin-left: -10px;")
+      div.meetVideoBox#meetVideoBox(v-else style="bottom:0; height:210px;padding:0;margin-left: -10px;")
 
   script.
       var eventid=!{room.eventid}
