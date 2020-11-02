@@ -2060,8 +2060,8 @@ function stopKeing(meetVideoItem, id){
         setTimeout(()=>{
             stopKeyCmd=false
                 var video=meetVideoItem.querySelector('video');
-                video.width=null;
-                video.height=null;
+                video.removeAttribute("width");
+                video.removeAttribute("height");
                 var canvas = document.querySelector('canvas');
                 canvas.parentNode.removeChild(canvas)
 
