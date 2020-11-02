@@ -117,7 +117,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
     if(stream) {
         var tracks=stream.getTracks();
         audio = tracks.filter(t => t.kind == "audio").length > 0 ? true : false;
-        video=tracks.filter(t => t.kind == "audio").length > 0 ? {width:1280, aspectRatio: 1.777777778} : false;
+        video=tracks.filter(t => t.kind == "audio").length > 0 ? {width:1280, height: 720} : false;
        // console.log("tracks",tracks )
       // audio:false;
       // video:true;
