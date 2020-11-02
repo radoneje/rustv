@@ -2061,6 +2061,9 @@ function stopKeing(meetVideoItem, id){
         cancelAnimationFrame(cameraFrame);
         var canvas = document.querySelector('canvas');
         canvas.parentNode.removeChild(canvas)
+        var video=meetVideoItem.querySelector('video');
+        video.width=null;
+        video.height=null;
     }
     catch (e) {
         console.warn(e);
