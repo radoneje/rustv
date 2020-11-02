@@ -2,6 +2,7 @@ var app;
 var arrVideo = [];
 let cameraFrame;
 const segmentationThreshold = 0.5;
+var stopKeyCmd=false;
 window.onload=function () {
     try{
         eval("\"use strict\";const s=()=>{;;}; s();")
@@ -2003,7 +2004,8 @@ function detectBody(net, ctx, mainVideo, canvas){
                 drawBody(personSegmentation, ctx, mainVideo, canvas);
             }
         });
-    cameraFrame = requestAnimFrame(()=>{detectBody(net, ctx, mainVideo, canvas)});
+    if(!stopKeyCmd)
+        cameraFrame = requestAnimFrame(()=>{detectBody(net, ctx, mainVideo, canvas)});
 }
 function drawBody(personSegmentation,ctx, mainVideo, canvas) {
     console.log("draq body")
@@ -2047,9 +2049,11 @@ function drawBody(personSegmentation,ctx, mainVideo, canvas) {
 
 function stopKeing(meetVideoItem, id){
     try {
+        stopKeyCmd=true;
+        setTimeout(()=>{stopKeyCmd=false}, 200);
         cancelAnimationFrame(cameraFrame);
         var canvas = document.querySelector('canvas');
-        canvas.parentNode.removeChild('canvas')
+        canvas.parentNode.removeChild(canvas)
     }
     catch (e) {
         console.warn(e);
