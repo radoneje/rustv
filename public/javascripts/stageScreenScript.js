@@ -1540,6 +1540,7 @@ window.onload=function () {
         meetVideoItem.addEventListener("click", ()=>{
             if(meetVideoItem.classList.contains("first")){
                 meetVideoItem.classList.remove("first")
+                stopKeing(meetVideoItem, id);
             }
             else {
                 var elems=document.querySelectorAll(".meetVideoItem");
@@ -1547,9 +1548,12 @@ window.onload=function () {
                     elem.classList.remove("first")
                 })
                 meetVideoItem.classList.add("first")
+                startKeing(meetVideoItem, id);
             }
         })
-        meetVideoItem.addEventListener("contextmenu", ()=>{
+        meetVideoItem.addEventListener("contextmenu", (e)=>{
+            e.stopPropagation();
+            e.preventDefault();
             if(meetVideoItem.classList.contains("second")){
                 meetVideoItem.classList.remove("second")
             }
@@ -1944,6 +1948,14 @@ window.onload=function () {
                 }
             }
         });
+}
+
+function startKeing(meetVideoItem, id){
+
+}
+
+function stopKeing(meetVideoItem, id){
+
 }
 
 
