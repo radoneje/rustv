@@ -2001,12 +2001,12 @@ function detectBody(net, ctx, mainVideo){
         })
         .then(personSegmentation => {
             if(personSegmentation!=null){
-                drawBody(personSegmentation, ctx);
+                drawBody(personSegmentation, ctx, mainVideo);
             }
         });
     cameraFrame = requestAnimFrame(()=>{detectBody(net, ctx, mainVideo)});
 }
-function drawBody(personSegmentation,ctx) {
+function drawBody(personSegmentation,ctx, mainVideo) {
     console.log("db");
     const maskBackground = true;
 // Convert the segmentation into a mask to darken the background.
