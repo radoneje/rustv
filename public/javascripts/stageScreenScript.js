@@ -1543,7 +1543,7 @@ window.onload=function () {
         meetVideoItem.addEventListener("click", async ()=>{
             if(meetVideoItem.classList.contains("first")){
                 meetVideoItem.classList.remove("first")
-                stopKeing(meetVideoItem, id);
+               // stopKeing(meetVideoItem, id);
             }
             else {
                 var elems=document.querySelectorAll(".meetVideoItem");
@@ -1554,7 +1554,7 @@ window.onload=function () {
                     meetVideoItem.classList.remove("second")
                 }
                 meetVideoItem.classList.add("first")
-                await startKeing(meetVideoItem, id);
+               // await startKeing(meetVideoItem, id);
             }
         })
         meetVideoItem.addEventListener("contextmenu", async (e)=>{
@@ -1566,7 +1566,7 @@ window.onload=function () {
             else {
                 if(meetVideoItem.classList.contains("first")){
                     meetVideoItem.classList.remove("first")
-                     stopKeing(meetVideoItem, id);
+                   //  stopKeing(meetVideoItem, id);
                 }
                 var elems=document.querySelectorAll(".meetVideoItem");
                 elems.forEach(elem=>{
