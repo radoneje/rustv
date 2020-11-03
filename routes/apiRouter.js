@@ -288,7 +288,7 @@ router.post("/regtoevent", async (req, res, next) => {
         return res.send(404)
     var evt = events[0];
 
-    if (req.body.f.length > 128 || req.body.i.length > 128)
+    if (req.body.f.length > 1024 || req.body.i.length > 1024)
         return res.send(404)
     var code = (parseInt(Math.random() * 10000) + parseInt(10000));
 
