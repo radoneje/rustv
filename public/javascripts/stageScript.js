@@ -1565,23 +1565,25 @@ window.onload=function () {
                             // console.log("dragover", e)
                         }, false);
                         var el = document.getElementById("app")
-                        el.addEventListener('dragover', function (e) {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            e.dataTransfer.dropEffect = 'copy';
-                        });
-                        el.addEventListener('drop', function (e) {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            console.log("drop")
-                            var files = e.dataTransfer.files; // Array of all files
-                            for (var i = 0, file; file = files[i]; i++) {
-                                if (file.type.match(/image.*/)) {
-                                    _this.activeSection = 2,
-                                        _this.uploafFilesToQ(file, "chat")
+                        if(el) {
+                            el.addEventListener('dragover', function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.dataTransfer.dropEffect = 'copy';
+                            });
+                            el.addEventListener('drop', function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                console.log("drop")
+                                var files = e.dataTransfer.files; // Array of all files
+                                for (var i = 0, file; file = files[i]; i++) {
+                                    if (file.type.match(/image.*/)) {
+                                        _this.activeSection = 2,
+                                            _this.uploafFilesToQ(file, "chat")
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
 
 
