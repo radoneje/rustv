@@ -43,7 +43,8 @@
     "loginNotes": [
       "Закройте остальные вкладки браузера.",
       "Закройте приложения, использующие веб-камеру.",
-       "Отключите VPN."
+       "Отключите VPN.",
+      "Нажмите на кнопку в центре для входа."
     ]
   },
   "en": {
@@ -90,7 +91,8 @@
     "loginNotes": [
       "Close all the remaining browser tabs.",
       "Close all apps that are using your webcam.",
-      "Turn VPN off."
+      "Turn VPN off.",
+      "Click to center button"
     ]
   }
 }
