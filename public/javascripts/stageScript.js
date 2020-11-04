@@ -108,6 +108,8 @@ window.onload=function () {
                 this.files.forEach(f=>{
                     if(f.id==data.id)
                         console.log("insert to pres", )
+                    if(!f.presfiles)
+                        f.presfiles=[];
                     f.presfiles.push({id:data.fileid, fileid:data.id});
                 })
             },
