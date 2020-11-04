@@ -104,7 +104,7 @@ window.onload=function () {
                 //this.previewPres=item.presfiles;
                 this.isPres=true;
                 await axios.post("/rest/api/deActivatePres/" + eventid + "/" + roomid, {id:item.id})
-                await axios.post("/rest/api/previewFilePres/" + eventid + "/" + roomid, {items:_this.previewPres})
+                await axios.post("/rest/api/previewFilePres/" + eventid + "/" + roomid, {items:/*_this.previewPres*/item.presfiles})
                 this.isPresFullScreen=false;
 
             },
