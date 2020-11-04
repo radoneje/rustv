@@ -84,7 +84,7 @@
     "link": "Link",
     "startPres": "Start show",
     "close": "close",
-    "checkWebCam": "Check you webcam:",
+    "checkWebCam": "Check your webcam:",
     "selectCamera": "Select your camera",
     "selectMic": "Select your microphone",
     "notes": "NOTES:",
@@ -92,7 +92,7 @@
       "Close all the remaining browser tabs",
       "Close all apps that are using your webcam",
       "Turn VPN off",
-      "Press the button at the center of the screen  to enter"
+      "Press the button at the center to ENTER "
     ]
   }
 }
