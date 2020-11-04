@@ -63,8 +63,54 @@ window.onload=function () {
             pole:[],
             selLang:'ru',
             lang:{ru:{},en:""},
+                pres:null,
+            previewPres:[],
+            isPres:false,
+            isPresFullScreen:false,
+
         },
         methods:{
+            deactivatePres:async function(){
+                await axios.post("/rest/api/deActivatePres/" + this.pres + "/" + roomid, {id:this.pres});
+                this.previewPres=[];
+                this.isPresFullScreen=false;
+            },
+            getPresBgUrl:function(pres){
+                return 'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')'
+            },
+            setPres:function (id) {
+                this.pres=id;
+                if(this.pres) {
+                    this.isPres=true
+                    var elem = document.getElementById("pres" + id)
+                    if (elem)
+                        elem.scrollIntoView({inline: "center", behavior: "smooth"})
+
+                }
+                else{
+                    this.isPres=false;
+                }
+            },
+            activatePres:async function (item) {
+                await axios.post("/rest/api/pres/" + eventid + "/" + roomid, {id:item.id})
+            },
+            previewFilePres:async function(item){
+                var _this=this;
+                this.previewPres=item.presfiles;
+                this.isPres=true;
+                await axios.post("/rest/api/deActivatePres/" + eventid + "/" + roomid, {id:item.id})
+                await axios.post("/rest/api/previewFilePres/" + eventid + "/" + roomid, {items:_this.previewPres})
+                this.isPresFullScreen=false;
+
+            },
+            OnNewFilePres:function (data) {
+                console.log("OnNewFilePres", this.files, data)
+                this.files.forEach(f=>{
+                    if(f.id==data.id)
+                        console.log("insert to pres", )
+                    f.presfiles.push({id:data.fileid, fileid:data.id});
+                })
+            },
             uploadFile:function(){
                 uploadFile(this);
             },
@@ -152,12 +198,14 @@ window.onload=function () {
                 var elem=document.getElementById('presRew')
                 var val=elem.classList.contains("active")
                 this.socket.emit("presRew", val)
+                movePres(-1)
 
             },
             presFow:function(){
                 var elem=document.getElementById('presFow')
                 var val=elem.classList.contains("active")
                 this.socket.emit("presFow", val)
+                movePres(1)
             },
             OnPresRew:function(val) {
                 var elem=document.getElementById('presRew')
@@ -1453,6 +1501,45 @@ window.onload=function () {
                                 console.log("pole", r.data)
                                 _this.pole=r.data;
                             })
+                        axios.get("/rest/api/files/"+eventid+"/"+roomid)
+                            .then(function (r) {
+                                console.log(r.data)
+                                _this.files=r.data;
+                                axios.get("/rest/api/activePres/" + eventid + "/" + roomid)
+                                    .then(function (ff) {
+                                        // console.log("activePres", ff)
+                                        if (ff.data.fileid) {
+                                            try {
+                                                _this.previewPres = _this.files.filter(r => r.id == ff.data.fileid)[0].presfiles
+                                                //_this.pres = ff.data.fileid
+                                                _this.setPres(ff.data.item)
+                                                setTimeout(function () {
+                                                    var elem = document.getElementById("pres" + ff.data.fileid)
+                                                    if (elem)
+                                                        elem.scrollIntoView({inline: "center", behavior: "smooth"})
+                                                }, 200)
+                                            }
+                                            catch (e) {
+                                                console.warn(e)
+                                            }
+
+                                            //  _this.pres = ff.data.item
+                                            // _this.isPres = ff.data.item ? true : false
+                                        } else
+                                            _this.previewPres = []
+
+
+                                    })
+
+                            });
+
+
+                       /* axios.get("/rest/api/activePres/" + eventid + "/" + roomid)
+                            .then(function (ff) {
+                                _this.pres = ff.data.item
+                            })*/
+
+
                       //  var scrElem = rHead;
                       //  scrElem.scrollLeft = (scrElem.scrollWidth - scrElem.clientWidth) / 2
                         document.body.addEventListener('drop', function (event) {
@@ -1861,11 +1948,30 @@ window.onload=function () {
                 var elems=document.querySelectorAll(".fullScreen");
                 elems.forEach(elem=>{
                     elem.classList.remove("fullScreen");
-                })
+                });
+                app.isPresFullScreen=false;
+            }
+            //console.log("rl click", e)
+            if(e.code=="ArrowRight" || e.code=="ArrowLeft" )
+            {
+                movePres(e.code=="ArrowRight"?1:-1)
+
             }
             
         };
     })
+    function movePres(j) {
+        var elems=document.querySelectorAll(".aModSectPresItem");
+        for(var i=0; i<elems.length; i++){
+            if(elems[i].classList.contains("active"))
+            {
+                if(j>0 && i<elems.length-1)
+                    elems[i+1].click();
+                if(j<0 && i>0)
+                    elems[i-1].click();
+            }
+        }
+    }
     var momentFormat = 'HH:mm:ss';
     if(!isPgm)
         var momentMask = IMask(document.getElementById('stageTimerLimit'), {

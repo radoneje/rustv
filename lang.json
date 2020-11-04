@@ -33,8 +33,9 @@
     "Yourquestion":"Напишите ваш вопрос",
     "download": "Скачать",
     "upload": "Загрузить",
-    "link": "Ссылка"
-
+    "link": "Ссылка",
+    "startPres": "Презентовать",
+    "close": "Закрыть"
 
 
   },
@@ -72,6 +73,8 @@
     "Yourquestion":"Your question",
     "download": "Download",
     "upload": "Upload new file",
-    "link": "Link"
+    "link": "Link",
+    "startPres": "Start show",
+    "close": "close"
   }
 }

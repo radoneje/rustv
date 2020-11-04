@@ -1552,7 +1552,7 @@ router.get("/eventRooms/:eventid/:roomid", checkLoginToRoom, async (req, res, ne
 
 
 
-router.post("/deActivatePres/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+router.post("/deActivatePres/:eventid/:roomid", async (req, res, next) => {
     var f = await req.knex.select("*").from("t_files").where({roomid: req.params.roomid});
     for (ff of f) {
         var pp = await req.knex("t_presfiles").update({isActive: false}).where({fileid: ff.id})

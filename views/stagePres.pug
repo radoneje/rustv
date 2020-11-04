@@ -1,0 +1,39 @@
+extends layout
+block head
+  link(rel='stylesheet', href='/stylesheets/old.css')
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  script(src="/javascripts/utils.js")
+  script(src="/lib/flashUtils.js")
+  script(src="/lib/flashphoner.js")
+  script(src="/javascripts/phoner.js")
+  script(src="/lib/imask.js")
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0"></script>
+  script(src="/javascripts/stagePresScript.js")
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  link(rel='stylesheet', href='/stylesheets/login.css')
+  link(rel='stylesheet', href='/stylesheets/room.css')
+  if event.isClientCss
+    link(rel='stylesheet', href='/stylesheets/'+event.clientCss)
+
+block content
+  <style>body{overflow:hidden;}</style>
+  div.roomScreen.multiViewVideo(id="app" )
+    div.center
+        .stagePresPreview.presFull(style="width:100%;margin-top:0" v-if="pres" )
+            //.stagePresPreviewBox( v-bind:style="{backgroundImage:url('/rest/api/pres/'+pres+'/'+eventid+'/'+roomid)}")
+            .stagePresPreviewBox( v-bind:style="{backgroundImage:getPresBgUrl(pres)}")
+
+
+  script.
+      var eventid=!{room.eventid}
+      var roomid=!{room.id}
+      var room=!{JSON.stringify(room)}
+      var  isMod=!{isMod};
+      var isPgm=true
+
+
+
+
+
+
