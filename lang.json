@@ -35,9 +35,16 @@
     "upload": "Загрузить",
     "link": "Ссылка",
     "startPres": "Презентовать",
-    "close": "Закрыть"
-
-
+    "close": "Закрыть",
+    "checkWebCam": "Проверка вашей вебкамеры:",
+    "selectCamera": "Выбор камеры",
+    "selectMic": "Выбор микрофона",
+    "notes": "Внимание:",
+    "loginNotes": [
+      "Закройте остальные вкладки браузера",
+      "Закройте приложения, использующие веб-камеру",
+       "Отключите VPN"
+    ]
   },
   "en": {
     "registration":"Registration",
@@ -75,6 +82,15 @@
     "upload": "Upload new file",
     "link": "Link",
     "startPres": "Start show",
-    "close": "close"
+    "close": "close",
+    "checkWebCam": "Check you webcam:",
+    "selectCamera": "Select you camera",
+    "selectMic": "Select you microphone",
+    "notes": "NOTES:",
+    "loginNotes": [
+      "Закройте остальные вкладки браузера",
+      "Закройте приложения, использующие веб-камеру",
+      "Отключите VPN"
+    ]
   }
 }

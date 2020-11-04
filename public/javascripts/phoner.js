@@ -93,7 +93,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
            // {width: {ideal: 640},quality: 100};
 
 
-    var dev=await navigator.mediaDevices.enumerateDevices()
+ /*   var dev=await navigator.mediaDevices.enumerateDevices()
     console.log("dev  ", dev)
     var fDev=null;
     dev.forEach(function(device) {
@@ -104,10 +104,14 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
         }
 
     })
-    console.log("dev find ", fDev)
-    if(fDev)
     video={ deviceId:  fDev.deviceId, width: 1280, height: 720,  aspectRatio:  1.7777777778}
+    console.log("dev find ", fDev)*/
+    if(vDevice && vDevice.length>0)
+    video={ deviceId:  vDevice, width: 1280, height: 720,  aspectRatio:  1.7777777778}
+    if(aDevice && aDevice.length>0 )
+        audio={ deviceId:  aDevice}
 
+    console.log("dev find ", vDevice, video)
     /*{
        // width: {ideal: 640},
        // height: {ideal: parseInt(640/1.7777777778)},

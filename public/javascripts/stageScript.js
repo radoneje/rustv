@@ -1,4 +1,6 @@
 var app;
+var aDevice=null;
+var vDevice=null
 var arrVideo = [];
 window.onload=function () {
     try{
@@ -812,7 +814,7 @@ window.onload=function () {
                                 _this.errorMessage="Невозможно подключиться. Проверьте доступ к видеокамере, разрешите использование видеокамеры в браузере и перезагрузите страницу."
                         });
 
-                    videoLayout();
+                    videoLayout2();
                     videoItem.streamid = _this.socket.id;
                     videoItem.elem = videoWr.querySelector('video');
                     videoItem.elem.setAttribute("allowfullscreen", "allowfullscreen")
@@ -889,7 +891,7 @@ window.onload=function () {
 
 
                 var video = await createVideo(data.streamid, false, data.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload,_this.videoRecord, _this.stopVideoRecord);
-                videoLayout();
+                videoLayout2();
 
                 var videoWrElem=document.getElementById('meetVideoWrapperContent_'+receiverItem.streamid);
                     var playerid=await phoneGetRemoteVideo(videoWrElem, receiverItem.streamid, ()=>{removeVideo(receiverItem.streamid)})
@@ -913,7 +915,7 @@ window.onload=function () {
                     }
                 })
                 arrVideo=arrVideo.filter(r=>{return r.streamid!=streamid});
-                videoLayout();
+                videoLayout2();
             },
             myVideoMute: function () {
                 var _this = this;
@@ -952,7 +954,7 @@ window.onload=function () {
                 await createVideo(videoItem.id, true, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord,  _this.stopVideoRecord)
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
                 await phonePublishLocalVideo(videoWr, videoItem.id, stream, ()=>{removeVideo(videoItem.id)});
-                videoLayout();
+                videoLayout2();
                 videoItem.elem = videoWr.querySelector('video');
                 videoItem.elem.setAttribute("allowfullscreen","allowfullscreen")
                 videoItem.elem.setAttribute("playsinline","playsinline")
@@ -1041,7 +1043,7 @@ window.onload=function () {
                         e.classList.remove("isPGM");
                     })
                 })
-                videoLayout();
+                videoLayout2();
             },
             OnVideoPIP:function (data) {
                 console.log('OnVideoPIP',data.val)
@@ -1072,7 +1074,7 @@ window.onload=function () {
                     else
                         item.pip=false;
                 })
-                videoLayout();
+                videoLayout2();
             },
             OnVideoP1:function (data) {
                 console.log('OnVideoP1', data.val)
@@ -1101,7 +1103,7 @@ window.onload=function () {
                     else
                         item.p1=false;
                 })
-                videoLayout();
+                videoLayout2();
             },
             OnVideoPgm:function (data) {
                 var  _this=this;
@@ -1141,7 +1143,7 @@ window.onload=function () {
                         item.pgm=false;
                 })
                 console.log("arrVideo ", arrVideo)
-                videoLayout();
+                videoLayout2();
             },
             initStage:async function(){
                 console.log("init stage")
@@ -1409,6 +1411,7 @@ window.onload=function () {
 
          },
         mounted:async function () {
+
             var _this=this;
             var r= await axios.get("/rest/api/lang");
             this.lang=r.data;
@@ -1553,6 +1556,8 @@ window.onload=function () {
 
                       //  var scrElem = rHead;
                       //  scrElem.scrollLeft = (scrElem.scrollWidth - scrElem.clientWidth) / 2
+                        setTimeout(previewVideo,100)
+
                         document.body.addEventListener('drop', function (event) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -1953,8 +1958,8 @@ window.onload=function () {
     }
 
 
-    window.addEventListener("resize",()=>{console.log("resize");videoLayout()});
-    window.addEventListener("orientationchange",()=>{console.log("orientationchange");videoLayout()});
+    window.addEventListener("resize",()=>{console.log("resize");videoLayout2()});
+    window.addEventListener("orientationchange",()=>{console.log("orientationchange");videoLayout2()});
     document.addEventListener("keydown",(e)=> {
         document.body.onkeydown = function (e) {
             if(e.code=="Escape"){
@@ -2037,8 +2042,61 @@ window.onload=function () {
                }
            });
        },1000)
+    async function   previewVideo() {
+        var video=document.getElementById("previewVideo");
+        startPreviewVideo(video);
+
+        if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
+            var vSel=document.getElementById("webcamSelect");
+            var aSel=document.getElementById("micSelect");
+            vSel.addEventListener("change",()=>{
+                startPreviewVideo(video,vSel.value);
+                vDevice=vSel.value;
+            })
+            aSel.addEventListener("change",()=>{
+                aDevice=aSel.value;
+            })
+           var devices= await  navigator.mediaDevices.enumerateDevices();
+            devices.forEach(function(device) {
+
+                if(device.kind=="audioinput" && device.deviceId.length>0){
+                    var option=document.createElement('option');
+                    option.value=device.deviceId;
+                    option.innerText=device.label;
+                    aSel.appendChild(option)
+
+                }
+                if(device.kind=="videoinput" && device.deviceId.length>0){
+                    var option=document.createElement('option');
+                    option.value=device.deviceId;
+                    option.innerText=device.label;
+                    vSel.appendChild(option)
+
+                }
+
+
+            });
+
+
+            return;
+        }
+
+    }
+    async function startPreviewVideo(video,deviceid) {
+        var constrints={ width: 1280, height: 720,  aspectRatio:  1.7777777778}
+        if(deviceid && deviceid.length>0)
+            constrints.deviceId=deviceid;
+        var stream = await  navigator.mediaDevices.getUserMedia({video:constrints })
+        video.srcObject=stream;
+        video.play();
+
+    }
 
 }
+function videoLayout2() {
+    videoLayout()
+}
+
 
 
 
