@@ -2036,7 +2036,7 @@ window.onload=function () {
                    }
                }
            });
-       },200)
+       },1000)
 
 }
 
