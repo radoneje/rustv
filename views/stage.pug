@@ -391,7 +391,7 @@ block content
                   div.qItemLoader(:id="'fileloader'+item.id")
                   div.qItemName {{item.title}}
                   div.qItemDate
-                    span.link.green(v-on:click="previewFilePres(item)" v-if="item.presfiles.length>0") &nbsp;&nbsp; {{lang[selLang].startPres}}
+                    span.link.green(v-on:click="previewFilePres(item)" v-if="item.presfiles && item.presfiles.length>0") &nbsp;&nbsp; {{lang[selLang].startPres}}
                     span.link.green(v-on:click="downloadFile(item)") &nbsp;&nbsp; {{lang[selLang].download}}
                     span.link.green(v-on:click="fileLink(item)") &nbsp;&nbsp; {{lang[selLang].link}}
               div.rFooter
