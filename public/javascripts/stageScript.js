@@ -101,7 +101,7 @@ window.onload=function () {
             },
             previewFilePres:async function(item){
                 var _this=this;
-                this.previewPres=item.presfiles;
+                //this.previewPres=item.presfiles;
                 this.isPres=true;
                 await axios.post("/rest/api/deActivatePres/" + eventid + "/" + roomid, {id:item.id})
                 await axios.post("/rest/api/previewFilePres/" + eventid + "/" + roomid, {items:_this.previewPres})
