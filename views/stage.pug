@@ -92,7 +92,7 @@ block content
                     span FORWARD >>
 
               div(v-if="!init" style="height: 100vh;display: flex;align-items: center;justify-content: center;margin: 10px;")
-                  div.greenBtn.center( v-on:click="initStage()") {{lang[selLang].clickHere}}
+                  div.greenBtn.center( v-on:click="initStage()" style="font-size: 24px;") {{lang[selLang].clickHere}}
               div.meetVideoBox#meetVideoBox(v-else)
       div.aModSectPres.stagePres(v-if="previewPres.length>0 && init")
         div.aModSectPresSlider
