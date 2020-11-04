@@ -952,6 +952,7 @@ window.onload=function () {
                 videoItem.streamid = socket.id + createUUID(4)+"Dt";
                 videoItem.id = videoItem.streamid ;
                 await createVideo(videoItem.id, true, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord,  _this.stopVideoRecord)
+                videoLayout2();
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
                 await phonePublishLocalVideo(videoWr, videoItem.id, stream, ()=>{removeVideo(videoItem.id)});
                 videoLayout2();

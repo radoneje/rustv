@@ -1173,7 +1173,8 @@ async function createVideo(id, muted, user, onPgm, onPip,onMute, onRemove, onRel
     var dt = await axios.get('/phoneVideoElem/' + id);
     meetVideoItem.innerHTML = dt.data;
     meetVideoBox.appendChild(meetVideoItem)
-
+    if(videoLayout2)
+        videoLayout2();
 
     var cap = document.getElementById("meetVideoCap_" + id)
     cap.innerText = (user.i || "") + " " + (user.f || "")
