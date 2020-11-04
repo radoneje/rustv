@@ -70,6 +70,11 @@ window.onload=function () {
 
         },
         methods:{
+            onPreviewFilePres:function (dt) {
+                console.log("onPreviewFilePres", dt)
+
+                this.previewPres=dt;
+            },
             deactivatePres:async function(){
                 await axios.post("/rest/api/deActivatePres/" + this.pres + "/" + roomid, {id:this.pres});
                 this.previewPres=[];
