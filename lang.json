@@ -41,10 +41,10 @@
     "selectMic": "Выбор микрофона",
     "notes": "Внимание:",
     "loginNotes": [
-      "Закройте остальные вкладки браузера.",
-      "Закройте приложения, использующие веб-камеру.",
-       "Отключите VPN.",
-      "Нажмите на кнопку в центре для входа."
+      "Закройте остальные вкладки браузера",
+      "Закройте приложения, использующие веб-камеру",
+       "Отключите VPN",
+      "Нажмите на кнопку в центре экрана"
     ]
   },
   "en": {
@@ -85,13 +85,13 @@
     "startPres": "Start show",
     "close": "close",
     "checkWebCam": "Check you webcam:",
-    "selectCamera": "Select you camera",
-    "selectMic": "Select you microphone",
+    "selectCamera": "Select your camera",
+    "selectMic": "Select your microphone",
     "notes": "NOTES:",
     "loginNotes": [
-      "Close all the remaining browser tabs.",
-      "Close all apps that are using your webcam.",
-      "Turn VPN off.",
+      "Close all the remaining browser tabs",
+      "Close all apps that are using your webcam",
+      "Turn VPN off",
       "Click to center button"
     ]
   }
