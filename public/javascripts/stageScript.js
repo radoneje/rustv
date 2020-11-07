@@ -1383,6 +1383,9 @@ window.onload=function () {
 
         },
         watch:{
+            isPresFullScreen:function (){
+                console.log("isPresFullScreen", this.isPresFullScreen)
+            }
           /*  activeSection:function () {
                 window.scrollTo(0,document.body.scrollHeight);
             }*/
