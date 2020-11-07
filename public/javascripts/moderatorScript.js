@@ -78,10 +78,12 @@ window.onload=async function () {
             findYellow:false,
             findRed:false,
             pole:[],
-            tags:[]
+            tags:[],
+            messageToAllUsersText:'',
 
         },
         methods:{
+            messageToAllUsers:async function(){},
             poleClick:function(item,event){
                 if(item.done)
                     return;
