@@ -1385,6 +1385,17 @@ window.onload=function () {
         watch:{
             isPresFullScreen:function (){
                 console.log("isPresFullScreen", this.isPresFullScreen)
+                if(this.isPresFullScreen)
+                {
+                    document.querySelectorAll(".meetVideoItem").forEach(e=>{
+                        e.style.display="none"
+                    })
+                }
+                else {
+                    document.querySelectorAll(".meetVideoItem").forEach(e=>{
+                        e.style.display="block"
+                    })
+                }
             }
           /*  activeSection:function () {
                 window.scrollTo(0,document.body.scrollHeight);
