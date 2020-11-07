@@ -202,7 +202,6 @@ function closeWnd(){
 
         var url = new URL(window.location.href);
         var redirect = url.searchParams.get("redirect");
-         console.log(redirect);
          if(!redirect)
              redirect="/event/"+evntId
         setTimeout(document.location.href=redirect,3000)

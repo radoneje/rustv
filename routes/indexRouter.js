@@ -199,9 +199,6 @@ router.get('/stage/:id',  async (req, res, next) =>{
 
   var room=rooms[0]
 
-  console.log("stage", room.eventid)
-
-  return res.json(req.session);
 
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stage/'+req.params.id))
