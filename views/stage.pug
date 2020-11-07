@@ -219,7 +219,8 @@ block content
               .rInviteBox(style="margin-top:10px")
                 .rInvitesTitle(v-for="note in lang[selLang].loginNotes") {{note}}
             div
-              .stageLTitle {{lang[selLang].checkWebCam}}
+              .stageLTitle
+                span.stageLNotes {{lang[selLang].checkWebCam}}
               video#previewVideo(muted="muted" autoplay width="320" height="180" style="margin:20px;width:calc(100% - 40px)")
               div(style="margin:20px")
                 .rInviteBox(style="margin-top:10px")
