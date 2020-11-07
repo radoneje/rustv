@@ -199,13 +199,13 @@ function closeWnd(){
         window.opener.registerSuccess(dt.data)
     }*/
   //  else
-    alert("closeWnd")
+
         var url = new URL(window.location.href);
         var redirect = url.searchParams.get("redirect");
          console.log(redirect);
          if(!redirect)
              redirect="/event/"+evntId
-
+    alert("closeWnd redirect "+ redirect);
         setTimeout(document.location.href=redirect,1000)
     return
 }
