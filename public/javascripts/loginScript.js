@@ -118,7 +118,7 @@ window.onload=function () {
 
                var dt= await axios.post('/rest/api/regtoevent/'
                     ,{evntId:evntId, f:this.f, i:this.i, CompanyName:this.CompanyName, tel:this.tel, email:this.email, companyTitle:this.companyTitle, company:this.company?this.company.id:null, otrasl:this.otrasl?this.otrasl.id:null})
-                        console.log("login", dt)
+
                        if(!dt.data.showConfirm){
                            if(dt.data.user)
                                closeWnd();
@@ -199,6 +199,7 @@ function closeWnd(){
         window.opener.registerSuccess(dt.data)
     }*/
   //  else
+    alert("closeWnd")
         var url = new URL(window.location.href);
         var redirect = url.searchParams.get("redirect");
          console.log(redirect);
