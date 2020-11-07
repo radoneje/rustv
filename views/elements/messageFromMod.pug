@@ -2,6 +2,6 @@ div.messageFromMod(v-if="messageFromMod.length>0")
     div.messageFromModTitle Сообщение от модератора:
     div.messageFromModText {{messageFromMod}}
     div.messageFromModReply
-        input.messageFromModReplyInput(type="text" v-on:keypress="if($event.keyCode==13) messageToMod()" :placeholder="lang?:(lang[selLang].replyPlaceholder)('Напишите здесь текст ответа')" v-model="messageToModText")
+        input.messageFromModReplyInput(type="text" v-on:keypress="if($event.keyCode==13) messageToMod()" :placeholder="lang?(lang[selLang].replyPlaceholder):('Напишите здесь текст ответа')" v-model="messageToModText")
         div.greenBtn.clearBtn(style='display:inline-block' v-on:click="messageToMod()") Ответить
         div.greenBtn.clearBtn(style='display:inline-block' v-on:click="messageFromMod=''") Закрыть
