@@ -205,8 +205,7 @@ function closeWnd(){
          console.log(redirect);
          if(!redirect)
              redirect="/event/"+evntId
-    alert(redirect)
-        setTimeout(document.location.href=redirect,1000)
+        setTimeout(document.location.href=redirect,3000)
     return
 }
 
