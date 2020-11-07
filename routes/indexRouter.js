@@ -104,7 +104,7 @@ router.get('/event/:id',  async (req, res, next) =>{
   if(evnts.length<1)
     return res.send(404);
 
-  console.log("event", req.params.id)
+
 
   if(!req.session["user"+req.params.id])
     return res.redirect("/login/"+req.params.id)
@@ -199,6 +199,7 @@ router.get('/stage/:id',  async (req, res, next) =>{
 
   var room=rooms[0]
 
+  console.log("stage", req.params.id)
 
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stage/'+req.params.id))
