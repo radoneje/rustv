@@ -1392,6 +1392,7 @@ window.onload=function () {
                     })
                     document.querySelectorAll(".meetVideoItem.isPGM").forEach(e=>{
                         e.classList.add("smallVideoShow")
+                        e.style.display="block"
                     })
 
 
