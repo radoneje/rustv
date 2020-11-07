@@ -1390,10 +1390,18 @@ window.onload=function () {
                     document.querySelectorAll(".meetVideoItem").forEach(e=>{
                         e.style.display="none"
                     })
+                    document.querySelectorAll(".meetVideoItem.isPGM").forEach(e=>{
+                        e.classList.add("smallVideoShow")
+                    })
+
+
                 }
                 else {
                     document.querySelectorAll(".meetVideoItem").forEach(e=>{
                         e.style.display="block"
+                    })
+                    document.querySelectorAll(".meetVideoItem.isPGM").forEach(e=>{
+                        e.classList.remove("smallVideoShow")
                     })
                 }
             }
