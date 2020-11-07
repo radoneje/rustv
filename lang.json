@@ -46,7 +46,9 @@
        "Отключите VPN",
       "Нажмите на кнопку в центре экрана"
     ],
-    "replyPlaceholder": "Напишите здесть текст ответа"
+    "replyPlaceholder": "Напишите здесть текст ответа",
+    "reply": "Ответить",
+    "messageFromMod": "Сообщение от модератора"
   },
   "en": {
     "registration":"Registration",
@@ -95,6 +97,8 @@
       "Turn VPN off",
       "Press the button at the center to JOIN "
     ],
-    "replyPlaceholder": "Reply text write here"
+    "replyPlaceholder": "Reply text write here",
+    "reply": "Reply",
+    "messageFromMod": "Message from Moderator"
   }
 }
