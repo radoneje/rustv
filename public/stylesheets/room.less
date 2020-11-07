@@ -1318,18 +1318,20 @@ position: relative;
 }
 .screenVideoBox .meetVideoItem.first{
   position: fixed;
-  top: 30px;
-  left: 0px;
-  width: 640px;
+  top: calc(25% - 30px);
+  left: 30px;
+  width: calc(50% - 60px);
+  margin: 30px;
 }
 .meetVideoItem.first .meetVideoCap, .meetVideoItem.first .meetVideoMute, .meetVideoItem.first .meetVideoFullScreen{
 display: none;
 }
 .screenVideoBox .meetVideoItem.second{
   position: fixed;
-  top: 30px;
-  left: calc( 640px);
-  width: 1280px;
+  top: calc(25% - 30px);
+  left: calc(50% + 60px);
+  width: calc(50% - 60px);
+  margin: 30px;
 }
 .meetVideoItem.second .meetVideoCap, .meetVideoItem.second .meetVideoMute, .meetVideoItem.second .meetVideoFullScreen{
   display: none;
