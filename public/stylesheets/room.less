@@ -473,13 +473,13 @@ width: 75%;
 //  flex: 1 0 33%; /* explanation below */
 }
 .stageLNotes{
-  color: #71BF42;
+
   color:#39ACDE;
   font-size: 24px;
 }
 .stageLCheck{
   margin-top: 10px;
-  background: #71BF42;
+
   background: #39ACDE;
   padding: 10px;
   border-radius: 6px;
@@ -499,6 +499,22 @@ width: 75%;
   margin: 0;
   z-index: 10;
 }
+.meetVideoItem.fullScreen .meetVideoFullScreen{
+  width: 40px;
+  /* height: 40px; */
+  background: #39ACDE;
+  opacity: 1;
+  text-align: right;
+  position: relative;
+}
+.meetVideoItem.fullScreen .meetVideoFullScreen:before{
+ content:"hide";
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 2px;
+}
+
 .meetVideoItem.isPGM, .meetVideoItem.isPIP,  .meetVideoItem.isP1{
   border: 2px solid red;
 }
