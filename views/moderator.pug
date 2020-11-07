@@ -273,7 +273,27 @@ block content
                     div.aSectSwith(v-on:click="usersOnOff()")
                         div(v-if="isUsers") Пользователи включены
                         div.warning(v-else) Пользователи выключены
+                    div
+                        input.aModSectFind
+                        div.aModSectFindVideo.aModSectFindItem(v-bind:class="{active:findVideo}" v-on:click="findVideo=!findVideo")
+                            <svg width="16px" height="16px" viewBox="0 0 28 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                            <desc>Created with Sketch.</desc>
+                            <defs></defs>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Desktop" transform="translate(-502.000000, -506.000000)" fill="#000000" fill-rule="nonzero">
+                            <g id="bx-bx-video" transform="translate(500.000000, 500.000000)">
+                            <g id="Icon">
+                            <path d="M24,9.33333333 C24,7.86266667 22.804,6.66666667 21.3333333,6.66666667 L5.33333333,6.66666667 C3.86266667,6.66666667 2.66666667,7.86266667 2.66666667,9.33333333 L2.66666667,22.6666667 C2.66666667,24.1373333 3.86266667,25.3333333 5.33333333,25.3333333 L21.3333333,25.3333333 C22.804,25.3333333 24,24.1373333 24,22.6666667 L24,18.2226667 L29.3333333,22.6666667 L29.3333333,9.33333333 L24,13.7773333 L24,9.33333333 Z M21.336,22.6666667 L5.33333333,22.6666667 L5.33333333,9.33333333 L21.3333333,9.33333333 L21.3346667,15.9986667 L21.3333333,16 L21.3346667,16.0013333 L21.336,22.6666667 Z" id="Icon-Shape"></path>
+                            <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="32" height="32"></rect>
+                            </g>
+                            </g>
+                            </g>
+                            </g>
+                            </svg>
                     include elements/modUserItem
+
+
         div.aPresBox()
             div.aModSectMenu
                 div.aModSectMenuItem(v-bind:class="{active:isPres}" v-on:click="isPres=!isPres")
