@@ -292,7 +292,6 @@ router.post("/regtoevent", async (req, res, next) => {
         return res.send(404)
     var code = (parseInt(Math.random() * 10000) + parseInt(10000));
 
-console.log("reg",req.body);
     var usr = await req.knex("t_eventusers").insert({
         eventid: evt.id,
         f: req.body.f,
@@ -312,6 +311,8 @@ console.log("reg",req.body);
     }
 
     if (evt.regCase == 0) {
+
+        console.log("reg case 0",req.body);
         req.session["user" + req.body.evntId] = usr[0];
         return res.json({showConfirm: false, user: {id: usr[0].id, f: usr[0].f, i: usr[0].i}})
     }
