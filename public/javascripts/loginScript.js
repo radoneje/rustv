@@ -118,7 +118,7 @@ window.onload=function () {
 
                var dt= await axios.post('/rest/api/regtoevent/'
                     ,{evntId:evntId, f:this.f, i:this.i, CompanyName:this.CompanyName, tel:this.tel, email:this.email, companyTitle:this.companyTitle, company:this.company?this.company.id:null, otrasl:this.otrasl?this.otrasl.id:null})
-
+                        console.log("login", dt)
                        if(!dt.data.showConfirm){
                            if(dt.data.user)
                                closeWnd();
