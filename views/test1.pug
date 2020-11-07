@@ -1,0 +1,21 @@
+extends layout
+block head
+  link(rel='stylesheet', href='/stylesheets/aij.css')
+  script(src="/lib/flashUtils.js")
+  script(src="/lib/flashphoner.js")
+  script(src="/javascripts/test1.js")
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/clients/aij/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/clients/aij/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/clients/aij/favicon-16x16.png">
+  <link rel="manifest" href="/images/clients/aij/site.webmanifest">
+  <link rel="shortcut icon" href="/images/clients/aij/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="/images/clients/aij/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+
+block content
+  body()
+    .tContainer bla-bla
+      input#startSecond(type="button" value="startSecond")
+      #localVideo
+      #remoteVideo
