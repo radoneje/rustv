@@ -201,6 +201,8 @@ router.get('/stage/:id',  async (req, res, next) =>{
 
   console.log("stage", room.eventid)
 
+  return res.json(req.session);
+
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stage/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
