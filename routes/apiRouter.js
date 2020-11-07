@@ -312,9 +312,9 @@ router.post("/regtoevent", async (req, res, next) => {
 
     if (evt.regCase == 0) {
 
-        console.log("reg case 0",req.body.evntId);
+       // console.log("reg case 0",req.body.evntId);
         req.session["user" + req.body.evntId] = usr[0];
-        console.log("reg case 0",req.session["user" + req.body.evntId]);
+      //  console.log("reg case 0",req.session["user" + req.body.evntId]);
         return res.json({showConfirm: false, user: {id: usr[0].id, f: usr[0].f, i: usr[0].i}})
     }
     if (evt.regCase == 1)
