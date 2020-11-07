@@ -87,7 +87,7 @@ window.onload=async function () {
                 if(this.messageToAllUsersText.length>0)
                 this.users.forEach(u=>{
                     u.messageToUserText=this.messageToAllUsersText;
-                    messageToUser(u)
+                    this.messageToUser(u)
                 })
                 this.messageToAllUsersText="";
             },
