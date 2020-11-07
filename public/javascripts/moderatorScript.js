@@ -83,7 +83,14 @@ window.onload=async function () {
 
         },
         methods:{
-            messageToAllUsers:async function(){},
+            messageToAllUsers:async function(){
+                if(this.messageToAllUsersText.length>0)
+                this.users.forEach(u=>{
+                    u.messageToUserText=this.messageToAllUsersText;
+                    messageToUser(u)
+                })
+                this.messageToAllUsersText="";
+            },
             poleClick:function(item,event){
                 if(item.done)
                     return;
