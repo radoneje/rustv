@@ -1384,26 +1384,26 @@ window.onload=function () {
         },
         watch:{
             isPresFullScreen:function (){
-                console.log("isPresFullScreen", this.isPresFullScreen)
-                if(this.isPresFullScreen)
-                {
-                    document.querySelectorAll(".meetVideoItem").forEach(e=>{
-                        e.style.display="none"
-                    })
-                    document.querySelectorAll(".meetVideoItem.isPGM").forEach(e=>{
-                        e.classList.add("smallVideoShow")
-                        e.style.display="block"
-                    })
+                if(!isMod) {
+                    console.log("isPresFullScreen", this.isPresFullScreen)
+                    if (this.isPresFullScreen) {
+                        document.querySelectorAll(".meetVideoItem").forEach(e => {
+                            e.style.display = "none"
+                        })
+                        document.querySelectorAll(".meetVideoItem.isPGM").forEach(e => {
+                            e.classList.add("smallVideoShow")
+                            e.style.display = "block"
+                        })
 
 
-                }
-                else {
-                    document.querySelectorAll(".meetVideoItem").forEach(e=>{
-                        e.style.display="block"
-                    })
-                    document.querySelectorAll(".meetVideoItem.isPGM").forEach(e=>{
-                        e.classList.remove("smallVideoShow")
-                    })
+                    } else {
+                        document.querySelectorAll(".meetVideoItem").forEach(e => {
+                            e.style.display = "block"
+                        })
+                        document.querySelectorAll(".meetVideoItem.isPGM").forEach(e => {
+                            e.classList.remove("smallVideoShow")
+                        })
+                    }
                 }
             }
           /*  activeSection:function () {
