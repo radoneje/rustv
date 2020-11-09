@@ -66,17 +66,17 @@ block content
                   .plInputBoxLabelText Компания
                   input#CompanyNameInpit( v-model="user.CompanyName" autocomplete="off" v-on:keydown="if($event.keyCode==13) enter()")
                 div.plInputBoxWarning Поле обязательно
-            div.pPersItem
+            div.pPersItem(v-if="user.email && user.email.length>0")
               div.plInputBox(v-bind:class="{warning:(emailErr &&  f.length<2)}" v-if="user.email && user.email,length>0")
                 div.plInputBoxLabel
                   .plInputBoxLabelText E-mail
                   input#emailInpit( v-model="user.email" autocomplete="off" readonly )
                 div.plInputBoxAlert Изменить невозможно
-            div.pPersItem
+            div.pPersItem(v-if="user.tel && user.tel.length>0")
               div.plInputBox
                 div.plInputBoxLabel
                   .plInputBoxLabelText Телефон
-                  input#tellInpit( v-model="user.tel" autocomplete="off" readonly v-if="user.tel && user.tel,length>0")
+                  input#tellInpit( v-model="user.tel" autocomplete="off" readonly )
                 div.plInputBoxAlert Изменить невозможно
             div.pPersItem
               div.plInputBox
