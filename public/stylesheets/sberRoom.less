@@ -1,0 +1,348 @@
+@bgColor:white;
+@frontColor:#333f48;
+@gray1: #EDEEF2;
+@gray2:#f9f8f8;
+@green:#32C058;
+@yellow:#F2E913;
+
+@font-face {
+  font-family: SB Sans Text;
+  font-display: swap;
+  src: url(/fonts/SBSansText-Bold.eot);
+  src: url(/fonts/SBSansText-Bold.eot?#iefix) format("embedded-opentype"),
+  url(/fonts/SBSansText-Bold.woff2) format("woff2"),
+  url(/fonts/SBSansText-Bold.woff) format("woff"),
+  url(/fonts/SBSansText-Bold.ttf) format("truetype"),
+  url(/fonts/SBSansText-Bold.svg#svgFontName) format("svg");
+  font-style: normal;
+  font-weight: 700;
+}
+@font-face {
+  font-family: SB Sans Text;
+  font-display: swap;
+  src: url(/fonts/SBSansText-Medium.eot);
+  src: url(/fonts/SBSansText-Medium.eot?#iefix) format("embedded-opentype"),
+  url(/fonts/SBSansText-Medium.woff2) format("woff2"),
+  url(/fonts/SBSansText-Medium.woff) format("woff"),
+  url(/fonts/SBSansText-Medium.ttf) format("truetype"),
+  url(/fonts/SBSansText-Medium.svg#svgFontName) format("svg");
+  font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-family: SB Sans Text;
+  font-display: swap;
+  src: url(/fonts/SBSansText-Semibold.eot);
+  src: url(/fonts/SBSansText-Semibold.eot?#iefix) format("embedded-opentype"),
+  url(/fonts/SBSansText-Semibold.woff2) format("woff2"),
+  url(/fonts/SBSansText-Semibold.woff) format("woff"),
+  url(/fonts/SBSansText-Semibold.ttf) format("truetype"),
+  url(/fonts/SBSansText-Semibold.svg#svgFontName) format("svg");
+  font-style: normal;
+  font-weight: 600;
+}
+
+body {
+  font-family: "SB Sans Text",sans-serif;
+  background-color: @bgColor;
+  color: @frontColor;
+}
+#app{
+  background-image: url(/images/clients/sber/bg-single.png);//url(/images/clients/aij/aijbg.png) !important;
+  // background-size: 100%  !important;
+  // background-position: 0  !important;
+  // background-repeat: repeat  !important;
+  background-repeat: no-repeat !important;
+  background-position: -20vw !important;
+  background-size: cover;
+}
+.meetVideoItem{
+  background: @gray1;
+}
+.roomScreen{
+  background: url(/images/clients/aij/aijbg.png);
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+}
+.pLoginBody{
+  background: @gray2;
+}
+.pBodySubTitle{
+  color: #8B8C90;
+}
+
+#videoWr{
+  background: #eeeeee;
+}
+.R{
+  background: @gray2;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.4);
+}
+.rHead{
+  background: @gray2;
+}
+.qItem{
+  background: #2B343A;
+}
+.qItemName{
+  color: #F0F0F0;
+}
+.aLang.active {
+  color: black;
+  background: @green;
+}
+.qItem.my .qItemName {
+  color: @green;;
+}
+.qItemText, .qItemDate{
+  color: #F0F0F0;
+}
+.vAnswBox{
+  color: #F0F0F0;
+}
+.qItemAnsvwer{
+  background: #C4C4C4;
+  color: #F0F0F0;
+}
+.qItemAnsvwer a {
+  color: @green;;
+}
+.vAnswPercent{
+  background: @green;
+}
+.qLikeIcon path, .qItemReady svg path {
+  fill:@green;
+}
+.qItemReady{
+  color: @green;
+  background: #C4C4C4;
+}
+.rUserLang.active {
+  color: @green;
+}
+input{
+  color: @frontColor;
+}
+.rHeadItem{
+  color: @frontColor;
+  width:75px
+}
+.rHeadItem.active{
+  border-bottom: 2px solid @green;
+  color: @green;
+}
+.userItemAvatar svg path{
+  fill:#F0F0F0
+}
+.userItem.active path {
+  fill: @green;
+}
+.green{
+  color: @green;
+}
+.videoPlayBannner svg path{
+  fill:@green !important;
+}
+.greenBtn{
+  background: @green;
+}
+.vAnsw.ready {
+  color: @green;
+
+}
+.codeRoom svg path{
+  fill:@green ;
+}
+.rFeedGroupTitle{
+  color: @frontColor;
+}
+.multiViewVideo .videoBoxWr {
+  background: #eeeeee;
+}
+.rBody{
+  background: @gray2;
+}
+.headTitle{
+  color: @frontColor;
+}
+.head{
+  display: none;
+}
+.videoPlayBannner{
+  display: none !important;
+}
+.opa0{
+  display: none;
+}
+.rInviteBox{
+  color: @gray1;
+}
+.aModSectFind {
+  margin-left: 10px;
+  width: 100px;
+  border: 0;
+  border-radius: 2px;
+  color: @bgColor;
+  background:@gray1 ;
+  padding: 4px;
+}
+.aModSectFindClear svg g{
+  fill:@bgColor;
+}
+.lFooterAdgendaWr {
+  background: @bgColor;
+}
+.lFooterAdgendaWr .qItemName{
+  color: @green;
+}
+
+.lFooterProg {
+  color: @frontColor;
+  background: @bgColor;
+  border-radius: 4px;
+}
+.messageFromModReplyInput, .qItemMessageInputGroup input{
+  background: #2B343A;;
+  color:#F0F0F0;
+
+}
+.stageL{
+
+  background: @gray2;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);;
+
+}
+.roomMeetVideoBox{
+
+  background: #2B343A;
+
+}
+.pLoginHead img, .pLoginHead svg{
+  display: none;
+}
+.pLoginHead:before{
+  content: "";
+  display: block;
+  width: 110px;
+  height: 46px;
+  background: url(/images/clients/sber/sber_logo_main.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.pTitle{
+  font-size: 30px;
+  line-height: 40px;
+  margin-top: 0;
+}
+#userVideo{
+  display: none;
+}
+.plInputBox input, .plInputBox div.sel {
+  background: @gray1;
+  color: @frontColor;
+  border: 1px solid @green;
+
+}
+.pLreturn{
+  color: @green;
+}
+.plInputBox {
+  margin-bottom: 25px;
+}
+.pLoginBody{
+  background: @gray1;
+  border: 1px solid rgba(29, 180, 211, 0.1);
+}
+.plSubmit {
+  background: @green;
+  color: #F0F0F0;
+}
+.pTitle{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stageR{
+  // display: none;
+}
+
+.L.stage {
+  // width: 80%;
+  // margin-left: 20%;
+}
+.stageTrPreview{
+  display: none;
+}
+
+.meetingBtnBox {
+
+  width: 55%;
+  left: 20%;
+
+
+
+}
+#stageTimerLimit{
+  color: black;
+}
+
+.stageLNotes{
+  color: @green;
+
+}
+.rInvitesTitle{
+  color:@frontColor;
+}
+.stageLCheck{
+
+  background: @green;
+
+}
+.meetVideoItem.fullScreen .meetVideoFullScreen,  .stagePresPreview.presFullScreen .meetVideoFullScreen{
+
+  background: @green;
+}
+.messageFromModReplyInput, .qItemMessageInputGroup input {
+  background: @gray1;
+  border: 1px solid;
+  color: @frontColor;
+}
+.messageFromModTitle{
+  color: @green;
+  font-size: 24px;
+}
+.rUser{
+  color:@frontColor
+}
+.pMenuItem.active {
+  border-bottom: 1px solid @green;
+  color: @green;
+}
+.stageLTitle{
+  color:@frontColor;
+}
+.qLikeIcon path, .qItemReady svg path {
+  fill: @yellow;
+}
+.roomScreen .rUserLang{
+  display: none;
+}
+@media only screen and (max-width: 1024px) {
+  #sectMenu_8 {
+    display: inline-block !important;
+  }
+  .pTitle {
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+}
+@media only screen and (max-width: 767px) {
+  #app{
+    //background: white;
+  }
+
+
+}
+

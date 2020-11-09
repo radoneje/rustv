@@ -19,7 +19,12 @@ window.onload=function () {
             }
         },
         methods:{
-
+            sendInviteNow:async function(item){
+                if(confirm("Сейчас будут отправлены приглашения всем участникам")){
+                    var dt=await axios.post("/rest/api/sendInviteNow", item);
+                    alert('Приглашения отправлены')
+                }
+            },
             addEvent:async function () {
                 var dt=await axios.post("/rest/api/events");
                 if(dt.data) {
@@ -92,6 +97,28 @@ window.onload=function () {
                     }
                 });
             },
+            changeRoomPriglDate:function (item, e) {
+                var _this=this;
+
+                    flatpickr(e.target, {
+                        defaultDate:item.date,
+                        wrap: false,
+                        position:"auto center",
+                        locale: "ru", // locale for this instance only
+                        onChange: function (selectedDates) {
+
+                            var selected=moment(selectedDates[0])
+                            item.dateprigl=new Date(moment(item.dateprigl).date(selected.date()).month(selected.month()).year(selected.year()).unix()*1000)
+                            console.log("item.dateprigl", item.dateprigl)
+                            _this.changeRoom().then(function(){});
+                        }
+                    });
+
+            },
+            changePrigl:function(item){
+                item.isPrigl=!item.isPrigl;
+                _this.changeRoom().then(function(){});
+            },
             changeRoomTime:async function (item, e) {
                 var _this=this;
                 flatpickr(e.target, {
@@ -103,11 +130,31 @@ window.onload=function () {
                     time_24hr: true,
                     onChange: function (selectedDates) {
                         var selected=moment(selectedDates[0])
+
                         item.date=new Date(moment(item.date).hour(selected.hour()).minute(selected.minute()).unix()*1000)
                          _this.changeRoom().then(function(){});;
                     }
                 });
             },
+            changeRoomPriglTime:async function (item, e) {
+                var _this=this;
+                flatpickr(e.target, {
+                    locale: "ru", // locale for this instance only
+                    defaultDate:item.date,
+                    enableTime: true,
+                    noCalendar: true,
+                    static:true,
+                    wrap: false,
+                    dateFormat: "H:i",
+                    time_24hr: true,
+                    onChange: function (selectedDates) {
+                        var selected=moment(selectedDates[0])
+                        item.dateprigl=new Date(moment(item.dateprigl).hour(selected.hour()).minute(selected.minute()).unix()*1000)
+                        _this.changeRoom().then(function(){});;
+                    }
+                });
+            },
+
             changeRoomSect:async function(sect) {
 
 

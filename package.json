@@ -23,7 +23,7 @@
     "jpeg-autorotate": "^5.0.3",
     "knex": "^0.20.13",
     "less-middleware": "~2.2.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.1",
     "morgan": "~1.9.1",
     "node-imagemagick": "^0.1.8",
     "nodemailer": "^6.4.6",

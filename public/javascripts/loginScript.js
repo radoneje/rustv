@@ -86,6 +86,7 @@ window.onload=function () {
                     else
                         this.telErr=false
                 }
+
                 if(companyNameElem){
                     if(this.CompanyName.length<2) {
                         this.CompanyNameErr=true;
@@ -99,12 +100,12 @@ window.onload=function () {
                     return document.getElementById("iInpit").focus();
                 if(this.fErr)
                     return document.getElementById("fInpit").focus();
-               /* if(this.telErr)
+                if(this.telErr)
                     return document.getElementById("telInpit").focus();
                 if(this.emailErr)
                     return document.getElementById("emailInpit").focus();
                 if(this.CompanyNameErr)
-                    return document.getElementById("CompanyNameInpit").focus();*/
+                    return document.getElementById("CompanyNameInpit").focus();
 
 
                 localStorage.setItem("f", this.f);

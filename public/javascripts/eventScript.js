@@ -67,6 +67,7 @@ window.onload=function () {
                     this.iErr = true;
                 } else
                     this.iErr = false
+                alert(companyNameElem)
                 if(companyNameElem){
                     if(this.user.CompanyName.length<2) {
                         this.CompanyNameErr=true;

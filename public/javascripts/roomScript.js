@@ -1027,7 +1027,7 @@ window.onload=function () {
                             _this.pole=r.data;
                         })
 
-
+                    startVideo();
                     document.getElementById("app").style.opacity=1;
                     var scrElem=rHead;
                     scrElem.scrollLeft = (scrElem.scrollWidth - scrElem.clientWidth) / 2
@@ -1065,7 +1065,7 @@ window.onload=function () {
 
 
 
-                    startVideo();
+
                     //_this.startRTC();
                 })
             window.addEventListener('scroll', function() {
@@ -1114,7 +1114,10 @@ window.onload=function () {
 
 }
 function startVideo() {
-
+    //alert(typeof(video))
+    setTimeout(()=>{
+    var video=document.getElementById('video')
+    console.log(video);
     if(typeof(video) =="undefined")
         return;
     if( Hls.isSupported()) {
@@ -1162,7 +1165,7 @@ function startVideo() {
             video.play();
         });
     }
-
+    },200)
 }
 async function createVideo(id, muted, user, onPgm, onPip,onMute, onRemove, onReload) {
     console.log("Create Video", id)

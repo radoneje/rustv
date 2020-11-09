@@ -85,6 +85,53 @@ div.editRoomBox(v-if="editRoom" v-on:click="editRoom=null")
                         include link
                     span &nbsp; Ссылка на страницу для спикера:
                     div.paddingTop.linkLabel https://conf.rustv.ru/speaker/{{editRoom.id}}
+                div.marginTop.regGroupTitle
+                    .btn(v-on:click="sendInviteNow(editRoom)") Пригласить зарегистрировавшихся
+                div.marginTop.regGroupTitle
+                    .regGroupItem(v-bind:class="{active:editRoom.isPrigl}" v-on:click="changePrigl(editRoom)") &nbsp; Отправать приглашения:
+                    div.editLine
+                        span.iconPre(v-on:click="changeRoomPriglTime(editRoom, $event)")
+                            <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                            <desc>Created with Sketch.</desc>
+                            <defs></defs>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Tablet" transform="translate(-147.000000, -525.000000)" fill="#000000" fill-rule="nonzero">
+                            <g id="Group" transform="translate(-85.000000, 381.000000)">
+                            <g id="bx-bx-time" transform="translate(231.000000, 143.000000)">
+                            <g id="Icon">
+                            <path d="M6,1 C3.243,1 1,3.243 1,6 C1,8.757 3.243,11 6,11 C8.757,11 11,8.757 11,6 C11,3.243 8.757,1 6,1 Z M6,10 C3.7945,10 2,8.2055 2,6 C2,3.7945 3.7945,2 6,2 C8.2055,2 10,3.7945 10,6 C10,8.2055 8.2055,10 6,10 Z" id="Icon-Shape"></path>
+                            <polygon id="Icon-Shape" points="6.5 3.5 5.5 3.5 5.5 6.5 8.5 6.5 8.5 5.5 6.5 5.5"></polygon>
+                            <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="12" height="12"></rect>
+                            </g>
+                            </g>
+                            </g>
+                            </g>
+                            </g>
+                            </svg>
+                        span(v-on:click="changeRoomPriglTime(editRoom, $event)") {{moment(editRoom.dateprigl).format('HH:mm')}}
+                        span &nbsp;&nbsp;&nbsp;
+                        span.iconPre(v-on:click="changeRoomPriglDate(editRoom, $event)")
+                            <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                            <desc>Created with Sketch.</desc>
+                            <defs></defs>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Tablet" transform="translate(-234.000000, -517.000000)" fill="#000000" fill-rule="nonzero">
+                            <g id="Group" transform="translate(43.000000, 411.000000)">
+                            <g id="bx-bx-calendar" transform="translate(190.000000, 105.000000)">
+                            <g id="Icon">
+                            <path d="M3.5,5.5 L4.5,5.5 L4.5,6.5 L3.5,6.5 L3.5,5.5 Z M3.5,7.5 L4.5,7.5 L4.5,8.5 L3.5,8.5 L3.5,7.5 Z M5.5,5.5 L6.5,5.5 L6.5,6.5 L5.5,6.5 L5.5,5.5 Z M5.5,7.5 L6.5,7.5 L6.5,8.5 L5.5,8.5 L5.5,7.5 Z M7.5,5.5 L8.5,5.5 L8.5,6.5 L7.5,6.5 L7.5,5.5 Z M7.5,7.5 L8.5,7.5 L8.5,8.5 L7.5,8.5 L7.5,7.5 Z" id="Icon-Shape"></path>
+                            <path d="M2.5,11 L9.5,11 C10.0515,11 10.5,10.5515 10.5,10 L10.5,3 C10.5,2.4485 10.0515,2 9.5,2 L8.5,2 L8.5,1 L7.5,1 L7.5,2 L4.5,2 L4.5,1 L3.5,1 L3.5,2 L2.5,2 C1.9485,2 1.5,2.4485 1.5,3 L1.5,10 C1.5,10.5515 1.9485,11 2.5,11 Z M9.5,4 L9.5005,10 L2.5,10 L2.5,4 L9.5,4 Z" id="Icon-Shape"></path>
+                            <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="12" height="12"></rect>
+                            </g>
+                            </g>
+                            </g>
+                            </g>
+                            </g>
+                            </svg>
+                        span(v-on:click="changeRoomPriglDate(editRoom, $event)") {{moment(editRoom.dateprigl).format('dddd, DD MMMM YYYY г. ')}}
+
             div.half
                 div.regGroupTitle
                     span

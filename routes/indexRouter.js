@@ -71,7 +71,7 @@ router.get('/test', function(req, res, next) {
   res.render('test', { title: 'AIJ test page' });
 });
 router.get('/test1', function(req, res, next) {
-  res.render('test1', { title: ' test page' });
+  res.json(req.session)
 });
 router.get('/regtoevent/:id', async (req, res, next) =>{
   var e=await req.knex.select("*").from("t_events").where({isDeleted:false, id:req.params.id})
@@ -163,6 +163,7 @@ router.get('/room/:id',  async (req, res, next) =>{
       email: "",
       smsCode: "",
     }, "*")
+    console.log("/room/:id")
     req.session["user"+room.eventid]=usr[0];
   }
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})

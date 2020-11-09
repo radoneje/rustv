@@ -20,6 +20,7 @@ const { exec } = require('child_process');
 const child_process = require('child_process');
 const translateLang=require('../translation')
 
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('index', {title: 'Сервис организации конференций'});
@@ -90,11 +91,13 @@ router.post('/checkPersonalCode', async (req, res, next) => {
     var users = await req.knex.select("*").from("t_eventusers").where({personalcode:code}).orderBy("id","desc");
     if(users.length==0)
         return res.sendStatus(404);
+    console.log("checkPersonalCode")
     req.session["user" + users[0].eventid]= users[0];
     return res.json({redirect:'/room/'+users[0].defaultroom})
     });
 //router.post("/checkCyberPersonalCode",async (req, res, next) => { return res.json(2)});
 router.post('/checkCyberPersonalCode', async (req, res, next) => {
+    console.log("checkCyberPersonalCode")
     var code=req.body.code;
     if(!code)
         return res.sendStatus(500);
@@ -109,6 +112,7 @@ router.post('/checkCyberPersonalCode', async (req, res, next) => {
 
 
 router.post('/checkCode', async (req, res, next) => {
+    console.log("checkCode")
     var users = await req.knex.select("*").from("t_users").where({
         id: req.body.id,
         smsCode: req.body.code,
@@ -260,13 +264,13 @@ router.put("/room", async (req, res, next) => {
         return res.send(404);
 
 
-    var r = await req.knex.select("*").from("t_events").where({
+   /* var r = await req.knex.select("*").from("t_events").where({
         id: req.body.id,
         adminId: req.session["admin"].id,
         isDeleted: false
     })
     if (r.length >= req.session["admin"].countOfRooms)
-        return res.json(null)
+        return res.json(null)*/
 
     var roomId = req.body.id;
     delete req.body.id;
@@ -276,13 +280,15 @@ router.put("/room", async (req, res, next) => {
     return res.json(r[0])
 });
 router.put("/regtoevent", async (req, res, next) => {
+    console.log("regtoevent")
     var r=await req.knex("t_eventusers").update({avatar:req.body.avatar, f:req.body.f, i:req.body.i, CompanyName:req.body.CompanyName},"*")
         .where({id:req.body.id})
     req.session["user" + req.body.evntId]=r[0];
+    console.log("regtoevent", req.session["user" + req.body.evntId])
     res.json(r);
 });
 router.post("/regtoevent", async (req, res, next) => {
-    req.session["user" + req.body.evntId] = null;
+   // req.session["user" + req.body.evntId] = null;
     var events = await req.knex.select("*").from("t_events").where({id: req.body.evntId, isDeleted: false})
     if (events.length < 1)
         return res.send(404)
@@ -314,6 +320,7 @@ router.post("/regtoevent", async (req, res, next) => {
 
        // console.log("reg case 0",req.body.evntId);
         req.session["user" + req.body.evntId] = usr[0];
+        console.log("regtoevent 2", req.session);
       //  console.log("reg case 0",req.session["user" + req.body.evntId]);
         return res.json({showConfirm: false, user: {id: usr[0].id, f: usr[0].f, i: usr[0].i}})
     }
@@ -399,6 +406,8 @@ router.post("/logincheckcode", async (req, res, next) => {
     }
     await req.knex("t_eventusers").update({isConfirm: true, confirmdate: (new Date())})
         .where({id: usr[0].id});
+
+    console.log("logincheckcode");
     req.session["user" + usr[0].eventid] = usr[0];
     res.set('x-userid', usr[0].id);
     return res.json({status: 1, showConfirm: false, user: {id: usr[0].id, f: usr[0].f, i: usr[0].i}})
@@ -1965,13 +1974,94 @@ router.post('/redirect', async (req, res, next) =>{
     var r= await req.knex("t_redirect").update({value:req.body.value},"*").where({key:req.body.key})
     res.json(r);
 })
+router.post('/sendInviteNow', async (req, res, next) =>{
+
+    console.log("sendInviteNow");
+    var rooms=await req.knex.select("*").from("t_rooms").where({id:req.body.id});
+    var room=rooms[0];
+    var users=await req.knex.select("*").from("v_roomToeventUsers").where({eventid:room.eventid});
+
+    var listSMS=[];
+    users.forEach(u=>{
+        if(u.tel && u.tel.length>0 && u.isSendSms){
+            var tel=u.tel.replace(/\s/gm,'').replace(" ",'').replace("(","").replace(")","");
+            if(listSMS.filter(l=>{return l.tel==tel}).length==0){
+                listSMS.push({
+                   f:u.f,
+                   i:u.i,
+                   id:u.id,
+                   tel:tel
+                })
+            }
+        }
+    })
+    var listEMAIL=[];
+    users.forEach(u=>{
+        if(u.email && u.email.length>0 && u.isSendEmail){
+            if(listEMAIL.filter(l=>{return l.email==u.email}).length==0){
+                listEMAIL.push({
+                    f:u.f,
+                    i:u.i,
+                    id:u.id,
+                    email:u.email
+                })
+            }
+        }
+    })
+    console.log(listEMAIL);
+
+    var text="Добрый день\r\n";
+    text+="\r\n Это автоматическое напоминание."
+    text+="\r\n "+ room.title+" начнется "+ moment(room.date).format("DD.MM.yyyy HH:mm")+ " Московского времени";
+    text+="\r\n Ссылка для входа: https://conf.onevent.online/room/"+room.id
+    for(var l of listEMAIL){
+        await sendEmail(l.email, text);
+    }
+
+    text=""+ room.title+" начнется: "+ moment(room.date).format("DD.MM.yyyy HH:mm")+ " MSK";
+    text+=" https://conf.onevent.online/room/"+room.id
+    for(var l of listSMS){
+        await sendSms(l.tel, text);
+    }
+
+
+})
+async function sendSms(tel, text) {
+    var url = "http://api.iqsms.ru/messages/v2/send/?phone=Access%20code:%20" + tel + "&text=" + encodeURI(text) + "&login=z1519200766955&password=713595";
+    try {
+        var rr = await axios.get(url);
+        console.log("ret",tel, rr.data);
+    }
+    catch (e) {
+        console.warn(e);
+    }
+}
+async function sendEmail(email, text) {
+    var transporter = nodemailer.createTransport({
+        host: "mail.nic.ru",
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+            user: "info@sber.link", // generated ethereal user
+            pass: "Gbplfgbplf13" // generated ethereal password
+        }
+    });
+
+    var mailOptions = {
+        from: 'info@sber.link',
+        to: email,
+        subject: 'Invitation to the event',
+        text: text
+    };
+    try {
+        await transporter.sendMail(mailOptions)
+        console.log("email send", email)
+    }
+    catch (e) {
+        console.warn(e)
+    }
+}
 
 
 
-
-
-
-
-
-
-module.exports = router;
+module.exports = router

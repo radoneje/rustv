@@ -10,9 +10,28 @@ var  fileUpload=require('express-fileupload')
 
 
 var indexRouter = require('./routes/indexRouter');
+
 var apiRouter = require('./routes/apiRouter');
 var phonerhooksRouter=require('./routes/phonerhooksRouter')
 const socket=require("./handlers/socketHandler")
+
+async function sendInvite(knex){
+  return;
+  var rooms=await knex.select("*").from("t_rooms").where({isPrigl:true});
+  var currTime=(new Date()).setSeconds(0,0);
+  for(var room of rooms){
+    if(room.dateprigl) {
+      var date = room.dateprigl.setSeconds(0,0);
+      if(date==currTime){
+        console.log("send Invite to "+room.title)
+        await axios.post("/rest/api/sendInviteNow", room);
+      }
+    }
+  }
+
+ // indexRouter.invites();
+  setTimeout(async()=>{await sendInvite(knex)},60*1000);
+}
 
 var SPKstatus=[];
 var knex = require('knex')({
@@ -43,7 +62,7 @@ app.use(session({
   secret: (config.sha256Secret),
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 1 * 24 * 60 * 60 * 1000 }, // 1 days
+  cookie: { maxAge: 10 * 24 * 60 * 60 * 1000 }, // 10 days
   store:new pgSession(pgStoreConfig),
 }));
 app.use(fileUpload({
@@ -52,6 +71,8 @@ app.use(fileUpload({
   tempFileDir : path.join(__dirname, 'public/files'),
   safeFileNames: true
 }));
+
+
 
 
 //app.use(logger('dev'));
@@ -66,7 +87,7 @@ app.use("/", (req,res, next)=>{req.SPKstatus=SPKstatus;next();});
 app.use("/", (req,res, next)=>{req.sockClients=sockClients;next();});
 app.use("/", (req,res, next)=>{req.knex=knex;next();});
 app.use("/", (req,res, next)=>{req.transport=transport;next();});
-
+sendInvite(knex);
 app.use('/modules', express.static(__dirname + '/node_modules/'));
 
 app.use('/', indexRouter);
