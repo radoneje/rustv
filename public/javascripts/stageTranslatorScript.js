@@ -73,6 +73,7 @@ window.onload=function () {
             isStarted: false,
             avaibleLangs: [],
             Alang: [{}, {}],
+            lang: [{}, {}],
             showLang: [false, false],
             activeLang: 0,
             langCh: [],
