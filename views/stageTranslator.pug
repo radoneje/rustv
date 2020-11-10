@@ -75,8 +75,8 @@ block content
                 div.greenBtn.center( v-on:click="initStage()") #{lang.clickHere}
               div.meetVideoBox#meetVideoBox(v-else)
 
-      //div.meetingBtnBox(v-if="!firstConnect")
-        div(v-if="langCh.length>0")
+      div.meetingBtnBox(v-if="!firstConnect")
+        //div(v-if="langCh.length>0")
           div.greenBtn.clearBtn.vCenterBtn(v-on:click.stop.prevent="showLangCh=true" )
             span Listen: &nbsp;
             span {{activeLangCh.title}}
