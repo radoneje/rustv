@@ -128,7 +128,7 @@ block content
               div.chooseLangBox(v-if="showLang[i]")
                 div.chooseLangItem(v-for="item in avaibleLangs" v-on:click.stop.prevent="selectLang(i, item)" v-bind:class="{active:item.id==lang[i].id}") {{item.title}}
         div
-          div.greenBtn.clearBtn.vCenterBtn(v-on:click.stop.prevent="startTranslate()" v-bind:class="{active:isStarted}" v-if="lang[0].id && lang[1].id")
+          //div.greenBtn.clearBtn.vCenterBtn(v-on:click.stop.prevent="startTranslate()" v-bind:class="{active:isStarted}" v-if="lang[0].id && lang[1].id")
             span(v-if="!isStarted") Start translation
             span(v-else) Translation is on
 
