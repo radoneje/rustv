@@ -75,7 +75,7 @@ block content
                 div.greenBtn.center( v-on:click="initStage()") #{lang.clickHere}
               div.meetVideoBox#meetVideoBox(v-else)
 
-      div.meetingBtnBox(v-if="!firstConnect")
+      //div.meetingBtnBox(v-if="!firstConnect")
         div(v-if="langCh.length>0")
           div.greenBtn.clearBtn.vCenterBtn(v-on:click.stop.prevent="showLangCh=true" )
             span Listen: &nbsp;
@@ -119,7 +119,7 @@ block content
             </g>
             </g>
             </svg>
-        div(v-for="i in [0,1]")
+        //div(v-for="i in [0,1]")
           div.greenBtn.clearBtn.vCenterBtn(v-bind:class="{active:i==activeLang}" v-on:click="activateLang(i)")
             span(v-if="i!=activeLang") {{lang[i].title  || "Select language " + (i+1)}}
             span(v-else ) {{lang[i].title? (lang[i].title +" is On") : ("Select language " + (i+1))}}
