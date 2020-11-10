@@ -1182,6 +1182,7 @@ window.onload=function () {
                 var dt = await axios.get('/rest/api/constraints');
                 _this.constraints = dt.data;*/
                 _this.firstConnect = false;
+                setTimeout(async ()=>{
                 console.log("startMyVideo0", isMod ,  isPgm)
                 /*if(!isMod &&  !isPgm)
                     setTimeout(() => {
@@ -1207,6 +1208,7 @@ window.onload=function () {
                 setTimeout(() => {
                     socket.emit("getStageVideos");
                 }, 0);
+                },200)
             },
             messageToUser:function (item) {
                 item.messageToUser="";
