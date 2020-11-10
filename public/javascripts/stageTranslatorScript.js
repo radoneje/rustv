@@ -72,13 +72,13 @@ window.onload=function () {
             /////////
             isStarted: false,
             avaibleLangs: [],
-            lang: [{}, {}],
+            Alang: [{}, {}],
             showLang: [false, false],
             activeLang: 0,
             langCh: [],
             showLangCh: false,
             selLang:'ru',
-            lang:{ru:{},en:""},
+            //lang:{ru:{},en:""},
         },
         methods:{
             addOriginalToAudio: function (stream, id) {
