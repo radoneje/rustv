@@ -121,8 +121,8 @@ block content
             </svg>
         div(v-for="i in [0,1]")
           div.greenBtn.clearBtn.vCenterBtn(v-bind:class="{active:i==activeLang}" v-on:click="activateLang(i)")
-            span(v-if="i!=activeLang") {{lang[i].title  || "Select language " + (i+1)}}
-            span(v-else ) {{lang[i].title? (lang[i].title +" is On") : ("Select language " + (i+1))}}
+            span(v-if="i!=activeLang") {{Alang[i].title  || "Select language " + (i+1)}}
+            span(v-else ) {{Alang[i].title? (Alang[i].title +" is On") : ("Select language " + (i+1))}}
             div.chooseLangBoxWr(v-on:click.stop.prevent="showLang=[i==0, i==1]" v-if="!isStarted")
               div.chooseArrow
               div.chooseLangBox(v-if="showLang[i]")
