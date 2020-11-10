@@ -72,7 +72,7 @@ window.onload=function () {
             /////////
             isStarted: false,
             avaibleLangs: [],
-            Alang: [{}, {}],
+            //Alang: [{}, {}],
             lang: [{}, {}],
             showLang: [false, false],
             activeLang: 0,
