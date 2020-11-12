@@ -74,7 +74,7 @@ div{
   margin-top: 25px;
   margin-bottom: 50px;
 }
-.plInputBox div.sel{
+.plInputBox div.sel, .plInputBox div.check{
   position: relative;
   cursor: pointer;
 
@@ -113,7 +113,7 @@ div{
   max-height: 30vh;
   overflow-y: scroll;
  }
-.plInputBox input, .plInputBox div.sel {
+.plInputBox input, .plInputBox div.sel , .plInputBox div.check{
 
   background: #373D43;
   border-radius: 4px;
@@ -123,6 +123,21 @@ div{
   line-height: 20px;
   border: none;
   padding-right: 30px;
+}
+.plInputBox div.check {
+  padding-left: 3em;
+  position: relative;
+}
+.plInputBox div.check.active:before {
+  content: "";
+  width: 1em;
+  height: .5em;
+  border-left: 2px solid #373D43;
+  border-bottom: 2px solid #373D43;
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 13px;
+  left: 1.5em;
 }
 .plInputListItemTitle{
   font-size: 14px;

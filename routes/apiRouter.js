@@ -313,7 +313,7 @@ router.post("/regtoevent", async (req, res, next) => {
 
     var rooms=await req.knex.select("*").from("t_rooms").where({eventid:evt.id});
     for(room of rooms){
-        await req.knex("t_roomToeventUsers").insert({roomid:room.id,eventuserid:usr[0].id});
+        await req.knex("t_roomToeventUsers").insert({roomid:room.id,eventuserid:usr[0].id, isSendEmail:req.body.notify,isSendSms:req.body.notify});
     }
 
     if (evt.regCase == 0) {

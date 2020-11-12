@@ -2117,26 +2117,7 @@ window.onload=function () {
     }
 
 }
-function videoLayout2() {
-    //videoLayout()
-    var container=document.getElementById("meetVideoBox")
-    //container.style.flexWrap="inherit"
-    var elems=container.querySelectorAll(".meetVideoItem");
-    var flex="0 0 calc(20% - 10px)";
-    if(elems.length<=9)
-        flex="0 0 calc(33% - 10px)";
-    if(elems.length<=4)
-        flex="0 0 calc(50% - 10px)";
-    if(elems.length<=1)
-        flex="inherit"
 
-    elems.forEach(elem=>{
-        console.log("elem",elem)
-        elem.style.width="inherit"
-        elem.style.margin="5px"
-        elem.style.flex=flex;
-    })
-}
 
 
 

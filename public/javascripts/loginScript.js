@@ -33,6 +33,7 @@ window.onload=function () {
             companyTitle:null,
             event:evt,
             selLang:'ru',
+            isSendReminder:true,
             lang:{ru:{},en:""},
         },
         methods:{
@@ -118,7 +119,7 @@ window.onload=function () {
               //  console.log("d", this.company?this.company.id:null, this.otrasl?this.otrasl.id:null,this.company, this.otrasl)
 
                var dt= await axios.post('/rest/api/regtoevent/'
-                    ,{evntId:evntId, f:this.f, i:this.i, CompanyName:this.CompanyName, tel:this.tel, email:this.email, companyTitle:this.companyTitle, company:this.company?this.company.id:null, otrasl:this.otrasl?this.otrasl.id:null})
+                    ,{evntId:evntId, notify:this.isSendReminder,f:this.f, i:this.i, CompanyName:this.CompanyName, tel:this.tel, email:this.email, companyTitle:this.companyTitle, company:this.company?this.company.id:null, otrasl:this.otrasl?this.otrasl.id:null})
 
                        if(!dt.data.showConfirm){
                            if(dt.data.user)

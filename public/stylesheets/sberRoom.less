@@ -237,10 +237,16 @@ input{
 }
 #userVideo{
 }
-.plInputBox input, .plInputBox div.sel {
+.plInputBox input, .plInputBox div.sel, .plInputBox div.check {
   background: @gray1;
   color: @frontColor;
   border: 1px solid @green;
+
+}
+.plInputBox div.check.active:before {
+
+  border-left: 2px solid @frontColor;
+  border-bottom: 2px solid @frontColor;
 
 }
 .pLreturn{

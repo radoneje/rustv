@@ -75,6 +75,10 @@ block content
                   div.plInputListItems
                     div.plInputListItem(v-for="item in isShowOtrasl" v-on:click.stop.prevent="selectOtrasl(item)")
                       div.plInputListItemTitle {{item.title}}
+            div.plInputBox(v-on:click="isSendReminder=!isSendReminder")
+              div.plInputBoxLabel
+                div.check(v-bind:class="{active:isSendReminder}") {{lang[selLang].remind}}
+
             div.plInputBox
               div.plSubmit(v-on:click="enter()")
                 div(v-if="!loader") {{lang[selLang].logon}}

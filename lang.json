@@ -48,7 +48,8 @@
     ],
     "replyPlaceholder": "Напишите здесть текст ответа",
     "reply": "Ответить",
-    "messageFromMod": "Сообщение от модератора"
+    "messageFromMod": "Сообщение от модератора",
+    "remind": "Получать уведомления о начале событий"
   },
   "en": {
     "registration":"Registration",
@@ -99,6 +100,8 @@
     ],
     "replyPlaceholder": "Reply text write here",
     "reply": "Reply",
-    "messageFromMod": "Message from Moderator"
+    "messageFromMod": "Message from Moderator",
+    "remind": "Notify me when event starts"
+
   }
 }
