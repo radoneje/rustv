@@ -114,7 +114,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
         video={  width: 1280, height: 720,  aspectRatio:  1.7777777778}
 
 
-    if(typeof(aDevice)!='undefined' &&  aDevice && aDevice.length>0 )
+             if(typeof(aDevice)!='undefined' &&  aDevice && aDevice.length>0 )
         audio={ deviceId:  aDevice}
     else
         audio=true
