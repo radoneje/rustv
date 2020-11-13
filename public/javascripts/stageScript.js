@@ -863,7 +863,7 @@ window.onload=function () {
                         });
 
                     }, 0);
-                }
+               // }
                 //catch (e) {
                 //    console.log("publish video failed", e);
                // }
