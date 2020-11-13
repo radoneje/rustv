@@ -806,7 +806,7 @@ window.onload=function () {
 
                 await createVideo(videoItem.id, videoItem.isMyVideo, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord, _this.stopVideoRecord);
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
-                try {
+             //   try {
                     await phonePublishLocalVideo(videoWr, videoItem.id, null, () => {
                             removeVideo(videoItem.id)
                         },
@@ -864,9 +864,9 @@ window.onload=function () {
 
                     }, 0);
                 }
-                catch (e) {
-                    console.log("publish video failed", e);
-                }
+                //catch (e) {
+                //    console.log("publish video failed", e);
+               // }
 
                 return ;
 
