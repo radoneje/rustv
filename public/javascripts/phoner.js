@@ -109,7 +109,7 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
 
 
     if(typeof (vDevice)!='undefined' && vDevice && vDevice.length>0)
-    video={ deviceId:  vDevice, width: 1280, height: 720,  aspectRatio:  1.7777777778}
+    video={ deviceId:  vDevice, width: 640, height: 360,  aspectRatio:  1.7777777778}
     else
        // video={  width: 1280, height: 720,  aspectRatio:  1.7777777778}
         video={  width: 640, height: 360,  aspectRatio:  1.7777777778}
