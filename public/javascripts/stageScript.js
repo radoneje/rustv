@@ -356,18 +356,20 @@ window.onload=function () {
             },
             StartTimer:function(){
                 var _this=this;
-                _this.socket.emit("startTimer", {isOn:this.stageTimeout?true:false})
+                _this.socket.emit("startTimer", {isOn:this.stageTimeout?true:false,lim: _this.stageTimer})
 
             },
             OnStartTimer:function(data){
                 var _this=this;
                // _this.stageTimeout=data.stageTimeout;
 
+                clearTimeout(this.stageTimeout)
+                this.stageTimeout=null;
                 if(data.isOn) {
-                    clearTimeout(this.stageTimeout)
-                    this.stageTimeout=null;
+
                 }
                 else {
+                    _this.stageTimer=data.lim
                     if(_this.stageTimer<=0)
                     {
                         var lim=5*60;
@@ -2068,13 +2070,18 @@ window.onload=function () {
        },1000)
     async function   previewVideo() {
         var video=document.getElementById("previewVideo");
-        startPreviewVideo(video);
+        try {
+            await startPreviewVideo(video);
+        }
+        catch (e) {
+            console.warn("previewVideo", e)
+        }
 
         if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
             var vSel=document.getElementById("webcamSelect");
             var aSel=document.getElementById("micSelect");
-            vSel.addEventListener("change",()=>{
-                startPreviewVideo(video,vSel.value);
+            vSel.addEventListener("change",async ()=>{
+                await startPreviewVideo(video,vSel.value);
                 vDevice=vSel.value;
             })
             aSel.addEventListener("change",()=>{
@@ -2110,7 +2117,7 @@ window.onload=function () {
         var constrints={ width: 1280, height: 720,  aspectRatio:  1.7777777778}
         if(deviceid && deviceid.length>0)
             constrints.deviceId=deviceid;
-        var stream = await  navigator.mediaDevices.getUserMedia({video:constrints })
+        var stream = await  navigator.mediaDevices.getUserMedia({video:constrints,audio:true  })
         video.srcObject=stream;
         video.play();
 

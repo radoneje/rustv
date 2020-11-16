@@ -1,5 +1,5 @@
 div.qItem.userItem(v-for="item in sortedUsers" v-bind:key="item.id" v-bind:class="{active:(item.isActive), handup:item.handup}" style="padding:5px;padding-left:50px")
-    div.qItemName(style='margin: 4px 0;') {{item.i}}&nbsp;{{item.f}}&nbsp{{item.smi}}
+    div.qItemName(style='margin: 4px 0;') {{item.i}}&nbsp;{{item.f}}&nbsp{{item.smi}} {{item.phone}}
     div.qItemMessageBox
         div.qItemMessageText {{item.messageToUser}}
         div.qItemMessageInputGroup
@@ -19,6 +19,7 @@ div.qItem.userItem(v-for="item in sortedUsers" v-bind:key="item.id" v-bind:class
             </g>
             </g>
             </svg>
+            div.smsBtn(v-on:click="sendSMS(item.messageToUserText, item)") SMS
     div.userItemAvatar(v-if="!item.isVideo"  style="top:1px")
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M15.9993 2.66663C8.77135 2.66663 2.66602 8.77196 2.66602 16C2.66602 23.228 8.77135 29.3333 15.9993 29.3333C23.2274 29.3333 29.3327 23.228 29.3327 16C29.3327 8.77196 23.2274 2.66663 15.9993 2.66663ZM15.9993 9.33329C18.302 9.33329 19.9993 11.0293 19.9993 13.3333C19.9993 15.6373 18.302 17.3333 15.9993 17.3333C13.698 17.3333 11.9993 15.6373 11.9993 13.3333C11.9993 11.0293 13.698 9.33329 15.9993 9.33329ZM9.19135 22.3626C10.3873 20.6026 12.382 19.4293 14.666 19.4293H17.3327C19.618 19.4293 21.6114 20.6026 22.8074 22.3626C21.1034 24.1866 18.686 25.3333 15.9993 25.3333C13.3127 25.3333 10.8953 24.1866 9.19135 22.3626Z" fill="#9A9A9A"/>

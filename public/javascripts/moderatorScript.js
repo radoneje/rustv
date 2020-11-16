@@ -83,6 +83,18 @@ window.onload=async function () {
 
         },
         methods:{
+            sendSMS:async function(text, item){
+               // if(!text || text.length==0)
+                //    return
+                try {
+                    var r = await axios.post("/rest/api/sendSMSToUser/", {text: text, id: item.id});
+                }
+                catch (e) {
+                    console.warn(e)
+                }
+                alert("SMS отправлено")
+
+            },
             messageToAllUsers:async function(){
                 if(this.messageToAllUsersText.length>0)
                 this.users.forEach(u=>{

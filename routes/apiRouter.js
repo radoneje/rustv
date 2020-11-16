@@ -25,6 +25,7 @@ const translateLang=require('../translation')
 router.get('/', function (req, res, next) {
     res.render('index', {title: 'Сервис организации конференций'});
 });
+
 router.post('/sendSms', async (req, res, next) => {
 
     const secret_key = '6LfC5uUUAAAAAFl49ps6HQys6fTmDxLTefNME3BW';
@@ -362,6 +363,7 @@ router.post("/roomSendStatus", async (req, res, next) => {
         .where({roomid:req.body.roomid,eventuserid:req.body.userid})
     res.json(r)
 });
+
 
 async function sendCodeToSms(tel, code) {
     var m = tel.match(/^\+(\d)\s\((\d\d\d)\)\s(\d\d\d)\s(\d\d\d\d)$/);
@@ -2025,6 +2027,24 @@ router.post('/sendInviteNow', async (req, res, next) =>{
     }
 
 
+})
+router.post("/sendSMSToUser",async (req, res, next) => {
+
+    var users=await req.knex.select("*").from("t_eventusers").where({id:req.body.id})
+    console.log(req.body, users)
+    if(users.length>0){
+
+        var tel=await users[0].tel.replace(/\s/gm,'').replace(" ",'').replace("(","").replace(")","");
+        if(tel){
+            await sendSms(tel, req.body.text)
+            res.json("ok")
+        }
+        else
+            res.sendStatus(404)
+
+    }
+    else
+        res.sendStatus(404)
 })
 async function sendSms(tel, text) {
     var url = "http://api.iqsms.ru/messages/v2/send/?phone=Access%20code:%20" + tel + "&text=" + encodeURI(text) + "&login=z1519200766955&password=713595";
