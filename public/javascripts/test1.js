@@ -1,5 +1,6 @@
 
-
+var vDevice=null;
+var aDevice=null
 
 document.addEventListener('DOMContentLoaded', function () {
     var SESSION_STATUS = Flashphoner.constants.SESSION_STATUS;
@@ -62,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("startSecond").addEventListener("click", ()=>{
         startSecond();
     })
+    
     function startSecond() {
         var session=Flashphoner.getSessions()[0];
         var c={
