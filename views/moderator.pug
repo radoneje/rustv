@@ -171,6 +171,8 @@ block content
                     div.aModSectMenuItem(v-bind:class="{active:centerSectActiveIndex==2}" v-on:click="centerSectActiveIndex=2")
                         div.aModSectTitle Файлы ({{files.length}})
                 div.aSectBody(id="chatBox" v-if="centerSectActiveIndex==1")
+                    .qItemDate
+                        span.link.green(v-on:click="deleteAllChat()") Очистить весь чат
                     div.aSectSwith(v-on:click="chatOnOff()")
                         div(v-if="isChat") Чат включен
                         div.warning(v-else) Чат выключен

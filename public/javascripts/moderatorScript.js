@@ -222,14 +222,18 @@ window.onload=async function () {
                 this.chatText+=" :) ";
                 document.getElementById("chatText").focus();
             },
-            deleteChat:function (item) {
+            deleteAllChat:async function(){
                 var _this=this;
-                if(confirm('Вы хотите удалть сообщение')){
-                    axios.delete("/rest/api/chatdelete/"+item.id+"/"+eventid+"/"+roomid)
-                        .then(function (r) {
+                if(confirm('Вы хотите удалить все сообщения чата?'))
+                for(var item of this.chat){
+                    await this.deleteChat(item, true);
+                }
 
-                        })
-
+            },
+            deleteChat:async function (item, isConfirm) {
+                var _this=this;
+                if(isConfirm || confirm('Вы хотите удалить сообщение')){
+                    await axios.delete("/rest/api/chatdelete/"+item.id+"/"+eventid+"/"+roomid)
                 }
             },
             ChatCopyToQ:function (item) {

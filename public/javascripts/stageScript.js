@@ -388,8 +388,17 @@ window.onload=function () {
                     }
                     this.stageTimeout=setTimeout(updateStageTimer,1000);
                 }
-                function updateStageTimer() {
-                    _this.stageTimer--;
+                function updateStageTimer(last) {
+                    var now=new Date();
+                    if(!last)
+                    {
+                        _this.stageTimer--;
+                    }
+                    else{
+                        var delta = Date.now() - last;
+                        _this.stageTimer-=delta / 1000;
+                        console.log(" _this.stageTimer",  _this.stageTimer, delta / 1000);
+                    }
                     if(_this.stageTimer<=0)
                     {
                         clearTimeout(_this.stageTimeout)
@@ -398,7 +407,7 @@ window.onload=function () {
 
                     }
                     else
-                    _this.stageTimeout=setTimeout(updateStageTimer,1000);
+                    _this.stageTimeout=setTimeout(()=>{updateStageTimer(now)},1000);
                 }
             },
             ResetTimer:function(){
@@ -1425,7 +1434,7 @@ window.onload=function () {
                  return sorted;
              },
              formatedTimeout:function () {
-                 return new Date(this.stageTimer * 1000).toISOString().substr(11, 8);
+                 return new Date(parseInt(this.stageTimer) * 1000).toISOString().substr(11, 8);
              },
              activeLangCh: function () {
                  var ret = this.langCh.filter(r => r.isActive == true);
