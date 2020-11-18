@@ -1,4 +1,6 @@
 
+var vDevice=null;
+var aDevice=null
 window.onload=function () {
     var app = new Vue({
 
