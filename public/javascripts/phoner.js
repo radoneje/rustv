@@ -108,6 +108,10 @@ async function publishStream(streamName, localVideo, stream,errHandeler, failedH
     console.log("dev find ", fDev)*/
 
 
+     if(typeof (vDevice)=="undefined")
+         vDevice=null;
+     if(typeof (aDevice)=="undefined")
+     aDevice=null
     if(typeof (vDevice)!='undefined' && vDevice && vDevice.length>0)
     video={ deviceId:  vDevice, width: 1280, height: 720,  aspectRatio:  1.7777777778}
     else
