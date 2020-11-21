@@ -212,6 +212,7 @@ router.get('/stage/:id',  async (req, res, next) =>{
 
 })
 
+
 router.get('/stage/translator/:id',  async (req, res, next) =>{
   req.params.id=parseInt(req.params.id)
   if(!Number.isInteger(req.params.id))
@@ -269,7 +270,7 @@ router.get('/stageScreen/:id',  async (req, res, next) =>{
   res.render('stageScreen', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false});
 
 })
-router.get('/stagePres/:id',  async (req, res, next) =>{
+router.get('/stageFive/:id',  async (req, res, next) =>{
   req.params.id=parseInt(req.params.id)
   if(!Number.isInteger(req.params.id))
     return res.send(404);
@@ -281,7 +282,25 @@ router.get('/stagePres/:id',  async (req, res, next) =>{
   var room=rooms[0]
 
   if(!req.session["user"+room.eventid])
-    return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stagePres/'+req.params.id))
+    return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stageScreen/'+req.params.id))
+  var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
+  res.header("X-Frame-Options","")
+  res.render('stageFive', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false});
+
+})
+router.get('/stagePres/:id',  async (req, res, next) =>{
+  req.params.id=parseInt(req.params.id)
+  if(!Number.isInteger(req.params.id))
+    return res.send(404);
+
+  var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.params.id})
+  if(rooms.length<1)
+    return res.send(404);
+
+  var room=rooms[0]
+
+ // if(!req.session["user"+room.eventid])
+ //   return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stagePres/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
   res.header("X-Frame-Options","")
   res.render('stagePres', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false});
