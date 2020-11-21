@@ -39,7 +39,7 @@ var knex = require('knex')({
   client: 'pg',
   version: '7.2',
   connection:config.pgConnection,
-  pool: { min: 0, max: 7 }
+  pool: { min: 0, max: 40 }
 });
 
 var sockClients=[];
