@@ -49,7 +49,9 @@ router.get('/', function(req, res, next) {
   if(req.headers.host.indexOf("atomday.ru")>=0)
     return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
 */
+  console.log("1111")
   res.render('index', { title: 'ON.event' });
+  console.log("222")
 });
 router.get('/badbrowser', function(req, res, next) {
   res.render('badbrowser', { title: 'ON.event' });
