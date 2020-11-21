@@ -13,7 +13,7 @@
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "excel4node": "^1.7.2",
-    "express": "~4.16.1",
+    "express": "4.16.1",
     "express-fileupload": "^1.1.7-alpha.1",
     "express-minify": "^1.0.0",
     "express-session": "^1.17.0",
