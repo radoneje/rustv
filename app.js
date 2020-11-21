@@ -34,6 +34,7 @@ async function sendInvite(knex){
 }
 
 var SPKstatus=[];
+console.log(config.pgConnection)
 var knex = require('knex')({
   client: 'pg',
   version: '7.2',
