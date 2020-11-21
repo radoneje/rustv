@@ -1,0 +1,38 @@
+extends layout
+block head
+  link(rel='stylesheet', href='/stylesheets/old.css')
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  script(src="/javascripts/utils.js")
+  script(src="/lib/flashUtils.js")
+  script(src="/lib/flashphoner.js")
+  script(src="/javascripts/phoner.js")
+  script(src="/lib/imask.js")
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0"></script>
+  script(src="/javascripts/stageFiveScript.js")
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  link(rel='stylesheet', href='/stylesheets/login.css')
+  link(rel='stylesheet', href='/stylesheets/room.css')
+  if event.isClientCss
+    link(rel='stylesheet', href='/stylesheets/'+event.clientCss)
+
+block content
+  <style>body{overflow:hidden;}</style>
+  div.roomScreen.multiViewVideo(id="app" )
+    div.center
+      div(v-if="!init" style="height: 100vh;display: flex;align-items: center;justify-content: center;margin: 10px;width: calc(100% - 20px);")
+          div.greenBtn.center( v-on:click="initStage()") Нажмите для начала
+      div.screenVideoBox#meetVideoBox(v-else )
+
+  script.
+      var eventid=!{room.eventid}
+      var roomid=!{room.id}
+      var room=!{JSON.stringify(room)}
+      var  isMod=!{isMod};
+      var isPgm=true
+
+
+
+
+
+
