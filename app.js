@@ -38,7 +38,12 @@ console.log(config.pgConnection)
 var knex = require('knex')({
   client: 'pg',
   version: '7.2',
-  connection:config.pgConnection
+  connection:config.pgConnection,
+  pool: {
+    max: 7,
+    min: 3,
+    acquireTimeout: 60 * 1000
+  }
 });
 
 var sockClients=[];
