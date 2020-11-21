@@ -51,7 +51,7 @@ router.get('/', function(req, res, next) {
 */
   console.log("1111")
   //res.render('index', { title: 'ON.event' });
-  res.json(1)
+  res.json({a:1})
   console.log("222")
 });
 router.get('/badbrowser', function(req, res, next) {
