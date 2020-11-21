@@ -35,7 +35,7 @@ async function redirect(f,req,res){
 router.get('/', function(req, res, next) {
   console.log(req.headers.host)
      // if(req.headers.host.indexOf("localhost")>=0)
- /* if(req.headers.host.indexOf("cyber-polygon.club")>=0 || req.headers.host.indexOf("cyber-poligon.club")>=0)
+  if(req.headers.host.indexOf("cyber-polygon.club")>=0 || req.headers.host.indexOf("cyber-poligon.club")>=0)
     return res.render('cyberPolygon', { title: 'Cyber Polygon', lang:(require("../lang.json"))["en"] });
 
   if(req.headers.host.indexOf("cbr-online.ru")>=0)
@@ -48,10 +48,10 @@ router.get('/', function(req, res, next) {
     return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
   if(req.headers.host.indexOf("atomday.ru")>=0)
     return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
-*/
-  console.log("1111")
-  //res.render('index', { title: 'ON.event' });
-  res.json({a:1})
+
+
+  res.render('index', { title: 'ON.event' });
+
   console.log("222")
 });
 router.get('/badbrowser', function(req, res, next) {
