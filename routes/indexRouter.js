@@ -50,7 +50,8 @@ router.get('/', function(req, res, next) {
     return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
 */
   console.log("1111")
-  res.render('index', { title: 'ON.event' });
+  //res.render('index', { title: 'ON.event' });
+  res.json(1)
   console.log("222")
 });
 router.get('/badbrowser', function(req, res, next) {
