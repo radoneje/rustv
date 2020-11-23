@@ -1483,11 +1483,12 @@ router.post("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, res,
                 //await pdf2pic.convertBulk(r[0].path, -1)
                 const spawn = require('await-spawn')
                 try {
-                    const bl = await spawn('nice', [, '-n', '9', 'convert', filename, "-quality", "75","-density", "300x300",  "-resize", "1024x720", folder+"/p_%04d.png"])
+                    console.log("convert ", filename);
+                    const bl = await spawn('nice', [ '-n', '9', 'convert', filename, "-quality", "75","-density", "300x300",  "-resize", "1024x720", folder+"/p_%04d.png"])
                     console.log("convert ok", bl);
                 }
                 catch (e) {
-                    console.log("convert error")
+                    console.log("convert error", e)
                 }
 
 
