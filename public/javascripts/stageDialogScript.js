@@ -835,6 +835,7 @@ window.onload=function () {
                             var roomName = "room"+room.id;
                             var streamName = roomName + "-" + videoItem.id.replace("-",'') + roomName;
                             console.log("streamName", streamName)
+                            phonerGetMix(streamName, document.getElementById('testVideo'));
 
                     },1000);
                     videoItem.streamid = _this.socket.id;

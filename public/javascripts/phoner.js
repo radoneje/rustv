@@ -222,6 +222,28 @@ async function phonePublishLocalVideo(localVideo, id, stream, errHandeler, faile
     });
 
 }
+function phonerGetMix(streamName, remoteVideo){
+
+    var session = Flashphoner.getSessions()[0];
+    conferenceStream = session.createStream({
+        name: streamName,
+        display: remoteVideo,
+        constraints: {audio:true, video:true},
+        flashShowFullScreenButton: true
+    }).on(STREAM_STATUS.PENDING, function (stream) {
+
+        console.log("STREAM_STATUS.PENDING");
+    }).on(STREAM_STATUS.PLAYING, function (stream) {
+        console.log("STREAM_STATUS.PLAYING");
+    }).on(STREAM_STATUS.STOPPED, function () {
+        console.log("STREAM_STATUS.STOPPED");
+    }).on(STREAM_STATUS.FAILED, function (stream) {
+        console.log("STREAM_STATUS.FAILED");
+    }).on(STREAM_STATUS.NOT_ENOUGH_BANDWIDTH, function (stream) {
+        console.log("STREAM_STATUS.NOT_ENOUGH_BANDWIDTH");
+    });
+    conferenceStream.play();
+}
 
 function phoneStopRemoteVideo(id) {
 
