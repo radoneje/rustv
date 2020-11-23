@@ -1481,6 +1481,8 @@ router.post("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, res,
                 });
 
                 await pdf2pic.convertBulk(r[0].path, -1)
+
+
                 var pres = await readdir(folder);
                 pres=pres.sort((a,b)=>{
                     var ma = a.match(/p_(\d+)\.png/);
