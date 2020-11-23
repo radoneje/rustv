@@ -222,8 +222,10 @@ async function phonePublishLocalVideo(localVideo, id, stream, errHandeler, faile
     });
 
 }
-function phonerGetMix(streamName, remoteVideo){
+async function phonerGetMix(streamName, remoteVideo){
 
+    if (Flashphoner.getSessions().length == 0)
+        await initFlashServer();
     var session = Flashphoner.getSessions()[0];
     conferenceStream = session.createStream({
         name: streamName,
