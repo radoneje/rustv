@@ -1183,7 +1183,7 @@ window.onload=function () {
                 _this.constraints = dt.data;*/
                 _this.firstConnect = false;
                 console.log("startMyVideo0", isMod ,  isPgm)
-                await phonerStartMix(_this.socket.id.replace("-",''),room.id, document.getElementById(remoteMixVideo));
+                await phonerStartMix(_this.socket.id.replace("-",''),room.id, document.getElementById("remoteMixVideo"));
                 return ;
                 if(!isMod &&  !isPgm)
                     setTimeout(() => {
