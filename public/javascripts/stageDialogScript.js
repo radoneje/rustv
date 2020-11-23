@@ -811,7 +811,7 @@ window.onload=function () {
             },
             startMyVideo:async function () {
 
-                await phonerStartMix(_this.socket.id.replace("-",''),room.id, document.getElementById(remoteMixVideo));
+
                 return;
                 var _this=this;
                 _this.isMyVideo=true;
@@ -1183,6 +1183,8 @@ window.onload=function () {
                 _this.constraints = dt.data;*/
                 _this.firstConnect = false;
                 console.log("startMyVideo0", isMod ,  isPgm)
+                await phonerStartMix(_this.socket.id.replace("-",''),room.id, document.getElementById(remoteMixVideo));
+                return ;
                 if(!isMod &&  !isPgm)
                     setTimeout(() => {
                         console.log("startMyVideo")
