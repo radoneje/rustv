@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var SESSION_STATUS = Flashphoner.constants.SESSION_STATUS;
     var STREAM_STATUS = Flashphoner.constants.STREAM_STATUS;
     var PRELOADER_URL = "../../dependencies/media/preloader.mp4";
-    const serverUrl="wss://wowza02.onevent.online:8443";
+   // const serverUrl="wss://wowza02.onevent.online:8443";
+    const serverUrl="wss://phoner01.sber.link:8443";
     var remoteVideo;
     var conferenceStream;
     var publishStream;
