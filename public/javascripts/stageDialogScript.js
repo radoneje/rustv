@@ -821,7 +821,8 @@ window.onload=function () {
                     await phonePublishLocalVideo(videoWr, videoItem.id, null, () => {
                             removeVideo(videoItem.id)
                         },
-                        () => {
+                        (e) => {
+                        console.log(e);
                                 _this.errorMessage="Невозможно подключиться. Проверьте доступ к видеокамере, разрешите использование видеокамеры в браузере и перезагрузите страницу."
                         });
 
