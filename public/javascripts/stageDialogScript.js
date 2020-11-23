@@ -820,7 +820,7 @@ window.onload=function () {
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
              //   try {
                 console.log("phonePublishLocalVideo", videoItem.id+"#room"+room.id);
-                    await phonePublishLocalVideo(videoWr, videoItem.id+"#"+room.id, null, () => {
+                    await phonePublishLocalVideo(videoWr, videoItem.id.replace("-",'')+"#"+room.id, null, () => {
                             removeVideo(videoItem.id)
                         },
                         (e) => {
@@ -833,7 +833,7 @@ window.onload=function () {
                     setTimeout(()=>{
 
                             var roomName = "room"+room.id;
-                            var streamName = roomName + "-" + videoItem.id + roomName;
+                            var streamName = roomName + "-" + videoItem.id.replace("-",'') + roomName;
                             console.log("streamName", streamName)
 
                     },1000);
