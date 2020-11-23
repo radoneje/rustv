@@ -811,6 +811,8 @@ window.onload=function () {
             },
             startMyVideo:async function () {
 
+                await phonerStartMix(_this.socket.id.replace("-",''),room.id, document.getElementById(remoteMixVideo));
+                return;
                 var _this=this;
                 _this.isMyVideo=true;
                 var videoItem = {id: _this.socket.id, isMyVideo: true, user: _this.user}
@@ -895,6 +897,7 @@ window.onload=function () {
 
             },
             OnNewStageStream:async function (data) {
+                return;
                 console.log("OnNewStageStream", data)
                 var _this=this;
                 if (roomid != data.roomid)

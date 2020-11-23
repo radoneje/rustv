@@ -222,6 +222,58 @@ async function phonePublishLocalVideo(localVideo, id, stream, errHandeler, faile
     });
 
 }
+async function phonerStartMix(videid, room, remoteVideo){
+    if (Flashphoner.getSessions().length == 0)
+        await initFlashServer();
+    var session = Flashphoner.getSessions()[0];
+    var c={
+        "audio": true,
+        "video": {
+            width: 640,
+            height: 360,
+            aspectRatio:  1.7777777778
+        }
+    }
+    console.log("publishStream ", videid+"#"+room)
+    publishStream = session.createStream({
+        name: videid+"#"+room,
+        display: localDisplay,
+        receiveVideo: false,
+        receiveAudio: false,
+        constraints: c
+    }).on(STREAM_STATUS.PUBLISHING, function (publishStream) {
+        //play preview
+        console.log("stram is published")
+        playStream(session);
+    }).on(STREAM_STATUS.UNPUBLISHED, function () {
+        //onStopped();
+    }).on(STREAM_STATUS.FAILED, function (stream) {
+       // setStatus(STREAM_STATUS.FAILED, "This login is already in use. Please change login");
+       // onStopped();
+    });
+    publishStream.publish();
+    function playStream() {
+        var streamName = room+"-"+videid+room;//roomName + "-" + login + roomName;
+        conferenceStream = session.createStream({
+            name: streamName,
+            display: remoteVideo,
+            constraints: {audio:true, video:{width: 1280, height: 720,  aspectRatio:  1.7777777778}},
+            flashShowFullScreenButton: true
+        }).on(STREAM_STATUS.PENDING, function (stream) {
+
+        }).on(STREAM_STATUS.PLAYING, function (stream) {
+            conferenceStream.setVolume(100);
+
+        }).on(STREAM_STATUS.STOPPED, function () {
+
+        }).on(STREAM_STATUS.FAILED, function (stream) {
+
+        }).on(STREAM_STATUS.NOT_ENOUGH_BANDWIDTH, function (stream) {
+            console.log("Not enough bandwidth, consider using lower video resolution or bitrate. Bandwidth " + (Math.round(stream.getNetworkBandwidth() / 1000)) + " bitrate " + (Math.round(stream.getRemoteBitrate() / 1000)));
+        });
+        conferenceStream.play();
+    }
+}
 async function phonerGetMix(streamName, remoteVideo){
 
     if (Flashphoner.getSessions().length == 0)
