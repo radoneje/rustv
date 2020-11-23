@@ -8,7 +8,6 @@ function initFlashServer(errHandeler) {
         if (Flashphoner.getSessions().length > 0)
             resolve(session);
         Flashphoner.init({flashMediaProviderSwfLocation: '../../../../media-provider.swf'});
-        serverUrl="wss://phone01.sber.link:8443"
         console.log("SESSION_STATUS.INIT", serverUrl)
         Flashphoner.createSession({urlServer: serverUrl}).on(SESSION_STATUS.ESTABLISHED, function (session) {
             console.log("SESSION_STATUS.ESTABLISHED")

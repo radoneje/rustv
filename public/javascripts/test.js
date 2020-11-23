@@ -1,7 +1,9 @@
 
 var vDevice=null;
 var aDevice=null
+
 window.onload=function () {
+    serverUrl="wss://phone01.sber.link:8443"
     var app = new Vue({
 
         el: "#app",

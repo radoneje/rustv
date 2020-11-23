@@ -3,7 +3,7 @@ var aDevice=null;
 var vDevice=null
 var arrVideo = [];
 window.onload=function () {
-    serverUrl = "wss://phone01.sber.link:8443";
+    //serverUrl = "wss://phone01.sber.link:8443";
     try{
         eval("\"use strict\";const s=()=>{;;}; s();")
     }
