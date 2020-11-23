@@ -819,7 +819,7 @@ window.onload=function () {
                 await createVideo(videoItem.id, videoItem.isMyVideo, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord, _this.stopVideoRecord);
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
              //   try {
-                console.log("phonePublishLocalVideo", videoItem.id+"#room"+room.id);
+                console.log("phonePublishLocalVideo", videoItem.id+"#"+room.id);
                     await phonePublishLocalVideo(videoWr, videoItem.id.replace("-",'')+"#"+room.id, null, () => {
                             removeVideo(videoItem.id)
                         },
@@ -832,7 +832,7 @@ window.onload=function () {
 
                     setTimeout(async ()=>{
 
-                            var roomName = "room"+room.id;
+                            var roomName = ""+room.id;
                             var streamName = roomName + "-" + videoItem.id.replace("-",'') + roomName;
                             console.log("streamName", streamName)
                             await phonerGetMix(streamName, document.getElementById('testVideo'));
