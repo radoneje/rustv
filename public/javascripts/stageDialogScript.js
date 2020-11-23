@@ -819,7 +819,7 @@ window.onload=function () {
                 await createVideo(videoItem.id, videoItem.isMyVideo, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord, _this.stopVideoRecord);
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
              //   try {
-                console.log("phonePublishLocalVideo", videoItem.id+"#"+room.id);
+                console.log("phonePublishLocalVideo", videoItem.id+"#room"+room.id);
                     await phonePublishLocalVideo(videoWr, videoItem.id+"#"+room.id, null, () => {
                             removeVideo(videoItem.id)
                         },
@@ -829,6 +829,14 @@ window.onload=function () {
                         });
 
                     videoLayout2();
+
+                    setTimeout(()=>{
+
+                            var roomName = "room"+room.id;
+                            var streamName = roomName + "-" + videoItem.id + roomName;
+                            console.log("streamName", streamName)
+
+                    },1000);
                     videoItem.streamid = _this.socket.id;
                     videoItem.elem = videoWr.querySelector('video');
                     videoItem.elem.setAttribute("allowfullscreen", "allowfullscreen")
