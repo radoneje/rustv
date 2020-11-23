@@ -3,6 +3,7 @@ var aDevice=null;
 var vDevice=null
 var arrVideo = [];
 window.onload=function () {
+    serverUrl = "wss://phone01.sber.link:8443";
     try{
         eval("\"use strict\";const s=()=>{;;}; s();")
     }
@@ -1160,7 +1161,7 @@ window.onload=function () {
             },
             initStage:async function(){
                 console.log("init stage")
-                serverUrl = "wss://phone01.sber.link:8443";
+
                 var _this=this;
                 _this.init=true;
                /* WowzaCfg = await axios.get('/rest/api/meetWowza')
