@@ -1472,15 +1472,23 @@ router.post("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, res,
                 var folder = path.join(__dirname, '../public/files/' + r[0].id)
                 if (!fs.existsSync(folder))
                     fs.mkdirSync(folder);
-                const pdf2pic = new PDF2Pic({
+               /* const pdf2pic = new PDF2Pic({
                     density: 300,           // output pixels per inch
                     savename: "p",   // output file name
                     savedir: folder,    // output file location
                     format: "png",          // output file format
                     size: "1024x720"         // output size in pixels
-                });
+                });*/
 
-                await pdf2pic.convertBulk(r[0].path, -1)
+                //await pdf2pic.convertBulk(r[0].path, -1)
+                const spawn = require('await-spawn')
+                try {
+                    const bl = await spawn('nice', [, '-n', '9', 'convert', filename, "-quality", "75","-density", "300x300",  "-resize", "1024x720", folder+"/p_%04d.png"])
+                    console.log("convert ok", bl);
+                }
+                catch (e) {
+                    console.log("convert error")
+                }
 
 
                 var pres = await readdir(folder);
