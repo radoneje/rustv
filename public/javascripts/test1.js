@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         Flashphoner.createSession({urlServer: serverUrl}).on(SESSION_STATUS.ESTABLISHED, function (session) {
+            console.log("createSession");
             setStatus(session.status());
             //session connected, start playback
             startStreaming(session);
