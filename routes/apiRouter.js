@@ -1484,8 +1484,8 @@ router.post("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, res,
                 const spawn = require('await-spawn')
                 try {
                     console.log("convert ", filename);
-                    const bl = await spawn('nice', [ '-n', '9', 'convert', filename, "-quality", "75","-density", "300x300",  "-resize", "1024x720", folder+"/p_%04d.png"])
-                    console.log("convert ok", bl);
+                    const bl = await spawn('nice', [ '-n', '19', 'convert', filename, "-quality", "75","-density", "300x300",  "-resize", "1024x720", folder+"/p_%04d.png"])
+                    console.log("convert ok");
                 }
                 catch (e) {
                     console.log("convert error", e)
