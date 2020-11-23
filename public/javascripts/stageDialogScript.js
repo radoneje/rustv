@@ -833,7 +833,7 @@ window.onload=function () {
                     setTimeout(async ()=>{
 
                             var roomName = "room"+room.id;
-                            var streamName = roomName ;//+ "-" + videoItem.id.replace("-",'') + roomName;
+                            var streamName = roomName + "-" + videoItem.id.replace("-",'') + roomName;
                             console.log("streamName", streamName)
                             await phonerGetMix(streamName, document.getElementById('testVideo'));
 
