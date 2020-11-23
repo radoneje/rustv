@@ -237,7 +237,7 @@ async function phonerStartMix(videid, room, remoteVideo){
     console.log("publishStream ", videid+"#"+room)
     publishStream = session.createStream({
         name: videid+"#"+room,
-        display: localDisplay,
+        display: document.getElementById("localVideo"),
         receiveVideo: false,
         receiveAudio: false,
         constraints: c
