@@ -226,13 +226,28 @@ async function phonerStartMix(videid, room, remoteVideo){
     if (Flashphoner.getSessions().length == 0)
         await initFlashServer();
     var session = Flashphoner.getSessions()[0];
-    var c={
-        "audio": true,
-        "video": {
-            width: 640,
-            height: 360,
-            aspectRatio:  1.7777777778
-        }
+
+    var video=true;
+    var audio=true;
+
+    if (typeof (vDevice) == "undefined")
+        vDevice = null;
+    if (typeof (aDevice) == "undefined")
+        aDevice = null
+    if (typeof (vDevice) != 'undefined' && vDevice && vDevice.length > 0)
+        video = {deviceId: vDevice, width: 1280, height: 720, aspectRatio: 1.7777777778}
+    else
+    // video={  width: 1280, height: 720,  aspectRatio:  1.7777777778}
+        video = {width: 1280, height: 720, aspectRatio: 1.7777777778}
+
+    if (typeof (aDevice) != 'undefined' && aDevice && aDevice.length > 0)
+        audio = {deviceId: aDevice}
+    else
+        audio = true
+
+    var c = {
+        audio: audio,
+        video: video,
     }
     console.log("publishStream ", videid+"#"+room)
     publishStream = session.createStream({
