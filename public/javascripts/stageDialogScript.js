@@ -819,7 +819,8 @@ window.onload=function () {
                 await createVideo(videoItem.id, videoItem.isMyVideo, _this.user, _this.videoPgm, _this.videoPIP,_this.videoP1, _this.videoMute, _this.videoRemove, _this.videoReload, _this.videoRecord, _this.stopVideoRecord);
                 var videoWr=document.getElementById("meetVideoWrapperContent_" + videoItem.id);
              //   try {
-                    await phonePublishLocalVideo(videoWr, videoItem.id, null, () => {
+                console.log("phonePublishLocalVideo", videoItem.id+"#"+room.id);
+                    await phonePublishLocalVideo(videoWr, videoItem.id+"#"+room.id, null, () => {
                             removeVideo(videoItem.id)
                         },
                         (e) => {
