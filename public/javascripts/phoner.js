@@ -117,7 +117,7 @@ async function publishStream(streamName, localVideo, stream, errHandeler, failed
         video = {deviceId: vDevice, width: 640, height: 360}
     else
     {
-        video = true;
+        video = { width: 640, height: 360};
 
         try {
             var dev = await navigator.mediaDevices.enumerateDevices()
