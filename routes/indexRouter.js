@@ -31,7 +31,9 @@ async function redirect(f,req,res){
   res.redirect(r[0].value);
 
 }
-
+router.get('/cbplayer', function(req, res, next) {
+  res.render('cbplayer')
+})
 router.get('/', function(req, res, next) {
   console.log(req.headers.host)
      // if(req.headers.host.indexOf("localhost")>=0)
