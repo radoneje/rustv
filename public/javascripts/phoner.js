@@ -114,10 +114,29 @@ async function publishStream(streamName, localVideo, stream, errHandeler, failed
     if (typeof (aDevice) == "undefined")
         aDevice = null
     if (typeof (vDevice) != 'undefined' && vDevice && vDevice.length > 0)
-        video = {deviceId: vDevice, width: 1280, height: 720, aspectRatio: 1.7777777778}
+        video = {deviceId: vDevice, width: 640, height: 360}
     else
+    {
+        video = true;
+
+        try {
+            var dev = await navigator.mediaDevices.enumerateDevices()
+            var fDev = null;
+            dev.forEach(function (device) {
+                console.log("dev find ", fDev)
+                if (device.label == "vMix Video") {
+                    video = {deviceId: fDev.deviceId, width: 1280, height: 720, aspectRatio: 1.7777777778}
+                }
+
+            })
+        }
+        catch (e) {
+            console.warn(e);
+        }
+
+    }
     // video={  width: 1280, height: 720,  aspectRatio:  1.7777777778}
-        video = true;//{width: 1280, height: 720, aspectRatio: 1.7777777778}
+       //{width: 1280, height: 720, aspectRatio: 1.7777777778}
 
 
     if (typeof (aDevice) != 'undefined' && aDevice && aDevice.length > 0)
