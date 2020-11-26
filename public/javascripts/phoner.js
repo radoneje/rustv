@@ -121,11 +121,10 @@ async function publishStream(streamName, localVideo, stream, errHandeler, failed
 
         try {
             var dev = await navigator.mediaDevices.enumerateDevices()
-            var fDev = null;
             dev.forEach(function (device) {
-                console.log("dev find ", fDev)
+                console.log("dev find ", device)
                 if (device.label == "vMix Video") {
-                    video = {deviceId: fDev.deviceId, width: 1280, height: 720, aspectRatio: 1.7777777778}
+                    video = {deviceId: device.deviceId, width: 1280, height: 720}
                 }
 
             })
