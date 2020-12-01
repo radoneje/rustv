@@ -2105,6 +2105,7 @@ router.post('/regToGpn/',  async (req, res, next) =>{
         return res.json(0);
     console.log(req.body)
     var codes=await req.knex.select("*").from("t_gpncodes").where({id:req.body.code});
+    console.log("codes", codes)
     if(codes.length==0)
         return res.json(0);
 
