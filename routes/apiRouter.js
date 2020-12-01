@@ -2101,24 +2101,30 @@ async function sendEmail(email, text) {
     }
 }
 router.post('/regToGpn/',  async (req, res, next) =>{
-    if(!Number.isInteger(req.body.code))
-        return res.json(0);
-    console.log(req.body)
-    var codes=await req.knex.select("*").from("t_gpncodes").where({id:req.body.code});
-    console.log("codes", codes)
-    if(codes.length==0)
-        return res.json(0);
+    try {
+        if (!Number.isInteger(parseInt(req.body.code)))
+            return res.json(0);
+        console.log(req.body)
+        var codes = await req.knex.select("*").from("t_gpncodes").where({id: parseInt(req.body.code)});
+        console.log("codes", codes)
+        if (codes.length == 0)
+            return res.json(0);
 
-    var usr = await req.knex("t_eventusers").insert({
-        eventid:42,
-        f: req.body.user,
-        i: "",
-        tel: "",
-        email: "",
-        smsCode: req.body.code,
-        company:null,
-        CompanyName:"GPN",
-    }, "*")
+        var usr = await req.knex("t_eventusers").insert({
+            eventid: 42,
+            f: req.body.user,
+            i: "",
+            tel: "",
+            email: "",
+            smsCode: req.body.code,
+            company: null,
+            CompanyName: "GPN",
+        }, "*")
+    }
+    catch (e) {
+        console.warn(e)
+        return josn(0);
+    }
 
     var rooms=await req.knex.select("*").from("t_rooms").where({eventid:evt.id});
     for(room of rooms){
