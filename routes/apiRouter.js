@@ -2120,24 +2120,24 @@ router.post('/regToGpn/',  async (req, res, next) =>{
             company: null,
             CompanyName: "GPN",
         }, "*")
+
+
+    var rooms=await req.knex.select("*").from("t_rooms").where({eventid:42});
+    for(room of rooms){
+        await req.knex("t_roomToeventUsers").insert({roomid:98,eventuserid:usr[0].id, isSendEmail:false,isSendSms:false});
+    }
+
+
+        req.session["user" + 42] = usr[0];
+        console.log("regtoevent GPN", req.session);
+        //  console.log("reg case 0",req.session["user" + req.body.evntId]);
+        return res.json("98");
+
     }
     catch (e) {
         console.warn(e)
         return josn(0);
     }
-
-    var rooms=await req.knex.select("*").from("t_rooms").where({eventid:42});
-    for(room of rooms){
-        await req.knex("t_roomToeventUsers").insert({roomid:room.id,eventuserid:usr[0].id, isSendEmail:false,isSendSms:false});
-    }
-
-
-        req.session["user" + req.body.evntId] = usr[0];
-        console.log("regtoevent GPN", req.session);
-        //  console.log("reg case 0",req.session["user" + req.body.evntId]);
-        return res.json("98");
-
-
 
 })
 
