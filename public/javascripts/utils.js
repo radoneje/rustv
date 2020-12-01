@@ -549,6 +549,12 @@ function connect(_this, roomid, clbk){
             _this.OnNewFilePres(data)
         }
     });
+    socket.on("convertPage", function(data) {
+        if(typeof(_this.OnConvertPage)!='undefined'){
+            _this.OnConvertPage(data)
+        }
+    });
+
     socket.on("setPres", function(data) {
         if(typeof(_this.setPres)!='undefined'){
             _this.setPres(data)

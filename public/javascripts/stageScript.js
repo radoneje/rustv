@@ -72,6 +72,13 @@ window.onload=function () {
 
         },
         methods:{
+            OnConvertPage:function(dt){
+                if(!dt)
+                    return;
+                var elem=document.getElementById("prescount"+dt.fileid)
+                if(elem)
+                    elem.innerHTML=dt.count+"/"+dt.total
+            },
             onPreviewFilePres:function (dt) {
                 console.log("onPreviewFilePres", dt)
 

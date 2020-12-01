@@ -65,6 +65,7 @@ body {
   font-family: DINPro;
   font-style: normal;
   font-weight: normal;
+  transition: opacity .5s ease;
 }
 .wnd{
   width: 1184px;
@@ -75,22 +76,36 @@ body {
   border-radius: 8px;
   box-sizing: border-box;
   display: flex;
+  height: 100vh;
 }
 .cbLoginLeft{
-  width: 720px;
+  width: 50%;
   padding: 40px;
   box-sizing: border-box;
-}
-.cbLoginRight{
-  width: ~"calc(100% - 720px)";
-  background: #F6F6F6;
-  border-radius: 0 8px 8px 0;
+  background: white;
+  color: black;
   display: flex;
+  align-items: center;
+}
+
+.cbLoginRight{
+  width:50%;
+  background: #F6F6F6;
+  //display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
   padding: 40px;
+  background-size: cover;
+
+  display: flex;
+  background-repeat: no-repeat;
+  background-image: url(/images/clients/gpn/bg.png);
 }
+.cbLoginLeftTitle{
+  font-size: 20px;
+}
+
 .cbLoginRightBox{
   width: 100%;
 }
@@ -110,14 +125,62 @@ body {
   font-family: DINPro;
   font-style: normal;
   font-weight: 500;
-  font-size: 32px;
+  font-size: 36px;
   line-height: 45px;
   text-transform: uppercase;
-
+  color:#ffffff;
   /* Text EEEEEE */
-
-  color: #ffffff;
   margin-top:16px
+}
+.loginError{
+  margin-top:6px ;
+  color:#E91D1D;
+  opacity: 0;
+}
+.loginLogOn{
+  /* Rectangle: */
+  background: #0173BC;
+  border-radius: 5px;
+  font-size: 20px;
+  color: #FFFFFF;
+  margin-top:24px;
+  padding: 12px;
+  cursor: pointer;
+  width: min-content;
+}
+.footerLogo{
+  position: absolute;
+  bottom: 24px;
+  bottom: 0;
+  width: 300px;
+  max-width: 100%;
+}
+.footerLogo svg{
+  width: 100%;
+}
+.cbLoginForm{
+  width: 100%;
+  padding: 6px;
+  border:1px solid #706F63;
+  margin-top:24px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+.cbLoginFormWr.error #logincode{
+  border:1px solid #E91D1D;
+}
+.cbLoginFormWr.error .loginError{
+  opacity: 1;
+}
+
+.cbLoginSubTitle{
+  background: #01477f;
+  text-transform: uppercase;
+  width: max-content;
+  font-size: 20px;
+  margin-top:20px;
+  padding: 6px 24px;
+  line-height: 31px;
 }
 .cbLoginPerson{
   font-family: DINPro;
@@ -125,7 +188,7 @@ body {
   font-weight: 500;
   font-size: 36px;
   line-height: 46px;
-
+  line-height: 31px;
   /* Text B8B9BC */
 
   color: #000000;
@@ -149,15 +212,14 @@ body {
   font-family: CB_Stem;
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 31px;
-  /* identical to box height */
-
-
-  /* Text B8B9BC */
-
   color: #ffffff;
-  margin-top:140px ;
+  background: #0173bc;
+  padding: 6px 24px;
+  margin-top:20px;
+  width: max-content;
+
 }
 .cbLoginRightTitle{
   font-family: DINPro;
@@ -434,13 +496,32 @@ input{
     display: none !important;
   }
   .wnd {
-    width: 864px;
+    width: 100%;
+    display: block;
+    display: flex; flex-direction: column;
   }
   .cbLoginLeft{
-    width: ~"calc(100% - 376px)";
+    width: 100%;
+    display: block;
+    order: 2;
+    padding: 24px 6px;
+  }
+  .footerLogo{
+    position: initial;
+    margin-top:24px
+  }
+  .loginLogOn{
+    margin:20px auto;
   }
   .cbLoginRight{
-    width: 376px;
+    width:100%;
+    order: 1;
+    display: block;
+    padding: 24px 6px;
+
+  }
+  .cbLoginSubTitle{
+    max-width: 100%;
   }
   .cbLoginHead{
     font-size: 28px;
@@ -454,56 +535,5 @@ input{
   }
 
 }
-@media only screen and (max-width: 864px) {
-  #loginApp{
-    background: #F6F6F6;
-  }
-  #app{
-    background:#E6E9EB ;
-  }
-  #loginApp{
-    display: block;
-  }
-  .wnd {
-    display: block;
-    width: 100%;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  .cbLoginLeft{
-    width: 100%;
-    border-radius: 0;
-    padding: 20px;
-    padding-bottom: 40px;
-    padding-top: 40px;
-  }
-  .cbLoginTitle{
-    font-size: 26px;
-    line-height: 34px;
-  }
-  .cbLoginDate{
-    margin-top:40px;
-  }
-  .cbLoginPerson{
-    font-size: 26px;
-    line-height: 34px;
-  }
-  .cbLoginHead {
-    font-size: 22px;
-    line-height: 36px;
-  }
-  .cbLoginRightCode{
-    font-size: 22px;
-  }
-  .cbLoginRightEnter{
-    font-size: 22px;
-  }
-  .cbLoginRight{
-    width: 100%;
-    border-radius: 0;
-    padding: 20px;
-    padding-bottom: 40px;
-  }
 
-}
 

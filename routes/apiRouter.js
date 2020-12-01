@@ -1442,6 +1442,10 @@ router.get("/files/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
     return res.json(r);
 
 })
+router.post("/convertPage", async (req, res, next)=>{
+    req.transport.emit("convertPage",{fileid:req.body.fileid, count:req.body.count, total:req.body.total} , req.body.roomid);
+    res.json(0)
+})
 router.post("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     // var r=await req.knex("t_files").insert({roomid:req.params.roomid, title:req.body.name, mime:req.body.type, bytes:req.body.size}, "*");
 
@@ -1469,22 +1473,26 @@ router.post("/file/:fileid/:eventid/:roomid", checkLoginToRoom, async (req, res,
             }
             if (r[0].mime.indexOf('application/pdf') == 0) {
 
+
                 var folder = path.join(__dirname, '../public/files/' + r[0].id)
                 if (!fs.existsSync(folder))
                     fs.mkdirSync(folder);
-               /* const pdf2pic = new PDF2Pic({
+               // await axios.post("http://10.0.0.50/pdf",{path: r[0].path, folder: folder})
+                const pdf2pic = new PDF2Pic({
                     density: 300,           // output pixels per inch
                     savename: "p",   // output file name
                     savedir: folder,    // output file location
                     format: "png",          // output file format
                     size: "1024x720"         // output size in pixels
-                });*/
+                });
 
-                //await pdf2pic.convertBulk(r[0].path, -1)
+                await pdf2pic.convertBulk(r[0].path, -1)
                 const spawn = require('await-spawn')
                 try {
                     console.log("convert ", filename);
-                    const bl = await spawn('nice', [ '-n', '19', 'convert', filename, "-quality", "75","-density", "300x300",  "-resize", "1024x720", folder+"/p_%04d.png"])
+                    //const bl = await spawn('nice', [ '-n', '19', 'convert', filename, "-quality", "75","-density", "300x300",  "-resize", "1024x720", folder+"/p_%04d.png"])
+
+                    const bl = await spawn('nice', [ '-n', '19', "gm", 'convert', filename, "-quality", "75","-density", "300x300",  "-resize", "1024x720", "-background", "transparent", "+adjoin", folder+"/p_%04d.png"])
                     console.log("convert ok");
                 }
                 catch (e) {
@@ -2092,7 +2100,9 @@ async function sendEmail(email, text) {
         console.warn(e)
     }
 }
-
+router.post('/regToGpn/',  async (req, res, next) =>{
+    res.json(0);
+})
 
 
 module.exports = router
