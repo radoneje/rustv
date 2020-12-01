@@ -2103,6 +2103,7 @@ async function sendEmail(email, text) {
 router.post('/regToGpn/',  async (req, res, next) =>{
     if(Number.isInteger(req.body.code))
         return res.json(0);
+    console.log(req.body)
     var codes=await req.knex.select("*").from("t_gpncodes").where({id:req.body.code});
     if(codes.length==0)
         return res.json(0);
