@@ -1165,7 +1165,7 @@ function startVideo() {
             video.play();
         });
     }
-    },200)
+    },1000)
 }
 async function createVideo(id, muted, user, onPgm, onPip,onMute, onRemove, onReload) {
     console.log("Create Video", id)
