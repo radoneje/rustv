@@ -2101,7 +2101,36 @@ async function sendEmail(email, text) {
     }
 }
 router.post('/regToGpn/',  async (req, res, next) =>{
-    res.json(0);
+    if(Number.isInteger(eq.code))
+        return res.json(0);
+    var codes=await req.knex.select("*").from("t_gpncodes").where({id:code});
+    if(codes.length==0)
+        return res.json(0);
+
+    var usr = await req.knex("t_eventusers").insert({
+        eventid:42,
+        f: req.body.user,
+        i: "",
+        tel: "",
+        email: "",
+        smsCode: req.body.code,
+        company:null,
+        CompanyName:"GPN",
+    }, "*")
+
+    var rooms=await req.knex.select("*").from("t_rooms").where({eventid:evt.id});
+    for(room of rooms){
+        await req.knex("t_roomToeventUsers").insert({roomid:room.id,eventuserid:usr[0].id, isSendEmail:false,isSendSms:false});
+    }
+
+
+        req.session["user" + req.body.evntId] = usr[0];
+        console.log("regtoevent GPN", req.session);
+        //  console.log("reg case 0",req.session["user" + req.body.evntId]);
+        return res.json("98");
+
+
+
 })
 
 

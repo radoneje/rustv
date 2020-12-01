@@ -19,7 +19,7 @@ window.onload=function () {
                 this.cap="Регистрирую..."
                 var _this=this;
                 try {
-                    axios.post("/rest/api/regToGpn", {u: this.user, code: this.code})
+                    axios.post("/rest/api/regToGpn", {user: this.user, code: this.code})
                         .then(function (e) {
                             console.log(e.data)
                             if(e.data==0){
@@ -31,6 +31,9 @@ window.onload=function () {
                             else {
                                 _this.cap = "Вы зарегистрированы."
                                 _this.codeError=false;
+                                setTimeout(function () {
+                                    document.location.href="/room/"+e.data;
+                                },2000)
                             }
                         })
                         .catch(function (e) {
