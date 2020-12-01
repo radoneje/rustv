@@ -2126,7 +2126,7 @@ router.post('/regToGpn/',  async (req, res, next) =>{
         return josn(0);
     }
 
-    var rooms=await req.knex.select("*").from("t_rooms").where({eventid:evt.id});
+    var rooms=await req.knex.select("*").from("t_rooms").where({eventid:42});
     for(room of rooms){
         await req.knex("t_roomToeventUsers").insert({roomid:room.id,eventuserid:usr[0].id, isSendEmail:false,isSendSms:false});
     }
