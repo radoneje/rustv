@@ -2101,7 +2101,7 @@ async function sendEmail(email, text) {
     }
 }
 router.post('/regToGpn/',  async (req, res, next) =>{
-    if(Number.isInteger(eq.code))
+    if(Number.isInteger(req.body.code))
         return res.json(0);
     var codes=await req.knex.select("*").from("t_gpncodes").where({id:code});
     if(codes.length==0)
