@@ -94,6 +94,9 @@ block content
           if(room.id == 19)
             div.rLfooter
               include elements/footerRosatom
+          if(room.id == 98)
+            div.rLfooter
+              include elements/footerGPN
 
 
 
@@ -123,6 +126,9 @@ block content
                 if(room.id == 66)
                   div.rLfooter
                     include elements/footerRosatom
+                if(room.id == 66)
+                  div.rLfooter
+                    include elements/footerGPN
 
             div.rContentWr(v-if="activeSection==0" v-show="isLenta")
               div.rBody(id="feedBox" )
