@@ -326,6 +326,9 @@ window.onload=function () {
                     axios.post("/rest/api/quest2/" + eventid + "/" + roomid, {text:tmp, user:_this.user})
                         .then(function (e) {
                             _this.q.push(e.data);
+                            _this.q=_this.q.filter(function (e) {
+                                return true;
+                            })
                             console.log(e.data)
                             setTimeout(function () {
                                 var objDiv = document.getElementById("qBox");
