@@ -1021,7 +1021,7 @@ window.onload=function () {
 function startVideo() {
    // setTimeout(function () {
 
-        var player = videojs('my-video');
+       // var player = videojs('my-video');
         player.src('https://front.sber.link/hls/app03/r_st03_720p/index.m3u8')
 //player.srcIndex = 0;
 //player.controlBar.addChild('QualitySelector');
