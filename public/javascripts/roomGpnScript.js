@@ -1027,6 +1027,7 @@ function startVideo() {
 //player.controlBar.addChild('QualitySelector');
         document.getElementById("video").style.opacity = 1;
         document.querySelector('video').style.opacity = 1;
+    player.dvr();
    // },500)
 
 }
