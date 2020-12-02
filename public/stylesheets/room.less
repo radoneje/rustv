@@ -159,14 +159,16 @@ width: 75%;
   justify-content: center;
   background: #272c31;
 }
- #videoWr1{
+#noVueVideoBox{
   position: fixed;
   top:0;
   left: 0;
-  width: 66%;
-   width: 75vw;
-   height: calc((75vw / 16 )*9);
-   overflow: hidden;
+}
+ #videoWr1{
+   width: 75%;
+   position: relative;
+   padding-bottom: 56.25%; /* 16:9 */
+   height: 0;
   }
 .adminScreen #videoWr {
   display: block;
