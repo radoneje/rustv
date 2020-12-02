@@ -326,7 +326,7 @@ window.onload=function () {
                     axios.post("/rest/api/quest2/" + eventid + "/" + roomid, {text:tmp, user:_this.user})
                         .then(function (e) {
                             _this.q.push(e.data);
-                            //console.log(e.data)
+                            console.log(e.data)
                             setTimeout(function () {
                                 var objDiv = document.getElementById("qBox");
                                 objDiv.scrollTop = objDiv.scrollHeight;
@@ -341,7 +341,6 @@ window.onload=function () {
                     _this.chatText = "";
                     axios.post("/rest/api/chat2/" + eventid + "/" + roomid, {text: tmp, user:_this.user})
                         .then(function (e) {
-
                             _this.chat.push(e.data);
                             //console.log(e.data)
                             setTimeout(function () {
