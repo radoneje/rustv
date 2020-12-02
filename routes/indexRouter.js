@@ -89,7 +89,7 @@ router.get('/login/:id', async (req, res, next) =>{
   if(!Number.isInteger(req.params.id))
     return res.send(404);
 
-  if(req.params.id==42)
+  if(req.params.id==42 && req.query.redirect && req.query.redirect.indexOf("room")>=0)
     return res.redirect('https://gpn.onevent.online/');
 
   var e=await req.knex.select("*").from("t_events").where({isDeleted:false, id:req.params.id})
