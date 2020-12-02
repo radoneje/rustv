@@ -98,31 +98,9 @@ window.onload=function () {
                     })
 
 
-                    r = await axios.get("/rest/api/votes/" + eventid + "/" + roomid)
-                    _this.votes = r.data;
+                    var u=await axios.get("/rest/api/users/"+eventid+"/"+roomid)
+                    _this.users = u.data;
 
-
-                    r = await axios.get("/rest/api/tags/" + eventid + "/" + roomid)
-                    /*_this.tags = */var data= r.data.filter(d=>d.isactive==true);
-
-                    var res=false;
-
-                    res=res || _this.tags.length!=data.length;
-                    _this.tags.forEach(tag=>{
-                        var fin=data.filter(d=>d.id==tag.id)
-                        if(fin.length !=1)
-                            res=true;
-                        else
-                            res=fin[0].isactive!=tag.isactive || fin[0].iscompl!=tag.iscompl || fin[0].isDeleted!=tag.isDeleted
-
-                    })
-                    if(res)
-                        _this.tags=data;
-
-
-
-                    r = await axios.get("/rest/api/pole/" + eventid + "/" + roomid)
-                    _this.pole = r.data;
                 }
                 catch (e) {
                     console.warn(e);
@@ -340,20 +318,38 @@ window.onload=function () {
                     document.getElementById('qText').focus()
 
             },
-            qtextSend:function (e) {
+            qtextSend:function(){
                 var _this=this;
-                if(this.qText.length>0)
-                    qtextSend(_this)
-                else
-                    document.getElementById('qText').focus()
-
-
+                if(_this.qText.length>0) {
+                    var tmp= _this.qText;
+                    _this.qText = "";
+                    axios.post("/rest/api/quest2/" + eventid + "/" + roomid, {text:tmp, user:_this.user})
+                        .then(function (e) {
+                            _this.q.push(e.data);
+                            //console.log(e.data)
+                            setTimeout(function () {
+                                var objDiv = document.getElementById("qBox");
+                                objDiv.scrollTop = objDiv.scrollHeight;
+                            }, 100)
+                        })
+                }
             },
-            chattextSend(_this){
-                if(this.chatText.length>0)
-                    chattextSend(this) ;
-                else
-                    document.getElementById('chatText').focus()
+            chattextSend:function(){
+                var _this=this;
+                if(_this.chatText.length>0) {
+                    var tmp=_this.chatText;
+                    _this.chatText = "";
+                    axios.post("/rest/api/chat2/" + eventid + "/" + roomid, {text: tmp, user:_this.user})
+                        .then(function (e) {
+
+                            _this.chat.push(e.data);
+                            //console.log(e.data)
+                            setTimeout(function () {
+                                var objDiv = document.getElementById("chatBox");
+                                objDiv.scrollTop = objDiv.scrollHeight;
+                            }, 100)
+                        })
+                }
             },
             chattextChange:function (e) {
                 var _this=this;
