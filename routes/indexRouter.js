@@ -90,7 +90,7 @@ router.get('/login/:id', async (req, res, next) =>{
     return res.send(404);
 
   if(req.params.id==42)
-    return res.redirect('https://gpn.onevent.online');
+    return res.redirect('https://gpn.onevent.online/');
 
   var e=await req.knex.select("*").from("t_events").where({isDeleted:false, id:req.params.id})
   if(e.length<1)
