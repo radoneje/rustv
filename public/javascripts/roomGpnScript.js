@@ -1025,8 +1025,8 @@ function startVideo() {
         player.src('https://front.sber.link/hls/app03/r_st03_720p/index.m3u8')
 //player.srcIndex = 0;
 //player.controlBar.addChild('QualitySelector');
-        document.getElementById("video").style.opacity = 1;
-        document.querySelector('video').style.opacity = 1;
+        document.getElementById("my-video").style.opacity = 1;
+        document.querySelector('my-video').style.opacity = 1;
     player.dvr();
    // },500)
 
