@@ -5,10 +5,9 @@ window.onload=function () {
     } catch (e) {
         document.location.href = "/badbrowser"
     }
-    var evntId=30;
-    var roomId=66
-    var eventid=30;
-    var roomid=66
+
+    var eventid=27;
+    var roomid=100;
 
     var app = new Vue({
         el: '#CBloginApp',
