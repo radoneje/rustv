@@ -13,19 +13,24 @@ window.onload=function () {
             currLang:lang[langid],
         },
         methods:{
-            UpdateInteractive:async function(){
+            UpdateInteractive:async function(_this){
+
                 try {
-                }
-                catch (e) {
                     console.log("UpdateInteractive");
                     var r = await axios.get("/rest/api/votes/" + eventid + "/" + roomid)
                     this.votes = r.data;
                 }
+                catch (e) {
+
+                }
+                setTimeout(function () {
+                    _this.UpdateInteractive(_this);
+                },2000)
             }
         },
         mounted:function () {
             document.getElementById("videoWrapper").style.display="block";
-            this.UpdateInteractive();
+            this.UpdateInteractive(this);
         }
     })
 }
