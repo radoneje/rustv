@@ -17,6 +17,7 @@ window.onload=function () {
                 try {
                 }
                 catch (e) {
+                    console.log("UpdateInteractive");
                     var r = await axios.get("/rest/api/votes/" + eventid + "/" + roomid)
                     this.votes = r.data;
                 }
