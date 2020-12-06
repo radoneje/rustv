@@ -100,15 +100,20 @@
     justify-content: space-between;
 }
 .vAnswBox.isCompl .vAnswTitleCap{
-      width: 30%;
+      width: 50%;
     font-size: 18px;
   }
 .vAnswBox.isCompl .vAnswPercent{
-    width: 30%;
+    width: 50%;
     height: 1em;
 }
 .vAnswBox.isCompl .vAnswPercentStatus{
     height: 1em;
+    display:inline-block;
+}
+.vAnswBox.isCompl .vAnswPercTitle2{
+   display: inline-block;
+    margin-left: 10px;
 }
 .vAnswBox.isCompl .vAnswPercentStatus[item="a0"]{
       background: #F0665D;
