@@ -76,4 +76,10 @@
     box-sizing: border-box;
     background: #0083BB;
     padding: 10px;
+    transition: all .5s ease;
+}
+.vAnsw.ready{
+    color: #0083BB;
+    background: white;
+    position: relative;
 }

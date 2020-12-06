@@ -50,7 +50,7 @@ html
                 div(v-if="item.iscompl" style="margin-bottom:20px")
                   span.red #{lang.pollClosed}.
                 div.qItemName {{item.title}}
-
+              .Thanks lang[langid]
                 div.vAnswBox
                   div.vAnsw(v-for="answ in sortedVoteAnsvers(item.answers)" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
                     div.vAnswTitle
