@@ -46,7 +46,7 @@ html
         #roomVote.rFeedGroup(v-if="votes.filter(r=>{return r.isactive}).length>0 ")
           div.rFeedGroupTitle
             div.rFeedGroupBody
-              div.qItem(v-for="item in votes" v-if="item.isactive" ) {{}}
+              div.qItem(v-for="item in votes" v-if="item.isactive" v-bind:class="{isCompl:item.iscompl}") {{}}
                 div.qItemName {{item.title}}
                 div.vAnswBox
                   div.vAnsw(v-for="answ in sortedVoteAnsvers(item.answers)" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
