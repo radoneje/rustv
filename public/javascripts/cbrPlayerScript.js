@@ -13,6 +13,9 @@ window.onload=function () {
             currLang:lang[langid],
         },
         methods:{
+            answIsReady:function (answ) {
+                return localStorage.getItem("ansv_"+answ.id)? true: false
+            },
             UpdateInteractive:async function(_this){
 
                 try {
