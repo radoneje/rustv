@@ -51,8 +51,9 @@ html
                 div.vAnswBox(v-bind:class="{isCompl:item.iscompl}")
                   div.vAnsw(v-for="answ in sortedVoteAnsvers(item.answers)" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
                     div.vAnswTitle
-                      span(v-if="item.iscompl") {{CalcAnswPercent(answ, item)}}%,&nbsp
-                      span {{answ.title}}
-                      div.vAnswPercent(v-if="item.iscompl" v-bind:style="{width:CalcAnswPercent(answ, item)+'%'}")
+                      .vAnswTitle {{answ.title}}
+                      .vAnswPercent(v-if="item.iscompl")
+                        .vAnswPercentStatus(v-bind:style="{width:CalcAnswPercent(answ, item)+'%'}")
+                      .vAnswPercTitle(v-if="item.iscompl") {{CalcAnswPercent(answ, item)}}%,&nbsp
     <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
     <script src="/javascripts/cbrPlayerScript.js"></script>
