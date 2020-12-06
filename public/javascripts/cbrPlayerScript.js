@@ -26,7 +26,11 @@ window.onload=function () {
                 setTimeout(function () {
                     _this.UpdateInteractive(_this);
                 },2000)
-            }
+            },
+            sortedVoteAnsvers:function(arr){
+                var nArr=arr.slice(0)
+                return nArr.sort((a,b)=>{return a.id-b.id});
+            },
         },
         mounted:function () {
             document.getElementById("videoWrapper").style.display="block";
