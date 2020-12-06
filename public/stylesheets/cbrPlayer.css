@@ -87,7 +87,7 @@
      display: block;
  }
 
-.vAnswBox.isCompl vAnsw{
+.vAnswBox.isCompl .vAnsw{
    background: none !important;
    color:white  !important;
     width: 100%;
