@@ -110,16 +110,16 @@
 .vAnswBox.isCompl .vAnswPercentStatus{
     height: 1em;
 }
-.vAnswBox.isCompl .vAnswPercentStatus:nth-child(0){
+.vAnswBox.isCompl .vAnswPercentStatus:nth-of-type(0){
       background: #F0665D;
   }
-.vAnswBox.isCompl .vAnswPercentStatus:nth-child(1){
+.vAnswBox.isCompl .vAnswPercentStatus:nth-of-type(1){
     background: #0083BB;
 }
-.vAnswBox.isCompl .vAnswPercentStatus:nth-child(2){
+.vAnswBox.isCompl .vAnswPercentStatus:nth-of-type(2){
     background: #01A5DC;
 }
-.vAnswBox.isCompl .vAnswPercentStatus:nth-child(3){
+.vAnswBox.isCompl .vAnswPercentStatus:nth-of-type(3){
     background: #63B74B;
 }
 .vAnswBox.isCompl .vAnswPercTitle{
