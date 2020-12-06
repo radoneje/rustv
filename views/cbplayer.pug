@@ -42,7 +42,7 @@ html
     .videoWrapper#videoWrapper(style="overflow: hidden;display:none")
       video#my-video.video.video-js.vjs-big-play-centered(controls mited autostart loop src="https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_640_3MG.mp4")
       #app
-        #roomVote.rFeedGroup(v-if="votes.filter(r=>{return r.isactive}).length>0 || tags.filter(r=>{return r.isactive}).length>0 || pole.filter(r=>{return r.isactive}).length>0")
+        #roomVote.rFeedGroup(v-if="votes.filter(r=>{return r.isactive}).length>0 ")
           div.rFeedGroupTitle
             div.rFeedGroupBody
 
