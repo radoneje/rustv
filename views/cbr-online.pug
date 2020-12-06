@@ -172,7 +172,7 @@ html
             .CBloginBodyL
               .CBloginBodyWr(v-bind:class="{codeError:codeError}")
                 .CBLoginRTitle {{currLang.PersonalCodeTitle}}
-                input.cbLoginCode(type="text" maxlength="10" :placeholder="currLang.PersonalCode" v-model="loginCode")
+                input.cbLoginCode(type="text" maxlength="10" :placeholder="currLang.PersonalCode" v-model="loginCode" v-on:keydown="if($event.keyCode==13) enter()")
                 .cbLoginCodeError() {{currLang.CodeIncorrect}}
                 .CBloginSubmit(v-on:click="loginCodeSubmit()")
                   span(v-if="!isLogging") {{currLang.Send}}

@@ -19,8 +19,6 @@ window.onload=function () {
             currLang:lang["ru"],
             isLogging:false,
             isLogOn:false,
-
-
             webCamStream:null,
             sect:[
 
@@ -63,6 +61,9 @@ window.onload=function () {
 
         },
         methods:{
+            enter:function(){
+                this.loginCodeSubmit();
+            },
             UpdateInteractive:async function(){
                 try {
                     var _this = this;
