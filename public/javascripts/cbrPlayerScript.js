@@ -6,7 +6,7 @@ window.onload=function () {
     var roomid=100;
 
     var app= new Vue({
-        el:"app",
+        el:"#app",
         data: {
             votes:[],
             currLangId:"ru",
