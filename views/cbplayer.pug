@@ -45,8 +45,6 @@ html
         #roomVote.rFeedGroup(v-if="votes.filter(r=>{return r.isactive}).length>0 ")
           div.rFeedGroupTitle
             div.rFeedGroupBody
-
-
               div.qItem(v-for="item in votes" v-if="item.isactive" ) {{}}
                 div(v-if="item.iscompl" style="margin-bottom:20px")
                   span.red #{lang.pollClosed}.

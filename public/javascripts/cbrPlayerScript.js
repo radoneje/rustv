@@ -16,9 +16,10 @@ window.onload=function () {
             UpdateInteractive:async function(_this){
 
                 try {
-                    console.log("UpdateInteractive");
+
                     var r = await axios.get("/rest/api/votes/" + eventid + "/" + roomid)
                     this.votes = r.data;
+                    console.log("UpdateInteractive", this.votes);
                 }
                 catch (e) {
 
