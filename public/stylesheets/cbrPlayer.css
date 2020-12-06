@@ -130,3 +130,14 @@
 .vAnswBox.isCompl .vAnswPercTitle{
     width: 30%;
 }
+@media only screen and (max-width: 864px) {
+    .qItemName{
+        font-size: 24px;
+    }
+    .vAnswBox {
+        margin: 10px 10px;
+    }
+    .vAnsw{
+        font-size: 18px;
+    }
+}
