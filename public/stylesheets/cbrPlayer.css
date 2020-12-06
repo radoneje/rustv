@@ -51,12 +51,23 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    font-family: CB_Stem !important;
+    font-style: normal;
+    font-weight: normal;
 }
 .qItemName{
     text-align: center;
     color:#FFFFFF;
-    font-family: CB_Stem !important;
-    font-style: normal;
-    font-weight: normal;
+
     font-size: 42px;
+}
+.vAnswBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+.vAnsw{
+    color:white;
+    font-size: 24px;
+    width: calc(25%  - 10px);
 }
