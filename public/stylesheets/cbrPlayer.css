@@ -84,5 +84,10 @@
     position: relative;
 }
 .vAnswBox.isCompl{
+     display: block;
+ }
 
+.vAnswBox.isCompl vAnsw{
+   background: none !important;
+   color:white  !important;
 }
