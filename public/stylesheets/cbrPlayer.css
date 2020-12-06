@@ -65,9 +65,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 10px 50px;
  }
 .vAnsw{
     color:white;
     font-size: 24px;
     width: calc(25%  - 10px);
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    background: #0083BB;
+    padding: 10px;
 }
