@@ -1,5 +1,61 @@
+@font-face {
+    font-family: 'CB_Stem Extra';
+    src: url('/fonts/CB_Stem-ExtraLight.eot');
+    src: url('/fonts/CB_Stem-ExtraLight.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/CB_Stem-ExtraLight.woff2') format('woff2'),
+    url('/fonts/CB_Stem-ExtraLight.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CB_Stem';
+    src: url('/fonts/CB_Stem-Regular.eot');
+    src: url('/fonts/CB_Stem-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/CB_Stem-Regular.woff2') format('woff2'),
+    url('/fonts/CB_Stem-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CB_Stem';
+    src: url('/fonts/CB_Stem-Light.eot');
+    src: url('/fonts/CB_Stem-Light.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/CB_Stem-Light.woff2') format('woff2'),
+    url('/fonts/CB_Stem-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CB_Stem';
+    src: url('/fonts/CB_Stem-Italic.eot');
+    src: url('/fonts/CB_Stem-Italic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/CB_Stem-Italic.woff2') format('woff2'),
+    url('/fonts/CB_Stem-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'CB_Stem';
+    src: url('/fonts/CB_Stem-Medium.eot');
+    src: url('/fonts/CB_Stem-Medium.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/CB_Stem-Medium.woff2') format('woff2'),
+    url('/fonts/CB_Stem-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
 #app{
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+.qItemName{
+    text-align: center;
+    color:#FFFFFF;
+    font-family: CB_Stem !important;
+    font-style: normal;
+    font-weight: normal;
 }
