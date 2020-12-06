@@ -99,3 +99,12 @@
     align-items: center;
     justify-content: flex-start;
 }
+.vAnswBox.isCompl .vAnswTitleCap{
+      width: 30%;
+  }
+.vAnswBox.isCompl .vAnswPercent{
+    width: 30%;
+}
+.vAnswBox.isCompl .vAnswPercTitle{
+    width: 30%;
+}
