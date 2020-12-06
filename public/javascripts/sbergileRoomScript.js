@@ -33,8 +33,8 @@ window.onload=function () {
 
             sect:[
 
-                {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoqCL.svg'},
-                {title:"Чат", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactiveCL.svg'}
+                {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoqCl.svg'},
+                {title:"Чат", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactiveCl.svg'}
             ],
             activeSection:2,
             chat:[],
