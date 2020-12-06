@@ -92,6 +92,7 @@
    color:white  !important;
     width: 100%;
     text-align: left;
+    cursor: auto;
 }
 .vAnswBox.isCompl .vAnswTitle{
     display: flex;
