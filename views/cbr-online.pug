@@ -224,7 +224,7 @@ html
                         <path d="M1.5 8C1.5 7.17157 2.17157 6.5 3 6.5H12C12.8284 6.5 13.5 7.17157 13.5 8V16C13.5 16.8284 12.8284 17.5 12 17.5H3C2.17157 17.5 1.5 16.8284 1.5 16V8Z" stroke="#9A9A9A"/>
                         <path d="M22.0992 5.00042C22.3496 5.16734 22.5 5.44833 22.5 5.74924V18.2508C22.5 18.5517 22.3496 18.8327 22.0992 18.9996C21.7655 19.222 21.3249 19.1968 21.0187 18.9378L16.0311 14.7175C15.6943 14.4325 15.5 14.0136 15.5 13.5724V10.4276C15.5 9.98637 15.6943 9.56752 16.0311 9.28252L21.0187 5.06222C21.3249 4.80315 21.7655 4.77795 22.0992 5.00042Z" stroke="#9A9A9A"/>
                         </svg>
-                        input.ask(placeholder="Напишите Ваш вопрос до 600 символов"  maxlength="600" v-on:paste="qTextOnPaste($event)" id="qText" v-model="qText" v-on:keypress="qtextChange($event)")
+                        input.ask(:placeholder="currLang.Yourquestion"  maxlength="600" v-on:paste="qTextOnPaste($event)" id="qText" v-model="qText" v-on:keypress="qtextChange($event)")
                         <svg class="svgSendBtn" v-on:click="qtextSend()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
                         <desc>Created with Sketch.</desc>
@@ -260,7 +260,7 @@ html
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 11C16.3284 11 17 10.1046 17 9C17 7.89543 16.3284 7 15.5 7C14.6716 7 14 7.89543 14 9C14 10.1046 14.6716 11 15.5 11Z" fill="#9A9A9A"/>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M6.37027 13.5247C6.27006 13.3332 6.41166 13.116 6.62779 13.116H18.5288C18.7536 13.116 18.8943 13.3497 18.7776 13.5418C18.0473 14.7436 15.7228 18.0745 12.3926 18.0745C9.0464 18.0745 6.99138 14.7116 6.37027 13.5247Z" stroke="#9A9A9A"/>
                         </svg>
-                        input.ask(v-on:paste="chatTextOnPaste($event)" placeholder="Напишите Ваше сообщение" id="chatText" v-model="chatText" v-on:keypress="chattextChange($event)")
+                        input.ask(v-on:paste="chatTextOnPaste($event)" :placeholder="currLang.youMessage" id="chatText" v-model="chatText" v-on:keypress="chattextChange($event)")
                         <svg class="svgSendBtn" v-on:click="chattextSend()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
                         <desc>Created with Sketch.</desc>

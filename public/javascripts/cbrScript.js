@@ -174,7 +174,7 @@ window.onload=function () {
                 console.log(this.currLang);
                 this.currLang=lang[this.currLangId];
                 this.sect[0].title=this.currLang.Questions;
-                this.sect[0].title=this.currLang.Support;
+                this.sect[1].title=this.currLang.Support;
 
             },
             loginCodeSubmit: function(){
