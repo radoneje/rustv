@@ -31,8 +31,10 @@ async function redirect(f,req,res){
   res.redirect(r[0].value);
 
 }
-router.get('/cbplayer', function(req, res, next) {
-  res.render('cbplayer')
+router.get('/cbplayer/:langid?', function(req, res, next) {
+  if(!req.params.langid)
+    req.params.langid="ru"
+  res.render('cbplayer', {langid:req.params.langid});
 })
 router.get('/', function(req, res, next) {
   console.log(req.headers.host)
@@ -41,7 +43,8 @@ router.get('/', function(req, res, next) {
     return res.render('cyberPolygon', { title: 'Cyber Polygon', lang:(require("../lang.json"))["en"] });
 
   if(req.headers.host.indexOf("cbr-online.ru")>=0)
-    return res.render('cbr-online', { title: 'Пресс-конференция Банка России' });
+    //return res.render('cbr-online', { title: 'Пресс-конференция Банка России' });
+    return res.render('cbr-online', { title: 'Онлайн-конференция Банка России', lang:require('../lang') });
   if(req.headers.host.indexOf("gpn.onevent.online")>=0)
     return res.render('gpn', { title: 'Трансляция ДИР' });
   if(req.headers.host.indexOf("roastom.onevent.online")>=0)
@@ -50,8 +53,8 @@ router.get('/', function(req, res, next) {
     return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
   if(req.headers.host.indexOf("atomday.ru")>=0)
     return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
- // res.render('index', { title: 'ON.event' });
-  res.render('cbr-online', { title: 'Онлайн-конференция Банка России', lang:require('../lang') });
+  res.render('index', { title: 'ON.event' });
+
 
 });
 router.get('/badbrowser', function(req, res, next) {
