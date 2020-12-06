@@ -1,5 +1,5 @@
 var serverUrl = "wss://wowza02.onevent.online:8443";
-if(typeif(roomid)!="undefined"  && roomid>90)
+if(typeof(roomid)!="undefined"  && roomid>90)
    var serverUrl = "wss://phone02.sber.link:8443";
 if(typeof(room)!="undefined"  && room.id>90)
 

@@ -2155,6 +2155,23 @@ router.post('/regToGpn/',  async (req, res, next) =>{
     }
 
 })
+router.post("/sbergileRegUser",async (req, res, next) => {
 
+    var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.body.roomid})
+    var room=rooms[0]
+    if((room.id>=102 && room.id<=104) ||room.id==30 )
+    {
+        var usr = await req.knex("t_eventusers").insert({
+            eventid: req.body.roomid,
+            f: req.body.username,
+            i: "",
+            tel: "",
+            email: "",
+            smsCode: "",
+        }, "*")
+
+        return res.json(usr[0]);
+    }
+});
 
 module.exports = router

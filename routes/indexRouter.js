@@ -183,6 +183,45 @@ res.header("X-Frame-Options","")
   res.render('room', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
 
 })
+
+router.get('/sbergile/:id',  async (req, res, next) =>{
+
+  req.params.id=parseInt(req.params.id)
+  if(!Number.isInteger(req.params.id))
+    return res.send(404);
+
+  var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.params.id})
+  if(rooms.length<1)
+    // return res.send(404);
+  rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:30})
+
+  var room=rooms[0]
+
+
+  if((room.id>=102 && room.id<=104) ||room.id==30 )
+  {
+    var usr = await req.knex("t_eventusers").insert({
+      eventid: room.eventid,
+      f: "noname",
+      i: "",
+      tel: "",
+      email: "",
+      smsCode: "",
+    }, "*")
+    console.log("/room/:id")
+    req.session["user"+room.eventid]=usr[0];
+  }
+  else
+    return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
+  var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
+  res.header("X-Frame-Options","")
+  if((room.id>=102 && room.id<=104) ||room.id==30 )
+    res.render('sbergile', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
+  else
+    res.render('room', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
+
+})
+
 router.get('/chatToscreen/:id',  async (req, res, next) =>{
   req.params.id=parseInt(req.params.id)
   if(!Number.isInteger(req.params.id))
