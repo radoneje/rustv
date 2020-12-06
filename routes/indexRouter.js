@@ -34,7 +34,7 @@ async function redirect(f,req,res){
 router.get('/cbplayer/:langid?', function(req, res, next) {
   if(!req.params.langid)
     req.params.langid="ru"
-  res.render('cbplayer', {langid:req.params.langid});
+  res.render('cbplayer', {langid:req.params.langid, lang:require('./../lang')});
 })
 router.get('/', function(req, res, next) {
   console.log(req.headers.host)

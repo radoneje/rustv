@@ -8,7 +8,9 @@ window.onload=function () {
     var app= new Vue({
         el:"app",
         data: {
-            votes:[]
+            votes:[],
+            currLangId:"ru",
+            currLang:lang[langid],
         },
         methods:{
             UpdateInteractive:async function(){
