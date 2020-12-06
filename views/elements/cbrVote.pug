@@ -1,0 +1,40 @@
+#roomVote.rFeedGroup(v-if="votes.filter(r=>{return r.isactive}).length>0 || tags.filter(r=>{return r.isactive}).length>0 || pole.filter(r=>{return r.isactive}).length>0")
+    div.rFeedGroupTitle
+        div.rFeedGroupBody
+            div.qItem(v-for="item in pole" v-bind:class="{ready:item.isReady}" v-if="item.isactive")
+                div.ask.poleTitle( ) {{item.title}}
+                div(style="margin-bottom:10px" v-if="!item.iscompl")
+                    div(style="width:100%;position: relative;height: 0;padding-bottom: 100%;")
+                        div(style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;")
+                            div(:id="'pole'+item.id" v-on:click="poleClick(item, $event)" style="width: 100%;height: 100%;background:white;position: relative;")
+                                div(style="width: 1px;height: 100%;background:black;position: absolute;top:0; left:50%")
+                                div(style="width: 100%;height: 1px;background:black;position: absolute;top:50%; left:0")
+                                div.ask(type='text' placeholder="введите текст здесь"   style="background:white;color:black;width: 50%;position: absolute;top:0%; left:25%;text-align:center") {{item.top}}
+                                div.ask(type='text' placeholder="введите текст здесь"   style="background:white;color:black;width: 50%;position: absolute;bottom:0%; left:25%;text-align:center") {{item.bottom}}
+                                div.ask(type='text' placeholder="введите текст здесь"  style="background:white;color:black;width: 40%;position: absolute;bottom:50%; left:0%;text-align:left") {{item.l}}
+                                div.ask(type='text' placeholder="введите текст здесь"  style="background:white;color:black;width: 40%;position: absolute;bottom:50%; right:0%;text-align:right") {{item.r}}
+                    div(style="margin-top:10px" v-if="!item.done")
+                        span.link.green( v-on:click="poleDo(item)" ) &nbsp;&nbsp; Проголосовать &nbsp;&nbsp;
+                div(style="margin:10px" v-if="item.iscompl")
+                    span.link.green( v-on:click="poleResShow(item)") Посмотреть результаты
+
+            div.qItem(v-for="item in tags" v-bind:class="{ready:item.isReady}" v-if="item.isactive")
+                div.ask.poleTitle( ) {{item.title}}
+                div(style="margin-bottom:10px" v-if="!item.iscompl")
+                    input.ask.tInput(type='text' placeholder="Напишите слова через запятую"  v-model="item.text" v-bind:readonly="item.done")
+                    div(style="margin-top:10px")
+                        span.link.green( v-on:click="tagsDo(item)" v-if="!item.done") &nbsp;&nbsp; Проголосовать &nbsp;&nbsp;
+                div(style="margin:10px" v-if="item.iscompl")
+                    span.link.green( v-on:click="tagsResShow(item)") Посмотреть результаты
+
+            div.qItem(v-for="item in votes" v-if="item.isactive" )
+                div(v-if="item.iscompl" style="margin-bottom:20px")
+                    span.red #{lang.pollClosed}.
+                div.qItemName {{item.title}}
+
+                div.vAnswBox
+                    div.vAnsw(v-for="answ in sortedVoteAnsvers(item.answers)" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
+                        div.vAnswTitle
+                            span(v-if="item.iscompl") {{CalcAnswPercent(answ, item)}}%,&nbsp
+                            span {{answ.title}}
+                            div.vAnswPercent(v-if="item.iscompl" v-bind:style="{width:CalcAnswPercent(answ, item)+'%'}")
