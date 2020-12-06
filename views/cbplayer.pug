@@ -51,7 +51,7 @@ html
                 div.vAnswBox(v-bind:class="{isCompl:item.iscompl}")
                   div.vAnsw(v-for="(answ, i) in sortedVoteAnsvers(item.answers)" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
                     div.vAnswTitle
-                      .vAnswTitleCap {{answ.title}} {{i}}
+                      .vAnswTitleCap {{answ.title}}
                       .vAnswPercent(v-if="item.iscompl")
                         .vAnswPercentStatus(:item="'a'+i" v-bind:style="{width:CalcAnswPercent(answ, item)+'%'}")
                       .vAnswPercTitle(v-if="item.iscompl") {{CalcAnswPercent(answ, item)}}%,&nbsp
