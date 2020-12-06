@@ -110,7 +110,7 @@
 .vAnswBox.isCompl .vAnswPercentStatus{
     height: 1em;
 }
-.vAnswBox.isCompl .vAnswPercentStatus:nth-of-type(0){
+.vAnswBox.isCompl .vAnswPercentStatus.a0(0){
       background: #F0665D;
   }
 .vAnswBox.isCompl .vAnswPercentStatus:nth-of-type(1){
