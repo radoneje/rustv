@@ -104,6 +104,10 @@
   }
 .vAnswBox.isCompl .vAnswPercent{
     width: 30%;
+    height: 1em;
+}
+.vAnswBox.isCompl .vAnswPercentStatus{
+    height: 1em;
 }
 .vAnswBox.isCompl .vAnswPercTitle{
     width: 30%;
