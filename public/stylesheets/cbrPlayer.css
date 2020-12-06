@@ -90,4 +90,5 @@
 .vAnswBox.isCompl vAnsw{
    background: none !important;
    color:white  !important;
+    width: 100%;
 }
