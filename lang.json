@@ -49,7 +49,21 @@
     "replyPlaceholder": "Напишите здесть текст ответа",
     "reply": "Ответить",
     "messageFromMod": "Сообщение от модератора",
-    "remind": "Получать уведомления о начале событий"
+    "remind": "Получать уведомления о начале событий",
+    "onlineConf": "Онлайн-конференция",
+    "onlineConfTitle": [
+      "9–10 декабря 2020.",
+      "(Пост)Короновирусная",
+      "экономика и вызовы для",
+      "для политики центрального банка"
+    ],
+    "PersonalCodeTitle": "Введите персональный код",
+    "PersonalCode": "Персональный код",
+    "Send": "Отправить",
+    "CodeIncorrect": "Введенный код неверен",
+    "loginDate": "Трансляция начнется здесь 9 декабря в 16:00",
+    "checkingCode": "Проверяю Ваш код...",
+    "footerIframe": "https://conference.cbr.ru/conference/post-koronavirusnaya-ekonomika-i-vyzovy-dlya-politiki-tsentralnogo-banka/?interface=clear"
   },
   "en": {
     "registration":"Registration",
@@ -101,7 +115,21 @@
     "replyPlaceholder": "Reply text write here",
     "reply": "Reply",
     "messageFromMod": "Message from Moderator",
-    "remind": "Notify me when event starts"
+    "remind": "Notify me when event starts",
+    "onlineConf": "On-line conferences",
+    "onlineConfTitle": [
+      "9 – 10 December 2020.",
+      "(Post-)Coronavirus Economy",
+      " and Challenges ",
+      "to Central Bank Policies"
+    ],
+    "PersonalCodeTitle": "Enter personal code",
+    "PersonalCode": "Personal code",
+    "Send": "Send",
+    "CodeIncorrect": "Personal code is incorrect",
+    "loginDate": "The broadcast starts here on 9 December in 16:00 MSK (+3 GMT)",
+    "checkingCode": "Cheking personal code...",
+    "footerIframe": "https://conference.cbr.ru/eng/conference/post-coronavirus-economy-and-challenges-to-central-bank-policies/?interface=clear"
 
   }
 }

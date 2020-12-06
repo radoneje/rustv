@@ -9,20 +9,22 @@
 }
 
 @font-face {
-  font-family: 'DINPro';
-  src: url('/fonts/DINPro-Medium.eot');
-  src: url('/fonts/DINPro-Medium.eot?#iefix') format('embedded-opentype'),
-  url('/fonts/DINPro-Medium.woff') format('woff');
+  font-family: 'CB_Stem';
+  src: url('/fonts/CB_Stem-Regular.eot');
+  src: url('/fonts/CB_Stem-Regular.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/CB_Stem-Regular.woff2') format('woff2'),
+  url('/fonts/CB_Stem-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'DINPro';
-  src: url('/fonts/DINPro-Bold.eot');
-  src: url('/fonts/DINPro-Bold.eot?#iefix') format('embedded-opentype'),
-  url('/fonts/DINPro-Bold.woff') format('woff');
-  font-weight: bold;
+  font-family: 'CB_Stem';
+  src: url('/fonts/CB_Stem-Light.eot');
+  src: url('/fonts/CB_Stem-Light.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/CB_Stem-Light.woff2') format('woff2'),
+  url('/fonts/CB_Stem-Light.woff') format('woff');
+  font-weight: 300;
   font-style: normal;
 }
 
@@ -49,12 +51,12 @@
 body {
   background-color: #EEEEEE;
   color: #252321;
-  font-family: DINPro !important;
+  font-family: CB_Stem !important;
   font-style: normal;
   font-weight: normal;
 }
 #loginApp{
-  background: linear-gradient(180deg, #0070BA 0%, #0097D8 100%);
+  background: url(/images/cbBg.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -62,77 +64,40 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: DINPro;
+  font-family: CB_Stem;
   font-style: normal;
   font-weight: normal;
-  transition: opacity .5s ease;
 }
 .wnd{
   width: 1184px;
 
-  background: linear-gradient(130.71deg, #004077 0%, #0097D8 75.25%);
-  color:white;
+  background: #E6E9EB;
   box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.16);
   border-radius: 8px;
   box-sizing: border-box;
   display: flex;
-  height: 100vh;
 }
 .cbLoginLeft{
-  width: 50%;
+  width: 720px;
   padding: 40px;
   box-sizing: border-box;
-  background: white;
-  color: black;
-  display: flex;
-  align-items: center;
 }
-
 .cbLoginRight{
-  width:50%;
+  width: ~"calc(100% - 720px)";
   background: #F6F6F6;
-  //display: flex;
+  border-radius: 0 8px 8px 0;
+  display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
   padding: 40px;
-  background-size: cover;
-
-  display: flex;
-  background-repeat: no-repeat;
-  background-image: url(/images/clients/gpn/register_no_text.jpg);
-}
-.cbLoginLeftTitle{
-  font-size: 20px;
-}
-.rUser{
-  color: black;
-}
-#userVideo{
-  display: none;
-}
-.lFooterAdgendaAvatar{
-  border-radius: 0;
-  top: 3px;
-  left: -25px;
-}
-.lFooterAdgendaBox{
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-.lFooterAdgendaWr .qItemName{
-  color:black
-}
-
-.lFooterAdgendaWr{
-  background: white;
 }
 .cbLoginRightBox{
   width: 100%;
 }
 .cbLoginHead{
   margin-top: 65px;
-  font-family: DINPro;
+  font-family: CB_Stem;
   font-style: normal;
   font-weight: 500;
   font-size: 36px;
@@ -143,80 +108,32 @@ body {
   color: #000000;
 }
 .cbLoginTitle{
-  font-family: DINPro;
+  font-family: CB_Stem;
   font-style: normal;
   font-weight: 500;
-  font-size: 36px;
-  line-height: 45px;
+  font-size: 44px;
+  line-height: 57px;
   text-transform: uppercase;
-  color:#ffffff;
+
   /* Text EEEEEE */
+
+  color: #000000;
   margin-top:16px
 }
-.loginError{
-  margin-top:6px ;
-  color:#E91D1D;
-  opacity: 0;
-}
-.loginLogOn{
-  /* Rectangle: */
-  background: #0173BC;
-  border-radius: 5px;
-  font-size: 20px;
-  color: #FFFFFF;
-  margin-top:24px;
-  padding: 12px;
-  cursor: pointer;
-  width: min-content;
-}
-.footerLogo{
-  position: absolute;
-  bottom: 24px;
-  bottom: 0;
-  width: 300px;
-  max-width: 100%;
-}
-.footerLogo svg{
-  width: 100%;
-}
-.cbLoginForm{
-  width: 100%;
-  padding: 6px;
-  border:1px solid #706F63;
-  margin-top:24px;
-  border-radius: 5px;
-  font-size: 20px;
-}
-.cbLoginFormWr.error #logincode{
-  border:1px solid #E91D1D;
-}
-.cbLoginFormWr.error .loginError{
-  opacity: 1;
-}
-
-.cbLoginSubTitle{
-  background: #01477f;
-  text-transform: uppercase;
-  width: max-content;
-  font-size: 20px;
-  margin-top:20px;
-  padding: 6px 24px;
-  line-height: 31px;
-}
 .cbLoginPerson{
-  font-family: DINPro;
+  font-family: CB_Stem;
   font-style: normal;
   font-weight: 500;
   font-size: 36px;
   line-height: 46px;
-  line-height: 31px;
+
   /* Text B8B9BC */
 
   color: #000000;
   margin-top:48px ;
 }
 .cbLoginPosition{
-  font-family: DINPro;
+  font-family: CB_Stem;
   font-style: normal;
   font-weight: normal;
   font-size: 24px;
@@ -233,17 +150,18 @@ body {
   font-family: CB_Stem;
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 31px;
-  color: #ffffff;
-  background: #0173bc;
-  padding: 6px 24px;
-  margin-top:20px;
-  width: max-content;
+  /* identical to box height */
 
+
+  /* Text B8B9BC */
+
+  color: #000000;
+  margin-top:48px ;
 }
 .cbLoginRightTitle{
-  font-family: DINPro;
+  font-family: CB_Stem;
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
@@ -276,7 +194,7 @@ body {
 }
 .cbLoginRightEnter {
   cursor: pointer;
-  background: #0070BA;
+  background: #00BBEE;
   opacity: 0.7;
   border-radius: 4px;
   width: 100%;
@@ -297,7 +215,7 @@ body {
   color: #252321;
 }
 div, input, textarea, span{
-  font-family: DINPro ;//!important;
+  font-family: CB_Stem !important;
   font-style: normal;
   //font-weight: normal;
 }
@@ -309,7 +227,7 @@ div, input, textarea, span{
 
 }
 .roomScreen{
-  background:#ffffff;
+  background: url(/images/clientLoginBg.png);
   background-size: 100%;
   background-position: 0 120px;
   background-repeat: no-repeat;
@@ -323,10 +241,10 @@ div, input, textarea, span{
 .plInputBox input, .plInputBox div.sel {
   background: #D8D8D8;
   color:#252321;
-  border: 1px solid #0070BA;
+  border: 1px solid #00BBEE;
 }
 .plSubmit{
-  background: #0070BA;
+  background: #00BBEE;
   color: #E9E9E9;
 }
 #videoWr{
@@ -346,7 +264,7 @@ div, input, textarea, span{
   color: #000000;
 }
 .qItem.my .qItemName {
-  color: #0070BA;;
+  color: #00BBEE;;
 }
 .qItemText, .qItemDate{
   color: #000000;
@@ -359,13 +277,13 @@ div, input, textarea, span{
   color: #000000;
 }
 .qItemAnsvwer a {
-  color: #0070BA;;
+  color: #00BBEE;;
 }
 .qLikeIcon path, .qItemReady svg path {
-  fill:#0070BA;
+  fill:#00BBEE;
 }
 .qItemReady{
-  color: #0070BA;
+  color: #00BBEE;
   background: #E6E9EB;
 }
 input{
@@ -373,36 +291,36 @@ input{
 }
 .rHeadItem{
   color: #000000;
-  width:100px;
+  width:75px;
   font-style: normal;
    font-weight:normal;
-  font-family: DINPro;
+  font-family: CB_Stem;
 }
 .rHeadItem.active{
-  border-bottom: 2px solid #0070BA;
-  color: #0070BA;
+  border-bottom: 2px solid #00BBEE;
+  color: #00BBEE;
 }
 .userItemAvatar svg path{
   fill:#000000
 }
 .userItem.active path {
-  fill: #0070BA;
+  fill: #00BBEE;
 }
 .green{
-  color: #0070BA;
+  color: #00BBEE;
 }
 .videoPlayBannner svg path{
-  fill:#0070BA !important;
+  fill:#00BBEE !important;
 }
 .greenBtn{
-  background: #0070BA;
+  background: #00BBEE;
 }
 .vAnsw.ready {
-  color: #0070BA;
+  color: #00BBEE;
 
 }
 .codeRoom svg path{
-  fill:#0070BA ;
+  fill:#00BBEE ;
 }
 .rFeedGroupTitle{
   color: #000000;
@@ -440,8 +358,11 @@ input{
 .aModSectFindClear svg g{
   fill:#E6E9EB;
 }
-.rUser{
-  display: none;
+.lFooterAdgendaWr {
+  background: #E6E9EB;
+}
+.lFooterAdgendaWr .qItemName{
+  color: #00BBEE;
 }
 
 .lFooterProg {
@@ -467,27 +388,27 @@ input{
 }
 .qItemDate .link.green{
   color: white;
-  background: #0070BA;
+  background: #00BBEE;
   padding: 4px;
   border-radius: 4px;
   margin-right: 1em;
 }
 .qItemDate .link.red{
   color: red;
-  background: #0070BA;
+  background: #00BBEE;
   padding: 4px;
   border-radius: 4px;
   margin-right: 1em;
 }
 .qItemDate .link.black{
   color: #000000;
-  background: #0070BA;
+  background: #00BBEE;
   padding: 4px;
   border-radius: 4px;
   margin-right: 1em;
 }
 .showAll{
-  background: #0070BA;
+  background: #00BBEE;
 }
 .messageFromModReplyInput, .qItemMessageInputGroup input{
   background: #cbcccc;;
@@ -512,46 +433,85 @@ input{
 @media only screen and (max-width: 1024px) {
   #sectMenu_8 {
     display: none !important;
-  }
-  .wnd {
-    width: 100%;
-    display: block;
-    display: flex; flex-direction: column;
-  }
-  .cbLoginLeft{
-    width: 100%;
-    display: block;
-    order: 2;
-    padding: 24px 6px;
-  }
-  .footerLogo{
-    position: initial;
-    margin-top:24px
-  }
-  .loginLogOn{
-    margin:20px auto;
-  }
-  .cbLoginRight{
-    width:100%;
-    order: 1;
-    display: block;
-    padding: 24px 6px;
 
   }
-  .cbLoginSubTitle{
-    max-width: 100%;
+  .wnd {
+    width: 864px;
+  }
+  .cbLoginLeft{
+    width: ~"calc(100% - 376px)";
+  }
+  .cbLoginRight{
+    width: 376px;
   }
   .cbLoginHead{
     font-size: 28px;
     line-height: 36px;
-    text-transform: uppercase;
   }
   .cbLoginTitle{
     font-size: 36px;
     line-height: 46px;
-    text-transform: uppercase;
   }
 
 }
+.rUser{
+  display: none;
+}
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.videoWrapper video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+@media only screen and (max-width: 864px) {
+  #app{
+    background:#E6E9EB ;
+  }
+  #loginApp{
+    display: block;
+  }
+  .wnd {
+    display: block;
+    width: 100%;
+    border-radius: 0;
+  }
+  .cbLoginLeft{
+    width: 100%;
+    border-radius: 0;
+    padding: 20px;
+    padding-bottom: 40px;
+    padding-top: 40px;
+  }
+  .cbLoginTitle{
+    font-size: 26px;
+    line-height: 34px;
+  }
+  .cbLoginPerson{
+    font-size: 26px;
+    line-height: 34px;
+  }
+  .cbLoginHead {
+    font-size: 22px;
+    line-height: 36px;
+  }
+  .cbLoginRightCode{
+    font-size: 22px;
+  }
+  .cbLoginRightEnter{
+    font-size: 22px;
+  }
+  .cbLoginRight{
+    width: 100%;
+    border-radius: 0;
+    padding: 20px;
+    padding-bottom: 40px;
+  }
 
+}
 

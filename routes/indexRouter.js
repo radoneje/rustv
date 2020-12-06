@@ -50,7 +50,8 @@ router.get('/', function(req, res, next) {
     return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
   if(req.headers.host.indexOf("atomday.ru")>=0)
     return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
-  res.render('index', { title: 'ON.event' });
+ // res.render('index', { title: 'ON.event' });
+  res.render('cbr-online', { title: 'Онлайн-конференция Банка России', lang:require('../lang') });
 
 });
 router.get('/badbrowser', function(req, res, next) {

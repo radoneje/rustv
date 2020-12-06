@@ -1,0 +1,29 @@
+{
+  "url": "https://zeenapi.stg.tooladigital.ru/comments/api/external/questions?stream_id=",
+  "compare": [
+    {
+      "room": 1,
+      "extroom":[23]
+    },
+    {
+      "room": 2,
+      "extroom":[34,29]
+    },
+    {
+      "room": 3,
+      "extroom":[26,30]
+    },
+    {
+      "room": 4,
+      "extroom":[33,31]
+    },
+    {
+      "room": 5,
+      "extroom":[27,34]
+    },
+    {
+      "room": 6,
+      "extroom":[28]
+    }
+  ]
+}

@@ -112,6 +112,21 @@ router.post('/checkCyberPersonalCode', async (req, res, next) => {
 });
 
 
+router.post('/cbPersonalCode', async (req, res, next) => {
+    console.log("cbPersonalCode")
+    var code=req.body.code;
+    if(!code)
+        return res.sendStatus(404);
+    if(code.length>10)
+        return res.sendStatus(403);
+    var users = await req.knex.select("*").from("t_eventusers").where({personalcode:code}).orderBy("id","desc");
+    if(users.length==0)
+        return res.sendStatus(404);
+    req.session["user" + users[0].eventid]= users[0];
+    return res.json(users[0]);
+});
+
+
 router.post('/checkCode', async (req, res, next) => {
     console.log("checkCode")
     var users = await req.knex.select("*").from("t_users").where({
@@ -1213,7 +1228,7 @@ function urlify(text) {
     // return text.replace(urlRegex, '<a href="$1">$1</a>')
 }
 
-router.get("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+router.get("/quest/:eventid/:roomid", /*checkLoginToRoom,*/ async (req, res, next) => {
     var r = await req.knex.select("*")
         .from("v_q")
         .where({roomid: req.params.roomid})
@@ -1223,7 +1238,7 @@ router.get("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
     r=r.sort((a,b)=>a.id-b.id)
     res.json(r);
 })
-router.get("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+router.get("/chat/:eventid/:roomid", /*checkLoginToRoom,*/ async (req, res, next) => {
     var r = await req.knex.select("*")
         .from("v_chat")
         .where({roomid: req.params.roomid})
