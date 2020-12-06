@@ -22,7 +22,7 @@ window.onload=function () {
                     console.log("UpdateInteractive", this.votes);
                 }
                 catch (e) {
-
+                    console.warn(e)
                 }
                 setTimeout(function () {
                     _this.UpdateInteractive(_this);
