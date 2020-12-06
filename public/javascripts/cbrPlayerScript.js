@@ -13,6 +13,18 @@ window.onload=function () {
             currLang:lang[langid],
         },
         methods:{
+            CalcAnswPercent:function (answ, vote) {
+                var _this=this;
+                var count=vote.answers.length;
+                var total=0;
+                vote.answers.forEach(a=>total=total+a.count);
+
+                if(total==0)
+                    return 0;
+
+                ret=parseFloat(answ.count/total)*100;
+                return parseInt(ret);
+            },
             vote:function (answ, voteItem) {
                 if(voteItem.iscompl)
                     return;
