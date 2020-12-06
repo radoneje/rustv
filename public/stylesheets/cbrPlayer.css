@@ -101,6 +101,7 @@
 }
 .vAnswBox.isCompl .vAnswTitleCap{
       width: 30%;
+    font-size: 18px;
   }
 .vAnswBox.isCompl .vAnswPercent{
     width: 30%;
@@ -109,8 +110,17 @@
 .vAnswBox.isCompl .vAnswPercentStatus{
     height: 1em;
 }
+.vAnswBox.isCompl .vAnswPercentStatus:nth-child(0){
+      background: #F0665D;
+  }
 .vAnswBox.isCompl .vAnswPercentStatus:nth-child(1){
-   background: #F0665D;
+    background: #0083BB;
+}
+.vAnswBox.isCompl .vAnswPercentStatus:nth-child(2){
+    background: #01A5DC;
+}
+.vAnswBox.isCompl .vAnswPercentStatus:nth-child(3){
+    background: #63B74B;
 }
 .vAnswBox.isCompl .vAnswPercTitle{
     width: 30%;
