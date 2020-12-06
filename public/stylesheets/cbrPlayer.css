@@ -97,7 +97,7 @@
 .vAnswBox.isCompl .vAnswTitle{
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 .vAnswBox.isCompl .vAnswTitleCap{
       width: 30%;
@@ -108,6 +108,9 @@
 }
 .vAnswBox.isCompl .vAnswPercentStatus{
     height: 1em;
+}
+.vAnswBox.isCompl .vAnswPercentStatus:nth-child(1){
+   background: #F0665D;
 }
 .vAnswBox.isCompl .vAnswPercTitle{
     width: 30%;
