@@ -63,7 +63,8 @@
     "CodeIncorrect": "Введенный код неверен",
     "loginDate": "Трансляция начнется здесь 9 декабря в 16:00",
     "checkingCode": "Проверяю Ваш код...",
-    "footerIframe": "https://conference.cbr.ru/conference/post-koronavirusnaya-ekonomika-i-vyzovy-dlya-politiki-tsentralnogo-banka/?interface=clear"
+    "footerIframe": "https://conference.cbr.ru/conference/post-koronavirusnaya-ekonomika-i-vyzovy-dlya-politiki-tsentralnogo-banka/?interface=clear",
+    "Support": "Поддержка"
   },
   "en": {
     "registration":"Registration",
@@ -129,7 +130,7 @@
     "CodeIncorrect": "Personal code is incorrect",
     "loginDate": "The broadcast starts here on 9 December in 16:00 MSK (+3 GMT)",
     "checkingCode": "Cheking personal code...",
-    "footerIframe": "https://conference.cbr.ru/eng/conference/post-coronavirus-economy-and-challenges-to-central-bank-policies/?interface=clear"
-
+    "footerIframe": "https://conference.cbr.ru/eng/conference/post-coronavirus-economy-and-challenges-to-central-bank-policies/?interface=clear",
+    "Support": "Support"
   }
 }

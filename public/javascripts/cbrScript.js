@@ -6,7 +6,7 @@ window.onload=function () {
         document.location.href = "/badbrowser"
     }
 
-    var eventid=27;
+    var eventid=43;
     var roomid=100;
 
     var app = new Vue({
@@ -22,8 +22,8 @@ window.onload=function () {
             webCamStream:null,
             sect:[
 
-                {title:"Вопросы", isActive:false, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoq.svg'},
-                {title:"Поддержка", isActive:true, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactive.svg'},
+                {title:"Вопросы", isActive:true, id:1, logo:'/images/logoqactive.svg', logoactive:'/images/logoq.svg'},
+                {title:"Поддержка", isActive:false, id:2, logo:'/images/logochat.svg', logoactive:'/images/logochatactive.svg'},
 
             ],
             activeSection:1,
@@ -173,6 +173,9 @@ window.onload=function () {
                 this.currLangId=this.currLangId=="ru"?"en":"ru";
                 console.log(this.currLang);
                 this.currLang=lang[this.currLangId];
+                this.sect[0].title=this.currLang.Questions;
+                this.sect[0].title=this.currLang.Support;
+
             },
             loginCodeSubmit: function(){
                 var _this=this;
