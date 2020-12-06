@@ -132,12 +132,14 @@
 }
 @media only screen and (max-width: 864px) {
     .qItemName{
-        font-size: 24px;
+        font-size: 18px;
     }
     .vAnswBox {
         margin: 10px 10px;
     }
     .vAnsw{
-        font-size: 18px;
+        font-size: 16px;
+        line-height: 14px;
+        padding: 4px;
     }
 }
