@@ -64,7 +64,6 @@ window.onload=function () {
             },
             qLike:function (item) {
                 if(!localStorage.getItem("qLike"+item.id))
-                    console.log("before likes", item);
                     axios.post("/rest/api/qLike/"+eventid+"/"+roomid,{id:item.id}).then(
                         function (e) {
                             console.log("likes 2", item);
@@ -73,9 +72,10 @@ window.onload=function () {
                             else
                                 item.likes++;
                             console.log("likes 3", item);
+                            localStorage.setItem("qLike"+item.id, true);
                         }
                     );
-                localStorage.setItem("qLike"+item.id, true);
+
             },
             UpdateInteractive:async function(){
                 try {
