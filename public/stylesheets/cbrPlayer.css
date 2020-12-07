@@ -60,6 +60,11 @@
     align-items: center;
     justify-content: center;
     font-family: CB_Stem !important;
+    opacity: .5;
+    transition: opacity .5s ease;
+}
+#langWr:hover{
+    opacity: 1;
 }
 #app{
     position: absolute;
