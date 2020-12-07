@@ -1059,7 +1059,7 @@ router.post("/tagsAdd/:eventid/:roomid", checkLoginToRoom, async (req, res, next
     res.json(v[0]);
 })
 
-router.get("/votes/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+router.get("/votes/:eventid/:roomid", async (req, res, next) => {
 
     var v = await req.knex.select("*").from("t_vote")
         .where({isDeleted:false, roomid:req.params.roomid})
