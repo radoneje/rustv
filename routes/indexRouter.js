@@ -176,7 +176,7 @@ router.get('/room/:id',  async (req, res, next) =>{
     req.session["user"+room.eventid]=usr[0];
   }
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
-
+res.header("X-Frame-Options","")
   if(room.id==98)
     res.render('roomgpn', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
   else
@@ -214,7 +214,7 @@ router.get('/sbergile/:id',  async (req, res, next) =>{
   else
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
-  
+  res.header("X-Frame-Options","ALLOW-FROM https://sbergile-talks.ru/")
   if((room.id>=102 && room.id<=104) ||room.id==30 )
     res.render('sbergile', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
   else
@@ -235,7 +235,7 @@ router.get('/chatToscreen/:id',  async (req, res, next) =>{
 
 
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
-  
+  res.header("X-Frame-Options","")
   res.render('chatToscreen', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
 
 })
@@ -255,7 +255,7 @@ router.get('/stage/:id',  async (req, res, next) =>{
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stage/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
-  
+  res.header("X-Frame-Options","")
   res.render('stage', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false, lang:(require("../lang.json"))[events[0].lang||"ru"]});
 
 })
@@ -274,7 +274,7 @@ router.get('/stageDialog/:id',  async (req, res, next) =>{
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stageDialog/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
-  
+  res.header("X-Frame-Options","")
   res.render('stageDialog', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false, lang:(require("../lang.json"))[events[0].lang||"ru"]});
 
 })
@@ -296,7 +296,7 @@ router.get('/stage/translator/:id',  async (req, res, next) =>{
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stage/translator/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
-  
+  res.header("X-Frame-Options","")
   res.render('stageTranslator', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false, lang:(require("../lang.json"))[events[0].lang||"ru"]});
 
 })
@@ -315,7 +315,7 @@ router.get('/stagePgm/:id',  async (req, res, next) =>{
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stagePgm/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
-  
+  res.header("X-Frame-Options","")
   res.render('stagePgm', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false});
 
 })
@@ -333,7 +333,7 @@ router.get('/stageScreen/:id',  async (req, res, next) =>{
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stageScreen/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
-  
+  res.header("X-Frame-Options","")
   res.render('stageScreen', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false});
 
 })
@@ -351,7 +351,7 @@ router.get('/stageFive/:id',  async (req, res, next) =>{
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stageFive/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
-  
+  res.header("X-Frame-Options","")
   res.render('stageFive', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false});
 
 })
@@ -369,7 +369,7 @@ router.get('/stagePres/:id',  async (req, res, next) =>{
   if(!req.session["user"+room.eventid])
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/stagePres/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
-  
+  res.header("X-Frame-Options","")
   res.render('stagePres', { title: 'ON.event '+room.title, room:room , event:events[0], isMod:req.session["moderator"+room.id]?true:false});
 
 })
