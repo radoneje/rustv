@@ -60,6 +60,7 @@ window.onload=function () {
                 this.activeStream=id;
                // this.room.id=100+parseInt(id);
                 roomid=100+parseInt(id);
+                player.poster(this.getplayerPoster())
                 player.src(this.getplayerSrc());
                 player.play();
                 this.chat=[];
@@ -475,6 +476,10 @@ window.onload=function () {
                 this.showCode=false;
                 this.code="";
             },
+            getplayerPoster:function () {
+                var src="/images/sbergileposter"+this.activeStream+".png"
+                return src;
+            },
             getplayerSrc:function () {
                 var src="https://front.sber.link/hls/app0"+(this.activeStream+1)+"/e_st0"+(this.activeStream+1)+"_720p/index.m3u8"
                 return src;
@@ -512,6 +517,7 @@ window.onload=function () {
             }
             document.getElementById("app").style.opacity=1;
             player= videojs('my-video');
+            player.poster(this.getplayerPoster())
             player.src(this.getplayerSrc());
             document.getElementById("videoWrapper").style.display="block"
             var item=localStorage.getItem("sbergileUser");
