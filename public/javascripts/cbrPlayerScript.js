@@ -97,7 +97,7 @@ window.onload=function () {
                 player.play();
                 if(window.parent)
                     window.parent.postMessage("changeLang",langid);
-
+                console.log(app)
             })
             this.UpdateInteractive(this);
         }
