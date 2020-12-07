@@ -86,12 +86,13 @@ window.onload=function () {
         mounted:function () {
             document.getElementById("videoWrapper").style.display="block";
             var langWr=document.getElementById("langWr")
-            langWr.innerHTML=langid;
+            langWr.innerHTML="<div>"+langid+"</div>";
             langWr.addEventListener("click", function () {
                 if(langid=="ru")
                     langid="en"
                 else
                     langid="ru"
+                langWr.innerHTML="<div>"+langid+"</div>";
                 player.src(lang[langid].playerUrl);
                 player.play();
                 if(window.parent)
