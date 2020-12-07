@@ -169,8 +169,10 @@ window.onload=function () {
                 console.log(_this.user);
                 _this.UpdateInteractive();
             },
-            changeLang:function(){
+            changeLang:function(l){
+                if(!l)
                 this.currLangId=this.currLangId=="ru"?"en":"ru";
+                else this.currLangId=l;
                 console.log(this.currLang);
                 this.currLang=lang[this.currLangId];
                 this.sect[0].title=this.currLang.Questions;
@@ -261,9 +263,8 @@ window.onload=function () {
                 console.log("message", event);
                 if(event.data=="ru" || event.data=="en")
                 {
-                    _this.currLangId=event.data;
-                        _this.currLang=lang[event.data];
-                        console.log(_this.currLangId);
+                    _this.changeLang(event.data)
+
                 }
             }, false);
 
