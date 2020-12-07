@@ -64,10 +64,12 @@ window.onload=function () {
             },
             qLike:function (item) {
                 if(!localStorage.getItem("qLike"+item.id))
+                    console.log("before likes", item);
                     axios.post("/rest/api/qLike/"+eventid+"/"+roomid,{id:item.id}).then(
                         function (e) {
-                            console.log("likes", item);
+
                             item.likes++;
+                            console.log("likes", item);
                         }
                     );
                 localStorage.setItem("qLike"+item.id, true);
