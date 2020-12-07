@@ -1070,7 +1070,7 @@ router.get("/votes/:eventid/:roomid", async (req, res, next) => {
     }
     res.json(v);
 })
-router.get("/pole/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+router.get("/pole/:eventid/:roomid", async (req, res, next) => {
 
     var v = await req.knex.select("*").from("t_pole")
         .where({isDeleted:false, roomid:req.params.roomid})
@@ -1079,7 +1079,7 @@ router.get("/pole/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =>
     res.json(v);
 })
 
-router.get("/tags/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+router.get("/tags/:eventid/:roomid", async (req, res, next) => {
 
     var v = await req.knex.select("*").from("t_tags")
         .where({isDeleted:false, roomid:req.params.roomid})
