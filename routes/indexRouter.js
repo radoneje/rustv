@@ -214,7 +214,7 @@ router.get('/sbergile/:id',  async (req, res, next) =>{
   else
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
-  res.header("X-Frame-Options","ALLOW-FROM https://sbergile-talks.ru/")
+  //res.header("X-Frame-Options","ALLOW-FROM https://sbergile-talks.ru/")
   if((room.id>=102 && room.id<=104) ||room.id==30 )
     res.render('sbergile', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
   else
