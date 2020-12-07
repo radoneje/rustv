@@ -1,6 +1,7 @@
 window.onload=function () {
     var player = videojs('my-video');
     player.src(lang[langid].playerUrl)
+    console.log("d", lang[langid].playerUrl)
 
     var eventid=43;
     var roomid=100;
