@@ -259,10 +259,10 @@ window.onload=function () {
             var _this=this;
             window.addEventListener("message", function (event) {
                 console.log("message", event);
-                if(event=="ru" || event=="en")
+                if(event.data=="ru" || event.data=="en")
                 {
-                    _this.currLangId=event;
-                        _this.currLang=lang[event];
+                    _this.currLangId=event.data;
+                        _this.currLang=lang[event.data];
                         console.log(_this.currLangId);
                 }
             }, false);
