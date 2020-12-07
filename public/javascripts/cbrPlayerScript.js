@@ -97,6 +97,9 @@ window.onload=function () {
                 player.poster("/images/clients/cbposter.png")
                 player.src(lang[langid].playerUrl);
                 player.play();
+
+                app.currLangId=langid;
+                app.currLang=lang[langid];
                 if(window.parent)
                     window.parent.postMessage("langid");
                 console.log(app)

@@ -259,6 +259,7 @@ window.onload=function () {
             window.addEventListener("message", function (event) {
                 console.log("message", event);
             }, false);
+
         }
     })
 }
