@@ -48,7 +48,7 @@ html
             div.rFeedGroupBody
               div.qItem(v-for="item in votes" v-if="item.isactive" )
                 div.qItemName(v-if="currLangId=='ru'") {{item.title}}
-                v.qItemName(v-else) {{item.titleen}}
+                .qItemName(v-else) {{item.titleen}}
                 div.vAnswBox(v-bind:class="{isCompl:item.iscompl}")
                   div.vAnsw(v-for="(answ, i) in sortedVoteAnsvers(item.answers)" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
                     div.vAnswTitle
