@@ -1258,7 +1258,7 @@ router.delete("/qdelete/:id/:eventid/:roomid", checkLoginToRoom, async (req, res
     req.transport.emit("qDelete", r[0].id, req.params.roomid);
     res.json(r[0].id)
 });
-router.post("/qLike/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+router.post("/qLike/:eventid/:roomid", async (req, res, next) => {
 
     var r = await req.knex.select("*").from("t_q").where({id:req.body.id});
     if(r.length<1)
