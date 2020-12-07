@@ -191,7 +191,7 @@ block content
           .regUserFormButton(v-on:click="regUser()") Войти
           .regUserFormButton(v-on:click="regUserForm=false") Отменить
   .videoWrapper#videoWrapper(style="overflow: hidden;display:none" )
-      video#my-video.video.video-js.vjs-big-play-centered(controls  loop)
+      video#my-video.video.video-js.vjs-big-play-centered.playsinline(controls  loop)
 
   script.
       var eventid=!{room.eventid}
