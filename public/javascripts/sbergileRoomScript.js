@@ -64,7 +64,11 @@ window.onload=function () {
             },
             qLike:function (item) {
                 if(!localStorage.getItem("qLike"+item.id))
-                    axios.post("/rest/api/qLike/"+eventid+"/"+roomid,{id:item.id}).then();
+                    axios.post("/rest/api/qLike/"+eventid+"/"+roomid,{id:item.id}).then(
+                        function (e) {
+                            item.likes++;
+                        }
+                    );
                 localStorage.setItem("qLike"+item.id, true);
             },
             UpdateInteractive:async function(){
