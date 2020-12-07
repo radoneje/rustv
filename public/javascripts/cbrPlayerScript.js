@@ -85,7 +85,7 @@ window.onload=function () {
         },
         mounted:function () {
             document.getElementById("videoWrapper").style.display="block";
-            var langWr=document.getElementById("videoWrapper")
+            var langWr=document.getElementById("langWr")
             langWr.innerHTML=langid;
             langWr.addEventListener("click", function () {
                 if(langid=="ru")
