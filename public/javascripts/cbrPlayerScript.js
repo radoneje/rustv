@@ -9,7 +9,7 @@ window.onload=function () {
         el:"#app",
         data: {
             votes:[],
-            currLangId:"ru",
+            currLangId:langid,
             currLang:lang[langid],
         },
         methods:{
