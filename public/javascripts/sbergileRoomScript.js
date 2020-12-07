@@ -66,6 +66,7 @@ window.onload=function () {
                 if(!localStorage.getItem("qLike"+item.id))
                     axios.post("/rest/api/qLike/"+eventid+"/"+roomid,{id:item.id}).then(
                         function (e) {
+                            console.log("likes", item);
                             item.likes++;
                         }
                     );
