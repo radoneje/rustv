@@ -47,11 +47,13 @@ html
           div.rFeedGroupTitle
             div.rFeedGroupBody
               div.qItem(v-for="item in votes" v-if="item.isactive" )
-                div.qItemName {{item.title}}
+                div.qItemName(v-if="currLangId=='ru'") {{item.title}}
+                v.qItemName(v-else) {{item.titleen}}
                 div.vAnswBox(v-bind:class="{isCompl:item.iscompl}")
                   div.vAnsw(v-for="(answ, i) in sortedVoteAnsvers(item.answers)" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
                     div.vAnswTitle
-                      .vAnswTitleCap {{answ.title}}
+                      .vAnswTitleCap(v-if="currLangId=='ru'") {{answ.title}}
+                      .vAnswTitleCap(v-else) {{answ.titleen}}
                       .vAnswPercent(v-if="item.iscompl")
                         .vAnswPercentStatus(:item="'a'+i" v-bind:style="{width:'calc(50% * ( '+CalcAnswPercent(answ, item)+' / 100 )'}")
                         .vAnswPercTitle2(v-if="item.iscompl") {{CalcAnswPercent(answ, item)}}%,&nbsp

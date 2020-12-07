@@ -132,11 +132,13 @@ block content
                     div.greenBtn.clearBtn(v-on:click="voteAdd()") Добавить голосование
                     div.qItem(v-for="item in votes" v-bind:class="{ready:item.isReady}")
                         input.ask(type='text' placeholder="введите текст вопроса" v-model="item.title" v-on:change="voteChange(item)")
+                        input.ask(type='text' placeholder="write english quertion" v-model="item.titleen" v-on:change="voteChange(item)")
                         div Ответы ({{caclAnswCount(item)}}):
                             div(v-for="answ in sortedVoteAnsvers(item.answers)")
                                 div
                                     span {{CalcAnswPercent(answ, item)}}% &nbsp;
                                     input.ask(type='text' placeholder="введите текст ответа" v-on:change="voteAnswerChange(answ)" v-model="answ.title")
+                                    input.ask(type='text' placeholder="write english answer" v-on:change="voteAnswerChange(answ)" v-model="answ.titleen")
                             div.qItemDate
                                 span.link.green(v-on:click="voteAddAnswer(item)" v-if="!item.isactive") Добавить ответ
                                 span.link.green(v-if="!item.isactive" v-on:click="voteStart(item)") &nbsp;&nbsp; Запустить
