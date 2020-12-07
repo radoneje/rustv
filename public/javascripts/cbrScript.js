@@ -263,6 +263,7 @@ window.onload=function () {
                 {
                     _this.currLangId=event;
                         _this.currLang=lang[event];
+                        console.log(_this.currLangId);
                 }
             }, false);
 
