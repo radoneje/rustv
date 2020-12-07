@@ -490,7 +490,7 @@ window.onload=function () {
                 setTimeout(()=>{
                     var elem=document.getElementById('regUserFormInput');
                     elem.value="";
-                   // elem.focus()
+                    elem.focus()
                 },0)
             },
             regUser:async function () {
