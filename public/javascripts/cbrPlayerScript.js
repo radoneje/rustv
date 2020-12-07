@@ -85,6 +85,19 @@ window.onload=function () {
         },
         mounted:function () {
             document.getElementById("videoWrapper").style.display="block";
+            var langWr=document.getElementById("videoWrapper")
+            langWr.innerHTML=langid;
+            langWr.addEventListener("click", function () {
+                if(langid=="ru")
+                    langid="en"
+                else
+                    langid="ru"
+                player.src(lang[langid].playerUrl);
+                player.play();
+                if(window.parent)
+                    window.parent.postMessage("changeLang",langid);
+
+            })
             this.UpdateInteractive(this);
         }
     })

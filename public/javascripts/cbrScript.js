@@ -256,6 +256,9 @@ window.onload=function () {
         mounted:function () {
             document.querySelector(".cbLoginCode").focus();
             this.isLoaded=1;
+            window.addEventListener("message", function (event) {
+                console.log("message", event);
+            }, false);
         }
     })
 }
