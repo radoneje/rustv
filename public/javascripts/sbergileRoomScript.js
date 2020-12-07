@@ -82,6 +82,7 @@ window.onload=function () {
                     var _this = this;
                     var r = await axios.get("/rest/api/quest/" + eventid + "/" + roomid)
                     r.data.forEach(item => {
+
                         if (this.q.filter(qt => qt.id == item.id).length == 0) {
                             _this.q.push(item);
 
@@ -91,7 +92,12 @@ window.onload=function () {
                                     objDiv.scrollTop = objDiv.scrollHeight;
                                 }, 0)
                         }
+                        this.q.forEach(qq=>{
+                            if(qq.id==item.id)
+                                qq.likes=item.likes;
+                                })
                     })
+
                     _this.q = _this.q.filter(item => {
                         var count = r.data.filter(d => d.id == item.id).length;
                         return count > 0;
