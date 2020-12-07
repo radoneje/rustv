@@ -125,6 +125,7 @@ window.onload=function () {
 
                     r = await axios.get("/rest/api/votes/" + eventid + "/" + roomid)
                     _this.votes = r.data;
+                    console.log("votes", r.data);
 
 
                     r = await axios.get("/rest/api/tags/" + eventid + "/" + roomid)
