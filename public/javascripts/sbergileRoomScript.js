@@ -56,11 +56,14 @@ window.onload=function () {
         },
         methods:{
             setActiveStream:function(id){
+
                 this.activeStream=id;
                // this.room.id=100+parseInt(id);
                 roomid=100+parseInt(id);
                 player.src(this.getplayerSrc());
                 player.play();
+                this.chat=[];
+                this.q=[]
             },
             qLike:function (item) {
                 if(!localStorage.getItem("qLike"+item.id))
