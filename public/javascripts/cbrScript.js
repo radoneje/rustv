@@ -256,8 +256,14 @@ window.onload=function () {
         mounted:function () {
             document.querySelector(".cbLoginCode").focus();
             this.isLoaded=1;
+            var _this=this.
             window.addEventListener("message", function (event) {
                 console.log("message", event);
+                if(event=="ru" || event=="en")
+                {
+                    _this.currLangId=event;
+                        _this.currLang=lang[event];
+                }
             }, false);
 
         }

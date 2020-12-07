@@ -101,7 +101,7 @@ window.onload=function () {
                 app.currLangId=langid;
                 app.currLang=lang[langid];
                 if(window.parent)
-                    window.parent.postMessage("langid");
+                    window.parent.postMessage(langid);
                 console.log(app)
             })
             this.UpdateInteractive(this);
