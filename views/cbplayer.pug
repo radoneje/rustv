@@ -41,7 +41,7 @@ html
       var langid= !{JSON.stringify(langid)}
   body(style="overflow: hidden;margin:0")
     .videoWrapper#videoWrapper(style="overflow: hidden;display:none")
-      video#my-video.video.video-js.vjs-big-play-centered(controls mited autostart loop src="https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_640_3MG.mp4")
+      video#my-video.video.video-js.vjs-big-play-centered(controls)
       #app
         #roomVote.rFeedGroup(v-if="votes.filter(r=>{return r.isactive}).length>0 ")
           div.rFeedGroupTitle
