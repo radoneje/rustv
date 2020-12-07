@@ -62,6 +62,11 @@ window.onload=function () {
                 player.src(this.getplayerSrc());
                 player.play();
             },
+            qLike:function (item) {
+                if(!localStorage.getItem("qLike"+item.id))
+                    axios.post("/rest/api/qLike/"+eventid+"/"+roomid,{id:item.id}).then();
+                localStorage.setItem("qLike"+item.id, true);
+            },
             UpdateInteractive:async function(){
                 try {
                     var _this = this;
