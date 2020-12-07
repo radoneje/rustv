@@ -1,5 +1,6 @@
 window.onload=function () {
     var player = videojs('my-video');
+    player.poster("/images/clients/cbposter.png")
     player.src(lang[langid].playerUrl)
     console.log("d", lang[langid].playerUrl)
 
