@@ -149,6 +149,9 @@
 .vAnswBox.isCompl .vAnswPercTitle{
     width: 30%;
 }
+.vjs-poster{
+    background-size: cover;
+}
 @media only screen and (max-width: 864px) {
     .qItemName{
         font-size: 18px;
