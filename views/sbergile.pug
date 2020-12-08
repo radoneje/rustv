@@ -26,17 +26,6 @@ block content
               .streamItem(v-on:click="setActiveStream(3)" v-bind:class="{active:activeStream==3}") Команда
 
 
-
-
-          div.videoWrapper(v-bind:style="{backgroundImage:pres?'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')':null}")
-
-        //div#userVideo(style='position: absolute;right: 0;top: 0;z-index: 10000;margin: 10px;')
-
-
-
-                //include elements/mainVideo
-
-
       div.R
         div.Rwr
           include elements/roomVote
