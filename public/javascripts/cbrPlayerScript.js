@@ -95,6 +95,7 @@ window.onload=function () {
                     langid="ru"
                 langWr.innerHTML="<div>"+langid+"</div>";
                 player.poster("/images/clients/cbposter.png")
+                //player.src(lang[langid].playerUrl);
                 player.src(lang[langid].playerUrl);
                 player.play();
 
