@@ -1,8 +1,8 @@
 
-//var roomid=100;
-//var eventid = 43;
-var roomid=30;
-var eventid = 28;
+var roomid=100;
+var eventid = 43;
+//var roomid=30;
+//var eventid = 28;
 var app= new Vue({
     el: "#voteres",
     data: {
