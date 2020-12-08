@@ -8,6 +8,7 @@ window.onload=function () {
     }
 
     var player;
+
     var app = new Vue({
         el: '#app',
         data: {
@@ -68,7 +69,7 @@ window.onload=function () {
             },
             qLike:function (item) {
                 if(!localStorage.getItem("qLike"+item.id))
-                    axios.post("/rest/api/qLike/"+eventid+"/"+roomid,{id:item.id}).then(
+                    axios.post("/rest/api/qLike/"+eventid+"/"+parseInt(roomid)+1,{id:item.id}).then(
                         function (e) {
                             console.log("likes 2", item);
                             if(!item.likes)
@@ -84,7 +85,7 @@ window.onload=function () {
             UpdateInteractive:async function(){
                 try {
                     var _this = this;
-                    var r = await axios.get("/rest/api/quest/" + eventid + "/" + roomid)
+                    var r = await axios.get("/rest/api/quest/" + eventid + "/" + parseInt(roomid)+1)
                     r.data.forEach(item => {
 
                         if (this.q.filter(qt => qt.id == item.id).length == 0) {
@@ -106,7 +107,7 @@ window.onload=function () {
                         var count = r.data.filter(d => d.id == item.id).length;
                         return count > 0;
                     })
-                    var r = await axios.get("/rest/api/chat/" + eventid + "/" + roomid)
+                    var r = await axios.get("/rest/api/chat/" + eventid + "/" + parseInt(roomid)+1)
                     r.data.forEach(item => {
                         if (this.chat.filter(qt => qt.id == item.id).length == 0) {
                             this.chat.push(item);
@@ -124,7 +125,7 @@ window.onload=function () {
                     })
 
 
-                    r = await axios.get("/rest/api/votes/" + eventid + "/" + roomid)
+                    r = await axios.get("/rest/api/votes/" + eventid + "/" + parseInt(roomid)+1)
                     _this.votes = r.data;
                     console.log("votes", r.data);
 
@@ -168,7 +169,7 @@ window.onload=function () {
                 if(_this.qText.length>0) {
                     var tmp= _this.qText;
                     _this.qText = "";
-                    axios.post("/rest/api/quest2/" + eventid + "/" + roomid, {text:tmp, user:_this.user})
+                    axios.post("/rest/api/quest2/" + eventid + "/" + parseInt(roomid)+1, {text:tmp, user:_this.user})
                         .then(function (e) {
                             _this.q.push(e.data);
                             //console.log(e.data)
@@ -185,7 +186,7 @@ window.onload=function () {
                 if(_this.chatText.length>0) {
                     var tmp=_this.chatText;
                     _this.chatText = "";
-                    axios.post("/rest/api/chat2/" + eventid + "/" + roomid, {text: tmp, user:_this.user})
+                    axios.post("/rest/api/chat2/" + eventid + "/" + parseInt(roomid)+1, {text: tmp, user:_this.user})
                         .then(function (e) {
 
                             _this.chat.push(e.data);
