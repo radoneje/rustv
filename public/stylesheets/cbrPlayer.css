@@ -181,11 +181,11 @@ height:auto;
     font-size:32px
 }
 #voteres .qItemName{
-    font-size:56px;
+    font-size:46px;
     margin-bottom: 1em;
 }
 #voteres .qItem{
-    margin-top:5em
+    margin-top:2em
 }
 #voteres .vAnswPercent{
     background: none;
