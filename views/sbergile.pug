@@ -24,6 +24,10 @@ block content
               .streamItem(v-on:click="setActiveStream(1)" v-bind:class="{active:activeStream==1}") Организация
               .streamItem(v-on:click="setActiveStream(2)" v-bind:class="{active:activeStream==2}") Продукт
               .streamItem(v-on:click="setActiveStream(3)" v-bind:class="{active:activeStream==3}") Команда
+        div.videoWrapper(v-bind:style="{backgroundImage:pres?'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')':null}")
+          iframe(v-if="roomid==102" width="560" height="315" src="https://www.youtube.com/embed/L8KG8T3qSn4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+          iframe( v-if="roomid==103" width="560" height="315" src="https://www.youtube.com/embed/UzbQTxlvCmk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+          iframe( v-if="roomid==104" width="560" height="315" src="https://www.youtube.com/embed/bkEQGc7UUFQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
 
 
       div.R
