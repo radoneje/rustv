@@ -63,10 +63,10 @@ window.onload=function () {
                 roomid=100+parseInt(id);
                 roomid2=(101+parseInt(id));
                 this.roomid=(101+parseInt(id));
-                player.poster(this.getplayerPoster())
+                //player.poster(this.getplayerPoster())
                 console.log("change", roomid,this.getplayerSrc() )
-                player.src(this.getplayerSrc());
-                player.play();
+                //player.src(this.getplayerSrc());
+                //player.play();
                 this.chat=[];
                 this.q=[]
             },
@@ -501,9 +501,9 @@ window.onload=function () {
             }
             document.getElementById("app").style.opacity=1;
             console.log("mounted", roomid,this.getplayerSrc() )
-            player= videojs('my-video');
-            player.poster(this.getplayerPoster())
-            player.src(this.getplayerSrc());
+           // player= videojs('my-video');
+            //player.poster(this.getplayerPoster())
+           // player.src(this.getplayerSrc());
             document.getElementById("videoWrapper").style.display="block"
             var item=localStorage.getItem("sbergileUser");
             if(item)
