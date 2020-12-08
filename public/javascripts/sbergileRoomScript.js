@@ -68,7 +68,8 @@ window.onload=function () {
                 //player.src(this.getplayerSrc());
                 //player.play();
                 this.chat=[];
-                this.q=[]
+                this.q=[];
+                this.votes=[];
             },
             qLike:function (item) {
                 if(!localStorage.getItem("qLike"+item.id))
