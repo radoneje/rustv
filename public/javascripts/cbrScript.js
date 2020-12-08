@@ -1,4 +1,4 @@
-window.onload=function () {
+
 
     try {
         eval("()=>{;;}")
@@ -270,4 +270,3 @@ window.onload=function () {
 
         }
     })
-}

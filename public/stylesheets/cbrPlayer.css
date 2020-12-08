@@ -66,19 +66,26 @@
 #langWr:hover{
     opacity: 1;
 }
-#app{
+#app, #voteres{
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
     width: 100%;
     font-family: CB_Stem !important;
     font-style: normal;
     font-weight: normal;
 }
+
 .qItemName{
     text-align: center;
     color:#FFFFFF;
-
+    text-shadow: 0px 0px 2px black;
     font-size: 42px;
+}
+.vAnswBox .vAnswTitleCap{
+    text-shadow: 0px 0px 2px black;
+}
+.vAnswPercTitle2{
+    text-shadow: 0px 0px 2px black;
 }
 .vAnswBox{
     display: flex;
@@ -150,7 +157,43 @@
     width: 30%;
 }
 
+#voteres{
+    position: initial;
+    display: flex;
+    align-items: center;
+}
+#voteres #roomVote{
+height:auto;
+}
+#voteres .qItem{
+    background: transparent;
 
+}
+#voteres .vAnsw{
+    color:#0583bb;
+    background: white;
+}
+#voteres .vAnswTitleCap {
+    font-size: 32px;
+    padding-left: 20px;
+}
+#voteres  .vAnswPercTitle2{
+    font-size:32px
+}
+#voteres .qItemName{
+    font-size:56px;
+    margin-bottom: 1em;
+}
+#voteres .qItem{
+    margin-top:5em
+}
+#voteres .vAnswPercent{
+    background: none;
+}
+#voteres .vAnswBox.isCompl .vAnswPercentStatus{
+    float: left;
+    font-size: 32px;
+}
 @media only screen and (max-width: 864px) {
     .qItemName{
         font-size: 18px;

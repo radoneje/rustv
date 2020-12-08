@@ -1,0 +1,73 @@
+html
+  head
+    meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
+    //link( rel="shortcut icon" href="/favicon.ico" type="image/x-icon")
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/cbicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/cbicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/cbicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/cbicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/cbicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/cbicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/cbicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/cbicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/cbicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/cbicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/cbicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/cbicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/cbicons/favicon-16x16.png">
+    <link rel="manifest" href="/images/cbicons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/images/cbicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="shortcut icon" href="/images/cbicons/favicon.ico" type="image/x-icon">
+    meta( property="og:title" content=title)
+    <meta property="og:site_name" content="Онлайн-конференция Банка России">
+    <meta property="og:url" content="https://cbr-online.ru/>
+    <meta property="og:description" content="Онлайн-конференция Банка России">
+    <meta property="og:image" content="https://cbr-online.ru/images/cb.png">
+    title= title
+
+    script(src="/lib/axios.js")
+    script(src="/lib/moment.min.js")
+    script(src="/lib/moment.ru.js")
+    script(src="/lib/vue.min.js")
+
+    link(rel='stylesheet', href='/stylesheets/reset.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+    link(rel='stylesheet', href='/stylesheets/old.css')
+    link(rel='stylesheet', href='/stylesheets/room.css')
+    link(rel='stylesheet', href='/stylesheets/cbrRoom.css')
+    link(rel='stylesheet', href='/stylesheets/cbrPlayer.css')
+
+    script.
+      var lang=!{JSON.stringify(lang)}
+  body(style="background: #0583bc;")
+    #voteres
+      #roomVote.rFeedGroup(v-if="votes.filter(r=>{return r.isactive}).length>0 ")
+        div.rFeedGroupTitle
+          div.rFeedGroupBody
+            div.qItem(v-for="item in votes" v-if="item.isactive" )
+              div.qItemName {{item.title}}
+              div.vAnswBox(v-bind:class="{isCompl:item.iscompl}")
+                div.vAnsw(v-for="(answ, i) in sortedVoteAnsvers(item.answers)" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
+                  div.vAnswTitle
+                    .vAnswTitleCap {{answ.title}}
+                    .vAnswPercent(v-if="item.iscompl")
+                      .vAnswPercentStatus(:item="'a'+i" v-bind:style="{width:'calc(50% * ( '+CalcAnswPercent(answ, item)+' / 100 )'}")
+                      .vAnswPercTitle2(v-if="item.iscompl") {{CalcAnswPercent(answ, item)}}%&nbsp
+        div.rFeedGroupBody
+          div.qItem(v-for="item in votes" v-if="item.isactive" )
+            div.qItemName {{item.titleen}}
+            div.vAnswBox(v-bind:class="{isCompl:item.iscompl}")
+              div.vAnsw(v-for="(answ, i) in sortedVoteAnsvers(item.answers)" v-on:click="vote(answ, item)" v-bind:class="{ready:answIsReady(answ)}")
+                div.vAnswTitle
+                  .vAnswTitleCap {{answ.titleen}}
+                  .vAnswPercent(v-if="item.iscompl")
+                    .vAnswPercentStatus(:item="'a'+i" v-bind:style="{width:'calc(50% * ( '+CalcAnswPercent(answ, item)+' / 100 )'}")
+                    .vAnswPercTitle2(v-if="item.iscompl") {{CalcAnswPercent(answ, item)}}%&nbsp
+    script(src="/javascripts/cbrVoteresScript.js")
+
+
+
+
