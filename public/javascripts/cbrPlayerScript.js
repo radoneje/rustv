@@ -87,13 +87,13 @@ window.onload=function () {
         mounted:function () {
             document.getElementById("videoWrapper").style.display="block";
             var langWr=document.getElementById("langWr")
-            langWr.innerHTML="<div>"+langid+"</div>";
+            langWr.innerHTML="<div>"+(langid=="ru"?"en":"ru")+"</div>";
             langWr.addEventListener("click", function () {
                 if(langid=="ru")
                     langid="en"
                 else
                     langid="ru"
-                langWr.innerHTML="<div>"+langid+"</div>";
+                langWr.innerHTML="<div>"+(langid=="ru"?"en":"ru")+"</div>";
                 player.poster("/images/clients/cbposter.png")
                 //player.src(lang[langid].playerUrl);
                 player.src(lang[langid].playerUrl);
