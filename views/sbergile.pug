@@ -191,7 +191,9 @@ block content
           .regUserFormButton(v-on:click="regUser()") Войти
           .regUserFormButton(v-on:click="regUserForm=false") Отменить
   .videoWrapper#videoWrapper(style="overflow: hidden;display:none" )
-      video#my-video.video.video-js.vjs-big-play-centered(playsinline controls  loop)
+    iframe( v-if="roomid==102" width="560" height="315" src="https://www.youtube.com/embed/L8KG8T3qSn4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+    iframe( v-if="roomid==103" width="560" height="315" src="https://www.youtube.com/embed/UzbQTxlvCmk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+    iframe( v-if="roomid==104" width="560" height="315" src="https://www.youtube.com/embed/bkEQGc7UUFQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
 
   script.
       var eventid=!{room.eventid}

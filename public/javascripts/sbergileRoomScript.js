@@ -52,8 +52,8 @@ window.onload=function () {
             activeStream:1,
             pres:[],
             selLang:"ru",
-            regUserForm:false
-
+            regUserForm:false,
+            roomid:roomid,
         },
         methods:{
             setActiveStream:function(id){
@@ -62,6 +62,7 @@ window.onload=function () {
                // this.room.id=100+parseInt(id);
                 roomid=100+parseInt(id);
                 roomid2=(101+parseInt(id));
+                this.roomid=(101+parseInt(id));
                 player.poster(this.getplayerPoster())
                 console.log("change", roomid,this.getplayerSrc() )
                 player.src(this.getplayerSrc());
