@@ -150,6 +150,10 @@
 .vAnswBox.isCompl .vAnswPercentStatus[item="a2"]{
     background: #01A5DC;
 }
+#voteres .vAnswBox.isCompl .vAnswPercentStatus[item="a2"]{
+    background: #579cb5;
+}
+
 .vAnswBox.isCompl .vAnswPercentStatus[item="a3"]{
     background: #63B74B;
 }
