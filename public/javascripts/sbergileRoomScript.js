@@ -500,11 +500,11 @@ window.onload=function () {
                 telElem.addEventListener("blur", mask, false);
             }
             document.getElementById("app").style.opacity=1;
-            console.log("mounted", roomid,this.getplayerSrc() )
+
            // player= videojs('my-video');
             //player.poster(this.getplayerPoster())
            // player.src(this.getplayerSrc());
-            document.getElementById("videoWrapper").style.display="block"
+
             var item=localStorage.getItem("sbergileUser");
             if(item)
                 this.user= JSON.parse(item)
