@@ -62,6 +62,7 @@ window.onload=function () {
                // this.room.id=100+parseInt(id);
                 roomid=100+parseInt(id);
                 player.poster(this.getplayerPoster())
+                console.log("change", roomid,this.getplayerSrc() )
                 player.src(this.getplayerSrc());
                 player.play();
                 this.chat=[];
@@ -497,6 +498,7 @@ window.onload=function () {
                 telElem.addEventListener("blur", mask, false);
             }
             document.getElementById("app").style.opacity=1;
+            console.log("mounted", roomid,this.getplayerSrc() )
             player= videojs('my-video');
             player.poster(this.getplayerPoster())
             player.src(this.getplayerSrc());
