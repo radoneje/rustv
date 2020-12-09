@@ -243,7 +243,7 @@ html
 
                   div.rContentWr(v-if="activeSection==2" )
                     div.rBody(id="chatBox" )
-                      div.qItem(v-for="item in chat" v-bind:class="{my:(item.userid==user.id)}" v-if="item.userid==user.id ")
+                      div.qItem(v-for="item in chat" v-bind:class="{my:(item.userid==user.id)}" v-if="item.userid==user.id || item.i=='Модератор' || item.f=='Модератор'")
                         div.qItemName {{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}
                         div.qItemText(v-html="item.text")
                         div(style="text-align:center")
