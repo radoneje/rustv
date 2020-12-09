@@ -120,8 +120,15 @@ router.post('/cbPersonalCode', async (req, res, next) => {
     if(code.length>10)
         return res.sendStatus(403);
     var users = await req.knex.select("*").from("t_eventusers").where({personalcode:code}).orderBy("id","desc");
+
+
+
     if(users.length==0)
         return res.sendStatus(404);
+
+    var filename=path.join(__dirname, '../public/cbr_users.txt');
+    fs.writeFileSync(filename, user[0].i +" "+ user[0].f +" "+ moment().format("HH:mm:ss"));
+
     req.session["user" + users[0].eventid]= users[0];
     return res.json(users[0]);
 });
