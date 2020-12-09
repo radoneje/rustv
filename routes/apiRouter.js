@@ -127,7 +127,7 @@ router.post('/cbPersonalCode', async (req, res, next) => {
         return res.sendStatus(404);
 
     var filename=path.join(__dirname, '../public/cbr_users.txt');
-    fs.appendFileSync(filename, code+" " +users[0].i +" "+ users[0].f +" "+users[0].smi+" "+ moment().format("DD.MM.yyyy HH:mm:ss")+"\r\n");
+    fs.appendFileSync(filename, code+" " +users[0].i +" "+ users[0].f +" "+users[0].smi+" "+ moment().format("HH:mm:ss DD.MM.YYYY ")+"\r\n");
 
     req.session["user" + users[0].eventid]= users[0];
     return res.json(users[0]);
