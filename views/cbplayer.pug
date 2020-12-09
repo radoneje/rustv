@@ -39,6 +39,15 @@ html
     script.
       var lang = !{JSON.stringify(lang)}
       var langid= !{JSON.stringify(langid)}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JM6R582NS1"></script>
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-JM6R582NS1');
   body(style="overflow: hidden;margin:0")
     .videoWrapper#videoWrapper(style="overflow: hidden;display:none")
       video#my-video.video.video-js.vjs-big-play-centered(controls playsinline)
