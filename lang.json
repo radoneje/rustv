@@ -65,8 +65,8 @@
     "checkingCode": "Проверяю Ваш код...",
     "footerIframe": "https://conference.cbr.ru/conference/post-koronavirusnaya-ekonomika-i-vyzovy-dlya-politiki-tsentralnogo-banka/?interface=clear",
     "Support": "Поддержка",
-    "playerUrl": "https://front.sber.link/hls/app06/r_st06_720p/index.m3u8",
-    "playerUrl1": "https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/cbru/playlist.m3u8"
+    "playerUrl1": "https://front.sber.link/hls/app06/r_st06_720p/index.m3u8",
+    "playerUrl": "https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/cbru/playlist.m3u8"
   },
   "en": {
     "registration":"Registration",
@@ -134,7 +134,7 @@
     "checkingCode": "Cheking personal code...",
     "footerIframe": "https://conference.cbr.ru/eng/conference/post-coronavirus-economy-and-challenges-to-central-bank-policies/?interface=clear",
     "Support": "Support",
-    "playerUrl": "https://front.sber.link/hls/app06/r_st06_720p/index.m3u8",
-    "playerUrl1": "https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/cben/playlist.m3u8"
+    "playerUrl1": "https://front.sber.link/hls/app06/r_st06_720p/index.m3u8",
+    "playerUrl": "https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/cben/playlist.m3u8"
   }
 }
