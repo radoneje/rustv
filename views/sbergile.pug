@@ -92,7 +92,7 @@ block content
                         </svg>
                     include elements/likes
 
-              div.rFooter
+              //div.rFooter
                 div.fileLoadProgress
                 div.askWr
                   <svg id='rQsend' v-on:click="qFileClick()" style="cursor:pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -126,7 +126,7 @@ block content
                     video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
                   div.qItemPhoto(v-on:click="window.open('/files/'+item.photo)" v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
                   div.qItemDate {{moment(item.date).format("HH:mm")}}
-              div.rFooter
+              //div.rFooter
                 div.fileLoadProgress
                 div.askWr
                   <svg v-on:click="chatAddSmile()" style="cursor:pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
