@@ -49,11 +49,11 @@ html
 
       gtag('config', 'G-JM6R582NS1');
   body(style="overflow: hidden;margin:0")
-    .videoWrapper#videoWrapper(style="overflow: hidden;display:none")
+    .videoWrapper#videoWrapper(style="overflow: hidden;")
       //video#my-video.video.video-js.vjs-big-play-centered(controls playsinline)
       img(src="/images/clients/cbposter.png" style="width: 100%;height: 100%;")
       #app
-        #roomVote.rFeedGroup(v-if="votes.filter(r=>{return r.isactive}).length>0 ")
+        //#roomVote.rFeedGroup(v-if="votes.filter(r=>{return r.isactive}).length>0 ")
           div.rFeedGroupTitle
             div.rFeedGroupBody
               div.qItem(v-for="item in votes" v-if="item.isactive" )
