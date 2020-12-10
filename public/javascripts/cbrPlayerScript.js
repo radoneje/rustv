@@ -105,7 +105,7 @@ window.onload=function () {
                     window.parent.postMessage(langid);
                 console.log(app)
             })
-            this.UpdateInteractive(this);
+           // this.UpdateInteractive(this);
         }
     })
 }

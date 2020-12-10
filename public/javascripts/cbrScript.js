@@ -110,6 +110,7 @@
 
             },
             qtextChange:function (e) {
+                return;
                 var _this=this;
                 if(this.qText.length>0)
                     if(e.keyCode==13 && _this.qText.length>0){
@@ -120,6 +121,7 @@
 
             },
             chattextChange:function (e) {
+                return;
                 var _this=this;
                 if(this.chatText.length>0)
                     if(e.keyCode==13 && _this.chatText.length>0){

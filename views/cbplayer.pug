@@ -50,7 +50,8 @@ html
       gtag('config', 'G-JM6R582NS1');
   body(style="overflow: hidden;margin:0")
     .videoWrapper#videoWrapper(style="overflow: hidden;display:none")
-      video#my-video.video.video-js.vjs-big-play-centered(controls playsinline)
+      //video#my-video.video.video-js.vjs-big-play-centered(controls playsinline)
+      img(src="/images/clients/cbposter.png" style="width: 100%;height: 100%;")
       #app
         #roomVote.rFeedGroup(v-if="votes.filter(r=>{return r.isactive}).length>0 ")
           div.rFeedGroupTitle
