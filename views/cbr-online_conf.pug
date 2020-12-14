@@ -1,0 +1,276 @@
+html
+  head
+    meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
+    //link( rel="shortcut icon" href="/favicon.ico" type="image/x-icon")
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/cbicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/cbicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/cbicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/cbicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/cbicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/cbicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/cbicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/cbicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/cbicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/cbicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/cbicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/cbicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/cbicons/favicon-16x16.png">
+    <link rel="manifest" href="/images/cbicons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/images/cbicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="shortcut icon" href="/images/cbicons/favicon.ico" type="image/x-icon">
+    meta( property="og:title" content=title)
+    <meta property="og:site_name" content="Онлайн-конференция Банка России">
+    <meta property="og:url" content="https://cbr-online.ru/>
+    <meta property="og:description" content="Онлайн-конференция Банка России">
+    <meta property="og:image" content="https://cbr-online.ru/images/cb.png">
+    title= title
+
+    script(src="/lib/axios.js")
+    script(src="/lib/moment.min.js")
+    script(src="/lib/moment.ru.js")
+    script(src="/lib/vue.min.js")
+    link(rel='stylesheet', href='/stylesheets/reset.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/old.css')
+    link(rel='stylesheet', href='/stylesheets/room.css')
+    link(rel='stylesheet', href='/stylesheets/cbrRoom.css')
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    script.
+      var lang=!{JSON.stringify(lang)}
+  body
+    #CBroot
+      div#CBloginApp(v-bind:style="{opacity:isLoaded}")
+        #CBloginPage(v-if="!isLogOn")
+          .cbLoginDecor(style="display:none")
+            .cbLoginDecorWr
+              .cbLoginDecorStar
+                <svg width="143" height="604" viewBox="0 0 143 604" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_dd)">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M-377.25 287.588L-445.357 15.6431L-173.412 83.7495L98.5326 15.6432L30.4263 287.588L98.5326 559.533L-173.412 491.426L-445.357 559.533L-377.25 287.588Z" stroke="url(#paint0_linear)" stroke-width="20"/>
+                </g>
+                <defs>
+                <filter id="filter0_dd" x="-460.109" y="0.889648" width="602.396" height="602.396" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                <feOffset dx="-1" dy="-1"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                <feOffset dx="16" dy="16"/>
+                <feGaussianBlur stdDeviation="7"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0"/>
+                <feBlend mode="normal" in2="effect1_dropShadow" result="effect2_dropShadow"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow" result="shape"/>
+                </filter>
+                <linearGradient id="paint0_linear" x1="211.176" y1="-97" x2="-558" y2="-97" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0087CC"/>
+                <stop offset="1" stop-color="#6BBB42"/>
+                </linearGradient>
+                </defs>
+                </svg>
+
+              .cbLoginPolygon
+                img(src="/img/1.svg")
+              .cbLoginRectangle
+                img(src="/img/3.svg")
+              .cbLoginDecorStar2
+                img(src="/img/4.svg")
+              .cbLoginRectangle2
+                img(src="/img/5.svg")
+
+          .CBLoginHead
+            .CBLoginLogo
+              <svg width="449" height="179" viewBox="0 0 449 179" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="179">
+              <rect x="0.767578" width="447.41" height="178.962" fill="white"/>
+              </mask>
+              <g mask="url(#mask0)">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M45.6055 89.4797C45.6055 64.7755 65.6346 44.7432 90.3389 44.7432C115.056 44.7432 135.085 64.7755 135.085 89.4797C135.085 114.187 115.056 134.219 90.3389 134.219C65.6346 134.219 45.6055 114.187 45.6055 89.4797ZM49.062 89.4798C49.062 112.281 67.5381 130.763 90.3389 130.763C113.146 130.763 131.625 112.281 131.625 89.4798C131.625 66.679 113.146 48.1998 90.3389 48.1998C67.5381 48.1998 49.062 66.679 49.062 89.4798Z" fill="white"/>
+              </g>
+              <mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="179">
+              <rect x="0.767578" width="447.41" height="178.962" fill="white"/>
+              </mask>
+              <g mask="url(#mask1)">
+              <path d="M90.3402 123.035C91.8869 123.035 92.8245 121.993 92.8813 120.569C93.2191 121.21 93.6578 121.646 94.3176 121.778C94.9647 121.908 95.6655 121.816 96.2589 121.554C96.8745 121.292 97.3448 120.863 97.6353 120.263C97.9288 119.664 97.831 119.042 97.6226 118.322C98.3487 119.37 99.5829 119.641 100.666 119.136C102.152 118.442 102.695 117.179 102.086 115.737C100.249 111.374 98.4244 107.09 96.5809 102.728C96.4136 102.333 96.2716 101.929 96.0853 101.535C95.9243 101.187 95.8139 100.932 95.6623 100.717C95.5518 100.569 95.4193 100.442 95.2299 100.322C98.0804 100.638 99.4504 101.762 100.208 102.261C100.407 102.393 100.397 102.412 101.168 102.172C101.521 102.059 101.913 102.128 102.19 102.283C102.534 102.475 102.888 102.684 103.188 102.92C104.214 103.719 105.256 104.489 106.221 105.351C106.673 105.752 107.323 106.443 107.232 107.059C107.159 107.64 105.757 108.969 105.341 109.363C104.346 110.307 105.849 112.075 107.857 111.911C107.32 111.349 107.194 110.872 107.26 110.449C107.462 110.446 107.844 110.484 108.204 110.162C108.636 109.77 108.441 108.621 108.845 108.23C109.549 107.542 111.856 107.479 113.239 107.419C113.816 107.397 114.426 107.239 114.381 106.336C115.259 106.396 115.442 107.049 115.442 107.637C116.193 107.207 116.844 105.162 114.056 104.691C114.527 104.268 115.306 104.107 115.789 104.653C116.241 103.902 115.098 102.428 113.034 103.261C113.037 103.252 112.109 102.033 109.318 105.159C108.968 104.893 108.617 104.635 108.299 104.338C107.222 103.353 104.501 100.695 104.501 100.695C104.501 99.1987 104.277 96.3009 102.301 94.5647C101.458 93.826 100.656 93.4346 98.8727 93.1095C98.8727 93.1095 99.7345 91.7584 99.8702 91.2281C101.423 92.7812 104.545 93.2452 104.545 90.622C107.09 93.1726 109.454 91.7994 109.454 90.199C109.533 90.9787 109.732 91.8373 109.997 92.5728C110.316 93.4283 111.48 96.7144 114.489 96.7144C114.558 97.854 114.565 101.614 118.16 102.45C118.312 102.491 118.51 102.542 118.608 102.662C120.057 104.464 126.093 106.364 126.831 105.853C126.361 105.518 125.622 105.073 125.506 102.952C125.43 101.554 125.275 94.2932 125.275 84.0624C125.275 80.4448 124.887 68.7177 113.292 67.0826C111.534 66.8332 109.804 66.9658 108.305 68.0801C106.266 69.6016 105.262 72.1712 106.461 75.0753C106.499 75.1795 106.531 75.2837 106.584 75.3752C106.992 76.0665 106.828 76.6663 106.297 77.1935C105.328 78.1531 104.201 78.8034 102.844 78.9612C101.985 79.0591 101.278 78.6834 100.71 78.0963C99.4093 76.7578 98.4939 75.1858 98.2066 73.3328C97.6574 69.8036 98.5412 68.0548 98.5917 67.9444C99.5356 66.0535 101.54 64.6646 103.86 64.4657C104.924 62.477 107.977 63.263 107.977 63.263C108.74 63.4303 109.009 63.6513 109.201 64.0269C109.201 64.0269 110.54 61.9845 109.277 61.167C108.018 60.3494 105.192 60.0116 105.192 60.0116C105.192 58.6826 102.995 57.6472 99.0242 58.3575C94.2229 59.213 93.1938 57.3379 93.1938 57.3379C92.9949 59.636 94.7469 60.8197 95.3119 61.1417C93.4905 63.1178 90.9462 67.0668 90.3402 72.6699C89.7341 67.0668 87.1898 63.1178 85.3684 61.1417C85.9303 60.8197 87.6854 59.636 87.4865 57.3379C87.4865 57.3379 86.4543 59.213 81.653 58.3575C77.685 57.6472 75.4879 58.6826 75.4879 60.0116C75.4879 60.0116 72.6627 60.3494 71.4 61.167C70.1405 61.9845 71.4758 64.0269 71.4758 64.0269C71.6715 63.6513 71.9398 63.4303 72.7038 63.263C72.7038 63.263 75.7563 62.477 76.8201 64.4657C79.1402 64.6646 81.1447 66.0535 82.0886 67.9444C82.1391 68.0548 83.0766 69.8194 82.4737 73.3328C82.1549 75.1826 81.271 76.7578 79.9704 78.0963C79.4022 78.6834 78.6951 79.0591 77.8365 78.9612C76.4791 78.8034 75.3522 78.1531 74.3831 77.1935C73.8528 76.6663 73.6886 76.0665 74.0958 75.3752C74.1495 75.2837 74.1811 75.1795 74.219 75.0753C75.4185 72.1712 74.4147 69.6016 72.3755 68.0801C70.876 66.9658 69.1462 66.8332 67.3879 67.0826C55.7934 68.7177 55.4019 80.4448 55.4019 84.0624C55.4019 94.2932 55.2473 101.554 55.1715 102.952C55.0547 105.073 54.316 105.515 53.8457 105.853C54.5875 106.364 60.62 104.467 62.072 102.662C62.1699 102.542 62.3688 102.488 62.5203 102.45C66.1157 101.61 66.1221 97.854 66.1915 96.7144C69.1998 96.7144 70.3646 93.4283 70.6835 92.5728C70.9486 91.8373 71.1475 90.9787 71.2264 90.199C71.2264 91.7994 73.5908 93.1694 76.1351 90.622C76.1351 93.2452 79.257 92.7843 80.8101 91.2281C80.9459 91.7584 81.8076 93.1095 81.8076 93.1095C80.0241 93.4346 79.2223 93.826 78.3763 94.5647C76.4034 96.304 76.1793 99.2019 76.1793 100.695C76.1793 100.695 73.4582 103.356 72.3818 104.338C72.0629 104.635 71.7126 104.893 71.3622 105.159C68.5716 102.037 67.6404 103.252 67.6467 103.261C65.5823 102.428 64.4395 103.902 64.891 104.653C65.3708 104.107 66.1536 104.268 66.624 104.691C63.8366 105.159 64.4837 107.207 65.2382 107.637C65.2382 107.046 65.4181 106.393 66.2988 106.336C66.2546 107.239 66.8639 107.397 67.4416 107.419C68.821 107.479 71.1286 107.542 71.8357 108.23C72.2366 108.621 72.0408 109.77 72.4765 110.162C72.8363 110.484 73.2183 110.446 73.4172 110.449C73.4835 110.872 73.3603 111.349 72.8237 111.911C74.8314 112.078 76.3339 110.307 75.3396 109.363C74.9229 108.969 73.5182 107.637 73.4487 107.059C73.3572 106.443 74.0075 105.752 74.4589 105.351C75.4248 104.492 76.4665 103.719 77.4924 102.92C77.7923 102.684 78.1459 102.472 78.49 102.283C78.7677 102.128 79.156 102.059 79.5127 102.172C80.283 102.412 80.2735 102.393 80.4724 102.261C81.2268 101.762 82.6 100.635 85.4505 100.322C85.2579 100.442 85.1253 100.569 85.0148 100.717C84.8633 100.929 84.756 101.184 84.595 101.535C84.4087 101.929 84.2667 102.333 84.0994 102.728C82.2559 107.09 80.4313 111.374 78.5941 115.737C77.9849 117.179 78.5278 118.442 80.0146 119.136C81.0974 119.641 82.3316 119.37 83.0577 118.322C82.8493 119.045 82.7515 119.664 83.0451 120.263C83.3355 120.863 83.8058 121.292 84.4214 121.554C85.0148 121.816 85.7156 121.908 86.3627 121.778C87.0225 121.646 87.4613 121.21 87.799 120.569C87.8558 121.993 88.7934 123.035 90.3402 123.035Z" fill="white"/>
+              </g>
+              <mask id="mask2" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="179">
+              <rect x="0.767578" width="447.41" height="178.962" fill="white"/>
+              </mask>
+              <g mask="url(#mask2)">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M176.269 73.4621C173.393 73.6358 168.361 73.8567 165.896 73.8567C165.174 73.8567 162.641 73.7269 160.218 73.6026C159.2 73.5504 158.2 73.4992 157.363 73.459C157.682 75.8865 157.717 83.4436 157.717 88.4343C157.717 94.0027 157.635 100.717 157.363 105.581C158.074 105.496 159.09 105.452 159.92 105.452C161.081 105.452 162.643 105.5 163.87 105.537C164.664 105.561 165.319 105.581 165.634 105.581C172.787 105.626 178.226 102.665 178.226 96.1713C178.226 88.1755 168.547 87.2947 163.945 87.2947H161.694V76.199C163.636 76.0222 167.222 75.937 168.147 75.937C169.463 75.937 173.702 76.199 176.269 76.5525C176.254 76.3827 176.234 76.1847 176.213 75.9861C176.175 75.6199 176.136 75.2516 176.136 75.0531C176.136 74.8321 176.183 73.9925 176.269 73.4621ZM165.447 103.11C164.206 103.11 162.843 103.066 161.694 103.021V89.6276C170.087 89.6276 173.702 91.2218 173.702 96.1241C173.702 100.676 170.665 103.11 165.447 103.11Z" fill="white"/>
+              </g>
+              <mask id="mask3" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="179">
+              <rect x="0.767578" width="447.41" height="178.962" fill="white"/>
+              </mask>
+              <g mask="url(#mask3)">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M190.798 82.79C188.137 82.79 184.961 83.7149 183.235 85.8299V88.5794H183.768C185.179 85.7037 187.13 84.9524 189.734 84.9524C193.093 84.9524 195.129 86.1898 195.129 91.0037C195.129 92.1054 194.327 92.5474 192.818 92.8125L188.317 93.6554C184.254 94.4003 181.287 96.2596 181.287 100.237C181.287 103.949 183.898 106.074 187.922 106.074C190.088 106.074 192.695 105.057 195.082 103.16L195.344 104.126C195.701 105.411 196.625 106.074 198.081 106.074C198.658 106.074 199.984 105.938 201.392 105.231L201.13 104.167C200.868 104.256 200.385 104.347 200.066 104.347C199.141 104.347 198.658 103.82 198.658 101.563V90.6028C198.658 85.0786 195.439 82.79 190.798 82.79ZM192.206 94.6212L195.129 94.1824V100.988C193.311 102.885 191.543 103.507 189.772 103.507C186.906 103.507 185.486 102.137 185.486 99.5772C185.486 96.2122 189.024 95.1105 192.206 94.6212Z" fill="white"/>
+              </g>
+              <mask id="mask4" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="179">
+              <rect x="0.767578" width="447.41" height="178.962" fill="white"/>
+              </mask>
+              <g mask="url(#mask4)">
+              <path d="M207.449 83.3621C207.935 83.3621 208.857 83.2737 209.52 83.2295C209.169 86.5851 209.119 92.1503 209.119 92.3713C210.978 92.4628 213.668 92.5543 215.094 92.5543C216.55 92.5543 219.334 92.466 220.66 92.3713C220.66 92.1093 220.612 86.544 220.265 83.2295C221.004 83.2737 221.982 83.3621 222.509 83.3621C223.002 83.3621 223.927 83.2737 224.59 83.2295C224.233 86.544 224.189 92.1061 224.189 94.4042C224.189 96.2603 224.233 102.226 224.59 105.585C223.927 105.5 223.223 105.456 222.554 105.456C221.806 105.456 220.918 105.5 220.262 105.585C220.609 102.226 220.656 96.2603 220.656 94.8524C218.712 94.7135 216.06 94.5399 215.044 94.5399C213.841 94.5399 210.893 94.6188 209.116 94.7546C209.116 96.2603 209.166 102.223 209.517 105.585C208.854 105.5 208.147 105.456 207.487 105.456C206.735 105.456 205.852 105.5 205.186 105.585C205.536 102.226 205.58 96.2603 205.58 94.4042C205.58 92.1503 205.536 86.544 205.186 83.2295C205.937 83.2705 206.915 83.3621 207.449 83.3621Z" fill="white"/>
+              </g>
+              <mask id="mask5" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="179">
+              <rect x="0.767578" width="447.41" height="178.962" fill="white"/>
+              </mask>
+              <g mask="url(#mask5)">
+              <path d="M232.85 83.3621C233.324 83.3621 234.255 83.2737 234.909 83.2295C234.568 86.544 234.527 92.1503 234.527 92.9521H235.24C236.695 92.9521 244.161 84.4638 244.871 83.2295C245.487 83.2737 246.497 83.3621 247.027 83.3621C247.479 83.3621 248.539 83.2737 249.199 83.2295L238.64 92.6838C239.972 94.2716 246.986 102.185 250.165 105.585C248.978 105.5 248.138 105.456 247.52 105.456C246.721 105.456 245.528 105.5 244.603 105.585C242.968 103.022 237.974 97.1473 235.24 94.139H234.527C234.527 95.7773 234.568 102.226 234.909 105.585C234.255 105.5 233.558 105.456 232.885 105.456C232.143 105.456 231.26 105.5 230.584 105.585C230.947 102.226 230.998 96.2603 230.998 94.4042C230.998 92.1503 230.947 86.544 230.584 83.2295C231.345 83.2705 232.32 83.3621 232.85 83.3621Z" fill="white"/>
+              </g>
+              <mask id="mask6" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="179">
+              <rect x="0.767578" width="447.41" height="178.962" fill="white"/>
+              </mask>
+              <g mask="url(#mask6)">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M272.363 73.521C271.476 73.5564 270.517 73.5947 269.691 73.5947C269.049 73.5947 268.019 73.5569 266.978 73.5188C266.371 73.4965 265.76 73.4741 265.221 73.459C265.536 75.8865 265.581 83.4436 265.581 88.4343C265.581 93.9995 265.492 100.72 265.221 105.581C265.928 105.496 266.853 105.452 267.655 105.452C268.409 105.452 269.16 105.496 269.912 105.581C269.64 103.372 269.552 100.673 269.552 98.4631V90.8239C270.395 90.9155 272.08 91.0007 272.481 91.0007C279.669 91.0007 285.73 88.7089 285.73 81.4991C285.73 75.937 282.541 73.4621 274.366 73.4621C273.838 73.4621 273.127 73.4905 272.363 73.521ZM281.221 81.4991C281.221 86.1868 277.598 88.6616 271.41 88.6616C270.968 88.6616 270.091 88.5764 269.551 88.4785V76.0696C270.173 75.9781 272.743 75.937 273.488 75.937C277.774 75.937 281.221 77.1271 281.221 81.4991Z" fill="white"/>
+              </g>
+              <mask id="mask7" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="179">
+              <rect x="0.767578" width="447.41" height="178.962" fill="white"/>
+              </mask>
+              <g mask="url(#mask7)">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M297.427 106.071C304.352 106.071 308.74 101.036 308.74 94.2709C308.74 87.6482 304.539 82.79 297.821 82.79C291.056 82.79 286.375 87.5598 286.375 94.8928C286.375 101.08 290.624 106.071 297.427 106.071ZM297.335 104.344C292.653 104.344 290.576 99.7508 290.576 94.7569C290.576 89.5011 292.915 84.5072 297.688 84.5072C302.682 84.5072 304.541 89.3211 304.541 94.094C304.541 100.013 301.842 104.344 297.335 104.344Z" fill="white"/>
+              </g>
+              <mask id="mask8" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="179">
+              <rect x="0.767578" width="447.41" height="178.962" fill="white"/>
+              </mask>
+              <g mask="url(#mask8)">
+              <path d="M330.396 88.0396H329.863C328.316 85.5237 326.153 84.5073 323.723 84.5073C318.549 84.5073 316.077 89.5012 316.077 94.3593C316.077 99.9687 319.165 104.344 324.648 104.344C326.466 104.344 328.098 104.082 330.658 101.295L331.059 101.781L330.525 103.946C328.395 105.364 326.021 106.071 323.281 106.071C316.383 106.071 311.879 101.254 311.879 94.4477C311.879 87.3357 316.74 82.79 323.852 82.79C326.153 82.79 328.666 83.2288 331.498 84.7314L330.396 88.0396Z" fill="white"/>
+              </g>
+              <mask id="mask9" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="179">
+              <rect x="0.767578" width="447.41" height="178.962" fill="white"/>
+              </mask>
+              <g mask="url(#mask9)">
+              <path d="M352.695 88.0396H352.171C350.63 85.5237 348.465 84.5073 346.037 84.5073C340.86 84.5073 338.385 89.5012 338.385 94.3593C338.385 99.9687 341.488 104.344 346.962 104.344C348.765 104.344 350.406 104.082 352.966 101.295L353.358 101.781L352.834 103.946C350.715 105.364 348.323 106.071 345.589 106.071C338.698 106.071 334.193 101.254 334.193 94.4477C334.193 87.3357 339.058 82.79 346.17 82.79C348.468 82.79 350.984 83.2288 353.812 84.7314L352.695 88.0396Z" fill="white"/>
+              </g>
+              <mask id="mask10" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="179">
+              <rect x="0.767578" width="447.41" height="178.962" fill="white"/>
+              </mask>
+              <g mask="url(#mask10)">
+              <path d="M359.247 105.456C358.979 105.456 358.184 105.535 357.83 105.585C358.184 102.226 358.231 96.2603 358.231 94.4042C358.231 92.1503 358.184 86.544 357.83 83.2295C358.585 83.2737 359.55 83.3621 360.081 83.3621C360.567 83.3621 361.492 83.2737 362.161 83.2295C361.808 86.544 361.77 92.1061 361.77 94.4042C361.77 96.2603 361.808 98.8646 361.849 100.105C364.282 97.1473 372.944 86.1463 375.025 83.2295C375.495 83.3147 375.807 83.3621 376.341 83.3621C376.603 83.3621 377.528 83.2737 378.023 83.2295C377.667 86.544 377.616 92.1061 377.616 94.4042C377.616 96.2603 377.667 102.226 378.023 105.585C377.354 105.5 376.647 105.456 375.99 105.456C375.236 105.456 374.358 105.5 373.686 105.585C374.04 102.226 374.09 96.2603 374.09 94.4042C374.09 92.1029 374.04 89.284 374.008 88.3496C370.993 91.4022 363.035 101.832 360.526 105.585C360.122 105.497 359.721 105.456 359.247 105.456Z" fill="white"/>
+              </g>
+              <mask id="mask11" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="449" height="179">
+              <rect x="0.767578" width="447.41" height="178.962" fill="white"/>
+              </mask>
+              <g mask="url(#mask11)">
+              <path d="M384.267 105.456C383.999 105.456 383.203 105.535 382.859 105.585C383.203 102.226 383.251 96.2603 383.251 94.4042C383.251 92.1503 383.203 86.544 382.859 83.2295C383.604 83.2737 384.57 83.3621 385.101 83.3621C385.587 83.3621 386.518 83.2737 387.181 83.2295C386.827 86.544 386.789 92.1061 386.789 94.4042C386.789 96.2603 386.827 98.8646 386.868 100.105C389.302 97.1473 397.955 86.1463 400.032 83.2295C400.518 83.3147 400.83 83.3621 401.361 83.3621C401.623 83.3621 402.557 83.2737 403.037 83.2295C402.696 86.544 402.645 92.1061 402.645 94.4042C402.645 96.2603 402.696 102.226 403.037 105.585C402.374 105.5 401.667 105.456 401.004 105.456C400.256 105.456 399.366 105.5 398.712 105.585C399.066 102.226 399.104 96.2603 399.104 94.4042C399.104 92.1029 399.066 89.284 399.025 88.3496C396.02 91.4022 388.052 101.832 385.536 105.585C385.145 105.497 384.744 105.456 384.267 105.456Z" fill="white"/>
+              </g>
+              </svg>
+
+            .CBLoginLang(v-on:click="changeLang()")
+              .CBLOginLangTitle {{currLangId}}
+          .CBloginBody
+            .CBloginBodyR
+              .CBLoginTitle {{currLang.onlineConf}}
+              .CBLoginSubTitle
+                div(v-for="item in currLang.onlineConfTitle") {{item}}
+              .CBLoginDateStart {{currLang.loginDate}}
+
+            .CBloginBodyL
+              .CBloginBodyWr(v-bind:class="{codeError:codeError}")
+                .CBLoginRTitle {{currLang.PersonalCodeTitle}}
+                input.cbLoginCode(type="text" maxlength="10" :placeholder="currLang.PersonalCode" v-model="loginCode" v-on:keydown="if($event.keyCode==13) enter()")
+                .cbLoginCodeError() {{currLang.CodeIncorrect}}
+                .CBloginSubmit(v-on:click="loginCodeSubmit()")
+                  span(v-if="!isLogging") {{currLang.Send}}
+                  span(v-else) {{currLang.checkingCode}}
+        #CBPlayerPage.roomScreen.multiViewVideo(v-else)
+          div.center
+            div.L
+              div.videoWrapper
+                iframe(:src="'/cbplayer/'+currLangId" border="0" allowfullscreen="allowfullscreen" width="1920" height="720")
+                //video(id="video" width="1280" height="720" controls autoplay playsinline loop  src="https://hls.sber.link/fabrikanews/fabrikanews2_720p/playlist.m3u8" poster="/images/clients/rosatom/screen_main.png" )
+              div.rLfooter()
+
+                iframe(style="width:100%" height="12000" src="https://conference.cbr.ru/conference/post-koronavirusnaya-ekonomika-i-vyzovy-dlya-politiki-tsentralnogo-banka/?interface=clear")
+
+            div.R
+              div.Rwr
+                div.rContent
+                  div.rHead#rHead
+                    div.rHeadItem(v-for="item in sect" v-bind:class="{active:item.isActive}" v-on:click="sectActive(item)" :id="'sectMenu_'+item.id")
+                      div.rHeadItemLogo
+                        img(v-bind:src="item.isActive?item.logoactive:item.logo")
+                      div {{item.title}}
+
+                  div.rContentWr(v-if="activeSection==1" v-show="isQ")
+                    div.rBody(id="qBox" )
+                      div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==user.id)}" v-if="item.userid==user.id || item.i=='Модератор' || item.f=='Модератор'" )
+                        div.qItemName {{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}
+                        div.qItemText(v-html="item.text")
+                        div(style="text-align:center")
+                          video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
+                        div.qItemPhoto(v-on:click="window.open('/files/'+item.photo)" v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
+                        div.qItemAnsvwer(v-if="item.answer!=null")
+                          div.qItemAnsvwerLabel Ответ:
+                          div.qItemAnsverText(v-html="item.answer")
+                        div.qItemDate
+                          span.qItemReady(v-if="item.isReady")
+                            span Ответ получен&nbsp;&nbsp;
+                            span
+                              <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M13.7319 0.295798C13.639 0.20207 13.5284 0.127675 13.4065 0.0769067C13.2846 0.026138 13.1539 0 13.0219 0C12.8899 0 12.7592 0.026138 12.6373 0.0769067C12.5155 0.127675 12.4049 0.20207 12.3119 0.295798L4.86192 7.7558L1.73192 4.6158C1.6354 4.52256 1.52146 4.44925 1.3966 4.40004C1.27175 4.35084 1.13843 4.32671 1.00424 4.32903C0.870064 4.33135 0.737655 4.36008 0.614576 4.41357C0.491498 4.46706 0.380161 4.54428 0.286922 4.6408C0.193684 4.73732 0.12037 4.85126 0.0711659 4.97612C0.0219619 5.10097 -0.00216855 5.2343 0.000152918 5.36848C0.00247438 5.50266 0.0312022 5.63507 0.0846957 5.75814C0.138189 5.88122 0.215401 5.99256 0.311922 6.0858L4.15192 9.9258C4.24489 10.0195 4.35549 10.0939 4.47735 10.1447C4.59921 10.1955 4.72991 10.2216 4.86192 10.2216C4.99394 10.2216 5.12464 10.1955 5.2465 10.1447C5.36836 10.0939 5.47896 10.0195 5.57192 9.9258L13.7319 1.7658C13.8334 1.67216 13.9144 1.5585 13.9698 1.432C14.0253 1.30551 14.0539 1.1689 14.0539 1.0308C14.0539 0.892697 14.0253 0.756091 13.9698 0.629592C13.9144 0.503092 13.8334 0.389441 13.7319 0.295798Z" fill="#3D89E0"/>
+                              </svg>
+                          //span {{moment(item.date).format("HH:mm")}}
+                          //include elements/likes
+
+                    div.rFooter
+                      div.fileLoadProgress
+                      div.askWr
+                        <svg id='rQsend' v-on:click="qFileClick()" style="cursor:pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.5 8C1.5 7.17157 2.17157 6.5 3 6.5H12C12.8284 6.5 13.5 7.17157 13.5 8V16C13.5 16.8284 12.8284 17.5 12 17.5H3C2.17157 17.5 1.5 16.8284 1.5 16V8Z" stroke="#9A9A9A"/>
+                        <path d="M22.0992 5.00042C22.3496 5.16734 22.5 5.44833 22.5 5.74924V18.2508C22.5 18.5517 22.3496 18.8327 22.0992 18.9996C21.7655 19.222 21.3249 19.1968 21.0187 18.9378L16.0311 14.7175C15.6943 14.4325 15.5 14.0136 15.5 13.5724V10.4276C15.5 9.98637 15.6943 9.56752 16.0311 9.28252L21.0187 5.06222C21.3249 4.80315 21.7655 4.77795 22.0992 5.00042Z" stroke="#9A9A9A"/>
+                        </svg>
+                        input.ask(:placeholder="currLang.Yourquestion"  maxlength="600" v-on:paste="qTextOnPaste($event)" id="qText" v-model="qText" v-on:keypress="qtextChange($event)")
+                        <svg class="svgSendBtn" v-on:click="qtextSend()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                        <desc>Created with Sketch.</desc>
+                        <defs></defs>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Desktop-HD" transform="translate(-712.000000, -505.000000)" fill-rule="nonzero">
+                        <g id="ic-baseline-call-made" transform="translate(708.000000, 500.000000)">
+                        <g id="Icon">
+                        <polygon id="Icon-Shape" fill="#9A9A9A" points="9 5 9 7 15.59 7 4 18.59 5.41 20 17 8.41 17 15 19 15 19 5"></polygon>
+                        <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                        </g>
+                        </g>
+                        </g>
+                        </g>
+                        </svg>
+
+
+                  div.rContentWr(v-if="activeSection==2" )
+                    div.rBody(id="chatBox" )
+                      div.qItem(v-for="item in chat" v-bind:class="{my:(item.userid==user.id)}" v-if="item.userid==user.id || item.i=='Модератор' || item.f=='Модератор'")
+                        div.qItemName {{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}
+                        div.qItemText(v-html="item.text")
+                        div(style="text-align:center")
+                          video.qItemVideo(v-bind:src="'/files/'+item.video" v-if="item.video" controls)
+                        div.qItemPhoto(v-on:click="window.open('/files/'+item.photo)" v-bind:style="{backgroundImage:'url(/files/'+item.photo+')'}" v-if="item.photo" controls)
+                        div.qItemDate {{moment(item.date).format("HH:mm")}}
+                    div.rFooter
+                      div.fileLoadProgress
+                      div.askWr
+
+                        input.ask(v-on:paste="chatTextOnPaste($event)" :placeholder="currLang.youMessage" id="chatText" v-model="chatText" v-on:keypress="chattextChange($event)")
+                        <svg class="svgSendBtn" v-on:click="chattextSend()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                        <desc>Created with Sketch.</desc>
+                        <defs></defs>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Desktop-HD" transform="translate(-712.000000, -505.000000)" fill-rule="nonzero">
+                        <g id="ic-baseline-call-made" transform="translate(708.000000, 500.000000)">
+                        <g id="Icon">
+                        <polygon id="Icon-Shape" fill="#9A9A9A" points="9 5 9 7 15.59 7 4 18.59 5.41 20 17 8.41 17 15 19 15 19 5"></polygon>
+                        <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                        </g>
+                        </g>
+                        </g>
+                        </g>
+                        </svg>
+    script(src="/javascripts/cbrScript.js")
+
+
+
