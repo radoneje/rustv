@@ -1457,7 +1457,7 @@ window.onload=function () {
             var _this=this;
             var r= await axios.get("/rest/api/lang");
             this.lang=r.data;
-            this.selLang=localStorage.getItem("selLang")||"en";
+            this.selLang="ru";//localStorage.getItem("selLang")||"en";
             this.changeLang(this.selLang);
 
             setTimeout(()=>{
