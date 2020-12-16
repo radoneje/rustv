@@ -103,7 +103,7 @@ router.get('/login/:id', async (req, res, next) =>{
   if(e.length<1)
     return res.send(404);
 
-  res.render('login', { title: 'ON.event', event:e[0], lang:(require("../lang.json"))[e[0].lang||"ru"] });
+  res.render('login', { title: 'ON.event', event:e[0], lang:(require("../lang.json"))["ru"] });
 });
 
 router.get('/event/:id',  async (req, res, next) =>{
