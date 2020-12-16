@@ -101,6 +101,9 @@ window.onload=function () {
                     var u=await axios.get("/rest/api/users/"+eventid+"/"+roomid)
                     _this.users = u.data;
 
+                    var v = await axios.get("/rest/api/votes/" + eventid + "/" + roomid)
+                    this.votes = v.data;
+
                 }
                 catch (e) {
                     console.warn(e);
