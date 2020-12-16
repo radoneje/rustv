@@ -1020,9 +1020,8 @@ window.onload=function () {
 }
 function startVideo() {
    // setTimeout(function () {
-
         var player = videojs('my-video');
-        player.src('https://front.sber.link/hls/app03/r_st03_720p/index.m3u8')
+        player.src('https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8')
 //player.srcIndex = 0;
 //player.controlBar.addChild('QualitySelector');
         document.getElementById("my-video").style.opacity = 1;
