@@ -1,0 +1,824 @@
+@font-face {
+  font-family: 'CB_Stem Extra';
+  src: url('/fonts/CB_Stem-ExtraLight.eot');
+  src: url('/fonts/CB_Stem-ExtraLight.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/CB_Stem-ExtraLight.woff2') format('woff2'),
+  url('/fonts/CB_Stem-ExtraLight.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CB_Stem';
+  src: url('/fonts/CB_Stem-Regular.eot');
+  src: url('/fonts/CB_Stem-Regular.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/CB_Stem-Regular.woff2') format('woff2'),
+  url('/fonts/CB_Stem-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CB_Stem';
+  src: url('/fonts/CB_Stem-Light.eot');
+  src: url('/fonts/CB_Stem-Light.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/CB_Stem-Light.woff2') format('woff2'),
+  url('/fonts/CB_Stem-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CB_Stem';
+  src: url('/fonts/CB_Stem-Italic.eot');
+  src: url('/fonts/CB_Stem-Italic.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/CB_Stem-Italic.woff2') format('woff2'),
+  url('/fonts/CB_Stem-Italic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'CB_Stem';
+  src: url('/fonts/CB_Stem-Medium.eot');
+  src: url('/fonts/CB_Stem-Medium.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/CB_Stem-Medium.woff2') format('woff2'),
+  url('/fonts/CB_Stem-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+iframe:focus, video:focus{
+  outline: none;
+}
+body {
+  background: #6C717B;
+  color:#FFFFFF;
+  font-family: CB_Stem !important;
+  font-style: normal;
+  font-weight: normal;
+  position: relative;
+}
+#CBloginApp{
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+#CBroot{
+
+}
+.cbLoginDecor{
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.cbLoginDecorWr{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.cbLoginDecorStar{
+  height: 50%;
+  position: absolute;
+  top:calc(25% + 120px);
+}
+.cbLoginPolygon{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.cbLoginRectangle{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.cbLoginRectangle2{
+  display: none;
+}
+.cbLoginDecorStar svg{
+  height: 100%;
+  width: auto;
+
+}
+.CBLoginHead{
+  position: relative;
+  width: 100%;
+}
+.CBLoginLogo{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.CBLoginLang{
+  /* Group 2 */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  font-size: 28.5891px;
+  line-height: 37px;
+  color: #FFFFFF;
+  border: 3.00938px solid #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 40px;
+  text-transform: uppercase;
+
+}
+.CBLoginDateStart{
+  font-size: 28px;
+  line-height: 48px;
+  margin-top: 48px;
+}
+.CBloginBody {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+.CBloginBodyR{
+  box-sizing: border-box;
+  width: 60%;
+  padding:70px 68px;
+}
+.CBloginBodyL{
+  box-sizing: border-box;
+  width: 40%;
+  padding-right: 70px;
+
+}
+.CBloginBodyWr{
+
+}
+.CBLoginTitle{
+  /* Онлайн-конференция */
+  font-size: 32px;
+  line-height: 41px;
+
+}
+.CBLoginSubTitle{
+  /* 9–10 ноября. Новые р */
+  font-size: 56px;
+  line-height: 120%;
+  margin-top: 20px;
+}
+.CBloginBodyWr{
+  padding: 68px 70px;
+  background: white;
+  color:#6C717B;
+  //width: ~"calc(100% - 70px)";
+  box-sizing: border-box;
+}
+.CBLoginRTitle{
+  /* Введите персональный код */
+  font-size: 34px;
+  color: #6C717B;
+}
+.cbLoginCode{
+  margin-top: 48px;
+}
+#loginApp{
+  background: url(/images/cbBg.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: CB_Stem;
+  font-style: normal;
+  font-weight: normal;
+}
+.cbLoginCode{
+  border: 0;
+  border-bottom: 1px solid #6C717B;
+  padding-bottom: 9px;
+  width: 100%;
+  font-size: 22px;
+  line-height: 28px;
+  color: #6C717B;
+}
+.cbLoginCode::placeholder{
+  color:#6C717B;
+  opacity: .5;
+}
+.cbLoginCodeError{
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+.CBloginBodyWr.codeError .cbLoginCodeError{
+  opacity: 1;
+}
+.CBloginSubmit{
+  /* Rectangle */
+  background: linear-gradient(308.11deg, #0087CC 0%, #01BBE7 14.8%, #0087CC 90.52%);
+  border-radius: 2px;
+  height: 63px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  cursor: pointer;
+  margin-top:63px;
+  font-size: 21px;
+}
+.cbLoginCodeError{
+  color:#ff0000;
+  margin-top: 10px;
+}
+.wnd{
+  width: 1184px;
+
+  background: #E6E9EB;
+  box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.16);
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+}
+.cbLoginLeft{
+  width: 720px;
+  padding: 40px;
+  box-sizing: border-box;
+}
+.cbLoginRight{
+  width: ~"calc(100% - 720px)";
+  background: #F6F6F6;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 40px;
+}
+.cbLoginRightBox{
+  width: 100%;
+}
+
+.cbLoginPerson{
+  font-family: CB_Stem;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 46px;
+
+  /* Text B8B9BC */
+
+  color: #000000;
+  margin-top:48px ;
+}
+.cbLoginPosition{
+  font-family: CB_Stem;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 31px;
+  /* identical to box height */
+
+
+  /* Text 8B8C90 */
+
+  color: #8B8C90;
+  margin-top: 12px;
+}
+.cbLoginDate{
+  font-family: CB_Stem;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  /* identical to box height */
+
+
+  /* Text B8B9BC */
+
+  color: #000000;
+  margin-top:48px ;
+}
+.cbLoginRightTitle{
+  font-family: CB_Stem;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  /* identical to box height */
+
+
+  /* Text B8B9BC */
+
+  color: #000000;
+}
+.cbLoginRightError{
+  font-size: 12px;
+  line-height: 15px;
+  color:red;
+  margin-top: 33px;
+}
+.cbLoginRightCode{
+  background: #FFFFFF;
+  /* Black 2 2B2B2B */
+
+  border: 1px solid #E6E9EB;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 5px;
+  font-size: 14px;
+  line-height: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.cbLoginRightEnter {
+  cursor: pointer;
+  background: #00BBEE;
+  opacity: 0.7;
+  border-radius: 4px;
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+  margin-top:32px;
+  text-align: center;
+
+  /* Black 4 212121 */
+
+  color: #FFFFFF;
+}
+
+
+div, input, textarea, span{
+  font-family: CB_Stem !important;
+  font-style: normal;
+  //font-weight: normal;
+}
+#app{
+  background: #ffffff !important;
+  background-size: 100%  !important;
+  background-position: 0  !important;
+  background-repeat: repeat  !important;
+
+}
+.roomScreen{
+  background: none;
+  background-size: 100%;
+  background-position: 0 120px;
+  background-repeat: no-repeat;
+}
+.pLoginBody{
+  background: #E6E9EB;
+}
+.pBodySubTitle{
+  color: #8B8C90;
+}
+.plInputBox input, .plInputBox div.sel {
+  background: #D8D8D8;
+  color:#252321;
+  border: 1px solid #00BBEE;
+}
+.plSubmit{
+  background: #00BBEE;
+  color: #E9E9E9;
+}
+#videoWr{
+  background: #eeeeee;
+}
+.R{
+  background: #6C717B;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.4);
+}
+.rHead{
+  background: #6C717B;
+}
+.qItem{
+  background: #606771;
+}
+.qItemName{
+  color: #000000;
+}
+.qItem.my .qItemName {
+  color: #00BBEE;;
+}
+.qItemText, .qItemDate{
+  color: #ffffff;
+}
+.vAnswBox{
+  color: #000000;
+}
+.qItemAnsvwer{
+  background: #E6E9EB;
+  color: #000000;
+}
+.qItemAnsvwer a {
+  color: #00BBEE;;
+}
+.qLikeIcon path, .qItemReady svg path {
+  fill:#00BBEE;
+}
+.qItemReady{
+  color: #00BBEE;
+  background: #E6E9EB;
+}
+input{
+  color: #ffffff;
+}
+input::placeholder{
+  color: #ffffff;
+}
+.rHeadItem{
+  color: #ffffff;
+  width:100px;
+  font-style: normal;
+   font-weight:normal;
+  font-family: CB_Stem;
+}
+.rHeadItem.active{
+  border-bottom: 2px solid #00BBEE;
+  color: #00BBEE;
+}
+.userItemAvatar svg path{
+  fill:#000000
+}
+.userItem.active path {
+  fill: #00BBEE;
+}
+.green{
+  color: #00BBEE;
+}
+.videoPlayBannner svg path{
+  fill:#00BBEE !important;
+}
+.greenBtn{
+  background: #00BBEE;
+}
+.vAnsw.ready {
+  color: #00BBEE;
+
+}
+.codeRoom svg path{
+  fill:#00BBEE ;
+}
+.rFeedGroupTitle{
+  color: #000000;
+}
+.multiViewVideo .videoBoxWr {
+  background: #eeeeee;
+}
+.rBody{
+  background: #6C717B;
+}
+.headTitle{
+  color: #000000;
+}
+.head{
+  display: none;
+}
+.videoPlayBannner{
+  display: none !important;
+}
+.opa0{
+  display: none;
+}
+.rInviteBox{
+  color: #000000;
+}
+.aModSectFind {
+  margin-left: 10px;
+  width: 100px;
+  border: 0;
+  border-radius: 2px;
+  color: #282d34;
+  background:#E6E9EB ;
+  padding: 4px;
+}
+.aModSectFindClear svg g{
+  fill:#E6E9EB;
+}
+.lFooterAdgendaWr {
+  background: #E6E9EB;
+}
+.lFooterAdgendaWr .qItemName{
+  color: #ffffff;
+}
+
+.lFooterProg {
+  color: #000000;
+  background: #E6E9EB;
+  border-radius: 4px;
+}
+.adminScreen #VKS{
+  background: #ffffff;
+}
+.qItemAnsvwer{
+  background: #cbcccc;
+}
+.qItemAnsverText, .qItemAnsverText textarea{
+  color: #000000;
+}
+.qLikeCount{
+  float: left;
+}
+.aModSect input{
+  color:black;
+}
+.qLikeIcon{
+  float: left;
+  margin-left: .5em;
+}
+.qItemDate .link.green{
+  color: white;
+  background: #00BBEE;
+  padding: 4px;
+  border-radius: 4px;
+  margin-right: 1em;
+}
+.qItemDate .link.red{
+  color: red;
+  background: #00BBEE;
+  padding: 4px;
+  border-radius: 4px;
+  margin-right: 1em;
+}
+.qItemDate .link.black{
+  color: #000000;
+  background: #00BBEE;
+  padding: 4px;
+  border-radius: 4px;
+  margin-right: 1em;
+}
+.showAll{
+  background: #00BBEE;
+}
+.messageFromModReplyInput, .qItemMessageInputGroup input{
+  background: #cbcccc;;
+  color:#000000;
+
+
+}
+.modUserSteaker{
+  background: #cbcccc;
+}
+.stageL{
+
+  background: #ffffff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);;
+
+}
+.roomMeetVideoBox{
+
+  background: #ffffff;
+
+}
+#voteres{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  margin: 0;
+  padding: 60px;
+  background-image: url(/images/cbicons/back_clean.png);
+  background-size: cover;
+  box-sizing: border-box;
+}
+#voteres #roomVote{
+  background: none;
+  position: inherit;
+}
+@media only screen and (max-width: 1024px) {
+  #sectMenu_8 {
+    display: none !important;
+
+  }
+  .wnd {
+    width: 864px;
+  }
+  .cbLoginLeft{
+    width: ~"calc(100% - 376px)";
+  }
+  .cbLoginRight{
+    width: 376px;
+  }
+  .cbLoginHead{
+    font-size: 28px;
+    line-height: 36px;
+  }
+  .cbLoginTitle{
+    font-size: 36px;
+    line-height: 46px;
+  }
+
+
+}
+.rUser{
+  display: none;
+}
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.videoWrapper video,  .videoWrapper div{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.cbLoginDecorStar2{
+  display: none;
+}
+.CBLoginHead{
+  height: 120px;
+}
+@media only screen and (max-width: 1600px) {
+  .CBLoginTitle{
+    font-size: 22px;
+
+  }
+  .CBLoginSubTitle{
+    font-size: 42px;
+  }
+  .CBLoginRTitle{
+    font-size: 24px;
+  }
+  .CBLoginDateStart {
+    font-size: 22px;
+  }
+  .CBloginBodyR{
+    padding-left: 150px;
+  }
+
+}
+
+@media only screen and (max-width: 1200px) {
+
+  .CBLoginTitle{
+    font-size: 24px;
+
+  }
+  .CBLoginSubTitle{
+    font-size: 32px;
+  }
+  .CBLoginRTitle{
+    font-size: 24px;
+  }
+  .CBLoginDateStart {
+    font-size: 22px;
+  }
+  .CBloginBodyR{
+    padding-left: 32px;
+  }
+  .CBloginBodyL {
+      padding-right:       32px;
+  }
+  .CBloginBodyWr{
+    padding: 48px 32px;
+  }
+  .cbLoginPolygon {
+
+    right: -50px;
+    top: -50px;
+  }
+  .cbLoginRectangle{
+    display: none;
+  }
+  .cbLoginDecorStar{
+    display: none;
+  }
+  .cbLoginDecorStar2{
+    display: block;
+    bottom: 0;
+    position: absolute;
+  }
+  .CBLoginDateStart{
+    margin-top: 20px;
+  }
+  .CBLoginLogo{
+    width: 230px;
+  }
+  .CBLoginLogo svg{
+    width: 100%;
+    height: auto;
+    margin: 10px;
+  }
+  .CBLoginLang{
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+    margin: 18px;
+  }
+
+  .CBLoginLogo{
+    width: 200px;
+  }
+  .CBLoginLogo svg{
+    width: 100%;
+    height: auto;
+    margin: 10px;
+  }
+  .CBLoginLang{
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+    margin: 18px;
+  }
+}
+
+@media only screen and (max-width: 864px) {
+
+.CBloginBody{
+  display: block;
+}
+  .CBloginBodyR, .CBloginBodyL{
+    width: 100%;
+  }
+  .CBloginBodyL{
+    padding-right: 0;
+  }
+  .CBloginBodyR{
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 22px;
+  }
+  .CBLoginTitle{
+    font-size: 22px;
+  }
+  .CBLoginSubTitle{
+    font-size: 24px;
+  }
+
+  .cbLoginRectangle{
+    display: none;
+  }
+.cbLoginRectangle2{
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left:~"calc(50% - (375px / 2))"
+
+}
+
+  #app{
+    background:#E6E9EB ;
+  }
+  #loginApp{
+    display: block;
+  }
+  .wnd {
+    display: block;
+    width: 100%;
+    border-radius: 0;
+  }
+  .cbLoginLeft{
+    width: 100%;
+    border-radius: 0;
+    padding: 20px;
+    padding-bottom: 40px;
+    padding-top: 40px;
+  }
+  .CBLoginDateStart {
+    font-size: 22px;
+    line-height: 27px;
+  }
+  .cbLoginPolygon {
+    right: -220px;
+    top: -50px;
+  }
+  .CBloginBody{
+    height: auto;
+    margin-bottom: 100px;
+  }
+  .cbLoginDecorStar2{
+    display: none;
+  }
+
+  .cbLoginPerson{
+    font-size: 26px;
+    line-height: 34px;
+  }
+  .cbLoginHead {
+    font-size: 22px;
+    line-height: 36px;
+  }
+  .cbLoginRightCode{
+    font-size: 22px;
+  }
+  .cbLoginRightEnter{
+    font-size: 22px;
+  }
+  .cbLoginRight{
+    width: 100%;
+    border-radius: 0;
+    padding: 20px;
+    padding-bottom: 40px;
+  }
+
+}
+
