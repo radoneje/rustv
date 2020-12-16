@@ -8,11 +8,14 @@ block head
   script(src="/javascripts/phoner.js")
   script(src="/lib/imask.js")
   script(src="/javascripts/stageScript.js")
+
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   link(rel='stylesheet', href='/stylesheets/login.css')
   link(rel='stylesheet', href='/stylesheets/room.css')
   if event.isClientCss
     link(rel='stylesheet', href='/stylesheets/'+event.clientCss)
+  script.
+      videoLayout2=videoLayout;
 
 block content
   <style>body{overflow:hidden;}</style>
