@@ -1106,10 +1106,8 @@ window.onload=function () {
 // наблюдатель
     let observer = new IntersectionObserver(callback, options)
     let target = document.querySelector('.L')
-    observer.observe(target)
-
-
-
+    if(target)
+        observer.observe(target)
 
 
 }

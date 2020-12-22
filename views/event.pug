@@ -45,7 +45,7 @@ block content
                 span.link.green Перейти к участию
         div.pLoginBody.pEventBody( v-show="activeSection==1" )
           div.pAvatarWr
-            div.pAvatar(v-bind:style="{backgroundImage:user.avatar?('url('+user.avatar+')'):'url(/images/avatar.svg)'}")
+            div.pAvatar(v-bind:style="{backgroundImage:(user && user.avatar)?('url('+user.avatar+')'):'url(/images/avatar.svg)'}")
             div.pAvatarLink(v-on:click="uploadImage()") изменить
           div.pPersWr
             div.pPersItem
