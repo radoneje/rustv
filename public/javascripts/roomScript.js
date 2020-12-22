@@ -1115,6 +1115,8 @@ function startVideo() {
     //alert(typeof(video))
     setTimeout(()=>{
     var video=document.getElementById('video')
+        if(!video)
+            return;
     console.log(video);
     if(typeof(video) =="undefined")
         return;
