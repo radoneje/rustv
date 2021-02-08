@@ -273,6 +273,7 @@ window.onload=function () {
 
             },
             qtextSend:function (e) {
+
                 var _this=this;
                 if(this.qText.length>0)
                     qtextSend(_this)
@@ -282,6 +283,7 @@ window.onload=function () {
 
             },
             chattextSend(_this){
+                console.log("chattextSend");
                 if(this.chatText.length>0)
                     chattextSend(this) ;
                 else
