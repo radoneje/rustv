@@ -254,12 +254,14 @@ window.onload=async function () {
                 }
             },
             QsetOld:function (item) {
+                console.log("QsetOld")
                 axios.post("/rest/api/qsetStatus/"+eventid+"/"+roomid,{id:item.id, status:true})
                     .then(function (r) {
 
                     })
             },
             QsetNew:function (item) {
+                console.log("QsetNew")
                 axios.post("/rest/api/qsetStatus/"+eventid+"/"+roomid,{id:item.id, status:false})
                     .then(function (r) {
 
