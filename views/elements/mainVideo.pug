@@ -6,7 +6,8 @@ else if room.id==62
     <youtube :video-id="'fQIhZegudFw'" :player-vars="{playsinline:'1'}" ref="youtube" ></youtube>
     //<iframe id="profIframe" name="profIframe" allowfullscreen src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&autoplay=false&mute=false"></iframe>
 
-
+else if room.id==52
+    video(id="video" width="1280" height="720" controls playsinline loop  :src="'https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/sber/playlist.m3u8'" :poster="'/images/'+room.poster" )
 else if room.id==67
     <youtube :video-id="'ObZKknxkMqU'" :player-vars="{playsinline:'1'}" ref="youtube" ></youtube>
 else if room.id==61
