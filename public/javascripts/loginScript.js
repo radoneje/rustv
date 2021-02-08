@@ -220,7 +220,7 @@ function closeWnd(){
          if(!redirect)
              redirect="/event/"+evntId
         setTimeout(document.location.href=redirect,3000)
-    return
+    return;
 }
 
 
