@@ -883,10 +883,16 @@ router.post("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) 
     if(req.body.text.length>2040)
         req.body.text=req.body.text.substr(0, 2040);
     var text = urlify(stripHtml(req.body.text))
+    var userid;
+    if(req.session["user" + req.params.eventid])
+        userid=req.session["user" + req.params.eventid].id
+    else
+        userid= req.query.userid;
+
     var r = await req.knex("t_q").insert({
         text: text,
         roomid: req.params.roomid,
-        userid: req.session["user" + req.params.eventid].id | req.query.userid,
+        userid: userid,
         date: (new Date())
     }, "*")
 
@@ -980,6 +986,11 @@ router.get("/invites/:eventid/:roomid", checkLoginToRoom, async (req, res, next)
 
 router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
     console.log(req.query)
+    var userid;
+    if(req.session["user" + req.params.eventid])
+        userid=req.session["user" + req.params.eventid].id
+    else
+        userid= req.query.userid;
     if(req.body.text.length>2040)
         req.body.text=req.body.text.substr(0, 2040);
     var text = urlify(stripHtml(req.body.text))
@@ -988,7 +999,7 @@ router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
     var r = await req.knex("t_chat").insert({
         text: text,
         roomid: req.params.roomid,
-        userid: req.session["user" + req.params.eventid].id | req.query.userid,
+        userid: userid,
         date: (new Date())
     }, "*")
     r = await req.knex.select("*").from("v_chat").where({id: r[0].id});
