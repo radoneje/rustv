@@ -163,7 +163,7 @@ router.get('/room/:id',  async (req, res, next) =>{
 
   var room=rooms[0]
 
-  console.log(req.query.userId)
+  console.log(req.query)
   if(!req.session["user"+room.eventid] && room.id!=65 && (!req.query.userId))
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
   if(!req.session["user"+room.eventid] && req.query.userId)
