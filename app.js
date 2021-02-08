@@ -62,9 +62,15 @@ const pgSession = require('connect-pg-simple')(session);
 const pgStoreConfig = {conObject: config.pgConnection}
 app.use(session({
   secret: (config.sha256Secret),
+
+
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 10 * 24 * 60 * 60 * 1000 }, // 10 days
+  cookie: {
+    maxAge: 10 * 24 * 60 * 60 * 1000,
+    sameSite:'none',
+    secure:true,
+  }, // 10 days
   store:new pgSession(pgStoreConfig),
 }));
 app.use(fileUpload({
