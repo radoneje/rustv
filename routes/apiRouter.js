@@ -886,7 +886,7 @@ router.post("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) 
     var r = await req.knex("t_q").insert({
         text: text,
         roomid: req.params.roomid,
-        userid: req.session["user" + req.params.eventid].id,
+        userid: req.session["user" + req.params.eventid].id | req.req.query.userid,
         date: (new Date())
     }, "*")
 
@@ -987,7 +987,7 @@ router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) =
     var r = await req.knex("t_chat").insert({
         text: text,
         roomid: req.params.roomid,
-        userid: req.session["user" + req.params.eventid].id,
+        userid: req.session["user" + req.params.eventid].id | req.req.query.userid,
         date: (new Date())
     }, "*")
     r = await req.knex.select("*").from("v_chat").where({id: r[0].id});

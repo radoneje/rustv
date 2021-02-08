@@ -701,7 +701,7 @@ function qItemAnswerChange(item, _this){
     axios.post("/rest/api/qAnswer/"+eventid+"/"+roomid,{answer:item.answer, id:item.id}).then(function () {;;})
 }
 function chattextSend(_this) {
-    axios.post("/rest/api/chat/"+eventid+"/"+roomid,{text:_this.chatText})
+    axios.post("/rest/api/chat/"+eventid+"/"+roomid+"?userid="+_this.user.id,{text:_this.chatText})
         .then(function (e) {
             _this.chatText="";
             // _this.q.push(e.data);
@@ -730,7 +730,7 @@ function qtextChange(_this,e) {
     }
 }
 function qtextSend(_this) {
-    axios.post("/rest/api/quest/"+eventid+"/"+roomid,{text:_this.qText})
+    axios.post("/rest/api/quest/"+eventid+"/"+roomid+"?userid="+_this.user.id,{text:_this.qText})
         .then(function (e) {
             _this.qText="";
             // _this.q.push(e.data);
