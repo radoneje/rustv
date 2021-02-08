@@ -35,8 +35,8 @@ block content
 
                         div.qItemDate
                             include elements/likes
-                            .isReady(v-if="item.isReady" v-on:click="QsetOld(item)" style="cursor:pointer") Показан, убрать с экрана
-                            .isReady(v-if="!item.isReady" v-on:click="QsetNew(item)" style="cursor:pointer") Скрыт, показать
+                            .isReady(v-if="item.isReady" v-on:click="QsetNew(item)" style="cursor:pointer") Показан, убрать с экрана
+                            .isReady(v-if="!item.isReady" v-on:click="QsetOld(item)" style="cursor:pointer") Скрыт, показать
 
 
 
