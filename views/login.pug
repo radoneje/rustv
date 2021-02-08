@@ -25,7 +25,7 @@ block content
                 input.aLang( v-bind:class="{active:selLang=='en'}" v-on:click="changeLang('en')" type="button" value="ENG" style="padding: 10px;cursor:pointer;")
               .plInputBox(style="width:min-content;")
                 input.aLang(v-bind:class="{active:selLang=='ru'}" v-on:click="changeLang('ru')" type="button" value="RUS" style="padding: 10px;cursor:pointer;margin-left:10px")
-            div.pBodyTitle {{lang[selLang].registration}}
+            div.pBodyTitle.pLoginTitle {{lang[selLang].registration}}
             div.pBodySubTitle {{lang[selLang].allMust}}
             div.plInputBox(v-bind:class="{warning:(iErr &&  i.length<2)}")
               div.plInputBoxLabel
