@@ -979,6 +979,7 @@ router.get("/invites/:eventid/:roomid", checkLoginToRoom, async (req, res, next)
 })
 
 router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
+    console.log(req.query)
     if(req.body.text.length>2040)
         req.body.text=req.body.text.substr(0, 2040);
     var text = urlify(stripHtml(req.body.text))
