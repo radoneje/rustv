@@ -68,8 +68,8 @@ app.use(session({
   saveUninitialized: true,
   cookie: {
     maxAge: 10 * 24 * 60 * 60 * 1000,
-    sameSite:'none',
-    secure:true,
+   // sameSite:'none',
+    //secure:true,
   }, // 10 days
   store:new pgSession(pgStoreConfig),
 }));
