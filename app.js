@@ -60,7 +60,7 @@ app.use(minify({
 
 const pgSession = require('connect-pg-simple')(session);
 const pgStoreConfig = {conObject: config.pgConnection}
-app.use(session({
+var sess=session({
   secret: (config.sha256Secret),
 
 
@@ -68,12 +68,13 @@ app.use(session({
   saveUninitialized: true,
   cookie: {
     maxAge: 10 * 24 * 60 * 60 * 1000,
-    //secure: true,
     httpOnly: true,
     sameSite: 'none',
   }, // 10 days
   store:new pgSession(pgStoreConfig),
-}));
+});
+sess.cookie.secure = true
+app.use(sess);
 app.use(fileUpload({
   limits: { fileSize: 100 * 1024 * 1024 },
   useTempFiles : true,
