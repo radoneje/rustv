@@ -952,9 +952,9 @@ window.onload=function () {
                     }
                 ]
             }
-            axios.get('/rest/api/info/'+eventid+"/"+roomid)
-                .then(function (dt) {
-                    _this.user=dt.data;
+          //  axios.get('/rest/api/info/'+eventid+"/"+roomid)
+             //   .then(function (dt) {
+                    _this.user=u;//dt.data;
                     connect(_this,roomid, function (socket) {
                         _this.socket=socket;
                     });
@@ -1067,7 +1067,7 @@ window.onload=function () {
 
 
                     //_this.startRTC();
-                })
+               // })
             window.addEventListener('scroll', function() {
                 if(_this.$refs.youtube)
                 {

@@ -191,7 +191,7 @@ res.header("X-Frame-Options","")
   if(room.id==98)
     res.render('roomgpn', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
   else
-  res.render('room', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
+  res.render('room', { title: 'ON.event '+room.title, user:req.session["user"+room.eventid], room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
 
 })
 
