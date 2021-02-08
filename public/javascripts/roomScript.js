@@ -965,7 +965,7 @@ window.onload=function () {
                             _this.users=r.data;
                          //   console.log(_this.users)
 
-                            axios.get("/rest/api/invitedUsers/"+eventid+"/"+roomid)
+                           /* axios.get("/rest/api/invitedUsers/"+eventid+"/"+roomid)
 
                                 .then(function (r) {
                                     console.log("invites",r.data )
@@ -979,7 +979,7 @@ window.onload=function () {
                                     if(_this.invites.length>0)
                                             _this.invites.push(r.data[0])
                                 });
-
+*/
 
                         })
                     axios.get("/rest/api/quest/"+eventid+"/"+roomid)
