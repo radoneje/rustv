@@ -7,18 +7,30 @@ window.onload=function () {
         document.location.href="/badbrowser"
     }
 
+    var initStruct={};
+    try{
+        initStruct.f=localStorage.getItem("f")|| "";
+        initStruct.i=localStorage.getItem("i")|| "";
+        initStruct.tel=localStorage.getItem("loginTel") || "";
+        initStruct.email=localStorage.getItem("email") || "";
+        initStruct.CompanyName=localStorage.getItem("CompanyName") || ""
+    }
+    catch (e) {
+       console.warn(e)
+    }
+
     var app = new Vue({
         el: '#app',
         data: {
             loader: false,
-            tel: localStorage.getItem("loginTel") || "",
+            tel:initStruct.tel ,
             telErr: false,
-            f:localStorage.getItem("f")|| "",
-            i:localStorage.getItem("i")||"",
+            f:initStruct.f,
+            i:initStruct.i,
             fErr:false,
             iErr:false,
-            email:localStorage.getItem("email") || "",
-            CompanyName:localStorage.getItem("CompanyName") || "",
+            email:initStruct.email,
+            CompanyName:initStruct.CompanyName,
             emailErr:false,
             CompanyNameErr:false,
             showCode:false,
