@@ -89,7 +89,7 @@ router.get('/regtoevent/:id', async (req, res, next) =>{
 
   var isRegistered=req.session["user"+req.params.id];
 
-  res.render('regtoevent', { title: 'ON.event', event:e[0], isRegistered:isRegistered });
+  res.render('regtoevent', { title: 'ON.event', event:e[0], isRegistered:isRegistered, userId:req.params.id });
 });
 router.get('/login/:id', async (req, res, next) =>{
   req.params.id=parseInt(req.params.id)

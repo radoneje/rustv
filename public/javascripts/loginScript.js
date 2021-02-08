@@ -136,7 +136,7 @@ window.onload=function () {
 
                        if(!dt.data.showConfirm){
                            if(dt.data.user)
-                               closeWnd();
+                               closeWnd(dt.data.user[0]);
                            else{
                                this.loader = false;
                                this.showCode=false;
@@ -208,7 +208,7 @@ window.onload=function () {
         }
     })
 }
-function closeWnd(){
+function closeWnd(params){
    /* if(window.opener  && window.opener.registerSuccess)
     {
         window.opener.registerSuccess(dt.data)
@@ -219,6 +219,8 @@ function closeWnd(){
         var redirect = url.searchParams.get("redirect");
          if(!redirect)
              redirect="/event/"+evntId
+    if(params)
+        redirect+="?userid="+params[0].id;
         setTimeout(document.location.href=redirect,3000)
     return;
 }
