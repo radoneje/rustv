@@ -14,6 +14,7 @@ window.onload=function () {
         initStruct.tel=localStorage.getItem("loginTel") || "";
         initStruct.email=localStorage.getItem("email") || "";
         initStruct.CompanyName=localStorage.getItem("CompanyName") || ""
+        initStruct.selLang=localStorage.getItem("selLang")||"ru";
     }
     catch (e) {
        console.warn(e)
@@ -192,7 +193,7 @@ window.onload=function () {
             var _this=this;
             var r= await axios.get("/rest/api/lang");
             this.lang=r.data;
-            this.selLang=localStorage.getItem("selLang")||"ru";
+            this.selLang= initStruct.selLang ;
           //  var iInpit=document.getElementById("iInpit");
            // if(iInpit)
             //    iInpit.focus()
