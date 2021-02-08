@@ -73,7 +73,7 @@ var sess=session({
   }, // 10 days
   store:new pgSession(pgStoreConfig),
 });
-sess.cookie.secure = true
+sess.cookie.secure = true;
 app.use(sess);
 app.use(fileUpload({
   limits: { fileSize: 100 * 1024 * 1024 },
