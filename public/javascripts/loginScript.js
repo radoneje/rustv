@@ -136,7 +136,7 @@ window.onload=function () {
 
                        if(!dt.data.showConfirm){
                            if(dt.data.user) {
-                               console.log("ddd", dt.data.user[0])
+                               console.log("ddd", dt.data)
                                closeWnd(dt.data.user[0]);
                            }
                            else{
