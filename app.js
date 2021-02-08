@@ -68,7 +68,7 @@ var sess={
   saveUninitialized: true,
   cookie: {
     maxAge: 10 * 24 * 60 * 60 * 1000,
-    secure: "true",
+    secure: true,
     httpOnly: true,
     sameSite: 'none',
   }, // 10 days
