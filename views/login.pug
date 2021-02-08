@@ -20,7 +20,7 @@ block content
             img(style="width:291px" src=event.loginlogo)
             div.pTitle !{event.title}
           div.pLoginBody(style="padding-top: 1px;")
-            div.pBodySubTitle(style="margin-top:0;display: flex;margin-bottom:0px")
+            div.pBodySubTitle.pLoginLangTitle(style="margin-top:0;display: flex;margin-bottom:0px")
               .plInputBox(style="width:min-content;")
                 input.aLang( v-bind:class="{active:selLang=='en'}" v-on:click="changeLang('en')" type="button" value="ENG" style="padding: 10px;cursor:pointer;")
               .plInputBox(style="width:min-content;")
