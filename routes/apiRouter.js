@@ -556,7 +556,7 @@ router.post("/addAllowedTelsDelete/", async (req, res, next) => {
 });
 
 function checkLoginToRoom(req, res, next) {
-    next();
+    return next();
     req.params.eventid = parseInt(req.params.eventid)
     if (!Number.isInteger(req.params.eventid))
         return res.send(404);
