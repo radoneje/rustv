@@ -163,8 +163,16 @@ router.get('/room/:id',  async (req, res, next) =>{
 
   var room=rooms[0]
 
-  if(!req.session["user"+room.eventid] && room.id!=65)
+  console.log(req.query.userId)
+  if(!req.session["user"+room.eventid] && room.id!=65 && (!req.query.userId))
     return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
+  if(!req.session["user"+room.eventid] && req.query.userId)
+  {
+    var rr=await req.knex.select("*").from("t_eventusers").where({id:req.query.userId});
+    if(rr.length<1)
+      return res.redirect("/login/"+room.eventid+"?redirect="+encodeURI('/room/'+req.params.id))
+    req.session["user"+room.eventid]=rr[0];
+  }
   if(room.id==65)
   {
     var usr = await req.knex("t_eventusers").insert({
