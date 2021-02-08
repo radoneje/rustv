@@ -220,7 +220,7 @@ function closeWnd(params){
          if(!redirect)
              redirect="/event/"+evntId
     if(params)
-        redirect+="?userid="+params[0].id;
+        redirect+="?userid="+params.id;
         setTimeout(document.location.href=redirect,3000)
     return;
 }
