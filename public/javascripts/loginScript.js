@@ -135,8 +135,10 @@ window.onload=function () {
                     ,{evntId:evntId, notify:this.isSendReminder,f:this.f, i:this.i, CompanyName:this.CompanyName, tel:this.tel, email:this.email, companyTitle:this.companyTitle, company:this.company?this.company.id:null, otrasl:this.otrasl?this.otrasl.id:null})
 
                        if(!dt.data.showConfirm){
-                           if(dt.data.user)
+                           if(dt.data.user) {
+                               console.log("ddd", dt.data.user[0])
                                closeWnd(dt.data.user[0]);
+                           }
                            else{
                                this.loader = false;
                                this.showCode=false;
