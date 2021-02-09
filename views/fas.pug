@@ -22,10 +22,10 @@ block content
           .streamSwitcherWr
             .streamSwitcher
               .streamItem(v-on:click="setActiveStream(6)" v-bind:class="{active:activeStream==6}") Стрим 1
-              .streamItem(v-on:click="setActiveStream(7)" v-bind:class="{active:activeStream==7}") Стрим 2 {{roomid}}
+              .streamItem(v-on:click="setActiveStream(7)" v-bind:class="{active:activeStream==7}") Стрим 2
           div.videoWrapper(v-bind:style="{backgroundImage:pres?'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')':null}")
-            iframe(v-if="roomid==106" width="560" height="315" src="https://www.youtube.com/embed/L8KG8T3qSn4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
-            iframe(v-if="roomid==107" width="560" height="315" src="https://www.youtube.com/embed/UzbQTxlvCmk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+            iframe(v-if="roomid==106" width="560" height="315" src="https://www.youtube.com/embed/-eoBpGkhgKQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+            iframe(v-if="roomid==107" width="560" height="315" src="https://www.youtube.com/embed/ekG3V36poTo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
 
 
 
