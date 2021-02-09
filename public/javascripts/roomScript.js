@@ -1130,6 +1130,9 @@ function startVideo() {
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, function() {
             console.log("MANIFEST_PARSED")
+            video.onplay=function(){
+                video.currentTime=video.duration-5;
+            }
             var banner=document.querySelector(".videoPlayBannner");
             banner.style.display="flex";
             banner.onclick=function () {
