@@ -2205,7 +2205,7 @@ router.post("/fasRegUser",async (req, res, next) => {
         return res.json(usr[0]);
     }
     else
-        return res.sendStatus(404);
+        return res.json(req.body).sendStatus(404);
 });
 
 module.exports = router
