@@ -70,7 +70,7 @@ var sess={
     maxAge: 10 * 24 * 60 * 60 * 1000,
    // secure: true,
     httpOnly: true,
-    sameSite: 'none',
+    //sameSite: 'none',
   }, // 10 days
   store:new pgSession(pgStoreConfig),
 };
