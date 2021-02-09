@@ -1,4 +1,12 @@
+try{
+    eval("()=>{;;}")
+}
+catch (e) {
+    document.location.href="/badbrowser"
+}
+
 window.onload=function () {
+
 
 
     var app = new Vue({
