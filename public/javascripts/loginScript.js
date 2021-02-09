@@ -13,7 +13,7 @@ window.onload=function () {
         initStruct.i=localStorage.getItem("i")|| "";
         initStruct.tel=localStorage.getItem("loginTel") || "";
         initStruct.email=localStorage.getItem("email") || "";
-        initStruct.CompanyName=localStorage.getItem("CompanyName") || ""
+        initStruct.CompanyName= ""
         initStruct.selLang="ru";
     }
     catch (e) {
