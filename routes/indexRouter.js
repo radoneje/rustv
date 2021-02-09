@@ -55,7 +55,6 @@ router.get('/', function(req, res, next) {
     return res.render('rosatom', { title: 'Росатом', lang:(require("../lang.json"))["en"]});
   res.render('index', { title: 'ON.event' });
 
-
 });
 router.get('/badbrowser', function(req, res, next) {
   res.render('badbrowser', { title: 'ON.event' });
