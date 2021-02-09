@@ -258,7 +258,7 @@ router.get('/fas/:id',  async (req, res, next) =>{
   var events=await req.knex.select("*").from("t_events").where({id:room.eventid})
   //res.header("X-Frame-Options","ALLOW-FROM https://sbergile-talks.ru/")
   if((room.id>=106 && room.id<=107)  )
-    res.render('sbergile', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
+    res.render('fas', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
   else
     res.render('room', { title: 'ON.event '+room.title, room:room , event:events[0], lang:(require("../lang.json"))[events[0].lang||"ru"]});
 
