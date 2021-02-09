@@ -62,7 +62,7 @@ window.onload=function () {
                // this.room.id=100+parseInt(id);
                 roomid=100+parseInt(id);
                 roomid2=(101+parseInt(id));
-                this.roomid=(101+parseInt(id));
+                this.roomid=(100+parseInt(id));
                 //player.poster(this.getplayerPoster())
                 console.log("change", roomid,this.getplayerSrc() )
                 //player.src(this.getplayerSrc());
