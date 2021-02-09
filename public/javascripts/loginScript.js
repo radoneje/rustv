@@ -9,10 +9,10 @@ window.onload=function () {
 
     var initStruct={};
     try{
-        initStruct.f=localStorage.getItem("f")|| "";
-        initStruct.i=localStorage.getItem("i")|| "";
-        initStruct.tel=localStorage.getItem("loginTel") || "";
-        initStruct.email=localStorage.getItem("email") || "";
+        initStruct.f="";
+        initStruct.i="";
+        initStruct.tel= "";
+        initStruct.email="";
         initStruct.CompanyName= ""
         initStruct.selLang="ru";
     }
