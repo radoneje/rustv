@@ -61,7 +61,7 @@ window.onload=function () {
                 this.activeStream=id;
                // this.room.id=100+parseInt(id);
                 roomid=100+parseInt(id);
-                roomid2=(101+parseInt(id));
+                roomid2=(100+parseInt(id));
                 this.roomid=(100+parseInt(id));
                 //player.poster(this.getplayerPoster())
                 console.log("change", roomid,this.getplayerSrc() )
