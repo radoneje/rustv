@@ -281,7 +281,7 @@ block content
                       div.qItemName 12:00 Сессия {{item}}
             div.rContentWr(v-if="activeSection==1" v-show="isQ")
               div.rBody(id="qBox" )
-                div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==user.id)}" v-if="item.isReady" oldv-if="item.userid==user.id || true")
+                div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==user.id)}" v-if="item.userid==user.id || true")
                   div.qItemSmi  {{item.smi}}
                   div.qItemName {{item.i}}&nbsp;{{item.f}}
                   div.qItemText(v-html="item.text")
