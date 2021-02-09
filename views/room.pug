@@ -153,7 +153,7 @@ block content
                         span.link.green(v-on:click="document.location.href='/room/'+item.id" v-if="item.id!=roomid") &nbsp;&nbsp; Перейти
             div.rContentWr(v-if="activeSection==1" v-show="isQ")
               div.rBody(id="qBox" )
-                div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==user.id)}" v-if="item.isReady || item.userid==user.id" oldv-if="item.userid==user.id ")
+                div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==user.id)}" v-if="item.userid==user.id ")
                   div.qItemName {{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}
                   div.qItemText(v-html="item.text")
                   div(style="text-align:center")
@@ -165,7 +165,7 @@ block content
                     div.qItemAnsvwerLabel Ответ:
                     div.qItemAnsverText(v-html="item.answer")
                   div.qItemDate
-                    //span.qItemReady(v-if="item.isReady")
+                    span.qItemReady(v-if="item.isReady")
                       span Ответ получен&nbsp;&nbsp;
                       span
                         <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
