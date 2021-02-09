@@ -122,8 +122,8 @@ window.onload=function () {
                     return document.getElementById("CompanyNameInpit").focus();
 
 
-                localStorage.setItem("f", this.f);
-                localStorage.setItem("i", this.i);
+              //  localStorage.setItem("f", this.f);
+             //   localStorage.setItem("i", this.i);
             /*    localStorage.setItem("email", this.email);
                 localStorage.setItem("CompanyName", this.CompanyName);*/
 
@@ -185,7 +185,7 @@ window.onload=function () {
                 this.code="";
             },
             changeLang:function (selLang) {
-                localStorage.setItem("selLang", selLang)
+              //  localStorage.setItem("selLang", selLang)
                 this.selLang=selLang;
                 console.log(selLang, )
             }
