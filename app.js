@@ -69,7 +69,7 @@ var sess={
   cookie: {
     maxAge: 10 * 24 * 60 * 60 * 1000,
    // secure: true,
-    httpOnly: true,
+    //httpOnly: true,
     //sameSite: 'none',
   }, // 10 days
   store:new pgSession(pgStoreConfig),
