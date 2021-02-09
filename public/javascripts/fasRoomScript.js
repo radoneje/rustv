@@ -482,7 +482,7 @@ window.onload=function () {
                 var elem=document.getElementById('regUserFormInput');
                 if(! elem.value || elem.value.length==0)
                     return;
-                var ret=await axios.post("/rest/api/sbergileRegUser", {roomid:roomid, username:elem.value})
+                var ret=await axios.post("/rest/api/fasRegUser", {roomid:roomid, username:elem.value})
                 this.user=ret.data;
                 localStorage.setItem("sbergileUser", JSON.stringify(this.user));
                 this.regUserForm=false;
