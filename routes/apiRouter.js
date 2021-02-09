@@ -556,7 +556,6 @@ router.post("/addAllowedTelsDelete/", async (req, res, next) => {
 });
 
 function checkLoginToRoom(req, res, next) {
-    return next();
     req.params.eventid = parseInt(req.params.eventid)
     if (!Number.isInteger(req.params.eventid))
         return res.send(404);
@@ -883,11 +882,9 @@ router.post("/quest/:eventid/:roomid", checkLoginToRoom, async (req, res, next) 
     if(req.body.text.length>2040)
         req.body.text=req.body.text.substr(0, 2040);
     var text = urlify(stripHtml(req.body.text))
-    var userid;
-    if(req.session["user" + req.params.eventid])
-        userid=req.session["user" + req.params.eventid].id
-    else
-        userid= req.query.userid;
+
+
+    var     userid=req.session["user" + req.params.eventid].id
 
     var r = await req.knex("t_q").insert({
         text: text,
@@ -985,12 +982,9 @@ router.get("/invites/:eventid/:roomid", checkLoginToRoom, async (req, res, next)
 })
 
 router.post("/chat/:eventid/:roomid", checkLoginToRoom, async (req, res, next) => {
-    console.log(req.query)
-    var userid;
-    if(req.session["user" + req.params.eventid])
-        userid=req.session["user" + req.params.eventid].id
-    else
-        userid= req.query.userid;
+
+    var    userid=req.session["user" + req.params.eventid].id
+
     if(req.body.text.length>2040)
         req.body.text=req.body.text.substr(0, 2040);
     var text = urlify(stripHtml(req.body.text))

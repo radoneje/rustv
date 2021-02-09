@@ -44,7 +44,7 @@ block content
             div.aModSect
                 div.aModSectTitle Вопросы ({{q.filter(q=>q.isReady==false).length}})
                 div.aSectBody(id="qBox")
-                    div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}" v-if="!item.isReady && item.isSpk")
+                    div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}"   v-if="!item.isReady && item.isSpk")
                         div.qItemName {{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}
                         div.qItemText(v-html="item.text")
                         div(style="text-align:center")
