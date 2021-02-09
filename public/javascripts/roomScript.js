@@ -834,7 +834,7 @@ window.onload=function () {
                 }
             },
             changeLang:function (selLang) {
-                localStorage.setItem("selLang", selLang)
+               // localStorage.setItem("selLang", selLang)
                 this.selLang=selLang;
                 console.log(selLang, )
             }
@@ -865,7 +865,8 @@ window.onload=function () {
             var _this=this;
             var r= await axios.get("/rest/api/lang");
             this.lang=r.data;
-            this.selLang=localStorage.getItem("selLang")||"en";
+            //this.selLang=localStorage.getItem("selLang")||"en";
+            this.selLang="ru"
             if(roomid==62 )
                 _this.sect.unshift({
                     title: "Программа",
