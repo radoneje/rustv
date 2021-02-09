@@ -14,7 +14,7 @@ window.onload=function () {
         initStruct.tel=localStorage.getItem("loginTel") || "";
         initStruct.email=localStorage.getItem("email") || "";
         initStruct.CompanyName=localStorage.getItem("CompanyName") || ""
-        initStruct.selLang=localStorage.getItem("selLang")||"ru";
+        initStruct.selLang="ru";
     }
     catch (e) {
        console.warn(e)
