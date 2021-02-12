@@ -314,7 +314,7 @@ block content
                 div.VKSboxTitle Активные подключения ({{SPKvksUsers.length}})
 
                 div.VKSboxItems
-                    div.VKSboxItem(v-for="item in SPKvksUsers" v-key="item.guid")
+                    div.VKSboxItem(v-for="item in SPKvksUsers" )
                         div.VKSboxItemBox
                             div.VKSboxItemTitle {{item.user.i||''}} {{item.user.f || ''}}
                             div.VKSboxItemBtn(v-on:click="disconnectSPKvksUser(item)" :id="'VKSboxItemBtn'+item.guid") Отключить
