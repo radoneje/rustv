@@ -303,7 +303,7 @@ block content
                     div.aModSectTitle Презентация
                         div(style='display: inline-block;' )
                             span.greenBtn.clearBtn(v-on:click.stop.prevent="clearPres()") Убрать с показа
-            div.aModSectPres
+            //div.aModSectPres
                 div.aModSectPresSlider
                     div.aModSectPresItem(v-for="item in previewPres" v-on:click="activatePres(item)" v-bind:class="{active:pres==item.id}" :id="'pres'+item.id")
                         div.aModSectPresItemWr
