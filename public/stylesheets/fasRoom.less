@@ -97,7 +97,8 @@ font-size: 18px;
 }
 
 #app{
-  background-image: url(/images/clients/sber/bg-single.png);//url(/images/clients/aij/aijbg.png) !important;
+
+  background-color: white;
   // background-size: 100%  !important;
   // background-position: 0  !important;
   // background-repeat: repeat  !important;
@@ -463,14 +464,20 @@ padding: 24px;
   border-bottom: 2px solid #E43938;
 }
 @media only screen and (max-width: 1024px) {
+  .rLoginSubmit, .rLoginInput, .rLoginSubTitle{
+    margin-top: 10px;
+  }
   .rContentWr {
     padding-bottom: 20px;
     height: calc(600px - 110px);
   }
   .R {
     width: 100%;
-    margin-top: 30px;
+    margin-top: 0px;
     max-height: 600px;
+  }
+  #UpBtn{
+    display: none;
   }
   #sectMenu_8 {
     display: inline-block !important;
