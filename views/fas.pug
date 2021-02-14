@@ -23,11 +23,11 @@ block content
       div.L
           .streamSwitcherWr
             .streamSwitcher
-              .streamItem(v-on:click="setActiveStream(6)" v-bind:class="{active:activeStream==6}") Стрим 1
-              .streamItem(v-on:click="setActiveStream(7)" v-bind:class="{active:activeStream==7}") Стрим 2
+              .streamItem(v-on:click="setActiveStream(6)" v-bind:class="{active:activeStream==6}") Поток 1
+              .streamItem(v-on:click="setActiveStream(7)" v-bind:class="{active:activeStream==7}") Поток 2
           div.videoWrapper(v-bind:style="{backgroundImage:pres?'url(/rest/api/pres/'+pres+'/'+eventid+'/'+roomid+')':null}")
-            <iframe width="560" height="315" src="https://atf.onevent.online/iframe/0/0" frameborder="0" allow=" autoplay; picture-in-picture" allowfullscreen></iframe>
-            <iframe width="560" height="315" src="https://atf.onevent.online/iframe/1/0" frameborder="0" allow=" autoplay; picture-in-picture" allowfullscreen></iframe>
+            <iframe v-if="activeStream==6" width="560" height="315" src="https://atf.onevent.online/iframe/0/0" frameborder="0" allow=" autoplay; picture-in-picture" allowfullscreen></iframe>
+            <iframe v-if="activeStream==7" width="560" height="315" src="https://atf.onevent.online/iframe/1/0" frameborder="0" allow=" autoplay; picture-in-picture" allowfullscreen></iframe>
 
 
 
