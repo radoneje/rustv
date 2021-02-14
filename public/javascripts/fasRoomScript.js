@@ -56,6 +56,9 @@ window.onload=function () {
             roomid:roomid,
         },
         methods:{
+            fasLogin:function(){
+                document.querySelector(".rLoginWr").classList.add("error");
+            },
             setActiveStream:function(id){
 
                 this.activeStream=id;

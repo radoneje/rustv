@@ -417,46 +417,49 @@ padding: 24px;
   margin-top:18px;
 }
 .rLoginInput{
-  /* Rectangle 265 */
   background: white;
   border: none;
   border-radius: 4px;
   color: #211E16;
+  font-size: 24px;
+  line-height: 28px;
+  padding: 8px;
+  box-sizing: border-box;
+  width: 100%;
   margin-top: 53px;
   border-bottom: 2px solid transparent;
-
+  transition:  all 1s ease;
 }
 .rLoginError{
-  color:#E43938;
   /* Пользователь с таким e-mail не зарегистрирован */
-  position: absolute;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  /* identical to box height, or 133% */
   color: #E43938;
+  margin-top: 4px;
+  padding-left: 8PX;
+  transition:  all 1s ease;
+  opacity: 0;
 }
 .rLoginSubmit{background: #007377;
-
-  background: #007377;
   cursor: pointer;
-
   background: #007377;
-  box-shadow: 0px 8px 12px rgba(0, 115, 119, 0.24);
+  box-shadow: 0 8px 12px rgb(0 115 119 / 24%);
   border-radius: 8px;
-
-
   font-weight: bold;
   font-size: 16px;
   line-height: 22px;
-
   text-align: center;
-
   color: #FFFFFF;
-
-
-
+  margin-top: 53px;
+  padding: 8px;
+}
+.rLoginWr.error .rLoginError{
+  opacity: 1;
+}
+.rLoginWr.error .rLoginInput{
+  border-bottom: 2px solid #E43938;
 }
 
 @media only screen and (max-width: 1024px) {
