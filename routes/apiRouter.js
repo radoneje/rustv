@@ -2193,12 +2193,16 @@ router.post("/fasRegUser",async (req, res, next) => {
     var room=rooms[0]
     if((room.id>=106 && room.id<=107))
     {
+        var preUsers=req.fasUsers.filter(e=>{return e.email.toLowerCase()==req.body.email.toLowerCase()});
+        if(preUsers.length<1)
+            return res.json(req.body).sendStatus(404);
+
         var usr = await req.knex("t_eventusers").insert({
             eventid: req.body.roomid,
-            f: req.body.username,
-            i: "",
-            tel: "",
-            email: "",
+            f: preUsers[0].name,
+            i: preUsers[0].surname,
+            tel: preUsers[0].id,
+            email: req.body.email,
             smsCode: "",
         }, "*")
 

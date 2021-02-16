@@ -57,7 +57,14 @@ window.onload=function () {
         },
         methods:{
             fasLogin:function(){
-                document.querySelector(".rLoginWr").classList.add("error");
+                axios.post("/rest/api/fasRegUser/"+eventid+"/"+((parseInt(roomid2))),{email:this.email})
+                    .then(function (ret) {
+                        console.log("ok", ret.data);
+                    })
+                    .catch(function (e) {
+                        document.querySelector(".rLoginWr").classList.add("error");
+                        console.warn("error", e)
+                    })
             },
             setActiveStream:function(id){
 
@@ -624,3 +631,11 @@ function startVideo() {
     }
 
 }
+
+/*@Shevchenko Denis добый день! От Ивана, нашего разработчика - данные для трансляции:
+Запросы отправлять на страницу
+http://antitrustforum.ru/u-check/
+Для проверки и получения данных пользователя - POST запрос с именем email и значением почты пользователя
+Для получения данных всех пользователей - POST или GET запрос с именем user и значением all
+
+Для теста можно использовать почту test@test.ru, id юзера будет 7*/
