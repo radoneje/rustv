@@ -57,11 +57,12 @@ window.onload=function () {
         },
         methods:{
             fasLogin:function(){
+                var _this=this;
                 axios.post("/rest/api/fasRegUser/"+eventid+"/"+((parseInt(roomid2))),{email:this.email})
                     .then(function (ret) {
                         console.log("ok", ret.data);
-                        this.user=ret.data;
-                        this.regUserForm=true;
+                        _this.user=ret.data;
+                        _this.regUserForm=true;
                     })
                     .catch(function (e) {
                         document.querySelector(".rLoginWr").classList.add("error");
