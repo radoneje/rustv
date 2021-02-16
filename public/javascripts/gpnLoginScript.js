@@ -37,7 +37,7 @@ window.onload=function () {
                                 _this.code="";
                             }
                             else {
-                                _this.cap = "Вы зарегистрированы."
+                                _this.cap = "Вы зарегистрированы. Сейчас откроется страница трансляции."
                                 _this.codeError=false;
                                 setTimeout(function () {
                                     document.location.href="/room/"+e.data;
