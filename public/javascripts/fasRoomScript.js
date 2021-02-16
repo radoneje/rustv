@@ -60,7 +60,7 @@ window.onload=function () {
                 var _this=this;
                 axios.post("/rest/api/fasRegUser/"+eventid+"/"+((parseInt(roomid2))),{email:this.email})
                     .then(function (ret) {
-                        console.log("ok", ret.data);
+
                         _this.user=ret.data;
                         _this.regUserForm=true;
                     })
