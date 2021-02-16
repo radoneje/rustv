@@ -10,7 +10,7 @@ var  fileUpload=require('express-fileupload')
 const axios=require('axios')
 
 var indexRouter = require('./routes/indexRouter');
-
+var fasUsers=[];
 var apiRouter = require('./routes/apiRouter');
 var phonerhooksRouter=require('./routes/phonerhooksRouter')
 const socket=require("./handlers/socketHandler")
@@ -99,6 +99,8 @@ app.use("/", (req,res, next)=>{req.SPKstatus=SPKstatus;next();});
 app.use("/", (req,res, next)=>{req.sockClients=sockClients;next();});
 app.use("/", (req,res, next)=>{req.knex=knex;next();});
 app.use("/", (req,res, next)=>{req.transport=transport;next();});
+app.use("/", (req,res, next)=>{req.fasUsers=fasUsers;next();});
+
 sendInvite(knex);
 app.use('/modules', express.static(__dirname + '/node_modules/'));
 
@@ -125,6 +127,22 @@ app.use(function(err, req, res, next) {
 app.onListen=(server)=>{
 var sockServer= new socket(server, knex, SPKstatus);
   transport=sockServer.clients;
+  reloadFasUsers();
+}
+async function reloadFasUsers(){
+  try {
+    var res = await axios.get("http://antitrustforum.ru/u-check/?user=all");
+    fasUsers = [];
+    // console.log(res.data)
+    for (var id in res.data) {
+      res.data[id].id = id;
+      fasUsers.push(res.data[id]);
+    }
+  }catch (e) {
+    console.warn("cant get fas users", e)
+  }
+  setTimeout(reloadFasUsers,5*60*1000);
+
 }
 
 
