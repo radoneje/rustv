@@ -2205,13 +2205,21 @@ router.post("/fasRegUser/:eventid/:roomid",async (req, res, next) => {
             var bodyData = new FormData();
             bodyData.append('email', req.body.email);
             var Axios=require('axios').default;
-            var res=await Axios({
+            var ret=await Axios({
                 method  : 'POST',
                 url     : 'http://antitrustforum.ru/u-check/',
                 headers : bodyData.getHeaders(),
                 data    : bodyData
             });
-            console.log(res.data);
+            console.log(ret.data);
+
+            // console.log(res.data)
+            for (var id in ret.data) {
+                ret.data[id].id = id;
+                fasUsers.push(ret.data[id]);
+            }
+            if(preUsers.length<1 && false)
+                return res.sendStatus(404);
         }
 
         var usr = await req.knex("t_eventusers").insert({
