@@ -2187,7 +2187,7 @@ router.post("/sbergileRegUser",async (req, res, next) => {
         return res.json(usr[0]);
     }
 });
-router.post("/fasRegUser",async (req, res, next) => {
+router.post("/fasRegUser/:eventid/:roomid",async (req, res, next) => {
 
     var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.body.roomid})
     var room=rooms[0]
@@ -2198,7 +2198,7 @@ router.post("/fasRegUser",async (req, res, next) => {
             return res.json(req.body).sendStatus(404);
 
         var usr = await req.knex("t_eventusers").insert({
-            eventid: req.body.roomid,
+            eventid: req.params.eventid,
             f: preUsers[0].name,
             i: preUsers[0].surname,
             tel: preUsers[0].id,
