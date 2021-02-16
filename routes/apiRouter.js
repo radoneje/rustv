@@ -2211,14 +2211,14 @@ router.post("/fasRegUser/:eventid/:roomid",async (req, res, next) => {
                 headers : bodyData.getHeaders(),
                 data    : bodyData
             });
-            console.log(ret.data);
+            var fasUsers=[];
 
             // console.log(res.data)
             for (var id in ret.data) {
                 ret.data[id].id = id;
                 fasUsers.push(ret.data[id]);
             }
-            if(preUsers.length<1 && false)
+            if(fasUsers.length<1 && false)
                 return res.sendStatus(404);
         }
 
