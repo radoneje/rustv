@@ -2205,7 +2205,7 @@ router.post("/fasRegUser/:eventid/:roomid",async (req, res, next) => {
             email: req.body.email,
             smsCode: "",
         }, "*")
-
+        console.log(usr[0])
         return res.json(usr[0]);
     }
     else
