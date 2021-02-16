@@ -2197,7 +2197,7 @@ router.post("/fasRegUser/:eventid/:roomid",async (req, res, next) => {
     if((room.id>=106 && room.id<=107))
     {
         var preUsers=req.fasUsers.filter(e=>{return e.email.toLowerCase()==req.body.email.toLowerCase()});
-        if(preUsers.length<1 && false)
+        if(preUsers.length<1)
             return res.sendStatus(404);
         else{
 
@@ -2205,12 +2205,17 @@ router.post("/fasRegUser/:eventid/:roomid",async (req, res, next) => {
             var bodyData = new FormData();
             bodyData.append('email', req.body.email);
             var Axios=require('axios').default;
-            var ret=await Axios({
-                method  : 'POST',
-                url     : 'http://antitrustforum.ru/u-check/',
-                headers : bodyData.getHeaders(),
-                data    : bodyData
-            });
+            try{
+                    var ret=await Axios({
+                        method  : 'POST',
+                        url     : 'http://antitrustforum.ru/u-check/',
+                        headers : bodyData.getHeaders(),
+                        data    : bodyData
+                    });
+                }
+                catch (e) {
+                    return res.sendStatus(404);
+                }
             var fasUsers=[];
 
             // console.log(res.data)
