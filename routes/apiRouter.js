@@ -2201,6 +2201,7 @@ router.post("/fasRegUser/:eventid/:roomid",async (req, res, next) => {
             return res.sendStatus(404);
         else{
 
+            var FormData = require('form-data');
             var bodyData = new FormData();
             bodyData.append('email', req.body.email);
             var Axios=require('axios').default;
