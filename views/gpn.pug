@@ -37,7 +37,7 @@ html
                 input.cbLoginForm#logincode(placeholder="Код-пароль" v-model="code")
               .loginError Пользователь не найден
               div
-                .loginLogOn(v-on:click="logOn()") {{cap}}
+                .loginLogOn(v-on:click="logOn()" v-html='cap')
           div.footerLogo
             <svg width="376px" height="106px" viewBox="0 0 376 106" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
