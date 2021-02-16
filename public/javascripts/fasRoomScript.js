@@ -54,10 +54,18 @@ window.onload=function () {
             selLang:"ru",
             regUserForm:false,
             roomid:roomid,
+            loginText:"Войти"
         },
         methods:{
             fasLogin:function(){
                 var _this=this;
+                this.loginText="Проверяю регистрацию...";
+                var re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+                if(!re.test(this.email.toLowerCase()))
+                {
+                    document.querySelector(".rLoginWr").classList.add("error");
+                    return;
+                }
                 axios.post("/rest/api/fasRegUser/"+eventid+"/"+((parseInt(roomid2))),{email:this.email})
                     .then(function (ret) {
 
@@ -68,6 +76,7 @@ window.onload=function () {
                         document.querySelector(".rLoginWr").classList.add("error");
                         console.warn("error", e)
                     })
+
             },
             setActiveStream:function(id){
 

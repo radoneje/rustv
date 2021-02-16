@@ -2190,7 +2190,10 @@ router.post("/sbergileRegUser",async (req, res, next) => {
 router.post("/fasRegUser/:eventid/:roomid",async (req, res, next) => {
 
     var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.params.roomid})
-    var room=rooms[0]
+    var room=rooms[0];
+    var re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    if(!re.test(this.email.toLowerCase()))
+        return res.sendStatus(404);
     if((room.id>=106 && room.id<=107))
     {
         var preUsers=req.fasUsers.filter(e=>{return e.email.toLowerCase()==req.body.email.toLowerCase()});
