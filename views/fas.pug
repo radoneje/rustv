@@ -158,7 +158,7 @@ block content
             .rLoginWr
               .rLoginTitle Вход
               .rLoginSubTitle Авторизуйтесь, чтобы задать вопрос спикеру и общаться с коллегами в чате
-              input.rLoginInput(type="email" placeholder="Email*" v-model="email" v-on:keydown="if($event.keyCode==13) fasLogin(); console.log($event)")
+              input.rLoginInput(type="email" placeholder="Email*" v-model="email" v-on:keydown="if($event.keyCode==13) fasLogin();")
               .rLoginError Пользователь с таким e-mail не зарегистрирован
               .rLoginSubmit(v-on:click="fasLogin()" v-html="loginText" )
 

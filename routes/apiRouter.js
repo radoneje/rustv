@@ -2197,8 +2197,13 @@ router.post("/fasRegUser/:eventid/:roomid",async (req, res, next) => {
     if((room.id>=106 && room.id<=107))
     {
         var preUsers=req.fasUsers.filter(e=>{return e.email.toLowerCase()==req.body.email.toLowerCase()});
-        if(preUsers.length<1)
+        if(preUsers.length<1 && false)
             return res.sendStatus(404);
+        else{
+
+            var res=await axios.post("http://antitrustforum.ru/u-check/",{email:req.body.email});
+            console.log(res.data);
+        }
 
         var usr = await req.knex("t_eventusers").insert({
             eventid: req.params.eventid,
