@@ -2201,7 +2201,15 @@ router.post("/fasRegUser/:eventid/:roomid",async (req, res, next) => {
             return res.sendStatus(404);
         else{
 
-            var res=await axios.post("http://antitrustforum.ru/u-check/",{email:req.body.email});
+            var bodyData = new FormData();
+            bodyData.append('email', req.body.email);
+            var Axios=require('axios').default;
+            var res=await Axios({
+                method  : 'POST',
+                url     : 'http://antitrustforum.ru/u-check/',
+                headers : bodyData.getHeaders(),
+                data    : bodyData
+            });
             console.log(res.data);
         }
 
