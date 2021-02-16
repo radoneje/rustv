@@ -60,6 +60,8 @@ window.onload=function () {
                 axios.post("/rest/api/fasRegUser/"+eventid+"/"+((parseInt(roomid2))),{email:this.email})
                     .then(function (ret) {
                         console.log("ok", ret.data);
+                        this.user=ret.data;
+                        this.regUserForm=true;
                     })
                     .catch(function (e) {
                         document.querySelector(".rLoginWr").classList.add("error");
