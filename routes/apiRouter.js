@@ -2192,7 +2192,7 @@ router.post("/fasRegUser/:eventid/:roomid",async (req, res, next) => {
     var rooms=await req.knex.select("*").from("t_rooms").where({isDeleted:false, id:req.params.roomid})
     var room=rooms[0];
     var re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if(!re.test(this.email.toLowerCase()))
+    if(!re.test(req.body.email.toLowerCase()))
         return res.sendStatus(404);
     if((room.id>=106 && room.id<=107))
     {
