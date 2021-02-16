@@ -6,6 +6,23 @@
 @yellow:#F2E913;
 
 
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -468,6 +485,7 @@ padding: 24px;
 .rLoginWr.error .rLoginInput{
   border-bottom: 2px solid #E43938;
 }
+
 @media only screen and (max-width: 1024px) {
   .rLogin{
     align-items: flex-start;

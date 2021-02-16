@@ -154,13 +154,14 @@ block content
                   </svg>
 
 
-          .rLogin(v-if="!regUserForm")
-            .rLoginWr
-              .rLoginTitle Вход
-              .rLoginSubTitle Авторизуйтесь, чтобы задать вопрос спикеру и общаться с коллегами в чате
-              input.rLoginInput(type="email" placeholder="Email*" v-model="email" v-on:keydown="if($event.keyCode==13) fasLogin();")
-              .rLoginError Пользователь с таким e-mail не зарегистрирован
-              .rLoginSubmit(v-on:click="fasLogin()" v-html="loginText" )
+          transition name="bounce"
+            .rLogin(v-if="!regUserForm")
+              .rLoginWr
+                .rLoginTitle Вход
+                .rLoginSubTitle Авторизуйтесь, чтобы задать вопрос спикеру и общаться с коллегами в чате
+                input.rLoginInput(type="email" placeholder="Email*" v-model="email" v-on:keydown="if($event.keyCode==13) fasLogin();")
+                .rLoginError Пользователь с таким e-mail не зарегистрирован
+                .rLoginSubmit(v-on:click="fasLogin()" v-html="loginText" )
 
     div#UpBtn(onclick="window.scrollTo(0, 0);")
       <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
