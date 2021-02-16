@@ -1028,8 +1028,8 @@ function startVideo() {
 //player.srcIndex = 0;
 //player.controlBar.addChild('QualitySelector');
         document.getElementById("my-video").style.opacity = 1;
-        document.querySelector('my-video').style.opacity = 1;
-    player.dvr();
+       // document.querySelector('my-video').style.opacity = 1;
+    //player.dvr();
    // },500)
 
 }
