@@ -131,7 +131,7 @@ var sockServer= new socket(server, knex, SPKstatus);
 }
 async function reloadFasUsers(){
   try {
-    var res = await axios.get("http://antitrustforum.ru/u-check/?user=all");
+    var res = await axios.get("https://antitrustforum.ru/u-check/?user=all");
     fasUsers = [];
     // console.log(res.data)
     for (var id in res.data) {
