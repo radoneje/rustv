@@ -160,7 +160,7 @@ block content
             .rLogin(v-if="!regUserForm")
               .rLoginWr
                 .rLoginTitle Вход
-                .rLoginSubTitle Авторизуйтесь, чтобы задать вопрос спикеру и общаться с коллегами в чате: введите адрес почты, который указывали при регистрации, либо зарегистрируйтесь по кнопке в верхнем левом углу страницы.
+                .rLoginSubTitle Авторизуйтесь, чтобы задать вопрос спикеру и общаться с коллегами в чате: введите адрес почты, который указывали при регистрации, либо зарегистрируйтесь по кнопке в верхнем правом углу страницы.
                 input.rLoginInput(type="email" placeholder="Email*" v-model="email" v-on:keydown="if($event.keyCode==13) fasLogin();")
                 .rLoginError Пользователь с таким e-mail не зарегистрирован
                 .rLoginSubmit(v-on:click="fasLogin()" v-html="loginText" )
