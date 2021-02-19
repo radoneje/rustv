@@ -254,7 +254,7 @@ window.onload=async function () {
                 }
             },
             QsetOld:function (item) {
-                console.log("QsetOld")
+                console.log("QsetOld_this.files.filter(r => r.id == ff.data.fileid)[0].presfiles")
                 axios.post("/rest/api/qsetStatus/"+eventid+"/"+roomid,{id:item.id, status:true})
                     .then(function (r) {
 
@@ -982,16 +982,21 @@ window.onload=async function () {
                                 .then(function(ff){
                                    // console.log("activePres", ff)
                                     if(ff.data.fileid) {
-                                        _this.previewPres = _this.files.filter(r => r.id == ff.data.fileid)[0].presfiles
-                                        _this.pres=ff.data.fileid
-                                            setTimeout(function(){
-                                            var elem=document.getElementById("pres"+ff.data.fileid)
-                                            if(elem)
-                                                elem.scrollIntoView({inline: "center", behavior: "smooth"})
-                                        },200)
+                                        try {
+                                            _this.previewPres = _this.files.filter(r => r.id == ff.data.fileid)[0].presfiles
+                                            _this.pres = ff.data.fileid
+                                            setTimeout(function () {
+                                                var elem = document.getElementById("pres" + ff.data.fileid)
+                                                if (elem)
+                                                    elem.scrollIntoView({inline: "center", behavior: "smooth"})
+                                            }, 200)
 
-                                        _this.pres=ff.data.item
-                                        _this.isPres=ff.data.item?true:false
+                                            _this.pres = ff.data.item
+                                            _this.isPres = ff.data.item ? true : false
+                                        }
+                                        catch(e){
+                                            console.warn("error", e)
+                                        }
                                     }
                                     else
                                         _this.previewPres =[]
