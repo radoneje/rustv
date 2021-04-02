@@ -254,7 +254,7 @@ window.onload=async function () {
                 }
             },
             QsetOld:function (item) {
-                console.log("QsetOld_this.files.filter(r => r.id == ff.data.fileid)[0].presfiles")
+
                 axios.post("/rest/api/qsetStatus/"+eventid+"/"+roomid,{id:item.id, status:true})
                     .then(function (r) {
 

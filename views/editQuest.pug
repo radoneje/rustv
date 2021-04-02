@@ -24,7 +24,7 @@ block content
                     div.aModSectMenuItem(v-bind:class="{active:lSectActiveIndex==2}" v-on:click="lSectActiveIndex=2")
 
                 div.aSectBody(id="qBox" style="height:auto")
-                    div.qItem(v-for="item in q" v-key="item.id" v-bind:class="{ready:item.isReady}")
+                    div.qItem(v-for="item in q"  v-bind:class="{ready:item.isReady}")
 
                         div.qItemName {{item.i}}&nbsp;{{item.f}}&nbsp;{{item.smi}}
                         //long-text(v-bind:itemtext="item.text")
