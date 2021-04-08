@@ -1,4 +1,4 @@
-div.qItem.userItem(v-for="item in sortedUsers" v-bind:key="item.id" v-bind:class="{active:(item.isActive), handup:item.handup}" style="padding:5px;padding-left:50px")
+div.qItem.userItem(v-for="item in sortedUsers"  v-bind:class="{active:(item.isActive), handup:item.handup}" style="padding:5px;padding-left:50px")
     div.qItemName(style='margin: 4px 0;') {{item.i}}&nbsp;{{item.f}}&nbsp{{item.smi}} {{item.phone}}
     div.qItemMessageBox
         div.qItemMessageText {{item.messageToUser}}
