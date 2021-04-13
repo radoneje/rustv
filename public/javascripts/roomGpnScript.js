@@ -1027,11 +1027,11 @@ function startVideo() {
         player.src([
             {
                 src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8",
-                label:"480P"
+                label:"720P"
             },
             {
-                src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8",
-                label:"480P"
+                src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn_low/playlist.m3u8",
+                label:"360P"
             }
         ])
     //player.src('/lib/gpn.m3u8')
