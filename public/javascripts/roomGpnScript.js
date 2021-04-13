@@ -1039,6 +1039,12 @@ function startVideo() {
                 label:"240P"
             }
         ])
+    player.tech_.on("retryplaylist", ()=>{
+        console.log("retryplaylist")
+    })
+    player.on("error", ()=> {
+        console.log("error")
+    })
     //player.src('/lib/gpn.m3u8')
   //  player.hlsQualitySelector();
    // player.qualityLevels();
