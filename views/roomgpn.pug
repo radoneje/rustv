@@ -15,6 +15,7 @@ block head
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
   link(rel='stylesheet', href='/stylesheets/login.css')
   link(rel='stylesheet', href='/stylesheets/room.css')
+  <link href="https://unpkg.com/@silvermine/videojs-quality-selector/dist/css/quality-selector.css" rel="stylesheet">
 
 
   if event.isClientCss
@@ -235,6 +236,8 @@ block content
   #noVueVideoBox
 
   <script src="/videojs/video.js"></script>
+  <script src="https://unpkg.com/@silvermine/videojs-quality-selector/dist/js/silvermine-videojs-quality-selector.min.js"></script>
+
   script.
       var eventid=!{room.eventid}
       var roomid=!{room.id}

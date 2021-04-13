@@ -1025,6 +1025,25 @@ function startVideo() {
    // setTimeout(function () {
         var player = videojs('my-video');
         player.src('https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8')
+    player.src([
+        {
+            src: 'https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8',
+            type: 'video/mp4',
+            label: '720P',
+        },
+        {
+            src: 'https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8',
+            type: 'video/mp4',
+            label: '480P',
+            selected: true,
+        },
+        {
+            src: 'https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8',
+            type: 'video/mp4',
+            label: '360P',
+        },
+    ]);
+
 //player.srcIndex = 0;
 //player.controlBar.addChild('QualitySelector');
         document.getElementById("my-video").style.opacity = 1;
