@@ -1026,12 +1026,12 @@ function startVideo() {
         var player = videojs('my-video');
         player.src([
             {
-                src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8"
-
+                src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8",
+                label:"480P"
             },
             {
-                src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8"
-
+                src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8",
+                label:"480P"
             }
         ])
     //player.src('/lib/gpn.m3u8')
