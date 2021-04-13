@@ -1,7 +1,7 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:BANDWIDTH=1709214,RESOLUTION=1280x720,CODECS="avc1.64001f,mp4a.40.2"
-https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/chunklist.m3u8?hls_proxy_host=a1be29a2eb9d237a36bc5daee8c78e8e
+https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/chunklist.m3u8
 #EXT-X-STREAM-INF:BANDWIDTH=1500000,RESOLUTION=640x360,CODECS="avc1.64001f,mp4a.40.2"
-https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/chunklist.m3u8?hls_proxy_host=a1be29a2eb9d237a36bc5daee8c78e8e
+https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/chunklist.m3u8
 
