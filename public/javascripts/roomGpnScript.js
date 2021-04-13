@@ -1024,7 +1024,8 @@ window.onload=function () {
 function startVideo() {
    // setTimeout(function () {
         var player = videojs('my-video');
-        player.src('https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8')
+       // player.src('https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8')
+    player.src('/lib/gpn.m3u8')
     player.hlsQualitySelector();
 
 //player.srcIndex = 0;
