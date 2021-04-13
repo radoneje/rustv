@@ -1024,7 +1024,7 @@ window.onload=function () {
 function startVideo() {
    // setTimeout(function () {
         var player = videojs('my-video');
-        player.src([
+        var src=[
             {
                 src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8",
                 label:"720P",
@@ -1038,13 +1038,20 @@ function startVideo() {
                 src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn_ultralow/playlist.m3u8",
                 label:"240P"
             }
-        ])
+        ];
+    player.src(src);
     player.tech_.on("retryplaylist", ()=>{
         console.log("retryplaylist")
     })
     player.on("error", ()=> {
         console.log("error")
     })
+
+    function restartPlay(){
+        setTimeout(()=>{player.src(src);
+            player.play();},1000)
+
+    }
     //player.src('/lib/gpn.m3u8')
   //  player.hlsQualitySelector();
    // player.qualityLevels();
