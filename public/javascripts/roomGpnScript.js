@@ -1036,8 +1036,8 @@ function startVideo() {
         ])
     //player.src('/lib/gpn.m3u8')
   //  player.hlsQualitySelector();
-    player.qualityLevels();
-
+   // player.qualityLevels();
+    player.controlBar.addChild('QualitySelector');
 //player.srcIndex = 0;
 //player.controlBar.addChild('QualitySelector');
         document.getElementById("my-video").style.opacity = 1;
