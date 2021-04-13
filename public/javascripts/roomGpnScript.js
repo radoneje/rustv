@@ -1026,11 +1026,11 @@ function startVideo() {
         var player = videojs('my-video');
         player.src([
             {
-                src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u"
+                src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8"
 
             },
             {
-                src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u"
+                src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn/playlist.m3u8"
 
             }
         ])
