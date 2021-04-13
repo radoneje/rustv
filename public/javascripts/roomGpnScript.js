@@ -1042,9 +1042,11 @@ function startVideo() {
     player.src(src);
     player.tech_.on("retryplaylist", ()=>{
         console.log("retryplaylist")
+        restartPlay();
     })
     player.on("error", ()=> {
         console.log("error")
+        restartPlay();
     })
 
     function restartPlay(){
