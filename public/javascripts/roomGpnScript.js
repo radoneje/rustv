@@ -1036,7 +1036,7 @@ function startVideo() {
             },
             {
                 src:"https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/gpn_ultralow/playlist.m3u8",
-                label:"360P"
+                label:"240P"
             }
         ])
     //player.src('/lib/gpn.m3u8')
