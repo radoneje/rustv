@@ -1051,7 +1051,7 @@ function startVideo() {
 
     function restartPlay(){
         setTimeout(()=>{player.src(src);
-            player.play();},1000)
+            player.play();},5*1000)
 
     }
     //player.src('/lib/gpn.m3u8')
