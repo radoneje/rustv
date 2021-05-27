@@ -15,7 +15,7 @@ window.onload=function () {
         initStruct.email="";
         initStruct.CompanyName= ""
         //initStruct.selLang="ru";
-        initStruct.selLang="en";
+        initStruct.selLang=localStorage.getItem("selLang")||"en";;
     }
     catch (e) {
        console.warn(e)
