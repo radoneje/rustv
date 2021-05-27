@@ -185,7 +185,7 @@ window.onload=function () {
                 this.code="";
             },
             changeLang:function (selLang) {
-              //  localStorage.setItem("selLang", selLang)
+                localStorage.setItem("selLang", selLang)
                 this.selLang=selLang;
                 console.log(selLang, )
             }
