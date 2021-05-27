@@ -192,6 +192,7 @@ window.onload=function () {
 
         },
         mounted:async function () {
+            this.selLang=localStorage.getItem("selLang")||"en";
             var _this=this;
             var r= await axios.get("/rest/api/lang");
             this.lang=r.data;
