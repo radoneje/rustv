@@ -274,7 +274,7 @@ block content
                     div.aModSectFindColor.aModSectFindItem(style="background:red" v-bind:class="{active:findRed}" v-on:click="findRed=!findRed;findYellow=false;findGreen=false;")
 
                 div.aSectBody.aSectUser
-                    div.qItemMessageInputGroup
+                    //div.qItemMessageInputGroup
                         input(type="text" placeholder="Сообщение всем" v-model="messageToAllUsersText" v-on:keypress="if($event.keyCode==13) messageToAllUsers()")
                         <svg  class="" v-on:click="messageToAllUsers()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
