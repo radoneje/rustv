@@ -190,7 +190,7 @@ async function publishStream(streamName, localVideo, stream, errHandeler, failed
             constraints: constraints,
             cvoExtension: true,
             // stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
-            stripCodecs: "h264,H264"
+            //stripCodecs: "h264,H264"
         }).on(STREAM_STATUS.PUBLISHING, function (stream) {
             // alert(1)
             var video = localVideo.querySelector('video')
@@ -364,7 +364,7 @@ async function phoneGetRemoteVideo(remoteVideo, id, errHandeler) {
                 name: id,
                 display: remoteVideo,
                 //   stripCodecs: "h264,H264,opus,vorbis,Opus,Vorbis"
-                stripCodecs: "h264,H264"
+               // stripCodecs: "h264,H264"
             })
                 .on(STREAM_STATUS.PENDING, function (stream) {
                     //  var video = document.getElementById(stream.id());
