@@ -1717,6 +1717,8 @@ window.onload=function () {
 
     async function createVideo(id, muted, user, onPgm, onPip,onP1,onMute, onRemove, onReload, onStartRecord, onStopRecord) {
         console.log("Create Video", id)
+        if(_this.firstConnect)
+            return ;
         var meetVideoBox = document.getElementById("meetVideoBox");
         if(isPgm)
             meetVideoBox.classList.add("pgm")
