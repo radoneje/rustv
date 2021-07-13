@@ -74,17 +74,17 @@ div.editRoomBox(v-if="editRoom" v-on:click="editRoom=null")
                     span
                         include link
                     span &nbsp; Ссылка на страницу для пользователя:
-                    div.paddingTop.linkLabel https://conf.rustv.ru/room/{{editRoom.id}}
+                    div.paddingTop.linkLabel https://gpn.usermod.ru/room/{{editRoom.id}}
                 div.marginTop.regGroupTitle
                     span
                         include link
                     span &nbsp;Ссылка на страницу для модератора:
-                    div.paddingTop.linkLabel https://conf.rustv.ru/moderator/{{editRoom.id}}
+                    div.paddingTop.linkLabel https://gpn.usermod.ru/moderator/{{editRoom.id}}
                 div.marginTop.regGroupTitle
                     span
                         include link
                     span &nbsp; Ссылка на страницу для спикера:
-                    div.paddingTop.linkLabel https://conf.rustv.ru/speaker/{{editRoom.id}}
+                    div.paddingTop.linkLabel https://gpn.usermod.ru/speaker/{{editRoom.id}}
                 div.marginTop.regGroupTitle
                     .btn(v-on:click="sendInviteNow(editRoom)") Пригласить зарегистрировавшихся
                 div.marginTop.regGroupTitle
@@ -138,5 +138,9 @@ div.editRoomBox(v-if="editRoom" v-on:click="editRoom=null")
                         include password
                     span &nbsp; Пароль спикера и модератора:
                     input.marginTop.eventItemInput.eventTitle(type="text" placeholder="Напишите пароль здесь" v-model="editRoom.password" v-on:change="changeRoom()")
+                div(style="margin-top:25px")
+                    textarea(style="border:1px solid black;width:100%" placeholder="iframe плейера" v-model="editRoom.iframe" v-on:change="changeRoom()")
+                div(style="margin-top:25px")
+                    input(style="border:1px solid black; width:100%" placeholder="rtmp URL" v-model="editRoom.rtmpURL" v-on:change="changeRoom()")
 
 

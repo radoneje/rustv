@@ -41,7 +41,7 @@ block content
                                 div.regGroupItem(v-bind:class="{active:item.regCase==0}" v-on:click="changeEventCase(item, 0)")
                                     span Открытая ссылка
                                     span.iconPost(v-if="item.regCase==0")
-                                        div.linkLabel https://conf.rustv.ru/event/{{item.id}}
+                                        div.linkLabel https://gpn.usermod.ru/event/{{item.id}}
                                 div.regGroupItem(v-bind:class="{active:item.regCase==1}" v-on:click="changeEventCase(item, 1)") Подтверждение через e-mail
                                 div.regGroupItem(v-bind:class="{active:item.regCase==2}" v-on:click="changeEventCase(item, 2)") Подтверждение через SMS
                                 div.regGroupItem(v-bind:class="{active:item.isEmail}" v-on:click="changeEmailText(item)") Поле ввода e-mail
@@ -122,11 +122,11 @@ block content
                         div.regGroup
                             div.regGroupTitle Вставьте это на ваш сайт для показа баннера регистрации:
                                 textarea(readonly).
-                                    <iframe src="https://conf.rustv.ru/regtoevent/{{item.id}}" width="150px" height="60px"></iframe>
+                                    <iframe src="https://gpn.usermod.ru/regtoevent/{{item.id}}" width="150px" height="60px"></iframe>
                         div.regGroup
                             div.regGroupTitle Статистика пользователей:
                                 textarea(readonly).
-                                    https://conf.rustv.ru/userstat/{{item.id}}"
+                                    https://gpn.usermod.ru/userstat/{{item.id}}"
 
 
                     div.half
@@ -216,8 +216,8 @@ block content
 
 
                                 //div.itemPost
-                                    div.half.linkLabel https://conf.rustv.ru/room/{{room.id}}
-                                    div.half.linkLabel &lt;iframe src='https://conf.rustv.ru/room/{{room.id}}' allowfullscreen width="150px" height="60px" &gt;&lt;/iframe&gt;
+                                    div.half.linkLabel https://gpn.usermod.ru/room/{{room.id}}
+                                    div.half.linkLabel &lt;iframe src='https://gpn.usermod.ru/room/{{room.id}}' allowfullscreen width="150px" height="60px" &gt;&lt;/iframe&gt;
         include elements/editRoom
         include elements/editAllowedUsers
         include elements/editOtrasl

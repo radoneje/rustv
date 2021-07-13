@@ -1,30 +1,3 @@
-if room.id==37
-    <youtube :video-id="'ObZKknxkMqU'" :player-vars="{playsinline:'1'}" ref="youtube" ></youtube>
 
-    //<iframe id="YT" width="560" height="315" src="https://www.youtube.com/embed/w7LlUN393O4?enablejsapi=1&playsinline=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-else if room.id==62
-    <youtube :video-id="'fQIhZegudFw'" :player-vars="{playsinline:'1'}" ref="youtube" ></youtube>
-    //<iframe id="profIframe" name="profIframe" allowfullscreen src="https://v4.proofix.ru/cbr_rus/embed.html?realtime=true&autoplay=false&mute=false"></iframe>
-
-else if room.id==52
-    video(id="video" width="1280" height="720" controls playsinline loop  :src="'https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/sber/playlist.m3u8'" :poster="'/images/'+room.poster" )
-else if room.id==67
-    <youtube :video-id="'ObZKknxkMqU'" :player-vars="{playsinline:'1'}" ref="youtube" ></youtube>
-else if room.id==61
-    <iframe id="profIframe" name="profIframe" allowfullscreen src="/flu.html"></iframe>
-else if room.id==66
-    video(id="video" width="1280" height="720" controls playsinline loop  src="https://stream.sberbank-school.ru/lrv/181_/index.m3u8" poster="/images/clients/rosatom/otkr.jpg" )
-else if room.id==69
-    <youtube :video-id="'acohKHquy_4'" :player-vars="{playsinline:'1'}" ref="youtube" ></youtube>
-else if room.id == 83
-    video(id="video" width="1280" height="720" controls playsinline loop  :src="'https://front.sber.link/hls/st01_720p_r/index.m3u8'" poster="/images/clients/sber/bg-single.png" )
-else if room.id==84
-    <youtube :video-id="'ObZKknxkMqU'" :player-vars="{playsinline:'1'}" ref="youtube" ></youtube>
-else if room.id==98
-    div
-else if room.id==105
-    <youtube :video-id="'ioVATlAtp60'" :player-vars="{playsinline:'1'}" ref="youtube" ></youtube>
-else
-    video(id="video" width="1280" height="720" controls playsinline loop  :src="'https://stream.sberbank-school.ru/hls/'+ room.streamname +'/index.m3u8'" :poster="'/images/'+room.poster" )
-
+div !{room.iframe}
 
