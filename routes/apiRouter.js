@@ -2253,7 +2253,8 @@ router.post("/startAir",async (req, res, next) => {
             const prm = {
                 "uri": "mixer://mixer" + roomid,
                 "localStreamName": "stream" + roomid,
-                "hasVideo": "true"
+                "hasVideo": "true",
+                "background": "/tmp/bg.png"
             }
             var r = await axios.post(WOWZAAPI + "mixer/startup", prm, {headers: {'Content-Type': 'application/json'}})
 
