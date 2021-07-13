@@ -910,6 +910,8 @@ window.onload=function () {
             },
             OnNewStageStream:async function (data) {
                 console.log("OnNewStageStream", data)
+                if(!this.init)
+                    return;
                 var _this=this;
                 if (roomid != data.roomid)
                     return; //видео чужих комнат
