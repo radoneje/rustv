@@ -2280,7 +2280,8 @@ router.post("/startAir",async (req, res, next) => {
            // res.json(false)
         }
     }catch (e) {
-        res.json(false)
+        console.warn(e);
+        return res.json(false)
     }
     try {
     var r = await axios.post(WOWZAAPI + "mixer/find_all", {}, {headers: {'Content-Type': 'application/json'}})
