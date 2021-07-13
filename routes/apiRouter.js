@@ -18,7 +18,9 @@ var im = require('imagemagick');
 var config = require('../config');
 const { exec } = require('child_process');
 const child_process = require('child_process');
+var spawn = require('child_process').spawn;
 const translateLang=require('../translation')
+const WOWZAAPI="https://wowza02.onevent.online:8444/rest-api/"
 
 
 /* GET home page. */
@@ -2240,5 +2242,98 @@ router.post("/fasRegUser/:eventid/:roomid",async (req, res, next) => {
     else
         return res.json(req.body).sendStatus(401);
 });
+
+router.post("/startAir",async (req, res, next) => {
+
+    var roomid=req.body.id;
+    var onAir=req.body.onAir;
+    try {
+        if (!onAir) {
+            const prm = {
+                "uri": "mixer://mixer" + roomid,
+                "localStreamName": "stream" + roomid,
+                "hasVideo": "true"
+            }
+            var r = await axios.post(WOWZAAPI + "mixer/startup", prm, {headers: {'Content-Type': 'application/json'}})
+
+            var room=await req.knex.select("*").from("t_rooms").where({id:roomid});
+            if(room[0].rtmpURL && room[0].rtmpURL.length>5)
+                setTimeout(()=>{
+                    //var out = fs.openSync('/tmp/out.log', 'a');
+                   // var   err = fs.openSync('/tmp/out.log', 'a');
+                    spawn('ffmpeg', ['-re','-i', 'rtmp://wowza02.onevent.online/live/stream'+roomid, "-c", "copy", "-f", "flv", room[0].rtmpURL],
+                        {
+                        detached: true,
+                       // stdio: [ 'ignore', out, err ]
+                    }).unref();;
+                },1000)
+
+
+
+
+           // res.json(true)
+        } else {
+            const prm = {
+                "uri": "mixer://mixer" + roomid,
+            }
+            var r = await axios.post(WOWZAAPI + "mixer/terminate", prm, {headers: {'Content-Type': 'application/json'}})
+           // res.json(false)
+        }
+    }catch (e) {
+        res.json(false)
+    }
+    try {
+    var r = await axios.post(WOWZAAPI + "mixer/find_all", {}, {headers: {'Content-Type': 'application/json'}})
+
+    res.json(r.data.filter(s=>{return s.localStreamName==("stream"+roomid)}))
+    }catch (e) {
+        res.json(false)
+    }
+
+})
+router.get("/mixerStatus/:id",async (req, res, next) => {
+
+    var roomid=req.params.id;
+try {
+
+    var r = await axios.post(WOWZAAPI + "mixer/find_all", {}, {headers: {'Content-Type': 'application/json'}})
+
+    res.json(r.data.filter(s=>{return s.localStreamName==("stream"+roomid)}))
+
+}
+catch (e) {
+    res.json([])
+}
+
+})
+
+
+router.post("/toMmix",async (req, res, next) => {
+
+    const roomid = req.body.roomid;
+    const id = req.body.id;
+    var r = await axios.post(WOWZAAPI + "mixer/find_all", {}, {headers: {'Content-Type': 'application/json'}})
+    let status=r.data.filter(s=>{return s.localStreamName==("stream"+roomid)});
+    if(status.length==0){
+        return  res.json(false)
+    }
+
+    var find=false;
+    status[0].mediaSessions.forEach(s=>{
+        if(s.localStreamName==id)
+            find=true;
+
+    })
+    console.log(find, id)
+    if(!find)
+        r = await axios.post(WOWZAAPI + "mixer/add", {"uri": "mixer://mixer"+roomid,"remoteStreamName": id}, {headers: {'Content-Type': 'application/json'}})
+    else
+        r = await axios.post(WOWZAAPI + "mixer/remove", {"uri": "mixer://mixer"+roomid,"remoteStreamName": id}, {headers: {'Content-Type': 'application/json'}})
+
+     r = await axios.post(WOWZAAPI + "mixer/find_all", {}, {headers: {'Content-Type': 'application/json'}})
+
+    res.json(r.data.filter(s=>{return s.localStreamName==("stream"+roomid)}))
+})
+
 
 module.exports = router

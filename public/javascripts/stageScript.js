@@ -69,9 +69,28 @@ window.onload=function () {
             previewPres:[],
             isPres:false,
             isPresFullScreen:false,
+            onAir:false,
 
         },
         methods:{
+            toMixClick:async function(mBtn, id){
+                this.onAir=(await axios.post("/rest/api/toMmix", {roomid:roomid,id:id})).data;
+            },
+            startAir:async function(){
+                this.onAir=(await axios.post("/rest/api/startAir", {id:roomid,onAir: this.onAir})).data;
+                if(this.onAir.length==0)
+                    this.onAir=false;
+            },
+            updateOnAirStatus:async function(){
+                var r=(await axios.get("/rest/api/mixerStatus/"+roomid)).data;
+                if(r.length>0)
+                    this.onAir=r;
+                else
+                    this.onAir=false;
+
+                setTimeout(async ()=>{await this.updateOnAirStatus()}, 10000);
+
+            },
             OnConvertPage:function(dt){
                 if(!dt)
                     return;
@@ -1396,11 +1415,31 @@ window.onload=function () {
                         }
                     ]
                 }
-            }
+            },
+
 
 
         },
         watch:{
+            onAir:function(){
+                console.log("onAir change ", this.onAir)
+                var s="inline-block"
+                if(!this.onAir)
+                    s="none";
+                document.querySelectorAll(".toMixBtn").forEach(e=>{
+                    e.style.display=s
+                })
+                if(this.onAir){
+                    document.querySelectorAll(".toMixBtn").forEach(e=>{
+                        e.classList.remove("bgRed")
+                    })
+                    this.onAir[0].mediaSessions.forEach(s=>{
+                        var elem=document.getElementById("mBtn"+s.localStreamName);
+                        if(elem)
+                            elem.classList.add("bgRed")
+                    })
+                }
+            },
             isPresFullScreen:function (){
                 if(!isMod) {
                     console.log("isPresFullScreen", this.isPresFullScreen)
@@ -1494,6 +1533,9 @@ window.onload=function () {
                     });
 
                     if(!isPgm) {
+                        if(isMod) {
+                            await _this.updateOnAirStatus();
+                        }
                         axios.get("/rest/api/users/" + eventid + "/" + roomid)
                             .then(function (r) {
                                 _this.users = r.data;
@@ -1743,10 +1785,26 @@ window.onload=function () {
             })
 
 
-            if(isMod){
+        if(isMod){
+
                 var recBox=document.createElement("div");
                 recBox.classList.add("modRecordContollers")
                 meetVideoItem.appendChild(recBox)
+            var mBtn=document.createElement("div");
+            mBtn.classList.add("greenBtn")
+            mBtn.classList.add("clearBtn")
+            mBtn.classList.add("toMixBtn");
+            mBtn.style.display="none"
+            if(app.onAir)
+                mBtn.style.display="inline-block"
+            mBtn.id="mBtn"+id;
+            mBtn.innerHTML="to MIX";
+            mBtn.classList.add("stageModBtn")
+            recBox.appendChild(mBtn);
+            mBtn.addEventListener("click",async()=> {
+                await app.toMixClick(mBtn, id);
+            });
+
                 var recBtn=document.createElement("div");
                 recBtn.classList.add("greenBtn")
                 recBtn.classList.add("clearBtn")
