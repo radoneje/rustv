@@ -20,7 +20,7 @@ const { exec } = require('child_process');
 const child_process = require('child_process');
 var spawn = require('child_process').spawn;
 const translateLang=require('../translation')
-const WOWZAAPI="https://wowza02.onevent.online:8444/rest-api/"
+const WOWZAAPI="https://wowza02.onevent.online/rest-api/"
 
 
 /* GET home page. */
