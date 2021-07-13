@@ -23,6 +23,7 @@ const translateLang=require('../translation')
 const WOWZAAPI="https://wowza02.onevent.online/rest-api/"
 
 
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('index', {title: 'Сервис организации конференций'});
