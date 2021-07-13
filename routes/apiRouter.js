@@ -2259,14 +2259,15 @@ router.post("/startAir",async (req, res, next) => {
 
             var room=await req.knex.select("*").from("t_rooms").where({id:roomid});
             if(room[0].rtmpURL && room[0].rtmpURL.length>5)
-                setTimeout(()=>{
+                setTimeout(async ()=>{
                     //var out = fs.openSync('/tmp/out.log', 'a');
                    // var   err = fs.openSync('/tmp/out.log', 'a');
-                    spawn('ffmpeg', ['-re','-i', 'rtmp://wowza02.onevent.online/live/stream'+roomid, "-c", "copy", "-f", "flv", room[0].rtmpURL],
+                    await axios.post("http://restreamer.may24.pro/restream",{roomid:roomid, rtmpURL:room[0].rtmpURL})
+                    /*spawn('ffmpeg', ['-re','-i', 'rtmp://wowza02.onevent.online/live/stream'+roomid, "-c", "copy", "-f", "flv", room[0].rtmpURL],
                         {
                         detached: true,
                        // stdio: [ 'ignore', out, err ]
-                    }).unref();;
+                    }).unref();;*/
                 },1000)
 
 
